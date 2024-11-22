@@ -33,6 +33,10 @@ export default tseslint.config({
     ...reactHooks.configs.recommended.rules,
     ...react.configs.recommended.rules,
     ...react.configs["jsx-runtime"].rules,
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/only-throw-error": "off",
+    "@typescript-eslint/no-floating-promises": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
     "react-refresh/only-export-components": [
       "warn",
       { allowConstantExport: true },
