@@ -7,7 +7,20 @@ export default defineConfig({
   plugins: [react(), vitesconfigPaths()],
   server: {
     open: true,
-    port: 3000,
+    port: 3001,
+  },
+  build: {
+    lib: {
+      entry: "src/main.tsx",
+      formats: ["es"],
+      fileName: "credicar",
+    },
+    rollupOptions: {
+      output: {
+        format: "es", 
+      },
+      external: ["react", "react-dom"], 
+    },
   },
   resolve: {
     alias: {
@@ -23,7 +36,7 @@ export default defineConfig({
       "@assets": path.resolve(__dirname, "./src/assets"),
       "@services": path.resolve(__dirname, "./src/services"),
       "@utils": path.resolve(__dirname, "./src/utils"),
-      "@apis": path.resolve(__dirname, "./src/apis"),
+      "@api": path.resolve(__dirname, "./src/api"),
       "@context": path.resolve(__dirname, "./src/context"),
     },
   },

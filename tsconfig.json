@@ -20,7 +20,7 @@
       "@services/*": ["src/services/*"],
       "@context/*": ["src/context/*"],
       "@utils/*": ["src/utils/*"],
-      "@apis/*": ["src/api/*"]
+      "@api/*": ["src/api/*"]
     },
 
     /* Bundler mode */

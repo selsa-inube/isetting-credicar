@@ -39,13 +39,12 @@ const fetchWithRetries = async <T>(
         url,
         config,
       );
-
-      // if (response.status === 204) {
-      //   if (Array.isArray(response.data)) {
-      //     return [] as T;
-      //   }
-      //   return {} as T;
-      // }
+      if (response.status === 204) {
+        if (Array.isArray(response.data)) {
+          return [] as T;
+        }
+        return {} as T;
+      }
 
       return response.data;
     } catch (error) {
@@ -87,8 +86,9 @@ export const getStaffPortalByBusinessManager = async (
       "X-Action": "SearchAllStaffPortalsByBusinessManager",
     },
   };
-  return fetchWithRetries<IStaffPortalByBusinessManager[]>(
+  const data = fetchWithRetries<IStaffPortalByBusinessManager[]>(
     `/staff-portals-by-business-manager?${queryParams.toString()}`,
     config,
   );
+  return data;
 };

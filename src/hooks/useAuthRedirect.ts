@@ -4,11 +4,12 @@ import {
   IBusinessManagers,
   IStaffPortalByBusinessManager,
 } from "@ptypes/staffPortal.types";
+import { encrypt } from "@utils/encrypt";
 
 export const useAuthRedirect = (
   portalPublicCode: IStaffPortalByBusinessManager,
   businessManagersData: IBusinessManagers,
-  portalCode: string | null,
+  portalCode: string,
 ) => {
   const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0();
   const [hasRedirected, setHasRedirected] = useState(false);
@@ -17,8 +18,10 @@ export const useAuthRedirect = (
   useEffect(() => {
     if (hasRedirected) return;
 
-    if (portalPublicCode.abbreviatedName) {
+    if (portalPublicCode?.abbreviatedName) {
       if (businessManagersData && !isLoading && !isAuthenticated) {
+        const encryptedParamValue = encrypt(portalCode);
+        localStorage.setItem("portalCode", encryptedParamValue);
         loginWithRedirect();
       } else if (isAuthenticated) {
         setHasRedirected(true);
