@@ -19,7 +19,8 @@
       "@assets/*": ["src/assets/*"],
       "@services/*": ["src/services/*"],
       "@context/*": ["src/context/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@api/*": ["src/api/*"]
     },
 
     /* Bundler mode */
