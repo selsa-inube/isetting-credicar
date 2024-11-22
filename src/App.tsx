@@ -36,10 +36,6 @@ const params = new URLSearchParams(url.search);
 const portalCode = params.get("portal");
 
 function App() {
-  if (!portalCode) {
-    return <ErrorPage />;
-  }
-
   const { portalData, hasError: portalError } = usePortalData(portalCode);
   const { businessManagersData, hasError: businessError } =
     useBusinessManagers(portalData);

@@ -4,7 +4,7 @@ import { IStaffPortalByBusinessManager } from "@ptypes/staffPortal.types";
 import { staffPortalByBusinessManager } from "@services/staffPortal/getStaffPortalByBusinessManager";
 import { encrypt } from "@utils/encrypt";
 
-export const usePortalData = (portalCode: string) => {
+export const usePortalData = (portalCode: string | null) => {
   const [portalData, setPortalData] = useState<IStaffPortalByBusinessManager>(
     {} as IStaffPortalByBusinessManager,
   );
@@ -13,6 +13,10 @@ export const usePortalData = (portalCode: string) => {
   useEffect(() => {
     const fetchPortalData = async () => {
       try {
+        if (!portalCode) {
+          setHasError(true);
+          return;
+        }
         const StaffPortalData = await staffPortalByBusinessManager(portalCode);
         if (!StaffPortalData) {
           setHasError(true);
