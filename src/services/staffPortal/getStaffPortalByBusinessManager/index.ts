@@ -5,18 +5,10 @@ import { mapStaffPortalByBusinessManagerApiToEntities } from "./mappers";
 const staffPortalByBusinessManager = async (
   portalCode: string,
 ): Promise<IStaffPortalByBusinessManager[]> => {
-  try {
-    const data: IStaffPortalByBusinessManager[] =
-      await getStaffPortalByBusinessManager(portalCode);
+  const data: IStaffPortalByBusinessManager[] =
+    await getStaffPortalByBusinessManager(portalCode);
 
-    return mapStaffPortalByBusinessManagerApiToEntities(data);
-  } catch (error) {
-    console.error(
-      "Todos los intentos fallaron. No se pudieron obtener los datos del operador:",
-      error,
-    );
-    throw error;
-  }
+  return mapStaffPortalByBusinessManagerApiToEntities(data);
 };
 
 export { staffPortalByBusinessManager };
