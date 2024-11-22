@@ -1,5 +1,5 @@
 import { IBusinessManagers } from "@ptypes/staffPortal.types";
-import { getBusinessManagers } from "@src/api/isaasQuery";
+import { getBusinessManagers } from "@api/isaasQuery";
 import { mapBusinessManagerApiToEntity } from "./mappers";
 
 const businessManagers = async (

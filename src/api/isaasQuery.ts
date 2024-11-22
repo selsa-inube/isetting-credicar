@@ -39,14 +39,6 @@ const fetchWithRetries = async <T>(
         url,
         config,
       );
-
-      // if (response.status === 204) {
-      //   if (Array.isArray(response.data)) {
-      //     return [] as T;
-      //   }
-      //   return {} as T;
-      // }
-
       return response.data;
     } catch (error) {
       if (error instanceof Error) {
