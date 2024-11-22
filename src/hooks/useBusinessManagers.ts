@@ -5,7 +5,7 @@ import {
   IStaffPortalByBusinessManager,
 } from "@ptypes/staffPortal.types";
 
-export const useBusinessManagers = (
+const useBusinessManagers = (
   portalPublicCode: IStaffPortalByBusinessManager,
 ) => {
   const [businessManagersData, setBusinessManagersData] =
@@ -34,3 +34,5 @@ export const useBusinessManagers = (
 
   return { businessManagersData, hasError };
 };
+
+export { useBusinessManagers };

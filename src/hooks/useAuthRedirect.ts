@@ -5,7 +5,7 @@ import {
   IStaffPortalByBusinessManager,
 } from "@ptypes/staffPortal.types";
 
-export const useAuthRedirect = (
+const useAuthRedirect = (
   portalPublicCode: IStaffPortalByBusinessManager,
   businessManagersData: IBusinessManagers,
   portalCode: string | null,
@@ -40,3 +40,5 @@ export const useAuthRedirect = (
 
   return { hasRedirected, hasError, isLoading, isAuthenticated };
 };
+
+export { useAuthRedirect };

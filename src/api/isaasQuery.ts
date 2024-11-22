@@ -54,7 +54,7 @@ const fetchWithRetries = async <T>(
   throw new Error("Error al obtener los datos del operador.");
 };
 
-export const getBusinessManagers = async (
+const getBusinessManagers = async (
   businessManagerId: string,
 ): Promise<IBusinessManagers> => {
   const config: AxiosRequestConfig = {
@@ -68,7 +68,7 @@ export const getBusinessManagers = async (
   );
 };
 
-export const getStaffPortalByBusinessManager = async (
+const getStaffPortalByBusinessManager = async (
   portalCode: string,
 ): Promise<IStaffPortalByBusinessManager[]> => {
   const queryParams = new URLSearchParams({
@@ -84,3 +84,5 @@ export const getStaffPortalByBusinessManager = async (
     config,
   );
 };
+
+export { getBusinessManagers, getStaffPortalByBusinessManager };
