@@ -1,13 +1,32 @@
+import vitesconfigPaths from "vite-tsconfig-paths";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import vitesconfigPaths from "vite-tsconfig-paths";
-import * as path from "path";
+import federation from "@originjs/vite-plugin-federation";
+import path from "path";
 
+// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), vitesconfigPaths()],
+  plugins: [
+    react(),
+    vitesconfigPaths(),
+    federation({
+      name: "remote_a",
+      filename: "remoteEntry.js",
+      exposes: {
+        "./App": "./src/App",
+      },
+      shared: ["react", "react-dom"],
+    }),
+  ],
   server: {
     open: true,
-    port: 3000,
+    port: 3001,
+  },
+  build: {
+    modulePreload: false,
+    target: "esnext",
+    minify: false,
+    cssCodeSplit: false,
   },
   resolve: {
     alias: {
