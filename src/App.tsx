@@ -9,11 +9,14 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import { enviroment } from "./config/environment";
 
-import { AppContextProvider } from "./context/AppContext";
+import { AppContext, AppContextProvider } from "./context/AppContext";
 import { usePortalData } from "./hooks/usePortalData";
 import { useBusinessManagers } from "./hooks/useBusinessManagers";
 import { useAuthRedirect } from "./hooks/useAuthRedirect";
 import { ErrorPage } from "./components/layout/ErrorPage";
+import { SelectBusinessUnitsRoutes } from "./routes/selectBusinessunits";
+import { useContext } from "react";
+import { SelectBusinessUnits } from "./pages/selectBusinessUnits";
 
 function LogOut() {
   localStorage.clear();
@@ -22,10 +25,24 @@ function LogOut() {
   return <></>;
 }
 
+function FirstPage() {
+  const { businessUnitSigla } = useContext(AppContext);
+
+  return businessUnitSigla.length === 0 ? (
+    <SelectBusinessUnits />
+  ) : (
+    <h1>Home Credicar</h1>
+  );
+}
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/" element={<h1>Home</h1>} errorElement={<ErrorPage />} />
+      <Route
+        path="selectBusinessUnit/*"
+        element={<SelectBusinessUnitsRoutes />}
+      />
+      <Route path="/" element={<FirstPage />} errorElement={<ErrorPage />} />
 
       <Route path="logout" element={<LogOut />} />
     </>,
