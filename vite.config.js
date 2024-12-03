@@ -3,7 +3,6 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import federation from "@originjs/vite-plugin-federation";
 import path from "path";
-
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -17,9 +16,10 @@ export default defineConfig({
         "./usePortalData": "./src/hooks/usePortalData",
         "./ErrorPage": "./src/components/layout/ErrorPage",
         "./SelectBusinessUnitsRoutes": "./src/routes/selectBusinessunits",
+        "./AppContext": "./src/context/AppContext/index.tsx",
       },
       remotes: {
-        hostApp: "http://localhost:3000/dist/assets/remoteEntry.js",
+        hostApp: "http://localhost:3000/assets/remoteEntry.js",
       },
       shared: ["react", "react-dom", "react-router-dom", "@auth0/auth0-react"],
     }),

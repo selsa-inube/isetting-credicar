@@ -8,6 +8,7 @@ interface IUser {
   picture: string;
   sub: string;
   updated_at: string;
+  [key: string]: unknown;
 }
 
 export type { IUser };

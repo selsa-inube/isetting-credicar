@@ -1,4 +1,3 @@
-// App.tsx
 import { useContext, useEffect } from "react";
 import {
   Route,
@@ -10,14 +9,15 @@ import {
 import { useAuth0 } from "@auth0/auth0-react";
 
 import { enviroment } from "./config/environment";
-import { AppContext, AppContextProvider } from "./context/AppContext";
+
 import { usePortalData } from "./hooks/usePortalData";
 import { useBusinessManagers } from "./hooks/useBusinessManagers";
 import { useAuthRedirect } from "./hooks/useAuthRedirect";
 import { ErrorPage } from "./components/layout/ErrorPage";
 import { SelectBusinessUnitsRoutes } from "./routes/selectBusinessunits";
 import { SelectBusinessUnits } from "./pages/selectBusinessUnits";
-import { IUser } from "./types/app-types";
+import { IUser } from "./types/app.types";
+import { AppContext } from "./context/AppContext";
 
 function LogOut() {
   localStorage.clear();
@@ -44,7 +44,6 @@ const router = createBrowserRouter(
         element={<SelectBusinessUnitsRoutes />}
       />
       <Route path="/" element={<FirstPage />} errorElement={<ErrorPage />} />
-
       <Route path="logout" element={<LogOut />} />
     </>,
   ),
@@ -62,18 +61,31 @@ interface AppProps {
 
 function App(props: AppProps) {
   const { code, user, businessUnit } = props;
+  const { setAppData, setBusinessUnitSigla } = useContext(AppContext);
 
-  const updateLocalStorage = () => {
+  const updateAppData = () => {
     if (code) {
       localStorage.setItem("portalCode", code);
     }
+
     if (businessUnit) {
       localStorage.setItem("businessUnitSigla", businessUnit);
+      setBusinessUnitSigla(businessUnit);
+    }
+
+    if (user) {
+      setAppData((prev) => ({
+        ...prev,
+        user: {
+          userAccount: user.email,
+          userName: user.name,
+        },
+      }));
     }
   };
 
   useEffect(() => {
-    updateLocalStorage();
+    updateAppData();
   }, [user, code, businessUnit]);
 
   if (!code) {
@@ -102,11 +114,7 @@ function App(props: AppProps) {
     }
   }
 
-  return (
-    <AppContextProvider>
-      <RouterProvider router={router} />
-    </AppContextProvider>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
