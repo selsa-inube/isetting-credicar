@@ -4,35 +4,30 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-
+import { useContext } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import { enviroment } from "./config/environment";
-
 import { AppContext, AppContextProvider } from "./context/AppContext";
 import { usePortalData } from "./hooks/usePortalData";
 import { useBusinessManagers } from "./hooks/useBusinessManagers";
 import { useAuthRedirect } from "./hooks/useAuthRedirect";
 import { ErrorPage } from "./components/layout/ErrorPage";
 import { SelectBusinessUnitsRoutes } from "./routes/selectBusinessunits";
-import { useContext } from "react";
 import { SelectBusinessUnits } from "./pages/selectBusinessUnits";
+import { Home } from "./pages/home";
 
 function LogOut() {
   localStorage.clear();
   const { logout } = useAuth0();
   logout({ logoutParams: { returnTo: enviroment.REDIRECT_URI } });
-  return <></>;
+  return <Home />;
 }
 
 function FirstPage() {
   const { businessUnitSigla } = useContext(AppContext);
 
-  return businessUnitSigla.length === 0 ? (
-    <SelectBusinessUnits />
-  ) : (
-    <h1>Home Credicar</h1>
-  );
+  return businessUnitSigla.length === 0 ? <SelectBusinessUnits /> : <Home />;
 }
 
 const router = createBrowserRouter(
