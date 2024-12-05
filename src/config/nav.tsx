@@ -1,10 +1,4 @@
-import {
-  MdLogout,
-  MdOutlineCheck,
-  MdOutlineMoving,
-  MdOutlineStart,
-  MdOutlineThumbUp,
-} from "react-icons/md";
+import { MdCreditCard, MdLogout, MdOutlinePayments } from "react-icons/md";
 
 import { INav } from "@pages/home/types";
 
@@ -16,28 +10,16 @@ const nav: INav = {
         name: "",
         links: {
           startProcess: {
-            id: "startProcess",
-            label: "Iniciar procesos",
-            icon: <MdOutlineStart />,
-            path: "/start-process",
+            id: "creditLines",
+            label: "Líneas de crédito",
+            icon: <MdOutlinePayments />,
+            path: "/credit-lines",
           },
           confirmInitiated: {
-            id: "confirmInitiated",
-            label: "Confirmar iniciados",
-            icon: <MdOutlineThumbUp />,
-            path: "/confirm-initiated",
-          },
-          validateProgress: {
-            id: "validateProgress",
-            label: "Validar progreso",
-            icon: <MdOutlineMoving />,
-            path: "/validate-progress",
-          },
-          finished: {
-            id: "finished",
-            label: "Finalizados",
-            icon: <MdOutlineCheck />,
-            path: "/finished",
+            id: "moneyDestination",
+            label: "Destinos de dinero",
+            icon: <MdCreditCard />,
+            path: "/money-destination",
           },
         },
       },
