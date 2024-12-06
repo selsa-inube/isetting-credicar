@@ -26,7 +26,6 @@ const StyledMain = styled.main`
   box-sizing: border-box;
   height: calc(100vh - 54px);
   overflow-y: auto;
-  padding: ${tokens.spacing.s300};
 
   @media screen and (max-width: 1000px) {
     padding: ${tokens.spacing.s300};
