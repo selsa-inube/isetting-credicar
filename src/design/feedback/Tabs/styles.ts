@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { inube } from "@inubekit/foundations";
+import { tokens } from "@src/design/tokens";
 
 const StyledTabs = styled.div`
   box-sizing: border-box;
@@ -23,9 +24,9 @@ const StyledContainer = styled.div`
   width: 100%;
   border-bottom: 2px solid
     ${({ theme }) => theme?.palette?.neutral?.N40 || inube.palette.neutral.N40};
-  padding: 0 16px;
+  padding: ${tokens.spacing.s0} ${tokens.spacing.s200};
   & > div > figure {
-    padding-top: 4px;
+    padding-top: ${tokens.spacing.s050};
   }
 `;
 
