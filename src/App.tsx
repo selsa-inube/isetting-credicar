@@ -5,35 +5,33 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-
 import { useAuth0 } from "@auth0/auth0-react";
 
 import { enviroment } from "./config/environment";
-
+import { AppContext } from "./context/AppContext";
 import { usePortalData } from "./hooks/usePortalData";
 import { useBusinessManagers } from "./hooks/useBusinessManagers";
 import { useAuthRedirect } from "./hooks/useAuthRedirect";
 import { ErrorPage } from "./components/layout/ErrorPage";
 import { SelectBusinessUnitsRoutes } from "./routes/selectBusinessunits";
 import { SelectBusinessUnits } from "./pages/selectBusinessUnits";
+import { Home } from "./pages/home";
+import { AppPage } from "./components/layout/AppPage";
+import { CreditLinesRoutes } from "./routes/creditLines";
+import { MoneyDestinationRoutes } from "./routes/moneyDestination";
 import { IUser } from "./types/app.types";
-import { AppContext } from "./context/AppContext";
 
 function LogOut() {
   localStorage.clear();
   const { logout } = useAuth0();
   logout({ logoutParams: { returnTo: enviroment.REDIRECT_URI } });
-  return <></>;
+  return <Home />;
 }
 
 function FirstPage() {
   const { businessUnitSigla } = useContext(AppContext);
 
-  return businessUnitSigla.length === 0 ? (
-    <SelectBusinessUnits />
-  ) : (
-    <h1>Home Credicar</h1>
-  );
+  return businessUnitSigla.length === 0 ? <SelectBusinessUnits /> : <Home />;
 }
 
 const router = createBrowserRouter(
@@ -44,6 +42,13 @@ const router = createBrowserRouter(
         element={<SelectBusinessUnitsRoutes />}
       />
       <Route path="/" element={<FirstPage />} errorElement={<ErrorPage />} />
+      <Route path="/" element={<AppPage />}>
+        <Route path="credit-lines/*" element={<CreditLinesRoutes />} />
+        <Route
+          path="money-destination/*"
+          element={<MoneyDestinationRoutes />}
+        />
+      </Route>
       <Route path="logout" element={<LogOut />} />
     </>,
   ),
