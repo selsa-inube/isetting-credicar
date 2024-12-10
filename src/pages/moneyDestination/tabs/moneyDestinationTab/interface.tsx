@@ -11,14 +11,14 @@ import { dataMoneyDestination } from "@mocks/moneydestination/destination.mock";
 import { StyledContainer } from "./styles";
 import { actions, breakPoints, titles } from "./config/table.config";
 
-interface MoneyDestinationTabUIProps {
+interface IMoneyDestinationTabUI {
   loading: boolean;
   searchMoneyDestination: string;
   onAddDestination: () => void;
   onSearchMoneyDestination: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function MoneyDestinationTabUI(props: MoneyDestinationTabUIProps) {
+function MoneyDestinationTabUI(props: IMoneyDestinationTabUI) {
   const {
     searchMoneyDestination,
     loading,
@@ -47,7 +47,7 @@ function MoneyDestinationTabUI(props: MoneyDestinationTabUIProps) {
               smallScreen ? `${tokens.spacing.s150}` : `${tokens.spacing.s0}`
             }
           >
-            <Stack>
+            <Stack justifyContent="center">
               <Input
                 name="searchMoneyDestination"
                 id="searchMoneyDestination"

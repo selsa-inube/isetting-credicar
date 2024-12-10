@@ -12,15 +12,13 @@ import {
   Thead,
   Tr,
 } from "@inubekit/table";
-import {
-  dataLoading,
-  showAction,
-  showActionTitle,
-  widthColmnsData,
-} from "./utils";
+import { dataLoading } from "./utils/dataLoading";
 import { IAction, IBreakpoint, IEntry, ITitle } from "./types";
+import { showActionTitle } from "./utils/showActionTitle";
+import { showAction } from "./utils/showAction";
+import { widthColmnsData } from "./utils/widthColumns";
 
-interface TableUIProps {
+interface ITableUI {
   actions: IAction[];
   breakpoints: IBreakpoint[];
   entries: IEntry[];
@@ -40,7 +38,7 @@ interface TableUIProps {
   prevPage: () => void;
 }
 
-const TableUI = (props: TableUIProps) => {
+const TableUI = (props: ITableUI) => {
   const {
     actions,
     breakpoints,

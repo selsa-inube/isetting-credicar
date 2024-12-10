@@ -9,12 +9,12 @@ import { crumbsMoneyDestination } from "./config/navigation";
 import { MoneyDestinationTabsConfig } from "./config/tabs.config";
 import { MoneyDestinationTab } from "./tabs/moneyDestinationTab";
 
-interface MoneyDestinationUIProps {
+interface IMoneyDestinationUI {
   isSelected: string;
   handleTabChange: (id: string) => void;
 }
 
-function MoneyDestinationUI(props: MoneyDestinationUIProps) {
+function MoneyDestinationUI(props: IMoneyDestinationUI) {
   const { isSelected, handleTabChange } = props;
 
   const smallScreen = useMediaQuery("(max-width: 990px)");

@@ -1,14 +1,14 @@
-import * as Yup from "yup";
+import { string, object } from "yup";
 import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { DecisionModalUI } from "./interface";
 import { IDecisionEntry } from "./types";
 
-const validationSchema = Yup.object({
-  justification: Yup.string(),
+const validationSchema = object({
+  justification: string(),
 });
 
-interface DecisionModalProps {
+interface IDecisionModal {
   actionText: string;
   description: string;
   portalId: string;
@@ -24,7 +24,7 @@ const initialValues: IDecisionEntry = {
   justification: "",
 };
 
-const DecisionModal = (props: DecisionModalProps) => {
+const DecisionModal = (props: IDecisionModal) => {
   const {
     actionText,
     description,
@@ -54,7 +54,7 @@ const DecisionModal = (props: DecisionModalProps) => {
     if (justificationOfDecision) {
       setDynamicValidationSchema(
         validationSchema.shape({
-          justification: Yup.string()
+          justification: string()
             .required("El dato es requerido")
             .min(5, "Debe registrar como mínimo 5 caracteres.")
             .max(130, "No puede superar de 130 caracteres."),
@@ -90,4 +90,4 @@ const DecisionModal = (props: DecisionModalProps) => {
 };
 
 export { DecisionModal };
-export type { DecisionModalProps };
+export type { IDecisionModal };

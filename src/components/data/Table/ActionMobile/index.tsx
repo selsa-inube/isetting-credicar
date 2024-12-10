@@ -6,14 +6,14 @@ import { ActionsModal } from "@src/components/modals/ActionsModal";
 import { IAction, IEntry } from "../types";
 import { StyledContainer, StyledContainerIcon } from "./styles";
 
-interface ActionMobileProps {
+interface IActionMobile {
   actions: IAction[];
   entry: IEntry;
 }
 
 let isModalOpen = false;
 
-const ActionMobile = (props: ActionMobileProps) => {
+const ActionMobile = (props: IActionMobile) => {
   const { actions, entry } = props;
   const [showModal, setShowModal] = useState(false);
 
@@ -58,4 +58,4 @@ const ActionMobile = (props: ActionMobileProps) => {
 };
 
 export { ActionMobile };
-export type { ActionMobileProps };
+export type { IActionMobile };

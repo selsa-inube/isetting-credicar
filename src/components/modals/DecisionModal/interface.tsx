@@ -43,6 +43,7 @@ const DecisionModalUI = (props: IDecisionModalUI) => {
   } = props;
 
   const isMobile = useMediaQuery(mediaQueryMobile);
+  const isMobileTextarea = useMediaQuery("(max-width: 490px)");
 
   const getFieldState = (formik: FormikValues, fieldName: string) => {
     if (formik.errors[fieldName]) return "invalid";
@@ -88,7 +89,7 @@ const DecisionModalUI = (props: IDecisionModalUI) => {
         </Text>
 
         {justificationOfDecision && (
-          <StyledTextarea $smallScreen={isMobile}>
+          <StyledTextarea $smallScreen={isMobileTextarea}>
             <Textarea
               label=""
               name="justification"

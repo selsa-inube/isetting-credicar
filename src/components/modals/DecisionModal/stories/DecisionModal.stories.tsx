@@ -3,7 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Meta, StoryFn } from "@storybook/react";
 import { Button } from "@inubekit/button";
 
-import { DecisionModal, DecisionModalProps } from "..";
+import { DecisionModal, IDecisionModal } from "..";
 
 const meta: Meta<typeof DecisionModal> = {
   title: "modals/DecisionModal",
@@ -17,7 +17,7 @@ const meta: Meta<typeof DecisionModal> = {
   ],
 };
 
-const Template: StoryFn<DecisionModalProps> = (args) => {
+const Template: StoryFn<IDecisionModal> = (args) => {
   const [showModal, setShowModal] = useState(false);
 
   return (

@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Stack } from "@inubekit/stack";
+import { useMediaQuery } from "@inubekit/hooks";
 
 import { TableUI } from "./interface";
 import { StyledContainerTable } from "./styles";
@@ -93,11 +94,14 @@ const Table = (props: ITable) => {
     }
   }
 
+  const screenTablet = useMediaQuery("(max-width: 1200px)");
+
   return (
     <StyledContainerTable
       id={id}
       $pageLength={pageLength}
       $entriesLength={entries.length}
+      $isTablet={screenTablet}
     >
       <Stack direction="column">
         <TableUI

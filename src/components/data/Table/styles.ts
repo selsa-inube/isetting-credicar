@@ -5,6 +5,7 @@ interface IStyledContainer {
   $multipleTables?: boolean;
   $pageLength?: number;
   $entriesLength?: number;
+  $isTablet?: boolean;
 }
 
 const StyledContainerTable = styled.div<IStyledContainer>`
@@ -21,21 +22,13 @@ const StyledContainerTable = styled.div<IStyledContainer>`
     justify-content: center;
   }
 
-  @media (max-width: 1200px) {
+  ${({ $isTablet }) =>
+    $isTablet &&
+    `
     & > td {
       justify-content: flex-start;
     }
-  }
-`;
-
-export const StyledText = styled.div`
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  @media (max-width: 560px) {
-    max-width: 100px;
-  }
+  `}
 `;
 
 export { StyledContainerTable };

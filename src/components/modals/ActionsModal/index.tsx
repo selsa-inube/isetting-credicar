@@ -1,6 +1,5 @@
 import { useRef, useEffect } from "react";
 import { MdClear } from "react-icons/md";
-
 import { Stack } from "@inubekit/stack";
 import { Grid } from "@inubekit/grid";
 
@@ -8,13 +7,13 @@ import { tokens } from "@design/tokens";
 import { IAction, IEntry } from "@components/data/Table/types";
 import { StyledModal } from "./styles";
 
-interface ActionsModalProps {
+interface IActionsModal {
   actions: IAction[];
   entry: IEntry;
   onClose: () => void;
 }
 
-function ActionsModal(props: ActionsModalProps) {
+function ActionsModal(props: IActionsModal) {
   const { actions, entry, onClose } = props;
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -52,5 +51,5 @@ function ActionsModal(props: ActionsModalProps) {
   );
 }
 
-export type { ActionsModalProps };
+export type { IActionsModal };
 export { ActionsModal };

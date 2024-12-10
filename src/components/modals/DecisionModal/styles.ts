@@ -6,6 +6,10 @@ interface IStyledModal {
   $smallScreen: boolean;
 }
 
+interface IStyledTextarea {
+  $smallScreen: boolean;
+}
+
 const StyledModal = styled.div<IStyledModal>`
   display: flex;
   flex-direction: column;
@@ -26,12 +30,14 @@ const StyledContainerButton = styled.div`
   }
 `;
 
-const StyledTextarea = styled.div<IStyledModal>`
+const StyledTextarea = styled.div<IStyledTextarea>`
   textarea {
     font-size: 14px;
   }
 
-  @media (max-width: 490px) {
+  ${({ $smallScreen }) =>
+    $smallScreen &&
+    `
     div {
       display: inline;
     }
@@ -44,7 +50,7 @@ const StyledTextarea = styled.div<IStyledModal>`
       white-space: normal;
       margin: 0px;
     }
-  }
+  `}
 `;
 
 export { StyledModal, StyledContainerButton, StyledTextarea };
