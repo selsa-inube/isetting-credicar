@@ -1,15 +1,14 @@
-import { useContext, useEffect, useRef, useState } from "react";
 import { MdOutlineChevronRight, MdOutlineDoorFront } from "react-icons/md";
 import { Header } from "@inubekit/header";
 import { Icon } from "@inubekit/icon";
-import { useMediaQuery } from "@inubekit/hooks";
+import { useMediaQueries } from "@inubekit/hooks";
 
 import { AppCard } from "@components/feedback/AppCard";
 import { nav, userMenu } from "@config/nav";
 import { Title } from "@components/data/Title";
-import { AppContext } from "@context/AppContext";
 import { BusinessUnitChange } from "@design/inputs/BusinessUnitChange";
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
+import { IAppData } from "@context/AppContext/types";
 import { ICardData } from "./types";
 import {
   StyledCollapse,
@@ -24,7 +23,15 @@ import {
   StyledTitle,
 } from "./styles";
 
-interface HomeProps {
+interface IHomeUI {
+  appData: IAppData;
+  businessUnitChangeRef: React.RefObject<HTMLDivElement>;
+  businessUnitsToTheStaff: IBusinessUnitsPortalStaff[];
+  collapse: boolean;
+  collapseMenuRef: React.RefObject<HTMLDivElement>;
+  selectedClient: string;
+  handleLogoClick: (businessUnit: IBusinessUnitsPortalStaff) => void;
+  setCollapse: (value: boolean) => void;
   data?: ICardData[];
 }
 
@@ -36,31 +43,29 @@ const renderLogo = (imgUrl: string) => {
   );
 };
 
-function HomeUI(props: HomeProps) {
-  const { data } = props;
-
-  const { appData, businessUnitsToTheStaff, setBusinessUnitSigla } =
-    useContext(AppContext);
-  const [collapse, setCollapse] = useState(false);
-  const [selectedClient, setSelectedClient] = useState<string>("");
-
-  const collapseMenuRef = useRef<HTMLDivElement>(null);
-  const businessUnitChangeRef = useRef<HTMLDivElement>(null);
-  const isTablet = useMediaQuery("(max-width: 944px)");
+function HomeUI(props: IHomeUI) {
+  const {
+    data,
+    appData,
+    businessUnitChangeRef,
+    businessUnitsToTheStaff,
+    collapse,
+    collapseMenuRef,
+    selectedClient,
+    setCollapse,
+    handleLogoClick,
+  } = props;
   const username = appData.user.userName.split(" ")[0];
 
-  useEffect(() => {
-    if (appData.businessUnit.publicCode) {
-      setSelectedClient(appData.businessUnit.abbreviatedName);
-    }
-  }, [appData]);
-
-  const handleLogoClick = (businessUnit: IBusinessUnitsPortalStaff) => {
-    const selectJSON = JSON.stringify(businessUnit);
-    setBusinessUnitSigla(selectJSON);
-    setSelectedClient(businessUnit.abbreviatedName);
-    setCollapse(false);
-  };
+  const {
+    "(max-width: 532px)": screenMobile,
+    "(max-width: 805px)": screenTablet,
+    "(max-width: 944px)": screenTabletHeader,
+  }: Record<string, boolean> = useMediaQueries([
+    "(max-width: 532px)",
+    "(max-width: 805px)",
+    "(max-width: 944px)",
+  ]);
 
   return (
     <>
@@ -81,7 +86,7 @@ function HomeUI(props: HomeProps) {
               <StyledCollapseIcon
                 $collapse={collapse}
                 onClick={() => setCollapse(!collapse)}
-                $isTablet={isTablet}
+                $isTablet={screenTabletHeader}
                 ref={collapseMenuRef}
               >
                 <Icon
@@ -103,8 +108,8 @@ function HomeUI(props: HomeProps) {
             </>
           )}
         </StyledHeaderContainer>
-        <StyledContainerSection>
-          <StyledTitle>
+        <StyledContainerSection $isMobile={screenMobile}>
+          <StyledTitle $isTablet={screenTablet}>
             <Title
               title={`Bienvenid@, ${username}`}
               description="Selecciona una opción para empezar a ajustar la configuración."
@@ -112,7 +117,7 @@ function HomeUI(props: HomeProps) {
               sizeTitle="large"
             />
           </StyledTitle>
-          <StyledContainerCards>
+          <StyledContainerCards $isTablet={screenTablet}>
             {data?.map((card) => (
               <AppCard
                 key={card.id}
@@ -124,7 +129,7 @@ function HomeUI(props: HomeProps) {
             ))}
           </StyledContainerCards>
         </StyledContainerSection>
-        <StyledFooter>
+        <StyledFooter $isMobile={screenMobile}>
           <StyledLogo src={appData.businessManager.urlBrand} />
         </StyledFooter>
       </StyledContainer>

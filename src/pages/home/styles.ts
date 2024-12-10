@@ -7,6 +7,20 @@ interface IStyledCollapseIcon {
   $isTablet: boolean;
 }
 
+interface IStyledContainerSection {
+  $isMobile: boolean;
+}
+
+interface IStyledTitle {
+  $isTablet: boolean;
+}
+interface IStyledContainerCards {
+  $isTablet: boolean;
+}
+interface IStyledFooter {
+  $isMobile: boolean;
+}
+
 const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -15,17 +29,18 @@ const StyledContainer = styled.div`
   height: 100vh;
   overflow-y: auto;
 `;
-const StyledContainerSection = styled.div`
-  @media screen and (max-width: 532px) {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    padding: ${tokens.spacing.s200};
-    gap: ${tokens.spacing.s300};
-  }
+const StyledContainerSection = styled.div<IStyledContainerSection>`
+  display: flex;
+  flex-direction: column;
+  height: ${({ $isMobile }) => ($isMobile ? "100vh" : "auto")};
+  padding: ${({ $isMobile }) =>
+    $isMobile ? `${tokens.spacing.s200}` : `${tokens.spacing.s0}`};
+  gap: ${({ $isMobile }) =>
+    $isMobile ? `${tokens.spacing.s300}` : `${tokens.spacing.s0}`};
 `;
 
 const StyledHeaderContainer = styled.div`
+  position: relative;
   & div > div {
     cursor: pointer;
   }
@@ -39,44 +54,40 @@ const StyledLogo = styled.img`
   max-width: 100px;
 `;
 
-const StyledTitle = styled.div`
-  padding: ${tokens.spacing.s600} ${tokens.spacing.s1600}
-    ${tokens.spacing.s1000};
-
-  @media screen and (max-width: 805px) {
-    display: flex;
-    padding: var(--spacing-S200, 16px);
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--spacing-S300, ${tokens.spacing.s300});
-    align-self: stretch;
-  }
+const StyledTitle = styled.div<IStyledTitle>`
+  padding: ${({ $isTablet }) =>
+    $isTablet
+      ? `var(--spacing-S200, ${tokens.spacing.s200})`
+      : `${tokens.spacing.s600} ${tokens.spacing.s1600} ${tokens.spacing.s1000}`};
+  display: flex;
+  flex-direction: column;
+  align-items: ${({ $isTablet }) => $isTablet && "flex-start"};
+  gap: ${({ $isTablet }) =>
+    $isTablet
+      ? `var(--spacing-S300, ${tokens.spacing.s300})`
+      : `${tokens.spacing.s0}`};
+  align-self: ${({ $isTablet }) => $isTablet && "stretch"};
 `;
 
-const StyledContainerCards = styled.div`
-  box-sizing: border-box;
-  padding: ${tokens.spacing.s0} ${tokens.spacing.s1400} ${tokens.spacing.s400}
-    170px;
+const StyledContainerCards = styled.div<IStyledContainerCards>`
   display: flex;
+  box-sizing: border-box;
+  padding: ${({ $isTablet }) =>
+    $isTablet
+      ? `${tokens.spacing.s0}`
+      : `${tokens.spacing.s0} ${tokens.spacing.s1400} ${tokens.spacing.s400} 170px`};
+  justify-content: ${({ $isTablet }) => ($isTablet ? "center" : "flex-start")};
   flex-wrap: wrap;
   gap: ${tokens.spacing.s400};
-
-  @media screen and (max-width: 805px) {
-    justify-content: center;
-    padding: ${tokens.spacing.s0};
-  }
 `;
 
-const StyledFooter = styled.footer`
+const StyledFooter = styled.footer<IStyledFooter>`
   display: flex;
   margin-top: auto;
   padding: ${tokens.spacing.s0} ${tokens.spacing.s1600} ${tokens.spacing.s0};
   justify-content: center;
-
-  @media screen and (max-width: 532px) {
-    padding-top: 50px;
-    margin: ${tokens.spacing.s0};
-  }
+  padding-top: ${({ $isMobile }) => $isMobile && "50px"};
+  margin: ${({ $isMobile }) => $isMobile && `${tokens.spacing.s0}`};
 `;
 
 const StyledCollapseIcon = styled.div<IStyledCollapseIcon>`

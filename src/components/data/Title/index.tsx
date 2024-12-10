@@ -9,7 +9,7 @@ import { mediaQueryMobile } from "@config/environment";
 import { tokens } from "@design/tokens";
 import { StyledContainerText } from "./styles";
 
-interface TitleProps {
+interface ITitle {
   title: string;
   description?: string;
   icon?: JSX.Element;
@@ -17,7 +17,7 @@ interface TitleProps {
   sizeTitle?: ITextSize;
 }
 
-function Title(props: TitleProps) {
+function Title(props: ITitle) {
   const {
     title,
     sizeTitle = "medium",
@@ -73,4 +73,4 @@ function Title(props: TitleProps) {
 }
 
 export { Title };
-export type { TitleProps };
+export type { ITitle };
