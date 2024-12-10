@@ -17,6 +17,9 @@ import { SelectBusinessUnitsRoutes } from "./routes/selectBusinessunits";
 import { SelectBusinessUnits } from "./pages/selectBusinessUnits";
 import { Home } from "./pages/home";
 import { GlobalStyles } from "./styles/global";
+import { MoneyDestinationRoutes } from "./routes/moneyDestination";
+import { CreditLinesRoutes } from "./routes/creditLines";
+import { AppPage } from "./components/layout/AppPage";
 
 function LogOut() {
   localStorage.clear();
@@ -39,7 +42,13 @@ const router = createBrowserRouter(
         element={<SelectBusinessUnitsRoutes />}
       />
       <Route path="/" element={<FirstPage />} errorElement={<ErrorPage />} />
-
+      <Route path="/" element={<AppPage />}>
+        <Route path="credit-lines/*" element={<CreditLinesRoutes />} />
+        <Route
+          path="money-destination/*"
+          element={<MoneyDestinationRoutes />}
+        />
+      </Route>
       <Route path="logout" element={<LogOut />} />
     </>,
   ),

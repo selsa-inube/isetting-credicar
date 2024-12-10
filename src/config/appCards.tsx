@@ -7,14 +7,14 @@ const appCards: ICardData[] = [
     label: "Líneas de crédito",
     description: "Líneas de crédito.",
     icon: <MdOutlinePayments />,
-    url: "/",
+    url: "/credit-lines",
   },
   {
     id: "moneyDestination",
     label: "Destinos de dinero",
     description: "Destinos de dinero.",
     icon: <MdCreditCard />,
-    url: "/",
+    url: "/money-destination",
   },
 ];
 
