@@ -45,7 +45,12 @@ const SelectBusinessUnitsUI = () => {
           }
         >
           <Stack direction="column" alignItems="center">
-            <Text as="h1" type="headline" size="large">
+            <Text
+              as="h1"
+              type="headline"
+              size={screenTablet ? "medium" : "large"}
+              textAlign="center"
+            >
               Bienvenido a iSetting Credicar
             </Text>
           </Stack>

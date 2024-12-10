@@ -4,7 +4,6 @@ import { MdOutlineChevronRight } from "react-icons/md";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Grid } from "@inubekit/grid";
 import { Header } from "@inubekit/header";
-import { Nav } from "@inubekit/nav";
 import { useMediaQuery } from "@inubekit/hooks";
 import { Icon } from "@inubekit/icon";
 
@@ -23,6 +22,7 @@ import {
   StyledLogo,
   StyledMain,
 } from "./styles";
+import { Nav } from "@inubekit/nav";
 const renderLogo = (imgUrl: string) => {
   return (
     <StyledContentImg to="/">

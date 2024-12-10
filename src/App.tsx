@@ -16,9 +16,10 @@ import { ErrorPage } from "./components/layout/ErrorPage";
 import { SelectBusinessUnitsRoutes } from "./routes/selectBusinessunits";
 import { SelectBusinessUnits } from "./pages/selectBusinessUnits";
 import { Home } from "./pages/home";
-import { AppPage } from "./components/layout/AppPage";
-import { CreditLinesRoutes } from "./routes/creditLines";
+import { GlobalStyles } from "./styles/global";
 import { MoneyDestinationRoutes } from "./routes/moneyDestination";
+import { CreditLinesRoutes } from "./routes/creditLines";
+import { AppPage } from "./components/layout/AppPage";
 
 function LogOut() {
   localStorage.clear();
@@ -83,6 +84,7 @@ function App() {
 
   return (
     <>
+      <GlobalStyles />
       <AppContextProvider>
         <RouterProvider router={router} />
       </AppContextProvider>

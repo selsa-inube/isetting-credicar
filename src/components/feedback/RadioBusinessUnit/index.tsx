@@ -5,7 +5,7 @@ import { Text } from "@inubekit/text";
 import { tokens } from "@design/tokens";
 import { StyledRadioBusinessUnit, StyledRadio, StyledImage } from "./styles";
 
-interface RadioBusinessUnitProps {
+interface IRadioBusinessUnit {
   id: string;
   label: string;
   logo: string;
@@ -14,7 +14,7 @@ interface RadioBusinessUnitProps {
   handleChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-function RadioBusinessUnit(props: RadioBusinessUnitProps) {
+function RadioBusinessUnit(props: IRadioBusinessUnit) {
   const { name, id, value, label, logo, handleChange } = props;
 
   const mediaQueries = ["(max-width: 532px)", "(max-width: 460px)"];
@@ -51,4 +51,4 @@ function RadioBusinessUnit(props: RadioBusinessUnitProps) {
 }
 
 export { RadioBusinessUnit };
-export type { RadioBusinessUnitProps };
+export type { IRadioBusinessUnit };

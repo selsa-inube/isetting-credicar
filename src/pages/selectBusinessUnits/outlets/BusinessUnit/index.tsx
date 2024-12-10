@@ -5,11 +5,11 @@ import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
 import { BusinessUnitsUI } from "./interface";
 import { IBusinessUnitstate } from "./types";
 
-interface BusinessUnitsProps {
+interface IBusinessUnits {
   businessUnits: IBusinessUnitsPortalStaff[];
 }
 
-function BusinessUnits(props: BusinessUnitsProps) {
+function BusinessUnits(props: IBusinessUnits) {
   const { businessUnits } = props;
   const { setBusinessUnitSigla } = useContext(AppContext);
   const [search, setSearch] = useState("");
