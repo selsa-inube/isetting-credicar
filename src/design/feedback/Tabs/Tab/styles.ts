@@ -29,14 +29,17 @@ const StyledTab = styled.li<IStyledTab>`
   }
 `;
 
-const StyledNotification = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background-color: ${inube.palette.red.R500};
+const StyledNotificationContainer = styled.svg``;
+
+const StyledNotificationElement = styled.text.attrs({
+  x: "50%",
+  y: "56%",
+  dominantBaseline: "middle",
+  textAnchor: "middle",
+})`
+  font-size: 12px;
+  font-weight: bold;
+  fill: ${inube.palette.neutral.N0};
 `;
 
-export { StyledTab, StyledNotification };
+export { StyledTab, StyledNotificationContainer, StyledNotificationElement };

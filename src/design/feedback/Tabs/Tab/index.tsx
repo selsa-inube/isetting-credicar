@@ -1,6 +1,11 @@
 import { Text, TextTokens } from "@inubekit/text";
-import { StyledNotification, StyledTab } from "./styles";
-
+import { Icon } from "@inubekit/icon";
+import {
+  StyledNotificationContainer,
+  StyledNotificationElement,
+  StyledTab,
+} from "./styles";
+import { ComponentAppearance } from "@src/types/aparences.types";
 interface ITab {
   label: string;
   id: string;
@@ -8,7 +13,6 @@ interface ITab {
   selected?: boolean;
   notificationIndicators?: number;
 }
-
 const Tab = (props: ITab) => {
   const {
     disabled = false,
@@ -17,8 +21,7 @@ const Tab = (props: ITab) => {
     label,
     notificationIndicators,
   } = props;
-  const selectedAppearance = "primary";
-
+  const selectedAppearance = ComponentAppearance.PRIMARY;
   return (
     <StyledTab
       disabled={disabled}
@@ -30,7 +33,9 @@ const Tab = (props: ITab) => {
         type="label"
         size="medium"
         appearance={
-          selected ? (selectedAppearance as keyof typeof TextTokens) : "gray"
+          selected
+            ? (selectedAppearance as keyof typeof TextTokens)
+            : ComponentAppearance.GRAY
         }
         disabled={disabled}
         textAlign="start"
@@ -39,15 +44,25 @@ const Tab = (props: ITab) => {
         {label}
       </Text>
       {notificationIndicators && notificationIndicators > 0 && (
-        <StyledNotification>
-          <Text type="label" size="small" appearance="light" weight="bold">
-            {notificationIndicators}
-          </Text>
-        </StyledNotification>
+        <Icon
+          icon={
+            <StyledNotificationContainer>
+              <StyledNotificationElement>
+                {notificationIndicators}
+              </StyledNotificationElement>
+            </StyledNotificationContainer>
+          }
+          appearance="danger"
+          cursorHover={true}
+          disabled={false}
+          spacing="narrow"
+          variant="filled"
+          shape="circle"
+          size="15px"
+        />
       )}
     </StyledTab>
   );
 };
-
 export { Tab };
 export type { ITab };

@@ -5,7 +5,7 @@ import { Tab, ITab } from "../index";
 
 const meta: Meta<typeof Tab> = {
   component: Tab,
-  title: "feedback/navigation/Tab",
+  title: "navigation/Tab",
   decorators: [
     (Story: StoryFn) => (
       <BrowserRouter>

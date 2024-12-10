@@ -5,7 +5,7 @@ import { Tabs, ITabs } from "..";
 
 const meta: Meta<typeof Tabs> = {
   component: Tabs,
-  title: "feedback/navigation/Tabs",
+  title: "navigation/Tabs",
   decorators: [
     (Story: StoryFn) => (
       <BrowserRouter>
