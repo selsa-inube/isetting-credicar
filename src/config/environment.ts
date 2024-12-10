@@ -4,6 +4,8 @@ const AUTH_REDIRECT_URI = import.meta.env.VITE_AUTH0_REDIRECT_URI as string;
 const maxRetriesServices = 5;
 const fetchTimeoutServices = 3000;
 
+const mediaQueryMobile = "(max-width: 770px)";
+
 const secretKeyPortalId =
   "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
 
@@ -14,10 +16,13 @@ const enviroment = {
   REDIRECT_URI: IS_PRODUCTION ? window.location.origin : AUTH_REDIRECT_URI,
   IVITE_ISAAS_QUERY_PROCESS_SERVICE: import.meta.env
     .VITE_ISAAS_QUERY_PROCESS_SERVICE,
+  IPORTAL_STAFF_QUERY_PROCESS_SERVICE: import.meta.env
+    .VITE_IPORTAL_STAFF_QUERY_PROCESS_SERVICE,
 };
 
 export {
   enviroment,
+  mediaQueryMobile,
   maxRetriesServices,
   fetchTimeoutServices,
   secretKeyPortalId,
