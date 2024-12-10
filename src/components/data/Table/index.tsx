@@ -43,7 +43,6 @@ const Table = (props: ITable) => {
     return entries.filter((entry) => {
       for (const attribute in entry) {
         const attributeValue = entry[attribute]?.toString().toLowerCase();
-        console.log(attributeValue);
         const statusValue = entry?.[attribute]?.props?.status
           ?.toString()
           .toLowerCase();

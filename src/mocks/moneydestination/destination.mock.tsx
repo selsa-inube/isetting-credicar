@@ -1,4 +1,3 @@
-import IconWithText from "@components/data/IconWithText";
 import {
   MdOutlineBeachAccess,
   MdDirectionsCar,
@@ -6,6 +5,7 @@ import {
   MdCreditCard,
   MdAndroid,
 } from "react-icons/md";
+import { IconWithText } from "@components/data/IconWithText";
 
 const dataMoneyDestination = [
   {
