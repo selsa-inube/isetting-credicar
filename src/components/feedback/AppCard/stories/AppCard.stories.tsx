@@ -2,7 +2,7 @@ import { BrowserRouter } from "react-router-dom";
 import { MdContacts } from "react-icons/md";
 import { StoryFn, Meta } from "@storybook/react";
 
-import { AppCard, AppCardProps } from "..";
+import { AppCard, IAppCard } from "..";
 
 const meta: Meta<typeof AppCard> = {
   component: AppCard,
@@ -16,7 +16,7 @@ const meta: Meta<typeof AppCard> = {
   ],
 };
 
-const Template: StoryFn<AppCardProps> = (args) => <AppCard {...args} />;
+const Template: StoryFn<IAppCard> = (args) => <AppCard {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

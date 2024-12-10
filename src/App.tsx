@@ -16,9 +16,10 @@ import { ErrorPage } from "./components/layout/ErrorPage";
 import { SelectBusinessUnitsRoutes } from "./routes/selectBusinessunits";
 import { SelectBusinessUnits } from "./pages/selectBusinessUnits";
 import { Home } from "./pages/home";
-import { AppPage } from "./components/layout/AppPage";
-import { CreditLinesRoutes } from "./routes/creditLines";
+import { GlobalStyles } from "./styles/global";
 import { MoneyDestinationRoutes } from "./routes/moneyDestination";
+import { CreditLinesRoutes } from "./routes/creditLines";
+import { AppPage } from "./components/layout/AppPage";
 import { IUser } from "./types/app.types";
 
 function LogOut() {
@@ -58,13 +59,13 @@ const url = new URL(window.location.href);
 const params = new URLSearchParams(url.search);
 const portalCode = params.get("portal");
 
-interface AppProps {
+interface IApp {
   code?: string;
   businessUnit?: string;
   user?: IUser;
 }
 
-function App(props: AppProps) {
+function App(props: IApp) {
   const { code, user, businessUnit } = props;
   const { setAppData, setBusinessUnitSigla } = useContext(AppContext);
 
@@ -119,7 +120,12 @@ function App(props: AppProps) {
     }
   }
 
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <GlobalStyles />
+      <RouterProvider router={router} />
+    </>
+  );
 }
 
 export default App;
