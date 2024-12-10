@@ -1,6 +1,8 @@
 import { MdCheck } from "react-icons/md";
 import { Stack } from "@inubekit/stack";
 import { Icon } from "@inubekit/icon";
+import { Divider } from "@inubekit/divider";
+
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
 import { tokens } from "@design/tokens";
 import { ComponentAppearance } from "@ptypes/aparences.types";
@@ -9,17 +11,16 @@ import {
   StyledUl,
   StyledLi,
   StyledImg,
-  StyledHr,
   StyledContainerOption,
 } from "./styles";
 
-interface BusinessUnitChangeProps {
+interface IBusinessUnitChange {
   businessUnits: IBusinessUnitsPortalStaff[];
   selectedClient: string;
   onLogoClick: (businessUnit: IBusinessUnitsPortalStaff) => void;
 }
 
-export const BusinessUnitChange = (props: BusinessUnitChangeProps) => {
+const BusinessUnitChange = (props: IBusinessUnitChange) => {
   const { businessUnits, selectedClient, onLogoClick } = props;
 
   return (
@@ -49,7 +50,7 @@ export const BusinessUnitChange = (props: BusinessUnitChangeProps) => {
                   </Stack>
                 )}
               </StyledLi>
-              {index !== businessUnits.length - 1 && <StyledHr />}
+              {index !== businessUnits.length - 1 && <Divider />}
             </StyledContainerOption>
           ))}
         </StyledUl>
@@ -57,3 +58,5 @@ export const BusinessUnitChange = (props: BusinessUnitChangeProps) => {
     </StyledContainer>
   );
 };
+
+export { BusinessUnitChange };

@@ -1,7 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
 import { MdDoorBack } from "react-icons/md";
 import { Meta, StoryFn } from "@storybook/react";
-import { Title, TitleProps } from "../index";
+import { Title, ITitle } from "../index";
 
 const meta: Meta<typeof Title> = {
   title: "data/Title",
@@ -15,7 +15,7 @@ const meta: Meta<typeof Title> = {
   ],
 };
 
-const Template: StoryFn<TitleProps> = (args) => <Title {...args} />;
+const Template: StoryFn<ITitle> = (args) => <Title {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

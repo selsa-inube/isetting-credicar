@@ -1,18 +1,21 @@
 import styled from "styled-components";
 import { tokens } from "@design/tokens";
 
-interface StyledBusinessUnitsListProps {
+interface IStyledBusinessUnitsList {
+  $isMobile: boolean;
+  $isTablet: boolean;
   $scroll?: boolean;
 }
 
-const StyledBusinessUnits = styled.div`
+interface IStyledBusinessUnits {
+  $isMobile: boolean;
+}
+
+const StyledBusinessUnits = styled.div<IStyledBusinessUnits>`
   & form {
     & > div {
       margin: ${tokens.spacing.s500} auto ${tokens.spacing.s0};
-      width: 500px;
-      @media screen and (max-width: 532px) {
-        width: auto;
-      }
+      width: ${({ $isMobile }) => ($isMobile ? "auto" : "500px")};
     }
   }
 
@@ -21,19 +24,15 @@ const StyledBusinessUnits = styled.div`
   }
 `;
 
-const StyledBusinessUnitsList = styled.div<StyledBusinessUnitsListProps>`
+const StyledBusinessUnitsList = styled.div<IStyledBusinessUnitsList>`
   & > div {
     list-style: none;
     max-height: 330px;
-    width: 500px;
+    min-height: ${({ $isTablet }) => $isTablet && "200px"};
+    width: ${({ $isMobile }) => ($isMobile ? "250px" : "500px")};
     overflow-y: auto;
 
     @media screen and (max-height: 1000px) {
-      min-height: 200px;
-    }
-
-    @media screen and (max-width: 532px) {
-      width: 250px;
     }
   }
 `;

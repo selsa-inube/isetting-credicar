@@ -4,6 +4,8 @@ import { Text } from "@inubekit/text";
 import { Stack } from "@inubekit/stack";
 import { tokens } from "@design/tokens";
 import { Button } from "@inubekit/button";
+import { Input } from "@inubekit/input";
+import { useMediaQueries } from "@inubekit/hooks";
 
 import { RadioBusinessUnit } from "@components/feedback/RadioBusinessUnit";
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
@@ -14,9 +16,8 @@ import {
   StyledBusinessUnitsItem,
 } from "./styles";
 import { IBusinessUnitstate } from "./types";
-import { Input } from "@inubekit/input";
 
-interface BusinessUnitsUIProps {
+interface IBusinessUnitsUI {
   businessUnits: IBusinessUnitsPortalStaff[];
   search: string;
   businessUnit: IBusinessUnitstate;
@@ -52,11 +53,19 @@ function BusinessUnitsUI({
   filterBusinessUnits,
   handleBussinessUnitChange,
   handleSubmit,
-}: BusinessUnitsUIProps) {
+}: IBusinessUnitsUI) {
   const filteredBusinessUnits = filterBusinessUnits(businessUnits, search);
 
+  const {
+    "(max-width: 532px)": screenMobile,
+    "(max-height: 1000px)": screenTablet,
+  }: Record<string, boolean> = useMediaQueries([
+    "(max-width: 532px)",
+    "(max-height: 1000px)",
+  ]);
+
   return (
-    <StyledBusinessUnits>
+    <StyledBusinessUnits $isMobile={screenMobile}>
       <Text type="title" as="h2" textAlign="center">
         Unidades de Negocios
       </Text>
@@ -80,7 +89,11 @@ function BusinessUnitsUI({
           {filteredBusinessUnits.length === 0 && (
             <NoResultsMessage search={search} />
           )}
-          <StyledBusinessUnitsList $scroll={businessUnits.length > 5}>
+          <StyledBusinessUnitsList
+            $scroll={businessUnits.length > 5}
+            $isMobile={screenMobile}
+            $isTablet={screenTablet}
+          >
             <Stack
               direction="column"
               padding={`${tokens.spacing.s0} ${tokens.spacing.s100}`}

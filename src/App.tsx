@@ -16,6 +16,7 @@ import { ErrorPage } from "./components/layout/ErrorPage";
 import { SelectBusinessUnitsRoutes } from "./routes/selectBusinessunits";
 import { SelectBusinessUnits } from "./pages/selectBusinessUnits";
 import { Home } from "./pages/home";
+import { GlobalStyles } from "./styles/global";
 
 function LogOut() {
   localStorage.clear();
@@ -74,6 +75,7 @@ function App() {
 
   return (
     <>
+      <GlobalStyles />
       <AppContextProvider>
         <RouterProvider router={router} />
       </AppContextProvider>

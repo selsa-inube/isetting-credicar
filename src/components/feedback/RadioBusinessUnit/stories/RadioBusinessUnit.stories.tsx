@@ -2,7 +2,7 @@ import { Meta, StoryFn } from "@storybook/react";
 import { BrowserRouter } from "react-router-dom";
 
 import { businessUnitDataMock } from "@mocks/businessUnits/businessUnits.mock";
-import { RadioBusinessUnit, RadioBusinessUnitProps } from "../index";
+import { RadioBusinessUnit, IRadioBusinessUnit } from "../index";
 
 const meta: Meta<typeof RadioBusinessUnit> = {
   title: "feedback/RadioBusinessUnit",
@@ -15,9 +15,7 @@ const meta: Meta<typeof RadioBusinessUnit> = {
     ),
   ],
 };
-const Default = (args: RadioBusinessUnitProps) => (
-  <RadioBusinessUnit {...args} />
-);
+const Default = (args: IRadioBusinessUnit) => <RadioBusinessUnit {...args} />;
 
 Default.args = {
   id: businessUnitDataMock[1].publicCode,

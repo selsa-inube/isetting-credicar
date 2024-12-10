@@ -6,7 +6,7 @@ import { SkeletonIcon, SkeletonLine } from "@inubekit/skeleton";
 import { tokens } from "@design/tokens";
 import { StyledAppCard } from "./styles";
 
-interface AppCardProps {
+interface IAppCard {
   description?: string;
   icon?: string | JSX.Element;
   label?: string;
@@ -14,7 +14,7 @@ interface AppCardProps {
   isLoading?: boolean;
 }
 
-function AppCard(props: AppCardProps) {
+function AppCard(props: IAppCard) {
   const { label, description, icon, url, isLoading } = props;
 
   return (
@@ -53,4 +53,4 @@ function AppCard(props: AppCardProps) {
 }
 
 export { AppCard };
-export type { AppCardProps };
+export type { IAppCard };

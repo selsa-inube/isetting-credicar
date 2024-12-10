@@ -1,8 +1,43 @@
+import { useContext, useEffect, useRef, useState } from "react";
 import { appCards } from "@config/appCards";
+import { AppContext } from "@context/AppContext";
+import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
 import { HomeUI } from "./interface";
 
 function Home() {
-  return <HomeUI data={appCards} />;
+  const { appData, businessUnitsToTheStaff, setBusinessUnitSigla } =
+    useContext(AppContext);
+  const [collapse, setCollapse] = useState(false);
+  const [selectedClient, setSelectedClient] = useState<string>("");
+
+  const collapseMenuRef = useRef<HTMLDivElement>(null);
+  const businessUnitChangeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (appData.businessUnit.publicCode) {
+      setSelectedClient(appData.businessUnit.abbreviatedName);
+    }
+  }, [appData]);
+
+  const handleLogoClick = (businessUnit: IBusinessUnitsPortalStaff) => {
+    const selectJSON = JSON.stringify(businessUnit);
+    setBusinessUnitSigla(selectJSON);
+    setSelectedClient(businessUnit.abbreviatedName);
+    setCollapse(false);
+  };
+  return (
+    <HomeUI
+      appData={appData}
+      businessUnitChangeRef={businessUnitChangeRef}
+      businessUnitsToTheStaff={businessUnitsToTheStaff}
+      collapse={collapse}
+      collapseMenuRef={collapseMenuRef}
+      data={appCards}
+      selectedClient={selectedClient}
+      setCollapse={setCollapse}
+      handleLogoClick={handleLogoClick}
+    />
+  );
 }
 
 export { Home };
