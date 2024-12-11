@@ -1,10 +1,7 @@
-import { MdOutlineRemoveRedEye } from "react-icons/md";
-import { Icon } from "@inubekit/icon";
-
 import { IAction, IEntry, ITitle } from "@components/data/Table/types";
-import { ComponentAppearance } from "@ptypes/aparences.types";
 import { Edit } from "../components/Edit";
 import { Delete } from "../components/Delete";
+import { Details } from "../components/Details";
 
 const titles: ITitle[] = [
   {
@@ -22,14 +19,7 @@ const titles: ITitle[] = [
 const actions: IAction[] = [
   {
     id: "Details",
-    content: () => (
-      <Icon
-        appearance={ComponentAppearance.DARK}
-        icon={<MdOutlineRemoveRedEye />}
-        size="16px"
-        cursorHover={true}
-      />
-    ),
+    content: (entry: IEntry) => <Details data={entry} />,
   },
   {
     id: "edit",

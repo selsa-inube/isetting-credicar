@@ -6,7 +6,7 @@ import { tokens } from "@design/tokens";
 import { Tabs } from "@design/feedback/Tabs";
 import { Title } from "@components/data/Title";
 import { crumbsMoneyDestination } from "./config/navigation";
-import { MoneyDestinationTabsConfig } from "./config/tabs.config";
+import { moneyDestinationTabsConfig } from "./config/tabs.config";
 import { MoneyDestinationTab } from "./tabs/moneyDestinationTab";
 
 interface IMoneyDestinationUI {
@@ -41,16 +41,16 @@ function MoneyDestinationUI(props: IMoneyDestinationUI) {
         </Stack>
         <Stack gap={tokens.spacing.s300} direction="column">
           <Tabs
-            tabs={Object.values(MoneyDestinationTabsConfig)}
+            tabs={Object.values(moneyDestinationTabsConfig)}
             selectedTab={isSelected}
             onChange={handleTabChange}
             scroll={smallScreenTab ? true : false}
           />
 
-          {isSelected === MoneyDestinationTabsConfig.moneyDestination.id && (
+          {isSelected === moneyDestinationTabsConfig.moneyDestination.id && (
             <MoneyDestinationTab />
           )}
-          {isSelected === MoneyDestinationTabsConfig.requestsInProgress.id && (
+          {isSelected === moneyDestinationTabsConfig.requestsInProgress.id && (
             <></>
           )}
         </Stack>

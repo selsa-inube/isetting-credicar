@@ -1,4 +1,4 @@
-const MoneyDestinationTabsConfig = {
+const moneyDestinationTabsConfig = {
   moneyDestination: {
     id: "moneyDestination",
     isDisabled: false,
@@ -12,4 +12,4 @@ const MoneyDestinationTabsConfig = {
   },
 };
 
-export { MoneyDestinationTabsConfig };
+export { moneyDestinationTabsConfig };
