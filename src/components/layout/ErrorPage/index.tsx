@@ -34,7 +34,11 @@ function ErrorPage(props: IErrorPage) {
     onClick,
   } = props;
 
-  const mediaQueries = ["(min-width: 771px)", "(max-width: 770px)"];
+  const mediaQueries = [
+    "(min-width: 771px)",
+    "(max-width: 770px)",
+    "(max-width: 1000px)",
+  ];
   const matches = useMediaQueries(mediaQueries);
 
   return (
@@ -51,7 +55,11 @@ function ErrorPage(props: IErrorPage) {
       }
       direction="column"
     >
-      <StyledCompanyLogo src={logo} alt={logoAlt} />
+      <StyledCompanyLogo
+        src={logo}
+        alt={logoAlt}
+        $isTablet={matches["(max-width: 1000px)"]}
+      />
       <Grid
         templateRows={matches["(max-width: 770px)"] ? "repeat(2, 1fr)" : "1fr"}
         templateColumns={

@@ -9,6 +9,10 @@ import { IEntry } from "@components/data/Table/types";
 import { DetailsDestinationModal } from "@components/modals/DetailsDestinationModal";
 import { StyledContainerIcon } from "./styles";
 import { detailsTabsConfig } from "./tabs.config";
+import {
+  decisionTemplate,
+  textValuesBusinessRules,
+} from "../../config/businessRules.config";
 
 interface IDetails {
   data: IEntry;
@@ -47,6 +51,8 @@ const Details = (props: IDetails) => {
           detailsTabsConfig={detailsTabsConfig}
           portalId="portal"
           onCloseModal={handleToggleModal}
+          textValues={textValuesBusinessRules}
+          decisionTemplate={decisionTemplate}
         />
       )}
     </>

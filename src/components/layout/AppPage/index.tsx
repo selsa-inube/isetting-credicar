@@ -42,6 +42,7 @@ function AppPage() {
 
   const navigate = useNavigate();
   const isTablet = useMediaQuery("(max-width: 849px)");
+  const isTabletMain = useMediaQuery("(max-width: 1000px)");
 
   useEffect(() => {
     if (appData.businessUnit.publicCode) {
@@ -107,7 +108,7 @@ function AppPage() {
             {!isTablet && (
               <Nav navigation={nav.items} actions={actionsConfig(logout)} />
             )}
-            <StyledMain>
+            <StyledMain $isMobile={isTabletMain}>
               <Outlet />
             </StyledMain>
           </Grid>

@@ -1,5 +1,6 @@
 import { MdClear } from "react-icons/md";
 import { createPortal } from "react-dom";
+import { IRuleDecision } from "@isettingkit/input";
 import { Button } from "@inubekit/button";
 import { useMediaQuery } from "@inubekit/hooks";
 import { Stack } from "@inubekit/stack";
@@ -13,16 +14,21 @@ import { tokens } from "@design/tokens";
 import { mediaQueryMobile } from "@config/environment";
 import { ComponentAppearance } from "@ptypes/aparences.types";
 import { IEntry } from "@components/data/Table/types";
+import { decisions } from "@mocks/moneydestination/creditLine.mock";
+import { IRulesFormTextValues } from "@pages/moneyDestination/tabs/moneyDestinationTab/types";
 import { StyledContainerButton, StyledModal } from "./styles";
 import { IDetailsTabsConfig } from "./types";
 import { GeneralDataTab } from "./GeneralDataTab";
+import { CreditLineTab } from "./CreditLineTab";
 
 interface IDetailsDestinationModalUI {
   data: IEntry;
+  decisionTemplate: IRuleDecision;
   detailsTabsConfig: IDetailsTabsConfig;
   isSelected: string;
   portalId: string;
   smallScreenTab: boolean;
+  textValues: IRulesFormTextValues;
   onCloseModal: () => void;
   onTabChange: (id: string) => void;
 }
@@ -35,6 +41,8 @@ function DetailsDestinationModalUI(props: IDetailsDestinationModalUI) {
     detailsTabsConfig,
     data,
     portalId,
+    textValues,
+    decisionTemplate,
     onCloseModal,
   } = props;
 
@@ -86,7 +94,13 @@ function DetailsDestinationModalUI(props: IDetailsDestinationModalUI) {
           {isSelected === detailsTabsConfig.generalData.id && (
             <GeneralDataTab data={data} />
           )}
-          {isSelected === detailsTabsConfig.creditLine.id && <></>}
+          {isSelected === detailsTabsConfig.creditLine.id && (
+            <CreditLineTab
+              data={decisions}
+              textValues={textValues}
+              decisionTemplate={decisionTemplate}
+            />
+          )}
         </Stack>
 
         <Stack gap={tokens.spacing.s250} justifyContent="flex-end">

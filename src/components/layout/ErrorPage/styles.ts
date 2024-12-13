@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-const StyledCompanyLogo = styled.img`
-  max-width: 300px;
+interface IStyledCompanyLogo {
+  $isTablet: boolean;
+}
 
-  @media screen and (max-width: 1000px) {
-    margin: 0 auto;
-    max-width: 250px;
-  }
+const StyledCompanyLogo = styled.img<IStyledCompanyLogo>`
+  max-width: ${({ $isTablet }) => ($isTablet ? "250px" : "300px")};
+  margin: ${({ $isTablet }) => $isTablet && "0 auto"};
 `;
 
 const StyledErrorImage = styled.img`
