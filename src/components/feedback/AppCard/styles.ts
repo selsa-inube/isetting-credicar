@@ -3,11 +3,18 @@ import { Link } from "react-router-dom";
 import { inube } from "@inubekit/foundations";
 import { tokens } from "@design/tokens";
 
-const StyledAppCard = styled(Link)`
+interface IStyledAppCard {
+  $isMobile: boolean;
+}
+
+const StyledAppCard = styled(Link)<IStyledAppCard>`
   box-sizing: border-box;
-  padding: ${tokens.spacing.s300};
+  padding: ${({ $isMobile }) =>
+    $isMobile ? `${tokens.spacing.s200}` : `${tokens.spacing.s300}`};
   height: 170px;
-  width: 250px;
+  width: ${({ $isMobile }) => ($isMobile ? "100%" : "250px")};
+  min-height: ${({ $isMobile }) => $isMobile && "100px"};
+  gap: ${({ $isMobile }) => $isMobile && `${tokens.spacing.s100}`};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -30,17 +37,13 @@ const StyledAppCard = styled(Link)`
       theme?.color?.surface?.gray?.regular || inube.palette.neutral.N30};
     box-shadow: none;
   }
-
-  @media (max-width: 400px) {
-    padding: ${tokens.spacing.s200};
-    width: 100%;
-    min-height: 100px;
-    gap: ${tokens.spacing.s100};
-
-    div {
+  ${({ $isMobile }) =>
+    $isMobile &&
+    `
+     div {
       gap: ${tokens.spacing.s050};
     }
-  }
+  `}
 `;
 
 export { StyledAppCard };

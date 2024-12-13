@@ -2,6 +2,7 @@ import { Stack } from "@inubekit/stack";
 import { Text } from "@inubekit/text";
 import { Icon } from "@inubekit/icon";
 import { SkeletonIcon, SkeletonLine } from "@inubekit/skeleton";
+import { useMediaQuery } from "@inubekit/hooks";
 
 import { tokens } from "@design/tokens";
 import { StyledAppCard } from "./styles";
@@ -17,8 +18,10 @@ interface IAppCard {
 function AppCard(props: IAppCard) {
   const { label, description, icon, url, isLoading } = props;
 
+  const screenMobile = useMediaQuery("(max-width: 400px)");
+
   return (
-    <StyledAppCard to={url ?? ""}>
+    <StyledAppCard to={url ?? ""} $isMobile={screenMobile}>
       <Stack direction="column" gap={tokens.spacing.s200}>
         {isLoading ? (
           <Stack width="70%">

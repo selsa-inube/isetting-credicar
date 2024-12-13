@@ -13,9 +13,11 @@ import { tokens } from "@design/tokens";
 import { mediaQueryMobile } from "@config/environment";
 import { ComponentAppearance } from "@ptypes/aparences.types";
 import { IEntry } from "@components/data/Table/types";
+import { decisions } from "@mocks/moneydestination/creditLine.mock";
 import { StyledContainerButton, StyledModal } from "./styles";
 import { IDetailsTabsConfig } from "./types";
 import { GeneralDataTab } from "./GeneralDataTab";
+import { CreditLineTab } from "./CreditLineTab";
 
 interface IDetailsDestinationModalUI {
   data: IEntry;
@@ -86,7 +88,9 @@ function DetailsDestinationModalUI(props: IDetailsDestinationModalUI) {
           {isSelected === detailsTabsConfig.generalData.id && (
             <GeneralDataTab data={data} />
           )}
-          {isSelected === detailsTabsConfig.creditLine.id && <></>}
+          {isSelected === detailsTabsConfig.creditLine.id && (
+            <CreditLineTab data={decisions} />
+          )}
         </Stack>
 
         <Stack gap={tokens.spacing.s250} justifyContent="flex-end">

@@ -22,14 +22,15 @@ const StyledContainer = styled.div`
   }
 `;
 
-const StyledMain = styled.main`
+interface IStyledMain {
+  $isMobile: boolean;
+}
+
+const StyledMain = styled.main<IStyledMain>`
   box-sizing: border-box;
   height: calc(100vh - 54px);
   overflow-y: auto;
-
-  @media screen and (max-width: 1000px) {
-    padding: ${tokens.spacing.s300};
-  }
+  padding: ${({ $isMobile }) => $isMobile && `${tokens.spacing.s300}`};
 `;
 
 const StyledHeaderContainer = styled.div`

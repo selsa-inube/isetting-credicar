@@ -31,9 +31,6 @@ const StyledBusinessUnitsList = styled.div<IStyledBusinessUnitsList>`
     min-height: ${({ $isTablet }) => $isTablet && "200px"};
     width: ${({ $isMobile }) => ($isMobile ? "250px" : "500px")};
     overflow-y: auto;
-
-    @media screen and (max-height: 1000px) {
-    }
   }
 `;
 
