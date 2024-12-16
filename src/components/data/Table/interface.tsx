@@ -30,8 +30,7 @@ interface ITableUI {
   titles: ITitle[];
   mobileTitle?: string;
   widthPercentageTotalColumns?: number;
-  widthFirstColumn?: number;
-  widthPercentageOtherColumns?: number;
+  columnWidths?: number[];
   goToEndPage: () => void;
   goToFirstPage: () => void;
   nextPage: () => void;
@@ -50,8 +49,7 @@ const TableUI = (props: ITableUI) => {
     pageLength,
     titles,
     widthPercentageTotalColumns,
-    widthFirstColumn,
-    widthPercentageOtherColumns,
+    columnWidths,
     goToEndPage,
     goToFirstPage,
     nextPage,
@@ -97,13 +95,12 @@ const TableUI = (props: ITableUI) => {
   const numberActions = actions ? actions.length : 1;
 
   return (
-    <Table>
+    <Table tableLayout={mediaActionOpen ? "auto" : "fixed"}>
       <Colgroup>
         {widthColmnsData(
           TitleColumns,
           widthPercentageTotalColumns,
-          widthFirstColumn,
-          widthPercentageOtherColumns,
+          columnWidths,
         )}
       </Colgroup>
 
