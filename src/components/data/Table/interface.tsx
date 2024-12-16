@@ -95,7 +95,7 @@ const TableUI = (props: ITableUI) => {
   const numberActions = actions ? actions.length : 1;
 
   return (
-    <Table>
+    <Table tableLayout={mediaActionOpen ? "auto" : "fixed"}>
       <Colgroup>
         {widthColmnsData(
           TitleColumns,
