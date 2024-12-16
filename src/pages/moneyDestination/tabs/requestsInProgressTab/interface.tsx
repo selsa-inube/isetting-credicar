@@ -18,6 +18,7 @@ function RequestsInProgressTabUI(props: IRequestsInProgressTabUI) {
   const { searchrequestProgress, loading, onSearchrequestProgress } = props;
 
   const smallScreen = useMediaQuery("(max-width: 690px)");
+  const widthFirstColumn = smallScreen ? 60 : 10;
 
   return (
     <StyledContainer $smallScreen={smallScreen}>
@@ -61,7 +62,7 @@ function RequestsInProgressTabUI(props: IRequestsInProgressTabUI) {
             breakpoints={breakPoints}
             filter={searchrequestProgress}
             isLoading={loading}
-            columnWidths={[10, 64, 10]}
+            columnWidths={[widthFirstColumn, 67, 10]}
           />
         </Stack>
       </Stack>
