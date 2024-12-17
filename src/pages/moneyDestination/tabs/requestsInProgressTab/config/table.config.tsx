@@ -5,6 +5,7 @@ import { IAction, ITitle } from "@components/data/Table/types";
 import { ComponentAppearance } from "@ptypes/aparences.types";
 import { Details } from "../components/Details";
 
+
 const titles: ITitle[] = [
   {
     id: "date",
@@ -22,6 +23,7 @@ const titles: ITitle[] = [
     priority: 2,
   },
 ];
+
 
 const actions: IAction[] = [
   {
