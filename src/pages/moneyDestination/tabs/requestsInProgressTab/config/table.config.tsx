@@ -1,8 +1,10 @@
-import { MdDeleteOutline, MdOutlineRemoveRedEye } from "react-icons/md";
+import { MdDeleteOutline } from "react-icons/md";
 import { Icon } from "@inubekit/icon";
 
 import { IAction, ITitle } from "@components/data/Table/types";
 import { ComponentAppearance } from "@ptypes/aparences.types";
+import { Details } from "../components/Details";
+
 
 const titles: ITitle[] = [
   {
@@ -16,23 +18,17 @@ const titles: ITitle[] = [
     priority: 1,
   },
   {
-    id: "state",
+    id: "status",
     titleName: "Estado",
     priority: 2,
   },
 ];
 
+
 const actions: IAction[] = [
   {
     id: "Details",
-    content: () => (
-      <Icon
-        appearance={ComponentAppearance.DARK}
-        icon={<MdOutlineRemoveRedEye />}
-        size="16px"
-        cursorHover
-      />
-    ),
+    content: (entry) => <Details data={entry} />,
   },
 
   {
