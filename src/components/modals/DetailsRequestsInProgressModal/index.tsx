@@ -13,7 +13,7 @@ import { Select } from "@inubekit/select";
 import { tokens } from "@design/tokens";
 import { mediaQueryMobile } from "@config/environment";
 import { ComponentAppearance } from "@ptypes/aparences.types";
-import { normalizeStateByName } from "@utils/status";
+import { normalizeStatusByName } from "@utils/status";
 import { IEntry } from "@components/data/Table/types";
 import { getDomainById } from "@mocks/domains/domainService.mocks";
 import {
@@ -125,10 +125,10 @@ function DetailsRequestsInProgressModal(
                   <Stack>
                     <Tag
                       appearance={
-                        (normalizeStateByName(data[field.id])
+                        (normalizeStatusByName(data[field.id])
                           ?.appearance as ITagAppearance) || "light"
                       }
-                      label={normalizeStateByName(data[field.id])?.name || ""}
+                      label={normalizeStatusByName(data[field.id])?.name || ""}
                     />
                   </Stack>
                 </StyledContainerFields>

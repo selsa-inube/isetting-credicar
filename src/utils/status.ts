@@ -7,7 +7,7 @@ const statusRequest = [
   { status: "Undefined", name: "No Definido", appearance: "gray" },
 ];
 
-const normalizeStateByName = (status: string) =>
+const normalizeStatusByName = (status: string) =>
   statusRequest.find((element) => element.name === status);
 
-export { statusRequest, normalizeStateByName };
+export { statusRequest, normalizeStatusByName };
