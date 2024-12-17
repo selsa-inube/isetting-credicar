@@ -1,27 +1,24 @@
-import { MdAdd } from "react-icons/md";
 import { Stack } from "@inubekit/stack";
 import { useMediaQuery } from "@inubekit/hooks";
 import { Input } from "@inubekit/input";
-import { Button } from "@inubekit/button";
 
 import { tokens } from "@design/tokens";
-import { ComponentAppearance } from "@ptypes/aparences.types";
 import { Table } from "@components/data/Table";
-import { dataMoneyDestination } from "@mocks/moneydestination/destination.mock";
+import { dataRequestsInProgress } from "@mocks/moneydestination/requestsInProgress.mock";
 import { StyledContainer } from "./styles";
 import { actions, breakPoints, titles } from "./config/table.config";
 
-interface IMoneyDestinationTabUI {
+interface IRequestsInProgressTabUI {
   loading: boolean;
-  searchMoneyDestination: string;
-  onSearchMoneyDestination: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  searchrequestProgress: string;
+  onSearchrequestProgress: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function MoneyDestinationTabUI(props: IMoneyDestinationTabUI) {
-  const { searchMoneyDestination, loading, onSearchMoneyDestination } = props;
+function RequestsInProgressTabUI(props: IRequestsInProgressTabUI) {
+  const { searchrequestProgress, loading, onSearchrequestProgress } = props;
 
   const smallScreen = useMediaQuery("(max-width: 690px)");
-  const widthFirstColumn = smallScreen ? 64 : 25;
+  const widthFirstColumn = smallScreen ? 60 : 10;
 
   return (
     <StyledContainer $smallScreen={smallScreen}>
@@ -36,7 +33,7 @@ function MoneyDestinationTabUI(props: IMoneyDestinationTabUI) {
       >
         <Stack gap={tokens.spacing.s400} direction="column">
           <Stack
-            justifyContent={smallScreen ? "center" : "space-between"}
+            justifyContent={smallScreen ? "center" : "start"}
             direction={smallScreen ? "column" : "row"}
             gap={
               smallScreen ? `${tokens.spacing.s150}` : `${tokens.spacing.s0}`
@@ -44,38 +41,28 @@ function MoneyDestinationTabUI(props: IMoneyDestinationTabUI) {
           >
             <Stack justifyContent="center">
               <Input
-                name="searchMoneyDestination"
-                id="searchMoneyDestination"
+                name="searchrequestProgress"
+                id="searchrequestProgress"
                 placeholder="Palabra clave..."
                 type="search"
                 size="compact"
-                value={searchMoneyDestination}
+                value={searchrequestProgress}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  onSearchMoneyDestination(e)
+                  onSearchrequestProgress(e)
                 }
               />
             </Stack>
-            <Button
-              spacing="wide"
-              appearance={ComponentAppearance.PRIMARY}
-              variant="filled"
-              iconBefore={<MdAdd />}
-              type="link"
-              path="/money-destination/add-destination"
-            >
-              Agregar destino
-            </Button>
           </Stack>
 
           <Table
             id="portal"
             titles={titles}
-            entries={dataMoneyDestination}
+            entries={dataRequestsInProgress}
             actions={actions}
             breakpoints={breakPoints}
-            filter={searchMoneyDestination}
+            filter={searchrequestProgress}
             isLoading={loading}
-            columnWidths={[widthFirstColumn, 55]}
+            columnWidths={[widthFirstColumn, 67, 10]}
           />
         </Stack>
       </Stack>
@@ -83,4 +70,4 @@ function MoneyDestinationTabUI(props: IMoneyDestinationTabUI) {
   );
 }
 
-export { MoneyDestinationTabUI };
+export { RequestsInProgressTabUI };
