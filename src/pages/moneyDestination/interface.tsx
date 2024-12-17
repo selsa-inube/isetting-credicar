@@ -8,6 +8,7 @@ import { Title } from "@components/data/Title";
 import { crumbsMoneyDestination } from "./config/navigation";
 import { moneyDestinationTabsConfig } from "./config/tabs.config";
 import { MoneyDestinationTab } from "./tabs/moneyDestinationTab";
+import { RequestsInProgressTab } from "./tabs/requestsInProgressTab";
 
 interface IMoneyDestinationUI {
   isSelected: string;
@@ -51,7 +52,7 @@ function MoneyDestinationUI(props: IMoneyDestinationUI) {
             <MoneyDestinationTab />
           )}
           {isSelected === moneyDestinationTabsConfig.requestsInProgress.id && (
-            <></>
+            <RequestsInProgressTab />
           )}
         </Stack>
       </Stack>
