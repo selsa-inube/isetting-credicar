@@ -13,7 +13,7 @@ import { Select } from "@inubekit/select";
 import { tokens } from "@design/tokens";
 import { mediaQueryMobile } from "@config/environment";
 import { ComponentAppearance } from "@ptypes/aparences.types";
-import { normalizeStateByName } from "@utils/state";
+import { normalizeStateByName } from "@utils/status";
 import { IEntry } from "@components/data/Table/types";
 import { getDomainById } from "@mocks/domains/domainService.mocks";
 import {

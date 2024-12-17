@@ -17,7 +17,7 @@ const titles: ITitle[] = [
     priority: 1,
   },
   {
-    id: "state",
+    id: "status",
     titleName: "Estado",
     priority: 2,
   },

@@ -8,7 +8,7 @@ const labelsOfRequest = [
     titleName: "Responsable:",
   },
   {
-    id: "state",
+    id: "status",
     titleName: "Estado:",
   },
 ];

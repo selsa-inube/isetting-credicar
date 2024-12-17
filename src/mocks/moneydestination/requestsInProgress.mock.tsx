@@ -5,7 +5,7 @@ const dataRequestsInProgress = [
     description: "Solicitud de creación destino vacaciones.",
     responsible: "Marcela María González Suarez",
     observation: "Solicitud procesada con éxito.",
-    state: "Procesada",
+    status: "Procesada",
   },
   {
     id: "2",
@@ -13,7 +13,7 @@ const dataRequestsInProgress = [
     description: "Solicitud de creación destino vehículo.",
     responsible: "Marcela María González Suarez",
     observation: "Solicitud procesada con éxito.",
-    state: "Cancelada",
+    status: "Cancelada",
   },
   {
     id: "3",
@@ -21,7 +21,7 @@ const dataRequestsInProgress = [
     description: "Solicitud de creación destino viajes de negocio.",
     responsible: "Marcela María González Suarez",
     observation: "Solicitud procesada con éxito.",
-    state: "Rechazada",
+    status: "Rechazada",
   },
   {
     id: "4",
@@ -29,7 +29,7 @@ const dataRequestsInProgress = [
     description: "Solicitud de creación destino estudios en el extranjero.",
     responsible: "Marcela María González Suarez",
     observation: "Solicitud procesada con éxito.",
-    state: "Con errores",
+    status: "Con errores",
   },
   {
     id: "5",
@@ -37,7 +37,7 @@ const dataRequestsInProgress = [
     description: "Solicitud de creación destino compra de vivienda nueva.",
     responsible: "Marcela María González Suarez",
     observation: "Solicitud procesada con éxito.",
-    state: "Pendiente",
+    status: "Pendiente",
   },
 ];
 
