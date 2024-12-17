@@ -20,7 +20,8 @@
       "@services/*": ["src/services/*"],
       "@context/*": ["src/context/*"],
       "@utils/*": ["src/utils/*"],
-      "@api/*": ["src/api/*"]
+      "@api/*": ["src/api/*"],
+      "@validations/*": ["src/validations/*"]
     },
 
     /* Bundler mode */
