@@ -1,6 +1,9 @@
 import { string, object } from "yup";
 import { useEffect, useState } from "react";
 import { useFormik } from "formik";
+import { IIconAppearance } from "@inubekit/icon";
+
+import { ComponentAppearance } from "@ptypes/aparences.types";
 import { DecisionModalUI } from "./interface";
 import { IDecisionEntry } from "./types";
 
@@ -15,9 +18,12 @@ interface IDecisionModal {
   title: string;
   onClick: () => void;
   onCloseModal: () => void;
+  setFieldEntered?: (value: string) => void;
+  appearance?: IIconAppearance;
+  icon?: React.JSX.Element;
   isLoading?: boolean;
   justificationOfDecision?: boolean;
-  setFieldEntered?: (value: string) => void;
+  withIcon?: boolean;
 }
 
 const initialValues: IDecisionEntry = {
@@ -27,11 +33,14 @@ const initialValues: IDecisionEntry = {
 const DecisionModal = (props: IDecisionModal) => {
   const {
     actionText,
+    icon = <></>,
+    withIcon = false,
     description,
     isLoading = false,
     justificationOfDecision = false,
     portalId,
     title,
+    appearance = ComponentAppearance.PRIMARY,
     onClick,
     onCloseModal,
     setFieldEntered,
@@ -76,15 +85,18 @@ const DecisionModal = (props: IDecisionModal) => {
   return (
     <DecisionModalUI
       actionText={actionText}
+      appearance={appearance}
       comparisonData={comparisonData}
       description={description}
       formik={formik}
+      icon={icon}
       isLoading={isLoading}
       justificationOfDecision={justificationOfDecision}
       onClick={onClick}
       onCloseModal={onCloseModal}
       portalId={portalId}
       title={title}
+      withIcon={withIcon}
     />
   );
 };

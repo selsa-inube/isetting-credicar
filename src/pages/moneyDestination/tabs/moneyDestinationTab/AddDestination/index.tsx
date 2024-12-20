@@ -1,7 +1,9 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FormikProps } from "formik";
+import { IRuleDecision } from "@isettingkit/input";
 
-import { addDestinationSteps } from "./config/assisted.config";
+import { addDestinationStepsConfig } from "./config/assisted.config";
 import { AddDestinationUI } from "./interface";
 import { IGeneralInformationEntry } from "../forms/GeneralInformation/types";
 
@@ -12,13 +14,27 @@ function AddDestination() {
     description: "",
   });
 
+  const [showModal, setShowModal] = useState(false);
   const [isCurrentFormValid, setIsCurrentFormValid] = useState(false);
+  const [creditLineDecisions, setCreditLineDecisions] = useState<
+    IRuleDecision[]
+  >([]);
+
+  const navigate = useNavigate();
 
   const generalInformationRef =
     useRef<FormikProps<IGeneralInformationEntry>>(null);
 
+  const [nameDecision, setNameDecision] = useState(
+    generalInformationRef.current?.values.nameDestination ?? "",
+  );
+
+  useEffect(() => {
+    setNameDecision(formValues.nameDestination ?? "");
+  }, [formValues.nameDestination]);
+
   const handleNextStep = () => {
-    if (currentStep < addDestinationSteps.length) {
+    if (currentStep < addDestinationStepsConfig("").length) {
       if (generalInformationRef.current) {
         setFormValues(generalInformationRef.current.values);
         setIsCurrentFormValid(generalInformationRef.current.isValid);
@@ -33,22 +49,31 @@ function AddDestination() {
     }
   };
 
+  const handleToggleModal = () => {
+    setShowModal(!showModal);
+  };
+
   const handleSubmitClick = () => {
-    console.log("Proceso completado");
+    handleToggleModal();
+    navigate("/money-destination");
   };
 
   return (
     <AddDestinationUI
-      steps={addDestinationSteps}
+      creditLineDecisions={creditLineDecisions}
       currentStep={currentStep}
-      setCurrentStep={setCurrentStep}
-      onPreviousStep={handlePreviousStep}
-      onNextStep={handleNextStep}
-      onSubmitClick={handleSubmitClick}
       generalInformationRef={generalInformationRef}
       initialGeneralInformationValues={formValues}
       isCurrentFormValid={isCurrentFormValid}
+      onFinishForm={handleSubmitClick}
+      onNextStep={handleNextStep}
+      onPreviousStep={handlePreviousStep}
+      onToggleModal={handleToggleModal}
+      setCreditLineDecisions={setCreditLineDecisions}
+      setCurrentStep={setCurrentStep}
       setIsCurrentFormValid={setIsCurrentFormValid}
+      showModal={showModal}
+      steps={addDestinationStepsConfig(nameDecision)}
     />
   );
 }
