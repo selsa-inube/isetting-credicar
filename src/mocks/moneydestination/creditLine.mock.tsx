@@ -59,5 +59,6 @@ const decision3: IRuleDecision = {
 };
 
 const decisions = [decision1, decision2, decision3];
+const decisionsAssited = [decision1, decision2];
 
-export { decisions };
+export { decisions, decisionsAssited };

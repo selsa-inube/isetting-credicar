@@ -16,7 +16,6 @@ function MoneyDestinationTab() {
       onSearchMoneyDestination={handleSearchMoneyDestination}
       searchMoneyDestination={searchMoneyDestination}
       loading={false}
-      onAddDestination={() => console.log("Add destination")}
     />
   );
 }

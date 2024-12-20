@@ -1,8 +1,10 @@
+import { MdOutlineWarningAmber } from "react-icons/md";
 import { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { Meta, StoryFn } from "@storybook/react";
 import { Button } from "@inubekit/button";
 
+import { ComponentAppearance } from "@ptypes/aparences.types";
 import { DecisionModal, IDecisionModal } from "..";
 
 const meta: Meta<typeof DecisionModal> = {
@@ -45,6 +47,18 @@ EditProcess.args = {
   title: "Editar",
   description: "¿Realmente deseas editar este destino de dinero?",
   actionText: "Continuar",
+};
+
+export const WithIcon = Template.bind({});
+WithIcon.args = {
+  portalId: "portal",
+  title: "Atención",
+  description:
+    "El destino de dinero debería tener al menos una (1) línea de crédito, en caso contrario este destino de dinero NO será utilizable.",
+  actionText: "Continuar aún así",
+  withIcon: true,
+  icon: <MdOutlineWarningAmber />,
+  appearance: ComponentAppearance.WARNING,
 };
 
 export default meta;
