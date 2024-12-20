@@ -15,11 +15,4 @@ const StyledContainer = styled.div`
   cursor: pointer;
 `;
 
-const StyledIcon = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: ${tokens.spacing.s025};
-`;
-
-export { StyledContainer, StyledIcon };
+export { StyledContainer };

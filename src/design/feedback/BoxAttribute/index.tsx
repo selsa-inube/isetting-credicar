@@ -62,7 +62,6 @@ function BoxAttribute(props: IBoxAttribute) {
             />
           ) : (
             <Text
-              type="body"
               size={isMobile ? "small" : "medium"}
               appearance={ComponentAppearance.GRAY}
               textAlign={direction === "column" ? "start" : "end"}

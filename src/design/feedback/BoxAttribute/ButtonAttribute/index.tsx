@@ -1,8 +1,10 @@
 import { Text } from "@inubekit/text";
 import { Icon } from "@inubekit/icon";
+import { Stack } from "@inubekit/stack";
 
 import { ComponentAppearance } from "@ptypes/aparences.types";
-import { StyledContainer, StyledIcon } from "./styles";
+import { tokens } from "@design/tokens";
+import { StyledContainer } from "./styles";
 
 interface IButtonAttribute {
   onClick?: () => void;
@@ -15,14 +17,16 @@ function ButtonAttribute(props: IButtonAttribute) {
   return (
     <StyledContainer onClick={onClick}>
       {icon && (
-        <StyledIcon>
+        <Stack
+          justifyContent="center"
+          alignItems="center"
+          padding={tokens.spacing.s025}
+        >
           <Icon icon={icon} appearance={ComponentAppearance.DARK} />
-        </StyledIcon>
+        </Stack>
       )}
 
-      <Text type="body" size="small" appearance="dark">
-        {value}
-      </Text>
+      <Text size="small">{value}</Text>
     </StyledContainer>
   );
 }
