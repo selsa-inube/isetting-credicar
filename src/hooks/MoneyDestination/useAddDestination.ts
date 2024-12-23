@@ -5,8 +5,9 @@ import { IRuleDecision } from "@isettingkit/input";
 
 import { addDestinationStepsConfig } from "@pages/moneyDestination/tabs/moneyDestinationTab/AddDestination/config/assisted.config";
 import { IGeneralInformationEntry } from "@pages/moneyDestination/tabs/moneyDestinationTab/forms/GeneralInformation/types";
+import { IRequestSteps } from "@design/feedback/RequestProcess/types";
 
-const useAddDestination = () => {
+const useAddDestination = (requestSteps: IRequestSteps[]) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formValues, setFormValues] = useState<IGeneralInformationEntry>({
     nameDestination: "",
@@ -18,6 +19,7 @@ const useAddDestination = () => {
   const [creditLineDecisions, setCreditLineDecisions] = useState<
     IRuleDecision[]
   >([]);
+  const [showRequestProcessModal, setShowRequestProcessModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -54,8 +56,20 @@ const useAddDestination = () => {
 
   const handleSubmitClick = () => {
     handleToggleModal();
-    navigate("/money-destination");
+    setShowRequestProcessModal(!showRequestProcessModal);
   };
+
+  useEffect(() => {
+    const requestLastStep = requestSteps[requestSteps.length - 1];
+    if (showRequestProcessModal && requestLastStep.status === "completed") {
+      const timer = setTimeout(() => {
+        setShowRequestProcessModal(false);
+        navigate("/money-destination");
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [showRequestProcessModal, requestSteps, navigate]);
 
   return {
     creditLineDecisions,
@@ -65,6 +79,7 @@ const useAddDestination = () => {
     isCurrentFormValid,
     nameDecision,
     showModal,
+    showRequestProcessModal,
     handleNextStep,
     handlePreviousStep,
     handleSubmitClick,

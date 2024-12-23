@@ -7,13 +7,17 @@ import { ComponentAppearance } from "@ptypes/aparences.types";
 import { Accordion } from "@design/data/Accordion";
 import { tokens } from "@design/tokens";
 import { DecisionModal } from "@components/modals/DecisionModal";
+import { IRequestSteps } from "@design/feedback/RequestProcess/types";
+import { RequestProcessModal } from "@components/modals/RequestProcessModal";
 import { VerificationBoxes } from "./VerificationBoxes";
 import { IFormsUpdateData } from "./types";
 import { addDestinationStepsConfig } from "../../AddDestination/config/assisted.config";
 import { finishModal } from "./config/messages.config";
 
 interface IVerificationForm {
+  requestSteps: IRequestSteps[];
   showModal: boolean;
+  showRequestProcessModal: boolean;
   updatedData: IFormsUpdateData;
   handleStepChange: (stepId: number) => void;
   onFinishForm: () => void;
@@ -23,7 +27,9 @@ interface IVerificationForm {
 
 function VerificationForm(props: IVerificationForm) {
   const {
+    requestSteps,
     showModal,
+    showRequestProcessModal,
     updatedData,
     handleStepChange,
     onFinishForm,
@@ -89,6 +95,14 @@ function VerificationForm(props: IVerificationForm) {
           actionText={finishModal.actionText}
           onCloseModal={onToggleModal}
           onClick={onFinishForm}
+        />
+      )}
+      {showRequestProcessModal && (
+        <RequestProcessModal
+          title="Procesando solicitud"
+          description="Hemos recibido tu solicitud y se encuentra en proceso.Por favor, espera mientras la gestionamos."
+          portalId="portal"
+          requestSteps={requestSteps}
         />
       )}
     </Stack>
