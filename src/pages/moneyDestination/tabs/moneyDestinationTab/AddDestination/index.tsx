@@ -1,7 +1,7 @@
+import { requestStepsMock } from "@mocks/moneydestination/requestProcess.mock";
+import { useAddDestination } from "@hooks/MoneyDestination/useAddDestination";
 import { addDestinationStepsConfig } from "./config/assisted.config";
 import { AddDestinationUI } from "./interface";
-
-import { useAddDestination } from "@hooks/MoneyDestination/useAddDestination";
 
 function AddDestination() {
   const {
@@ -12,6 +12,7 @@ function AddDestination() {
     isCurrentFormValid,
     nameDecision,
     showModal,
+    showRequestProcessModal,
     handleNextStep,
     handlePreviousStep,
     handleSubmitClick,
@@ -19,7 +20,7 @@ function AddDestination() {
     setCreditLineDecisions,
     setCurrentStep,
     setIsCurrentFormValid,
-  } = useAddDestination();
+  } = useAddDestination(requestStepsMock);
 
   return (
     <AddDestinationUI
@@ -37,6 +38,8 @@ function AddDestination() {
       setIsCurrentFormValid={setIsCurrentFormValid}
       showModal={showModal}
       steps={addDestinationStepsConfig(nameDecision)}
+      requestSteps={requestStepsMock}
+      showRequestProcessModal={showRequestProcessModal}
     />
   );
 }

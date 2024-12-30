@@ -8,6 +8,7 @@ import { Assisted, IAssistedStep } from "@inubekit/assisted";
 import { Title } from "@components/data/Title";
 import { crumbsAddDestination } from "@pages/moneyDestination/tabs/moneyDestinationTab/AddDestination/config/navigation";
 import { tokens } from "@design/tokens";
+import { IRequestSteps } from "@design/feedback/RequestProcess/types";
 import { GeneralInformationForm } from "../forms/GeneralInformation";
 import { IGeneralInformationEntry } from "../forms/GeneralInformation/types";
 import { CreditLineForm } from "../forms/CreditLine";
@@ -19,7 +20,9 @@ interface IAddDestinationUI {
   generalInformationRef: React.RefObject<FormikProps<IGeneralInformationEntry>>;
   initialGeneralInformationValues: IGeneralInformationEntry;
   isCurrentFormValid: boolean;
+  requestSteps: IRequestSteps[];
   showModal: boolean;
+  showRequestProcessModal: boolean;
   steps: IAssistedStep[];
   onFinishForm: () => void;
   onNextStep: () => void;
@@ -37,7 +40,9 @@ function AddDestinationUI(props: IAddDestinationUI) {
     generalInformationRef,
     initialGeneralInformationValues,
     isCurrentFormValid,
+    requestSteps,
     showModal,
+    showRequestProcessModal,
     steps,
     onFinishForm,
     onNextStep,
@@ -113,9 +118,11 @@ function AddDestinationUI(props: IAddDestinationUI) {
                     values: creditLineDecisions,
                   },
                 }}
+                requestSteps={requestSteps}
                 onPreviousStep={onPreviousStep}
                 handleStepChange={(stepId) => setCurrentStep(stepId)}
                 showModal={showModal}
+                showRequestProcessModal={showRequestProcessModal}
                 onToggleModal={onToggleModal}
                 onFinishForm={onFinishForm}
               />
