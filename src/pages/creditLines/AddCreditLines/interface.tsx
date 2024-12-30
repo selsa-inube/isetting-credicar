@@ -1,55 +1,35 @@
 import { FormikProps } from "formik";
-import { IRuleDecision } from "@isettingkit/input";
 import { useMediaQuery } from "@inubekit/hooks";
 import { Stack } from "@inubekit/stack";
 import { Breadcrumbs } from "@inubekit/breadcrumbs";
 import { Assisted, IAssistedStep } from "@inubekit/assisted";
 
 import { Title } from "@components/data/Title";
-import { crumbsAddDestination } from "@pages/moneyDestination/tabs/moneyDestinationTab/AddDestination/config/navigation";
 import { tokens } from "@design/tokens";
-import { IRequestSteps } from "@design/feedback/RequestProcess/types";
 import { GeneralInformationForm } from "../forms/GeneralInformation";
+import { crumbsAddCreditLines } from "./config/navigation";
 import { IGeneralInformationEntry } from "../forms/GeneralInformation/types";
-import { CreditLineForm } from "../forms/CreditLine";
-import { VerificationForm } from "../forms/VerificationForm";
 
-interface IAddDestinationUI {
-  creditLineDecisions: IRuleDecision[];
+interface IAddCreditLinesUI {
   currentStep: number;
   generalInformationRef: React.RefObject<FormikProps<IGeneralInformationEntry>>;
   initialGeneralInformationValues: IGeneralInformationEntry;
   isCurrentFormValid: boolean;
-  requestSteps: IRequestSteps[];
-  showModal: boolean;
-  showRequestProcessModal: boolean;
   steps: IAssistedStep[];
-  onFinishForm: () => void;
   onNextStep: () => void;
   onPreviousStep: () => void;
-  onToggleModal: () => void;
-  setCreditLineDecisions: (decisions: IRuleDecision[]) => void;
-  setCurrentStep: (step: number) => void;
   setIsCurrentFormValid: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function AddDestinationUI(props: IAddDestinationUI) {
+function AddCreditLinesUI(props: IAddCreditLinesUI) {
   const {
-    creditLineDecisions,
     currentStep,
     generalInformationRef,
     initialGeneralInformationValues,
     isCurrentFormValid,
-    requestSteps,
-    showModal,
-    showRequestProcessModal,
     steps,
-    onFinishForm,
     onNextStep,
     onPreviousStep,
-    onToggleModal,
-    setCreditLineDecisions,
-    setCurrentStep,
     setIsCurrentFormValid,
   } = props;
 
@@ -67,10 +47,10 @@ function AddDestinationUI(props: IAddDestinationUI) {
     >
       <Stack gap={tokens.spacing.s300} direction="column">
         <Stack gap={tokens.spacing.s300} direction="column">
-          <Breadcrumbs crumbs={crumbsAddDestination} />
+          <Breadcrumbs crumbs={crumbsAddCreditLines} />
           <Title
-            title="Destinos de dinero"
-            description=" Destino del dinero para crédito."
+            title="Líneas de crédito"
+            description="Registra los medios de pago"
             sizeTitle="large"
           />
         </Stack>
@@ -80,7 +60,9 @@ function AddDestinationUI(props: IAddDestinationUI) {
             totalSteps={steps.length}
             onBackClick={onPreviousStep}
             onNextClick={onNextStep}
-            onSubmitClick={onToggleModal}
+            onSubmitClick={() => {
+              console.log("");
+            }}
             disableNext={!isCurrentFormValid}
             controls={{
               goBackText: "Anterior",
@@ -98,35 +80,6 @@ function AddDestinationUI(props: IAddDestinationUI) {
                 handleNextStep={onNextStep}
               />
             )}
-            {currentStep === 2 && (
-              <CreditLineForm
-                onNextStep={onNextStep}
-                onPreviousStep={onPreviousStep}
-                initialValues={creditLineDecisions}
-                setCreditLineDecisions={setCreditLineDecisions}
-              />
-            )}
-            {currentStep === 3 && (
-              <VerificationForm
-                updatedData={{
-                  personalInformation: {
-                    isValid: isCurrentFormValid,
-                    values: initialGeneralInformationValues,
-                  },
-                  creditline: {
-                    isValid: true,
-                    values: creditLineDecisions,
-                  },
-                }}
-                requestSteps={requestSteps}
-                onPreviousStep={onPreviousStep}
-                handleStepChange={(stepId) => setCurrentStep(stepId)}
-                showModal={showModal}
-                showRequestProcessModal={showRequestProcessModal}
-                onToggleModal={onToggleModal}
-                onFinishForm={onFinishForm}
-              />
-            )}
           </Stack>
         </Stack>
       </Stack>
@@ -134,4 +87,4 @@ function AddDestinationUI(props: IAddDestinationUI) {
   );
 }
 
-export { AddDestinationUI };
+export { AddCreditLinesUI };

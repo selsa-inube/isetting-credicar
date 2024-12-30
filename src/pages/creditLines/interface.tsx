@@ -85,7 +85,7 @@ function CreditLinesUI(props: ICreditLinesUI) {
                   variant="filled"
                   iconBefore={<MdAdd />}
                   type="link"
-                  path=""
+                  path="/credit-lines/add-credit-line"
                 >
                   Agregar línea de crédito
                 </Button>
