@@ -44,7 +44,11 @@ function RadioBusinessUnit(props: IRadioBusinessUnit) {
           onChange={handleChange}
         />
         <Text size="medium">{label}</Text>
-        <StyledImage src={logo} alt="Logo de empresa" />
+        <StyledImage
+          $isTablet={matches["(max-width: 532px)"]}
+          src={logo}
+          alt="Logo de empresa"
+        />
       </Grid>
     </StyledRadioBusinessUnit>
   );

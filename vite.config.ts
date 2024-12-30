@@ -50,6 +50,7 @@ export default defineConfig({
       "@utils": path.resolve(__dirname, "./src/utils"),
       "@api": path.resolve(__dirname, "./src/api"),
       "@context": path.resolve(__dirname, "./src/context"),
+      "@validations": path.resolve(__dirname, "./src/validations"),
     },
   },
 });

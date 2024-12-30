@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import { inube } from "@inubekit/foundations";
 
+interface IStyledImage {
+  $isTablet: boolean;
+}
+
 const StyledRadioBusinessUnit = styled.label`
   & div {
     box-sizing: border-box;
@@ -23,15 +27,17 @@ const StyledRadio = styled.input`
   }
 `;
 
-const StyledImage = styled.img`
+const StyledImage = styled.img<IStyledImage>`
   width: 100px;
   height: auto;
   transition: filter 500ms ease-out;
   filter: grayscale(100%);
 
-  @media screen and (max-width: 532px) {
-    display: none;
-  }
+  ${({ $isTablet }) =>
+    $isTablet &&
+    `
+   display: none;
+  `}
 `;
 
 export { StyledRadioBusinessUnit, StyledImage, StyledRadio };

@@ -18,8 +18,7 @@ interface ITable {
   mobileTitle?: string;
   pageLength?: number;
   widthPercentageTotalColumns?: number;
-  widthFirstColumn?: number;
-  widthPercentageOtherColumns?: number;
+  columnWidths?: number[];
 }
 
 const Table = (props: ITable) => {
@@ -34,8 +33,7 @@ const Table = (props: ITable) => {
     pageLength = 4,
     breakpoints,
     widthPercentageTotalColumns,
-    widthFirstColumn,
-    widthPercentageOtherColumns,
+    columnWidths,
   } = props;
 
   const filteredEntries = useMemo(() => {
@@ -120,8 +118,7 @@ const Table = (props: ITable) => {
           goToEndPage={goToEndPage}
           filteredEntries={filteredEntries}
           widthPercentageTotalColumns={widthPercentageTotalColumns}
-          widthFirstColumn={widthFirstColumn}
-          widthPercentageOtherColumns={widthPercentageOtherColumns}
+          columnWidths={columnWidths}
         />
       </Stack>
     </StyledContainerTable>

@@ -6,7 +6,7 @@ import { useMediaQuery } from "@inubekit/hooks";
 import { Stack } from "@inubekit/stack";
 import { Text } from "@inubekit/text";
 import { Blanket } from "@inubekit/blanket";
-import { Icon } from "@inubekit/icon";
+import { Icon, IIconAppearance } from "@inubekit/icon";
 import { Textarea } from "@inubekit/textarea";
 import { Divider } from "@inubekit/divider";
 
@@ -17,13 +17,16 @@ import { StyledContainerButton, StyledModal, StyledTextarea } from "./styles";
 
 interface IDecisionModalUI {
   actionText: string;
+  appearance: IIconAppearance;
   comparisonData: boolean;
   description: string;
   formik: FormikValues;
+  icon: React.JSX.Element;
   isLoading: boolean;
   justificationOfDecision: boolean;
   portalId: string;
   title: string;
+  withIcon: boolean;
   onClick: () => void;
   onCloseModal: () => void;
 }
@@ -31,13 +34,16 @@ interface IDecisionModalUI {
 const DecisionModalUI = (props: IDecisionModalUI) => {
   const {
     actionText,
+    appearance,
     comparisonData,
     description,
     formik,
     isLoading,
+    icon,
     justificationOfDecision,
     portalId,
     title,
+    withIcon,
     onCloseModal,
     onClick,
   } = props;
@@ -84,6 +90,13 @@ const DecisionModalUI = (props: IDecisionModalUI) => {
           </Stack>
           <Divider />
         </Stack>
+
+        {withIcon && (
+          <Stack width="100%" alignItems="center" justifyContent="center">
+            <Icon icon={icon} appearance={appearance} size="60px" />
+          </Stack>
+        )}
+
         <Text appearance={ComponentAppearance.GRAY} type="body" size="medium">
           {description}
         </Text>
@@ -117,7 +130,7 @@ const DecisionModalUI = (props: IDecisionModalUI) => {
           </Button>
           <Button
             spacing="wide"
-            appearance={ComponentAppearance.PRIMARY}
+            appearance={appearance}
             variant="filled"
             loading={isLoading}
             onClick={onClick}

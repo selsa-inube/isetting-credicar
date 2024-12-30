@@ -14,19 +14,14 @@ import { actions, breakPoints, titles } from "./config/table.config";
 interface IMoneyDestinationTabUI {
   loading: boolean;
   searchMoneyDestination: string;
-  onAddDestination: () => void;
   onSearchMoneyDestination: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function MoneyDestinationTabUI(props: IMoneyDestinationTabUI) {
-  const {
-    searchMoneyDestination,
-    loading,
-    onAddDestination,
-    onSearchMoneyDestination,
-  } = props;
+  const { searchMoneyDestination, loading, onSearchMoneyDestination } = props;
 
   const smallScreen = useMediaQuery("(max-width: 690px)");
+  const widthFirstColumn = smallScreen ? 64 : 25;
 
   return (
     <StyledContainer $smallScreen={smallScreen}>
@@ -64,8 +59,9 @@ function MoneyDestinationTabUI(props: IMoneyDestinationTabUI) {
               spacing="wide"
               appearance={ComponentAppearance.PRIMARY}
               variant="filled"
-              onClick={onAddDestination}
               iconBefore={<MdAdd />}
+              type="link"
+              path="/money-destination/add-destination"
             >
               Agregar destino
             </Button>
@@ -79,8 +75,7 @@ function MoneyDestinationTabUI(props: IMoneyDestinationTabUI) {
             breakpoints={breakPoints}
             filter={searchMoneyDestination}
             isLoading={loading}
-            widthFirstColumn={smallScreen ? 64 : 25}
-            widthPercentageOtherColumns={56}
+            columnWidths={[widthFirstColumn, 55]}
           />
         </Stack>
       </Stack>
