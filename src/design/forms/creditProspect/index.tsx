@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import { FormikProps } from "formik";
 
-import { useCreditProspectForm } from "@src/hooks/creditLines/useCreditProspectForm";
+import { useCreditProspectForm } from "@hooks/creditLines/useCreditProspectForm";
 import { ICreditProspectEntry, IOptionsProspect } from "./types";
 import { CreditProspectFormUI } from "./interface";
 
