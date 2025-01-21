@@ -1,36 +1,44 @@
-import { FormikProps } from "formik";
-import { useMediaQuery } from "@inubekit/hooks";
-import { Stack } from "@inubekit/stack";
-import { Breadcrumbs } from "@inubekit/breadcrumbs";
-import { Assisted, IAssistedStep } from "@inubekit/assisted";
+import {
+  Assisted,
+  Breadcrumbs,
+  IAssistedStep,
+  Stack,
+  useMediaQuery,
+} from "@inubekit/inubekit";
 
 import { Title } from "@components/data/Title";
 import { tokens } from "@design/tokens";
+import { IOptionsProspect } from "@design/forms/creditProspect/types";
+import { CreditProspectForm } from "@design/forms/creditProspect";
 import { GeneralInformationForm } from "../forms/GeneralInformation";
+import { IFormsCreditlines, IFormsCreditlinesRefs } from "./types";
 import { crumbsAddCreditLines } from "./config/navigation";
-import { IGeneralInformationEntry } from "../forms/GeneralInformation/types";
 
 interface IAddCreditLinesUI {
   currentStep: number;
-  generalInformationRef: React.RefObject<FormikProps<IGeneralInformationEntry>>;
-  initialGeneralInformationValues: IGeneralInformationEntry;
+  formReferences: IFormsCreditlinesRefs;
+  initialValues: IFormsCreditlines;
   isCurrentFormValid: boolean;
   steps: IAssistedStep[];
   onNextStep: () => void;
   onPreviousStep: () => void;
   setIsCurrentFormValid: React.Dispatch<React.SetStateAction<boolean>>;
+  optionsProspect: IOptionsProspect[];
+  setOptionsProspect: React.Dispatch<React.SetStateAction<IOptionsProspect[]>>;
 }
 
 function AddCreditLinesUI(props: IAddCreditLinesUI) {
   const {
     currentStep,
-    generalInformationRef,
-    initialGeneralInformationValues,
+    formReferences,
+    initialValues,
     isCurrentFormValid,
     steps,
     onNextStep,
     onPreviousStep,
     setIsCurrentFormValid,
+    optionsProspect,
+    setOptionsProspect,
   } = props;
 
   const smallScreen = useMediaQuery("(max-width: 990px)");
@@ -74,10 +82,22 @@ function AddCreditLinesUI(props: IAddCreditLinesUI) {
           <Stack direction="column">
             {currentStep === 1 && (
               <GeneralInformationForm
-                ref={generalInformationRef}
-                initialValues={initialGeneralInformationValues}
+                ref={formReferences.generalInformation}
+                initialValues={initialValues.generalInformation.values}
                 onFormValid={setIsCurrentFormValid}
                 handleNextStep={onNextStep}
+              />
+            )}
+            {currentStep === 2 && (
+              <CreditProspectForm
+                ref={formReferences.creditProspect}
+                initialValues={initialValues.creditProspect.values}
+                onFormValid={setIsCurrentFormValid}
+                handleNextStep={onNextStep}
+                onPreviousStep={onPreviousStep}
+                optionsProspect={optionsProspect}
+                setOptionsProspect={setOptionsProspect}
+                isFormValid={isCurrentFormValid}
               />
             )}
           </Stack>

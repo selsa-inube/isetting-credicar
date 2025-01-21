@@ -1,12 +1,14 @@
 import { useAddCreditlines } from "@hooks/creditlines/useAddCreditLines";
-import { addCreditLinesSteps } from "./config/assisted.config";
 import { AddCreditLinesUI } from "./interface";
+import { addCreditLinesSteps } from "./config/assisted.config";
 
 function Addcreditlines() {
   const {
     currentStep,
     formValues,
-    generalInformationRef,
+    formReferences,
+    optionsProspect,
+    setOptionsProspect,
     isCurrentFormValid,
     handleNextStep,
     handlePreviousStep,
@@ -16,13 +18,15 @@ function Addcreditlines() {
   return (
     <AddCreditLinesUI
       currentStep={currentStep}
-      generalInformationRef={generalInformationRef}
-      initialGeneralInformationValues={formValues}
+      formReferences={formReferences}
+      initialValues={formValues}
       isCurrentFormValid={isCurrentFormValid}
       onNextStep={handleNextStep}
       onPreviousStep={handlePreviousStep}
       setIsCurrentFormValid={setIsCurrentFormValid}
       steps={addCreditLinesSteps}
+      optionsProspect={optionsProspect}
+      setOptionsProspect={setOptionsProspect}
     />
   );
 }

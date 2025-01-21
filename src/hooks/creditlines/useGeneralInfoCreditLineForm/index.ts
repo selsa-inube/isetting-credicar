@@ -27,7 +27,7 @@ const useGeneralInfoCreditLineForm = (
   const formik = useFormik({
     initialValues,
     validationSchema,
-    validateOnBlur: false,
+    validateOnBlur: true,
     onSubmit: onSubmit ?? (() => true),
   });
 
