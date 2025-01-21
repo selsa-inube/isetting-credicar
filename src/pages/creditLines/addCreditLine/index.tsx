@@ -1,4 +1,4 @@
-import { useAddCreditlines } from "@src/hooks/creditLines/useAddCreditLines";
+import { useAddCreditlines } from "@src/hooks/creditLine/useAddCreditLines";
 import { addCreditLinesSteps } from "./config/assisted.config";
 import { AddCreditLinesUI } from "./interface";
 
