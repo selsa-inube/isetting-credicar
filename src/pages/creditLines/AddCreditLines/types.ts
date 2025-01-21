@@ -1,6 +1,6 @@
 import { FormikProps } from "formik";
-import { ICreditProspectEntry } from "@design/forms/creditProspect/types";
 import { IGeneralInformationEntry } from "../forms/GeneralInformation/types";
+import { ICreditProspectEntry } from "../../../design/forms/creditProspect/types";
 
 interface IFormsCreditlines {
   generalInformation: { isValid: boolean; values: IGeneralInformationEntry };

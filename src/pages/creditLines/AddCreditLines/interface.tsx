@@ -1,18 +1,15 @@
-import {
-  Assisted,
-  Breadcrumbs,
-  IAssistedStep,
-  Stack,
-  useMediaQuery,
-} from "@inubekit/inubekit";
+import { useMediaQuery } from "@inubekit/hooks";
+import { Stack } from "@inubekit/stack";
+import { Breadcrumbs } from "@inubekit/breadcrumbs";
+import { Assisted, IAssistedStep } from "@inubekit/assisted";
 
 import { Title } from "@components/data/Title";
 import { tokens } from "@design/tokens";
-import { IOptionsProspect } from "@design/forms/creditProspect/types";
-import { CreditProspectForm } from "@design/forms/creditProspect";
 import { GeneralInformationForm } from "../forms/GeneralInformation";
-import { IFormsCreditlines, IFormsCreditlinesRefs } from "./types";
 import { crumbsAddCreditLines } from "./config/navigation";
+import { CreditProspectForm } from "../../../design/forms/creditProspect";
+import { IFormsCreditlines, IFormsCreditlinesRefs } from "./types";
+import { IOptionsProspect } from "@src/design/forms/creditProspect/types";
 
 interface IAddCreditLinesUI {
   currentStep: number;
