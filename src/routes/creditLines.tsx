@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 
 import { CreditLines } from "@pages/creditLines";
-import { Addcreditlines } from "@pages/creditLines/addCreditLines";
+import { Addcreditlines } from "@pages/creditLines/addCreditLine";
 
 function CreditLinesRoutes() {
   return (

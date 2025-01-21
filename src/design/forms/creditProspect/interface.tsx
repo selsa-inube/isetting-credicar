@@ -11,13 +11,13 @@ import {
 import { getDomainById } from "@mocks/domains/domainService.mocks";
 import { OptionsPropectCredit } from "@design/data/optionsPropectCredit";
 import { IEntry } from "@design/data/optionsPropectCredit/types";
-import { tokens } from "@design/tokens";
-import { ComponentAppearance } from "@ptypes/aparences.types";
-import { ICreditProspectEntry } from "@design/forms/creditProspect/types";
 import {
   StyledContainer,
   StyledContainerFields,
 } from "@design/forms/creditProspect/styles";
+import { tokens } from "@design/tokens";
+import { ComponentAppearance } from "@ptypes/aparences.types";
+import { ICreditProspectEntry } from "@design/forms/creditProspect/types";
 
 interface ICreditProspectFormUI {
   formik: FormikProps<ICreditProspectEntry>;
