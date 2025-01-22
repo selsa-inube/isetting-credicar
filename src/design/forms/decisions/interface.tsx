@@ -8,21 +8,20 @@ import { Stack } from "@inubekit/stack";
 import { tokens } from "@design/tokens";
 import { DecisionModal } from "@components/modals/DecisionModal";
 import { ComponentAppearance } from "@ptypes/aparences.types";
-import {
-  attentionModal,
-  deleteModal,
-} from "@design/forms/decisions/config/messages.config";
 import { StyledContainer } from "./styles";
-import { textValuesBusinessRules } from "../../config/businessRules.config";
+import { IMessageModal, IRulesFormTextValues } from "./types";
 
-interface ICreditLineFormUI {
+interface IDecisionsFormUI {
+  attentionModal: IMessageModal;
   decisions: IRuleDecision[];
   decisionTemplate: IRuleDecision;
+  deleteModal: IMessageModal;
   isModalOpen: boolean;
   loading: boolean;
   selectedDecision: IRuleDecision | null;
   showAttentionModal: boolean;
   showDeleteModal: boolean;
+  textValuesBusinessRules: IRulesFormTextValues;
   onNextStep: () => void;
   onPreviousStep: () => void;
   onCloseModal: () => void;
@@ -33,15 +32,18 @@ interface ICreditLineFormUI {
   onToggleDeleteModal: (id: string) => void;
 }
 
-function CreditLineFormUI(props: ICreditLineFormUI) {
+function DecisionsFormUI(props: IDecisionsFormUI) {
   const {
+    attentionModal,
     decisions,
     decisionTemplate,
+    deleteModal,
     isModalOpen,
     loading,
     selectedDecision,
     showAttentionModal,
     showDeleteModal,
+    textValuesBusinessRules,
     onCloseModal,
     onDelete,
     onNextStep,
@@ -135,4 +137,4 @@ function CreditLineFormUI(props: ICreditLineFormUI) {
   );
 }
 
-export { CreditLineFormUI };
+export { DecisionsFormUI };

@@ -1,11 +1,5 @@
 import { IRuleDecision } from "@isettingkit/input";
 
-const dataTranslations: Record<string, string> = {
-  "Money destination": "Destino de dinero",
-  "Client type": "Tipo de cliente",
-  "Line of credit": "Línea de crédito",
-};
-
 const revertModalDisplayData = (
   dataDecision: IRuleDecision,
   originalDecision: IRuleDecision,
@@ -27,4 +21,4 @@ const revertModalDisplayData = (
   };
 };
 
-export { dataTranslations, revertModalDisplayData };
+export { revertModalDisplayData };

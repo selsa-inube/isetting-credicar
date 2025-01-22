@@ -1,4 +1,4 @@
-import { IEnumeratorsRules } from "@pages/moneyDestination/tabs/moneyDestinationTab/types";
+import { IEnumeratorsRules } from "@design/forms/decisions/types";
 
 const mapEnumeratorsRulesApiToEntity = (
   enumerator: IEnumeratorsRules,

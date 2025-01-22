@@ -3,8 +3,9 @@ import {
   ValueDataType,
   ValueHowToSetUp,
 } from "@isettingkit/input";
-import { IEnumeratorsRules } from "../../../types";
-import { dataTranslations } from "../utils";
+
+import { dataTranslations } from "@utils/dataTranslations";
+import { IEnumeratorsRules } from "../types";
 
 const decisionTemplateConfig = ({
   labelName,

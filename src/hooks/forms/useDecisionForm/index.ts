@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { IRuleDecision } from "@isettingkit/input";
 
-const useCreditLineForm = (
+const useDecisionForm = (
   initialValues: IRuleDecision[],
   revertModalDisplayData: (
     dataDecision: IRuleDecision,
@@ -82,4 +82,4 @@ const useCreditLineForm = (
   };
 };
 
-export { useCreditLineForm };
+export { useDecisionForm };
