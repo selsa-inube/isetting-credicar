@@ -1,5 +1,5 @@
 import { requestStepsMock } from "@mocks/moneydestination/requestProcess.mock";
-import { useAddDestination } from "@hooks/MoneyDestination/useAddDestination";
+import { useAddDestination } from "@src/hooks/moneyDestination/useAddDestination";
 import { addDestinationStepsConfig } from "./config/assisted.config";
 import { AddDestinationUI } from "./interface";
 

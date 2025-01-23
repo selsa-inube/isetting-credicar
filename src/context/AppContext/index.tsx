@@ -1,11 +1,11 @@
 import { createContext, useEffect, useMemo, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
-import { useBusinessManagers } from "@hooks/useBusinessManagers";
-import { usePortalData } from "@hooks/usePortalData";
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
 import { decrypt } from "@utils/encrypt";
 import { IAppContext, IAppData } from "./types";
+import { usePortalData } from "@hooks/staffPortal/usePortalData";
+import { useBusinessManagers } from "@hooks/staffPortal/useBusinessManagers";
 
 const AppContext = createContext<IAppContext>({} as IAppContext);
 
