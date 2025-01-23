@@ -15,7 +15,7 @@ import { mediaQueryMobile } from "@config/environment";
 import { ComponentAppearance } from "@ptypes/aparences.types";
 import { IEntry } from "@components/data/Table/types";
 import { decisions } from "@mocks/moneydestination/creditLine.mock";
-import { IRulesFormTextValues } from "@pages/moneyDestination/tabs/moneyDestinationTab/types";
+import { IRulesFormTextValues } from "@design/forms/decisions/types";
 import { StyledContainerButton, StyledModal } from "./styles";
 import { IDetailsTabsConfig } from "./types";
 import { GeneralDataTab } from "./GeneralDataTab";

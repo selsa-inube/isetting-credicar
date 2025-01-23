@@ -3,8 +3,8 @@ import { IRuleDecision } from "@isettingkit/input";
 import { useMediaQuery } from "@inubekit/hooks";
 
 import { mediaQueryMobile } from "@config/environment";
-import { IRulesFormTextValues } from "@pages/moneyDestination/tabs/moneyDestinationTab/types";
 import { IEntry } from "@components/data/Table/types";
+import { IRulesFormTextValues } from "@design/forms/decisions/types";
 import { IDetailsTabsConfig } from "./types";
 import { DetailsDestinationModalUI } from "./interface";
 
