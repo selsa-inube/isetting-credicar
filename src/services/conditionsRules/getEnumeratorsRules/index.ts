@@ -1,5 +1,5 @@
-import { IEnumeratorsRules } from "@pages/moneyDestination/tabs/moneyDestinationTab/types";
 import { getEnumeratorsRules } from "@api/isettingCredicarQuery";
+import { IEnumeratorsRules } from "@design/forms/decisions/types";
 import { mapEnumeratorsRulesApiToEntity } from "./mappers";
 
 const enumeratorsRules = async (
