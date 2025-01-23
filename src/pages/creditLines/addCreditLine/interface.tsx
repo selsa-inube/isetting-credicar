@@ -17,9 +17,9 @@ import {
   deleteModal,
 } from "@design/forms/decisions/config/messages.config";
 import { decisionTemplateConfig } from "@design/forms/decisions/config/decisionTemplate.config";
+import { CreditProspectForm } from "@design/forms/creditProspect";
 import { GeneralInformationForm } from "../forms/GeneralInformation";
 import { crumbsAddCreditLines } from "./config/navigation";
-import { CreditProspectForm } from "../../../design/forms/creditProspect";
 import { IFormsCreditlines, IFormsCreditlinesRefs } from "./types";
 import { textValuesBusinessRules } from "./config/businessRules.config";
 
