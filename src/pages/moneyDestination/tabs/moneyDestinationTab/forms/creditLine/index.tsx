@@ -1,8 +1,7 @@
 import { useContext } from "react";
 import { IRuleDecision } from "@isettingkit/input";
 
-
-import { useEnumRules } from "@hooks/MoneyDestination/useEnumRules";
+import { useEnumRules } from "@hooks/moneyDestination/useEnumRules";
 import { useDecisionForm } from "@hooks/forms/useDecisionForm";
 import { revertModalDisplayData } from "@utils/revertModalDisplayData";
 import { decisionTemplateConfig } from "@design/forms/decisions/config/decisionTemplate.config";

@@ -1,8 +1,8 @@
 import { forwardRef, useContext } from "react";
 import { FormikProps } from "formik";
 
-import { useEnumMoneyDestination } from "@hooks/MoneyDestination/useEnumMoneyDestination";
-import { useGeneralInformationForm } from "@hooks/MoneyDestination/useGeneralInformationForm";
+import { useEnumMoneyDestination } from "@hooks/moneyDestination/useEnumMoneyDestination";
+import { useGeneralInformationForm } from "@hooks/moneyDestination/useGeneralInformationForm";
 import { GeneralInformationFormUI } from "./interface";
 import { IGeneralInformationEntry } from "./types";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
