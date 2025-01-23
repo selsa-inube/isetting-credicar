@@ -4,8 +4,6 @@ import {
   fetchTimeoutServices,
   maxRetriesServices,
 } from "@config/environment";
-import { IEnumeratorsMoneyDestination } from "@pages/moneyDestination/tabs/moneyDestinationTab/types";
-import { IEnumeratorsRules } from "@design/forms/decisions/types";
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: enviroment.ISETTING_CREDICAR_QUERY_PROCESS_SERVICE,
@@ -52,36 +50,4 @@ const fetchWithRetries = async <T>(
   throw new Error("Error al obtener los de las unidades de negocio.");
 };
 
-const getEnumeratorsMoneyDestination = async (
-  enumDestination: string,
-  bussinesUnits: string,
-): Promise<IEnumeratorsMoneyDestination[]> => {
-  const config: AxiosRequestConfig = {
-    headers: {
-      "X-Action": "GetEnum",
-      "X-Business-unit": bussinesUnits,
-    },
-  };
-  return fetchWithRetries<IEnumeratorsMoneyDestination[]>(
-    `/enumerators/${enumDestination}`,
-    config,
-  );
-};
-
-const getEnumeratorsRules = async (
-  ruleName: string,
-  bussinesUnits: string,
-): Promise<IEnumeratorsRules> => {
-  const config: AxiosRequestConfig = {
-    headers: {
-      "X-Action": "GetByIdBusinessRuleCatalog",
-      "X-Business-unit": bussinesUnits,
-    },
-  };
-  return fetchWithRetries<IEnumeratorsRules>(
-    `/enums/business-rules-catalog/${ruleName}`,
-    config,
-  );
-};
-
-export { getEnumeratorsMoneyDestination, getEnumeratorsRules };
+export { fetchWithRetries };

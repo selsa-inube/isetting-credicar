@@ -7,18 +7,20 @@ import { Button } from "@inubekit/button";
 import { tokens } from "@design/tokens";
 import { ComponentAppearance } from "@ptypes/aparences.types";
 import { Table } from "@components/data/Table";
-import { dataMoneyDestination } from "@mocks/moneydestination/destination.mock";
+import { IEntry } from "@components/data/Table/types";
 import { StyledContainer } from "./styles";
 import { actions, breakPoints, titles } from "./config/table.config";
 
 interface IMoneyDestinationTabUI {
+  entries: IEntry[];
   loading: boolean;
   searchMoneyDestination: string;
   onSearchMoneyDestination: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function MoneyDestinationTabUI(props: IMoneyDestinationTabUI) {
-  const { searchMoneyDestination, loading, onSearchMoneyDestination } = props;
+  const { searchMoneyDestination, entries, loading, onSearchMoneyDestination } =
+    props;
 
   const smallScreen = useMediaQuery("(max-width: 690px)");
   const widthFirstColumn = smallScreen ? 64 : 25;
@@ -70,7 +72,7 @@ function MoneyDestinationTabUI(props: IMoneyDestinationTabUI) {
           <Table
             id="portal"
             titles={titles}
-            entries={dataMoneyDestination}
+            entries={entries}
             actions={actions}
             breakpoints={breakPoints}
             filter={searchMoneyDestination}

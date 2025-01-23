@@ -5,12 +5,12 @@ import { Details } from "../components/Details";
 
 const titles: ITitle[] = [
   {
-    id: "name",
+    id: "abbreviatedName",
     titleName: "Nombre",
     priority: 0,
   },
   {
-    id: "description",
+    id: "descriptionUse",
     titleName: "Descripción",
     priority: 1,
   },
