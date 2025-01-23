@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { AppContext } from "@context/AppContext";
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
 import { BusinessUnitsUI } from "./interface";
 import { IBusinessUnitstate } from "./types";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 
 interface IBusinessUnits {
   businessUnits: IBusinessUnitsPortalStaff[];
@@ -11,7 +11,7 @@ interface IBusinessUnits {
 
 function BusinessUnits(props: IBusinessUnits) {
   const { businessUnits } = props;
-  const { setBusinessUnitSigla } = useContext(AppContext);
+  const { setBusinessUnitSigla } = useContext(AuthAndPortalData);
   const [search, setSearch] = useState("");
   const [selectedBusinessUnit, setSelectedBusinessUnit] =
     useState<IBusinessUnitsPortalStaff>();

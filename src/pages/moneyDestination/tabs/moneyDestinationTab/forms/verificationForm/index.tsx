@@ -9,9 +9,9 @@ import { tokens } from "@design/tokens";
 import { DecisionModal } from "@components/modals/DecisionModal";
 import { IRequestSteps } from "@design/feedback/RequestProcess/types";
 import { RequestProcessModal } from "@components/modals/RequestProcessModal";
-import { VerificationBoxes } from "./VerificationBoxes";
+import { VerificationBoxes } from "./verificationBoxes";
 import { IFormsUpdateData } from "./types";
-import { addDestinationStepsConfig } from "../../AddDestination/config/assisted.config";
+import { addDestinationStepsConfig } from "../../addDestination/config/assisted.config";
 import { finishModal } from "./config/messages.config";
 
 interface IVerificationForm {

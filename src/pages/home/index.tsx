@@ -1,12 +1,13 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { appCards } from "@config/appCards";
-import { AppContext } from "@context/AppContext";
+
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
 import { HomeUI } from "./interface";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 
 function Home() {
   const { appData, businessUnitsToTheStaff, setBusinessUnitSigla } =
-    useContext(AppContext);
+    useContext(AuthAndPortalData);
   const [collapse, setCollapse] = useState(false);
   const [selectedClient, setSelectedClient] = useState<string>("");
 

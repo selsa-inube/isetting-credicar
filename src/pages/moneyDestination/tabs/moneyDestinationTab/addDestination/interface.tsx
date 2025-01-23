@@ -6,13 +6,13 @@ import { Breadcrumbs } from "@inubekit/breadcrumbs";
 import { Assisted, IAssistedStep } from "@inubekit/assisted";
 
 import { Title } from "@components/data/Title";
-import { crumbsAddDestination } from "@pages/moneyDestination/tabs/moneyDestinationTab/AddDestination/config/navigation";
+import { crumbsAddDestination } from "@pages/moneyDestination/tabs/moneyDestinationTab/addDestination/config/navigation";
 import { tokens } from "@design/tokens";
 import { IRequestSteps } from "@design/feedback/RequestProcess/types";
-import { GeneralInformationForm } from "../forms/GeneralInformation";
-import { IGeneralInformationEntry } from "../forms/GeneralInformation/types";
-import { CreditLineForm } from "../forms/CreditLine";
-import { VerificationForm } from "../forms/VerificationForm";
+import { GeneralInformationForm } from "../forms/generalInformation";
+import { IGeneralInformationEntry } from "../forms/generalInformation/types";
+import { CreditLineForm } from "../forms/creditLine";
+import { VerificationForm } from "../forms/verificationForm";
 
 interface IAddDestinationUI {
   creditLineDecisions: IRuleDecision[];

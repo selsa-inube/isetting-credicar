@@ -1,5 +1,5 @@
 import { FormikProps } from "formik";
-import { IGeneralInformationEntry } from "../forms/GeneralInformation/types";
+import { IGeneralInformationEntry } from "../forms/generalInformation/types";
 import { ICreditProspectEntry } from "../../../design/forms/creditProspect/types";
 
 interface IFormsCreditlines {

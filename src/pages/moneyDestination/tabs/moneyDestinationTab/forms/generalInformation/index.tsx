@@ -1,11 +1,11 @@
 import { forwardRef, useContext } from "react";
 import { FormikProps } from "formik";
 
-import { AppContext } from "@context/AppContext";
 import { useEnumMoneyDestination } from "@hooks/moneyDestination/useEnumMoneyDestination";
 import { useGeneralInformationForm } from "@hooks/moneyDestination/useGeneralInformationForm";
 import { GeneralInformationFormUI } from "./interface";
 import { IGeneralInformationEntry } from "./types";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 
 interface IGeneralInformationForm {
   initialValues: IGeneralInformationEntry;
@@ -19,7 +19,7 @@ const GeneralInformationForm = forwardRef<
   FormikProps<IGeneralInformationEntry>,
   IGeneralInformationForm
 >(({ initialValues, onFormValid, onSubmit, handleNextStep, loading }, ref) => {
-  const { appData } = useContext(AppContext);
+  const { appData } = useContext(AuthAndPortalData);
 
   const { enumData } = useEnumMoneyDestination(
     "moneydestination",

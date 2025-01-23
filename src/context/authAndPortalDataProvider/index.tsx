@@ -3,17 +3,18 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
 import { decrypt } from "@utils/encrypt";
-import { IAppContext, IAppData } from "./types";
+
 import { usePortalData } from "@hooks/staffPortal/usePortalData";
 import { useBusinessManagers } from "@hooks/staffPortal/useBusinessManagers";
+import { IAuthAndPortalData, IAppData } from "./types";
 
-const AppContext = createContext<IAppContext>({} as IAppContext);
+const AuthAndPortalData = createContext<IAuthAndPortalData>({} as IAuthAndPortalData);
 
-interface AppProviderProps {
+interface IAuthAndPortalDataProvider {
   children: React.ReactNode;
 }
 
-function AppContextProvider(props: AppProviderProps) {
+function AuthAndPortalDataProvider(props: IAuthAndPortalDataProvider) {
   const { children } = props;
   const { user } = useAuth0();
 
@@ -112,7 +113,7 @@ function AppContextProvider(props: AppProviderProps) {
     );
   }, [businessUnitsToTheStaff]);
 
-  const appContext = useMemo(
+  const authAndPortalDataContainer = useMemo(
     () => ({
       appData,
       businessUnitSigla,
@@ -125,9 +126,9 @@ function AppContextProvider(props: AppProviderProps) {
   );
 
   return (
-    <AppContext.Provider value={appContext}>{children}</AppContext.Provider>
+    <AuthAndPortalData.Provider value={authAndPortalDataContainer}>{children}</AuthAndPortalData.Provider>
   );
 }
 
-export { AppContext, AppContextProvider };
-export type { AppProviderProps };
+export { AuthAndPortalData, AuthAndPortalDataProvider };
+export type { IAuthAndPortalDataProvider };

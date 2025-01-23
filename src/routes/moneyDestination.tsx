@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { MoneyDestination } from "@pages/moneyDestination";
-import { AddDestination } from "@pages/moneyDestination/tabs/moneyDestinationTab/AddDestination";
+import { AddDestination } from "@pages/moneyDestination/tabs/moneyDestinationTab/addDestination";
 
 function MoneyDestinationRoutes() {
   return (

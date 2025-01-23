@@ -8,19 +8,19 @@ import { useContext } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import { enviroment } from "./config/environment";
-import { AppContext, AppContextProvider } from "./context/AppContext";
 
-import { ErrorPage } from "./components/layout/ErrorPage";
+import { ErrorPage } from "@components/layout/ErrorPage";
 import { SelectBusinessUnitsRoutes } from "./routes/selectBusinessunits";
-import { SelectBusinessUnits } from "./pages/selectBusinessUnits";
-import { Home } from "./pages/home";
+import { SelectBusinessUnits } from "@pages/selectBusinessUnits";
+import { Home } from "@pages/home";
 import { GlobalStyles } from "./styles/global";
 import { MoneyDestinationRoutes } from "./routes/moneyDestination";
 import { CreditLinesRoutes } from "./routes/creditLines";
-import { AppPage } from "./components/layout/AppPage";
+import { AppPage } from "@components/layout/AppPage";
 import { usePortalData } from "@hooks/staffPortal/usePortalData";
 import { useBusinessManagers } from "@hooks/staffPortal/useBusinessManagers";
 import { useAuthRedirect } from "@hooks/authentication/useAuthRedirect";
+import { AuthAndPortalData, AuthAndPortalDataProvider } from "@context/authAndPortalDataProvider";
 
 function LogOut() {
   localStorage.clear();
@@ -30,7 +30,7 @@ function LogOut() {
 }
 
 function FirstPage() {
-  const { businessUnitSigla } = useContext(AppContext);
+  const { businessUnitSigla } = useContext(AuthAndPortalData);
 
   return businessUnitSigla.length === 0 ? <SelectBusinessUnits /> : <Home />;
 }
@@ -86,9 +86,9 @@ function App() {
   return (
     <>
       <GlobalStyles />
-      <AppContextProvider>
+      <AuthAndPortalDataProvider>
         <RouterProvider router={router} />
-      </AppContextProvider>
+      </AuthAndPortalDataProvider>
     </>
   );
 }

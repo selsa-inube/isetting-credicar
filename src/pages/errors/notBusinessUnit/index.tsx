@@ -4,7 +4,7 @@ import { ErrorPage } from "@components/layout/ErrorPage";
 import clientNotFound from "@assets/images/Expired.png";
 import { enviroment } from "@config/environment";
 
-function ErrorNotBusinessUnit() {
+function NotBusinessUnit() {
   const { logout } = useAuth0();
   useEffect(() => {
     localStorage.clear();
@@ -23,4 +23,4 @@ function ErrorNotBusinessUnit() {
   );
 }
 
-export { ErrorNotBusinessUnit };
+export { NotBusinessUnit };
