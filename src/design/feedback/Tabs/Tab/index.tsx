@@ -5,7 +5,7 @@ import {
   StyledNotificationElement,
   StyledTab,
 } from "./styles";
-import { ComponentAppearance } from "@src/types/aparences.types";
+import { ComponentAppearance } from "@ptypes/aparences.types";
 interface ITab {
   label: string;
   id: string;

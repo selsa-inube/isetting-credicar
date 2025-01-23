@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import { FormikProps } from "formik";
 
-import { useGeneralInfoCreditLineForm } from "@src/hooks/creditLine/useGeneralInfoCreditLineForm";
+import { useGeneralInfoCreditLineForm } from "@hooks/creditLine/useGeneralInfoCreditLineForm";
 import { GeneralInformationFormUI } from "./interface";
 import { IGeneralInformationEntry } from "./types";
 

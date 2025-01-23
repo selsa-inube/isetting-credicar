@@ -10,7 +10,7 @@ import {
   IMessageModal,
   IRulesFormTextValues,
 } from "./types";
-import { AuthAndPortalData } from "@src/context/authAndPortalDataProvider";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 
 interface IDecisionsForm {
   attentionModal: IMessageModal;

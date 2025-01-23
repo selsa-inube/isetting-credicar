@@ -4,7 +4,7 @@ import { object } from "yup";
 
 import { validationRules } from "@validations/validationRules";
 import { validationMessages } from "@validations/validationMessages";
-import { IGeneralInformationEntry } from "@src/pages/creditLines/forms/generalInformation/types";
+import { IGeneralInformationEntry } from "@pages/creditLines/forms/generalInformation/types";
 
 const useGeneralInfoCreditLineForm = (
   initialValues: IGeneralInformationEntry,

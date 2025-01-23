@@ -11,7 +11,7 @@ import {
 } from "@utils/destination";
 import { validationRules } from "@validations/validationRules";
 import { validationMessages } from "@validations/validationMessages";
-import { IGeneralInformationEntry } from "@src/pages/moneyDestination/tabs/moneyDestinationTab/forms/generalInformation/types";
+import { IGeneralInformationEntry } from "@pages/moneyDestination/tabs/moneyDestinationTab/forms/generalInformation/types";
 
 const useGeneralInformationForm = (
   enumData: IEnumeratorsMoneyDestination[],
