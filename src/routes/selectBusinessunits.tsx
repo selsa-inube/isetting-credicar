@@ -5,10 +5,12 @@ import { ErrorPage } from "@components/layout/ErrorPage";
 import { IBusinessUnit } from "@pages/selectBusinessUnits/outlets/BusinessUnit/types";
 import { SelectBusinessUnits } from "@pages/selectBusinessUnits";
 import { BusinessUnits } from "@pages/selectBusinessUnits/outlets/BusinessUnit";
-import { CheckingCredentials } from "@pages/selectBusinessUnits/outlets/CheckingCredentials";
+import { CheckingCredentials } from "@pages/login/checkingCredentials";
 import { AppContext } from "@context/AppContext";
 import { LoadingApp } from "@components/feedback/LoadingApp";
-import { ErrorNotBusinessUnit } from "@pages/selectBusinessUnits/errors/ErrorNotBusinessUnit";
+import { NotBusinessUnit } from "@pages/errors/notBusinessUnit";
+
+
 
 export interface IBusinessUnits {
   businessUnits: IBusinessUnit[];
@@ -33,7 +35,7 @@ function SelectBusinessUnitsRoutes() {
       <Route path="error/not-available" element={<ErrorPage />} />
       <Route
         path="error/not-related-businessUnits"
-        element={<ErrorNotBusinessUnit />}
+        element={<NotBusinessUnit />}
       />
       <Route path="*" element={<ErrorPage />} />
       <Route path="/*" element={<ErrorPage />} />

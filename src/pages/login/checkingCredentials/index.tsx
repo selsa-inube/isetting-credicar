@@ -1,17 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import { useCallback, useContext, useEffect } from "react";
 
-import { AppContext } from "@context/AppContext";
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
 import { CheckingCredentialsUI } from "./interface";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 
-function CheckingCredentials({
-  businessUnits,
-}: {
-  businessUnits: IBusinessUnitsPortalStaff[];
-}) {
+interface ICheckingCredentials {
+   businessUnits: IBusinessUnitsPortalStaff[];
+};
+
+function CheckingCredentials(props: ICheckingCredentials) {
+  const { businessUnits } = props;
   const navigate = useNavigate();
-  const { appData, setBusinessUnitSigla } = useContext(AppContext);
+  const { appData, setBusinessUnitSigla } = useContext(AuthAndPortalData);
 
   const selectedBusinessUnit = () => {
     const selected = businessUnits[0];
@@ -51,3 +52,4 @@ function CheckingCredentials({
 }
 
 export { CheckingCredentials };
+export type { ICheckingCredentials };

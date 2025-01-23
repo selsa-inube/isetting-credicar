@@ -31,7 +31,7 @@ interface IAppData {
   businessUnit: IBusinessUnit;
   user: IUser;
 }
-interface IAppContext {
+interface IAuthAndPortalData {
   appData: IAppData;
   businessUnitSigla: string;
   businessUnitsToTheStaff: IBusinessUnitsPortalStaff[];
@@ -42,4 +42,4 @@ interface IAppContext {
   >;
 }
 
-export type { IAppContext, IAppData, IBusinessUnit };
+export type { IAuthAndPortalData, IAppData, IBusinessUnit };
