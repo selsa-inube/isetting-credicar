@@ -93,71 +93,75 @@ const nameDestination = [
 const iconDestination = [
   {
     value: "MdOutlineRealEstateAgent",
-    icon: <MdOutlineRealEstateAgent size={24} />,
+    icon: <MdOutlineRealEstateAgent size={20} />,
   },
   {
     value: "MdOutlineBuild",
-    icon: <MdOutlineBuild size={24} />,
+    icon: <MdOutlineBuild size={20} />,
   },
   {
     value: "MdOutlineSchool",
-    icon: <MdOutlineSchool size={24} />,
+    icon: <MdOutlineSchool size={20} />,
   },
   {
     value: "MdOutlineLightbulb",
-    icon: <MdOutlineLightbulb size={24} />,
+    icon: <MdOutlineLightbulb size={20} />,
   },
   {
     value: "MdOutlineDirectionsCar",
-    icon: <MdOutlineDirectionsCar size={24} />,
+    icon: <MdOutlineDirectionsCar size={20} />,
   },
   {
     value: "MdOutlineVolunteerActivism",
-    icon: <MdOutlineVolunteerActivism size={24} />,
+    icon: <MdOutlineVolunteerActivism size={20} />,
   },
   {
     value: "MdOutlineBeachAccess",
-    icon: <MdOutlineBeachAccess size={24} />,
+    icon: <MdOutlineBeachAccess size={20} />,
   },
   {
     value: "MdOutlineAssuredWorkload",
-    icon: <MdOutlineAssuredWorkload size={24} />,
+    icon: <MdOutlineAssuredWorkload size={20} />,
   },
   {
     value: "MdOutlinePersonalInjury",
-    icon: <MdOutlinePersonalInjury size={24} />,
+    icon: <MdOutlinePersonalInjury size={20} />,
   },
   {
     value: "MdOutlineDiversity1",
-    icon: <MdOutlineDiversity1 size={24} />,
+    icon: <MdOutlineDiversity1 size={20} />,
   },
   {
     value: "MdOutline1xMobiledata",
-    icon: <MdOutline1xMobiledata size={24} />,
+    icon: <MdOutline1xMobiledata size={20} />,
   },
   {
     value: "MdOutlineFavoriteBorder",
-    icon: <MdOutlineFavoriteBorder size={24} />,
+    icon: <MdOutlineFavoriteBorder size={20} />,
   },
   {
     value: "MdOutlineAddHomeWork",
-    icon: <MdOutlineAddHomeWork size={24} />,
+    icon: <MdOutlineAddHomeWork size={20} />,
   },
   {
     value: "MdOutlineTravelExplore",
-    icon: <MdOutlineTravelExplore size={24} />,
+    icon: <MdOutlineTravelExplore size={20} />,
   },
   {
     value: "MdOutlineCreditCard",
-    icon: <MdOutlineCreditCard size={24} />,
+    icon: <MdOutlineCreditCard size={20} />,
   },
   {
     value: "MdOutlinePayments",
-    icon: <MdOutlinePayments size={24} />,
+    icon: <MdOutlinePayments size={20} />,
   },
   {
     value: "MdOutlineHandshak",
-    icon: <MdOutlineHandshake size={24} />,
+    icon: <MdOutlineHandshake size={20} />,
+  },
+  {
+    value: "MdOutlineTravelExplore",
+    icon: <MdOutlineTravelExplore size={20} />,
   },
 ];
 
