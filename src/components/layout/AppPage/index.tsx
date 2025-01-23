@@ -8,7 +8,7 @@ import { useMediaQuery } from "@inubekit/hooks";
 import { Icon } from "@inubekit/icon";
 
 import { actionsConfig, userMenu, nav } from "@config/nav";
-import { AppContext } from "@context/AppContext";
+
 import { BusinessUnitChange } from "@design/inputs/BusinessUnitChange";
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
 
@@ -23,6 +23,7 @@ import {
   StyledMain,
 } from "./styles";
 import { Nav } from "@inubekit/nav";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 const renderLogo = (imgUrl: string) => {
   return (
     <StyledContentImg to="/">
@@ -33,7 +34,7 @@ const renderLogo = (imgUrl: string) => {
 
 function AppPage() {
   const { appData, businessUnitsToTheStaff, setBusinessUnitSigla } =
-    useContext(AppContext);
+    useContext(AuthAndPortalData);
   const { logout } = useAuth0();
   const [collapse, setCollapse] = useState(false);
   const collapseMenuRef = useRef<HTMLDivElement>(null);

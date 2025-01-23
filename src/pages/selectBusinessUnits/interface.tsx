@@ -5,13 +5,13 @@ import { Stack } from "@inubekit/stack";
 import { Text } from "@inubekit/text";
 import { useMediaQueries } from "@inubekit/hooks";
 
-import { AppContext } from "@context/AppContext";
 import { tokens } from "@design/tokens";
 import {
   StyledWelcomeContainer,
   StyledOutletContainer,
   StyledImage,
 } from "./styles";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 
 const SelectBusinessUnitsUI = () => {
   const {
@@ -28,7 +28,7 @@ const SelectBusinessUnitsUI = () => {
     return "160px";
   };
 
-  const { appData } = useContext(AppContext);
+  const { appData } = useContext(AuthAndPortalData);
   return (
     <Grid
       templateColumns={screenTablet ? "1fr" : "repeat(2, 1fr)"}

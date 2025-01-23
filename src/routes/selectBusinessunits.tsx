@@ -6,9 +6,9 @@ import { IBusinessUnit } from "@pages/selectBusinessUnits/outlets/BusinessUnit/t
 import { SelectBusinessUnits } from "@pages/selectBusinessUnits";
 import { BusinessUnits } from "@pages/selectBusinessUnits/outlets/BusinessUnit";
 import { CheckingCredentials } from "@pages/login/checkingCredentials";
-import { AppContext } from "@context/AppContext";
 import { LoadingApp } from "@components/feedback/LoadingApp";
 import { NotBusinessUnit } from "@pages/errors/notBusinessUnit";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 
 
 
@@ -16,7 +16,7 @@ export interface IBusinessUnits {
   businessUnits: IBusinessUnit[];
 }
 function SelectBusinessUnitsRoutes() {
-  const { businessUnitsToTheStaff } = useContext(AppContext);
+  const { businessUnitsToTheStaff } = useContext(AuthAndPortalData);
   const businessUnits = businessUnitsToTheStaff;
 
   return (

@@ -3,13 +3,14 @@ import { IRuleDecision } from "@isettingkit/input";
 
 import { useDecisionForm } from "@hooks/forms/useDecisionForm";
 import { useEnumRules } from "@hooks/MoneyDestination/useEnumRules";
-import { AppContext } from "@context/AppContext";
+
 import { DecisionsFormUI } from "./interface";
 import {
   IEnumeratorsRules,
   IMessageModal,
   IRulesFormTextValues,
 } from "./types";
+import { AuthAndPortalData } from "@src/context/authAndPortalDataProvider";
 
 interface IDecisionsForm {
   attentionModal: IMessageModal;
@@ -57,7 +58,7 @@ const DecisionsForm = (props: IDecisionsForm) => {
     handleDelete,
   } = useDecisionForm(initialValues, revertModalDisplayData, setDecisions);
 
-  const { appData } = useContext(AppContext);
+  const { appData } = useContext(AuthAndPortalData);
   const { enumRuleData } = useEnumRules(
     labelBusinessRules,
     appData.businessUnit.publicCode,

@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { IRuleDecision } from "@isettingkit/input";
 
-import { AppContext } from "@context/AppContext";
+
 import { useEnumRules } from "@hooks/MoneyDestination/useEnumRules";
 import { useDecisionForm } from "@hooks/forms/useDecisionForm";
 import { revertModalDisplayData } from "@utils/revertModalDisplayData";
 import { decisionTemplateConfig } from "@design/forms/decisions/config/decisionTemplate.config";
 import { CreditLineFormUI } from "./interface";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 
 interface ICreditLineForm {
   initialValues: IRuleDecision[];
@@ -37,7 +38,7 @@ const CreditLineForm = (props: ICreditLineForm) => {
     setCreditLineDecisions,
   );
 
-  const { appData } = useContext(AppContext);
+  const { appData } = useContext(AuthAndPortalData);
   const { enumRuleData } = useEnumRules(
     "LineOfCredit",
     appData.businessUnit.publicCode,
