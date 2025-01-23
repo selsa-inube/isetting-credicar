@@ -1,5 +1,5 @@
 import { IEnumeratorsMoneyDestination } from "@pages/moneyDestination/tabs/moneyDestinationTab/types";
-import { getEnumeratorsMoneyDestination } from "@api/isettingCredicarQuery";
+import { getEnumeratorsMoneyDestination } from "@api/isettingCredicar/getEnumeratorsMoneyDestination";
 import { mapEnumMoneyDestinationToEntities } from "./mappers";
 
 const enumeratorsMoneyDestination = async (
