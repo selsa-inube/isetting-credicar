@@ -18,7 +18,7 @@ import {
 } from "@design/forms/decisions/config/messages.config";
 import { decisionTemplateConfig } from "@design/forms/decisions/config/decisionTemplate.config";
 import { CreditProspectForm } from "@design/forms/creditProspect";
-import { GeneralInformationForm } from "../forms/GeneralInformation";
+import { GeneralInformationForm } from "../forms/generalInformation";
 import { crumbsAddCreditLines } from "./config/navigation";
 import { IFormsCreditlines, IFormsCreditlinesRefs } from "./types";
 import { textValuesBusinessRules } from "./config/businessRules.config";
