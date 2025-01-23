@@ -1,23 +1,47 @@
 import { useContext } from "react";
 import { IRuleDecision } from "@isettingkit/input";
 
-import { AppContext } from "@context/AppContext";
-import { useEnumRules } from "@hooks/MoneyDestination/useEnumRules";
 import { useDecisionForm } from "@hooks/forms/useDecisionForm";
-import { revertModalDisplayData } from "@utils/revertModalDisplayData";
-import { decisionTemplateConfig } from "@design/forms/decisions/config/decisionTemplate.config";
-import { CreditLineFormUI } from "./interface";
+import { useEnumRules } from "@hooks/MoneyDestination/useEnumRules";
+import { AppContext } from "@context/AppContext";
+import { DecisionsFormUI } from "./interface";
+import {
+  IEnumeratorsRules,
+  IMessageModal,
+  IRulesFormTextValues,
+} from "./types";
 
-interface ICreditLineForm {
+interface IDecisionsForm {
+  attentionModal: IMessageModal;
+  deleteModal: IMessageModal;
   initialValues: IRuleDecision[];
+  labelBusinessRules: string;
+  textValuesBusinessRules: IRulesFormTextValues;
+  decisionTemplateConfig: (
+    enumeratorsRules: IEnumeratorsRules,
+  ) => IRuleDecision | undefined;
   onNextStep: () => void;
   onPreviousStep: () => void;
-  setCreditLineDecisions: (decisions: IRuleDecision[]) => void;
+  setDecisions: (decisions: IRuleDecision[]) => void;
+  revertModalDisplayData: (
+    dataDecision: IRuleDecision,
+    originalDecision: IRuleDecision,
+  ) => void;
 }
 
-const CreditLineForm = (props: ICreditLineForm) => {
-  const { onNextStep, onPreviousStep, initialValues, setCreditLineDecisions } =
-    props;
+const DecisionsForm = (props: IDecisionsForm) => {
+  const {
+    attentionModal,
+    deleteModal,
+    initialValues,
+    labelBusinessRules,
+    textValuesBusinessRules,
+    decisionTemplateConfig,
+    onNextStep,
+    onPreviousStep,
+    revertModalDisplayData,
+    setDecisions,
+  } = props;
 
   const {
     isModalOpen,
@@ -31,24 +55,22 @@ const CreditLineForm = (props: ICreditLineForm) => {
     handleToggleAttentionModal,
     handleToggleDeleteModal,
     handleDelete,
-  } = useDecisionForm(
-    initialValues,
-    revertModalDisplayData,
-    setCreditLineDecisions,
-  );
+  } = useDecisionForm(initialValues, revertModalDisplayData, setDecisions);
 
   const { appData } = useContext(AppContext);
   const { enumRuleData } = useEnumRules(
-    "LineOfCredit",
+    labelBusinessRules,
     appData.businessUnit.publicCode,
   );
 
   return (
-    <CreditLineFormUI
+    <DecisionsFormUI
+      attentionModal={attentionModal}
       decisions={decisions}
       decisionTemplate={
         decisionTemplateConfig(enumRuleData) ?? ({} as IRuleDecision)
       }
+      deleteModal={deleteModal}
       isModalOpen={isModalOpen}
       loading={false}
       onCloseModal={handleCloseModal}
@@ -62,9 +84,10 @@ const CreditLineForm = (props: ICreditLineForm) => {
       selectedDecision={selectedDecision}
       showAttentionModal={showAttentionModal}
       showDeleteModal={showDeleteModal}
+      textValuesBusinessRules={textValuesBusinessRules}
     />
   );
 };
 
-export { CreditLineForm };
-export type { ICreditLineForm };
+export { DecisionsForm };
+export type { IDecisionsForm };

@@ -67,7 +67,7 @@ function CreditProspectFormUI(props: ICreditProspectFormUI) {
                 ¿Cuál es la cantidad máxima de deudores que se pueden registrar?
               </Text>
               <Select
-                fullwidth={false}
+                fullwidth={isMobile ? true : false}
                 disabled={!additionalDebtorsField}
                 id="additionalDebtors"
                 name="additionalDebtors"

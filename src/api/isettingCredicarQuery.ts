@@ -4,10 +4,8 @@ import {
   fetchTimeoutServices,
   maxRetriesServices,
 } from "@config/environment";
-import {
-  IEnumeratorsMoneyDestination,
-  IEnumeratorsRules,
-} from "@pages/moneyDestination/tabs/moneyDestinationTab/types";
+import { IEnumeratorsMoneyDestination } from "@pages/moneyDestination/tabs/moneyDestinationTab/types";
+import { IEnumeratorsRules } from "@design/forms/decisions/types";
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: enviroment.ISETTING_CREDICAR_QUERY_PROCESS_SERVICE,

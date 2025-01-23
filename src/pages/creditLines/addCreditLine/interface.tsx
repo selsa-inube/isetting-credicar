@@ -1,40 +1,56 @@
-import { useMediaQuery } from "@inubekit/hooks";
-import { Stack } from "@inubekit/stack";
-import { Breadcrumbs } from "@inubekit/breadcrumbs";
-import { Assisted, IAssistedStep } from "@inubekit/assisted";
+import {
+  Assisted,
+  Breadcrumbs,
+  IAssistedStep,
+  Stack,
+  useMediaQuery,
+} from "@inubekit/inubekit";
+import { IRuleDecision } from "@isettingkit/input";
 
 import { Title } from "@components/data/Title";
 import { tokens } from "@design/tokens";
+import { IOptionsProspect } from "@design/forms/creditProspect/types";
+import { DecisionsForm } from "@design/forms/decisions";
+import { revertModalDisplayData } from "@utils/revertModalDisplayData";
+import {
+  attentionModal,
+  deleteModal,
+} from "@design/forms/decisions/config/messages.config";
+import { decisionTemplateConfig } from "@design/forms/decisions/config/decisionTemplate.config";
+import { CreditProspectForm } from "@design/forms/creditProspect";
 import { GeneralInformationForm } from "../forms/GeneralInformation";
 import { crumbsAddCreditLines } from "./config/navigation";
-import { CreditProspectForm } from "../../../design/forms/creditProspect";
 import { IFormsCreditlines, IFormsCreditlinesRefs } from "./types";
-import { IOptionsProspect } from "@src/design/forms/creditProspect/types";
+import { textValuesBusinessRules } from "./config/businessRules.config";
 
 interface IAddCreditLinesUI {
+  decisions: IRuleDecision[];
   currentStep: number;
   formReferences: IFormsCreditlinesRefs;
   initialValues: IFormsCreditlines;
   isCurrentFormValid: boolean;
+  optionsProspect: IOptionsProspect[];
   steps: IAssistedStep[];
   onNextStep: () => void;
   onPreviousStep: () => void;
+  setDecisions: (decisions: IRuleDecision[]) => void;
   setIsCurrentFormValid: React.Dispatch<React.SetStateAction<boolean>>;
-  optionsProspect: IOptionsProspect[];
   setOptionsProspect: React.Dispatch<React.SetStateAction<IOptionsProspect[]>>;
 }
 
 function AddCreditLinesUI(props: IAddCreditLinesUI) {
   const {
+    decisions,
     currentStep,
     formReferences,
     initialValues,
     isCurrentFormValid,
+    optionsProspect,
     steps,
     onNextStep,
     onPreviousStep,
+    setDecisions,
     setIsCurrentFormValid,
-    optionsProspect,
     setOptionsProspect,
   } = props;
 
@@ -95,6 +111,20 @@ function AddCreditLinesUI(props: IAddCreditLinesUI) {
                 optionsProspect={optionsProspect}
                 setOptionsProspect={setOptionsProspect}
                 isFormValid={isCurrentFormValid}
+              />
+            )}
+            {currentStep === 3 && (
+              <DecisionsForm
+                attentionModal={attentionModal}
+                deleteModal={deleteModal}
+                textValuesBusinessRules={textValuesBusinessRules}
+                decisionTemplateConfig={decisionTemplateConfig}
+                onNextStep={onNextStep}
+                onPreviousStep={onPreviousStep}
+                initialValues={decisions}
+                setDecisions={setDecisions}
+                revertModalDisplayData={revertModalDisplayData}
+                labelBusinessRules="MaximunFRCquota"
               />
             )}
           </Stack>

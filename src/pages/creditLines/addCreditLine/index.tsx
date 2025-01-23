@@ -1,4 +1,4 @@
-import { useAddCreditlines } from "@src/hooks/creditLine/useAddCreditLines";
+import { useAddCreditlines } from "@hooks/creditLine/useAddCreditLines";
 import { addCreditLinesSteps } from "./config/assisted.config";
 import { AddCreditLinesUI } from "./interface";
 
@@ -8,11 +8,13 @@ function Addcreditlines() {
     formValues,
     formReferences,
     optionsProspect,
+    decisions,
     setOptionsProspect,
     isCurrentFormValid,
     handleNextStep,
     handlePreviousStep,
     setIsCurrentFormValid,
+    setDecisions,
   } = useAddCreditlines();
 
   return (
@@ -27,6 +29,8 @@ function Addcreditlines() {
       steps={addCreditLinesSteps}
       optionsProspect={optionsProspect}
       setOptionsProspect={setOptionsProspect}
+      decisions={decisions}
+      setDecisions={setDecisions}
     />
   );
 }

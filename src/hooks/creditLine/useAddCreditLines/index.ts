@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { FormikProps } from "formik";
+import { IRuleDecision } from "@isettingkit/input";
 
 import { IGeneralInformationEntry } from "@pages/creditLines/forms/GeneralInformation/types";
 import { ICreditProspectEntry } from "@design/forms/creditProspect/types";
@@ -12,6 +13,7 @@ import { addCreditLinesSteps } from "@pages/creditLines/addCreditLine/config/ass
 
 const useAddCreditlines = () => {
   const [currentStep, setCurrentStep] = useState(1);
+  const [decisions, setDecisions] = useState<IRuleDecision[]>([]);
   const [formValues, setFormValues] = useState<IFormsCreditlines>({
     generalInformation: {
       isValid: false,
@@ -79,14 +81,16 @@ const useAddCreditlines = () => {
 
   return {
     currentStep,
-    formValues,
+    decisions,
     formReferences,
-    optionsProspect,
-    setOptionsProspect,
+    formValues,
     isCurrentFormValid,
+    optionsProspect,
     handleNextStep,
     handlePreviousStep,
+    setDecisions,
     setIsCurrentFormValid,
+    setOptionsProspect,
   };
 };
 
