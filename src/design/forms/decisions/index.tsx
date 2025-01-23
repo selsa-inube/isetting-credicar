@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { IRuleDecision } from "@isettingkit/input";
 
 import { useDecisionForm } from "@hooks/forms/useDecisionForm";
-import { useEnumRules } from "@hooks/MoneyDestination/useEnumRules";
+import { useEnumRules } from "@hooks/moneyDestination/useEnumRules";
 import { AppContext } from "@context/AppContext";
 import { DecisionsFormUI } from "./interface";
 import {

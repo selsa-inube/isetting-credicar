@@ -9,9 +9,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import { enviroment } from "./config/environment";
 import { AppContext, AppContextProvider } from "./context/AppContext";
-import { usePortalData } from "./hooks/usePortalData";
-import { useBusinessManagers } from "./hooks/useBusinessManagers";
-import { useAuthRedirect } from "./hooks/useAuthRedirect";
+
 import { ErrorPage } from "./components/layout/ErrorPage";
 import { SelectBusinessUnitsRoutes } from "./routes/selectBusinessunits";
 import { SelectBusinessUnits } from "./pages/selectBusinessUnits";
@@ -20,6 +18,9 @@ import { GlobalStyles } from "./styles/global";
 import { MoneyDestinationRoutes } from "./routes/moneyDestination";
 import { CreditLinesRoutes } from "./routes/creditLines";
 import { AppPage } from "./components/layout/AppPage";
+import { usePortalData } from "@hooks/staffPortal/usePortalData";
+import { useBusinessManagers } from "@hooks/staffPortal/useBusinessManagers";
+import { useAuthRedirect } from "@hooks/authentication/useAuthRedirect";
 
 function LogOut() {
   localStorage.clear();
