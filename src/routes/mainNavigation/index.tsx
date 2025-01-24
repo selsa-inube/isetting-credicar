@@ -6,7 +6,8 @@ import { MoneyDestinationRoutes } from "../moneyDestination";
 import { ErrorPage } from "@components/layout/ErrorPage";
 import { Logout } from "@pages/login/logout";
 import { AppPage } from "@components/layout/AppPage";
-import { Landing } from "@pages/login/landing";
+import { Landing } from "@pages/home/landing";
+
 
 const mainNavigation = createBrowserRouter(
   createRoutesFromElements(
