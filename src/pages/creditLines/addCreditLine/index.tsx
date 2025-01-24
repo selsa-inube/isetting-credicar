@@ -1,6 +1,8 @@
 import { useAddCreditlines } from "@hooks/creditLine/useAddCreditLines";
-import { addCreditLinesSteps } from "./config/assisted.config";
+
 import { AddCreditLinesUI } from "./interface";
+import { addCreditLinesSteps } from "@config/creditLines/addCreditLine/assisted";
+
 
 function Addcreditlines() {
   const {

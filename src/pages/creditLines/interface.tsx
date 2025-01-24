@@ -11,8 +11,9 @@ import { Title } from "@components/data/Title";
 import { ComponentAppearance } from "@ptypes/aparences.types";
 import { dataCreditLines } from "@mocks/creditLines/creditLines.mock";
 import { StyledContent } from "./styles";
-import { crumbsCreditLines } from "./config/navigation";
-import { actions, breakPoints, titles } from "./config/table.config";
+import { crumbsCreditLines } from "@config/creditLines/navigation";
+import { actions, breakPoints, titles } from "@config/creditLines/table";
+
 
 interface ICreditLinesUI {
   loading: boolean;

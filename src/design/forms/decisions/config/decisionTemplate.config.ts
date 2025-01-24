@@ -5,7 +5,7 @@ import {
 } from "@isettingkit/input";
 
 import { dataTranslations } from "@utils/dataTranslations";
-import { IEnumeratorsRules } from "../types";
+import { IEnumeratorsRules } from "@design/forms/decisions/types";
 
 const decisionTemplateConfig = ({
   labelName,

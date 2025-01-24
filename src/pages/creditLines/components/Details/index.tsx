@@ -8,7 +8,8 @@ import { ComponentAppearance } from "@ptypes/aparences.types";
 import { IEntry } from "@components/data/Table/types";
 import { DetailsCreditLinesModal } from "@components/modals/DetailsCreditLinesModal";
 import { StyledContainerIcon } from "./styles";
-import { detailsTabsConfig } from "./config/tabs.config";
+import { detailsTabsConfig } from "@config/creditLines/details/tabs";
+
 
 interface IDetails {
   data: IEntry;
