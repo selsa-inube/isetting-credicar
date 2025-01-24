@@ -8,7 +8,7 @@ import { Button } from "@inubekit/button";
 import { Table } from "@components/data/Table";
 import { tokens } from "@design/tokens";
 import { Title } from "@components/data/Title";
-import { ComponentAppearance } from "@ptypes/aparences.types";
+import { ComponentAppearance } from "@src/enum/appearances";
 import { dataCreditLines } from "@mocks/creditLines/creditLines.mock";
 import { StyledContent } from "./styles";
 import { crumbsCreditLines } from "@config/creditLines/navigation";

@@ -10,9 +10,10 @@ import { crumbsAddDestination } from "@config/moneyDestination/addDestination/na
 import { tokens } from "@design/tokens";
 import { IRequestSteps } from "@design/feedback/RequestProcess/types";
 import { GeneralInformationForm } from "@pages/moneyDestination/tabs/moneyDestinationTab/forms/generalInformation";
-import { IGeneralInformationEntry } from "@pages/moneyDestination/tabs/moneyDestinationTab/forms/generalInformation/types";
 import { CreditLineForm } from "@pages/moneyDestination/tabs/moneyDestinationTab/forms/creditLine";
 import { VerificationForm } from "@pages/moneyDestination/tabs/moneyDestinationTab/forms/verificationForm";
+import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationEntry";
+
 
 interface IAddDestinationUI {
   creditLineDecisions: IRuleDecision[];

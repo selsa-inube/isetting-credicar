@@ -1,6 +1,6 @@
 import { SkeletonLine } from "@inubekit/skeleton";
 import { Td, Tr } from "@inubekit/table";
-import { ITitle } from "../types";
+import { ITitle } from "@components/data/Table/types";
 
 const actionsLoading = (numberActions: number) => {
   const cellsOfActionsLoading = [];

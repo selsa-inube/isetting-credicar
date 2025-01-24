@@ -4,8 +4,9 @@ import { FormikProps } from "formik";
 import { IRuleDecision } from "@isettingkit/input";
 
 import { addDestinationStepsConfig } from "@config/moneyDestination/addDestination/assisted";
-import { IGeneralInformationEntry } from "@pages/moneyDestination/tabs/moneyDestinationTab/forms/generalInformation/types";
+
 import { IRequestSteps } from "@design/feedback/RequestProcess/types";
+import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationEntry";
 
 const useAddDestination = (requestSteps: IRequestSteps[]) => {
   const [currentStep, setCurrentStep] = useState(1);

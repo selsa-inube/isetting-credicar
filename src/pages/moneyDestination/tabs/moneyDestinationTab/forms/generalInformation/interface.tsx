@@ -8,22 +8,23 @@ import { Text } from "@inubekit/text";
 import { Autosuggest } from "@inubekit/autosuggest";
 
 import { tokens } from "@design/tokens";
-import { getFieldState } from "@utils/forms";
-import { ComponentAppearance } from "@ptypes/aparences.types";
-import { IServerDomain } from "@ptypes/domain.types";
-import {
-  normalizeCodeDestination,
-  normalizeDestination,
-  normalizeIconDestination,
-} from "@utils/destination";
+
+import { ComponentAppearance } from "@enum/appearances";
+import { IServerDomain } from "@ptypes/IServerDomain";
+
 import {
   StyledContainer,
   StyledContainerFields,
   StyledFormContent,
   StyledIcon,
 } from "./styles";
-import { IGeneralInformationEntry } from "./types";
-import { IEnumeratorsMoneyDestination } from "../../types";
+
+import { getFieldState } from "@utils/forms/getFieldState";
+import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationEntry";
+import { IEnumeratorsMoneyDestination } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/IEnumeratorsMoneyDestination";
+import { normalizeCodeDestination } from "@utils/destination/normalizeCodeDestination";
+import { normalizeDestination } from "@utils/destination/normalizeDestination";
+import { normalizeIconDestination } from "@utils/destination/normalizeIconDestination";
 
 interface IGeneralInformationFormUI {
   formik: FormikProps<IGeneralInformationEntry>;

@@ -4,10 +4,10 @@ import { useMediaQuery } from "@inubekit/hooks";
 import { Grid } from "@inubekit/grid";
 
 import { tokens } from "@design/tokens";
-import { ComponentAppearance } from "@ptypes/aparences.types";
+import { ComponentAppearance } from "@enum/appearances";
 import { ButtonAttribute } from "./ButtonAttribute";
 import { StyledBoxAttribute } from "./styles";
-import { IAttribute } from "./types";
+import { IAttribute } from "@design/feedback/BoxAttribute/types";
 
 interface IBoxAttribute {
   label: string;

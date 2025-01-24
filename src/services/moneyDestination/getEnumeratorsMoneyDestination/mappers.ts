@@ -1,4 +1,4 @@
-import { IEnumeratorsMoneyDestination } from "@pages/moneyDestination/tabs/moneyDestinationTab/types";
+import { IEnumeratorsMoneyDestination } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/IEnumeratorsMoneyDestination";
 
 const mapEnumMoneyDestinationToEntity = (
   enumData: IEnumeratorsMoneyDestination,

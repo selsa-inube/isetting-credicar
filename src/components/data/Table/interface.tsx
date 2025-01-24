@@ -12,11 +12,11 @@ import {
   Thead,
   Tr,
 } from "@inubekit/table";
-import { dataLoading } from "./utils/dataLoading";
+import { dataLoading } from "@components/data/Table/utils/dataLoading";
 import { IAction, IBreakpoint, IEntry, ITitle } from "./types";
-import { showActionTitle } from "./utils/showActionTitle";
-import { showAction } from "./utils/showAction";
-import { widthColmnsData } from "./utils/widthColumns";
+import { showActionTitle } from "@components/data/Table/utils/showActionTitle";
+import { showAction } from "@components/data/Table/utils/showAction";
+import { widthColmnsData } from "@components/data/Table/utils/widthColumns";
 
 interface ITableUI {
   actions: IAction[];

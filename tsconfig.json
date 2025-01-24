@@ -9,6 +9,7 @@
     "paths": {
       "@src/*": ["src/*"],
       "@design/*": ["src/design/*"],
+      "@enum/*": ["src/enum/*"],
       "@components/*": ["src/components/*"],
       "@config/*": ["src/config/*"],
       "@pages/*": ["src/pages/*"],

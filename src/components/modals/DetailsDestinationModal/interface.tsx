@@ -12,7 +12,7 @@ import { Tabs } from "@inubekit/tabs";
 
 import { tokens } from "@design/tokens";
 import { mediaQueryMobile } from "@config/environment";
-import { ComponentAppearance } from "@ptypes/aparences.types";
+import { ComponentAppearance } from "@src/enum/appearances";
 import { IEntry } from "@components/data/Table/types";
 import { decisions } from "@mocks/moneydestination/creditLine.mock";
 import { IRulesFormTextValues } from "@design/forms/decisions/types";

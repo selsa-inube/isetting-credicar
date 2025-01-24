@@ -6,10 +6,11 @@ import { Textarea } from "@inubekit/textarea";
 import { Input } from "@inubekit/input";
 
 import { tokens } from "@design/tokens";
-import { getFieldState } from "@utils/forms";
-import { ComponentAppearance } from "@ptypes/aparences.types";
+import { ComponentAppearance } from "@enum/appearances";
 import { StyledContainer, StyledContainerFields } from "./styles";
-import { IGeneralInformationEntry } from "./types";
+import { getFieldState } from "@utils/forms/getFieldState";
+import { IGeneralInformationEntry } from "@ptypes/creditLines/forms/IGeneralInformationEntry";
+
 
 interface IGeneralInformationFormUI {
   formik: FormikProps<IGeneralInformationEntry>;

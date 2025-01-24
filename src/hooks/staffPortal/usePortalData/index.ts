@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
-import { IStaffPortalByBusinessManager } from "@ptypes/staffPortal.types";
 import { staffPortalByBusinessManager } from "@services/staffPortal/getStaffPortalByBusinessManager";
-import { encrypt } from "@utils/encrypt";
+import { encrypt } from "@utils/crypto/encrypt";
+import { IStaffPortalByBusinessManager } from "@ptypes/staffPortal/IStaffPortalByBusinessManager";
 
 const usePortalData = (portalCode: string | null) => {
   const [portalData, setPortalData] = useState<IStaffPortalByBusinessManager>(

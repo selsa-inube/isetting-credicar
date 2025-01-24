@@ -3,7 +3,7 @@ import { FormikProps } from "formik";
 
 import { useGeneralInfoCreditLineForm } from "@hooks/creditLine/useGeneralInfoCreditLineForm";
 import { GeneralInformationFormUI } from "./interface";
-import { IGeneralInformationEntry } from "./types";
+import { IGeneralInformationEntry } from "@ptypes/creditLines/forms/IGeneralInformationEntry";
 
 interface IGeneralInformationForm {
   initialValues: IGeneralInformationEntry;

@@ -3,9 +3,9 @@ import { Stack } from "@inubekit/stack";
 import { Icon } from "@inubekit/icon";
 import { Divider } from "@inubekit/divider";
 
-import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
+import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";
 import { tokens } from "@design/tokens";
-import { ComponentAppearance } from "@ptypes/aparences.types";
+import { ComponentAppearance } from "@enum/appearances";
 import {
   StyledContainer,
   StyledUl,

@@ -5,7 +5,7 @@ import { useMediaQuery } from "@inubekit/hooks";
 import { mediaQueryMobile } from "@config/environment";
 import { IEntry } from "@components/data/Table/types";
 import { IRulesFormTextValues } from "@design/forms/decisions/types";
-import { IDetailsTabsConfig } from "./types";
+import { IDetailsTabsConfig } from "@components/modals/DetailsDestinationModal/types";
 import { DetailsDestinationModalUI } from "./interface";
 
 interface IDetailsDestinationModal {

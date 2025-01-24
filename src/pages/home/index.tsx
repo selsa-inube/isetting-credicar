@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 
-import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
+import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";
 import { HomeUI } from "./interface";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 import { mainCards } from "@config/mainCard";

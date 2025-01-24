@@ -4,15 +4,15 @@ import { Icon } from "@inubekit/icon";
 import { useMediaQuery } from "@inubekit/hooks";
 import { Text } from "@inubekit/text";
 
-import { ComponentAppearance } from "@ptypes/aparences.types";
+import { ComponentAppearance } from "@enum/appearances";
 import { IEntry } from "@components/data/Table/types";
 import { DetailsDestinationModal } from "@components/modals/DetailsDestinationModal";
 import { StyledContainerIcon } from "./styles";
-import { detailsTabsConfig } from "@pages/moneyDestination/tabs/moneyDestinationTab/components/details/tabs.config";
 import {
   decisionTemplate,
   textValuesBusinessRules,
 } from "@config/moneyDestination/moneyDestinationTab/businessRules";
+import { detailsTabsConfig } from "@config/moneyDestination/moneyDestinationTab/generics/detailsTabsConfig";
 
 interface IDetails {
   data: IEntry;

@@ -4,7 +4,7 @@ import { Icon } from "@inubekit/icon";
 import { useMediaQuery } from "@inubekit/hooks";
 import { Text } from "@inubekit/text";
 
-import { ComponentAppearance } from "@ptypes/aparences.types";
+import { ComponentAppearance } from "@src/enum/appearances";
 import { IEntry } from "@components/data/Table/types";
 import { DetailsCreditLinesModal } from "@components/modals/DetailsCreditLinesModal";
 import { StyledContainerIcon } from "./styles";

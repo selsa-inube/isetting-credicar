@@ -3,16 +3,16 @@ import { useMediaQuery } from "@inubekit/hooks";
 import { Button } from "@inubekit/button";
 import { Stack } from "@inubekit/stack";
 
-import { ComponentAppearance } from "@ptypes/aparences.types";
+import { ComponentAppearance } from "@enum/appearances";
 import { Accordion } from "@design/data/Accordion";
 import { tokens } from "@design/tokens";
 import { DecisionModal } from "@components/modals/DecisionModal";
 import { IRequestSteps } from "@design/feedback/RequestProcess/types";
 import { RequestProcessModal } from "@components/modals/RequestProcessModal";
-import { VerificationBoxes } from "./verificationBoxes";
-import { IFormsUpdateData } from "./types";
+import { VerificationBoxes } from "@pages/moneyDestination/tabs/moneyDestinationTab/forms/verificationForm/verificationBoxes";
 import { addDestinationStepsConfig } from "@config/moneyDestination/addDestination/assisted";
 import { finishModal } from "@config/moneyDestination/moneyDestinationTab/form/verificationForm";
+import { IFormsUpdateData } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IFormsUpdateData";
 
 interface IVerificationForm {
   requestSteps: IRequestSteps[];

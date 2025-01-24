@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { IEnumeratorsMoneyDestination } from "@pages/moneyDestination/tabs/moneyDestinationTab/types";
+
 import { enumeratorsMoneyDestination } from "@services/moneyDestination/getEnumeratorsMoneyDestination";
+import { IEnumeratorsMoneyDestination } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/IEnumeratorsMoneyDestination";
 
 const useEnumMoneyDestination = (
   enumDestination: string,

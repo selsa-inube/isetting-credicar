@@ -1,5 +1,5 @@
 import { MdCreditCard, MdOutlinePayments } from "react-icons/md";
-import { INav } from "@pages/home/types";
+import { INav } from "@ptypes/home/INav";
 
 const mainNavigation: INav = {
     items: {

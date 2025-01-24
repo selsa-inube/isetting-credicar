@@ -12,7 +12,7 @@ import { Divider } from "@inubekit/divider";
 
 import { tokens } from "@design/tokens";
 import { mediaQueryMobile } from "@config/environment";
-import { ComponentAppearance } from "@ptypes/aparences.types";
+import { ComponentAppearance } from "@src/enum/appearances";
 import { StyledContainerButton, StyledModal, StyledTextarea } from "./styles";
 
 interface IDecisionModalUI {

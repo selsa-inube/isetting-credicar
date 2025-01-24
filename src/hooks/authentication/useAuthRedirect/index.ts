@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import {
-  IBusinessManagers,
-  IStaffPortalByBusinessManager,
-} from "@ptypes/staffPortal.types";
+import { IStaffPortalByBusinessManager } from "@ptypes/staffPortal/IStaffPortalByBusinessManager";
+import { IBusinessManagers } from "@ptypes/staffPortal/IBusinessManagers";
 
 const useAuthRedirect = (
   portalPublicCode: IStaffPortalByBusinessManager,
