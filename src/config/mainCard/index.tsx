@@ -1,7 +1,7 @@
 import { MdCreditCard, MdOutlinePayments } from "react-icons/md";
 import { ICardData } from "@pages/home/types";
 
-const appCards: ICardData[] = [
+const mainCards: ICardData[] = [
   {
     id: "creditLines",
     label: "Líneas de crédito",
@@ -18,4 +18,4 @@ const appCards: ICardData[] = [
   },
 ];
 
-export { appCards };
+export { mainCards };

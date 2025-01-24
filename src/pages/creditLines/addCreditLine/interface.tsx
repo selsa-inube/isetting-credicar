@@ -22,7 +22,7 @@ import { GeneralInformationForm } from "@pages/creditLines/forms/generalInformat
 
 import { IFormsCreditlines, IFormsCreditlinesRefs } from "./types";
 import { crumbsAddCreditLines } from "@config/creditLines/addCreditLine/navigation";
-import { textValuesBusinessRules } from "@config/moneyDestination/moneyDestinationTab/businessRules.config";
+import { textValuesBusinessRules } from "@config/moneyDestination/moneyDestinationTab/businessRules";
 
 
 interface IAddCreditLinesUI {

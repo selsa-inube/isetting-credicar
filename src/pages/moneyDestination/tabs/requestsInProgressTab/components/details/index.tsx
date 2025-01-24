@@ -8,7 +8,8 @@ import { ComponentAppearance } from "@ptypes/aparences.types";
 import { DetailsRequestsInProgressModal } from "@components/modals/DetailsRequestsInProgressModal";
 import { IEntry } from "@components/data/Table/types";
 import { StyledContainerIcon } from "./styles";
-import { labelsOfRequest, labelsOfTraceability } from "@config/moneyDestination/requestsInProgressTab/details/parameters.config";
+import { labelsOfRequest } from "@config/moneyDestination/requestsInProgressTab/details/labelsOfRequest";
+import { labelsOfTraceability } from "@config/moneyDestination/requestsInProgressTab/details/labelsOfTraceability";
 
 
 interface IDetails {

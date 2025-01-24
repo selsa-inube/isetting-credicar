@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { MoneyDestinationUI } from "./interface";
-import { moneyDestinationTabsConfig } from "@config/moneyDestination/tabs.config";
+import { moneyDestinationTabsConfig } from "@config/moneyDestination/tabs";
 
 function MoneyDestination() {
   const [isSelected, setIsSelected] = useState<string>();

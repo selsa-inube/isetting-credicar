@@ -11,7 +11,8 @@ import {
 } from "@pages/creditLines/addCreditLine/types";
 
 import { IGeneralInformationEntry } from "@pages/creditLines/forms/generalInformation/types";
-import { addCreditLinesSteps } from "@config/creditLines/addCreditLine/assisted.config";
+import { addCreditLinesSteps } from "@config/creditLines/addCreditLine/assisted";
+
 
 const useAddCreditlines = () => {
   const [currentStep, setCurrentStep] = useState(1);

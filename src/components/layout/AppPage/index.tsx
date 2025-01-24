@@ -7,7 +7,7 @@ import { Header } from "@inubekit/header";
 import { useMediaQuery } from "@inubekit/hooks";
 import { Icon } from "@inubekit/icon";
 
-import { actionsConfig, userMenu, nav } from "@config/nav";
+
 
 import { BusinessUnitChange } from "@design/inputs/BusinessUnitChange";
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
@@ -24,6 +24,9 @@ import {
 } from "./styles";
 import { Nav } from "@inubekit/nav";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
+import { mainNavigation } from "@config/mainNavigation";
+import { userMenu } from "@config/menuMainConfiguration";
+import { actionsConfig } from "@config/mainActionLogout";
 const renderLogo = (imgUrl: string) => {
   return (
     <StyledContentImg to="/">
@@ -65,7 +68,7 @@ function AppPage() {
         <StyledHeaderContainer>
           <Header
             portalId="portal"
-            navigation={nav}
+            navigation={mainNavigation}
             user={{
               username: appData.user.userName,
               breakpoint: "848px",
@@ -107,7 +110,7 @@ function AppPage() {
             height={"95vh"}
           >
             {!isTablet && (
-              <Nav navigation={nav.items} actions={actionsConfig(logout)} />
+              <Nav navigation={mainNavigation.items} actions={actionsConfig(logout)} />
             )}
             <StyledMain $isMobile={isTabletMain}>
               <Outlet />

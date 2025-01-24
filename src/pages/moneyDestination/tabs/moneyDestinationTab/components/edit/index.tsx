@@ -9,7 +9,7 @@ import { ComponentAppearance } from "@ptypes/aparences.types";
 import { IEntry } from "@components/data/Table/types";
 
 import { StyledContainerIcon } from "./styles";
-import { editMoneyDestinationModal } from "@config/moneyDestination/moneyDestinationTab/generics/edit/messages.config";
+import { editMoneyDestinationModal } from "@config/moneyDestination/moneyDestinationTab/generics/editMoneyDestinationModal";
 
 interface IEdit {
   data: IEntry;

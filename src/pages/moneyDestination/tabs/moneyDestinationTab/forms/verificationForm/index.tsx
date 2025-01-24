@@ -11,8 +11,8 @@ import { IRequestSteps } from "@design/feedback/RequestProcess/types";
 import { RequestProcessModal } from "@components/modals/RequestProcessModal";
 import { VerificationBoxes } from "./verificationBoxes";
 import { IFormsUpdateData } from "./types";
-import { addDestinationStepsConfig } from "@config/moneyDestination/addDestination/assisted.config";
-import { finishModal } from "@config/moneyDestination/moneyDestinationTab/form/verificationForm/messages.config";
+import { addDestinationStepsConfig } from "@config/moneyDestination/addDestination/assisted";
+import { finishModal } from "@config/moneyDestination/moneyDestinationTab/form/verificationForm";
 
 interface IVerificationForm {
   requestSteps: IRequestSteps[];

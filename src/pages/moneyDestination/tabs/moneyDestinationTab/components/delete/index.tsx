@@ -9,7 +9,7 @@ import { IEntry } from "@components/data/Table/types";
 import { useMediaQuery } from "@inubekit/hooks";
 import { StyledContainerIcon } from "./styles";
 import { Text } from "@inubekit/text";
-import { deleteMoneyDestinationModal } from "@config/moneyDestination/moneyDestinationTab/generics/delete/messages.config";
+import { deleteMoneyDestinationModal } from "@config/moneyDestination/moneyDestinationTab/generics/deleteMoneyDestinationModal";
 
 interface IDelete {
   data: IEntry;

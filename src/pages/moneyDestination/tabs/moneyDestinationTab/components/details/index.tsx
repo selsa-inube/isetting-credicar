@@ -12,7 +12,7 @@ import { detailsTabsConfig } from "@pages/moneyDestination/tabs/moneyDestination
 import {
   decisionTemplate,
   textValuesBusinessRules,
-} from "@config/moneyDestination/moneyDestinationTab/businessRules.config";
+} from "@config/moneyDestination/moneyDestinationTab/businessRules";
 
 interface IDetails {
   data: IEntry;

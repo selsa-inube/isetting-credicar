@@ -6,7 +6,7 @@ import { tokens } from "@design/tokens";
 import { Tabs } from "@design/feedback/Tabs";
 import { Title } from "@components/data/Title";
 import { crumbsMoneyDestination } from "@config/moneyDestination/navigation";
-import { moneyDestinationTabsConfig } from "@config/moneyDestination/tabs.config";
+import { moneyDestinationTabsConfig } from "@config/moneyDestination/tabs";
 import { MoneyDestinationTab } from "@pages/moneyDestination/tabs/moneyDestinationTab";
 import { RequestsInProgressTab } from "@pages/moneyDestination/tabs/requestsInProgressTab";
 
