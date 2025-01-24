@@ -18,10 +18,12 @@ import {
 } from "@design/forms/decisions/config/messages.config";
 import { decisionTemplateConfig } from "@design/forms/decisions/config/decisionTemplate.config";
 import { CreditProspectForm } from "@design/forms/creditProspect";
-import { GeneralInformationForm } from "../forms/generalInformation";
-import { crumbsAddCreditLines } from "./config/navigation";
+import { GeneralInformationForm } from "@pages/creditLines/forms/generalInformation";
+
 import { IFormsCreditlines, IFormsCreditlinesRefs } from "./types";
-import { textValuesBusinessRules } from "./config/businessRules.config";
+import { crumbsAddCreditLines } from "@config/creditLines/addCreditLine/navigation";
+import { textValuesBusinessRules } from "@config/moneyDestination/moneyDestinationTab/businessRules.config";
+
 
 interface IAddCreditLinesUI {
   decisions: IRuleDecision[];

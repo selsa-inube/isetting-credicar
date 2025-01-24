@@ -1,24 +1,21 @@
-import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { MdDeleteOutline } from "react-icons/md";
 import { useState } from "react";
 import { Icon } from "@inubekit/icon";
-import { useMediaQuery } from "@inubekit/hooks";
-import { Text } from "@inubekit/text";
 
+import { DecisionModal } from "@components/modals/DecisionModal";
 import { ComponentAppearance } from "@ptypes/aparences.types";
 import { IEntry } from "@components/data/Table/types";
-import { DetailsDestinationModal } from "@components/modals/DetailsDestinationModal";
-import { StyledContainerIcon } from "./styles";
-import { detailsTabsConfig } from "./tabs.config";
-import {
-  decisionTemplate,
-  textValuesBusinessRules,
-} from "../../config/businessRules.config";
 
-interface IDetails {
+import { useMediaQuery } from "@inubekit/hooks";
+import { StyledContainerIcon } from "./styles";
+import { Text } from "@inubekit/text";
+import { deleteMoneyDestinationModal } from "@config/moneyDestination/moneyDestinationTab/generics/delete/messages.config";
+
+interface IDelete {
   data: IEntry;
 }
 
-const Details = (props: IDetails) => {
+const Delete = (props: IDelete) => {
   const { data } = props;
   const [showModal, setShowModal] = useState(false);
 
@@ -32,31 +29,32 @@ const Details = (props: IDetails) => {
     <>
       <StyledContainerIcon onClick={handleToggleModal} $isTablet={screenTablet}>
         <Icon
-          appearance={ComponentAppearance.DARK}
-          icon={<MdOutlineRemoveRedEye />}
-          size={screenTablet ? "20px" : "16px"}
+          appearance={ComponentAppearance.DANGER}
+          icon={<MdDeleteOutline />}
+          size="16px"
+          onClick={handleToggleModal}
           cursorHover
           spacing="narrow"
         />
         {screenTablet && (
           <Text type="body" size="medium">
-            Detalles
+            Eliminar
           </Text>
         )}
       </StyledContainerIcon>
-
       {showModal && (
-        <DetailsDestinationModal
-          data={data}
-          detailsTabsConfig={detailsTabsConfig}
+        <DecisionModal
           portalId="portal"
+          title={deleteMoneyDestinationModal.title}
+          actionText={deleteMoneyDestinationModal.actionText}
+          description={deleteMoneyDestinationModal.description}
+          justificationOfDecision={true}
+          onClick={() => console.log(data)}
           onCloseModal={handleToggleModal}
-          textValues={textValuesBusinessRules}
-          decisionTemplate={decisionTemplate}
         />
       )}
     </>
   );
 };
 
-export { Details };
+export { Delete };

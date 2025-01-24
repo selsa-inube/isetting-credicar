@@ -7,7 +7,7 @@ import {
 import { useContext } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
-import { enviroment } from "./config/environment";
+import { enviroment } from "@config/environment";
 
 import { ErrorPage } from "@components/layout/ErrorPage";
 import { SelectBusinessUnitsRoutes } from "./routes/selectBusinessunits";

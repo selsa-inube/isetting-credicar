@@ -9,7 +9,7 @@ import { ComponentAppearance } from "@ptypes/aparences.types";
 import { Table } from "@components/data/Table";
 import { IEntry } from "@components/data/Table/types";
 import { StyledContainer } from "./styles";
-import { actions, breakPoints, titles } from "./config/table.config";
+import { actions, breakPoints, titles } from "@config/moneyDestination/moneyDestinationTab/table.config";
 
 interface IMoneyDestinationTabUI {
   entries: IEntry[];

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { FormikProps } from "formik";
 import { IRuleDecision } from "@isettingkit/input";
 
-import { addDestinationStepsConfig } from "@pages/moneyDestination/tabs/moneyDestinationTab/addDestination/config/assisted.config";
+import { addDestinationStepsConfig } from "@config/moneyDestination/addDestination/assisted.config";
 import { IGeneralInformationEntry } from "@pages/moneyDestination/tabs/moneyDestinationTab/forms/generalInformation/types";
 import { IRequestSteps } from "@design/feedback/RequestProcess/types";
 

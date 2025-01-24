@@ -6,7 +6,7 @@ import { Tag } from "@inubekit/tag";
 import { BoxAttribute } from "@design/feedback/BoxAttribute";
 import { tokens } from "@design/tokens";
 import { ComponentAppearance } from "@ptypes/aparences.types";
-import { IGeneralInformationEntry } from "../../generalInformation/types";
+import { IGeneralInformationEntry } from "@pages/moneyDestination/tabs/moneyDestinationTab/forms/generalInformation/types";
 import { StyledAttribute, StyledConatinerAttribute } from "./styles";
 
 const renderPersonalInfoVerification = (

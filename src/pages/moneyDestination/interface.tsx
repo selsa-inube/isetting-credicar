@@ -5,10 +5,10 @@ import { Breadcrumbs } from "@inubekit/breadcrumbs";
 import { tokens } from "@design/tokens";
 import { Tabs } from "@design/feedback/Tabs";
 import { Title } from "@components/data/Title";
-import { crumbsMoneyDestination } from "./config/navigation";
-import { moneyDestinationTabsConfig } from "./config/tabs.config";
-import { MoneyDestinationTab } from "./tabs/moneyDestinationTab";
-import { RequestsInProgressTab } from "./tabs/requestsInProgressTab";
+import { crumbsMoneyDestination } from "@config/moneyDestination/navigation";
+import { moneyDestinationTabsConfig } from "@config/moneyDestination/tabs.config";
+import { MoneyDestinationTab } from "@pages/moneyDestination/tabs/moneyDestinationTab";
+import { RequestsInProgressTab } from "@pages/moneyDestination/tabs/requestsInProgressTab";
 
 interface IMoneyDestinationUI {
   isSelected: string;

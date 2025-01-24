@@ -13,7 +13,7 @@ import {
   deleteModal,
 } from "@design/forms/decisions/config/messages.config";
 import { StyledContainer } from "./styles";
-import { textValuesBusinessRules } from "../../config/businessRules.config";
+import { textValuesBusinessRules } from "@config/moneyDestination/moneyDestinationTab/businessRules.config";
 
 interface ICreditLineFormUI {
   decisions: IRuleDecision[];

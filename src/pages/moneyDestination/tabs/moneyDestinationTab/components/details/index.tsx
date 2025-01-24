@@ -1,20 +1,24 @@
-import { MdOutlineCreate } from "react-icons/md";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { useState } from "react";
 import { Icon } from "@inubekit/icon";
 import { useMediaQuery } from "@inubekit/hooks";
 import { Text } from "@inubekit/text";
 
-import { DecisionModal } from "@components/modals/DecisionModal";
 import { ComponentAppearance } from "@ptypes/aparences.types";
 import { IEntry } from "@components/data/Table/types";
-import { editMoneyDestinationModal } from "./config/messages.config";
+import { DetailsDestinationModal } from "@components/modals/DetailsDestinationModal";
 import { StyledContainerIcon } from "./styles";
+import { detailsTabsConfig } from "@pages/moneyDestination/tabs/moneyDestinationTab/components/details/tabs.config";
+import {
+  decisionTemplate,
+  textValuesBusinessRules,
+} from "@config/moneyDestination/moneyDestinationTab/businessRules.config";
 
-interface IEdit {
+interface IDetails {
   data: IEntry;
 }
 
-const Edit = (props: IEdit) => {
+const Details = (props: IDetails) => {
   const { data } = props;
   const [showModal, setShowModal] = useState(false);
 
@@ -28,31 +32,31 @@ const Edit = (props: IEdit) => {
     <>
       <StyledContainerIcon onClick={handleToggleModal} $isTablet={screenTablet}>
         <Icon
-          appearance={ComponentAppearance.PRIMARY}
-          icon={<MdOutlineCreate />}
+          appearance={ComponentAppearance.DARK}
+          icon={<MdOutlineRemoveRedEye />}
           size={screenTablet ? "20px" : "16px"}
           cursorHover
           spacing="narrow"
         />
         {screenTablet && (
           <Text type="body" size="medium">
-            Editar
+            Detalles
           </Text>
         )}
       </StyledContainerIcon>
 
       {showModal && (
-        <DecisionModal
+        <DetailsDestinationModal
+          data={data}
+          detailsTabsConfig={detailsTabsConfig}
           portalId="portal"
-          title={editMoneyDestinationModal.title}
-          actionText={editMoneyDestinationModal.actionText}
-          description={editMoneyDestinationModal.description}
-          onClick={() => console.log(data)}
           onCloseModal={handleToggleModal}
+          textValues={textValuesBusinessRules}
+          decisionTemplate={decisionTemplate}
         />
       )}
     </>
   );
 };
 
-export { Edit };
+export { Details };

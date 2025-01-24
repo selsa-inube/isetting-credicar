@@ -1,5 +1,4 @@
 import { secretKeyPortalId } from "@config/environment";
-import CryptoJS from "crypto-js";
 
 const secretKey = CryptoJS.enc.Hex.parse(secretKeyPortalId);
 const iv = CryptoJS.enc.Hex.parse("abcdef9876543210abcdef9876543210");

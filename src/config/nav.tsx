@@ -1,7 +1,7 @@
 import { MdCreditCard, MdLogout, MdOutlinePayments } from "react-icons/md";
 
 import { INav } from "@pages/home/types";
-import { enviroment } from "./environment";
+import { enviroment } from "@config/environment";
 
 const nav: INav = {
   items: {
