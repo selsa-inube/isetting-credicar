@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { Auth0Provider } from "@auth0/auth0-react";
 
 import App from "./App.tsx";
-import { enviroment } from "./config/environment";
+import { enviroment } from "@config/environment";
 
 const redirect_uri = window.location.origin;
 

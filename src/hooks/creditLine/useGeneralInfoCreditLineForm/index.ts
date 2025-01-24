@@ -6,6 +6,7 @@ import { validationRules } from "@validations/validationRules";
 import { validationMessages } from "@validations/validationMessages";
 import { IGeneralInformationEntry } from "@pages/creditLines/forms/generalInformation/types";
 
+
 const useGeneralInfoCreditLineForm = (
   initialValues: IGeneralInformationEntry,
   ref: React.ForwardedRef<FormikProps<IGeneralInformationEntry>>,

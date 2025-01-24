@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import { useMoneyDestination } from "@hooks/MoneyDestination/useMoneyDestination";
+import { useMoneyDestination } from "@hooks/moneyDestination/useMoneyDestination";
 
 import { IEntry } from "@components/data/Table/types";
 import { MoneyDestinationTabUI } from "./interface";

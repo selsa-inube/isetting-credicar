@@ -14,7 +14,7 @@ import { mediaQueryMobile } from "@config/environment";
 import { ComponentAppearance } from "@ptypes/aparences.types";
 import { IEntry } from "@components/data/Table/types";
 
-import { GeneralDataTab } from "./GeneralDataTab";
+import { GeneralDataTab } from "@components/modals/DetailsCreditLinesModal/GeneralDataTab";
 import { StyledContainerButton, StyledModal } from "./styles";
 import { IDetailsTabsConfig } from "./types";
 
