@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { MoneyDestination } from "@pages/moneyDestination";
 import { AddDestination } from "@pages/moneyDestination/tabs/moneyDestinationTab/addDestination";
 
-function MoneyDestinationRoutes() {
+const MoneyDestinationRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<MoneyDestination />} />

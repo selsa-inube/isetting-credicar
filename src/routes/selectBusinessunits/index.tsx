@@ -10,12 +10,11 @@ import { LoadingApp } from "@components/feedback/LoadingApp";
 import { NotBusinessUnit } from "@pages/errors/notBusinessUnit";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 
-
-
-export interface IBusinessUnits {
+interface IBusinessUnits {
   businessUnits: IBusinessUnit[];
 }
-function SelectBusinessUnitsRoutes() {
+
+const SelectBusinessUnitsRoutes = () => {
   const { businessUnitsToTheStaff } = useContext(AuthAndPortalData);
   const businessUnits = businessUnitsToTheStaff;
 
@@ -44,3 +43,4 @@ function SelectBusinessUnitsRoutes() {
 }
 
 export { SelectBusinessUnitsRoutes };
+export type { IBusinessUnits };

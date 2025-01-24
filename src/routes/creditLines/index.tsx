@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { CreditLines } from "@pages/creditLines";
 import { Addcreditlines } from "@pages/creditLines/addCreditLine";
 
-function CreditLinesRoutes() {
+const CreditLinesRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<CreditLines />} />
