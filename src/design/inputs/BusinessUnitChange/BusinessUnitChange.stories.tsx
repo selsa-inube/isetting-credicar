@@ -1,8 +1,9 @@
 import { Meta } from "@storybook/react";
 import { Stack } from "@inubekit/stack";
 import { businessUnitDataMock } from "@mocks/businessUnits/businessUnits.mock";
-import { AppContext } from "@context/AppContext";
+
 import { BusinessUnitChange } from ".";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 
 const meta: Meta<typeof BusinessUnitChange> = {
   title: "inputs/BusinessUnitChange",
@@ -51,7 +52,7 @@ const defaultContextValue = {
 
 const Default = () => {
   return (
-    <AppContext.Provider value={defaultContextValue}>
+    <AuthAndPortalData.Provider value={defaultContextValue}>
       <Stack width="100px">
         <BusinessUnitChange
           businessUnits={businessUnitDataMock}
@@ -59,7 +60,7 @@ const Default = () => {
           onLogoClick={() => console.log("Logo clicked")}
         />
       </Stack>
-    </AppContext.Provider>
+    </AuthAndPortalData.Provider>
   );
 };
 

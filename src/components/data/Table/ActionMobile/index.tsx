@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { MdOutlinePending } from "react-icons/md";
 import { Icon } from "@inubekit/icon";
 
-import { ActionsModal } from "@src/components/modals/ActionsModal";
+import { ActionsModal } from "@components/modals/ActionsModal";
 import { IAction, IEntry } from "../types";
 import { StyledContainer, StyledContainerIcon } from "./styles";
 

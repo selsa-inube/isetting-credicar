@@ -1,21 +1,27 @@
-import { useState } from "react";
+import { useContext } from "react";
+
+import { useMoneyDestination } from "@hooks/moneyDestination/useMoneyDestination";
+
+import { IEntry } from "@components/data/Table/types";
 import { MoneyDestinationTabUI } from "./interface";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 
 function MoneyDestinationTab() {
-  const [searchMoneyDestination, setSearchMoneyDestination] =
-    useState<string>("");
+  const { appData } = useContext(AuthAndPortalData);
 
-  const handleSearchMoneyDestination = (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    setSearchMoneyDestination(e.target.value);
-  };
+  const {
+    moneyDestination,
+    searchMoneyDestination,
+    loading,
+    handleSearchMoneyDestination,
+  } = useMoneyDestination(appData.businessUnit.publicCode);
 
   return (
     <MoneyDestinationTabUI
       onSearchMoneyDestination={handleSearchMoneyDestination}
       searchMoneyDestination={searchMoneyDestination}
-      loading={false}
+      loading={loading}
+      entries={moneyDestination as IEntry[]}
     />
   );
 }

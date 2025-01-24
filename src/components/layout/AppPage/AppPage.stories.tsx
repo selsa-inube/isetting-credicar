@@ -1,9 +1,10 @@
 import { BrowserRouter } from "react-router-dom";
 import { Meta, StoryFn } from "@storybook/react";
 
-import { AppContext } from "@context/AppContext";
+
 import selsaLogo from "@assets/images/selsa.png";
 import { AppPage } from ".";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 
 const usersMock = {
   firstName: "David",
@@ -57,9 +58,9 @@ const meta: Meta<typeof AppPage> = {
   decorators: [
     (Story: StoryFn) => (
       <BrowserRouter>
-        <AppContext.Provider value={useContext}>
+        <AuthAndPortalData.Provider value={useContext}>
           <Story />
-        </AppContext.Provider>
+        </AuthAndPortalData.Provider>
       </BrowserRouter>
     ),
   ],

@@ -15,11 +15,11 @@ import { mediaQueryMobile } from "@config/environment";
 import { ComponentAppearance } from "@ptypes/aparences.types";
 import { IEntry } from "@components/data/Table/types";
 import { decisions } from "@mocks/moneydestination/creditLine.mock";
-import { IRulesFormTextValues } from "@pages/moneyDestination/tabs/moneyDestinationTab/types";
+import { IRulesFormTextValues } from "@design/forms/decisions/types";
 import { StyledContainerButton, StyledModal } from "./styles";
-import { IDetailsTabsConfig } from "./types";
-import { GeneralDataTab } from "./GeneralDataTab";
-import { CreditLineTab } from "./CreditLineTab";
+import { IDetailsTabsConfig } from "@components/modals/DetailsDestinationModal/types";
+import { GeneralDataTab } from "@components/modals/DetailsDestinationModal/GeneralDataTab";
+import { CreditLineTab } from "@components/modals/DetailsDestinationModal/CreditLineTab";
 
 interface IDetailsDestinationModalUI {
   data: IEntry;

@@ -7,20 +7,21 @@ import {
 } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
-import { enviroment } from "./config/environment";
-import { AppContext } from "./context/AppContext";
-import { usePortalData } from "./hooks/usePortalData";
-import { useBusinessManagers } from "./hooks/useBusinessManagers";
-import { useAuthRedirect } from "./hooks/useAuthRedirect";
-import { ErrorPage } from "./components/layout/ErrorPage";
+import { enviroment } from "@config/environment";
+
+import { ErrorPage } from "@components/layout/ErrorPage";
 import { SelectBusinessUnitsRoutes } from "./routes/selectBusinessunits";
-import { SelectBusinessUnits } from "./pages/selectBusinessUnits";
-import { Home } from "./pages/home";
+import { SelectBusinessUnits } from "@pages/selectBusinessUnits";
+import { Home } from "@pages/home";
 import { GlobalStyles } from "./styles/global";
 import { MoneyDestinationRoutes } from "./routes/moneyDestination";
 import { CreditLinesRoutes } from "./routes/creditLines";
-import { AppPage } from "./components/layout/AppPage";
-import { IUser } from "./types/app.types";
+import { AppPage } from "@components/layout/AppPage";
+import { AuthAndPortalData, AuthAndPortalDataProvider } from "@context/authAndPortalDataProvider";
+import { IUser } from "@ptypes/app.types";
+import { usePortalData } from "@hooks/staffPortal/usePortalData";
+import { useBusinessManagers } from "@hooks/staffPortal/useBusinessManagers";
+import { useAuthRedirect } from "@hooks/authentication/useAuthRedirect";
 
 function LogOut() {
   localStorage.clear();
@@ -30,7 +31,7 @@ function LogOut() {
 }
 
 function FirstPage() {
-  const { businessUnitSigla } = useContext(AppContext);
+  const { businessUnitSigla } = useContext(AuthAndPortalData);
 
   return businessUnitSigla.length === 0 ? <SelectBusinessUnits /> : <Home />;
 }
@@ -67,7 +68,7 @@ interface IApp {
 
 function App(props: IApp) {
   const { code, user, businessUnit } = props;
-  const { setAppData, setBusinessUnitSigla } = useContext(AppContext);
+  const { setAppData, setBusinessUnitSigla } = useContext(AuthAndPortalData);
 
   const updateAppData = () => {
     if (code) {
@@ -123,7 +124,9 @@ function App(props: IApp) {
   return (
     <>
       <GlobalStyles />
-      <RouterProvider router={router} />
+      <AuthAndPortalDataProvider>
+        <RouterProvider router={router} />
+      </AuthAndPortalDataProvider>
     </>
   );
 }

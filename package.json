@@ -10,7 +10,9 @@
     "preview": "vite preview",
     "prepare": "husky",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "auto": "auto",
+    "changelog": "npm run auto changelog"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.4",
@@ -25,6 +27,7 @@
     "@inubekit/hooks": "^1.2.0",
     "@inubekit/icon": "^2.18.2",
     "@inubekit/input": "^1.6.3",
+    "@inubekit/inubekit": "^1.0.0",
     "@inubekit/nav": "^5.3.1",
     "@inubekit/select": "^6.35.0",
     "@inubekit/skeleton": "^2.11.1",
@@ -67,11 +70,12 @@
     "eslint-plugin-react": "^7.37.1",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.12",
+    "auto": "^11.0.4",
     "globals": "^15.9.0",
     "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
     "prettier": "3.3.3",
-    "typescript": "^5.5.3",
+    "typescript": "^5.7.3",
     "typescript-eslint": "^8.7.0",
     "vite": "^5.4.8"
   },

@@ -1,12 +1,13 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { appCards } from "@config/appCards";
-import { AppContext } from "@context/AppContext";
+
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
 import { HomeUI } from "./interface";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
+import { mainCards } from "@config/mainCard";
 
 function Home() {
   const { appData, businessUnitsToTheStaff, setBusinessUnitSigla } =
-    useContext(AppContext);
+    useContext(AuthAndPortalData);
   const [collapse, setCollapse] = useState(false);
   const [selectedClient, setSelectedClient] = useState<string>("");
 
@@ -32,7 +33,7 @@ function Home() {
       businessUnitsToTheStaff={businessUnitsToTheStaff}
       collapse={collapse}
       collapseMenuRef={collapseMenuRef}
-      data={appCards}
+      data={mainCards}
       selectedClient={selectedClient}
       setCollapse={setCollapse}
       handleLogoClick={handleLogoClick}

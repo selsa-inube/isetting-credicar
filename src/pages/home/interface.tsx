@@ -4,11 +4,11 @@ import { Icon } from "@inubekit/icon";
 import { useMediaQueries } from "@inubekit/hooks";
 
 import { AppCard } from "@components/feedback/AppCard";
-import { nav, userMenu } from "@config/nav";
+
 import { Title } from "@components/data/Title";
 import { BusinessUnitChange } from "@design/inputs/BusinessUnitChange";
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
-import { IAppData } from "@context/AppContext/types";
+
 import { ICardData } from "./types";
 import {
   StyledCollapse,
@@ -22,6 +22,9 @@ import {
   StyledLogo,
   StyledTitle,
 } from "./styles";
+import { IAppData } from "@context/authAndPortalDataProvider/types";
+import { mainNavigation } from "@config/mainNavigation";
+import { userMenu } from "@config/menuMainConfiguration";
 
 interface IHomeUI {
   appData: IAppData;
@@ -73,7 +76,7 @@ function HomeUI(props: IHomeUI) {
         <StyledHeaderContainer>
           <Header
             portalId="portal"
-            navigation={nav}
+            navigation={mainNavigation}
             logoURL={renderLogo(appData.businessUnit.urlLogo)}
             user={{
               username: appData.user.userName,

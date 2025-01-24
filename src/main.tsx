@@ -3,8 +3,8 @@ import ReactDOM from "react-dom/client";
 import { Auth0Provider } from "@auth0/auth0-react";
 
 import App from "./App.tsx";
-import { enviroment } from "./config/environment";
-import { AppContextProvider } from "./context/AppContext";
+import { enviroment } from "@config/environment";
+import { AuthAndPortalDataProvider } from "./context/authAndPortalDataProvider/index.tsx";
 
 const redirect_uri = window.location.origin;
 
@@ -40,13 +40,13 @@ root.render(
         redirect_uri,
       }}
     >
-      <AppContextProvider>
+      <AuthAndPortalDataProvider>
         <App
           user={pruebauser}
           businessUnit={pruebabusiness}
           code={"J4EE6aa6pSNoNsIbZhlk6w=="}
         />
-      </AppContextProvider>
+      </AuthAndPortalDataProvider>
       {/* <App/> */}
     </Auth0Provider>
   </React.StrictMode>,

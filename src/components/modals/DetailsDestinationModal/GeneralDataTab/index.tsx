@@ -28,7 +28,9 @@ function GeneralDataTab(props: IGeneralDataTab) {
         >
           Nombre
         </Text>
-        <StyledContainerDataName>{data.name}</StyledContainerDataName>
+        <StyledContainerDataName>
+          {data.abbreviatedName}
+        </StyledContainerDataName>
       </StyledContainerName>
       <StyledContainerDescription>
         <Text
@@ -40,7 +42,7 @@ function GeneralDataTab(props: IGeneralDataTab) {
           Descripción
         </Text>
         <Text type="body" size="medium" appearance={ComponentAppearance.GRAY}>
-          {data.description}
+          {data.descriptionUse}
         </Text>
       </StyledContainerDescription>
       <Divider />

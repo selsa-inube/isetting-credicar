@@ -7,8 +7,8 @@ import { Header } from "@inubekit/header";
 import { useMediaQuery } from "@inubekit/hooks";
 import { Icon } from "@inubekit/icon";
 
-import { actionsConfig, userMenu, nav } from "@config/nav";
-import { AppContext } from "@context/AppContext";
+
+
 import { BusinessUnitChange } from "@design/inputs/BusinessUnitChange";
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
 
@@ -23,6 +23,10 @@ import {
   StyledMain,
 } from "./styles";
 import { Nav } from "@inubekit/nav";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
+import { mainNavigation } from "@config/mainNavigation";
+import { userMenu } from "@config/menuMainConfiguration";
+import { actionsConfig } from "@config/mainActionLogout";
 const renderLogo = (imgUrl: string) => {
   return (
     <StyledContentImg to="/">
@@ -33,7 +37,7 @@ const renderLogo = (imgUrl: string) => {
 
 function AppPage() {
   const { appData, businessUnitsToTheStaff, setBusinessUnitSigla } =
-    useContext(AppContext);
+    useContext(AuthAndPortalData);
   const { logout } = useAuth0();
   const [collapse, setCollapse] = useState(false);
   const collapseMenuRef = useRef<HTMLDivElement>(null);
@@ -64,7 +68,7 @@ function AppPage() {
         <StyledHeaderContainer>
           <Header
             portalId="portal"
-            navigation={nav}
+            navigation={mainNavigation}
             user={{
               username: appData.user.userName,
               breakpoint: "848px",
@@ -106,7 +110,7 @@ function AppPage() {
             height={"95vh"}
           >
             {!isTablet && (
-              <Nav navigation={nav.items} actions={actionsConfig(logout)} />
+              <Nav navigation={mainNavigation.items} actions={actionsConfig(logout)} />
             )}
             <StyledMain $isMobile={isTabletMain}>
               <Outlet />
