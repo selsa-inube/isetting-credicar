@@ -4,7 +4,7 @@ import { Auth0Provider } from "@auth0/auth0-react";
 
 import App from "./App.tsx";
 import { enviroment } from "@config/environment";
-import { AuthAndPortalDataProvider } from "./context/authAndPortalDataProvider/index.tsx";
+import { AuthAndPortalDataProvider } from "@context/authAndPortalDataProvider/index.tsx";
 
 const redirect_uri = window.location.origin;
 
