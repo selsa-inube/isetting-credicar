@@ -23,42 +23,46 @@ const textValuesBusinessRules = {
 };
 
 const decisionTemplate: IRuleDecision = {
-  name: "LineaDeCrédito",
-  dataType: ValueDataType.ALPHABETICAL,
-  valueUse: ValueHowToSetUp.EQUAL,
+  ruleName: "LineaDeCrédito",
+  decisionDataType: ValueDataType.ALPHABETICAL,
+  howToSetTheDecision: ValueHowToSetUp.EQUAL,
   value: "",
-  startDate: "",
-  endDate: "",
-  conditions: [
+  effectiveFrom: "",
+  validUntil: "",
+  conditionThatEstablishesTheDecision: [
     {
-      name: "AntigüedadDelCliente(Días)",
-      dataType: ValueDataType.ALPHABETICAL,
+      labelName: "Antigüedad del cliente(Días)",
+      conditionName: "AntigüedadDelCliente",
+      conditionDataType: ValueDataType.ALPHABETICAL,
       value: "",
-      valueUse: ValueHowToSetUp.EQUAL,
+      howToSetTheCondition: ValueHowToSetUp.EQUAL,
     },
     {
-      name: "CategoríaDelCliente ",
-      dataType: ValueDataType.ALPHABETICAL,
-      possibleValue: {
+      labelName: "Categoría del cliente ",
+      conditionName: "CategoriaDelCliente",
+      conditionDataType: ValueDataType.ALPHABETICAL,
+      listOfPossibleValues: {
         list: ["Leales", "Ocasionales", "Plata", "Platinum"],
       },
       value: [],
-      valueUse: ValueHowToSetUp.LIST_OF_VALUES_MULTI,
+      howToSetTheCondition: ValueHowToSetUp.LIST_OF_VALUES_MULTI,
     },
     {
-      name: "NivelDeMembresía",
-      dataType: ValueDataType.ALPHABETICAL,
-      possibleValue: {
+      labelName: "Nivel de membresía",
+      conditionName: "NivelDeMembresía",
+      conditionDataType: ValueDataType.ALPHABETICAL,
+      listOfPossibleValues: {
         list: ["Muy alto", "Alto", "Medio", "Bajo", "Muy bajo"],
       },
       value: "",
-      valueUse: ValueHowToSetUp.EQUAL,
+      howToSetTheCondition: ValueHowToSetUp.EQUAL,
     },
     {
-      name: "ReciprocidadDeAhorro",
-      dataType: ValueDataType.PERCENTAGE,
+      labelName: "Reciprocidad de ahorro",
+      conditionName: "ReciprocidadDeAhorro",
+      conditionDataType: ValueDataType.PERCENTAGE,
       value: 0,
-      valueUse: ValueHowToSetUp.EQUAL,
+      howToSetTheCondition: ValueHowToSetUp.EQUAL,
     },
   ],
 };

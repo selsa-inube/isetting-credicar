@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from "axios";
-import { IEnumeratorsRules } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/IEnumeratorsRules";
+import { IEnumeratorsRules } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/decisions/IEnumeratorsRules";
 import { fetchWithRetries } from "../axiosConfig/getRequests";
 
 const getEnumeratorsRules = async (

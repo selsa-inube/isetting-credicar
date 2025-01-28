@@ -3,11 +3,11 @@ import {
   ValueDataType,
   ValueHowToSetUp,
 } from "@isettingkit/input";
-
+import { IEnumeratorsRules } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/decisions/IEnumeratorsRules";
 import { dataTranslations } from "@utils/dataTranslations";
-import { IEnumeratorsRules } from "@design/forms/decisions/types";
 
 const decisionTemplateConfig = ({
+  ruleName,
   labelName,
   decisionDataType,
   conditionThatEstablishesTheDecision,
@@ -16,23 +16,29 @@ const decisionTemplateConfig = ({
     const decisionData = decisionDataType.toLocaleUpperCase();
 
     const decisionTemplate: IRuleDecision = {
-      name: dataTranslations[labelName],
-      dataType: ValueDataType[decisionData as keyof typeof ValueDataType],
-      valueUse: ValueHowToSetUp.EQUAL,
+      ruleName: ruleName,
+      labelName: dataTranslations[labelName],
+      decisionDataType:
+        ValueDataType[decisionData as keyof typeof ValueDataType],
+      howToSetTheDecision: ValueHowToSetUp.EQUAL,
       value: "",
-      startDate: "",
-      endDate: "",
-      conditions: conditionThatEstablishesTheDecision.map((condition) => ({
-        name: dataTranslations[condition.labelName],
-        dataType: condition.conditionDataType as
-          | "number"
-          | "alphabetical"
-          | "currency"
-          | "date"
-          | "percentage",
-        value: "",
-        valueUse: ValueHowToSetUp.EQUAL,
-      })),
+      effectiveFrom: "",
+      validUntil: "",
+      conditionThatEstablishesTheDecision:
+        conditionThatEstablishesTheDecision.map((condition) => ({
+          conditionName: condition.conditionName,
+          labelName: dataTranslations[condition.labelName],
+          conditionDataType: condition.conditionDataType as
+            | "number"
+            | "alphabetical"
+            | "currency"
+            | "date"
+            | "percentage",
+          value: condition.labelName,
+          howToSetTheCondition: ValueHowToSetUp.EQUAL,
+          hidden: condition.conditionName === "MoneyDestination",
+          switchPlaces: condition.conditionName === "MoneyDestination",
+        })),
     };
 
     return decisionTemplate;

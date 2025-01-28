@@ -121,7 +121,7 @@ function AddCreditLinesUI(props: IAddCreditLinesUI) {
                 deleteModal={deleteModal}
                 textValuesBusinessRules={textValuesBusinessRules}
                 decisionTemplateConfig={decisionTemplateConfig}
-                onNextStep={onNextStep}
+                onButtonClick={onNextStep}
                 onPreviousStep={onPreviousStep}
                 initialValues={decisions}
                 setDecisions={setDecisions}

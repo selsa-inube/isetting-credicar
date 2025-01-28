@@ -7,7 +7,9 @@ const useDecisionForm = (
     dataDecision: IRuleDecision,
     originalDecision: IRuleDecision,
   ) => void,
+  onButtonClick: () => void,
   setCreditLineDecisions: (decisions: IRuleDecision[]) => void,
+  editDataOption?: boolean,
 ) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDecision, setSelectedDecision] =
@@ -37,12 +39,14 @@ const useDecisionForm = (
         ) as unknown as IRuleDecision)
       : {
           ...dataDecision,
-          id: `Decisión ${decisions.length + 1}`,
+          decisionId: `Decisión ${decisions.length + 1}`,
         };
 
     const updatedDecisions = isEditing
       ? decisions.map((decision) =>
-          decision.id === selectedDecision.id ? newDecision : decision,
+          decision.decisionId === selectedDecision.decisionId
+            ? newDecision
+            : decision,
         )
       : [...decisions, newDecision];
 
@@ -62,11 +66,26 @@ const useDecisionForm = (
   };
 
   const handleDelete = () => {
-    const updatedDecisions = decisions.filter((decision) => decision.id !== id);
+    const updatedDecisions = decisions.filter(
+      (decision) => decision.decisionId !== id,
+    );
     setDecisions(updatedDecisions);
     setCreditLineDecisions(updatedDecisions);
     handleToggleDeleteModal(id);
   };
+
+  const handleSave = () => {
+    if (editDataOption) {
+      return decisions;
+    } else {
+      if (decisions && decisions.length > 0) {
+        onButtonClick();
+      } else {
+        handleToggleAttentionModal();
+      }
+    }
+  };
+
   return {
     isModalOpen,
     selectedDecision,
@@ -79,6 +98,7 @@ const useDecisionForm = (
     handleToggleAttentionModal,
     handleToggleDeleteModal,
     handleDelete,
+    handleSave,
   };
 };
 

@@ -6,7 +6,7 @@ import { IRuleDecision } from "@isettingkit/input";
 import { addDestinationStepsConfig } from "@config/moneyDestination/addDestination/assisted";
 
 import { IRequestSteps } from "@design/feedback/RequestProcess/types";
-import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationEntry";
+import { IGeneralInformationEntry } from "@src/types/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationDestination";
 
 const useAddDestination = (requestSteps: IRequestSteps[]) => {
   const [currentStep, setCurrentStep] = useState(1);

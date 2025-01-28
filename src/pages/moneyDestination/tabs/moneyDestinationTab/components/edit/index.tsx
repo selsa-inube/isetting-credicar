@@ -1,15 +1,13 @@
-import { MdOutlineCreate } from "react-icons/md";
 import { useState } from "react";
-import { Icon } from "@inubekit/icon";
-import { useMediaQuery } from "@inubekit/hooks";
-import { Text } from "@inubekit/text";
+import { MdOutlineCreate } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import { Icon, Text, useMediaQuery } from "@inubekit/inubekit";
 
 import { DecisionModal } from "@components/modals/DecisionModal";
-import { ComponentAppearance } from "@enum/appearances";
 import { IEntry } from "@components/data/Table/types";
-
-import { StyledContainerIcon } from "./styles";
+import { ComponentAppearance } from "@enum/appearances";
 import { editMoneyDestinationModal } from "@config/moneyDestination/moneyDestinationTab/generics/editMoneyDestinationModal";
+import { StyledContainerIcon } from "./styles";
 
 interface IEdit {
   data: IEntry;
@@ -19,11 +17,26 @@ const Edit = (props: IEdit) => {
   const { data } = props;
   const [showModal, setShowModal] = useState(false);
 
+  const navigate = useNavigate();
+
+  const destinationData = {
+    id: data.id,
+    nameDestination: data.name,
+    description: data.descriptionUse,
+    icon: data.iconReference,
+  };
+
   const handleToggleModal = () => {
     setShowModal(!showModal);
   };
 
   const screenTablet = useMediaQuery("(max-width: 1200px)");
+
+  const handleEdit = () => {
+    navigate(`/money-destination/edit-destination`, {
+      state: { data: destinationData },
+    });
+  };
 
   return (
     <>
@@ -48,7 +61,7 @@ const Edit = (props: IEdit) => {
           title={editMoneyDestinationModal.title}
           actionText={editMoneyDestinationModal.actionText}
           description={editMoneyDestinationModal.description}
-          onClick={() => console.log(data)}
+          onClick={handleEdit}
           onCloseModal={handleToggleModal}
         />
       )}

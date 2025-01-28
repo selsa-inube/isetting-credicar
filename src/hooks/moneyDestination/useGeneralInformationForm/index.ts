@@ -2,20 +2,23 @@ import { useEffect, useImperativeHandle, useState } from "react";
 import { FormikProps, useFormik } from "formik";
 import { object } from "yup";
 
-import { IServerDomain } from "@ptypes/IServerDomain";
-
 import { validationRules } from "@validations/validationRules";
 import { validationMessages } from "@validations/validationMessages";
-import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationEntry";
+import { IGeneralInformationEntry } from "@src/types/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationDestination";
+import { IServerDomain } from "@ptypes/IServerDomain";
 import { IEnumeratorsMoneyDestination } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/IEnumeratorsMoneyDestination";
 import { normalizeNameDestination } from "@utils/destination/normalizeNameDestination";
 import { normalizeCodeDestination } from "@utils/destination/normalizeCodeDestination";
 import { normalizeDestination } from "@utils/destination/normalizeDestination";
+import { normalizeEditDestination } from "@utils/destination/normalizeEditDestination";
+import { normalizeIconDestination } from "@utils/destination/normalizeIconDestination";
 
 const useGeneralInformationForm = (
   enumData: IEnumeratorsMoneyDestination[],
   initialValues: IGeneralInformationEntry,
   ref: React.ForwardedRef<FormikProps<IGeneralInformationEntry>>,
+  editDataOption: boolean,
+  loading: boolean | undefined,
   onSubmit: ((values: IGeneralInformationEntry) => void) | undefined,
   onFormValid: React.Dispatch<React.SetStateAction<boolean>> | undefined,
 ) => {
@@ -39,11 +42,18 @@ const useGeneralInformationForm = (
   const [autosuggestValue, setAutosuggestValue] = useState(
     formik.values.nameDestination || "",
   );
-  const optionsDestination: IServerDomain[] = enumData.map((item) => ({
-    id: item.code,
-    label: normalizeNameDestination(item.code)?.name as unknown as string,
-    value: normalizeNameDestination(item.code)?.name as unknown as string,
-  }));
+
+  const [isDisabledButton, setIsDisabledButton] = useState(false);
+  const [icon, setIcon] = useState<JSX.Element | undefined>();
+
+  const optionsDestination: IServerDomain[] = enumData.map((item) => {
+    const name = normalizeNameDestination(item.code)?.name as unknown as string;
+    return {
+      id: item.code,
+      label: name,
+      value: name,
+    };
+  });
 
   useImperativeHandle(ref, () => formik);
 
@@ -65,26 +75,89 @@ const useGeneralInformationForm = (
     formik.setFieldValue(name, value);
 
     if (name === "nameDestination") {
-      if (value === "") {
-        formik.setFieldValue("description", "");
+      const normalizeData = normalizeCodeDestination(value)?.code || "";
+      const description =
+        normalizeDestination(enumData, normalizeData)?.description || "";
+
+      const currentDescription = formik.values.description || "";
+      const newDescription = `${currentDescription} ${description}`.trim();
+      formik.setFieldValue("description", newDescription);
+
+      if (initialValues.nameDestination !== value) {
+        formik.setFieldValue("icon", icon);
       } else {
-        const nameEnum = normalizeCodeDestination(value)?.code || "";
-        const description = normalizeDestination(
-          enumData,
-          nameEnum,
-        )?.description;
-        if (description !== undefined) {
-          formik.setFieldValue("description", description);
-        }
+        formik.setFieldValue("icon", initialValues.icon);
       }
     }
   };
+
+  const nameEnum =
+    normalizeCodeDestination(formik.values.nameDestination || "")?.code || "";
+  const addData = normalizeDestination(enumData, nameEnum);
+
+  const valuesEqual = () => {
+    return JSON.stringify(initialValues) === JSON.stringify(formik.values);
+  };
+
+  const valuesEmpty = () => {
+    return Object.values(formik.values).every(
+      (value) => value === "" || value === null || value === undefined,
+    );
+  };
+
+  useEffect(() => {
+    const updateButton = () => {
+      if (editDataOption) {
+        setIsDisabledButton(
+          (valuesEqual() || valuesEmpty() || loading) ?? !formik.isValid,
+        );
+      } else {
+        setIsDisabledButton(loading ?? !formik.isValid);
+      }
+    };
+    updateButton();
+  }, [formik.values, loading, formik.isValid, initialValues, editDataOption]);
+
+  useEffect(() => {
+    const updateIcon = () => {
+      let iconData;
+      const editData = normalizeEditDestination(
+        enumData,
+        formik.values.icon ?? "",
+      );
+      const compare =
+        JSON.stringify(initialValues.nameDestination) ===
+        JSON.stringify(formik.values.nameDestination);
+
+      if (editDataOption) {
+        iconData =
+          editData && compare
+            ? normalizeIconDestination(editData?.value ?? "")?.icon
+            : normalizeIconDestination(addData?.value ?? "")?.icon;
+      } else {
+        iconData = normalizeIconDestination(addData?.value ?? "")?.icon;
+      }
+
+      setIcon(iconData);
+    };
+
+    updateIcon();
+  }, [
+    editDataOption,
+    formik.values,
+    enumData,
+    initialValues.nameDestination,
+    addData,
+  ]);
 
   return {
     autosuggestValue,
     optionsDestination,
     formik,
+    isDisabledButton,
+    icon,
     handleChange,
+    valuesEqual,
   };
 };
 

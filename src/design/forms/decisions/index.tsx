@@ -1,15 +1,13 @@
 import { useContext } from "react";
 import { IRuleDecision } from "@isettingkit/input";
 
-import { useDecisionForm } from "@hooks/forms/useDecisionForm";
-import { useEnumRules } from "@hooks/moneyDestination/useEnumRules";
-import { DecisionsFormUI } from "./interface";
-import {
-  IEnumeratorsRules,
-  IMessageModal,
-  IRulesFormTextValues,
-} from "@design/forms/decisions/types";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
+import { useEnumRules } from "@hooks/moneyDestination/useEnumRules";
+import { useDecisionForm } from "@hooks/forms/useDecisionForm";
+import { IMessageModal } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/decisions/IMessageModal";
+import { IRulesFormTextValues } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/decisions/IRulesFormTextValues";
+import { IEnumeratorsRules } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/decisions/IEnumeratorsRules";
+import { DecisionsFormUI } from "./interface";
 
 interface IDecisionsForm {
   attentionModal: IMessageModal;
@@ -20,13 +18,14 @@ interface IDecisionsForm {
   decisionTemplateConfig: (
     enumeratorsRules: IEnumeratorsRules,
   ) => IRuleDecision | undefined;
-  onNextStep: () => void;
+  onButtonClick: () => void;
   onPreviousStep: () => void;
   setDecisions: (decisions: IRuleDecision[]) => void;
   revertModalDisplayData: (
     dataDecision: IRuleDecision,
     originalDecision: IRuleDecision,
   ) => void;
+  editDataOption?: boolean;
 }
 
 const DecisionsForm = (props: IDecisionsForm) => {
@@ -36,8 +35,9 @@ const DecisionsForm = (props: IDecisionsForm) => {
     initialValues,
     labelBusinessRules,
     textValuesBusinessRules,
+    editDataOption,
     decisionTemplateConfig,
-    onNextStep,
+    onButtonClick,
     onPreviousStep,
     revertModalDisplayData,
     setDecisions,
@@ -55,7 +55,14 @@ const DecisionsForm = (props: IDecisionsForm) => {
     handleToggleAttentionModal,
     handleToggleDeleteModal,
     handleDelete,
-  } = useDecisionForm(initialValues, revertModalDisplayData, setDecisions);
+    handleSave,
+  } = useDecisionForm(
+    initialValues,
+    revertModalDisplayData,
+    onButtonClick,
+    setDecisions,
+    editDataOption,
+  );
 
   const { appData } = useContext(AuthAndPortalData);
   const { enumRuleData } = useEnumRules(
@@ -75,7 +82,7 @@ const DecisionsForm = (props: IDecisionsForm) => {
       loading={false}
       onCloseModal={handleCloseModal}
       onDelete={handleDelete}
-      onNextStep={onNextStep}
+      onButtonClick={onButtonClick}
       onOpenModal={handleOpenModal}
       onPreviousStep={onPreviousStep}
       onSubmitForm={handleSubmitForm}
@@ -85,6 +92,8 @@ const DecisionsForm = (props: IDecisionsForm) => {
       showAttentionModal={showAttentionModal}
       showDeleteModal={showDeleteModal}
       textValuesBusinessRules={textValuesBusinessRules}
+      editDataOption={editDataOption}
+      onSave={handleSave}
     />
   );
 };

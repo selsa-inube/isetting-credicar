@@ -1,16 +1,9 @@
 import { FormikProps } from "formik";
 import { IRuleDecision } from "@isettingkit/input";
-import {
-  Assisted,
-  Breadcrumbs,
-  IAssistedStep,
-  Stack,
-  useMediaQuery,
-} from "@inubekit/inubekit";
+import { Breadcrumbs, Stack, Tabs, useMediaQuery } from "@inubekit/inubekit";
 
 import { Title } from "@components/data/Title";
 import { tokens } from "@design/tokens";
-import { IRequestSteps } from "@design/feedback/RequestProcess/types";
 import { GeneralInformationForm } from "@design/forms/generalInformationDestination";
 import { DecisionsForm } from "@design/forms/decisions";
 import {
@@ -20,46 +13,34 @@ import {
 import { decisionTemplateConfig } from "@design/forms/decisions/config/decisionTemplate.config";
 import { revertModalDisplayData } from "@utils/revertModalDisplayData";
 import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationDestination";
-import { crumbsAddDestination } from "@config/moneyDestination/addDestination/navigation";
+import { crumbsEditDestination } from "@config/moneyDestination/editDestination/navigation";
 import { textValuesBusinessRules } from "@config/moneyDestination/moneyDestinationTab/businessRules";
-import { VerificationForm } from "../forms/verificationForm";
+import { IEditDestinationTabsConfig } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/tabs/ITabConfig/IEditDestinationTabsConfig";
 
-interface IAddDestinationUI {
+interface IEditDestinationUI {
+  editDestinationTabsConfig: IEditDestinationTabsConfig;
   creditLineDecisions: IRuleDecision[];
-  currentStep: number;
   generalInformationRef: React.RefObject<FormikProps<IGeneralInformationEntry>>;
   initialGeneralInformationValues: IGeneralInformationEntry;
-  isCurrentFormValid: boolean;
-  requestSteps: IRequestSteps[];
-  showModal: boolean;
-  showRequestProcessModal: boolean;
-  steps: IAssistedStep[];
-  onFinishForm: () => void;
-  onNextStep: () => void;
-  onPreviousStep: () => void;
-  onToggleModal: () => void;
+  isSelected: string;
+  onTabChange: (id: string) => void;
+  onButtonClick: () => void;
+  handleReset: () => void;
   setCreditLineDecisions: (decisions: IRuleDecision[]) => void;
-  setCurrentStep: (step: number) => void;
   setIsCurrentFormValid: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const AddDestinationUI = (props: IAddDestinationUI) => {
+const EditDestinationUI = (props: IEditDestinationUI) => {
   const {
     creditLineDecisions,
-    currentStep,
+    editDestinationTabsConfig,
     generalInformationRef,
     initialGeneralInformationValues,
-    isCurrentFormValid,
-    requestSteps,
-    showModal,
-    showRequestProcessModal,
-    steps,
-    onFinishForm,
-    onNextStep,
-    onPreviousStep,
-    onToggleModal,
+    isSelected,
+    onTabChange,
+    onButtonClick,
+    handleReset,
     setCreditLineDecisions,
-    setCurrentStep,
     setIsCurrentFormValid,
   } = props;
 
@@ -77,7 +58,7 @@ const AddDestinationUI = (props: IAddDestinationUI) => {
     >
       <Stack gap={tokens.spacing.s300} direction="column">
         <Stack gap={tokens.spacing.s300} direction="column">
-          <Breadcrumbs crumbs={crumbsAddDestination} />
+          <Breadcrumbs crumbs={crumbsEditDestination} />
           <Title
             title="Destinos de dinero"
             description=" Destino del dinero para crédito."
@@ -85,62 +66,34 @@ const AddDestinationUI = (props: IAddDestinationUI) => {
           />
         </Stack>
         <Stack gap={tokens.spacing.s300} direction="column">
-          <Assisted
-            step={steps[currentStep - 1]}
-            totalSteps={steps.length}
-            onBackClick={onPreviousStep}
-            onNextClick={onNextStep}
-            onSubmitClick={onToggleModal}
-            disableNext={!isCurrentFormValid}
-            controls={{
-              goBackText: "Anterior",
-              goNextText: "Siguiente",
-              submitText: "Finalizar",
-            }}
-            size={smallScreen ? "small" : "large"}
+          <Tabs
+            tabs={Object.values(editDestinationTabsConfig)}
+            selectedTab={isSelected}
+            onChange={onTabChange}
           />
           <Stack direction="column">
-            {currentStep === 1 && (
+            {isSelected === editDestinationTabsConfig.generalInformation.id && (
               <GeneralInformationForm
                 ref={generalInformationRef}
                 initialValues={initialGeneralInformationValues}
                 onFormValid={setIsCurrentFormValid}
-                onButtonClick={onNextStep}
+                onButtonClick={onButtonClick}
+                editDataOption
               />
             )}
-            {currentStep === 2 && (
+            {isSelected === editDestinationTabsConfig.creditLine.id && (
               <DecisionsForm
                 attentionModal={attentionModal}
                 deleteModal={deleteModal}
                 textValuesBusinessRules={textValuesBusinessRules}
                 decisionTemplateConfig={decisionTemplateConfig}
-                onButtonClick={onNextStep}
-                onPreviousStep={onPreviousStep}
+                onButtonClick={onButtonClick}
+                onPreviousStep={handleReset}
                 initialValues={creditLineDecisions}
                 setDecisions={setCreditLineDecisions}
                 revertModalDisplayData={revertModalDisplayData}
                 labelBusinessRules="LineOfCredit"
-              />
-            )}
-            {currentStep === 3 && (
-              <VerificationForm
-                updatedData={{
-                  personalInformation: {
-                    isValid: isCurrentFormValid,
-                    values: initialGeneralInformationValues,
-                  },
-                  creditline: {
-                    isValid: true,
-                    values: creditLineDecisions,
-                  },
-                }}
-                requestSteps={requestSteps}
-                onPreviousStep={onPreviousStep}
-                handleStepChange={(stepId) => setCurrentStep(stepId)}
-                showModal={showModal}
-                showRequestProcessModal={showRequestProcessModal}
-                onToggleModal={onToggleModal}
-                onFinishForm={onFinishForm}
+                editDataOption
               />
             )}
           </Stack>
@@ -150,4 +103,4 @@ const AddDestinationUI = (props: IAddDestinationUI) => {
   );
 };
 
-export { AddDestinationUI };
+export { EditDestinationUI };
