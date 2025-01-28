@@ -49,6 +49,7 @@ const DecisionsForm = (props: IDecisionsForm) => {
     decisions,
     showAttentionModal,
     showDeleteModal,
+    hasChanges,
     handleOpenModal,
     handleCloseModal,
     handleSubmitForm,
@@ -56,6 +57,7 @@ const DecisionsForm = (props: IDecisionsForm) => {
     handleToggleDeleteModal,
     handleDelete,
     handleSave,
+    handleReset,
   } = useDecisionForm(
     initialValues,
     revertModalDisplayData,
@@ -94,6 +96,8 @@ const DecisionsForm = (props: IDecisionsForm) => {
       textValuesBusinessRules={textValuesBusinessRules}
       editDataOption={editDataOption}
       onSave={handleSave}
+      handleReset={handleReset}
+      hasChanges={hasChanges}
     />
   );
 };
