@@ -23,6 +23,7 @@ interface IDecisionsFormUI {
   showAttentionModal: boolean;
   showDeleteModal: boolean;
   textValuesBusinessRules: IRulesFormTextValues;
+  hasChanges: boolean;
   onButtonClick: () => void;
   onPreviousStep: () => void;
   onCloseModal: () => void;
@@ -32,6 +33,7 @@ interface IDecisionsFormUI {
   onToggleAttentionModal: () => void;
   onToggleDeleteModal: (id: string) => void;
   onSave: () => void;
+  handleReset: () => void;
   editDataOption?: boolean;
 }
 
@@ -48,6 +50,7 @@ const DecisionsFormUI = (props: IDecisionsFormUI) => {
     showDeleteModal,
     textValuesBusinessRules,
     editDataOption,
+    hasChanges,
     onCloseModal,
     onDelete,
     onButtonClick,
@@ -57,6 +60,7 @@ const DecisionsFormUI = (props: IDecisionsFormUI) => {
     onToggleAttentionModal,
     onToggleDeleteModal,
     onSave,
+    handleReset,
   } = props;
 
   const isMobile = useMediaQuery("(max-width: 990px)");
@@ -96,8 +100,9 @@ const DecisionsFormUI = (props: IDecisionsFormUI) => {
         <Stack justifyContent="flex-end" gap={tokens.spacing.s250}>
           <Button
             fullwidth={isMobile}
-            onClick={onPreviousStep}
+            onClick={editDataOption ? handleReset : onPreviousStep}
             appearance={ComponentAppearance.GRAY}
+            disabled={editDataOption ? !hasChanges : false}
           >
             {editDataOption ? "Cancelar" : "Anterior"}
           </Button>
@@ -106,6 +111,7 @@ const DecisionsFormUI = (props: IDecisionsFormUI) => {
             fullwidth={isMobile}
             onClick={onSave}
             appearance={ComponentAppearance.PRIMARY}
+            disabled={editDataOption ? !hasChanges : false}
           >
             {editDataOption ? "Guardar" : "Siguiente"}
           </Button>

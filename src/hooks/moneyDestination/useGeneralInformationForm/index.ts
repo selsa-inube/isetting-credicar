@@ -95,21 +95,18 @@ const useGeneralInformationForm = (
     normalizeCodeDestination(formik.values.nameDestination || "")?.code || "";
   const addData = normalizeDestination(enumData, nameEnum);
 
-  const valuesEqual = () => {
-    return JSON.stringify(initialValues) === JSON.stringify(formik.values);
-  };
+  const valuesEqual =
+    JSON.stringify(initialValues) === JSON.stringify(formik.values);
 
-  const valuesEmpty = () => {
-    return Object.values(formik.values).every(
-      (value) => value === "" || value === null || value === undefined,
-    );
-  };
+  const valuesEmpty = Object.values(formik.values).every(
+    (value) => value === "" || value === null || value === undefined,
+  );
 
   useEffect(() => {
     const updateButton = () => {
       if (editDataOption) {
         setIsDisabledButton(
-          (valuesEqual() || valuesEmpty() || loading) ?? !formik.isValid,
+          (valuesEqual || valuesEmpty || loading) ?? !formik.isValid,
         );
       } else {
         setIsDisabledButton(loading ?? !formik.isValid);

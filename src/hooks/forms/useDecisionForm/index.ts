@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IRuleDecision } from "@isettingkit/input";
 
 const useDecisionForm = (
@@ -18,6 +18,10 @@ const useDecisionForm = (
   const [showAttentionModal, setShowAttentionModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [id, setId] = useState("");
+  const [hasChanges, setHasChanges] = useState(false);
+  const [savedDecisions, setSavedDecisions] = useState<IRuleDecision[]>([]);
+
+  const initialDecisions = useState(initialValues)[0];
 
   const handleOpenModal = () => {
     setSelectedDecision(null);
@@ -52,7 +56,6 @@ const useDecisionForm = (
 
     setDecisions(updatedDecisions);
     setCreditLineDecisions(updatedDecisions);
-
     handleCloseModal();
   };
 
@@ -76,15 +79,31 @@ const useDecisionForm = (
 
   const handleSave = () => {
     if (editDataOption) {
+      setHasChanges(false);
+      setSavedDecisions(decisions);
       return decisions;
     } else {
       if (decisions && decisions.length > 0) {
         onButtonClick();
+        setSavedDecisions(decisions);
       } else {
         handleToggleAttentionModal();
       }
     }
   };
+
+  const handleReset = () => {
+    setDecisions(initialDecisions);
+    setSavedDecisions(initialDecisions);
+  };
+
+  useEffect(() => {
+    if (JSON.stringify(decisions) !== JSON.stringify(initialDecisions)) {
+      setHasChanges(true);
+    } else {
+      setHasChanges(false);
+    }
+  }, [decisions, initialDecisions]);
 
   return {
     isModalOpen,
@@ -92,6 +111,8 @@ const useDecisionForm = (
     decisions,
     showAttentionModal,
     showDeleteModal,
+    hasChanges,
+    savedDecisions,
     handleOpenModal,
     handleCloseModal,
     handleSubmitForm,
@@ -99,6 +120,7 @@ const useDecisionForm = (
     handleToggleDeleteModal,
     handleDelete,
     handleSave,
+    handleReset,
   };
 };
 

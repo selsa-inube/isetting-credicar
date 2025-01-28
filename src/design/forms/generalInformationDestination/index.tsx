@@ -67,7 +67,7 @@ const GeneralInformationForm = forwardRef<
         editDataOption={editDataOption}
         isDisabledButton={isDisabledButton}
         icon={icon}
-        valuesEqual={valuesEqual()}
+        valuesEqual={valuesEqual}
       />
     );
   },

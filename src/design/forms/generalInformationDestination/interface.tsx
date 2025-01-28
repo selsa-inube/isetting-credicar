@@ -10,7 +10,7 @@ import {
 
 import { tokens } from "@design/tokens";
 
-import { MdCategory } from "react-icons/md";
+import { MdOutlineFax } from "react-icons/md";
 import { IServerDomain } from "@ptypes/IServerDomain";
 import { ComponentAppearance } from "@enum/appearances";
 import { getFieldState } from "@utils/forms/getFieldState";
@@ -87,7 +87,7 @@ const GeneralInformationFormUI = (props: IGeneralInformationFormUI) => {
                       Icono
                     </Text>
                     <StyledIcon $isMobile={isMobile}>
-                      {icon ?? <MdCategory size={24} />}
+                      {icon ?? <MdOutlineFax size={24} />}
                     </StyledIcon>
                   </Stack>
                 </Stack>
