@@ -2,7 +2,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import { Icon } from "@inubekit/icon";
 
 import { IAction, ITitle } from "@components/data/Table/types";
-import { ComponentAppearance } from "@ptypes/aparences.types";
+import { ComponentAppearance } from "@enum/appearances";
 import { Details } from "@pages/moneyDestination/tabs/requestsInProgressTab/components/details";
 
 const titles: ITitle[] = [

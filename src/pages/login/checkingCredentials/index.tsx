@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useCallback, useContext, useEffect } from "react";
 
-import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
+import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";
 import { CheckingCredentialsUI } from "./interface";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 

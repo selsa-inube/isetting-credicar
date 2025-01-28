@@ -4,7 +4,7 @@ import {
   fetchTimeoutServices,
   maxRetriesServices,
 } from "@config/environment";
-import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
+import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: enviroment.IPORTAL_STAFF_QUERY_PROCESS_SERVICE,

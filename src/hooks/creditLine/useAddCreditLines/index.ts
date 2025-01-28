@@ -2,17 +2,13 @@ import { useRef, useState } from "react";
 import { FormikProps } from "formik";
 import { IRuleDecision } from "@isettingkit/input";
 
-
 import { ICreditProspectEntry } from "@design/forms/creditProspect/types";
 import { optionsProspectConfig } from "@design/forms/creditProspect/config/optionsProspect.config";
-import {
-  IFormsCreditlines,
-  IFormsCreditlinesRefs,
-} from "@pages/creditLines/addCreditLine/types";
 
-import { IGeneralInformationEntry } from "@pages/creditLines/forms/generalInformation/types";
 import { addCreditLinesSteps } from "@config/creditLines/addCreditLine/assisted";
-
+import { IFormsCreditlines } from "@ptypes/creditLines/addCreditLine/IFormsCreditlines";
+import { IGeneralInformationEntry } from "@ptypes/creditLines/forms/IGeneralInformationEntry";
+import { IFormsCreditlinesRefs } from "@ptypes/creditLines/addCreditLine/IFormsCreditlinesRefs";
 
 const useAddCreditlines = () => {
   const [currentStep, setCurrentStep] = useState(1);

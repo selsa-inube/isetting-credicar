@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import { businessManagers } from "@services/staffPortal/getBusinessManager";
-import {
-  IBusinessManagers,
-  IStaffPortalByBusinessManager,
-} from "@ptypes/staffPortal.types";
+import { IStaffPortalByBusinessManager } from "@ptypes/staffPortal/IStaffPortalByBusinessManager";
+import { IBusinessManagers } from "@ptypes/staffPortal/IBusinessManagers";
 
 const useBusinessManagers = (
   portalPublicCode: IStaffPortalByBusinessManager,

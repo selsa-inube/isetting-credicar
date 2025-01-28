@@ -1,7 +1,8 @@
 import { MdCategory } from "react-icons/md";
-import { IMoneyDestinationData } from "@pages/moneyDestination/tabs/moneyDestinationTab/types";
 import { IconWithText } from "@components/data/IconWithText";
-import { normalizeIconDestination } from "@utils/destination";
+
+import { IMoneyDestinationData } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/IMoneyDestinationData";
+import { normalizeIconDestination } from "@utils/destination/normalizeIconDestination";
 
 const mapMoneyDestinationToEntity = (
   data: IMoneyDestinationData,

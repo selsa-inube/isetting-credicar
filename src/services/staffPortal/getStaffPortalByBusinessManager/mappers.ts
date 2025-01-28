@@ -1,12 +1,10 @@
-import {
-  IoptionsByStaffPortalBusinessManager,
-  IStaffPortalByBusinessManager,
-} from "@ptypes/staffPortal.types";
+import { IOptionsByStaffPortalBusinessManager } from "@ptypes/staffPortal/IOptionsByStaffPortalBusinessManager";
+import { IStaffPortalByBusinessManager } from "@ptypes/staffPortal/IStaffPortalByBusinessManager";
 
 const mapStaffPortalByBusinessManagerApiToEntity = (
   resend: Record<
     string,
-    string | IoptionsByStaffPortalBusinessManager[] | undefined
+    string | IOptionsByStaffPortalBusinessManager[] | undefined
   >,
 ): IStaffPortalByBusinessManager => {
   const buildResend: IStaffPortalByBusinessManager = {
@@ -24,7 +22,7 @@ const mapStaffPortalByBusinessManagerApiToEntity = (
 const mapStaffPortalByBusinessManagerApiToEntities = (
   resend: Record<
     string,
-    string | IoptionsByStaffPortalBusinessManager[] | undefined
+    string | IOptionsByStaffPortalBusinessManager[] | undefined
   >[],
 ): IStaffPortalByBusinessManager[] => {
   return resend.map(mapStaffPortalByBusinessManagerApiToEntity);

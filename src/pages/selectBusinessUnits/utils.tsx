@@ -1,5 +1,5 @@
 import { businessUnitsPortalStaff } from "@services/staffPortal/getBusinessUnits";
-import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
+import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";
 
 const validateBusinessUnities = async (
   publicCode: string,

@@ -38,6 +38,7 @@ export default defineConfig({
     alias: {
       "@src": path.resolve(__dirname, "./src"),
       "@design": path.resolve(__dirname, "./src/design"),
+      "@enum": path.resolve(__dirname, "./src/enum"),
       "@components": path.resolve(__dirname, "./src/components"),
       "@config": path.resolve(__dirname, "./src/config"),
       "@pages": path.resolve(__dirname, "./src/pages"),

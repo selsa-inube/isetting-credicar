@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Icon } from "@inubekit/icon";
 
 import { DecisionModal } from "@components/modals/DecisionModal";
-import { ComponentAppearance } from "@ptypes/aparences.types";
+import { ComponentAppearance } from "@enum/appearances";
 import { IEntry } from "@components/data/Table/types";
 
 import { useMediaQuery } from "@inubekit/hooks";

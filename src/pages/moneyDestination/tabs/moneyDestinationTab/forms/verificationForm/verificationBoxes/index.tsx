@@ -1,9 +1,9 @@
 import { useMediaQuery } from "@inubekit/hooks";
-import { IFormsUpdateData } from "../types";
 import {
   renderCreditlineVerification,
   renderPersonalInfoVerification,
 } from "./utils";
+import { IFormsUpdateData } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IFormsUpdateData";
 
 interface IVerificationBoxes {
   updatedData: IFormsUpdateData;

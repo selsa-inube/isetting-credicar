@@ -7,7 +7,7 @@ import { Stack } from "@inubekit/stack";
 
 import { tokens } from "@design/tokens";
 import { DecisionModal } from "@components/modals/DecisionModal";
-import { ComponentAppearance } from "@ptypes/aparences.types";
+import { ComponentAppearance } from "@src/enum/appearances";
 import {
   attentionModal,
   deleteModal,

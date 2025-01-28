@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from "axios";
-import { IMoneyDestinationData } from "@pages/moneyDestination/tabs/moneyDestinationTab/types";
+import { IMoneyDestinationData } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/IMoneyDestinationData";
 import { fetchWithRetries } from "../axiosConfig/getRequests";
 
 const getMoneyDestination = async (

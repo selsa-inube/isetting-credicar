@@ -4,7 +4,7 @@ import { Divider } from "@inubekit/divider";
 
 import { tokens } from "@design/tokens";
 import { IEntry } from "@components/data/Table/types";
-import { ComponentAppearance } from "@ptypes/aparences.types";
+import { ComponentAppearance } from "@enum/appearances";
 import {
   StyledContainerDataName,
   StyledContainerDescription,

@@ -12,8 +12,8 @@ import { Select } from "@inubekit/select";
 
 import { tokens } from "@design/tokens";
 import { mediaQueryMobile } from "@config/environment";
-import { ComponentAppearance } from "@ptypes/aparences.types";
-import { normalizeStatusByName } from "@utils/status";
+import { ComponentAppearance } from "@enum/appearances";
+import { normalizeStatusByName } from "@utils/status/normalizeStatusByName";
 import { IEntry } from "@components/data/Table/types";
 import { getDomainById } from "@mocks/domains/domainService.mocks";
 import {
@@ -21,7 +21,7 @@ import {
   StyledContainerFields,
   StyledModal,
 } from "./styles";
-import { ILabel } from "./types";
+import { ILabel } from "@components/modals/DetailsRequestsInProgressModal/types";
 
 interface IDetailsRequestsInProgressModal {
   data: IEntry;

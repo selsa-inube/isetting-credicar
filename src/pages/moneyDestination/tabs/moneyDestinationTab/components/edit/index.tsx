@@ -5,7 +5,7 @@ import { useMediaQuery } from "@inubekit/hooks";
 import { Text } from "@inubekit/text";
 
 import { DecisionModal } from "@components/modals/DecisionModal";
-import { ComponentAppearance } from "@ptypes/aparences.types";
+import { ComponentAppearance } from "@enum/appearances";
 import { IEntry } from "@components/data/Table/types";
 
 import { StyledContainerIcon } from "./styles";

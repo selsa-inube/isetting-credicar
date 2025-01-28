@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { IMoneyDestinationData } from "@pages/moneyDestination/tabs/moneyDestinationTab/types";
+
 import { moneyDestinationData } from "@services/moneyDestination/getMoneyDestination";
+import { IMoneyDestinationData } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/IMoneyDestinationData";
 
 const useMoneyDestination = (bussinesUnits: string) => {
   const [moneyDestination, setMoneyDestination] = useState<

@@ -3,11 +3,11 @@ import { Icon, IIconAppearance } from "@inubekit/icon";
 import { Stack } from "@inubekit/stack";
 import { Text } from "@inubekit/text";
 
-import { ComponentAppearance } from "@ptypes/aparences.types";
+import { ComponentAppearance } from "@enum/appearances";
 import { tokens } from "@design/tokens";
 import { StyledBar, StyledContainerBar } from "./styles";
-import { IRequestSteps } from "./types";
-import { countVerifiedRequests, verifiedErrorRequest } from "./utils";
+import { IRequestSteps } from "@design/feedback/RequestProcess/types";
+import { countVerifiedRequests, verifiedErrorRequest } from "@design/feedback/RequestProcess/utils";
 
 interface IRequestProcess {
   appearance: IIconAppearance;

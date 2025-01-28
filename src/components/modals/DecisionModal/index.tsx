@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { IIconAppearance } from "@inubekit/icon";
 
-import { ComponentAppearance } from "@ptypes/aparences.types";
+import { ComponentAppearance } from "@src/enum/appearances";
 import { DecisionModalUI } from "./interface";
-import { IDecisionEntry } from "./types";
+import { IDecisionEntry } from "@components/modals/DecisionModal/types";
 
 const validationSchema = object({
   justification: string(),

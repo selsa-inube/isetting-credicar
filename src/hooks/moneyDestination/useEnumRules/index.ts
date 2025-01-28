@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { IEnumeratorsRules } from "@pages/moneyDestination/tabs/moneyDestinationTab/types";
+
 import { getEnumeratorsRules } from "@api/isettingCredicar/getEnumeratorsRules";
+import { IEnumeratorsRules } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/IEnumeratorsRules";
 
 const useEnumRules = (enumDestination: string, bussinesUnits: string) => {
   const [enumRuleData, setEnumRuleData] = useState<IEnumeratorsRules>(

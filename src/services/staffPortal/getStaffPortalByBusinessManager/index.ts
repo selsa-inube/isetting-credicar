@@ -1,6 +1,6 @@
-import { IStaffPortalByBusinessManager } from "@ptypes/staffPortal.types";
 import { getStaffPortalByBusinessManager } from "@api/isaasQuery";
 import { mapStaffPortalByBusinessManagerApiToEntities } from "./mappers";
+import { IStaffPortalByBusinessManager } from "@ptypes/staffPortal/IStaffPortalByBusinessManager";
 
 const staffPortalByBusinessManager = async (
   portalCode: string,

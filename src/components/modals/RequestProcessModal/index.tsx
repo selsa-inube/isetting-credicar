@@ -7,7 +7,7 @@ import { Blanket } from "@inubekit/blanket";
 import { tokens } from "@design/tokens";
 import { RequestProcess } from "@design/feedback/RequestProcess";
 import { IRequestSteps } from "@design/feedback/RequestProcess/types";
-import { ComponentAppearance } from "@ptypes/aparences.types";
+import { ComponentAppearance } from "@enum/appearances";
 import { StyledModal } from "./styles";
 
 interface IRequestProcessModal {

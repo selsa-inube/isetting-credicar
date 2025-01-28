@@ -5,7 +5,7 @@ import { Input } from "@inubekit/input";
 import { Button } from "@inubekit/button";
 
 import { tokens } from "@design/tokens";
-import { ComponentAppearance } from "@ptypes/aparences.types";
+import { ComponentAppearance } from "@enum/appearances";
 import { Table } from "@components/data/Table";
 import { IEntry } from "@components/data/Table/types";
 import { StyledContainer } from "./styles";
