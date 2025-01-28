@@ -1,12 +1,13 @@
+import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AppContext } from "@context/AppContext";
-import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
-import { IBusinessUnitstate } from "@pages/selectBusinessUnits/outlets/BusinessUnit/types";
+import { IBusinessUnitstate } from "@ptypes/selectBusinessUnits/outlets/businessUnit/IBusinessUnitstate";
+
 
 const useBusinessUnits = (businessUnits: IBusinessUnitsPortalStaff[]) => {
   const navigate = useNavigate();
-  const { setBusinessUnitSigla } = useContext(AppContext);
+  const { setBusinessUnitSigla } = useContext(AuthAndPortalData);
 
   const [search, setSearch] = useState("");
   const [selectedBusinessUnit, setSelectedBusinessUnit] =
