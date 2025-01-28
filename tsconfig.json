@@ -22,7 +22,8 @@
       "@context/*": ["src/context/*"],
       "@utils/*": ["src/utils/*"],
       "@api/*": ["src/api/*"],
-      "@validations/*": ["src/validations/*"]
+      "@validations/*": ["src/validations/*"],
+      "@routes/*": ["src/routes/*"]
     },
 
     /* Bundler mode */

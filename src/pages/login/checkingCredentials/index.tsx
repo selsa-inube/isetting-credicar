@@ -6,8 +6,8 @@ import { CheckingCredentialsUI } from "./interface";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 
 interface ICheckingCredentials {
-   businessUnits: IBusinessUnitsPortalStaff[];
-};
+  businessUnits: IBusinessUnitsPortalStaff[];
+}
 
 function CheckingCredentials(props: ICheckingCredentials) {
   const { businessUnits } = props;
@@ -44,7 +44,7 @@ function CheckingCredentials(props: ICheckingCredentials) {
   }, [appData, navigate, businessUnits]);
 
   useEffect(() => {
-    const timer = setTimeout(checkCredentials, 2000);
+    const timer = setTimeout(() => checkCredentials(), 2000);
     return () => clearTimeout(timer);
   }, [checkCredentials]);
 

@@ -13,8 +13,15 @@ export default defineConfig({
       filename: "remoteEntry.js",
       exposes: {
         "./App": "./src/App",
+        // "./usePortalData": "./src/hooks/usePortalData",
+        // "./ErrorPage": "./src/components/layout/ErrorPage",
+        // "./SelectBusinessUnitsRoutes": "./src/routes/selectBusinessunits",
+        // "./AppContext": "./src/context/AppContext/index.tsx",
       },
-      shared: ["react", "react-dom"],
+      remotes: {
+        hostApp: "http://localhost:3000/assets/remoteEntry.js",
+      },
+      shared: ["react", "react-dom", "react-router-dom", "@auth0/auth0-react"],
     }),
   ],
   server: {
@@ -45,6 +52,7 @@ export default defineConfig({
       "@api": path.resolve(__dirname, "./src/api"),
       "@context": path.resolve(__dirname, "./src/context"),
       "@validations": path.resolve(__dirname, "./src/validations"),
+      "@routes": path.resolve(__dirname, "./src/routes"),
     },
   },
 });
