@@ -16,7 +16,7 @@ import {
   StyledContainerFields,
 } from "@design/forms/creditProspect/styles";
 import { tokens } from "@design/tokens";
-import { ComponentAppearance } from "@ptypes/aparences.types";
+import { ComponentAppearance } from "@enum/appearances";
 import { ICreditProspectEntry } from "@design/forms/creditProspect/types";
 
 interface ICreditProspectFormUI {

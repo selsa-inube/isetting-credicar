@@ -1,13 +1,12 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import {
-  IBusinessManagers,
-  IStaffPortalByBusinessManager,
-} from "@ptypes/staffPortal.types";
+
 import {
   enviroment,
   fetchTimeoutServices,
   maxRetriesServices,
 } from "@config/environment";
+import { IBusinessManagers } from "@ptypes/staffPortal/IBusinessManagers";
+import { IStaffPortalByBusinessManager } from "@ptypes/staffPortal/IStaffPortalByBusinessManager";
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: enviroment.IVITE_ISAAS_QUERY_PROCESS_SERVICE,

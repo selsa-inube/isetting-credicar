@@ -4,7 +4,7 @@ import { useMediaQuery } from "@inubekit/hooks";
 import { mediaQueryMobile } from "@config/environment";
 import { IEntry } from "@components/data/Table/types";
 import { DetailsCreditLinesModalUI } from "./interface";
-import { IDetailsTabsConfig } from "./types";
+import { IDetailsTabsConfig } from "@components/modals/DetailsCreditLinesModal/types";
 
 interface IDetailsCreditLinesModal {
   detailsTabsConfig: IDetailsTabsConfig;

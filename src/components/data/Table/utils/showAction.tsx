@@ -1,6 +1,6 @@
 import { Td } from "@inubekit/table";
-import { IAction, IEntry } from "../types";
-import { ActionMobile } from "../ActionMobile";
+import { IAction, IEntry } from "@components/data/Table/types";
+import { ActionMobile } from "@components/data/Table//ActionMobile";
 
 function showAction(
   actionContent: IAction[],

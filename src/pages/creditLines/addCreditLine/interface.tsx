@@ -20,10 +20,10 @@ import { decisionTemplateConfig } from "@design/forms/decisions/config/decisionT
 import { CreditProspectForm } from "@design/forms/creditProspect";
 import { GeneralInformationForm } from "@pages/creditLines/forms/generalInformation";
 
-import { IFormsCreditlines, IFormsCreditlinesRefs } from "./types";
 import { crumbsAddCreditLines } from "@config/creditLines/addCreditLine/navigation";
 import { textValuesBusinessRules } from "@config/moneyDestination/moneyDestinationTab/businessRules";
-
+import { IFormsCreditlinesRefs } from "@ptypes/creditLines/addCreditLine/IFormsCreditlinesRefs";
+import { IFormsCreditlines } from "@ptypes/creditLines/addCreditLine/IFormsCreditlines";
 
 interface IAddCreditLinesUI {
   decisions: IRuleDecision[];

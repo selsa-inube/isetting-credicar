@@ -2,7 +2,7 @@ import { Text } from "@inubekit/text";
 import { Icon } from "@inubekit/icon";
 import { Stack } from "@inubekit/stack";
 
-import { ComponentAppearance } from "@ptypes/aparences.types";
+import { ComponentAppearance } from "@src/enum/appearances";
 import { tokens } from "@design/tokens";
 import { StyledContainer } from "./styles";
 

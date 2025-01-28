@@ -8,7 +8,7 @@ import {
   IEnumeratorsRules,
   IMessageModal,
   IRulesFormTextValues,
-} from "./types";
+} from "@design/forms/decisions/types";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 
 interface IDecisionsForm {

@@ -11,12 +11,12 @@ import { Tabs } from "@inubekit/tabs";
 
 import { tokens } from "@design/tokens";
 import { mediaQueryMobile } from "@config/environment";
-import { ComponentAppearance } from "@ptypes/aparences.types";
+import { ComponentAppearance } from "@enum/appearances";
 import { IEntry } from "@components/data/Table/types";
 
 import { GeneralDataTab } from "@components/modals/DetailsCreditLinesModal/GeneralDataTab";
 import { StyledContainerButton, StyledModal } from "./styles";
-import { IDetailsTabsConfig } from "./types";
+import { IDetailsTabsConfig } from "@components/modals/DetailsCreditLinesModal/types";
 
 interface IDetailsCreditLinesModalUI {
   data: IEntry;

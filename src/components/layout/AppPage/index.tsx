@@ -7,10 +7,8 @@ import { Header } from "@inubekit/header";
 import { useMediaQuery } from "@inubekit/hooks";
 import { Icon } from "@inubekit/icon";
 
-
-
 import { BusinessUnitChange } from "@design/inputs/BusinessUnitChange";
-import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
+import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";
 
 import {
   StyledAppPage,

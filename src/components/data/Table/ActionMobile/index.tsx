@@ -3,7 +3,7 @@ import { MdOutlinePending } from "react-icons/md";
 import { Icon } from "@inubekit/icon";
 
 import { ActionsModal } from "@components/modals/ActionsModal";
-import { IAction, IEntry } from "../types";
+import { IAction, IEntry } from "@components/data/Table/types";
 import { StyledContainer, StyledContainerIcon } from "./styles";
 
 interface IActionMobile {

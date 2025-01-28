@@ -1,6 +1,6 @@
-import { IMoneyDestinationData } from "@pages/moneyDestination/tabs/moneyDestinationTab/types";
 import { getMoneyDestination } from "@api/isettingCredicar/getMoneyDestination";
 import { mapMoneyDestinationToEntities } from "./mappers";
+import { IMoneyDestinationData } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/IMoneyDestinationData";
 
 const moneyDestinationData = async (
   bussinesUnits: string,

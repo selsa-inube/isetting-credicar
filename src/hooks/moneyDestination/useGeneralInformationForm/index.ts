@@ -2,16 +2,15 @@ import { useEffect, useImperativeHandle, useState } from "react";
 import { FormikProps, useFormik } from "formik";
 import { object } from "yup";
 
-import { IEnumeratorsMoneyDestination } from "@pages/moneyDestination/tabs/moneyDestinationTab/types";
-import { IServerDomain } from "@ptypes/domain.types";
-import {
-  normalizeCodeDestination,
-  normalizeDestination,
-  normalizeNameDestination,
-} from "@utils/destination";
+import { IServerDomain } from "@ptypes/IServerDomain";
+
 import { validationRules } from "@validations/validationRules";
 import { validationMessages } from "@validations/validationMessages";
-import { IGeneralInformationEntry } from "@pages/moneyDestination/tabs/moneyDestinationTab/forms/generalInformation/types";
+import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationEntry";
+import { IEnumeratorsMoneyDestination } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/IEnumeratorsMoneyDestination";
+import { normalizeNameDestination } from "@utils/destination/normalizeNameDestination";
+import { normalizeCodeDestination } from "@utils/destination/normalizeCodeDestination";
+import { normalizeDestination } from "@utils/destination/normalizeDestination";
 
 const useGeneralInformationForm = (
   enumData: IEnumeratorsMoneyDestination[],

@@ -1,5 +1,5 @@
 import { Col } from "@inubekit/table";
-import { ITitle } from "../types";
+import { ITitle } from "@components/data/Table/types";
 
 const widthColmnsData = (
   titleColumns: ITitle[],

@@ -1,9 +1,10 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
+import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";
 import { BusinessUnitsUI } from "./interface";
-import { IBusinessUnitstate } from "./types";
+
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
+import { IBusinessUnitstate } from "@ptypes/selectBusinessUnits/outlets/businessUnit/IBusinessUnitstate";
 
 interface IBusinessUnits {
   businessUnits: IBusinessUnitsPortalStaff[];

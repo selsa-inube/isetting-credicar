@@ -1,8 +1,8 @@
 import { Stack, Text, Toggle } from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
-import { ComponentAppearance } from "@ptypes/aparences.types";
-import { IEntry } from "./types";
+import { ComponentAppearance } from "@enum/appearances";
+import { IEntry } from "@design/data/optionsPropectCredit/types";
 
 interface IOptionsPropectCredit {
   entry: IEntry;

@@ -7,9 +7,9 @@ import { Stack } from "@inubekit/stack";
 
 import { tokens } from "@design/tokens";
 import { DecisionModal } from "@components/modals/DecisionModal";
-import { ComponentAppearance } from "@ptypes/aparences.types";
+import { ComponentAppearance } from "@src/enum/appearances";
 import { StyledContainer } from "./styles";
-import { IMessageModal, IRulesFormTextValues } from "./types";
+import { IMessageModal, IRulesFormTextValues } from "@design/forms/decisions/types";
 
 interface IDecisionsFormUI {
   attentionModal: IMessageModal;

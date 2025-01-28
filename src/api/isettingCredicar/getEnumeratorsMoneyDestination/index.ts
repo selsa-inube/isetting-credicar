@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from "axios";
-import { IEnumeratorsMoneyDestination } from "@pages/moneyDestination/tabs/moneyDestinationTab/types";
 import { fetchWithRetries } from "../axiosConfig/getRequests";
+import { IEnumeratorsMoneyDestination } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/IEnumeratorsMoneyDestination";
 
 
 const getEnumeratorsMoneyDestination = async (

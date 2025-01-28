@@ -1,4 +1,4 @@
-import { IServerDomain } from "@ptypes/domain.types";
+import { IServerDomain } from "@ptypes/IServerDomain";
 import { dateTraceabilityData } from "./dateTraceability";
 import { additionalDebtorsData } from "./additionalDebtors";
 

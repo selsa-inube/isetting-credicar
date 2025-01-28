@@ -2,13 +2,13 @@ import { Route, Routes } from "react-router-dom";
 import { useContext } from "react";
 
 import { ErrorPage } from "@components/layout/ErrorPage";
-import { IBusinessUnit } from "@pages/selectBusinessUnits/outlets/businessUnit/types";
 import { SelectBusinessUnits } from "@pages/selectBusinessUnits";
 import { BusinessUnits } from "@pages/selectBusinessUnits/outlets/businessUnit";
 import { CheckingCredentials } from "@pages/login/checkingCredentials";
 import { LoadingApp } from "@components/feedback/LoadingApp";
 import { NotBusinessUnit } from "@pages/errors/notBusinessUnit";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
+import { IBusinessUnit } from "@ptypes/context/authAndPortalDataProvider/IBusinessUnit";
 
 interface IBusinessUnits {
   businessUnits: IBusinessUnit[];

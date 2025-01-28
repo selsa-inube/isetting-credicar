@@ -8,14 +8,15 @@ import { Input } from "@inubekit/input";
 import { useMediaQueries } from "@inubekit/hooks";
 
 import { RadioBusinessUnit } from "@components/feedback/RadioBusinessUnit";
-import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
+import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";
 import {
   StyledBusinessUnits,
   StyledBusinessUnitsList,
   StyledNoResults,
   StyledBusinessUnitsItem,
 } from "./styles";
-import { IBusinessUnitstate } from "./types";
+import { IBusinessUnitstate } from "@ptypes/selectBusinessUnits/outlets/businessUnit/IBusinessUnitstate";
+
 
 interface IBusinessUnitsUI {
   businessUnits: IBusinessUnitsPortalStaff[];

@@ -1,5 +1,6 @@
+import { ICardData } from "@ptypes/home/ICardData";
 import { MdCreditCard, MdOutlinePayments } from "react-icons/md";
-import { ICardData } from "@pages/home/types";
+
 
 const mainCards: ICardData[] = [
   {
