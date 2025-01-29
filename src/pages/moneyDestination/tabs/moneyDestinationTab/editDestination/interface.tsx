@@ -6,16 +6,14 @@ import { Title } from "@components/data/Title";
 import { tokens } from "@design/tokens";
 import { GeneralInformationForm } from "@design/forms/generalInformationDestination";
 import { DecisionsForm } from "@design/forms/decisions";
-import {
-  attentionModal,
-  deleteModal,
-} from "@design/forms/decisions/config/messages.config";
-import { decisionTemplateConfig } from "@design/forms/decisions/config/decisionTemplate.config";
+
 import { revertModalDisplayData } from "@utils/revertModalDisplayData";
 import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationDestination";
 import { crumbsEditDestination } from "@config/moneyDestination/editDestination/navigation";
 import { textValuesBusinessRules } from "@config/moneyDestination/moneyDestinationTab/businessRules";
 import { IEditDestinationTabsConfig } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/tabs/ITabConfig/IEditDestinationTabsConfig";
+import { attentionModal, deleteModal } from "@config/decisions/messages";
+import { decisionTemplateConfig } from "@src/config/decisions/decisionTemplateDestination";
 
 interface IEditDestinationUI {
   editDestinationTabsConfig: IEditDestinationTabsConfig;
@@ -93,6 +91,9 @@ const EditDestinationUI = (props: IEditDestinationUI) => {
                 setDecisions={setCreditLineDecisions}
                 revertModalDisplayData={revertModalDisplayData}
                 labelBusinessRules="LineOfCredit"
+                conditionForSwitchPlace={
+                  initialGeneralInformationValues.nameDestination
+                }
                 editDataOption
               />
             )}

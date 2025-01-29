@@ -13,16 +13,14 @@ import { tokens } from "@design/tokens";
 import { IRequestSteps } from "@design/feedback/RequestProcess/types";
 import { GeneralInformationForm } from "@design/forms/generalInformationDestination";
 import { DecisionsForm } from "@design/forms/decisions";
-import {
-  attentionModal,
-  deleteModal,
-} from "@design/forms/decisions/config/messages.config";
-import { decisionTemplateConfig } from "@design/forms/decisions/config/decisionTemplate.config";
+
 import { revertModalDisplayData } from "@utils/revertModalDisplayData";
 import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationDestination";
 import { crumbsAddDestination } from "@config/moneyDestination/addDestination/navigation";
 import { textValuesBusinessRules } from "@config/moneyDestination/moneyDestinationTab/businessRules";
 import { VerificationForm } from "../forms/verificationForm";
+import { attentionModal, deleteModal } from "@src/config/decisions/messages";
+import { decisionTemplateConfig } from "@src/config/decisions/decisionTemplateDestination";
 
 interface IAddDestinationUI {
   creditLineDecisions: IRuleDecision[];
@@ -120,6 +118,9 @@ const AddDestinationUI = (props: IAddDestinationUI) => {
                 setDecisions={setCreditLineDecisions}
                 revertModalDisplayData={revertModalDisplayData}
                 labelBusinessRules="LineOfCredit"
+                conditionForSwitchPlace={
+                  initialGeneralInformationValues.nameDestination
+                }
               />
             )}
             {currentStep === 3 && (

@@ -17,6 +17,7 @@ interface IDecisionsForm {
   textValuesBusinessRules: IRulesFormTextValues;
   decisionTemplateConfig: (
     enumeratorsRules: IEnumeratorsRules,
+    conditionForSwitchPlace: string,
   ) => IRuleDecision | undefined;
   onButtonClick: () => void;
   onPreviousStep: () => void;
@@ -25,6 +26,7 @@ interface IDecisionsForm {
     dataDecision: IRuleDecision,
     originalDecision: IRuleDecision,
   ) => void;
+  conditionForSwitchPlace: string;
   editDataOption?: boolean;
 }
 
@@ -36,6 +38,7 @@ const DecisionsForm = (props: IDecisionsForm) => {
     labelBusinessRules,
     textValuesBusinessRules,
     editDataOption,
+    conditionForSwitchPlace,
     decisionTemplateConfig,
     onButtonClick,
     onPreviousStep,
@@ -77,7 +80,8 @@ const DecisionsForm = (props: IDecisionsForm) => {
       attentionModal={attentionModal}
       decisions={decisions}
       decisionTemplate={
-        decisionTemplateConfig(enumRuleData) ?? ({} as IRuleDecision)
+        decisionTemplateConfig(enumRuleData, conditionForSwitchPlace) ??
+        ({} as IRuleDecision)
       }
       deleteModal={deleteModal}
       isModalOpen={isModalOpen}

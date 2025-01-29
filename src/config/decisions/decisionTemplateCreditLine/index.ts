@@ -34,10 +34,8 @@ const decisionTemplateConfig = ({
             | "currency"
             | "date"
             | "percentage",
-          value: condition.labelName,
+          value: "",
           howToSetTheCondition: ValueHowToSetUp.EQUAL,
-          hidden: condition.conditionName === "MoneyDestination",
-          switchPlaces: condition.conditionName === "MoneyDestination",
         })),
     };
 
