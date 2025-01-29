@@ -4,7 +4,7 @@ import { Stack } from "@inubekit/stack";
 import { Divider } from "@inubekit/divider";
 
 import { tokens } from "@design/tokens";
-import { IRulesFormTextValues } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/decisions/IRulesFormTextValues";
+import { IRulesFormTextValues } from "@ptypes/decisions/IRulesFormTextValues";
 import { StyledContainer } from "./styles";
 
 interface ICreditLineTab {

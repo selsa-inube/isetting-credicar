@@ -1,18 +1,15 @@
-import {
-  IRuleDecision,
-  ValueDataType,
-  ValueHowToSetUp,
-} from "@isettingkit/input";
-import { IEnumeratorsRules } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/decisions/IEnumeratorsRules";
+import { IRuleDecision, ValueDataType } from "@isettingkit/input";
+import { sortDisplayDataSampleSwitchPlaces } from "@utils/decisions/sortDisplayDataSampleSwitchPlaces";
 import { dataTranslations } from "@utils/dataTranslations";
 
 const decisionTemplateConfig = (
   {
     ruleName,
     labelName,
+    howToSetTheDecision,
     decisionDataType,
     conditionThatEstablishesTheDecision,
-  }: IEnumeratorsRules,
+  }: IRuleDecision,
   conditionForSwitchPlace: string,
 ) => {
   if (labelName && decisionDataType && conditionThatEstablishesTheDecision) {
@@ -23,7 +20,7 @@ const decisionTemplateConfig = (
       labelName: dataTranslations[labelName],
       decisionDataType:
         ValueDataType[decisionData as keyof typeof ValueDataType],
-      howToSetTheDecision: ValueHowToSetUp.EQUAL,
+      howToSetTheDecision: howToSetTheDecision,
       value: "",
       effectiveFrom: "",
       validUntil: "",
@@ -31,44 +28,17 @@ const decisionTemplateConfig = (
         conditionThatEstablishesTheDecision.map((condition) => ({
           conditionName: condition.conditionName,
           labelName: dataTranslations[condition.labelName],
-          conditionDataType: condition.conditionDataType as
-            | "number"
-            | "alphabetical"
-            | "currency"
-            | "date"
-            | "percentage",
+          conditionDataType: condition.conditionDataType,
           value:
             condition.conditionName === "MoneyDestination"
               ? conditionForSwitchPlace
               : "",
-          howToSetTheCondition: ValueHowToSetUp.EQUAL,
+          howToSetTheCondition: condition.howToSetTheCondition,
           switchPlaces: condition.conditionName === "MoneyDestination",
         })),
     };
 
-    const data: IRuleDecision = { ...decisionTemplate };
-    const conditionToDisplay = data.conditionThatEstablishesTheDecision?.find(
-      (condition) => condition.switchPlaces,
-    );
-
-    if (conditionToDisplay) {
-      return {
-        ...data,
-        ruleName: conditionToDisplay.conditionName,
-        labelName: conditionToDisplay.labelName,
-        decisionDataType: conditionToDisplay.conditionDataType,
-        value: conditionToDisplay.value,
-        howToSetTheDecision: conditionToDisplay.howToSetTheCondition,
-        conditionThatEstablishesTheDecision:
-          data.conditionThatEstablishesTheDecision!.map((condition) =>
-            condition.conditionName === conditionToDisplay.conditionName
-              ? { ...condition, hidden: true }
-              : condition,
-          ),
-      };
-    }
-
-    return data;
+    return sortDisplayDataSampleSwitchPlaces(decisionTemplate);
   }
 };
 

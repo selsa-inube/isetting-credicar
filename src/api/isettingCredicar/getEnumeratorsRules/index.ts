@@ -1,18 +1,18 @@
 import { AxiosRequestConfig } from "axios";
-import { IEnumeratorsRules } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/decisions/IEnumeratorsRules";
+import { IRuleDecision } from "@isettingkit/input";
 import { fetchWithRetries } from "../axiosConfig/getRequests";
 
 const getEnumeratorsRules = async (
   ruleName: string,
   bussinesUnits: string,
-): Promise<IEnumeratorsRules> => {
+): Promise<IRuleDecision> => {
   const config: AxiosRequestConfig = {
     headers: {
       "X-Action": "GetByIdBusinessRuleCatalog",
       "X-Business-unit": bussinesUnits,
     },
   };
-  return fetchWithRetries<IEnumeratorsRules>(
+  return fetchWithRetries<IRuleDecision>(
     `/enums/business-rules-catalog/${ruleName}`,
     config,
   );

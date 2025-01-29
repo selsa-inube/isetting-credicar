@@ -19,7 +19,7 @@ import { StyledContainerButton, StyledModal } from "./styles";
 import { IDetailsTabsConfig } from "@components/modals/DetailsDestinationModal/types";
 import { GeneralDataTab } from "@components/modals/DetailsDestinationModal/GeneralDataTab";
 import { CreditLineTab } from "@components/modals/DetailsDestinationModal/CreditLineTab";
-import { IRulesFormTextValues } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/decisions/IRulesFormTextValues";
+import { IRulesFormTextValues } from "@ptypes/decisions/IRulesFormTextValues";
 
 interface IDetailsDestinationModalUI {
   data: IEntry;

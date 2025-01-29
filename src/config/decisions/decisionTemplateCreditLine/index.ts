@@ -3,7 +3,6 @@ import {
   ValueDataType,
   ValueHowToSetUp,
 } from "@isettingkit/input";
-import { IEnumeratorsRules } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/decisions/IEnumeratorsRules";
 import { dataTranslations } from "@utils/dataTranslations";
 
 const decisionTemplateConfig = ({
@@ -11,7 +10,7 @@ const decisionTemplateConfig = ({
   labelName,
   decisionDataType,
   conditionThatEstablishesTheDecision,
-}: IEnumeratorsRules) => {
+}: IRuleDecision) => {
   if (labelName && decisionDataType && conditionThatEstablishesTheDecision) {
     const decisionData = decisionDataType.toLocaleUpperCase();
 
@@ -28,12 +27,7 @@ const decisionTemplateConfig = ({
         conditionThatEstablishesTheDecision.map((condition) => ({
           conditionName: condition.conditionName,
           labelName: dataTranslations[condition.labelName],
-          conditionDataType: condition.conditionDataType as
-            | "number"
-            | "alphabetical"
-            | "currency"
-            | "date"
-            | "percentage",
+          conditionDataType: condition.conditionDataType,
           value: "",
           howToSetTheCondition: ValueHowToSetUp.EQUAL,
         })),

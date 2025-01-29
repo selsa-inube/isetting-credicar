@@ -8,8 +8,8 @@ import { Stack } from "@inubekit/stack";
 import { tokens } from "@design/tokens";
 import { DecisionModal } from "@components/modals/DecisionModal";
 import { ComponentAppearance } from "@enum/appearances";
-import { IMessageModal } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/decisions/IMessageModal";
-import { IRulesFormTextValues } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/decisions/IRulesFormTextValues";
+import { IMessageModal } from "@ptypes/decisions/IMessageModal";
+import { IRulesFormTextValues } from "@ptypes/decisions/IRulesFormTextValues";
 import { StyledContainer } from "./styles";
 
 interface IDecisionsFormUI {

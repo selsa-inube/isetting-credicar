@@ -4,9 +4,8 @@ import { IRuleDecision } from "@isettingkit/input";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 import { useEnumRules } from "@hooks/moneyDestination/useEnumRules";
 import { useDecisionForm } from "@hooks/forms/useDecisionForm";
-import { IMessageModal } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/decisions/IMessageModal";
-import { IRulesFormTextValues } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/decisions/IRulesFormTextValues";
-import { IEnumeratorsRules } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/decisions/IEnumeratorsRules";
+import { IMessageModal } from "@ptypes/decisions/IMessageModal";
+import { IRulesFormTextValues } from "@ptypes/decisions/IRulesFormTextValues";
 import { DecisionsFormUI } from "./interface";
 
 interface IDecisionsForm {
@@ -16,7 +15,7 @@ interface IDecisionsForm {
   labelBusinessRules: string;
   textValuesBusinessRules: IRulesFormTextValues;
   decisionTemplateConfig: (
-    enumeratorsRules: IEnumeratorsRules,
+    enumeratorsRules: IRuleDecision,
     conditionForSwitchPlace: string,
   ) => IRuleDecision | undefined;
   onButtonClick: () => void;

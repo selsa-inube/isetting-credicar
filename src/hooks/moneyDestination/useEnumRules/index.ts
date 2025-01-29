@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 
+import { IRuleDecision } from "@isettingkit/input";
 import { getEnumeratorsRules } from "@api/isettingCredicar/getEnumeratorsRules";
-import { IEnumeratorsRules } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/decisions/IEnumeratorsRules";
 
 const useEnumRules = (enumDestination: string, bussinesUnits: string) => {
-  const [enumRuleData, setEnumRuleData] = useState<IEnumeratorsRules>(
-    {} as IEnumeratorsRules,
+  const [enumRuleData, setEnumRuleData] = useState<IRuleDecision>(
+    {} as IRuleDecision,
   );
   const [hasError, setHasError] = useState(false);
 
