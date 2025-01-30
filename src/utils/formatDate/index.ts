@@ -1,17 +1,13 @@
-import { capitalizeText } from "../capitalizeText";
-
 const formatDate = (date: Date) => {
-  const options: Intl.DateTimeFormatOptions = {
+  const dateString = date.toLocaleDateString("es-ES", {
     day: "2-digit",
-    month: "short",
+    month: "2-digit",
     year: "numeric",
-    timeZone: "UTC",
-  };
-  const dateString = date.toLocaleDateString("es-ES", options);
+  });
 
-  const [day, month, year] = dateString.split(" ");
+  const [day, month, year] = dateString.split("/");
 
-  return `${day}/${capitalizeText(month)}/${year}`;
+  return `${year}-${month}-${day}`;
 };
 
 export { formatDate };
