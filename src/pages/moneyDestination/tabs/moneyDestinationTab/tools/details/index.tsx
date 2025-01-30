@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { IEntry } from "@components/data/Table/types";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 import { DetailsMoneyDestination } from "@design/feedback/detailsMoneyDestination";
-import { useDetailsDestination } from "@src/hooks/moneyDestination/useDetailsDestination";
+import { useDetailsDestination } from "@hooks/moneyDestination/useDetailsDestination";
 
 interface IDetails {
   data: IEntry;
