@@ -12,14 +12,14 @@ import { Tabs } from "@inubekit/tabs";
 
 import { tokens } from "@design/tokens";
 import { mediaQueryMobile } from "@config/environment";
-import { ComponentAppearance } from "@src/enum/appearances";
+import { ComponentAppearance } from "@enum/appearances";
 import { IEntry } from "@components/data/Table/types";
 import { decisions } from "@mocks/moneydestination/creditLine.mock";
-import { IRulesFormTextValues } from "@design/forms/decisions/types";
 import { StyledContainerButton, StyledModal } from "./styles";
 import { IDetailsTabsConfig } from "@components/modals/DetailsDestinationModal/types";
 import { GeneralDataTab } from "@components/modals/DetailsDestinationModal/GeneralDataTab";
 import { CreditLineTab } from "@components/modals/DetailsDestinationModal/CreditLineTab";
+import { IRulesFormTextValues } from "@ptypes/decisions/IRulesFormTextValues";
 
 interface IDetailsDestinationModalUI {
   data: IEntry;

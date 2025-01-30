@@ -18,4 +18,6 @@ const StyledModal = styled.div`
   z-index: 1;
 `;
 
-export { StyledModal };
+const StyledContentActions = styled.div``;
+
+export { StyledModal, StyledContentActions };

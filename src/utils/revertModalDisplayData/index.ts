@@ -5,18 +5,18 @@ const revertModalDisplayData = (
   originalDecision: IRuleDecision,
 ) => {
   const conditionToRestore = {
-    name: dataDecision.name,
-    dataType: dataDecision.dataType,
+    ruleName: dataDecision.ruleName,
+    decisionDataType: dataDecision.decisionDataType,
     value: dataDecision.value,
-    valueUse: dataDecision.valueUse,
-    possibleValue: dataDecision.possibleValue,
+    howToSetTheDecision: dataDecision.howToSetTheDecision,
+    listOfPossibleValues: dataDecision.listOfPossibleValues,
     switchPlaces: true,
   };
 
   return {
     ...originalDecision,
-    conditions: dataDecision.conditions?.map((condition) =>
-      condition.hidden ? conditionToRestore : condition,
+    conditions: dataDecision.conditionThatEstablishesTheDecision?.map(
+      (condition) => (condition.hidden ? conditionToRestore : condition),
     ),
   };
 };

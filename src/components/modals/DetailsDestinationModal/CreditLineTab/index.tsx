@@ -4,8 +4,8 @@ import { Stack } from "@inubekit/stack";
 import { Divider } from "@inubekit/divider";
 
 import { tokens } from "@design/tokens";
+import { IRulesFormTextValues } from "@ptypes/decisions/IRulesFormTextValues";
 import { StyledContainer } from "./styles";
-import { IRulesFormTextValues } from "@design/forms/decisions/types";
 
 interface ICreditLineTab {
   data: IRuleDecision[];

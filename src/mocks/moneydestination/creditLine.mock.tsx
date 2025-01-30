@@ -5,55 +5,58 @@ import {
 } from "@isettingkit/input";
 
 const decision1: IRuleDecision = {
-  id: "Decisión 1",
-  name: "LíneaDeCrédito",
-  dataType: ValueDataType.ALPHABETICAL,
-  value: "Crédito vacacional",
-  valueUse: ValueHowToSetUp.EQUAL,
-  startDate: "2024-12-31",
-  endDate: "2024-12-31",
-  conditions: [
+  decisionId: "Decisión 1",
+  ruleName: "LíneaDeCrédito",
+  labelName: "Crédito vacacional",
+  decisionDataType: ValueDataType.ALPHABETICAL,
+  howToSetTheDecision: ValueHowToSetUp.EQUAL,
+  effectiveFrom: "2024-12-31",
+  validUntil: "2024-12-31",
+  conditionThatEstablishesTheDecision: [
     {
-      name: "CategoriaCliente",
-      dataType: ValueDataType.ALPHABETICAL,
+      labelName: "Categoria del cliente",
+      conditionName: "CategoriaCliente",
+      conditionDataType: ValueDataType.ALPHABETICAL,
       value: ["Leales", "Platinum"],
-      valueUse: ValueHowToSetUp.LIST_OF_VALUES_MULTI,
+      howToSetTheCondition: ValueHowToSetUp.LIST_OF_VALUES_MULTI,
     },
   ],
 };
 
 const decision2: IRuleDecision = {
-  id: "Decisión 2",
-  name: "LíneaDeCrédito",
-  dataType: ValueDataType.ALPHABETICAL,
-  value: "Libre inversión",
-  valueUse: ValueHowToSetUp.EQUAL,
-  startDate: "2024-12-31",
-  endDate: "2024-12-31",
-  conditions: [
+  decisionId: "Decisión 2",
+  ruleName: "LíneaDeCrédito",
+  labelName: "Libre inversión",
+  decisionDataType: ValueDataType.ALPHABETICAL,
+  howToSetTheDecision: ValueHowToSetUp.EQUAL,
+  effectiveFrom: "2024-12-31",
+  validUntil: "2024-12-31",
+  conditionThatEstablishesTheDecision: [
     {
-      name: "CategoriaCliente",
-      dataType: ValueDataType.ALPHABETICAL,
+      labelName: "Categoria del cliente",
+      conditionName: "CategoriaCliente",
+      conditionDataType: ValueDataType.ALPHABETICAL,
       value: ["Ocasionales", "Plata"],
-      valueUse: ValueHowToSetUp.LIST_OF_VALUES_MULTI,
+      howToSetTheCondition: ValueHowToSetUp.LIST_OF_VALUES_MULTI,
     },
   ],
 };
 
 const decision3: IRuleDecision = {
-  id: "Decisión 3",
-  name: "LíneaDeCrédito",
-  dataType: ValueDataType.ALPHABETICAL,
+  decisionId: "Decisión 3",
+  ruleName: "LíneaDeCrédito",
+  decisionDataType: ValueDataType.ALPHABETICAL,
   value: "Libre inversión",
-  valueUse: ValueHowToSetUp.EQUAL,
-  startDate: "2024-12-31",
-  endDate: "2024-12-31",
-  conditions: [
+  howToSetTheDecision: ValueHowToSetUp.EQUAL,
+  effectiveFrom: "2024-12-31",
+  validUntil: "2024-12-31",
+  conditionThatEstablishesTheDecision: [
     {
-      name: "CategoriaCliente",
-      dataType: ValueDataType.ALPHABETICAL,
+      labelName: "Categoria del cliente",
+      conditionName: "CategoriaCliente",
+      conditionDataType: ValueDataType.ALPHABETICAL,
       value: ["Ocasionales", "Plata"],
-      valueUse: ValueHowToSetUp.LIST_OF_VALUES_MULTI,
+      howToSetTheCondition: ValueHowToSetUp.LIST_OF_VALUES_MULTI,
     },
   ],
 };

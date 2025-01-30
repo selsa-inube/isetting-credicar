@@ -10,7 +10,6 @@ import { DetailsCreditLinesModal } from "@components/modals/DetailsCreditLinesMo
 import { StyledContainerIcon } from "./styles";
 import { detailsTabsConfig } from "@config/creditLines/details/tabs";
 
-
 interface IDetails {
   data: IEntry;
 }

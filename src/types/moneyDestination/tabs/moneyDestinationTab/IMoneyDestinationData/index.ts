@@ -4,6 +4,7 @@ interface IMoneyDestinationData {
   iconReference: string;
   moneyDestinationId: string;
   id?: string | number;
+  name?: string;
 }
 
 export type { IMoneyDestinationData };

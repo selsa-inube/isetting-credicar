@@ -2,7 +2,6 @@ import { AxiosRequestConfig } from "axios";
 import { fetchWithRetries } from "../axiosConfig/getRequests";
 import { IEnumeratorsMoneyDestination } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/IEnumeratorsMoneyDestination";
 
-
 const getEnumeratorsMoneyDestination = async (
   enumDestination: string,
   bussinesUnits: string,

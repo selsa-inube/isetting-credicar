@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { MdOutlinePending } from "react-icons/md";
 import { Icon } from "@inubekit/icon";
 
 import { ActionsModal } from "@components/modals/ActionsModal";
-import { IAction, IEntry } from "@components/data/Table/types";
+import { IAction, IEntry } from "../types";
 import { StyledContainer, StyledContainerIcon } from "./styles";
 
 interface IActionMobile {
@@ -16,6 +16,7 @@ let isModalOpen = false;
 const ActionMobile = (props: IActionMobile) => {
   const { actions, entry } = props;
   const [showModal, setShowModal] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     isModalOpen = false;
@@ -33,6 +34,19 @@ const ActionMobile = (props: IActionMobile) => {
     isModalOpen = false;
   };
 
+  const handleClickOutside = (event: MouseEvent) => {
+    if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+      handleCloseModal();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <StyledContainer>
       <StyledContainerIcon>
@@ -45,7 +59,7 @@ const ActionMobile = (props: IActionMobile) => {
         />
       </StyledContainerIcon>
       {showModal && (
-        <div id="actionModal">
+        <div id="actionModal" ref={modalRef}>
           <ActionsModal
             actions={actions}
             entry={entry}

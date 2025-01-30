@@ -1,7 +1,5 @@
 import { useContext, useEffect } from "react";
-import {
-  RouterProvider,
-} from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 
 import { ErrorPage } from "@components/layout/ErrorPage";
 
@@ -9,7 +7,10 @@ import { GlobalStyles } from "./styles/global";
 import { usePortalData } from "@hooks/staffPortal/usePortalData";
 import { useBusinessManagers } from "@hooks/staffPortal/useBusinessManagers";
 import { useAuthRedirect } from "@hooks/authentication/useAuthRedirect";
-import {  AuthAndPortalData, AuthAndPortalDataProvider } from "@context/authAndPortalDataProvider";
+import {
+  AuthAndPortalData,
+  AuthAndPortalDataProvider,
+} from "@context/authAndPortalDataProvider";
 import { mainNavigation } from "./routes/mainNavigation";
 import { IUser } from "@ptypes/app.types";
 

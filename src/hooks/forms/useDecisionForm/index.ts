@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IRuleDecision } from "@isettingkit/input";
 
 const useDecisionForm = (
@@ -7,7 +7,9 @@ const useDecisionForm = (
     dataDecision: IRuleDecision,
     originalDecision: IRuleDecision,
   ) => void,
+  onButtonClick: () => void,
   setCreditLineDecisions: (decisions: IRuleDecision[]) => void,
+  editDataOption?: boolean,
 ) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDecision, setSelectedDecision] =
@@ -16,6 +18,10 @@ const useDecisionForm = (
   const [showAttentionModal, setShowAttentionModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [id, setId] = useState("");
+  const [hasChanges, setHasChanges] = useState(false);
+  const [savedDecisions, setSavedDecisions] = useState<IRuleDecision[]>([]);
+
+  const initialDecisions = useState(initialValues)[0];
 
   const handleOpenModal = () => {
     setSelectedDecision(null);
@@ -37,18 +43,19 @@ const useDecisionForm = (
         ) as unknown as IRuleDecision)
       : {
           ...dataDecision,
-          id: `Decisión ${decisions.length + 1}`,
+          decisionId: `Decisión ${decisions.length + 1}`,
         };
 
     const updatedDecisions = isEditing
       ? decisions.map((decision) =>
-          decision.id === selectedDecision.id ? newDecision : decision,
+          decision.decisionId === selectedDecision.decisionId
+            ? newDecision
+            : decision,
         )
       : [...decisions, newDecision];
 
     setDecisions(updatedDecisions);
     setCreditLineDecisions(updatedDecisions);
-
     handleCloseModal();
   };
 
@@ -62,23 +69,58 @@ const useDecisionForm = (
   };
 
   const handleDelete = () => {
-    const updatedDecisions = decisions.filter((decision) => decision.id !== id);
+    const updatedDecisions = decisions.filter(
+      (decision) => decision.decisionId !== id,
+    );
     setDecisions(updatedDecisions);
     setCreditLineDecisions(updatedDecisions);
     handleToggleDeleteModal(id);
   };
+
+  const handleSave = () => {
+    if (editDataOption) {
+      setHasChanges(false);
+      setSavedDecisions(decisions);
+      return decisions;
+    } else {
+      if (decisions && decisions.length > 0) {
+        onButtonClick();
+        setSavedDecisions(decisions);
+      } else {
+        handleToggleAttentionModal();
+      }
+    }
+  };
+
+  const handleReset = () => {
+    setDecisions(initialDecisions);
+    setSavedDecisions(initialDecisions);
+  };
+
+  useEffect(() => {
+    if (JSON.stringify(decisions) !== JSON.stringify(initialDecisions)) {
+      setHasChanges(true);
+    } else {
+      setHasChanges(false);
+    }
+  }, [decisions, initialDecisions]);
+
   return {
     isModalOpen,
     selectedDecision,
     decisions,
     showAttentionModal,
     showDeleteModal,
+    hasChanges,
+    savedDecisions,
     handleOpenModal,
     handleCloseModal,
     handleSubmitForm,
     handleToggleAttentionModal,
     handleToggleDeleteModal,
     handleDelete,
+    handleSave,
+    handleReset,
   };
 };
 

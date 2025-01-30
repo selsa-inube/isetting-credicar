@@ -1,12 +1,12 @@
-import { IEnumeratorsRules } from "@design/forms/decisions/types";
+import { IRuleDecision } from "@isettingkit/input";
 import { getEnumeratorsRules } from "@api/isettingCredicar/getEnumeratorsRules";
 import { mapEnumeratorsRulesApiToEntity } from "./mappers";
 
 const enumeratorsRules = async (
   ruleName: string,
   bussinesUnits: string,
-): Promise<IEnumeratorsRules> => {
-  const data: IEnumeratorsRules = await getEnumeratorsRules(
+): Promise<IRuleDecision> => {
+  const data: IRuleDecision = await getEnumeratorsRules(
     ruleName,
     bussinesUnits,
   );

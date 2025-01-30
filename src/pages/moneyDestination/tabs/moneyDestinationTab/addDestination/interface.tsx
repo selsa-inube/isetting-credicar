@@ -1,19 +1,26 @@
 import { FormikProps } from "formik";
 import { IRuleDecision } from "@isettingkit/input";
-import { useMediaQuery } from "@inubekit/hooks";
-import { Stack } from "@inubekit/stack";
-import { Breadcrumbs } from "@inubekit/breadcrumbs";
-import { Assisted, IAssistedStep } from "@inubekit/assisted";
+import {
+  Assisted,
+  Breadcrumbs,
+  IAssistedStep,
+  Stack,
+  useMediaQuery,
+} from "@inubekit/inubekit";
 
 import { Title } from "@components/data/Title";
-import { crumbsAddDestination } from "@config/moneyDestination/addDestination/navigation";
 import { tokens } from "@design/tokens";
 import { IRequestSteps } from "@design/feedback/RequestProcess/types";
-import { GeneralInformationForm } from "@pages/moneyDestination/tabs/moneyDestinationTab/forms/generalInformation";
-import { CreditLineForm } from "@pages/moneyDestination/tabs/moneyDestinationTab/forms/creditLine";
-import { VerificationForm } from "@pages/moneyDestination/tabs/moneyDestinationTab/forms/verificationForm";
-import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationEntry";
+import { GeneralInformationForm } from "@design/forms/generalInformationDestination";
+import { DecisionsForm } from "@design/forms/decisions";
 
+import { revertModalDisplayData } from "@utils/revertModalDisplayData";
+import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationDestination";
+import { crumbsAddDestination } from "@config/moneyDestination/addDestination/navigation";
+import { textValuesBusinessRules } from "@config/moneyDestination/moneyDestinationTab/businessRules";
+import { VerificationForm } from "../forms/verificationForm";
+import { attentionModal, deleteModal } from "@src/config/decisions/messages";
+import { decisionTemplateConfig } from "@src/config/decisions/decisionTemplateDestination";
 
 interface IAddDestinationUI {
   creditLineDecisions: IRuleDecision[];
@@ -34,7 +41,7 @@ interface IAddDestinationUI {
   setIsCurrentFormValid: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function AddDestinationUI(props: IAddDestinationUI) {
+const AddDestinationUI = (props: IAddDestinationUI) => {
   const {
     creditLineDecisions,
     currentStep,
@@ -96,15 +103,24 @@ function AddDestinationUI(props: IAddDestinationUI) {
                 ref={generalInformationRef}
                 initialValues={initialGeneralInformationValues}
                 onFormValid={setIsCurrentFormValid}
-                handleNextStep={onNextStep}
+                onButtonClick={onNextStep}
               />
             )}
             {currentStep === 2 && (
-              <CreditLineForm
-                onNextStep={onNextStep}
+              <DecisionsForm
+                attentionModal={attentionModal}
+                deleteModal={deleteModal}
+                textValuesBusinessRules={textValuesBusinessRules}
+                decisionTemplateConfig={decisionTemplateConfig}
+                onButtonClick={onNextStep}
                 onPreviousStep={onPreviousStep}
                 initialValues={creditLineDecisions}
-                setCreditLineDecisions={setCreditLineDecisions}
+                setDecisions={setCreditLineDecisions}
+                revertModalDisplayData={revertModalDisplayData}
+                labelBusinessRules="LineOfCredit"
+                conditionForSwitchPlace={
+                  initialGeneralInformationValues.nameDestination
+                }
               />
             )}
             {currentStep === 3 && (
@@ -133,6 +149,6 @@ function AddDestinationUI(props: IAddDestinationUI) {
       </Stack>
     </Stack>
   );
-}
+};
 
 export { AddDestinationUI };

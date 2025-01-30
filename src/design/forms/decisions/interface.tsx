@@ -7,9 +7,10 @@ import { Stack } from "@inubekit/stack";
 
 import { tokens } from "@design/tokens";
 import { DecisionModal } from "@components/modals/DecisionModal";
-import { ComponentAppearance } from "@src/enum/appearances";
+import { ComponentAppearance } from "@enum/appearances";
+import { IMessageModal } from "@ptypes/decisions/IMessageModal";
+import { IRulesFormTextValues } from "@ptypes/decisions/IRulesFormTextValues";
 import { StyledContainer } from "./styles";
-import { IMessageModal, IRulesFormTextValues } from "@design/forms/decisions/types";
 
 interface IDecisionsFormUI {
   attentionModal: IMessageModal;
@@ -22,7 +23,8 @@ interface IDecisionsFormUI {
   showAttentionModal: boolean;
   showDeleteModal: boolean;
   textValuesBusinessRules: IRulesFormTextValues;
-  onNextStep: () => void;
+  hasChanges: boolean;
+  onButtonClick: () => void;
   onPreviousStep: () => void;
   onCloseModal: () => void;
   onDelete: () => void;
@@ -30,9 +32,12 @@ interface IDecisionsFormUI {
   onSubmitForm: (dataDecision: IRuleDecision) => void;
   onToggleAttentionModal: () => void;
   onToggleDeleteModal: (id: string) => void;
+  onSave: () => void;
+  handleReset: () => void;
+  editDataOption?: boolean;
 }
 
-function DecisionsFormUI(props: IDecisionsFormUI) {
+const DecisionsFormUI = (props: IDecisionsFormUI) => {
   const {
     attentionModal,
     decisions,
@@ -44,14 +49,18 @@ function DecisionsFormUI(props: IDecisionsFormUI) {
     showAttentionModal,
     showDeleteModal,
     textValuesBusinessRules,
+    editDataOption,
+    hasChanges,
     onCloseModal,
     onDelete,
-    onNextStep,
+    onButtonClick,
     onOpenModal,
     onPreviousStep,
     onSubmitForm,
     onToggleAttentionModal,
     onToggleDeleteModal,
+    onSave,
+    handleReset,
   } = props;
 
   const isMobile = useMediaQuery("(max-width: 990px)");
@@ -91,22 +100,20 @@ function DecisionsFormUI(props: IDecisionsFormUI) {
         <Stack justifyContent="flex-end" gap={tokens.spacing.s250}>
           <Button
             fullwidth={isMobile}
-            onClick={onPreviousStep}
+            onClick={editDataOption ? handleReset : onPreviousStep}
             appearance={ComponentAppearance.GRAY}
+            disabled={editDataOption ? !hasChanges : false}
           >
-            Anterior
+            {editDataOption ? "Cancelar" : "Anterior"}
           </Button>
 
           <Button
             fullwidth={isMobile}
-            onClick={
-              decisions && decisions.length > 0
-                ? onNextStep
-                : onToggleAttentionModal
-            }
+            onClick={onSave}
             appearance={ComponentAppearance.PRIMARY}
+            disabled={editDataOption ? !hasChanges : false}
           >
-            Siguiente
+            {editDataOption ? "Guardar" : "Siguiente"}
           </Button>
         </Stack>
         {showAttentionModal && (
@@ -119,7 +126,7 @@ function DecisionsFormUI(props: IDecisionsFormUI) {
             icon={<MdOutlineWarningAmber />}
             appearance={ComponentAppearance.WARNING}
             onCloseModal={onToggleAttentionModal}
-            onClick={onNextStep}
+            onClick={onButtonClick}
           />
         )}
         {showDeleteModal && (
@@ -135,6 +142,6 @@ function DecisionsFormUI(props: IDecisionsFormUI) {
       </Stack>
     </form>
   );
-}
+};
 
 export { DecisionsFormUI };

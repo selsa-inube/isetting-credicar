@@ -6,8 +6,8 @@ import { CheckingCredentialsUI } from "./interface";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 
 interface ICheckingCredentials {
-   businessUnits: IBusinessUnitsPortalStaff[];
-};
+  businessUnits: IBusinessUnitsPortalStaff[];
+}
 
 function CheckingCredentials(props: ICheckingCredentials) {
   const { businessUnits } = props;

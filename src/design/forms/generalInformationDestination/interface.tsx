@@ -1,17 +1,20 @@
-import { MdCategory } from "react-icons/md";
 import { FormikProps } from "formik";
-import { useMediaQuery } from "@inubekit/hooks";
-import { Button } from "@inubekit/button";
-import { Stack } from "@inubekit/stack";
-import { Textarea } from "@inubekit/textarea";
-import { Text } from "@inubekit/text";
-import { Autosuggest } from "@inubekit/autosuggest";
+import {
+  Autosuggest,
+  Button,
+  Stack,
+  Text,
+  Textarea,
+  useMediaQuery,
+} from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
 
-import { ComponentAppearance } from "@enum/appearances";
+import { MdOutlineFax } from "react-icons/md";
 import { IServerDomain } from "@ptypes/IServerDomain";
-
+import { ComponentAppearance } from "@enum/appearances";
+import { getFieldState } from "@utils/forms/getFieldState";
+import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationDestination";
 import {
   StyledContainer,
   StyledContainerFields,
@@ -19,40 +22,34 @@ import {
   StyledIcon,
 } from "./styles";
 
-import { getFieldState } from "@utils/forms/getFieldState";
-import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationEntry";
-import { IEnumeratorsMoneyDestination } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/IEnumeratorsMoneyDestination";
-import { normalizeCodeDestination } from "@utils/destination/normalizeCodeDestination";
-import { normalizeDestination } from "@utils/destination/normalizeDestination";
-import { normalizeIconDestination } from "@utils/destination/normalizeIconDestination";
-
 interface IGeneralInformationFormUI {
   formik: FormikProps<IGeneralInformationEntry>;
-  enumData: IEnumeratorsMoneyDestination[];
   optionsDestination: IServerDomain[];
-  onNextStep: () => void;
+  autosuggestValue: string;
+  editDataOption: boolean;
+  icon: JSX.Element | undefined;
+  valuesEqual: boolean;
+  onButtonClick: () => void;
   onChange: (name: string, value: string) => void;
   loading?: boolean;
-  autosuggestValue: string;
+  isDisabledButton?: boolean;
 }
 
-function GeneralInformationFormUI(props: IGeneralInformationFormUI) {
+const GeneralInformationFormUI = (props: IGeneralInformationFormUI) => {
   const {
     formik,
     loading,
     optionsDestination,
-    enumData,
-    onNextStep,
+    editDataOption,
+    icon,
     onChange,
+    onButtonClick,
+    valuesEqual,
     autosuggestValue,
+    isDisabledButton,
   } = props;
 
   const isMobile = useMediaQuery("(max-width: 990px)");
-
-  const nameEnum =
-    normalizeCodeDestination(formik.values.nameDestination || "")?.code || "";
-
-  const data = normalizeDestination(enumData, nameEnum);
 
   return (
     <StyledContainer>
@@ -90,9 +87,7 @@ function GeneralInformationFormUI(props: IGeneralInformationFormUI) {
                       Icono
                     </Text>
                     <StyledIcon $isMobile={isMobile}>
-                      {normalizeIconDestination(data?.value ?? "")?.icon || (
-                        <MdCategory size={24} />
-                      )}
+                      {icon ?? <MdOutlineFax size={24} />}
                     </StyledIcon>
                   </Stack>
                 </Stack>
@@ -102,7 +97,7 @@ function GeneralInformationFormUI(props: IGeneralInformationFormUI) {
                   placeholder="Describe el destino."
                   name="description"
                   id="description"
-                  value={data?.description ?? formik.values.description}
+                  value={formik.values.description}
                   maxLength={1000}
                   disabled={loading}
                   status={getFieldState(formik, "description")}
@@ -121,21 +116,22 @@ function GeneralInformationFormUI(props: IGeneralInformationFormUI) {
           fullwidth={isMobile}
           onClick={() => formik.resetForm()}
           appearance={ComponentAppearance.GRAY}
+          disabled={valuesEqual}
         >
           Cancelar
         </Button>
 
         <Button
           fullwidth={isMobile}
-          onClick={onNextStep}
-          disabled={loading ?? !formik.isValid}
+          onClick={onButtonClick}
+          disabled={isDisabledButton}
           appearance={ComponentAppearance.PRIMARY}
         >
-          Siguiente
+          {editDataOption ? "Guardar" : "Siguiente"}
         </Button>
       </Stack>
     </StyledContainer>
   );
-}
+};
 
 export { GeneralInformationFormUI };
