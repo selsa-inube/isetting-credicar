@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IEntry } from "@components/data/Table/types";
+import { IEntry } from "@design/data/table/types";
 
 const useDeleteDestination = (
   data: IEntry,
