@@ -8,23 +8,29 @@ import { tokens } from "@design/tokens";
 import { ComponentAppearance } from "@enum/appearances";
 import { Table } from "@design/data/table";
 import { IEntry } from "@design/data/table/types";
-import { StyledContainer } from "./styles";
 import {
-  actions,
+  actionsConfig,
   breakPoints,
   titles,
 } from "@config/moneyDestination/moneyDestinationTab/table";
+import { StyledContainer } from "./styles";
 
 interface IMoneyDestinationTabUI {
   entries: IEntry[];
   loading: boolean;
   searchMoneyDestination: string;
   onSearchMoneyDestination: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setEntryDeleted: (value: string | number) => void;
 }
 
 function MoneyDestinationTabUI(props: IMoneyDestinationTabUI) {
-  const { searchMoneyDestination, entries, loading, onSearchMoneyDestination } =
-    props;
+  const {
+    searchMoneyDestination,
+    entries,
+    loading,
+    onSearchMoneyDestination,
+    setEntryDeleted,
+  } = props;
 
   const smallScreen = useMediaQuery("(max-width: 690px)");
   const widthFirstColumn = smallScreen ? 64 : 25;
@@ -77,7 +83,7 @@ function MoneyDestinationTabUI(props: IMoneyDestinationTabUI) {
             id="portal"
             titles={titles}
             entries={entries}
-            actions={actions}
+            actions={actionsConfig(setEntryDeleted)}
             breakpoints={breakPoints}
             filter={searchMoneyDestination}
             isLoading={loading}
