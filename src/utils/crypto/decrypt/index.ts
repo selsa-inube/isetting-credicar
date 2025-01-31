@@ -1,8 +1,8 @@
-import { secretKeyPortalId } from "@config/environment";
 import CryptoJS from "crypto-js";
+import { enviroment } from "@config/environment";
 
-const secretKey = CryptoJS.enc.Hex.parse(secretKeyPortalId);
-const iv = CryptoJS.enc.Hex.parse("abcdef9876543210abcdef9876543210");
+const secretKey = CryptoJS.enc.Hex.parse(enviroment.SECRET_KET_PORTAL_ID);
+const iv = CryptoJS.enc.Hex.parse(btoa(enviroment.SECRET_KET_PORTAL_IV));
 
 const decrypt = (data: string) => {
   try {

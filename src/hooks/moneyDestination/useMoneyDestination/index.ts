@@ -11,13 +11,13 @@ const useMoneyDestination = (bussinesUnits: string) => {
   const [searchMoneyDestination, setSearchMoneyDestination] =
     useState<string>("");
   const [loading, setLoading] = useState(true);
+  const [entryDeleted, setEntryDeleted] = useState<string | number>("");
 
   useEffect(() => {
     const fetchEnumData = async () => {
       setLoading(true);
       try {
         const data = await moneyDestinationData(bussinesUnits);
-
         setMoneyDestination(data);
       } catch (error) {
         console.info(error);
@@ -29,6 +29,14 @@ const useMoneyDestination = (bussinesUnits: string) => {
 
     fetchEnumData();
   }, []);
+
+  useEffect(() => {
+    if (entryDeleted) {
+      setMoneyDestination((prev) =>
+        prev.filter((entry) => entry.id !== entryDeleted),
+      );
+    }
+  }, [entryDeleted]);
 
   const handleSearchMoneyDestination = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -42,6 +50,7 @@ const useMoneyDestination = (bussinesUnits: string) => {
     searchMoneyDestination,
     loading,
     handleSearchMoneyDestination,
+    setEntryDeleted,
   };
 };
 
