@@ -5,23 +5,23 @@ import { Stack } from "@inubekit/stack";
 import { tokens } from "@design/tokens";
 import { Button } from "@inubekit/button";
 import { Input } from "@inubekit/input";
-import { useMediaQueries } from "@inubekit/hooks";
 
 import { RadioBusinessUnit } from "@components/feedback/RadioBusinessUnit";
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";
+import { IBusinessUnitstate } from "@ptypes/selectBusinessUnits/outlets/businessUnit/IBusinessUnitstate";
+import { NoResultsMessage } from "@design/feedback/noResultsMessage";
 import {
   StyledBusinessUnits,
-  StyledBusinessUnitsList,
-  StyledNoResults,
   StyledBusinessUnitsItem,
+  StyledBusinessUnitsList,
 } from "./styles";
-import { IBusinessUnitstate } from "@ptypes/selectBusinessUnits/outlets/businessUnit/IBusinessUnitstate";
-
 
 interface IBusinessUnitsUI {
   businessUnits: IBusinessUnitsPortalStaff[];
   search: string;
   businessUnit: IBusinessUnitstate;
+  screenMobile: boolean;
+  screenTablet: boolean;
   handleSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleBussinessUnitChange: (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -33,37 +33,20 @@ interface IBusinessUnitsUI {
   handleSubmit: () => void;
 }
 
-function NoResultsMessage({ search }: { search: string }) {
-  return (
-    <StyledNoResults>
-      <Text size="medium">
-        No se encontraron resultados para &quot;{search}&quot;.
-      </Text>
-      <Text size="medium">
-        Por favor, intenta modificando los parámetros de búsqueda.
-      </Text>
-    </StyledNoResults>
-  );
-}
-
-function BusinessUnitsUI({
-  businessUnits,
-  search,
-  businessUnit,
-  handleSearchChange,
-  filterBusinessUnits,
-  handleBussinessUnitChange,
-  handleSubmit,
-}: IBusinessUnitsUI) {
-  const filteredBusinessUnits = filterBusinessUnits(businessUnits, search);
-
+function BusinessUnitsUI(props: IBusinessUnitsUI) {
   const {
-    "(max-width: 532px)": screenMobile,
-    "(max-height: 1000px)": screenTablet,
-  }: Record<string, boolean> = useMediaQueries([
-    "(max-width: 532px)",
-    "(max-height: 1000px)",
-  ]);
+    businessUnits,
+    search,
+    businessUnit,
+    screenMobile,
+    screenTablet,
+    handleSearchChange,
+    filterBusinessUnits,
+    handleBussinessUnitChange,
+    handleSubmit,
+  } = props;
+
+  const filteredBusinessUnits = filterBusinessUnits(businessUnits, search);
 
   return (
     <StyledBusinessUnits $isMobile={screenMobile}>

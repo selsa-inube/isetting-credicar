@@ -1,8 +1,9 @@
 import { useEffect, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { SelectBusinessUnitsUI } from "./interface";
-import { validateBusinessUnities } from "./utils";
+
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
+import { validateBusinessUnities } from "@utils/selectBusinessUnits/validateBusinessUnities";
 
 function SelectBusinessUnits() {
   const navigate = useNavigate();
