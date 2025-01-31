@@ -4,7 +4,7 @@ import { Button } from "@inubekit/button";
 import { Stack } from "@inubekit/stack";
 
 import { ComponentAppearance } from "@enum/appearances";
-import { Accordion } from "@design/data/accordion";
+import { Accordion } from "@src/design/data/accordions";
 import { tokens } from "@design/tokens";
 import { IRequestSteps } from "@design/feedback/RequestProcess/types";
 import { VerificationBoxes } from "@pages/moneyDestination/tabs/moneyDestinationTab/forms/verificationForm/verificationBoxes";

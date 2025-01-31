@@ -5,8 +5,8 @@ import { Grid } from "@inubekit/grid";
 
 import { tokens } from "@design/tokens";
 import { ComponentAppearance } from "@enum/appearances";
-import { IAttribute } from "@design/feedback/boxAttribute/types";
-import { ButtonAttribute } from "./buttonAttribute";
+import { IAttribute } from "./types";
+import { ButtonAttribute } from "./ButtonAttribute";
 import { StyledBoxAttribute } from "./styles";
 
 interface IBoxAttribute {
@@ -66,7 +66,9 @@ const BoxAttribute = (props: IBoxAttribute) => {
               appearance={ComponentAppearance.GRAY}
               textAlign={direction === "column" ? "start" : "end"}
             >
-              {String(value)}
+              {typeof value === "object"
+                ? JSON.stringify(value)
+                : String(value)}
             </Text>
           )}
         </Stack>
