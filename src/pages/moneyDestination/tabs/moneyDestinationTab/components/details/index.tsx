@@ -5,14 +5,14 @@ import { useMediaQuery } from "@inubekit/hooks";
 import { Text } from "@inubekit/text";
 
 import { ComponentAppearance } from "@enum/appearances";
-import { IEntry } from "@components/data/Table/types";
-import { DetailsDestinationModal } from "@components/modals/DetailsDestinationModal";
-import { StyledContainerIcon } from "./styles";
+import { IEntry } from "@design/data/table/types";
 import {
   decisionTemplate,
   textValuesBusinessRules,
 } from "@config/moneyDestination/moneyDestinationTab/businessRules";
 import { detailsTabsConfig } from "@config/moneyDestination/moneyDestinationTab/generics/detailsTabsConfig";
+import { DetailsDestinationModal } from "@design/modals/detailsDestinationModal";
+import { StyledContainerIcon } from "./styles";
 
 interface IDetails {
   data: IEntry;

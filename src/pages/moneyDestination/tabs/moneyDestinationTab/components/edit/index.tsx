@@ -3,10 +3,10 @@ import { MdOutlineCreate } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { Icon, Text, useMediaQuery } from "@inubekit/inubekit";
 
-import { DecisionModal } from "@components/modals/DecisionModal";
-import { IEntry } from "@components/data/Table/types";
+import { IEntry } from "@design/data/table/types";
 import { ComponentAppearance } from "@enum/appearances";
 import { editMoneyDestinationModal } from "@config/moneyDestination/moneyDestinationTab/generics/editMoneyDestinationModal";
+import { DecisionModal } from "@design/modals/decisionModal";
 import { StyledContainerIcon } from "./styles";
 
 interface IEdit {

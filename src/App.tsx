@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { RouterProvider } from "react-router-dom";
 
-import { ErrorPage } from "@components/layout/ErrorPage";
+import { ErrorPage } from "@design/layout/errorPage";
 
 import { GlobalStyles } from "./styles/global";
 import { usePortalData } from "@hooks/staffPortal/usePortalData";

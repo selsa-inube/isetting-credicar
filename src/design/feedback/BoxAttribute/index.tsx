@@ -5,9 +5,9 @@ import { Grid } from "@inubekit/grid";
 
 import { tokens } from "@design/tokens";
 import { ComponentAppearance } from "@enum/appearances";
-import { ButtonAttribute } from "./ButtonAttribute";
+import { IAttribute } from "@design/feedback/boxAttribute/types";
+import { ButtonAttribute } from "./buttonAttribute";
 import { StyledBoxAttribute } from "./styles";
-import { IAttribute } from "@design/feedback/BoxAttribute/types";
 
 interface IBoxAttribute {
   label: string;
@@ -19,7 +19,7 @@ interface IBoxAttribute {
   onClickButton?: () => void;
 }
 
-function BoxAttribute(props: IBoxAttribute) {
+const BoxAttribute = (props: IBoxAttribute) => {
   const {
     label,
     value,
@@ -73,7 +73,7 @@ function BoxAttribute(props: IBoxAttribute) {
       </Grid>
     </StyledBoxAttribute>
   );
-}
+};
 
 export { BoxAttribute };
 export type { IBoxAttribute };

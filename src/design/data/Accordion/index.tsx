@@ -4,7 +4,7 @@ import { Text } from "@inubekit/text";
 import { Icon } from "@inubekit/icon";
 import { Divider } from "@inubekit/divider";
 
-import { ComponentAppearance } from "@src/enum/appearances";
+import { ComponentAppearance } from "@enum/appearances";
 import { StyledContainer, StyledHead } from "./styles";
 
 interface IAccordion {

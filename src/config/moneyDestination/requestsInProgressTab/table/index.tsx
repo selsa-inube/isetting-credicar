@@ -1,7 +1,7 @@
 import { MdDeleteOutline } from "react-icons/md";
 import { Icon } from "@inubekit/icon";
 
-import { IAction, ITitle } from "@components/data/Table/types";
+import { IAction, ITitle } from "@design/data/table/types";
 import { ComponentAppearance } from "@enum/appearances";
 import { Details } from "@pages/moneyDestination/tabs/requestsInProgressTab/components/details";
 

@@ -3,11 +3,14 @@ import { Header } from "@inubekit/header";
 import { Icon } from "@inubekit/icon";
 import { useMediaQueries } from "@inubekit/hooks";
 
-import { AppCard } from "@components/feedback/AppCard";
-import { Title } from "@components/data/Title";
+import { AppCard } from "@design/feedback/appCard";
+import { Title } from "@design/data/title";
 import { BusinessUnitChange } from "@design/inputs/BusinessUnitChange";
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";
-
+import { mainNavigation } from "@config/mainNavigation";
+import { userMenu } from "@config/menuMainConfiguration";
+import { ICardData } from "@ptypes/home/ICardData";
+import { IAppData } from "@ptypes/context/authAndPortalDataProvider/IAppData";
 import {
   StyledCollapse,
   StyledCollapseIcon,
@@ -20,11 +23,6 @@ import {
   StyledLogo,
   StyledTitle,
 } from "./styles";
-
-import { mainNavigation } from "@config/mainNavigation";
-import { userMenu } from "@config/menuMainConfiguration";
-import { ICardData } from "@ptypes/home/ICardData";
-import { IAppData } from "@ptypes/context/authAndPortalDataProvider/IAppData";
 
 interface IHomeUI {
   appData: IAppData;

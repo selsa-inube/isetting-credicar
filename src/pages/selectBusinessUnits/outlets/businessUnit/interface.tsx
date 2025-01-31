@@ -7,16 +7,15 @@ import { Button } from "@inubekit/button";
 import { Input } from "@inubekit/input";
 import { useMediaQueries } from "@inubekit/hooks";
 
-import { RadioBusinessUnit } from "@components/feedback/RadioBusinessUnit";
+import { RadioBusinessUnit } from "@design/feedback/radioBusinessUnit";
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";
+import { IBusinessUnitstate } from "@ptypes/selectBusinessUnits/outlets/businessUnit/IBusinessUnitstate";
 import {
   StyledBusinessUnits,
   StyledBusinessUnitsList,
   StyledNoResults,
   StyledBusinessUnitsItem,
 } from "./styles";
-import { IBusinessUnitstate } from "@ptypes/selectBusinessUnits/outlets/businessUnit/IBusinessUnitstate";
-
 
 interface IBusinessUnitsUI {
   businessUnits: IBusinessUnitsPortalStaff[];

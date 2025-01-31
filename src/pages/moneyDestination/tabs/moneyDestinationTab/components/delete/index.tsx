@@ -1,15 +1,14 @@
 import { MdDeleteOutline } from "react-icons/md";
 import { useState } from "react";
 import { Icon } from "@inubekit/icon";
-
-import { DecisionModal } from "@components/modals/DecisionModal";
-import { ComponentAppearance } from "@enum/appearances";
-import { IEntry } from "@components/data/Table/types";
-
-import { useMediaQuery } from "@inubekit/hooks";
-import { StyledContainerIcon } from "./styles";
 import { Text } from "@inubekit/text";
+import { useMediaQuery } from "@inubekit/hooks";
+
+import { ComponentAppearance } from "@enum/appearances";
+import { IEntry } from "@design/data/table/types";
 import { deleteMoneyDestinationModal } from "@config/moneyDestination/moneyDestinationTab/generics/deleteMoneyDestinationModal";
+import { DecisionModal } from "@design/modals/decisionModal";
+import { StyledContainerIcon } from "./styles";
 
 interface IDelete {
   data: IEntry;

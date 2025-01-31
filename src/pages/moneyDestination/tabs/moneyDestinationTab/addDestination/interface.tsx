@@ -8,19 +8,18 @@ import {
   useMediaQuery,
 } from "@inubekit/inubekit";
 
-import { Title } from "@components/data/Title";
+import { Title } from "@design/data/title";
 import { tokens } from "@design/tokens";
 import { IRequestSteps } from "@design/feedback/RequestProcess/types";
 import { GeneralInformationForm } from "@design/forms/generalInformationDestination";
 import { DecisionsForm } from "@design/forms/decisions";
-
 import { revertModalDisplayData } from "@utils/revertModalDisplayData";
 import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationDestination";
 import { crumbsAddDestination } from "@config/moneyDestination/addDestination/navigation";
 import { textValuesBusinessRules } from "@config/moneyDestination/moneyDestinationTab/businessRules";
 import { VerificationForm } from "../forms/verificationForm";
-import { attentionModal, deleteModal } from "@src/config/decisions/messages";
-import { decisionTemplateConfig } from "@src/config/decisions/decisionTemplateDestination";
+import { attentionModal, deleteModal } from "@config/decisions/messages";
+import { decisionTemplateConfig } from "@config/decisions/decisionTemplateDestination";
 
 interface IAddDestinationUI {
   creditLineDecisions: IRuleDecision[];

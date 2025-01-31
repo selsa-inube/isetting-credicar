@@ -4,7 +4,7 @@ import { Breadcrumbs } from "@inubekit/breadcrumbs";
 
 import { tokens } from "@design/tokens";
 import { Tabs } from "@design/feedback/Tabs";
-import { Title } from "@components/data/Title";
+import { Title } from "@design/data/title";
 import { crumbsMoneyDestination } from "@config/moneyDestination/navigation";
 import { moneyDestinationTabsConfig } from "@config/moneyDestination/tabs";
 import { MoneyDestinationTab } from "@pages/moneyDestination/tabs/moneyDestinationTab";

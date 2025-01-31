@@ -1,7 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
 import { Meta, StoryFn } from "@storybook/react";
 
-import { ComponentAppearance } from "@src/enum/appearances";
+import { ComponentAppearance } from "@enum/appearances";
 import { IRequestProcess, RequestProcess } from "..";
 
 const meta: Meta<typeof RequestProcess> = {

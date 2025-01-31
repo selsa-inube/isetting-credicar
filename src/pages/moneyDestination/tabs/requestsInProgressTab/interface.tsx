@@ -3,10 +3,14 @@ import { useMediaQuery } from "@inubekit/hooks";
 import { Input } from "@inubekit/input";
 
 import { tokens } from "@design/tokens";
-import { Table } from "@components/data/Table";
+import { Table } from "@design/data/table";
 import { dataRequestsInProgress } from "@mocks/moneydestination/requestsInProgress.mock";
 import { StyledContainer } from "./styles";
-import { actions, breakPoints, titles } from "@config/moneyDestination/requestsInProgressTab/table";
+import {
+  actions,
+  breakPoints,
+  titles,
+} from "@config/moneyDestination/requestsInProgressTab/table";
 
 interface IRequestsInProgressTabUI {
   loading: boolean;

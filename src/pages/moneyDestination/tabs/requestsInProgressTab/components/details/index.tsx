@@ -5,12 +5,11 @@ import { useMediaQuery } from "@inubekit/hooks";
 import { Text } from "@inubekit/text";
 
 import { ComponentAppearance } from "@enum/appearances";
-import { DetailsRequestsInProgressModal } from "@components/modals/DetailsRequestsInProgressModal";
-import { IEntry } from "@components/data/Table/types";
-import { StyledContainerIcon } from "./styles";
+import { IEntry } from "@design/data/table/types";
 import { labelsOfRequest } from "@config/moneyDestination/requestsInProgressTab/details/labelsOfRequest";
 import { labelsOfTraceability } from "@config/moneyDestination/requestsInProgressTab/details/labelsOfTraceability";
-
+import { DetailsRequestsInProgressModal } from "@design/modals/detailsRequestsInProgressModal";
+import { StyledContainerIcon } from "./styles";
 
 interface IDetails {
   data: IEntry;

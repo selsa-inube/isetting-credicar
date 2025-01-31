@@ -3,7 +3,7 @@ import { Grid } from "@inubekit/grid";
 import { Stack } from "@inubekit/stack";
 import { Tag } from "@inubekit/tag";
 
-import { BoxAttribute } from "@design/feedback/BoxAttribute";
+import { BoxAttribute } from "@design/feedback/boxAttribute";
 import { tokens } from "@design/tokens";
 import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationDestination";
 import { ComponentAppearance } from "@enum/appearances";
