@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useMediaQueries } from "@inubekit/hooks";
 import { validateBusinessUnities } from "@pages/selectBusinessUnits/utils";
 import { IAppData } from "@ptypes/context/authAndPortalDataProvider/IAppData";
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";
-import { useMediaQueries } from "@inubekit/hooks";
 
 const useSelectBusinessUnits = (
   appData: IAppData,
