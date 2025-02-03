@@ -12,7 +12,7 @@ const useAppData = (
   user: IUser,
   businessUnit: string | undefined,
 ) => {
-  const { setAppData, setBusinessUnitSigla } = useContext(AuthAndPortalData);
+  const { setBusinessUnitSigla } = useContext(AuthAndPortalData);
   const updateAppData = () => {
     if (code) {
       localStorage.setItem("portalCode", code);
@@ -24,13 +24,10 @@ const useAppData = (
     }
 
     if (user) {
-      setAppData((prev) => ({
-        ...prev,
-        user: {
-          userAccount: user.email,
-          userName: user.name,
-        },
-      }));
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ email: user.email, userName: user.name }),
+      );
     }
   };
 
