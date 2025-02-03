@@ -32,9 +32,6 @@ const useValidatingLoginInformation = () => {
     console.error("Error parsing businessUnitSigla:", error);
   }
 
-  const userLocal = JSON.parse(localStorage.getItem("user") ?? "{}");
-  const { userName, email } = userLocal;
-
   const [appData, setAppData] = useState<IAppData>({
     portal: {
       abbreviatedName: "",
@@ -55,8 +52,8 @@ const useValidatingLoginInformation = () => {
       urlLogo: businessUnitData?.urlLogo || "",
     },
     user: {
-      userAccount: email || user?.email || "",
-      userName: userName || user?.name || "",
+      userAccount: user?.email ?? "",
+      userName: user?.name ?? "",
     },
   });
 
@@ -81,26 +78,6 @@ const useValidatingLoginInformation = () => {
       },
     }));
   }, [businessManagersData, portalData, portalCode]);
-
-  useEffect(() => {
-    if (userName || email) {
-      setAppData((prev) => ({
-        ...prev,
-        user: {
-          userAccount: email,
-          userName: userName,
-        },
-      }));
-    } else if (user) {
-      setAppData((prev) => ({
-        ...prev,
-        user: {
-          userAccount: user.email ?? "",
-          userName: user.name ?? "",
-        },
-      }));
-    }
-  }, [user, userName, email]);
 
   useEffect(() => {
     localStorage.setItem("businessUnitSigla", businessUnitSigla);
