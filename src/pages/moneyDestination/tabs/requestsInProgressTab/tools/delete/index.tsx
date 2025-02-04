@@ -1,7 +1,7 @@
 import { IEntry } from "@components/data/Table/types";
-import { deleteMoneyDestinationModal } from "@config/moneyDestination/moneyDestinationTab/generics/deleteMoneyDestinationModal";
 import { DeleteRecord } from "@design/feedback/DeleteRecord";
 import { useDeleteRequestInProgress } from "@hooks/moneyDestination/useDeleteRequestInProgress";
+import { deleteRequestInProgress } from "@config/moneyDestination/moneyDestinationTab/generics/deleteRequestInProgress";
 
 interface IDelete {
   data: IEntry;
@@ -16,7 +16,7 @@ const Delete = (props: IDelete) => {
 
   return (
     <DeleteRecord
-      messageDelete={deleteMoneyDestinationModal}
+      messageDelete={deleteRequestInProgress}
       showModal={showModal}
       onToggleModal={handleToggleModal}
       onClick={handleClick}
