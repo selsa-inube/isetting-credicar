@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-
-import { moneyDestinationData } from "@services/moneyDestination/getMoneyDestination";
 import { IMoneyDestinationData } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/IMoneyDestinationData";
+import { getMoneyDestinationData } from "@services/moneyDestination/getMoneyDestination";
 
 const useMoneyDestination = (bussinesUnits: string) => {
   const [moneyDestination, setMoneyDestination] = useState<
@@ -17,7 +16,7 @@ const useMoneyDestination = (bussinesUnits: string) => {
     const fetchEnumData = async () => {
       setLoading(true);
       try {
-        const data = await moneyDestinationData(bussinesUnits);
+        const data = await getMoneyDestinationData(bussinesUnits);
         setMoneyDestination(data);
       } catch (error) {
         console.info(error);
