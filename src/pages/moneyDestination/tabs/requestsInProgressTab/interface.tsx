@@ -4,18 +4,24 @@ import { Input } from "@inubekit/input";
 
 import { tokens } from "@design/tokens";
 import { Table } from "@components/data/Table";
-import { dataRequestsInProgress } from "@mocks/moneydestination/requestsInProgress.mock";
 import { StyledContainer } from "./styles";
-import { actions, breakPoints, titles } from "@config/moneyDestination/requestsInProgressTab/table";
+import {
+  actions,
+  breakPoints,
+  titles,
+} from "@config/moneyDestination/requestsInProgressTab/table";
+import { IEntry } from "@components/data/Table/types";
 
 interface IRequestsInProgressTabUI {
+  entries: IEntry[];
   loading: boolean;
   searchrequestProgress: string;
   onSearchrequestProgress: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function RequestsInProgressTabUI(props: IRequestsInProgressTabUI) {
-  const { searchrequestProgress, loading, onSearchrequestProgress } = props;
+  const { entries, searchrequestProgress, loading, onSearchrequestProgress } =
+    props;
 
   const smallScreen = useMediaQuery("(max-width: 690px)");
   const widthFirstColumn = smallScreen ? 60 : 10;
@@ -57,12 +63,12 @@ function RequestsInProgressTabUI(props: IRequestsInProgressTabUI) {
           <Table
             id="portal"
             titles={titles}
-            entries={dataRequestsInProgress}
+            entries={entries}
             actions={actions}
             breakpoints={breakPoints}
             filter={searchrequestProgress}
             isLoading={loading}
-            columnWidths={[widthFirstColumn, 67, 10]}
+            columnWidths={[widthFirstColumn, 55, 23]}
           />
         </Stack>
       </Stack>

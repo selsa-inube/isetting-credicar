@@ -7,7 +7,7 @@ import { Details } from "@pages/moneyDestination/tabs/requestsInProgressTab/comp
 
 const titles: ITitle[] = [
   {
-    id: "date",
+    id: "requestDate",
     titleName: "Fecha",
     priority: 0,
   },
@@ -17,7 +17,7 @@ const titles: ITitle[] = [
     priority: 1,
   },
   {
-    id: "status",
+    id: "requestStatus",
     titleName: "Estado",
     priority: 2,
   },

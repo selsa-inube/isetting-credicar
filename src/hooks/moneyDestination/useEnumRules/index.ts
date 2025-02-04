@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import { IRuleDecision } from "@isettingkit/input";
-import { getEnumeratorsRules } from "@api/isettingCredicar/getEnumeratorsRules";
+import { getEnumeratorsRules } from "@services/conditionsRules/getEnumeratorsRules";
 
 const useEnumRules = (enumDestination: string, bussinesUnits: string) => {
   const [enumRuleData, setEnumRuleData] = useState<IRuleDecision>(

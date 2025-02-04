@@ -128,7 +128,9 @@ function DetailsRequestsInProgressModal(
                         (normalizeStatusByName(data[field.id])
                           ?.appearance as ITagAppearance) || "light"
                       }
-                      label={normalizeStatusByName(data[field.id])?.name || ""}
+                      label={
+                        normalizeStatusByName(data[field.id])?.status || ""
+                      }
                     />
                   </Stack>
                 </StyledContainerFields>

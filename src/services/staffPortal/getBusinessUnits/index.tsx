@@ -1,16 +1,26 @@
+import { AxiosRequestConfig } from "axios";
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";
-import { getBusinessUnitsPortalStaff } from "@api/iPortalStaffQuery";
+import { getWithRetries } from "@services/core/getWithRetries";
+import { axiosInstance } from "@api/iPortalStaff";
 import { mapBusinessUnitsPortalStaffToEntities } from "./mappers";
 
-const businessUnitsPortalStaff = async (
+const getBusinessUnitsPortalStaff = async (
   portalPublicCode: string,
   userAccount: string,
 ): Promise<IBusinessUnitsPortalStaff[]> => {
-  const data: IBusinessUnitsPortalStaff[] = await getBusinessUnitsPortalStaff(
-    portalPublicCode,
-    userAccount,
+  const config: AxiosRequestConfig = {
+    headers: {
+      "X-Action": "SearchBusinessUnitsForAnOfficer",
+    },
+  };
+  const data: IBusinessUnitsPortalStaff[] = await getWithRetries<
+    IBusinessUnitsPortalStaff[]
+  >(
+    axiosInstance,
+    `/business-units-portal-staff/${userAccount}/${portalPublicCode}`,
+    config,
   );
   return Array.isArray(data) ? mapBusinessUnitsPortalStaffToEntities(data) : [];
 };
 
-export { businessUnitsPortalStaff };
+export { getBusinessUnitsPortalStaff };

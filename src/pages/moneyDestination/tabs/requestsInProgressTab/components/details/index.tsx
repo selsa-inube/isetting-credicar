@@ -11,7 +11,6 @@ import { StyledContainerIcon } from "./styles";
 import { labelsOfRequest } from "@config/moneyDestination/requestsInProgressTab/details/labelsOfRequest";
 import { labelsOfTraceability } from "@config/moneyDestination/requestsInProgressTab/details/labelsOfTraceability";
 
-
 interface IDetails {
   data: IEntry;
 }
@@ -30,6 +29,14 @@ const Details = (props: IDetails) => {
   };
 
   const screenTablet = useMediaQuery("(max-width: 1200px)");
+
+  const normalizeData = {
+    ...data,
+    request: data.configurationRequestsTraceability[0].actionExecuted,
+    responsable:
+      data.configurationRequestsTraceability[0].userWhoExecutedAction,
+    status: data.requestStatus,
+  };
 
   return (
     <>
@@ -50,7 +57,7 @@ const Details = (props: IDetails) => {
 
       {showModal && (
         <DetailsRequestsInProgressModal
-          data={data}
+          data={normalizeData}
           portalId="portal"
           labelsOfRequest={labelsOfRequest}
           labelsOfTraceability={labelsOfTraceability}
