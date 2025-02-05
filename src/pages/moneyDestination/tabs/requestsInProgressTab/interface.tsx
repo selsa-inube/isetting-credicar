@@ -1,27 +1,30 @@
-import { Stack } from "@inubekit/stack";
-import { useMediaQuery } from "@inubekit/hooks";
-import { Input } from "@inubekit/input";
-
+import { Input, Stack, useMediaQuery } from "@inubekit/inubekit";
 import { tokens } from "@design/tokens";
 import { Table } from "@components/data/Table";
-import { StyledContainer } from "./styles";
 import {
-  actions,
+  actionsConfig,
   breakPoints,
   titles,
 } from "@config/moneyDestination/requestsInProgressTab/table";
 import { IEntry } from "@components/data/Table/types";
+import { StyledContainer } from "./styles";
 
 interface IRequestsInProgressTabUI {
   entries: IEntry[];
   loading: boolean;
   searchrequestProgress: string;
+  setEntryDeleted: (value: string | number) => void;
   onSearchrequestProgress: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function RequestsInProgressTabUI(props: IRequestsInProgressTabUI) {
-  const { entries, searchrequestProgress, loading, onSearchrequestProgress } =
-    props;
+  const {
+    entries,
+    searchrequestProgress,
+    loading,
+    setEntryDeleted,
+    onSearchrequestProgress,
+  } = props;
 
   const smallScreen = useMediaQuery("(max-width: 690px)");
   const widthFirstColumn = smallScreen ? 60 : 10;
@@ -64,7 +67,7 @@ function RequestsInProgressTabUI(props: IRequestsInProgressTabUI) {
             id="portal"
             titles={titles}
             entries={entries}
-            actions={actions}
+            actions={actionsConfig(setEntryDeleted)}
             breakpoints={breakPoints}
             filter={searchrequestProgress}
             isLoading={loading}

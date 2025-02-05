@@ -1,7 +1,8 @@
-import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";
-import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 import { IBusinessUnitstate } from "@ptypes/selectBusinessUnits/outlets/businessUnit/IBusinessUnitstate";
 
 const useBusinessUnits = (businessUnits: IBusinessUnitsPortalStaff[]) => {

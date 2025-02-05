@@ -13,6 +13,7 @@ interface IDetailsDestinationModal {
   portalId: string;
   data: IEntry;
   decisionTemplate: IRuleDecision;
+  decisions: IRuleDecision[];
   textValues: IRulesFormTextValues;
   onCloseModal: () => void;
 }
@@ -23,6 +24,7 @@ function DetailsDestinationModal(props: IDetailsDestinationModal) {
     portalId,
     data,
     decisionTemplate,
+    decisions,
     textValues,
     onCloseModal,
   } = props;
@@ -46,6 +48,7 @@ function DetailsDestinationModal(props: IDetailsDestinationModal) {
       smallScreenTab={isMobile}
       decisionTemplate={decisionTemplate}
       textValues={textValues}
+      decisions={decisions}
     />
   );
 }

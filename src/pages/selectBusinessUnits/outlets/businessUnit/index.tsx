@@ -1,6 +1,6 @@
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";
-import { BusinessUnitsUI } from "./interface";
 import { useBusinessUnits } from "@hooks/selectBusinessUnits/useBusinessUnits";
+import { BusinessUnitsUI } from "./interface";
 
 interface IBusinessUnits {
   businessUnits: IBusinessUnitsPortalStaff[];

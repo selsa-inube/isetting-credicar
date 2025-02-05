@@ -14,12 +14,11 @@ import { tokens } from "@design/tokens";
 import { mediaQueryMobile } from "@config/environment";
 import { ComponentAppearance } from "@enum/appearances";
 import { IEntry } from "@components/data/Table/types";
-import { decisions } from "@mocks/moneydestination/creditLine.mock";
-import { StyledContainerButton, StyledModal } from "./styles";
 import { IDetailsTabsConfig } from "@components/modals/DetailsDestinationModal/types";
 import { GeneralDataTab } from "@components/modals/DetailsDestinationModal/GeneralDataTab";
 import { CreditLineTab } from "@components/modals/DetailsDestinationModal/CreditLineTab";
 import { IRulesFormTextValues } from "@ptypes/decisions/IRulesFormTextValues";
+import { StyledContainerButton, StyledModal } from "./styles";
 
 interface IDetailsDestinationModalUI {
   data: IEntry;
@@ -29,6 +28,7 @@ interface IDetailsDestinationModalUI {
   portalId: string;
   smallScreenTab: boolean;
   textValues: IRulesFormTextValues;
+  decisions: IRuleDecision[];
   onCloseModal: () => void;
   onTabChange: (id: string) => void;
 }
@@ -43,6 +43,7 @@ function DetailsDestinationModalUI(props: IDetailsDestinationModalUI) {
     portalId,
     textValues,
     decisionTemplate,
+    decisions,
     onCloseModal,
   } = props;
 

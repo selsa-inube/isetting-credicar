@@ -1,27 +1,30 @@
 import { MdClear, MdOutlineRemoveRedEye } from "react-icons/md";
 import { createPortal } from "react-dom";
-import { Button } from "@inubekit/button";
-import { useMediaQuery } from "@inubekit/hooks";
-import { Stack } from "@inubekit/stack";
-import { Text } from "@inubekit/text";
-import { Blanket } from "@inubekit/blanket";
-import { Icon } from "@inubekit/icon";
-import { Divider } from "@inubekit/divider";
-import { ITagAppearance, Tag } from "@inubekit/tag";
-import { Select } from "@inubekit/select";
+import {
+  Blanket,
+  Button,
+  Divider,
+  Icon,
+  ITagAppearance,
+  Select,
+  Stack,
+  Tag,
+  Text,
+  useMediaQuery,
+} from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
 import { mediaQueryMobile } from "@config/environment";
 import { ComponentAppearance } from "@enum/appearances";
 import { normalizeStatusByName } from "@utils/status/normalizeStatusByName";
 import { IEntry } from "@components/data/Table/types";
-import { getDomainById } from "@mocks/domains/domainService.mocks";
+import { ILabel } from "@components/modals/DetailsRequestsInProgressModal/types";
+import { IServerDomain } from "@ptypes/IServerDomain";
 import {
   StyledContainerButton,
   StyledContainerFields,
   StyledModal,
 } from "./styles";
-import { ILabel } from "@components/modals/DetailsRequestsInProgressModal/types";
 
 interface IDetailsRequestsInProgressModal {
   data: IEntry;
@@ -29,6 +32,7 @@ interface IDetailsRequestsInProgressModal {
   labelsOfTraceability: ILabel[];
   portalId: string;
   dateSelected: string;
+  dateOptions: IServerDomain[];
   onCloseModal: () => void;
   onChange: (name: string, value: string) => void;
   onMoreDetails: () => void;
@@ -43,6 +47,7 @@ function DetailsRequestsInProgressModal(
     labelsOfRequest,
     labelsOfTraceability,
     dateSelected,
+    dateOptions,
     onChange,
     onCloseModal,
     onMoreDetails,
@@ -94,7 +99,7 @@ function DetailsRequestsInProgressModal(
           alignItems="center"
         >
           <Text type="label" size="large" weight="bold">
-            Solicitud de creación {data.request}
+            Solicitud {data.request}
           </Text>
 
           {labelsOfRequest.slice(0, partLabelsOfRequest).map(
@@ -162,7 +167,7 @@ function DetailsRequestsInProgressModal(
               name="dateTraceability"
               label="Fecha"
               onChange={onChange}
-              options={getDomainById("dateTraceability")}
+              options={dateOptions}
               required={false}
               size="compact"
               value={dateSelected}

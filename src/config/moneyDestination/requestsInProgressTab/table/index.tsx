@@ -1,9 +1,6 @@
-import { MdDeleteOutline } from "react-icons/md";
-import { Icon } from "@inubekit/icon";
-
 import { IAction, ITitle } from "@components/data/Table/types";
-import { ComponentAppearance } from "@enum/appearances";
-import { Details } from "@pages/moneyDestination/tabs/requestsInProgressTab/components/details";
+import { Details } from "@pages/moneyDestination/tabs/requestsInProgressTab/tools/details";
+import { Delete } from "@src/pages/moneyDestination/tabs/requestsInProgressTab/tools/delete";
 
 const titles: ITitle[] = [
   {
@@ -23,28 +20,27 @@ const titles: ITitle[] = [
   },
 ];
 
-const actions: IAction[] = [
-  {
-    id: "Details",
-    content: (entry) => <Details data={entry} />,
-  },
+const actionsConfig = (setEntryDeleted: (value: string | number) => void) => {
+  const actions: IAction[] = [
+    {
+      id: "Details",
+      content: (entry) => <Details data={entry} />,
+    },
 
-  {
-    id: "delete",
-    content: () => (
-      <Icon
-        appearance={ComponentAppearance.DANGER}
-        icon={<MdDeleteOutline />}
-        size="16px"
-        cursorHover
-      />
-    ),
-  },
-];
+    {
+      id: "delete",
+      content: (entry) => (
+        <Delete data={entry} setEntryDeleted={setEntryDeleted} />
+      ),
+    },
+  ];
+
+  return actions;
+};
 
 const breakPoints = [
   { breakpoint: "(min-width: 745px)", totalColumns: 3 },
   { breakpoint: "(max-width: 744px)", totalColumns: 1 },
 ];
 
-export { titles, actions, breakPoints };
+export { titles, actionsConfig, breakPoints };
