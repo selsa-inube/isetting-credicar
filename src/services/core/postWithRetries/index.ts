@@ -1,29 +1,8 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import {
-  enviroment,
-  fetchTimeoutServices,
-  maxRetriesServices,
-} from "@config/environment";
+import { axiosInstance } from "@src/api/isettingCredicar";
+import { maxRetriesServices } from "@config/environment";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
 
-const axiosInstance: AxiosInstance = axios.create({
-  baseURL: enviroment.ISETTING_CREDICAR_QUERY_PROCESS_SERVICE,
-  timeout: fetchTimeoutServices,
-  headers: {
-    "Content-type": "application/json; charset=UTF-8",
-  },
-});
-
-axiosInstance.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.code === "ECONNABORTED") {
-      console.error("Request timed out");
-    }
-    return Promise.reject(new Error(error.message));
-  },
-);
-
-const fetchWithRetries = async <T>(
+const postWithRetries = async <T>(
   url: string,
   config: AxiosRequestConfig,
   data: string[],
@@ -52,4 +31,4 @@ const fetchWithRetries = async <T>(
   throw new Error("Error al obtener los de las unidades de negocio.");
 };
 
-export { fetchWithRetries };
+export { postWithRetries };
