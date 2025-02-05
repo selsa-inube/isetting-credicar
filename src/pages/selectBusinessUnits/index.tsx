@@ -1,37 +1,24 @@
-import { useEffect, useContext } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useContext } from "react";
+import { useSelectBusinessUnits } from "@hooks/selectBusinessUnits/useSelectBusinessUnits";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 import { SelectBusinessUnitsUI } from "./interface";
 
-import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
-import { validateBusinessUnities } from "@utils/selectBusinessUnits/validateBusinessUnities";
-
 function SelectBusinessUnits() {
-  const navigate = useNavigate();
-  const location = useLocation();
   const { appData, setBusinessUnitsToTheStaff } = useContext(AuthAndPortalData);
 
-  useEffect(() => {
-    if (appData.portal.publicCode) {
-      validateBusinessUnities(
-        appData.portal.publicCode,
-        appData.user.userAccount,
-      ).then((data) => {
-        setBusinessUnitsToTheStaff(data);
-      });
-    }
-  }, [appData.portal.publicCode]);
+  const { imageWidth, screenTablet, screenDesktop } = useSelectBusinessUnits(
+    appData,
+    setBusinessUnitsToTheStaff,
+  );
 
-  useEffect(() => {
-    if (
-      location.pathname === "/selectBusinessUnit" ||
-      location.pathname === "/selectBusinessUnit/" ||
-      location.pathname === "/"
-    ) {
-      navigate(`/selectBusinessUnit/checking-credentials/`);
-    }
-  }, [location, navigate, appData]);
-
-  return <SelectBusinessUnitsUI />;
+  return (
+    <SelectBusinessUnitsUI
+      appData={appData}
+      screenTablet={screenTablet}
+      screenDesktop={screenDesktop}
+      imageWidth={imageWidth}
+    />
+  );
 }
 
 export { SelectBusinessUnits };

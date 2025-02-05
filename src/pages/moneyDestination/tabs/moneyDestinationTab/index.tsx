@@ -14,6 +14,7 @@ function MoneyDestinationTab() {
     searchMoneyDestination,
     loading,
     handleSearchMoneyDestination,
+    setEntryDeleted,
   } = useMoneyDestination(appData.businessUnit.publicCode);
 
   return (
@@ -22,6 +23,7 @@ function MoneyDestinationTab() {
       searchMoneyDestination={searchMoneyDestination}
       loading={loading}
       entries={moneyDestination as IEntry[]}
+      setEntryDeleted={setEntryDeleted}
     />
   );
 }

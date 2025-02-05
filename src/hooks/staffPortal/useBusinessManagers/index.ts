@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { businessManagers } from "@services/staffPortal/getBusinessManager";
 import { IStaffPortalByBusinessManager } from "@ptypes/staffPortal/IStaffPortalByBusinessManager";
 import { IBusinessManagers } from "@ptypes/staffPortal/IBusinessManagers";
+import { getBusinessManagers } from "@services/staffPortal/getBusinessManager";
 
 const useBusinessManagers = (
   portalPublicCode: IStaffPortalByBusinessManager,
@@ -17,7 +17,7 @@ const useBusinessManagers = (
         return;
       }
       try {
-        const newData = await businessManagers(
+        const newData = await getBusinessManagers(
           portalPublicCode.businessManagerId,
         );
         setBusinessManagersData(newData);

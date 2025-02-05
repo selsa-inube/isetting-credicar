@@ -1,11 +1,11 @@
-import { businessUnitsPortalStaff } from "@services/staffPortal/getBusinessUnits";
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";
+import { getBusinessUnitsPortalStaff } from "@services/staffPortal/getBusinessUnits";
 
 const validateBusinessUnities = async (
   publicCode: string,
   userAccount: string,
 ): Promise<IBusinessUnitsPortalStaff[]> => {
-  const newData = await businessUnitsPortalStaff(publicCode, userAccount);
+  const newData = await getBusinessUnitsPortalStaff(publicCode, userAccount);
 
   return newData;
 };
