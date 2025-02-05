@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useMediaQueries } from "@inubekit/inubekit";
 
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
@@ -59,9 +60,19 @@ const useBusinessUnits = (businessUnits: IBusinessUnitsPortalStaff[]) => {
     });
   }
 
+  const {
+    "(max-width: 532px)": screenMobile,
+    "(max-height: 1000px)": screenTablet,
+  }: Record<string, boolean> = useMediaQueries([
+    "(max-width: 532px)",
+    "(max-height: 1000px)",
+  ]);
+
   return {
     search,
     businessUnitLocal,
+    screenMobile,
+    screenTablet,
     handleSearchChange,
     handleChange,
     handleSubmit,
