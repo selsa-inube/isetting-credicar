@@ -6,10 +6,10 @@ import { Button } from "@inubekit/button";
 import { Stack } from "@inubekit/stack";
 
 import { tokens } from "@design/tokens";
-import { DecisionModal } from "@components/modals/DecisionModal";
 import { ComponentAppearance } from "@enum/appearances";
 import { IMessageModal } from "@ptypes/decisions/IMessageModal";
 import { IRulesFormTextValues } from "@ptypes/decisions/IRulesFormTextValues";
+import { DecisionModal } from "@design/modals/decisionModal";
 import { StyledContainer } from "./styles";
 
 interface IDecisionsFormUI {

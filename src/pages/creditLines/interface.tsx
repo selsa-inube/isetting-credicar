@@ -5,15 +5,14 @@ import { useMediaQuery } from "@inubekit/hooks";
 import { Breadcrumbs } from "@inubekit/breadcrumbs";
 import { Button } from "@inubekit/button";
 
-import { Table } from "@components/data/Table";
+import { Table } from "@design/data/table";
 import { tokens } from "@design/tokens";
-import { Title } from "@components/data/Title";
-import { ComponentAppearance } from "@src/enum/appearances";
+import { Title } from "@design/data/title";
+import { ComponentAppearance } from "@enum/appearances";
 import { dataCreditLines } from "@mocks/creditLines/creditLines.mock";
-import { StyledContent } from "./styles";
 import { crumbsCreditLines } from "@config/creditLines/navigation";
 import { actions, breakPoints, titles } from "@config/creditLines/table";
-
+import { StyledContent } from "./styles";
 
 interface ICreditLinesUI {
   loading: boolean;

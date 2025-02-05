@@ -5,7 +5,7 @@ import {
   MdCreditCard,
   MdAndroid,
 } from "react-icons/md";
-import { IconWithText } from "@components/data/IconWithText";
+import { IconWithText } from "@design/data/iconWithText";
 
 const dataMoneyDestination = [
   {

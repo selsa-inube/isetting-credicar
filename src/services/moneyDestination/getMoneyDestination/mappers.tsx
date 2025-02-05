@@ -1,5 +1,5 @@
 import { MdCategory } from "react-icons/md";
-import { IconWithText } from "@components/data/IconWithText";
+import { IconWithText } from "@design/data/iconWithText";
 import { IMoneyDestinationData } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/IMoneyDestinationData";
 import { normalizeIconDestination } from "@utils/destination/normalizeIconDestination";
 

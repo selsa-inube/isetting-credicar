@@ -1,10 +1,11 @@
 import { RouterProvider } from "react-router-dom";
-import { ErrorPage } from "@components/layout/ErrorPage";
+
 import { IUser } from "@ptypes/app.types";
 import { mainNavigation } from "./routes/mainNavigation";
 import { useAppData } from "./hooks/useAppData";
 import { GlobalStyles } from "./styles/global";
 import { AuthAndPortalDataProvider } from "./context/authAndPortalDataProvider";
+import { ErrorPage } from "./design/layout/errorPage";
 
 const url = new URL(window.location.href);
 const params = new URLSearchParams(url.search);

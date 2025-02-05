@@ -7,15 +7,13 @@ import {
 } from "@inubekit/inubekit";
 import { IRuleDecision } from "@isettingkit/input";
 
-import { Title } from "@components/data/Title";
+import { Title } from "@design/data/title";
 import { tokens } from "@design/tokens";
 import { IOptionsProspect } from "@design/forms/creditProspect/types";
 import { DecisionsForm } from "@design/forms/decisions";
 import { revertModalDisplayData } from "@utils/revertModalDisplayData";
-
 import { CreditProspectForm } from "@design/forms/creditProspect";
 import { GeneralInformationForm } from "@pages/creditLines/forms/generalInformation";
-
 import { crumbsAddCreditLines } from "@config/creditLines/addCreditLine/navigation";
 import { textValuesBusinessRules } from "@config/moneyDestination/moneyDestinationTab/businessRules";
 import { IFormsCreditlinesRefs } from "@ptypes/creditLines/addCreditLine/IFormsCreditlinesRefs";

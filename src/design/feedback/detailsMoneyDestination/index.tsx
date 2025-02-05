@@ -3,13 +3,14 @@ import { IRuleDecision } from "@isettingkit/input";
 import { Icon, Text, useMediaQuery } from "@inubekit/inubekit";
 
 import { ComponentAppearance } from "@enum/appearances";
-import { IEntry } from "@components/data/Table/types";
-import { DetailsDestinationModal } from "@components/modals/DetailsDestinationModal";
+
 import {
   decisionTemplate,
   textValuesBusinessRules,
 } from "@config/moneyDestination/moneyDestinationTab/businessRules";
 import { detailsTabsConfig } from "@config/moneyDestination/moneyDestinationTab/generics/detailsTabsConfig";
+import { DetailsDestinationModal } from "@design/modals/detailsDestinationModal";
+import { IEntry } from "@design/data/table/types";
 import { StyledContainerIcon } from "./styles";
 
 interface IDetailsMoneyDestination {

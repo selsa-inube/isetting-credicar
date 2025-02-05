@@ -1,7 +1,7 @@
-import { IEntry } from "@components/data/Table/types";
 import { DeleteRecord } from "@design/feedback/DeleteRecord";
 import { useDeleteRequestInProgress } from "@hooks/moneyDestination/useDeleteRequestInProgress";
 import { deleteRequestInProgress } from "@config/moneyDestination/moneyDestinationTab/generics/deleteRequestInProgress";
+import { IEntry } from "@design/data/table/types";
 
 interface IDelete {
   data: IEntry;

@@ -1,12 +1,9 @@
 import React from "react";
 import { MdSearch } from "react-icons/md";
-import { Text } from "@inubekit/text";
-import { Stack } from "@inubekit/stack";
-import { tokens } from "@design/tokens";
-import { Button } from "@inubekit/button";
-import { Input } from "@inubekit/input";
+import { Button, Input, Stack, Text } from "@inubekit/inubekit";
 
-import { RadioBusinessUnit } from "@components/feedback/RadioBusinessUnit";
+import { tokens } from "@design/tokens";
+import { RadioBusinessUnit } from "@design/feedback/radioBusinessUnit";
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";
 import { IBusinessUnitstate } from "@ptypes/selectBusinessUnits/outlets/businessUnit/IBusinessUnitstate";
 import { NoResultsMessage } from "@design/feedback/noResultsMessage";

@@ -1,6 +1,6 @@
-import { IAction, ITitle } from "@components/data/Table/types";
 import { Details } from "@pages/moneyDestination/tabs/requestsInProgressTab/tools/details";
-import { Delete } from "@src/pages/moneyDestination/tabs/requestsInProgressTab/tools/delete";
+import { IAction, ITitle } from "@design/data/table/types";
+import { Delete } from "@pages/moneyDestination/tabs/requestsInProgressTab/tools/delete";
 
 const titles: ITitle[] = [
   {

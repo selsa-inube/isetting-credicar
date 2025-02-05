@@ -6,8 +6,8 @@ import { Button } from "@inubekit/button";
 
 import { tokens } from "@design/tokens";
 import { ComponentAppearance } from "@enum/appearances";
-import { Table } from "@components/data/Table";
-import { IEntry } from "@components/data/Table/types";
+import { Table } from "@design/data/table";
+import { IEntry } from "@design/data/table/types";
 import {
   actionsConfig,
   breakPoints,

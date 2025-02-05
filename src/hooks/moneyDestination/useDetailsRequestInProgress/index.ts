@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { IEntry } from "@components/data/Table/types";
 import { IServerDomain } from "@ptypes/IServerDomain";
 import { IConfigurationRequestsTraceability } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/requestsInProgress/IConfigRequestsTraceability";
 import { formatDateTable } from "@utils/date/formatDateTable";
+import { IEntry } from "@design/data/table/types";
 
 const useDetailsRequestInProgress = (data: IEntry) => {
   const [showModal, setShowModal] = useState(false);

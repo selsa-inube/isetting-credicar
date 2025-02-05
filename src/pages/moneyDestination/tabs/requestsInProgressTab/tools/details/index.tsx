@@ -1,6 +1,6 @@
-import { IEntry } from "@components/data/Table/types";
 import { DetailsRequestInProcess } from "@design/feedback/detailsRequestInProcess";
 import { useDetailsRequestInProgress } from "@hooks/moneyDestination/useDetailsRequestInProgress";
+import { IEntry } from "@design/data/table/types";
 
 interface IDetails {
   data: IEntry;

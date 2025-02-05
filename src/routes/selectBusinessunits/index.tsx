@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import { useContext } from "react";
 
-import { ErrorPage } from "@components/layout/ErrorPage";
+import { ErrorPage } from "@design/layout/errorPage";
 import { SelectBusinessUnits } from "@pages/selectBusinessUnits";
 import { BusinessUnits } from "@pages/selectBusinessUnits/outlets/businessUnit";
 import { CheckingCredentials } from "@pages/login/checkingCredentials";
-import { LoadingApp } from "@components/feedback/LoadingApp";
+import { LoadingApp } from "@design/feedback/loadingApp";
 import { NotBusinessUnit } from "@pages/errors/notBusinessUnit";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 import { IBusinessUnit } from "@ptypes/context/authAndPortalDataProvider/IBusinessUnit";
@@ -40,7 +40,7 @@ const SelectBusinessUnitsRoutes = () => {
       <Route path="/*" element={<ErrorPage />} />
     </Routes>
   );
-}
+};
 
 export { SelectBusinessUnitsRoutes };
 export type { IBusinessUnits };

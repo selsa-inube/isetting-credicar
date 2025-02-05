@@ -1,12 +1,14 @@
 import { Input, Stack, useMediaQuery } from "@inubekit/inubekit";
 import { tokens } from "@design/tokens";
-import { Table } from "@components/data/Table";
+
 import {
   actionsConfig,
   breakPoints,
   titles,
 } from "@config/moneyDestination/requestsInProgressTab/table";
-import { IEntry } from "@components/data/Table/types";
+
+import { IEntry } from "@design/data/table/types";
+import { Table } from "@design/data/table";
 import { StyledContainer } from "./styles";
 
 interface IRequestsInProgressTabUI {

@@ -1,5 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { ErrorPage } from "@components/layout/ErrorPage";
+import { ErrorPage } from "@design/layout/errorPage";
 import clientNotFound from "@assets/images/Expired.png";
 import { enviroment } from "@config/environment";
 import { useClearLocalStorage } from "@hooks/authentication/useClearLocalStorage";

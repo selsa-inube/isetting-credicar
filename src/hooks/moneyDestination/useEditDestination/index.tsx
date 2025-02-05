@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { FormikProps } from "formik";
 import { IRuleDecision } from "@isettingkit/input";
 
-import { IGeneralInformationEntry } from "@src/types/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationDestination";
+import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationDestination";
 
 const useEditDestination = (data: {
   nameDestination: string;

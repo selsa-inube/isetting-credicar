@@ -2,7 +2,7 @@ import { FormikProps } from "formik";
 import { IRuleDecision } from "@isettingkit/input";
 import { Breadcrumbs, Stack, Tabs, useMediaQuery } from "@inubekit/inubekit";
 
-import { Title } from "@components/data/Title";
+import { Title } from "@design/data/title";
 import { tokens } from "@design/tokens";
 import { GeneralInformationForm } from "@design/forms/generalInformationDestination";
 import { DecisionsForm } from "@design/forms/decisions";
@@ -13,7 +13,7 @@ import { crumbsEditDestination } from "@config/moneyDestination/editDestination/
 import { textValuesBusinessRules } from "@config/moneyDestination/moneyDestinationTab/businessRules";
 import { IEditDestinationTabsConfig } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/tabs/ITabConfig/IEditDestinationTabsConfig";
 import { attentionModal, deleteModal } from "@config/decisions/messages";
-import { decisionTemplateConfig } from "@src/config/decisions/decisionTemplateDestination";
+import { decisionTemplateConfig } from "@config/decisions/decisionTemplateDestination";
 
 interface IEditDestinationUI {
   editDestinationTabsConfig: IEditDestinationTabsConfig;

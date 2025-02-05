@@ -1,7 +1,7 @@
-import { IEntry } from "@components/data/Table/types";
 import { deleteMoneyDestinationModal } from "@config/moneyDestination/moneyDestinationTab/generics/deleteMoneyDestinationModal";
 import { DeleteRecord } from "@design/feedback/DeleteRecord";
 import { useDeleteDestination } from "@hooks/moneyDestination/useDeleteDestination";
+import { IEntry } from "@design/data/table/types";
 
 interface IDelete {
   data: IEntry;

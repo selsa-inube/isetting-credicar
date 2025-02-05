@@ -2,11 +2,12 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { Icon, Text, useMediaQuery } from "@inubekit/inubekit";
 
 import { ComponentAppearance } from "@enum/appearances";
-import { DetailsRequestsInProgressModal } from "@components/modals/DetailsRequestsInProgressModal";
-import { IEntry } from "@components/data/Table/types";
+
 import { labelsOfRequest } from "@config/moneyDestination/requestsInProgressTab/details/labelsOfRequest";
 import { labelsOfTraceability } from "@config/moneyDestination/requestsInProgressTab/details/labelsOfTraceability";
 import { IServerDomain } from "@ptypes/IServerDomain";
+import { IEntry } from "@design/data/table/types";
+import { DetailsRequestsInProgressModal } from "@design/modals/detailsRequestsInProgressModal";
 import { StyledContainerIcon } from "./styles";
 
 interface IDetails {
