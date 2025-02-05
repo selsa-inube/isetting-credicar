@@ -1,7 +1,7 @@
 import { IAction, IEntry, ITitle } from "@components/data/Table/types";
 import { Edit } from "@pages/moneyDestination/tabs/moneyDestinationTab/components/edit";
 import { Delete } from "@pages/moneyDestination/tabs/moneyDestinationTab/tools/delete";
-import { Details } from "@pages/moneyDestination/tabs/moneyDestinationTab/components/details";
+import { Details } from "@pages/moneyDestination/tabs/moneyDestinationTab/tools/details";
 
 const titles: ITitle[] = [
   {
