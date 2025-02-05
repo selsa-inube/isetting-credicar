@@ -1,20 +1,28 @@
+import { AxiosRequestConfig } from "axios";
 import { IRuleDecision } from "@isettingkit/input";
-
-import { postEvaluateRule } from "@api/isettingCredicar/postEvaluateRule";
-import { IEvaluateRuleRequest } from "@src/types/decisions/IEvaluateRuleRequest";
-import {
-  mapEvaluateRuleByBusinessEntities,
-  mapEvaluateRuleByBusinessEntityToApi,
-} from "./mappers";
+import { IEvaluateRuleRequest } from "@ptypes/decisions/IEvaluateRuleRequest";
+import { postWithRetries } from "@services/core/postWithRetries";
+import { mapEvaluateRuleByBusinessEntities } from "./mappers";
 
 const evaluateRuleByBusinessUnit = async (
   bussinesUnits: string,
   rulesData: IEvaluateRuleRequest,
 ): Promise<IRuleDecision[] | undefined> => {
-  const data: IRuleDecision[] | undefined = await postEvaluateRule(
-    bussinesUnits,
-    mapEvaluateRuleByBusinessEntityToApi(rulesData),
+  const config: AxiosRequestConfig = {
+    headers: {
+      "X-Action": "EvaluteRuleByBusinessUnit",
+      "X-Business-unit": bussinesUnits,
+    },
+  };
+
+  const data: IRuleDecision[] | undefined = await postWithRetries<
+    IRuleDecision[] | undefined
+  >(
+    `/crediboard-business-unit-rules`,
+    config,
+    rulesData as unknown as string[],
   );
+
   return mapEvaluateRuleByBusinessEntities(data);
 };
 
