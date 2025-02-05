@@ -1,4 +1,5 @@
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";
+
 import { useBusinessUnits } from "@hooks/selectBusinessUnits/useBusinessUnits";
 import { BusinessUnitsUI } from "./interface";
 
@@ -12,6 +13,8 @@ function BusinessUnits(props: IBusinessUnits) {
   const {
     search,
     businessUnitLocal,
+    screenMobile,
+    screenTablet,
     handleSearchChange,
     handleChange,
     handleSubmit,
@@ -27,6 +30,8 @@ function BusinessUnits(props: IBusinessUnits) {
       handleBussinessUnitChange={handleChange}
       filterBusinessUnits={filterBusinessUnits}
       handleSubmit={handleSubmit}
+      screenMobile={screenMobile}
+      screenTablet={screenTablet}
     />
   );
 }
