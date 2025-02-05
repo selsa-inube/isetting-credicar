@@ -1,39 +1,31 @@
 import { MdOutlineRemoveRedEye } from "react-icons/md";
-import { useState } from "react";
-import { Icon } from "@inubekit/icon";
-import { useMediaQuery } from "@inubekit/hooks";
-import { Text } from "@inubekit/text";
+import { Icon, Text, useMediaQuery } from "@inubekit/inubekit";
 
 import { ComponentAppearance } from "@enum/appearances";
 import { DetailsRequestsInProgressModal } from "@components/modals/DetailsRequestsInProgressModal";
 import { IEntry } from "@components/data/Table/types";
-import { StyledContainerIcon } from "./styles";
 import { labelsOfRequest } from "@config/moneyDestination/requestsInProgressTab/details/labelsOfRequest";
 import { labelsOfTraceability } from "@config/moneyDestination/requestsInProgressTab/details/labelsOfTraceability";
-
+import { IServerDomain } from "@ptypes/IServerDomain";
+import { StyledContainerIcon } from "./styles";
 
 interface IDetails {
   data: IEntry;
+  showModal: boolean;
+  form: { name: string; dateTraceability: string };
+  dateOptions: IServerDomain[];
+  onToggleModal: () => void;
+  onChange: (name: string, newValue: string) => void;
 }
 
-const Details = (props: IDetails) => {
-  const { data } = props;
-  const [showModal, setShowModal] = useState(false);
-  const [form, setForm] = useState({ name: "", dateTraceability: data.date });
-
-  const handleChange = (name: string, newValue: string) => {
-    setForm({ ...form, [name]: newValue });
-  };
-
-  const handleToggleModal = () => {
-    setShowModal(!showModal);
-  };
+const DetailsRequestInProcess = (props: IDetails) => {
+  const { data, showModal, form, dateOptions, onToggleModal, onChange } = props;
 
   const screenTablet = useMediaQuery("(max-width: 1200px)");
 
   return (
     <>
-      <StyledContainerIcon onClick={handleToggleModal} $isTablet={screenTablet}>
+      <StyledContainerIcon onClick={onToggleModal} $isTablet={screenTablet}>
         <Icon
           appearance={ComponentAppearance.DARK}
           icon={<MdOutlineRemoveRedEye />}
@@ -52,11 +44,12 @@ const Details = (props: IDetails) => {
         <DetailsRequestsInProgressModal
           data={data}
           portalId="portal"
+          dateOptions={dateOptions}
           labelsOfRequest={labelsOfRequest}
           labelsOfTraceability={labelsOfTraceability}
           dateSelected={form.dateTraceability}
-          onCloseModal={handleToggleModal}
-          onChange={handleChange}
+          onCloseModal={onToggleModal}
+          onChange={onChange}
           onMoreDetails={() => {
             console.log("");
           }}
@@ -66,4 +59,4 @@ const Details = (props: IDetails) => {
   );
 };
 
-export { Details };
+export { DetailsRequestInProcess };
