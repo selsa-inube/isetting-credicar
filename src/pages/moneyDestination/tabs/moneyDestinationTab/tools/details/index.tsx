@@ -1,9 +1,9 @@
 import { useContext } from "react";
 
-import { IEntry } from "@components/data/Table/types";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 import { DetailsMoneyDestination } from "@design/feedback/detailsMoneyDestination";
 import { useDetailsDestination } from "@hooks/moneyDestination/useDetailsDestination";
+import { IEntry } from "@design/data/table/types";
 
 interface IDetails {
   data: IEntry;
