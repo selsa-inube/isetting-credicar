@@ -52,6 +52,7 @@ const DeleteRecord = (props: IDelete) => {
           onClick={onClick}
           onCloseModal={onToggleModal}
           setFieldEntered={setJustificationDelete}
+          appearance={ComponentAppearance.DANGER}
         />
       )}
     </>

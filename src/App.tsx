@@ -1,18 +1,11 @@
-import { useContext, useEffect } from "react";
 import { RouterProvider } from "react-router-dom";
 
-import { ErrorPage } from "@design/layout/errorPage";
-
-import { GlobalStyles } from "./styles/global";
-import { usePortalData } from "@hooks/staffPortal/usePortalData";
-import { useBusinessManagers } from "@hooks/staffPortal/useBusinessManagers";
-import { useAuthRedirect } from "@hooks/authentication/useAuthRedirect";
-import {
-  AuthAndPortalData,
-  AuthAndPortalDataProvider,
-} from "@context/authAndPortalDataProvider";
-import { mainNavigation } from "./routes/mainNavigation";
 import { IUser } from "@ptypes/app.types";
+import { mainNavigation } from "./routes/mainNavigation";
+import { useAppData } from "./hooks/useAppData";
+import { GlobalStyles } from "./styles/global";
+import { AuthAndPortalDataProvider } from "./context/authAndPortalDataProvider";
+import { ErrorPage } from "./design/layout/errorPage";
 
 const url = new URL(window.location.href);
 const params = new URLSearchParams(url.search);
@@ -26,57 +19,24 @@ interface IApp {
 
 function App(props: IApp) {
   const { code, user, businessUnit } = props;
-  const { setAppData, setBusinessUnitSigla } = useContext(AuthAndPortalData);
 
-  const updateAppData = () => {
-    if (code) {
-      localStorage.setItem("portalCode", code);
-    }
+  const { hasError, isLoading, isAuthenticated } = useAppData(
+    portalCode,
+    code,
+    user || ({} as IUser),
+    businessUnit,
+  );
 
-    if (businessUnit) {
-      localStorage.setItem("businessUnitSigla", businessUnit);
-      setBusinessUnitSigla(businessUnit);
-    }
+  if (isLoading) {
+    return null;
+  }
 
-    if (user) {
-      setAppData((prev) => ({
-        ...prev,
-        user: {
-          userAccount: user.email,
-          userName: user.name,
-        },
-      }));
-    }
-  };
+  if (hasError && !isAuthenticated) {
+    return <ErrorPage />;
+  }
 
-  useEffect(() => {
-    updateAppData();
-  }, [user, code, businessUnit]);
-
-  if (!code) {
-    const { portalData, hasError: portalError } = usePortalData(portalCode);
-    const { businessManagersData, hasError: businessError } =
-      useBusinessManagers(portalData);
-
-    const {
-      hasError: authError,
-      isLoading,
-      isAuthenticated,
-    } = useAuthRedirect(portalData, businessManagersData, portalCode);
-
-    const hasError = portalError || businessError || authError;
-
-    if (isLoading) {
-      return null;
-    }
-
-    if (hasError && !isAuthenticated) {
-      return <ErrorPage />;
-    }
-
-    if (!isAuthenticated) {
-      return null;
-    }
+  if (!isAuthenticated) {
+    return null;
   }
 
   return (
