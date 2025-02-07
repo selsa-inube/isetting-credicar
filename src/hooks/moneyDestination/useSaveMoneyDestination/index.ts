@@ -52,8 +52,13 @@ const useSaveMoneyDestination = (
     }
   };
 
+  const isStatusIntAutomatic = (status: string | undefined): boolean => {
+    return status ? statusFlowAutomatic.includes(status) : false;
+  };
+
   const fetchRequestInProgressData = async () => {
     try {
+      if (!isStatusIntAutomatic(saveMoneyDestination?.requestStatus)) return;
       const data = await getRequestInProgressById(
         bussinesUnits,
         saveMoneyDestination?.settingRequestId || "",
@@ -85,10 +90,6 @@ const useSaveMoneyDestination = (
       }
       return step;
     });
-  };
-
-  const isStatusIntAutomatic = (status: string | undefined): boolean => {
-    return status ? statusFlowAutomatic.includes(status) : false;
   };
 
   const isStatusCloseModal = (): boolean => {
