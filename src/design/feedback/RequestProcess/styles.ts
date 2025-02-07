@@ -38,6 +38,7 @@ const StyledBar = styled.div<IStyledBar>`
   animation-fill-mode: forwards;
   background-color: ${({ $statusError }) =>
     $statusError ? `${inube.palette.red.R300}` : `${inube.palette.green.G300}`};
+  transition: width 0.5s ease-in-out; /* Añade esta línea para la animación */
 `;
 
 export { StyledModal, StyledBar, StyledContainerBar };

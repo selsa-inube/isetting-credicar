@@ -1,28 +1,31 @@
-import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext, useEffect, useRef, useState } from "react";
 import { FormikProps } from "formik";
 import { IRuleDecision } from "@isettingkit/input";
 
 import { addDestinationStepsConfig } from "@config/moneyDestination/addDestination/assisted";
-
-import { IRequestSteps } from "@design/feedback/RequestProcess/types";
 import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationDestination";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
+import { formatDate } from "@utils/date/formatDate";
+import { ISaveDataRequest } from "@ptypes/saveData/ISaveDataRequest";
 
-const useAddDestination = (requestSteps: IRequestSteps[]) => {
+const useAddDestination = () => {
+  const { appData } = useContext(AuthAndPortalData);
   const [currentStep, setCurrentStep] = useState(1);
   const [formValues, setFormValues] = useState<IGeneralInformationEntry>({
     nameDestination: "",
     description: "",
+    icon: "",
   });
-
+  const [saveData, setSaveData] = useState<ISaveDataRequest>();
   const [showModal, setShowModal] = useState(false);
   const [isCurrentFormValid, setIsCurrentFormValid] = useState(false);
+  const [creditLineOriginalDecisions, setCreditLineOriginalDecisions] =
+    useState<IRuleDecision[]>([]);
+
   const [creditLineDecisions, setCreditLineDecisions] = useState<
     IRuleDecision[]
   >([]);
   const [showRequestProcessModal, setShowRequestProcessModal] = useState(false);
-
-  const navigate = useNavigate();
 
   const generalInformationRef =
     useRef<FormikProps<IGeneralInformationEntry>>(null);
@@ -55,22 +58,49 @@ const useAddDestination = (requestSteps: IRequestSteps[]) => {
     setShowModal(!showModal);
   };
 
+  const decisionsData = creditLineOriginalDecisions.map((decision) => {
+    return {
+      ruleName: "LineOfCredit",
+      decisionByRule: [
+        {
+          conditionThatEstablishesTheDecision:
+            decision.conditionThatEstablishesTheDecision?.map((condition) => {
+              return {
+                conditionName: condition.conditionName,
+                conditionDataType: condition.conditionDataType,
+                howToSetTheCondition: condition.howToSetTheCondition,
+                labelName: condition.labelName,
+                switchPlaces: condition.switchPlaces,
+                value: condition.value,
+              };
+            }),
+          effectiveFrom: decision.effectiveFrom,
+          validUntil: decision.validUntil,
+          value: decision.value,
+        },
+      ],
+    };
+  });
+
   const handleSubmitClick = () => {
     handleToggleModal();
     setShowRequestProcessModal(!showRequestProcessModal);
+    setSaveData({
+      applicationName: "ifac",
+      businessManagerCode: appData.businessManager.publicCode,
+      businessUnitCode: appData.businessUnit.publicCode,
+      description: "solicitud de creación de un destino de dinero",
+      entityName: "MoneyDestination",
+      requestDate: formatDate(new Date()),
+      useCaseName: "AddMoneyDestination",
+      configurationRequestData: {
+        abbreviatedName: formValues.nameDestination,
+        descriptionUse: formValues.description,
+        iconReference: formValues.icon ?? "",
+        rules: decisionsData,
+      },
+    });
   };
-
-  useEffect(() => {
-    const requestLastStep = requestSteps[requestSteps.length - 1];
-    if (showRequestProcessModal && requestLastStep.status === "completed") {
-      const timer = setTimeout(() => {
-        setShowRequestProcessModal(false);
-        navigate("/money-destination");
-      }, 3000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [showRequestProcessModal, requestSteps, navigate]);
 
   return {
     creditLineDecisions,
@@ -81,13 +111,16 @@ const useAddDestination = (requestSteps: IRequestSteps[]) => {
     nameDecision,
     showModal,
     showRequestProcessModal,
+    saveData,
     handleNextStep,
     handlePreviousStep,
     handleSubmitClick,
     handleToggleModal,
     setCreditLineDecisions,
+    setCreditLineOriginalDecisions,
     setCurrentStep,
     setIsCurrentFormValid,
+    setShowRequestProcessModal,
   };
 };
 

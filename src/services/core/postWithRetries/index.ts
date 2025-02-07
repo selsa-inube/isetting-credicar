@@ -1,11 +1,11 @@
-import { axiosInstance } from "@src/api/isettingCredicar";
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 import { maxRetriesServices } from "@config/environment";
-import { AxiosRequestConfig, AxiosResponse } from "axios";
 
 const postWithRetries = async <T>(
   url: string,
   config: AxiosRequestConfig,
   data: string[],
+  axiosInstance: AxiosInstance,
 ): Promise<T> => {
   const maxRetries = maxRetriesServices;
 

@@ -1,4 +1,5 @@
 import { RouterProvider } from "react-router-dom";
+import { FlagProvider } from "@inubekit/inubekit";
 
 import { IUser } from "@ptypes/app.types";
 import { mainNavigation } from "./routes/mainNavigation";
@@ -23,7 +24,7 @@ function App(props: IApp) {
   const { hasError, isLoading, isAuthenticated } = useAppData(
     portalCode,
     code,
-    user || ({} as IUser),
+    user as IUser,
     businessUnit,
   );
 
@@ -42,9 +43,11 @@ function App(props: IApp) {
   return (
     <>
       <GlobalStyles />
-      <AuthAndPortalDataProvider>
-        <RouterProvider router={mainNavigation} />
-      </AuthAndPortalDataProvider>
+      <FlagProvider>
+        <AuthAndPortalDataProvider>
+          <RouterProvider router={mainNavigation} />
+        </AuthAndPortalDataProvider>
+      </FlagProvider>
     </>
   );
 }

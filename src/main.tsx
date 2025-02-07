@@ -8,27 +8,27 @@ import { AuthAndPortalDataProvider } from "@context/authAndPortalDataProvider/in
 
 const redirect_uri = window.location.origin;
 
-const pruebauser = {
-  email: "angiepinillanova@gmail.com",
-  email_verified: true,
-  family_name: "pinilla nova",
-  given_name: "angie",
-  name: "angie pinilla nova",
-  nickname: "angiepinillanova",
-  picture:
-    "https://lh3.googleusercontent.com/a/ACg8ocKmxazU01okYO_cctPDDKnUX-k_UN60Ayjb1zMuDp8xnNb4Afrr=s96-c",
-  sub: "google-oauth2|114859487757017350144",
-  updated_at: "2024-12-02T19:44:20.603Z",
-};
+// const pruebauser = {
+//   email: "angiepinillanova@gmail.com",
+//   email_verified: true,
+//   family_name: "pinilla nova",
+//   given_name: "angie",
+//   name: "angie pinilla nova",
+//   nickname: "angiepinillanova",
+//   picture:
+//     "https://lh3.googleusercontent.com/a/ACg8ocKmxazU01okYO_cctPDDKnUX-k_UN60Ayjb1zMuDp8xnNb4Afrr=s96-c",
+//   sub: "google-oauth2|114859487757017350144",
+//   updated_at: "2024-12-02T19:44:20.603Z",
+// };
 
-const pruebabusiness = JSON.stringify({
-  publicCode: "test",
-  languageId: "esp",
-  abbreviatedName: "test",
-  descriptionUse: "test",
-  firstMonthOfFiscalYear: "JAN",
-  urlLogo: "http://www.sistemasenlinea.com.co/images/nuevo-logo-linix.png",
-});
+// const pruebabusiness = JSON.stringify({
+//   publicCode: "test",
+//   languageId: "esp",
+//   abbreviatedName: "test",
+//   descriptionUse: "test",
+//   firstMonthOfFiscalYear: "JAN",
+//   urlLogo: "http://www.sistemasenlinea.com.co/images/nuevo-logo-linix.png",
+// });
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 root.render(
@@ -41,13 +41,13 @@ root.render(
       }}
     >
       <AuthAndPortalDataProvider>
-        <App
+        {/* <App
           user={pruebauser}
           businessUnit={pruebabusiness}
           code={"J4EE6aa6pSNoNsIbZhlk6w=="}
-        />
+        /> */}
+        <App />
       </AuthAndPortalDataProvider>
-      {/* <App/> */}
     </Auth0Provider>
   </React.StrictMode>,
 );

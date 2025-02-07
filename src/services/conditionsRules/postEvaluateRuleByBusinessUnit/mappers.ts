@@ -1,6 +1,6 @@
 import { IRuleDecision } from "@isettingkit/input";
-import { IEvaluateRuleRequest } from "@src/types/decisions/IEvaluateRuleRequest";
-import { formatDate } from "@utils/formatDate";
+import { IEvaluateRuleRequest } from "@ptypes/decisions/IEvaluateRuleRequest";
+import { formatDate } from "@utils/date/formatDate";
 import { dataTranslations } from "@utils/dataTranslations";
 
 const mapEvaluateRuleByBusinessEntityToApi = (
