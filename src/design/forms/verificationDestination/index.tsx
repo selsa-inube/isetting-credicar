@@ -5,7 +5,7 @@ import { ComponentAppearance } from "@enum/appearances";
 import { Accordion } from "@design/data/accordions";
 import { tokens } from "@design/tokens";
 import { IRequestSteps } from "@design/feedback/RequestProcess/types";
-import { VerificationBoxes } from "@pages/moneyDestination/tabs/moneyDestinationTab/forms/verificationForm/verificationBoxes";
+import { VerificationBoxes } from "@src/design/forms/verificationDestination/verificationBoxes";
 import { addDestinationStepsConfig } from "@config/moneyDestination/addDestination/assisted";
 import { finishModal } from "@config/moneyDestination/moneyDestinationTab/form/verificationForm";
 import { IFormsUpdateData } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IFormsUpdateData";

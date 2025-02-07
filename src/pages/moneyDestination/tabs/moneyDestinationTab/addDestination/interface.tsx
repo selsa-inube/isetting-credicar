@@ -20,7 +20,7 @@ import { textValuesBusinessRules } from "@config/moneyDestination/moneyDestinati
 import { attentionModal, deleteModal } from "@config/decisions/messages";
 import { decisionTemplateConfig } from "@config/decisions/decisionTemplateDestination";
 import { ISaveDataResponse } from "@ptypes/saveData/ISaveDataResponse";
-import { VerificationForm } from "../forms/verificationForm";
+import { VerificationForm } from "@design/forms/verificationDestination";
 
 interface IAddDestinationUI {
   creditLineDecisions: IRuleDecision[];
