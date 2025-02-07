@@ -37,6 +37,7 @@ function AddDestination() {
     handleCloseRequestStatus,
   } = useSaveMoneyDestination(
     appData.businessUnit.publicCode,
+    appData.user.userAccount,
     showRequestProcessModal,
     saveData as ISaveDataRequest,
     setShowRequestProcessModal,

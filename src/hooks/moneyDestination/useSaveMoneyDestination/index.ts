@@ -16,6 +16,7 @@ import { statusRequestFinished } from "@config/status/statusRequestFinished";
 
 const useSaveMoneyDestination = (
   bussinesUnits: string,
+  userAccount: string,
   sendData: boolean,
   data: ISaveDataRequest,
   setSendData: React.Dispatch<React.SetStateAction<boolean>>,
@@ -34,7 +35,7 @@ const useSaveMoneyDestination = (
   const fetchSaveMoneyDestinationData = async () => {
     setLoading(true);
     try {
-      const saveData = await postSaveRequest("nicolas@gmail.com", data);
+      const saveData = await postSaveRequest(userAccount, data);
       setSaveMoneyDestination(saveData);
     } catch (error) {
       console.info(error);
