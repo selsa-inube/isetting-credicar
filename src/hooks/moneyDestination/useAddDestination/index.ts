@@ -19,9 +19,6 @@ const useAddDestination = () => {
   const [saveData, setSaveData] = useState<ISaveDataRequest>();
   const [showModal, setShowModal] = useState(false);
   const [isCurrentFormValid, setIsCurrentFormValid] = useState(false);
-  const [creditLineOriginalDecisions, setCreditLineOriginalDecisions] =
-    useState<IRuleDecision[]>([]);
-
   const [creditLineDecisions, setCreditLineDecisions] = useState<
     IRuleDecision[]
   >([]);
@@ -58,7 +55,7 @@ const useAddDestination = () => {
     setShowModal(!showModal);
   };
 
-  const decisionsData = creditLineOriginalDecisions.map((decision) => {
+  const decisionsData = creditLineDecisions.map((decision) => {
     return {
       ruleName: "LineOfCredit",
       decisionByRule: [
@@ -117,7 +114,6 @@ const useAddDestination = () => {
     handleSubmitClick,
     handleToggleModal,
     setCreditLineDecisions,
-    setCreditLineOriginalDecisions,
     setCurrentStep,
     setIsCurrentFormValid,
     setShowRequestProcessModal,
