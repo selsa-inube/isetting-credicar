@@ -94,13 +94,13 @@ const RequestProcessModal = (props: IRequestProcessModal) => {
                 title={
                   descriptionRequestStatus(
                     saveData.requestNumber,
-                    saveData.settingRequestId,
+                    saveData.responsible ?? "uno de nuestros funcionarios",
                   ).title
                 }
                 description={
                   descriptionRequestStatus(
                     saveData.requestNumber,
-                    saveData.settingRequestId,
+                    saveData.responsible ?? "uno de nuestros funcionarios",
                   ).description
                 }
                 onClick={onCloseRequestStatus}
@@ -109,7 +109,7 @@ const RequestProcessModal = (props: IRequestProcessModal) => {
                 actionText={
                   descriptionRequestStatus(
                     saveData.requestNumber,
-                    saveData.settingRequestId,
+                    saveData.responsible ?? "uno de nuestros funcionarios",
                   ).actionText
                 }
                 appearance={ComponentAppearance.PRIMARY}
