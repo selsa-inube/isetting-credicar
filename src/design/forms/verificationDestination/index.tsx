@@ -109,7 +109,7 @@ function VerificationForm(props: IVerificationForm) {
           onClick={onFinishForm}
         />
       )}
-      {showRequestProcessModal && (
+      {showRequestProcessModal && saveMoneyDestination && (
         <RequestProcessModal
           portalId="portal"
           saveData={saveMoneyDestination}
