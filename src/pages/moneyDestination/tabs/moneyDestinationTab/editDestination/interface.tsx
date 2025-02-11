@@ -91,10 +91,12 @@ const EditDestinationUI = (props: IEditDestinationUI) => {
                 setDecisions={setCreditLineDecisions}
                 revertModalDisplayData={revertModalDisplayData}
                 labelBusinessRules="LineOfCredit"
-                conditionForSwitchPlace={
+                nameMoneyDestination={
                   initialGeneralInformationValues.nameDestination
                 }
                 editDataOption
+                showAttentionModal={false}
+                setShowAttentionModal={() => console.log()}
               />
             )}
           </Stack>

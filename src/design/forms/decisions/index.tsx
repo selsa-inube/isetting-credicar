@@ -14,9 +14,10 @@ interface IDecisionsForm {
   initialValues: IRuleDecision[];
   labelBusinessRules: string;
   textValuesBusinessRules: IRulesFormTextValues;
+  showAttentionModal: boolean;
   decisionTemplateConfig: (
     enumeratorsRules: IRuleDecision,
-    conditionForSwitchPlace: string,
+    nameMoneyDestination: string,
   ) => IRuleDecision | undefined;
   onButtonClick: () => void;
   onPreviousStep: () => void;
@@ -25,7 +26,8 @@ interface IDecisionsForm {
     dataDecision: IRuleDecision,
     originalDecision: IRuleDecision,
   ) => void;
-  conditionForSwitchPlace: string;
+  nameMoneyDestination: string;
+  setShowAttentionModal: React.Dispatch<React.SetStateAction<boolean>>;
   editDataOption?: boolean;
 }
 
@@ -37,19 +39,20 @@ const DecisionsForm = (props: IDecisionsForm) => {
     labelBusinessRules,
     textValuesBusinessRules,
     editDataOption,
-    conditionForSwitchPlace,
+    nameMoneyDestination,
+    showAttentionModal,
     decisionTemplateConfig,
     onButtonClick,
     onPreviousStep,
     revertModalDisplayData,
     setDecisions,
+    setShowAttentionModal,
   } = props;
 
   const {
     isModalOpen,
     selectedDecision,
     decisions,
-    showAttentionModal,
     showDeleteModal,
     hasChanges,
     handleOpenModal,
@@ -65,6 +68,8 @@ const DecisionsForm = (props: IDecisionsForm) => {
     revertModalDisplayData,
     onButtonClick,
     setDecisions,
+    setShowAttentionModal,
+    showAttentionModal,
     editDataOption,
   );
 
@@ -79,7 +84,7 @@ const DecisionsForm = (props: IDecisionsForm) => {
       attentionModal={attentionModal}
       decisions={decisions}
       decisionTemplate={
-        decisionTemplateConfig(enumRuleData, conditionForSwitchPlace) ??
+        decisionTemplateConfig(enumRuleData, nameMoneyDestination) ??
         ({} as IRuleDecision)
       }
       deleteModal={deleteModal}
@@ -90,7 +95,13 @@ const DecisionsForm = (props: IDecisionsForm) => {
       onButtonClick={onButtonClick}
       onOpenModal={handleOpenModal}
       onPreviousStep={onPreviousStep}
-      onSubmitForm={handleSubmitForm}
+      onSubmitForm={(dataDecision: IRuleDecision) =>
+        handleSubmitForm(
+          dataDecision,
+          decisionTemplateConfig(enumRuleData, nameMoneyDestination) ??
+            ({} as IRuleDecision),
+        )
+      }
       onToggleAttentionModal={handleToggleAttentionModal}
       onToggleDeleteModal={handleToggleDeleteModal}
       selectedDecision={selectedDecision}

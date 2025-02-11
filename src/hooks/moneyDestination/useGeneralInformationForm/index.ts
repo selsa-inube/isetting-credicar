@@ -28,6 +28,7 @@ const useGeneralInformationForm = (
         validationMessages.required,
       ),
       description: validationRules.string.required(validationMessages.required),
+      icon: validationRules.string,
     });
 
   const validationSchema = createValidationSchema();
@@ -129,13 +130,14 @@ const useGeneralInformationForm = (
       if (editDataOption) {
         iconData =
           editData && compare
-            ? normalizeIconDestination(editData?.value ?? "")?.icon
-            : normalizeIconDestination(addData?.value ?? "")?.icon;
+            ? normalizeIconDestination(editData?.value ?? "")
+            : normalizeIconDestination(addData?.value ?? "");
       } else {
-        iconData = normalizeIconDestination(addData?.value ?? "")?.icon;
+        iconData = normalizeIconDestination(addData?.value ?? "");
       }
 
-      setIcon(iconData);
+      setIcon(iconData?.icon);
+      formik.setFieldValue("icon", iconData?.value ?? "");
     };
 
     updateIcon();

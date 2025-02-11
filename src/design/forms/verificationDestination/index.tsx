@@ -1,28 +1,35 @@
 import { MdOutlineArrowBack } from "react-icons/md";
-import { useMediaQuery } from "@inubekit/hooks";
-import { Button } from "@inubekit/button";
-import { Stack } from "@inubekit/stack";
+import { Button, Stack, useMediaQuery } from "@inubekit/inubekit";
 
 import { ComponentAppearance } from "@enum/appearances";
-import { Accordion } from "@src/design/data/accordions";
+import { Accordion } from "@design/data/accordions";
 import { tokens } from "@design/tokens";
 import { IRequestSteps } from "@design/feedback/RequestProcess/types";
-import { VerificationBoxes } from "@pages/moneyDestination/tabs/moneyDestinationTab/forms/verificationForm/verificationBoxes";
+import { VerificationBoxes } from "@src/design/forms/verificationDestination/verificationBoxes";
 import { addDestinationStepsConfig } from "@config/moneyDestination/addDestination/assisted";
 import { finishModal } from "@config/moneyDestination/moneyDestinationTab/form/verificationForm";
 import { IFormsUpdateData } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IFormsUpdateData";
 import { DecisionModal } from "@design/modals/decisionModal";
 import { RequestProcessModal } from "@design/modals/requestProcessModal";
+import { requestProcessMessage } from "@config/moneyDestination/moneyDestinationTab/generics/requestProcessMessage";
+import { ISaveDataResponse } from "@ptypes/saveData/ISaveDataResponse";
+import { requestStatusMessage } from "@config/moneyDestination/moneyDestinationTab/generics/requestStatusMessage";
+import { requestPendingModal } from "@config/moneyDestination/moneyDestinationTab/generics/requestPendingModal";
 
 interface IVerificationForm {
   requestSteps: IRequestSteps[];
   showModal: boolean;
   showRequestProcessModal: boolean;
   updatedData: IFormsUpdateData;
+  saveMoneyDestination: ISaveDataResponse;
+  loading: boolean;
+  showPendingReqModal: boolean;
   handleStepChange: (stepId: number) => void;
   onFinishForm: () => void;
   onPreviousStep: () => void;
   onToggleModal: () => void;
+  onCloseRequestStatus: () => void;
+  onClosePendingReqModal: () => void;
 }
 
 function VerificationForm(props: IVerificationForm) {
@@ -31,10 +38,15 @@ function VerificationForm(props: IVerificationForm) {
     showModal,
     showRequestProcessModal,
     updatedData,
+    saveMoneyDestination,
+    loading,
+    showPendingReqModal,
     handleStepChange,
     onFinishForm,
     onPreviousStep,
     onToggleModal,
+    onCloseRequestStatus,
+    onClosePendingReqModal,
   } = props;
 
   const isTablet = useMediaQuery("(max-width: 1224px)");
@@ -97,12 +109,31 @@ function VerificationForm(props: IVerificationForm) {
           onClick={onFinishForm}
         />
       )}
-      {showRequestProcessModal && (
+      {showRequestProcessModal && saveMoneyDestination && (
         <RequestProcessModal
-          title="Procesando solicitud"
-          description="Hemos recibido tu solicitud y se encuentra en proceso.Por favor, espera mientras la gestionamos."
           portalId="portal"
-          requestSteps={requestSteps}
+          saveData={saveMoneyDestination}
+          descriptionRequestProcess={requestProcessMessage}
+          descriptionRequestStatus={requestStatusMessage}
+          loading={loading}
+          requestProcessSteps={requestSteps}
+          appearance={ComponentAppearance.SUCCESS}
+          onCloseRequestStatus={onCloseRequestStatus}
+        />
+      )}
+      {showPendingReqModal && saveMoneyDestination.requestNumber && (
+        <DecisionModal
+          portalId="portal"
+          title={requestPendingModal(saveMoneyDestination.requestNumber).title}
+          description={
+            requestPendingModal(saveMoneyDestination.requestNumber).description
+          }
+          actionText={
+            requestPendingModal(saveMoneyDestination.requestNumber).actionText
+          }
+          onCloseModal={onClosePendingReqModal}
+          onClick={onClosePendingReqModal}
+          withCancelButton={false}
         />
       )}
     </Stack>

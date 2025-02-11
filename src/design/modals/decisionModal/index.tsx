@@ -24,6 +24,7 @@ interface IDecisionModal {
   isLoading?: boolean;
   justificationOfDecision?: boolean;
   withIcon?: boolean;
+  withCancelButton?: boolean;
 }
 
 const initialValues: IDecisionEntry = {
@@ -41,6 +42,7 @@ const DecisionModal = (props: IDecisionModal) => {
     portalId,
     title,
     appearance = ComponentAppearance.PRIMARY,
+    withCancelButton = true,
     onClick,
     onCloseModal,
     setFieldEntered,
@@ -97,6 +99,7 @@ const DecisionModal = (props: IDecisionModal) => {
       portalId={portalId}
       title={title}
       withIcon={withIcon}
+      withCancelButton={withCancelButton}
     />
   );
 };

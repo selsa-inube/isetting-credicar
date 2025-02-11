@@ -17,9 +17,10 @@ import { revertModalDisplayData } from "@utils/revertModalDisplayData";
 import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationDestination";
 import { crumbsAddDestination } from "@config/moneyDestination/addDestination/navigation";
 import { textValuesBusinessRules } from "@config/moneyDestination/moneyDestinationTab/businessRules";
-import { VerificationForm } from "../forms/verificationForm";
 import { attentionModal, deleteModal } from "@config/decisions/messages";
 import { decisionTemplateConfig } from "@config/decisions/decisionTemplateDestination";
+import { ISaveDataResponse } from "@ptypes/saveData/ISaveDataResponse";
+import { VerificationForm } from "@design/forms/verificationDestination";
 
 interface IAddDestinationUI {
   creditLineDecisions: IRuleDecision[];
@@ -31,6 +32,10 @@ interface IAddDestinationUI {
   showModal: boolean;
   showRequestProcessModal: boolean;
   steps: IAssistedStep[];
+  saveMoneyDestination: ISaveDataResponse;
+  loading: boolean;
+  showPendingReqModal: boolean;
+  showAttentionModal: boolean;
   onFinishForm: () => void;
   onNextStep: () => void;
   onPreviousStep: () => void;
@@ -38,6 +43,9 @@ interface IAddDestinationUI {
   setCreditLineDecisions: (decisions: IRuleDecision[]) => void;
   setCurrentStep: (step: number) => void;
   setIsCurrentFormValid: React.Dispatch<React.SetStateAction<boolean>>;
+  onCloseRequestStatus: () => void;
+  onClosePendingReqModal: () => void;
+  setShowAttentionModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AddDestinationUI = (props: IAddDestinationUI) => {
@@ -51,6 +59,10 @@ const AddDestinationUI = (props: IAddDestinationUI) => {
     showModal,
     showRequestProcessModal,
     steps,
+    loading,
+    saveMoneyDestination,
+    showPendingReqModal,
+    showAttentionModal,
     onFinishForm,
     onNextStep,
     onPreviousStep,
@@ -58,6 +70,9 @@ const AddDestinationUI = (props: IAddDestinationUI) => {
     setCreditLineDecisions,
     setCurrentStep,
     setIsCurrentFormValid,
+    onCloseRequestStatus,
+    onClosePendingReqModal,
+    setShowAttentionModal,
   } = props;
 
   const smallScreen = useMediaQuery("(max-width: 990px)");
@@ -117,9 +132,11 @@ const AddDestinationUI = (props: IAddDestinationUI) => {
                 setDecisions={setCreditLineDecisions}
                 revertModalDisplayData={revertModalDisplayData}
                 labelBusinessRules="LineOfCredit"
-                conditionForSwitchPlace={
+                nameMoneyDestination={
                   initialGeneralInformationValues.nameDestination
                 }
+                showAttentionModal={showAttentionModal}
+                setShowAttentionModal={setShowAttentionModal}
               />
             )}
             {currentStep === 3 && (
@@ -141,6 +158,11 @@ const AddDestinationUI = (props: IAddDestinationUI) => {
                 showRequestProcessModal={showRequestProcessModal}
                 onToggleModal={onToggleModal}
                 onFinishForm={onFinishForm}
+                saveMoneyDestination={saveMoneyDestination}
+                loading={loading}
+                onCloseRequestStatus={onCloseRequestStatus}
+                showPendingReqModal={showPendingReqModal}
+                onClosePendingReqModal={onClosePendingReqModal}
               />
             )}
           </Stack>

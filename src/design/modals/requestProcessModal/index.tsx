@@ -1,24 +1,50 @@
 import { createPortal } from "react-dom";
-import { useMediaQuery } from "@inubekit/hooks";
-import { Stack } from "@inubekit/stack";
-import { Text } from "@inubekit/text";
-import { Blanket } from "@inubekit/blanket";
+import {
+  Blanket,
+  ISpinnerAppearance,
+  Spinner,
+  Stack,
+  Text,
+  useMediaQuery,
+} from "@inubekit/inubekit";
 
-import { tokens } from "@design/tokens";
 import { RequestProcess } from "@design/feedback/RequestProcess";
 import { IRequestSteps } from "@design/feedback/RequestProcess/types";
 import { ComponentAppearance } from "@enum/appearances";
+import { ISaveDataResponse } from "@ptypes/saveData/ISaveDataResponse";
+import { RequestStatus } from "@design/feedback/requestStatus";
+import { statusFlowAutomatic } from "@config/status/statusFlowAutomatic";
+import { tokens } from "@design/tokens";
 import { StyledModal } from "./styles";
 
 interface IRequestProcessModal {
-  title: string;
-  description: string;
+  descriptionRequestProcess: {
+    title: string;
+    description: string;
+  };
   portalId: string;
-  requestSteps: IRequestSteps[];
+  loading: boolean;
+  requestProcessSteps: IRequestSteps[];
+  descriptionRequestStatus: (
+    requestNumber: string,
+    responsible: string,
+  ) => { actionText: string; description: string; title: string };
+  onCloseRequestStatus: () => void;
+  saveData?: ISaveDataResponse;
+  appearance?: ISpinnerAppearance;
 }
 
 const RequestProcessModal = (props: IRequestProcessModal) => {
-  const { title, description, portalId, requestSteps } = props;
+  const {
+    descriptionRequestProcess,
+    portalId,
+    requestProcessSteps,
+    loading,
+    appearance = "primary",
+    saveData,
+    descriptionRequestStatus,
+    onCloseRequestStatus,
+  } = props;
 
   const isMobile = useMediaQuery("(max-width: 768px)");
 
@@ -34,37 +60,62 @@ const RequestProcessModal = (props: IRequestProcessModal) => {
     <Blanket>
       <StyledModal $smallScreen={isMobile}>
         <Stack direction="column" gap={tokens.spacing.s300}>
-          <Text type="title" size="medium" weight="bold">
-            {title}
-          </Text>
-        </Stack>
-        <Stack
-          gap={tokens.spacing.s100}
-          direction="column"
-          justifyContent="center"
-          alignItems="center"
-          padding={
-            isMobile
-              ? `${tokens.spacing.s100}`
-              : `${tokens.spacing.s0} ${tokens.spacing.s150} ${tokens.spacing.s450} ${tokens.spacing.s450}`
-          }
-        >
-          <Text size={isMobile ? "medium" : "large"}>{description}</Text>
-        </Stack>
-
-        <Stack
-          padding={
-            isMobile
-              ? `${tokens.spacing.s100} ${tokens.spacing.s100}`
-              : `${tokens.spacing.s0} ${tokens.spacing.s450}`
-          }
-        >
-          <RequestProcess
-            appearance={ComponentAppearance.SUCCESS}
-            requestSteps={requestSteps}
-            isMobile={isMobile}
-            sizeIcon={isMobile ? "20px " : "32px"}
-          />
+          {loading ? (
+            <Stack
+              direction="column"
+              alignItems="center"
+              justifyContent="center"
+              alignContent="center"
+              gap={tokens.spacing.s300}
+            >
+              <Spinner
+                size="large"
+                appearance={appearance}
+                transparent={false}
+              />
+              <Text type="body" size="medium" weight="bold" appearance="dark">
+                Espere un momento por favor
+              </Text>
+            </Stack>
+          ) : (
+            saveData &&
+            saveData.requestStatus !== "" &&
+            (statusFlowAutomatic.includes(saveData.requestStatus) ? (
+              <RequestProcess
+                title={descriptionRequestProcess.title}
+                description={descriptionRequestProcess.description}
+                appearance={ComponentAppearance.SUCCESS}
+                requestSteps={requestProcessSteps}
+                isMobile={isMobile}
+                sizeIcon={isMobile ? "20px " : "32px"}
+              />
+            ) : (
+              <RequestStatus
+                title={
+                  descriptionRequestStatus(
+                    saveData.requestNumber,
+                    saveData.responsible ?? "uno de nuestros funcionarios",
+                  ).title
+                }
+                description={
+                  descriptionRequestStatus(
+                    saveData.requestNumber,
+                    saveData.responsible ?? "uno de nuestros funcionarios",
+                  ).description
+                }
+                onClick={onCloseRequestStatus}
+                onCloseModal={onCloseRequestStatus}
+                isLoading={false}
+                actionText={
+                  descriptionRequestStatus(
+                    saveData.requestNumber,
+                    saveData.responsible ?? "uno de nuestros funcionarios",
+                  ).actionText
+                }
+                appearance={ComponentAppearance.PRIMARY}
+              />
+            ))
+          )}
         </Stack>
       </StyledModal>
     </Blanket>,

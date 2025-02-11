@@ -36,7 +36,7 @@ const useAppData = (
 
   useEffect(() => {
     updateAppData();
-  }, [user, code, businessUnit]);
+  }, []);
 
   let hasError = false;
   let isLoading = false;

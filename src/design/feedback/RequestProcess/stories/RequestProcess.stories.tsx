@@ -27,6 +27,9 @@ const Template: StoryFn<IRequestProcess> = (args) => {
 export const Default = Template.bind({});
 Default.args = {
   appearance: ComponentAppearance.SUCCESS,
+  title: "Procesando solicitud",
+  description:
+    "Hemos recibido tu solicitud y se encuentra en proceso. Por favor, espera mientras la gestionamos.",
   requestSteps: [
     { name: "Solicitud radicada", status: "completed" },
     { name: "Agregando", status: "completed" },
@@ -36,7 +39,10 @@ Default.args = {
 
 export const WithError = Template.bind({});
 WithError.args = {
-  appearance: ComponentAppearance.SUCCESS,
+  appearance: ComponentAppearance.DANGER,
+  title: "Procesando solicitud",
+  description:
+    "Hemos recibido tu solicitud y se encuentra en proceso. Por favor, espera mientras la gestionamos.",
   requestSteps: [
     { name: "Solicitud radicada", status: "completed" },
     { name: "Evaluando requisitos", status: "completed" },
