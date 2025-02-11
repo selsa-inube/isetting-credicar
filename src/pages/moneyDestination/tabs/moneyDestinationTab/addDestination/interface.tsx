@@ -132,7 +132,7 @@ const AddDestinationUI = (props: IAddDestinationUI) => {
                 setDecisions={setCreditLineDecisions}
                 revertModalDisplayData={revertModalDisplayData}
                 labelBusinessRules="LineOfCredit"
-                conditionForSwitchPlace={
+                nameMoneyDestination={
                   initialGeneralInformationValues.nameDestination
                 }
                 showAttentionModal={showAttentionModal}

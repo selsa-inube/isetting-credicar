@@ -17,7 +17,7 @@ interface IDecisionsForm {
   showAttentionModal: boolean;
   decisionTemplateConfig: (
     enumeratorsRules: IRuleDecision,
-    conditionForSwitchPlace: string,
+    nameMoneyDestination: string,
   ) => IRuleDecision | undefined;
   onButtonClick: () => void;
   onPreviousStep: () => void;
@@ -26,7 +26,7 @@ interface IDecisionsForm {
     dataDecision: IRuleDecision,
     originalDecision: IRuleDecision,
   ) => void;
-  conditionForSwitchPlace: string;
+  nameMoneyDestination: string;
   setShowAttentionModal: React.Dispatch<React.SetStateAction<boolean>>;
   editDataOption?: boolean;
 }
@@ -39,7 +39,7 @@ const DecisionsForm = (props: IDecisionsForm) => {
     labelBusinessRules,
     textValuesBusinessRules,
     editDataOption,
-    conditionForSwitchPlace,
+    nameMoneyDestination,
     showAttentionModal,
     decisionTemplateConfig,
     onButtonClick,
@@ -84,7 +84,7 @@ const DecisionsForm = (props: IDecisionsForm) => {
       attentionModal={attentionModal}
       decisions={decisions}
       decisionTemplate={
-        decisionTemplateConfig(enumRuleData, conditionForSwitchPlace) ??
+        decisionTemplateConfig(enumRuleData, nameMoneyDestination) ??
         ({} as IRuleDecision)
       }
       deleteModal={deleteModal}
@@ -98,7 +98,7 @@ const DecisionsForm = (props: IDecisionsForm) => {
       onSubmitForm={(dataDecision: IRuleDecision) =>
         handleSubmitForm(
           dataDecision,
-          decisionTemplateConfig(enumRuleData, conditionForSwitchPlace) ??
+          decisionTemplateConfig(enumRuleData, nameMoneyDestination) ??
             ({} as IRuleDecision),
         )
       }

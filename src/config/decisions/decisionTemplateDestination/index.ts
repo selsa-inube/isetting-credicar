@@ -9,7 +9,7 @@ const decisionTemplateConfig = (
     decisionDataType,
     conditionThatEstablishesTheDecision,
   }: IRuleDecision,
-  conditionForSwitchPlace: string,
+  nameMoneyDestination: string,
 ) => {
   if (labelName && decisionDataType && conditionThatEstablishesTheDecision) {
     const decisionData = decisionDataType.toLocaleUpperCase();
@@ -28,7 +28,7 @@ const decisionTemplateConfig = (
           conditionName: condition.conditionName,
           labelName: dataTranslations[condition.labelName],
           conditionDataType: condition.conditionDataType,
-          value: conditionForSwitchPlace,
+          value: nameMoneyDestination,
           howToSetTheCondition: condition.howToSetTheCondition,
           hidden: condition.conditionName === "MoneyDestination",
         })),
