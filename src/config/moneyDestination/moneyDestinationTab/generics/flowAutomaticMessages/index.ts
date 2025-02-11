@@ -21,12 +21,6 @@ const flowAutomaticMessages = {
     appearance: ComponentAppearance.DANGER,
     duration: 5000,
   },
-  requestInQueue: {
-    title: "Solicitud en cola",
-    description: "Verifique su solicitud en la pestaña solicitudes en tramite",
-    appearance: ComponentAppearance.WARNING,
-    duration: 5000,
-  },
   SuccessfulCreateRequest: {
     title: "¡Creación de solicitud exitosa!",
     description: "Se creo el cargo con éxito",

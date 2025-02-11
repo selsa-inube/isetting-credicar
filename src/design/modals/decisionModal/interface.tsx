@@ -27,6 +27,7 @@ interface IDecisionModalUI {
   portalId: string;
   title: string;
   withIcon: boolean;
+  withCancelButton: boolean;
   onClick: () => void;
   onCloseModal: () => void;
 }
@@ -44,6 +45,7 @@ const DecisionModalUI = (props: IDecisionModalUI) => {
     portalId,
     title,
     withIcon,
+    withCancelButton,
     onCloseModal,
     onClick,
   } = props;
@@ -120,14 +122,16 @@ const DecisionModalUI = (props: IDecisionModalUI) => {
         )}
 
         <Stack gap={tokens.spacing.s250} justifyContent="flex-end">
-          <Button
-            spacing="wide"
-            appearance={ComponentAppearance.GRAY}
-            variant="filled"
-            onClick={onCloseModal}
-          >
-            Cancelar
-          </Button>
+          {withCancelButton && (
+            <Button
+              spacing="wide"
+              appearance={ComponentAppearance.GRAY}
+              variant="filled"
+              onClick={onCloseModal}
+            >
+              Cancelar
+            </Button>
+          )}
           <Button
             spacing="wide"
             appearance={appearance}

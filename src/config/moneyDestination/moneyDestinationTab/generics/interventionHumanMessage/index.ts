@@ -1,4 +1,4 @@
-import { ComponentAppearance } from "@src/enum/appearances";
+import { ComponentAppearance } from "@enum/appearances";
 
 const interventionHumanMessage = {
   SuccessfulCreateRequestIntHuman: {

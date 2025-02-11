@@ -126,6 +126,8 @@ function AddCreditLinesUI(props: IAddCreditLinesUI) {
                 conditionForSwitchPlace={
                   initialValues.generalInformation.values.nameCreditLine
                 }
+                showAttentionModal={false}
+                setShowAttentionModal={() => console.log()}
               />
             )}
           </Stack>

@@ -14,6 +14,7 @@ import { RequestProcessModal } from "@design/modals/requestProcessModal";
 import { requestProcessMessage } from "@config/moneyDestination/moneyDestinationTab/generics/requestProcessMessage";
 import { ISaveDataResponse } from "@ptypes/saveData/ISaveDataResponse";
 import { requestStatusMessage } from "@config/moneyDestination/moneyDestinationTab/generics/requestStatusMessage";
+import { requestPendingModal } from "@config/moneyDestination/moneyDestinationTab/generics/requestPendingModal";
 
 interface IVerificationForm {
   requestSteps: IRequestSteps[];
@@ -22,11 +23,13 @@ interface IVerificationForm {
   updatedData: IFormsUpdateData;
   saveMoneyDestination: ISaveDataResponse;
   loading: boolean;
+  showPendingReqModal: boolean;
   handleStepChange: (stepId: number) => void;
   onFinishForm: () => void;
   onPreviousStep: () => void;
   onToggleModal: () => void;
   onCloseRequestStatus: () => void;
+  onClosePendingReqModal: () => void;
 }
 
 function VerificationForm(props: IVerificationForm) {
@@ -37,11 +40,13 @@ function VerificationForm(props: IVerificationForm) {
     updatedData,
     saveMoneyDestination,
     loading,
+    showPendingReqModal,
     handleStepChange,
     onFinishForm,
     onPreviousStep,
     onToggleModal,
     onCloseRequestStatus,
+    onClosePendingReqModal,
   } = props;
 
   const isTablet = useMediaQuery("(max-width: 1224px)");
@@ -114,6 +119,21 @@ function VerificationForm(props: IVerificationForm) {
           requestProcessSteps={requestSteps}
           appearance={ComponentAppearance.SUCCESS}
           onCloseRequestStatus={onCloseRequestStatus}
+        />
+      )}
+      {showPendingReqModal && saveMoneyDestination.requestNumber && (
+        <DecisionModal
+          portalId="portal"
+          title={requestPendingModal(saveMoneyDestination.requestNumber).title}
+          description={
+            requestPendingModal(saveMoneyDestination.requestNumber).description
+          }
+          actionText={
+            requestPendingModal(saveMoneyDestination.requestNumber).actionText
+          }
+          onCloseModal={onClosePendingReqModal}
+          onClick={onClosePendingReqModal}
+          withCancelButton={false}
         />
       )}
     </Stack>

@@ -9,13 +9,14 @@ const useDecisionForm = (
   ) => void,
   onButtonClick: () => void,
   setCreditLineDecisions: (decisions: IRuleDecision[]) => void,
+  setShowAttentionModal: React.Dispatch<React.SetStateAction<boolean>>,
+  showAttentionModal: boolean,
   editDataOption?: boolean,
 ) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDecision, setSelectedDecision] =
     useState<IRuleDecision | null>(null);
   const [decisions, setDecisions] = useState<IRuleDecision[]>(initialValues);
-  const [showAttentionModal, setShowAttentionModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [id, setId] = useState("");
   const [hasChanges, setHasChanges] = useState(false);
@@ -33,8 +34,28 @@ const useDecisionForm = (
     setSelectedDecision(null);
   };
 
-  const handleSubmitForm = (dataDecision: IRuleDecision) => {
+  const handleSubmitForm = (
+    dataDecision: IRuleDecision,
+    decisionTemplate: IRuleDecision,
+  ) => {
     const isEditing = selectedDecision !== null;
+
+    const updatedConditions =
+      decisionTemplate.conditionThatEstablishesTheDecision?.map(
+        (templateCondition) => {
+          const existingCondition =
+            dataDecision.conditionThatEstablishesTheDecision?.find(
+              (condition) =>
+                condition.conditionName === templateCondition.conditionName,
+            );
+
+          if (!existingCondition) {
+            return templateCondition;
+          }
+
+          return existingCondition;
+        },
+      );
 
     const newDecision = isEditing
       ? (revertModalDisplayData(
@@ -44,6 +65,7 @@ const useDecisionForm = (
       : {
           ...dataDecision,
           decisionId: `Decisión ${decisions.length + 1}`,
+          conditionThatEstablishesTheDecision: updatedConditions,
         };
 
     const updatedDecisions = isEditing
@@ -109,7 +131,6 @@ const useDecisionForm = (
     isModalOpen,
     selectedDecision,
     decisions,
-    showAttentionModal,
     showDeleteModal,
     hasChanges,
     savedDecisions,

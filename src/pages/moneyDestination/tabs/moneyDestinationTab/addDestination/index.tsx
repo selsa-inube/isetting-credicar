@@ -18,6 +18,7 @@ function AddDestination() {
     showModal,
     showRequestProcessModal,
     saveData,
+    showAttentionModal,
     handleNextStep,
     handlePreviousStep,
     handleSubmitClick,
@@ -26,6 +27,7 @@ function AddDestination() {
     setCurrentStep,
     setIsCurrentFormValid,
     setShowRequestProcessModal,
+    setShowAttentionModal,
   } = useAddDestination();
 
   const { appData } = useContext(AuthAndPortalData);
@@ -34,7 +36,9 @@ function AddDestination() {
     saveMoneyDestination,
     requestSteps,
     loading,
+    showPendingReqModal,
     handleCloseRequestStatus,
+    handleClosePendingReqModal,
   } = useSaveMoneyDestination(
     appData.businessUnit.publicCode,
     appData.user.userAccount,
@@ -64,6 +68,10 @@ function AddDestination() {
       saveMoneyDestination={saveMoneyDestination as ISaveDataResponse}
       loading={loading}
       onCloseRequestStatus={handleCloseRequestStatus}
+      showPendingReqModal={showPendingReqModal}
+      onClosePendingReqModal={handleClosePendingReqModal}
+      showAttentionModal={showAttentionModal}
+      setShowAttentionModal={setShowAttentionModal}
     />
   );
 }

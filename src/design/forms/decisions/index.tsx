@@ -14,6 +14,7 @@ interface IDecisionsForm {
   initialValues: IRuleDecision[];
   labelBusinessRules: string;
   textValuesBusinessRules: IRulesFormTextValues;
+  showAttentionModal: boolean;
   decisionTemplateConfig: (
     enumeratorsRules: IRuleDecision,
     conditionForSwitchPlace: string,
@@ -26,6 +27,7 @@ interface IDecisionsForm {
     originalDecision: IRuleDecision,
   ) => void;
   conditionForSwitchPlace: string;
+  setShowAttentionModal: React.Dispatch<React.SetStateAction<boolean>>;
   editDataOption?: boolean;
 }
 
@@ -38,18 +40,19 @@ const DecisionsForm = (props: IDecisionsForm) => {
     textValuesBusinessRules,
     editDataOption,
     conditionForSwitchPlace,
+    showAttentionModal,
     decisionTemplateConfig,
     onButtonClick,
     onPreviousStep,
     revertModalDisplayData,
     setDecisions,
+    setShowAttentionModal,
   } = props;
 
   const {
     isModalOpen,
     selectedDecision,
     decisions,
-    showAttentionModal,
     showDeleteModal,
     hasChanges,
     handleOpenModal,
@@ -65,6 +68,8 @@ const DecisionsForm = (props: IDecisionsForm) => {
     revertModalDisplayData,
     onButtonClick,
     setDecisions,
+    setShowAttentionModal,
+    showAttentionModal,
     editDataOption,
   );
 
@@ -90,7 +95,13 @@ const DecisionsForm = (props: IDecisionsForm) => {
       onButtonClick={onButtonClick}
       onOpenModal={handleOpenModal}
       onPreviousStep={onPreviousStep}
-      onSubmitForm={handleSubmitForm}
+      onSubmitForm={(dataDecision: IRuleDecision) =>
+        handleSubmitForm(
+          dataDecision,
+          decisionTemplateConfig(enumRuleData, conditionForSwitchPlace) ??
+            ({} as IRuleDecision),
+        )
+      }
       onToggleAttentionModal={handleToggleAttentionModal}
       onToggleDeleteModal={handleToggleDeleteModal}
       selectedDecision={selectedDecision}

@@ -16,8 +16,9 @@ const mapEvaluateRuleByBusinessEntities = (
   data: IRuleDecision[] | undefined,
 ) => {
   if (!data) return [];
-  return data.map((item) => ({
+  return data.map((item, index) => ({
     ...item,
+    decisionId: `Decisión ${index + 1}`,
     labelName:
       item.labelName && dataTranslations[item.labelName]
         ? dataTranslations[item.labelName]

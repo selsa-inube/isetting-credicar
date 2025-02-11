@@ -23,6 +23,7 @@ const useAddDestination = () => {
     IRuleDecision[]
   >([]);
   const [showRequestProcessModal, setShowRequestProcessModal] = useState(false);
+  const [showAttentionModal, setShowAttentionModal] = useState(false);
 
   const generalInformationRef =
     useRef<FormikProps<IGeneralInformationEntry>>(null);
@@ -36,6 +37,19 @@ const useAddDestination = () => {
   }, [formValues.nameDestination]);
 
   const handleNextStep = () => {
+    if (
+      currentStep === 2 &&
+      creditLineDecisions.length === 0 &&
+      !showAttentionModal
+    ) {
+      setShowAttentionModal(true);
+      return;
+    }
+
+    if (currentStep === 2 && showAttentionModal) {
+      setShowAttentionModal(false);
+    }
+
     if (currentStep < addDestinationStepsConfig("").length) {
       if (generalInformationRef.current) {
         setFormValues(generalInformationRef.current.values);
@@ -57,17 +71,13 @@ const useAddDestination = () => {
 
   const decisionsData = creditLineDecisions.map((decision) => {
     return {
-      ruleName: "LineOfCredit",
+      ruleName: decision.ruleName,
       decisionByRule: [
         {
           conditionThatEstablishesTheDecision:
             decision.conditionThatEstablishesTheDecision?.map((condition) => {
               return {
                 conditionName: condition.conditionName,
-                conditionDataType: condition.conditionDataType,
-                howToSetTheCondition: condition.howToSetTheCondition,
-                labelName: condition.labelName,
-                switchPlaces: condition.switchPlaces,
                 value: condition.value,
               };
             }),
@@ -109,6 +119,7 @@ const useAddDestination = () => {
     showModal,
     showRequestProcessModal,
     saveData,
+    showAttentionModal,
     handleNextStep,
     handlePreviousStep,
     handleSubmitClick,
@@ -117,6 +128,7 @@ const useAddDestination = () => {
     setCurrentStep,
     setIsCurrentFormValid,
     setShowRequestProcessModal,
+    setShowAttentionModal,
   };
 };
 

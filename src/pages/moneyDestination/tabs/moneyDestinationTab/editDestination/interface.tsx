@@ -95,6 +95,8 @@ const EditDestinationUI = (props: IEditDestinationUI) => {
                   initialGeneralInformationValues.nameDestination
                 }
                 editDataOption
+                showAttentionModal={false}
+                setShowAttentionModal={() => console.log()}
               />
             )}
           </Stack>

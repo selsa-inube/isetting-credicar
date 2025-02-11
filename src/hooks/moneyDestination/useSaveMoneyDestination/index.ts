@@ -28,6 +28,7 @@ const useSaveMoneyDestination = (
   const { addFlag } = useFlag();
   const [requestSteps, setRequestSteps] =
     useState<IRequestSteps[]>(requestStepsInitial);
+  const [showPendingReqModal, setShowPendingReqModal] = useState(false);
 
   const navigate = useNavigate();
   const navigatePage = "/money-destination";
@@ -184,14 +185,7 @@ const useSaveMoneyDestination = (
       const timeout = setTimeout(() => {
         clearInterval(timer);
         setSendData(false);
-        navigate(navigatePage);
-        addFlag({
-          title: flowAutomaticMessages.requestInQueue.title,
-          description: flowAutomaticMessages.requestInQueue.description,
-          appearance: flowAutomaticMessages.requestInQueue
-            .appearance as IFlagAppearance,
-          duration: flowAutomaticMessages.requestInQueue.duration,
-        });
+        setShowPendingReqModal(true);
       }, 60000);
 
       return () => {
@@ -215,6 +209,11 @@ const useSaveMoneyDestination = (
     });
   };
 
+  const handleClosePendingReqModal = () => {
+    setShowPendingReqModal(false);
+    navigate(navigatePage);
+  };
+
   useEffect(() => {
     handleStatusChange();
   }, [statusRequest]);
@@ -223,7 +222,9 @@ const useSaveMoneyDestination = (
     saveMoneyDestination,
     requestSteps,
     loading,
+    showPendingReqModal,
     handleCloseRequestStatus,
+    handleClosePendingReqModal,
   };
 };
 

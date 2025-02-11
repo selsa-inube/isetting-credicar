@@ -1,5 +1,4 @@
 import { IRuleDecision, ValueDataType } from "@isettingkit/input";
-import { sortDisplayDataSampleSwitchPlaces } from "@utils/decisions/sortDisplayDataSampleSwitchPlaces";
 import { dataTranslations } from "@utils/dataTranslations";
 
 const decisionTemplateConfig = (
@@ -29,16 +28,13 @@ const decisionTemplateConfig = (
           conditionName: condition.conditionName,
           labelName: dataTranslations[condition.labelName],
           conditionDataType: condition.conditionDataType,
-          value:
-            condition.conditionName === "MoneyDestination"
-              ? conditionForSwitchPlace
-              : "",
+          value: conditionForSwitchPlace,
           howToSetTheCondition: condition.howToSetTheCondition,
-          switchPlaces: condition.conditionName === "MoneyDestination",
+          hidden: condition.conditionName === "MoneyDestination",
         })),
     };
 
-    return sortDisplayDataSampleSwitchPlaces(decisionTemplate);
+    return decisionTemplate;
   }
 };
 

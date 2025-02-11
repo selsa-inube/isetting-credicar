@@ -34,6 +34,8 @@ interface IAddDestinationUI {
   steps: IAssistedStep[];
   saveMoneyDestination: ISaveDataResponse;
   loading: boolean;
+  showPendingReqModal: boolean;
+  showAttentionModal: boolean;
   onFinishForm: () => void;
   onNextStep: () => void;
   onPreviousStep: () => void;
@@ -42,6 +44,8 @@ interface IAddDestinationUI {
   setCurrentStep: (step: number) => void;
   setIsCurrentFormValid: React.Dispatch<React.SetStateAction<boolean>>;
   onCloseRequestStatus: () => void;
+  onClosePendingReqModal: () => void;
+  setShowAttentionModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AddDestinationUI = (props: IAddDestinationUI) => {
@@ -57,6 +61,8 @@ const AddDestinationUI = (props: IAddDestinationUI) => {
     steps,
     loading,
     saveMoneyDestination,
+    showPendingReqModal,
+    showAttentionModal,
     onFinishForm,
     onNextStep,
     onPreviousStep,
@@ -65,6 +71,8 @@ const AddDestinationUI = (props: IAddDestinationUI) => {
     setCurrentStep,
     setIsCurrentFormValid,
     onCloseRequestStatus,
+    onClosePendingReqModal,
+    setShowAttentionModal,
   } = props;
 
   const smallScreen = useMediaQuery("(max-width: 990px)");
@@ -127,6 +135,8 @@ const AddDestinationUI = (props: IAddDestinationUI) => {
                 conditionForSwitchPlace={
                   initialGeneralInformationValues.nameDestination
                 }
+                showAttentionModal={showAttentionModal}
+                setShowAttentionModal={setShowAttentionModal}
               />
             )}
             {currentStep === 3 && (
@@ -151,6 +161,8 @@ const AddDestinationUI = (props: IAddDestinationUI) => {
                 saveMoneyDestination={saveMoneyDestination}
                 loading={loading}
                 onCloseRequestStatus={onCloseRequestStatus}
+                showPendingReqModal={showPendingReqModal}
+                onClosePendingReqModal={onClosePendingReqModal}
               />
             )}
           </Stack>
