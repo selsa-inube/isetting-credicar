@@ -29,9 +29,9 @@ interface IGeneralInformationFormUI {
   editDataOption: boolean;
   icon: JSX.Element | undefined;
   valuesEqual: boolean;
+  loading: boolean;
   onButtonClick: () => void;
   onChange: (name: string, value: string) => void;
-  loading?: boolean;
   isDisabledButton?: boolean;
 }
 
@@ -124,7 +124,10 @@ const GeneralInformationFormUI = (props: IGeneralInformationFormUI) => {
         <Button
           fullwidth={isMobile}
           onClick={onButtonClick}
-          disabled={isDisabledButton}
+          disabled={
+            editDataOption ? isDisabledButton && !loading : isDisabledButton
+          }
+          loading={loading}
           appearance={ComponentAppearance.PRIMARY}
         >
           {editDataOption ? "Guardar" : "Siguiente"}

@@ -1,12 +1,13 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { FormikProps } from "formik";
-import { IRuleDecision } from "@isettingkit/input";
+import { IRuleDecision, ICondition } from "@isettingkit/input";
 
 import { addDestinationStepsConfig } from "@config/moneyDestination/addDestination/assisted";
 import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationDestination";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 import { formatDate } from "@utils/date/formatDate";
 import { ISaveDataRequest } from "@ptypes/saveData/ISaveDataRequest";
+import { formatDateDecision } from "@utils/date/formatDateDecision";
 
 const useAddDestination = () => {
   const { appData } = useContext(AuthAndPortalData);
@@ -70,22 +71,27 @@ const useAddDestination = () => {
   };
 
   const decisionsData = creditLineDecisions.map((decision) => {
+    const decisionByRule: IRuleDecision = {
+      conditionThatEstablishesTheDecision:
+        decision.conditionThatEstablishesTheDecision?.map((condition) => {
+          return {
+            conditionName: condition.conditionName,
+            value: condition.value,
+          };
+        }) as ICondition[],
+      effectiveFrom: formatDateDecision(decision.effectiveFrom as string),
+      value: decision.value,
+    };
+
+    if (decision.validUntil) {
+      decisionByRule.validUntil = formatDateDecision(
+        decision.validUntil as string,
+      );
+    }
+
     return {
       ruleName: decision.ruleName,
-      decisionByRule: [
-        {
-          conditionThatEstablishesTheDecision:
-            decision.conditionThatEstablishesTheDecision?.map((condition) => {
-              return {
-                conditionName: condition.conditionName,
-                value: condition.value,
-              };
-            }),
-          effectiveFrom: decision.effectiveFrom,
-          validUntil: decision.validUntil,
-          value: decision.value,
-        },
-      ],
+      decisionByRule: [decisionByRule],
     };
   });
 

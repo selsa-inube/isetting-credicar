@@ -18,6 +18,8 @@ const mapEvaluateRuleByBusinessEntities = (
   if (!data) return [];
   return data.map((item, index) => ({
     ...item,
+    id: item.decisionId,
+    businessRuleId: item.decisionId,
     decisionId: `Decisión ${index + 1}`,
     labelName:
       item.labelName && dataTranslations[item.labelName]

@@ -20,6 +20,7 @@ const useSaveMoneyDestination = (
   sendData: boolean,
   data: ISaveDataRequest,
   setSendData: React.Dispatch<React.SetStateAction<boolean>>,
+  setErrorFetchSaveData?: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   const [saveMoneyDestination, setSaveMoneyDestination] =
     useState<ISaveDataResponse>();
@@ -40,6 +41,9 @@ const useSaveMoneyDestination = (
       setSaveMoneyDestination(saveData);
     } catch (error) {
       console.info(error);
+      if (setErrorFetchSaveData) {
+        setErrorFetchSaveData(true);
+      }
       setSendData(false);
       addFlag({
         title: flowAutomaticMessages.errorSendingData.title,
