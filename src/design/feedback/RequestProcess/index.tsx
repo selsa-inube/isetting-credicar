@@ -31,7 +31,7 @@ const RequestProcess = (props: IRequestProcess) => {
     title,
   } = props;
   return (
-    <Stack direction="column" gap={tokens.spacing.s100} width="100%">
+    <Stack direction="column" gap={tokens.spacing.s200} width="100%">
       <Stack direction="column" gap={tokens.spacing.s300}>
         <Text type="title" size="small" weight="bold">
           {title}

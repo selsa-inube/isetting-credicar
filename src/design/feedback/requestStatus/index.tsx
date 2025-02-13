@@ -1,18 +1,26 @@
-import { MdClear } from "react-icons/md";
-import { Button, Icon, IIconAppearance, Stack, Text } from "@inubekit/inubekit";
+import { MdCheckCircle, MdClear } from "react-icons/md";
+import {
+  Button,
+  Divider,
+  Icon,
+  IIconAppearance,
+  Stack,
+  Text,
+  useMediaQuery,
+} from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
 import { ComponentAppearance } from "@enum/appearances";
-import { StyledContainerButton, StyledText } from "./styles";
-
+import { StyledContainerButton } from "./styles";
 interface IRequestStatus {
   title: string;
   actionText: string;
-  appearance: IIconAppearance;
   description: string;
   isLoading: boolean;
+  requestNumber: string;
   onClick: () => void;
   onCloseModal: () => void;
+  appearance?: IIconAppearance;
 }
 
 const RequestStatus = (props: IRequestStatus) => {
@@ -22,14 +30,21 @@ const RequestStatus = (props: IRequestStatus) => {
     appearance,
     description,
     isLoading,
+    requestNumber,
     onClick,
     onCloseModal,
   } = props;
 
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   return (
-    <Stack direction="column" gap={tokens.spacing.s300}>
+    <Stack
+      direction="column"
+      gap={isMobile ? tokens.spacing.s050 : tokens.spacing.s100}
+      width="100%"
+    >
       <Stack alignItems="center" justifyContent="space-between">
-        <Text type="body" size="medium" weight="bold" appearance="dark">
+        <Text type="headline" size="small" weight="bold" appearance="dark">
           {title}
         </Text>
         <StyledContainerButton>
@@ -46,11 +61,33 @@ const RequestStatus = (props: IRequestStatus) => {
           </Button>
         </StyledContainerButton>
       </Stack>
-      <StyledText>
-        <Text appearance={ComponentAppearance.GRAY} type="body" size="medium">
+      <Divider />
+
+      <Stack alignItems="center" justifyContent="center">
+        <Icon
+          icon={<MdCheckCircle />}
+          appearance={ComponentAppearance.SUCCESS}
+          size="60px"
+        />
+      </Stack>
+
+      <Stack direction="column" gap={tokens.spacing.s200}>
+        <Stack justifyContent="center">
+          <Text
+            textAlign="center"
+            appearance={ComponentAppearance.DARK}
+            size="large"
+            weight="bold"
+          >
+            {`Solicitud # ${requestNumber}`}
+          </Text>
+        </Stack>
+
+        <Text appearance={ComponentAppearance.GRAY} size="medium">
           {description}
         </Text>
-      </StyledText>
+      </Stack>
+
       <Stack gap={tokens.spacing.s250} justifyContent="flex-end">
         <Button
           spacing="wide"
