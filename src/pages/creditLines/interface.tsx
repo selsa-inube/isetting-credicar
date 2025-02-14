@@ -1,6 +1,6 @@
 import { MdAdd } from "react-icons/md";
 import { Input } from "@inubekit/input";
-import { Stack } from "@inubekit/stack";
+import { Stack } from "@inubekit/inubekit";
 import { useMediaQuery } from "@inubekit/hooks";
 import { Breadcrumbs } from "@inubekit/breadcrumbs";
 import { Button } from "@inubekit/button";

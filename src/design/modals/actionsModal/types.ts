@@ -1,4 +1,4 @@
-import { IIconAppearance } from "@inubekit/icon";
+import { IIconAppearance } from "@inubekit/inubekit";
 
 interface IInfoModal {
   infoName: string;

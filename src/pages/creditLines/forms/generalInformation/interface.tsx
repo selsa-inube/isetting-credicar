@@ -1,7 +1,7 @@
 import { FormikProps } from "formik";
 import { useMediaQuery } from "@inubekit/hooks";
 import { Button } from "@inubekit/button";
-import { Stack } from "@inubekit/stack";
+import { Stack } from "@inubekit/inubekit";
 import { Textarea } from "@inubekit/textarea";
 import { Input } from "@inubekit/input";
 
@@ -10,7 +10,6 @@ import { ComponentAppearance } from "@enum/appearances";
 import { StyledContainer, StyledContainerFields } from "./styles";
 import { getFieldState } from "@utils/forms/getFieldState";
 import { IGeneralInformationEntry } from "@ptypes/creditLines/forms/IGeneralInformationEntry";
-
 
 interface IGeneralInformationFormUI {
   formik: FormikProps<IGeneralInformationEntry>;

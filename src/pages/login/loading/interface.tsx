@@ -1,5 +1,4 @@
-import { Stack } from "@inubekit/stack";
-import { Text } from "@inubekit/text";
+import { Stack, Text } from "@inubekit/inubekit";
 import { Spinner } from "@inubekit/spinner";
 import { spacing } from "@design/tokens/spacing/spacing";
 

@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { Grid } from "@inubekit/grid";
-import { Stack } from "@inubekit/stack";
-import { Text } from "@inubekit/text";
+import { Stack, Text } from "@inubekit/inubekit";
 
 import { IAppData } from "@ptypes/context/authAndPortalDataProvider/IAppData";
 import { tokens } from "@design/tokens";

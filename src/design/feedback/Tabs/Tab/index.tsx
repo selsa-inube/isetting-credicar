@@ -1,5 +1,4 @@
-import { Text, TextTokens } from "@inubekit/text";
-import { Icon } from "@inubekit/icon";
+import { Text, Icon } from "@inubekit/inubekit";
 import {
   StyledNotificationContainer,
   StyledNotificationElement,
@@ -32,11 +31,7 @@ const Tab = (props: ITab) => {
       <Text
         type="label"
         size="medium"
-        appearance={
-          selected
-            ? (selectedAppearance as keyof typeof TextTokens)
-            : ComponentAppearance.GRAY
-        }
+        appearance={selected ? selectedAppearance : ComponentAppearance.GRAY}
         disabled={disabled}
         textAlign="start"
         weight="bold"

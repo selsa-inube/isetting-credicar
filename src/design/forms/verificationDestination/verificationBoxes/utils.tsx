@@ -1,9 +1,9 @@
 import { IRuleDecision } from "@isettingkit/input";
+import { Stack } from "@inubekit/inubekit";
 import { Grid } from "@inubekit/grid";
-import { Stack } from "@inubekit/stack";
 import { Tag } from "@inubekit/tag";
 
-import { BoxAttribute } from "@src/design/feedback/boxAttributes";
+import { BoxAttribute } from "@design/feedback/boxAttributes";
 import { tokens } from "@design/tokens";
 import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationDestination";
 import { ComponentAppearance } from "@enum/appearances";

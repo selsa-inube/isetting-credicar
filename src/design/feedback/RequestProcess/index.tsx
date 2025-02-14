@@ -1,7 +1,5 @@
 import { MdCancel, MdCheckCircle } from "react-icons/md";
-import { Icon, IIconAppearance } from "@inubekit/icon";
-import { Stack } from "@inubekit/stack";
-import { Text } from "@inubekit/text";
+import { Stack, Text, Icon, IIconAppearance } from "@inubekit/inubekit";
 
 import { ComponentAppearance } from "@enum/appearances";
 import { tokens } from "@design/tokens";

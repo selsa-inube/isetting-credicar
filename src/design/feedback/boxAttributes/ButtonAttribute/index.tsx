@@ -1,6 +1,4 @@
-import { Text } from "@inubekit/text";
-import { Icon } from "@inubekit/icon";
-import { Stack } from "@inubekit/stack";
+import { Stack, Text, Icon } from "@inubekit/inubekit";
 
 import { ComponentAppearance } from "@enum/appearances";
 import { tokens } from "@design/tokens";

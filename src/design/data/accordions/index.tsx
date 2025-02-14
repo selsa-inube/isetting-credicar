@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
-import { Text } from "@inubekit/text";
-import { Icon } from "@inubekit/icon";
+import { Text, Icon } from "@inubekit/inubekit";
 import { Divider } from "@inubekit/divider";
 
 import { ComponentAppearance } from "@enum/appearances";

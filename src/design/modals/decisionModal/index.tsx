@@ -1,7 +1,7 @@
 import { string, object } from "yup";
 import { useEffect, useState } from "react";
 import { useFormik } from "formik";
-import { IIconAppearance } from "@inubekit/icon";
+import { IIconAppearance } from "@inubekit/inubekit";
 
 import { ComponentAppearance } from "@enum/appearances";
 import { DecisionModalUI } from "./interface";

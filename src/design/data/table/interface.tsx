@@ -1,4 +1,4 @@
-import { Text } from "@inubekit/text";
+import { Text } from "@inubekit/inubekit";
 import {
   Colgroup,
   Pagination,

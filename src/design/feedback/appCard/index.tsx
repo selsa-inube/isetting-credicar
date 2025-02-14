@@ -1,6 +1,4 @@
-import { Stack } from "@inubekit/stack";
-import { Text } from "@inubekit/text";
-import { Icon } from "@inubekit/icon";
+import { Stack, Text, Icon } from "@inubekit/inubekit";
 import { tokens } from "@design/tokens";
 import { SkeletonIcon, SkeletonLine } from "@inubekit/skeleton";
 import { useMediaQuery } from "@inubekit/hooks";
