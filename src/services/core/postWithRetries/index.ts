@@ -1,5 +1,5 @@
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { maxRetriesServices } from "@config/environment";
+import { maxRetriesPost } from "@config/environment";
 
 const postWithRetries = async <T>(
   url: string,
@@ -7,7 +7,7 @@ const postWithRetries = async <T>(
   data: string[],
   axiosInstance: AxiosInstance,
 ): Promise<T> => {
-  const maxRetries = maxRetriesServices;
+  const maxRetries = maxRetriesPost;
 
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {

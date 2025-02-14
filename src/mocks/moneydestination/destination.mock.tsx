@@ -10,43 +10,45 @@ import { IconWithText } from "@design/data/iconWithText";
 const dataMoneyDestination = [
   {
     id: "1",
-    name: (
+    abbreviatedName: (
       <IconWithText
         icon={<MdOutlineBeachAccess size={16} />}
         text="Vacaciones"
       />
     ),
-    description:
+    descriptionUse:
       "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
   },
   {
     id: "2",
-    name: <IconWithText icon={<MdDirectionsCar size={16} />} text="Vehículo" />,
-    description:
+    abbreviatedName: (
+      <IconWithText icon={<MdDirectionsCar size={16} />} text="Vehículo" />
+    ),
+    descriptionUse:
       "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
   },
   {
     id: "3",
-    name: (
+    abbreviatedName: (
       <IconWithText icon={<MdCreditCard size={16} />} text="Credito personal" />
     ),
-    description:
+    descriptionUse:
       "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
   },
   {
     id: "4",
-    name: (
+    abbreviatedName: (
       <IconWithText icon={<MdAndroid size={16} />} text="Libre inversión" />
     ),
-    description:
+    descriptionUse:
       "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
   },
   {
     id: "5",
-    name: (
+    abbreviatedName: (
       <IconWithText icon={<MdHandyman size={16} />} text="Lorem ipsum sopdm" />
     ),
-    description:
+    descriptionUse:
       "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
   },
 ];

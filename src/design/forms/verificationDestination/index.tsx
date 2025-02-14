@@ -107,6 +107,7 @@ function VerificationForm(props: IVerificationForm) {
           actionText={finishModal.actionText}
           onCloseModal={onToggleModal}
           onClick={onFinishForm}
+          isLoading={loading}
         />
       )}
       {showRequestProcessModal && saveMoneyDestination && (

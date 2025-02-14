@@ -28,6 +28,7 @@ function AddDestination() {
     setIsCurrentFormValid,
     setShowRequestProcessModal,
     setShowAttentionModal,
+    setShowModal,
   } = useAddDestination();
 
   const { appData } = useContext(AuthAndPortalData);
@@ -35,7 +36,7 @@ function AddDestination() {
   const {
     saveMoneyDestination,
     requestSteps,
-    loading,
+    loadingSendData,
     showPendingReqModal,
     handleCloseRequestStatus,
     handleClosePendingReqModal,
@@ -44,6 +45,7 @@ function AddDestination() {
     appData.user.userAccount,
     showRequestProcessModal,
     saveData as ISaveDataRequest,
+    setShowModal,
     setShowRequestProcessModal,
   );
 
@@ -66,7 +68,7 @@ function AddDestination() {
       requestSteps={requestSteps}
       showRequestProcessModal={showRequestProcessModal}
       saveMoneyDestination={saveMoneyDestination as ISaveDataResponse}
-      loading={loading}
+      loading={loadingSendData}
       onCloseRequestStatus={handleCloseRequestStatus}
       showPendingReqModal={showPendingReqModal}
       onClosePendingReqModal={handleClosePendingReqModal}
