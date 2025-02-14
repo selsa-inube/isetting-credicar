@@ -27,12 +27,13 @@ const EditDestination = () => {
     handleTabChange,
     setShowRequestProcessModal,
     setErrorFetchSaveData,
+    setShowModal,
   } = useEditDestination(data, appData);
 
   const {
     saveMoneyDestination,
     requestSteps,
-    loading,
+    loadingSendData,
     showPendingReqModal,
     handleCloseRequestStatus,
     handleClosePendingReqModal,
@@ -41,7 +42,9 @@ const EditDestination = () => {
     appData.user.userAccount,
     showRequestProcessModal,
     saveData as ISaveDataRequest,
+    setShowModal,
     setShowRequestProcessModal,
+
     setErrorFetchSaveData,
   );
 
@@ -59,7 +62,7 @@ const EditDestination = () => {
       setIsCurrentFormValid={setIsCurrentFormValid}
       saveMoneyDestination={saveMoneyDestination as ISaveDataResponse}
       requestSteps={requestSteps}
-      loading={loading}
+      loading={loadingSendData}
       showPendingReqModal={showPendingReqModal}
       showRequestProcessModal={showRequestProcessModal}
       onCloseRequestStatus={handleCloseRequestStatus}

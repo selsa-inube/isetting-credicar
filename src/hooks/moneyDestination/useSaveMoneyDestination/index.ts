@@ -20,22 +20,23 @@ const useSaveMoneyDestination = (
   sendData: boolean,
   data: ISaveDataRequest,
   setSendData: React.Dispatch<React.SetStateAction<boolean>>,
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>,
   setErrorFetchSaveData?: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   const [saveMoneyDestination, setSaveMoneyDestination] =
     useState<ISaveDataResponse>();
   const [statusRequest, setStatusRequest] = useState<string>();
-  const [loading, setLoading] = useState(false);
   const { addFlag } = useFlag();
   const [requestSteps, setRequestSteps] =
     useState<IRequestSteps[]>(requestStepsInitial);
   const [showPendingReqModal, setShowPendingReqModal] = useState(false);
+  const [loadingSendData, setLoadingSendData] = useState(false);
 
   const navigate = useNavigate();
   const navigatePage = "/money-destination";
 
   const fetchSaveMoneyDestinationData = async () => {
-    setLoading(true);
+    setLoadingSendData(true);
     try {
       const saveData = await postSaveRequest(userAccount, data);
       setSaveMoneyDestination(saveData);
@@ -53,7 +54,8 @@ const useSaveMoneyDestination = (
         duration: flowAutomaticMessages.errorSendingData.duration,
       });
     } finally {
-      setLoading(false);
+      setLoadingSendData(false);
+      setShowModal(false);
     }
   };
 
@@ -225,8 +227,8 @@ const useSaveMoneyDestination = (
   return {
     saveMoneyDestination,
     requestSteps,
-    loading,
     showPendingReqModal,
+    loadingSendData,
     handleCloseRequestStatus,
     handleClosePendingReqModal,
   };

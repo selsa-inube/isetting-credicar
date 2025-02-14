@@ -125,7 +125,7 @@ const EditDestinationUI = (props: IEditDestinationUI) => {
           </Stack>
         </Stack>
       </Stack>
-      {showRequestProcessModal && (
+      {showRequestProcessModal && saveMoneyDestination && (
         <RequestProcessModal
           portalId="portal"
           saveData={saveMoneyDestination}

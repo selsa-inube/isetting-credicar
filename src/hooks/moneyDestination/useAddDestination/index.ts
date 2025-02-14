@@ -96,8 +96,6 @@ const useAddDestination = () => {
   });
 
   const handleSubmitClick = () => {
-    handleToggleModal();
-    setShowRequestProcessModal(!showRequestProcessModal);
     setSaveData({
       applicationName: "ifac",
       businessManagerCode: appData.businessManager.publicCode,
@@ -113,6 +111,7 @@ const useAddDestination = () => {
         rules: decisionsData,
       },
     });
+    setShowRequestProcessModal(!showRequestProcessModal);
   };
 
   return {
@@ -135,6 +134,7 @@ const useAddDestination = () => {
     setIsCurrentFormValid,
     setShowRequestProcessModal,
     setShowAttentionModal,
+    setShowModal,
   };
 };
 

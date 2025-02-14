@@ -38,7 +38,7 @@ const useEditDestination = (
   const [showRequestProcessModal, setShowRequestProcessModal] = useState(false);
   const [saveData, setSaveData] = useState<ISaveDataRequest>();
   const [errorFetchSaveData, setErrorFetchSaveData] = useState(true);
-
+  const [showModal, setShowModal] = useState(false);
   const [creditLineDecisions, setCreditLineDecisions] = useState<
     IRuleDecision[]
   >([]);
@@ -232,6 +232,7 @@ const useEditDestination = (
     isSelected,
     saveData,
     showRequestProcessModal,
+    showModal,
     handleReset,
     onSubmit,
     setCreditLineDecisions,
@@ -239,6 +240,7 @@ const useEditDestination = (
     handleTabChange,
     setShowRequestProcessModal,
     setErrorFetchSaveData,
+    setShowModal,
   };
 };
 
