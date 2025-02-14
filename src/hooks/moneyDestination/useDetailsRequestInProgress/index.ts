@@ -12,11 +12,12 @@ const useDetailsRequestInProgress = (data: IEntry) => {
       return {
         id: traceability.traceabilityId,
         label: formatDateTable(new Date(traceability.executionDate)),
-        value: formatDateTable(new Date(traceability.executionDate)),
+        value: traceability.traceabilityId,
         observation: traceability.description,
       };
     },
   );
+
   const [form, setForm] = useState({
     name: "",
     dateTraceability: dateOptions[0].value,
