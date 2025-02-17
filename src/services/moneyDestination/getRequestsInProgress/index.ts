@@ -17,6 +17,8 @@ const getRequestsInProgress = async (
   const queryParams = new URLSearchParams({
     applicationName: "ifac",
     entityName: "MoneyDestination",
+    page: ".1",
+    per_page: ".1",
   });
   const data = await getWithRetries<IRequestsInProgress[]>(
     axiosInstance,

@@ -29,6 +29,8 @@ interface IDecisionsForm {
   nameMoneyDestination: string;
   setShowAttentionModal: React.Dispatch<React.SetStateAction<boolean>>;
   editDataOption?: boolean;
+  titleContentAddCard?: string;
+  messageEmptyDecisions?: string;
 }
 
 const DecisionsForm = (props: IDecisionsForm) => {
@@ -41,6 +43,8 @@ const DecisionsForm = (props: IDecisionsForm) => {
     editDataOption,
     nameMoneyDestination,
     showAttentionModal,
+    titleContentAddCard,
+    messageEmptyDecisions,
     decisionTemplateConfig,
     onButtonClick,
     onPreviousStep,
@@ -112,6 +116,8 @@ const DecisionsForm = (props: IDecisionsForm) => {
       onSave={handleSave}
       handleReset={handleReset}
       hasChanges={hasChanges}
+      titleContentAddCard={titleContentAddCard}
+      messageEmptyDecisions={messageEmptyDecisions}
     />
   );
 };

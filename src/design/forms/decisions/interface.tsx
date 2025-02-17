@@ -35,6 +35,8 @@ interface IDecisionsFormUI {
   onSave: () => void;
   handleReset: () => void;
   editDataOption?: boolean;
+  titleContentAddCard?: string;
+  messageEmptyDecisions?: string;
 }
 
 const DecisionsFormUI = (props: IDecisionsFormUI) => {
@@ -51,6 +53,8 @@ const DecisionsFormUI = (props: IDecisionsFormUI) => {
     textValuesBusinessRules,
     editDataOption,
     hasChanges,
+    titleContentAddCard,
+    messageEmptyDecisions,
     onCloseModal,
     onDelete,
     onButtonClick,
@@ -94,6 +98,8 @@ const DecisionsFormUI = (props: IDecisionsFormUI) => {
             handleCloseModal={onCloseModal}
             handleSubmitForm={onSubmitForm}
             handleDelete={onToggleDeleteModal}
+            customTitleContentAddCard={titleContentAddCard}
+            customMessageEmptyDecisions={messageEmptyDecisions}
           />
         </StyledContainer>
 

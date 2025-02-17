@@ -137,6 +137,8 @@ const AddDestinationUI = (props: IAddDestinationUI) => {
                 }
                 showAttentionModal={showAttentionModal}
                 setShowAttentionModal={setShowAttentionModal}
+                titleContentAddCard="Agregar línea de crédito"
+                messageEmptyDecisions="Agrega línea de crédito"
               />
             )}
             {currentStep === 3 && (
