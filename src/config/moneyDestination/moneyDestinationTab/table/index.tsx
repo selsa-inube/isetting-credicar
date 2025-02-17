@@ -1,5 +1,5 @@
 import { IAction, IEntry, ITitle } from "@design/data/table/types";
-import { Edit } from "@pages/moneyDestination/tabs/moneyDestinationTab/components/edit";
+import { Edit } from "@pages/moneyDestination/tabs/moneyDestinationTab/tools/edit";
 import { Delete } from "@pages/moneyDestination/tabs/moneyDestinationTab/tools/delete";
 import { Details } from "@pages/moneyDestination/tabs/moneyDestinationTab/tools/details";
 

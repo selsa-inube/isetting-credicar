@@ -9,8 +9,8 @@ import { GeneralInformationFormUI } from "./interface";
 
 interface IGeneralInformationForm {
   initialValues: IGeneralInformationEntry;
-  loading?: boolean;
   onButtonClick: () => void;
+  loading?: boolean;
   onFormValid?: React.Dispatch<React.SetStateAction<boolean>>;
   onSubmit?: (values: IGeneralInformationEntry) => void;
   editDataOption?: boolean;
@@ -26,7 +26,7 @@ const GeneralInformationForm = forwardRef<
       onFormValid,
       onSubmit,
       onButtonClick,
-      loading,
+      loading = false,
       editDataOption = false,
     },
     ref,

@@ -25,10 +25,11 @@ interface IRequestProcessModal {
   portalId: string;
   loading: boolean;
   requestProcessSteps: IRequestSteps[];
-  descriptionRequestStatus: (
-    requestNumber: string,
-    responsible: string,
-  ) => { actionText: string; description: string; title: string };
+  descriptionRequestStatus: (responsible: string) => {
+    actionText: string;
+    description: string;
+    title: string;
+  };
   onCloseRequestStatus: () => void;
   saveData?: ISaveDataResponse;
   appearance?: ISpinnerAppearance;
@@ -93,22 +94,20 @@ const RequestProcessModal = (props: IRequestProcessModal) => {
               <RequestStatus
                 title={
                   descriptionRequestStatus(
-                    saveData.requestNumber,
                     saveData.responsible ?? "uno de nuestros funcionarios",
                   ).title
                 }
                 description={
                   descriptionRequestStatus(
-                    saveData.requestNumber,
                     saveData.responsible ?? "uno de nuestros funcionarios",
                   ).description
                 }
+                requestNumber={saveData.requestNumber}
                 onClick={onCloseRequestStatus}
                 onCloseModal={onCloseRequestStatus}
                 isLoading={false}
                 actionText={
                   descriptionRequestStatus(
-                    saveData.requestNumber,
                     saveData.responsible ?? "uno de nuestros funcionarios",
                   ).actionText
                 }

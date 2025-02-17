@@ -55,7 +55,7 @@ InterventionAutomatic.args = {
     description:
       "Hemos recibido tu solicitud y se encuentra en proceso.Por favor, espera mientras la gestionamos.",
   },
-  descriptionRequestStatus: () => requestStatusMessage("1234", "Juan Perez"),
+  descriptionRequestStatus: () => requestStatusMessage("Juan Perez"),
   loading: false,
   requestProcessSteps: [
     { name: "Solicitud radicada", status: "completed" },
@@ -73,7 +73,7 @@ InterventionHuman.args = {
     description:
       "Hemos recibido tu solicitud y se encuentra en proceso.Por favor, espera mientras la gestionamos.",
   },
-  descriptionRequestStatus: () => requestStatusMessage("1234", "Juan Perez"),
+  descriptionRequestStatus: () => requestStatusMessage("Juan Perez"),
   loading: false,
   requestProcessSteps: [
     { name: "Solicitud radicada", status: "completed" },
@@ -91,7 +91,7 @@ Loading.args = {
     description:
       "Hemos recibido tu solicitud y se encuentra en proceso.Por favor, espera mientras la gestionamos.",
   },
-  descriptionRequestStatus: () => requestStatusMessage("1234", "Juan Perez"),
+  descriptionRequestStatus: () => requestStatusMessage("Juan Perez"),
   loading: true,
   requestProcessSteps: [
     { name: "Solicitud radicada", status: "completed" },

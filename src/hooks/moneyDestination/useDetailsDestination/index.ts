@@ -17,7 +17,7 @@ const useDetailsDestination = (appData: IAppData, data: IEntry) => {
       conditions: [
         {
           condition: "MoneyDestination",
-          value: data.descriptionUse,
+          value: data.name,
         },
       ],
     },

@@ -12,6 +12,7 @@ import { normalizeCodeDestination } from "@utils/destination/normalizeCodeDestin
 import { normalizeDestination } from "@utils/destination/normalizeDestination";
 import { normalizeEditDestination } from "@utils/destination/normalizeEditDestination";
 import { normalizeIconDestination } from "@utils/destination/normalizeIconDestination";
+import { normalizeIconTextDestination } from "@utils/destination/normalizeIconTextDestination";
 
 const useGeneralInformationForm = (
   enumData: IEnumeratorsMoneyDestination[],
@@ -80,14 +81,12 @@ const useGeneralInformationForm = (
       const description =
         normalizeDestination(enumData, normalizeData)?.description || "";
 
-      const currentDescription = formik.values.description || "";
-      const newDescription = `${currentDescription} ${description}`.trim();
-      formik.setFieldValue("description", newDescription);
-
-      if (initialValues.nameDestination !== value) {
-        formik.setFieldValue("icon", icon);
+      if (value === "") {
+        formik.setFieldValue("description", "");
       } else {
-        formik.setFieldValue("icon", initialValues.icon);
+        const currentDescription = formik.values.description || "";
+        const newDescription = `${currentDescription} ${description}`.trim();
+        formik.setFieldValue("description", newDescription);
       }
     }
   };
@@ -130,14 +129,22 @@ const useGeneralInformationForm = (
       if (editDataOption) {
         iconData =
           editData && compare
-            ? normalizeIconDestination(editData?.value ?? "")
-            : normalizeIconDestination(addData?.value ?? "");
+            ? normalizeIconDestination(editData?.value ?? "")?.icon
+            : normalizeIconDestination(addData?.value ?? "")?.icon;
       } else {
-        iconData = normalizeIconDestination(addData?.value ?? "");
+        iconData = normalizeIconDestination(addData?.value ?? "")?.icon;
       }
 
-      setIcon(iconData?.icon);
-      formik.setFieldValue("icon", iconData?.value ?? "");
+      if (editDataOption && valuesEqual) {
+        formik.setFieldValue("icon", initialValues.icon);
+      } else {
+        formik.setFieldValue(
+          "icon",
+          normalizeIconTextDestination(iconData ?? <></>)?.value ??
+            "MdOutlineFax",
+        );
+      }
+      setIcon(iconData);
     };
 
     updateIcon();

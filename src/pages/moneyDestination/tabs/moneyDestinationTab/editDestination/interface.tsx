@@ -14,6 +14,14 @@ import { textValuesBusinessRules } from "@config/moneyDestination/moneyDestinati
 import { IEditDestinationTabsConfig } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/tabs/ITabConfig/IEditDestinationTabsConfig";
 import { attentionModal, deleteModal } from "@config/decisions/messages";
 import { decisionTemplateConfig } from "@config/decisions/decisionTemplateDestination";
+import { DecisionModal } from "@design/modals/decisionModal";
+import { RequestProcessModal } from "@design/modals/requestProcessModal";
+import { IRequestSteps } from "@design/feedback/RequestProcess/types";
+import { ISaveDataResponse } from "@ptypes/saveData/ISaveDataResponse";
+import { ComponentAppearance } from "@enum/appearances";
+import { requestPendingModal } from "@config/moneyDestination/moneyDestinationTab/generics/requestPendingModal";
+import { requestProcessMessage } from "@config/moneyDestination/moneyDestinationTab/generics/requestProcessMessage";
+import { requestStatusMessage } from "@config/moneyDestination/moneyDestinationTab/generics/requestStatusMessage";
 
 interface IEditDestinationUI {
   editDestinationTabsConfig: IEditDestinationTabsConfig;
@@ -21,11 +29,18 @@ interface IEditDestinationUI {
   generalInformationRef: React.RefObject<FormikProps<IGeneralInformationEntry>>;
   initialGeneralInformationValues: IGeneralInformationEntry;
   isSelected: string;
+  requestSteps: IRequestSteps[];
+  loading: boolean;
+  showPendingReqModal: boolean;
+  showRequestProcessModal: boolean;
+  saveMoneyDestination: ISaveDataResponse;
   onTabChange: (id: string) => void;
   onButtonClick: () => void;
-  handleReset: () => void;
+  onReset: () => void;
   setCreditLineDecisions: (decisions: IRuleDecision[]) => void;
   setIsCurrentFormValid: React.Dispatch<React.SetStateAction<boolean>>;
+  onCloseRequestStatus: () => void;
+  onClosePendingReqModal: () => void;
 }
 
 const EditDestinationUI = (props: IEditDestinationUI) => {
@@ -35,11 +50,18 @@ const EditDestinationUI = (props: IEditDestinationUI) => {
     generalInformationRef,
     initialGeneralInformationValues,
     isSelected,
+    saveMoneyDestination,
+    requestSteps,
+    loading,
+    showPendingReqModal,
+    showRequestProcessModal,
     onTabChange,
     onButtonClick,
-    handleReset,
+    onReset,
     setCreditLineDecisions,
     setIsCurrentFormValid,
+    onCloseRequestStatus,
+    onClosePendingReqModal,
   } = props;
 
   const smallScreen = useMediaQuery("(max-width: 990px)");
@@ -77,6 +99,7 @@ const EditDestinationUI = (props: IEditDestinationUI) => {
                 onFormValid={setIsCurrentFormValid}
                 onButtonClick={onButtonClick}
                 editDataOption
+                loading={loading}
               />
             )}
             {isSelected === editDestinationTabsConfig.creditLine.id && (
@@ -86,7 +109,7 @@ const EditDestinationUI = (props: IEditDestinationUI) => {
                 textValuesBusinessRules={textValuesBusinessRules}
                 decisionTemplateConfig={decisionTemplateConfig}
                 onButtonClick={onButtonClick}
-                onPreviousStep={handleReset}
+                onPreviousStep={onReset}
                 initialValues={creditLineDecisions}
                 setDecisions={setCreditLineDecisions}
                 revertModalDisplayData={revertModalDisplayData}
@@ -102,6 +125,33 @@ const EditDestinationUI = (props: IEditDestinationUI) => {
           </Stack>
         </Stack>
       </Stack>
+      {showRequestProcessModal && saveMoneyDestination && (
+        <RequestProcessModal
+          portalId="portal"
+          saveData={saveMoneyDestination}
+          descriptionRequestProcess={requestProcessMessage}
+          descriptionRequestStatus={requestStatusMessage}
+          loading={loading}
+          requestProcessSteps={requestSteps}
+          appearance={ComponentAppearance.SUCCESS}
+          onCloseRequestStatus={onCloseRequestStatus}
+        />
+      )}
+      {showPendingReqModal && saveMoneyDestination.requestNumber && (
+        <DecisionModal
+          portalId="portal"
+          title={requestPendingModal(saveMoneyDestination.requestNumber).title}
+          description={
+            requestPendingModal(saveMoneyDestination.requestNumber).description
+          }
+          actionText={
+            requestPendingModal(saveMoneyDestination.requestNumber).actionText
+          }
+          onCloseModal={onClosePendingReqModal}
+          onClick={onClosePendingReqModal}
+          withCancelButton={false}
+        />
+      )}
     </Stack>
   );
 };

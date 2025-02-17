@@ -9,10 +9,4 @@ const StyledContainerButton = styled.div`
   }
 `;
 
-const StyledText = styled.div`
-  & p {
-    white-space: pre-line;
-  }
-`;
-
-export { StyledContainerButton, StyledText };
+export { StyledContainerButton };
