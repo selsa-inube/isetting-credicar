@@ -74,6 +74,7 @@ function RequestsInProgressTabUI(props: IRequestsInProgressTabUI) {
             filter={searchrequestProgress}
             isLoading={loading}
             columnWidths={[widthFirstColumn, 55, 23]}
+            pageLength={40}
           />
         </Stack>
       </Stack>

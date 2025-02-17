@@ -103,6 +103,7 @@ const useDecisionForm = (
     if (editDataOption) {
       setHasChanges(false);
       setSavedDecisions(decisions);
+      onButtonClick();
       return decisions;
     } else {
       if (decisions && decisions.length > 0) {

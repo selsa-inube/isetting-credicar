@@ -3,7 +3,7 @@ import { Meta, StoryFn } from "@storybook/react";
 import { IRequestStatus, RequestStatus } from "..";
 
 const meta: Meta<typeof RequestStatus> = {
-  title: "modals/RequestStatusModal",
+  title: "feedback/RequestStatus",
   component: RequestStatus,
   decorators: [
     (Story: StoryFn) => (
@@ -24,9 +24,10 @@ const Template: StoryFn<IRequestStatus> = (args) => {
 
 export const Default = Template.bind({});
 Default.args = {
-  title: "Estado de la solicitud",
+  title: "Solicitud",
+  requestNumber: "123245",
   description:
-    "Hemos recibido tu solicitud, el tramite se procesar, con el número de solicitud 123245.  Ten encuenta que este proceso va hacer gestionado por responsable, puede tardar un tiempo mientras se gestiona la aprobación.",
+    "Este proceso será gestionado por Jose Perez, puede tardar algún tiempo mientras se gestiona la aprobación.",
   actionText: "Enterado",
 };
 
