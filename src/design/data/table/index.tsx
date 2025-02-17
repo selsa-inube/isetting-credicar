@@ -1,4 +1,4 @@
-import { Stack } from "@inubekit/stack";
+import { Stack } from "@inubekit/inubekit";
 
 import { useTable } from "@hooks/generic/useTable";
 import { TableUI } from "./interface";

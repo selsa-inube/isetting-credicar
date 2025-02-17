@@ -1,9 +1,9 @@
 import { Meta } from "@storybook/react";
-import { Stack } from "@inubekit/stack";
-import { businessUnitDataMock } from "@mocks/businessUnits/businessUnits.mock";
+import { Stack } from "@inubekit/inubekit";
 
-import { BusinessUnitChange } from ".";
+import { businessUnitDataMock } from "@mocks/businessUnits/businessUnits.mock";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
+import { BusinessUnitChange } from ".";
 
 const meta: Meta<typeof BusinessUnitChange> = {
   title: "inputs/BusinessUnitChange",

@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-import { Stack } from "@inubekit/stack";
-import { Icon } from "@inubekit/icon";
+import { Stack, Icon } from "@inubekit/inubekit";
 
 import { Tab, ITab } from "./Tab";
 import { StyledContainer, StyledTabs } from "./styles";

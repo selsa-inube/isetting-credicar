@@ -1,8 +1,7 @@
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { useState } from "react";
-import { Icon } from "@inubekit/icon";
+import { Icon, Text } from "@inubekit/inubekit";
 import { useMediaQuery } from "@inubekit/hooks";
-import { Text } from "@inubekit/text";
 
 import { ComponentAppearance } from "@enum/appearances";
 import { IEntry } from "@design/data/table/types";

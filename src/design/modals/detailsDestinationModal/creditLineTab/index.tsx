@@ -1,6 +1,6 @@
 import { IRuleDecision } from "@isettingkit/input";
 import { BusinessRules } from "@isettingkit/business-rules";
-import { Stack } from "@inubekit/stack";
+import { Stack } from "@inubekit/inubekit";
 import { Divider } from "@inubekit/divider";
 
 import { tokens } from "@design/tokens";

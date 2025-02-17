@@ -1,7 +1,5 @@
-import { Stack } from "@inubekit/stack";
-import { Text } from "@inubekit/text";
+import { Stack, Text } from "@inubekit/inubekit";
 import { tokens } from "@design/tokens";
-
 interface IIconWithText {
   icon: JSX.Element;
   text: string;
