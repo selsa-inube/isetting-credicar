@@ -9,19 +9,13 @@ import { StyledContainerIcon } from "./styles";
 interface IDelete {
   showModal: boolean;
   messageDelete: IMessageModal;
+  loading: boolean;
   onToggleModal: () => void;
   onClick: () => void;
-  setJustificationDelete: (value: string) => void;
 }
 
 const DeleteRecord = (props: IDelete) => {
-  const {
-    showModal,
-    messageDelete,
-    onToggleModal,
-    onClick,
-    setJustificationDelete,
-  } = props;
+  const { showModal, messageDelete, loading, onToggleModal, onClick } = props;
 
   const screenTablet = useMediaQuery("(max-width: 1200px)");
 
@@ -48,11 +42,10 @@ const DeleteRecord = (props: IDelete) => {
           title={messageDelete.title}
           actionText={messageDelete.actionText}
           description={messageDelete.description}
-          justificationOfDecision={true}
           onClick={onClick}
           onCloseModal={onToggleModal}
-          setFieldEntered={setJustificationDelete}
           appearance={ComponentAppearance.DANGER}
+          isLoading={loading}
         />
       )}
     </>

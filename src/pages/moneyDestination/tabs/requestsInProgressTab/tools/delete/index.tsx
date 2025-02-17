@@ -11,7 +11,7 @@ interface IDelete {
 const Delete = (props: IDelete) => {
   const { data, setEntryDeleted } = props;
 
-  const { showModal, handleToggleModal, handleClick, setJustificationDelete } =
+  const { showModal, handleToggleModal, handleClick } =
     useDeleteRequestInProgress(data, setEntryDeleted);
 
   return (
@@ -20,7 +20,7 @@ const Delete = (props: IDelete) => {
       showModal={showModal}
       onToggleModal={handleToggleModal}
       onClick={handleClick}
-      setJustificationDelete={setJustificationDelete}
+      loading={false}
     />
   );
 };
