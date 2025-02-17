@@ -31,6 +31,7 @@ const CreditLineTab = (props: ICreditLineTab) => {
           handleCloseModal={() => console.log("")}
           handleSubmitForm={() => console.log("")}
           handleDelete={() => console.log("")}
+          customMessageEmptyDecisions="Aún NO tienes definidas líneas de crédito, ve a editar"
         />
       </StyledContainer>
       <Divider />

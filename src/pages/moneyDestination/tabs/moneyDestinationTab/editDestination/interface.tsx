@@ -120,12 +120,14 @@ const EditDestinationUI = (props: IEditDestinationUI) => {
                 editDataOption
                 showAttentionModal={false}
                 setShowAttentionModal={() => console.log()}
+                titleContentAddCard="Agregar línea de crédito"
+                messageEmptyDecisions="Agrega línea de crédito"
               />
             )}
           </Stack>
         </Stack>
       </Stack>
-      {showRequestProcessModal && saveMoneyDestination && (
+      {showRequestProcessModal && (
         <RequestProcessModal
           portalId="portal"
           saveData={saveMoneyDestination}

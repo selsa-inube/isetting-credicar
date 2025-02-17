@@ -42,9 +42,8 @@ const EditDestination = () => {
     appData.user.userAccount,
     showRequestProcessModal,
     saveData as ISaveDataRequest,
-    setShowModal,
     setShowRequestProcessModal,
-
+    setShowModal,
     setErrorFetchSaveData,
   );
 

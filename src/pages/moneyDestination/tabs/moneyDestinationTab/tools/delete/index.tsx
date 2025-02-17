@@ -29,7 +29,6 @@ const Delete = (props: IDelete) => {
     handleToggleModal,
     handleClick,
     setShowRequestProcessModal,
-
     setShowModal,
   } = useDeleteDestination(data, appData);
 
