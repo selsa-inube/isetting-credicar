@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useMediaQueries } from "@inubekit/hooks";
+import { useMediaQueries } from "@inubekit/inubekit";
 import { IAppData } from "@ptypes/context/authAndPortalDataProvider/IAppData";
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";
 import { validateBusinessUnities } from "@utils/selectBusinessUnits/validateBusinessUnities";

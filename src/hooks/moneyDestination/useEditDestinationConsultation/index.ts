@@ -1,10 +1,7 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IEntry } from "@design/data/table/types";
 
-const useEditDestinationModal = (data: IEntry) => {
-  const [showModal, setShowModal] = useState(false);
-
+const useEditDestinationConsultation = (data: IEntry) => {
   const navigate = useNavigate();
 
   const destinationData = {
@@ -14,10 +11,6 @@ const useEditDestinationModal = (data: IEntry) => {
     icon: data.iconReference,
   };
 
-  const handleToggleModal = () => {
-    setShowModal(!showModal);
-  };
-
   const handleEdit = () => {
     navigate(`/money-destination/edit-destination`, {
       state: { data: destinationData },
@@ -25,10 +18,8 @@ const useEditDestinationModal = (data: IEntry) => {
   };
 
   return {
-    showModal,
-    handleToggleModal,
     handleEdit,
   };
 };
 
-export { useEditDestinationModal };
+export { useEditDestinationConsultation };

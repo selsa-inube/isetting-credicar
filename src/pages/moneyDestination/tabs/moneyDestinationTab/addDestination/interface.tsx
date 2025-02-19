@@ -10,7 +10,7 @@ import {
 
 import { Title } from "@design/data/title";
 import { tokens } from "@design/tokens";
-import { IRequestSteps } from "@design/feedback/RequestProcess/types";
+import { IRequestSteps } from "@design/modals/requestProcessModal/types";
 import { GeneralInformationForm } from "@design/forms/generalInformationDestination";
 import { DecisionsForm } from "@design/forms/decisions";
 import { revertModalDisplayData } from "@utils/revertModalDisplayData";

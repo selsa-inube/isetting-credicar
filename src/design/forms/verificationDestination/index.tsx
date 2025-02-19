@@ -4,17 +4,18 @@ import { Button, Stack, useMediaQuery } from "@inubekit/inubekit";
 import { ComponentAppearance } from "@enum/appearances";
 import { Accordion } from "@design/data/accordions";
 import { tokens } from "@design/tokens";
-import { IRequestSteps } from "@design/feedback/RequestProcess/types";
-import { VerificationBoxes } from "@src/design/forms/verificationDestination/verificationBoxes";
+import { IRequestSteps } from "@design/modals/requestProcessModal/types";
+import { VerificationBoxes } from "@design/forms/verificationDestination/verificationBoxes";
 import { addDestinationStepsConfig } from "@config/moneyDestination/addDestination/assisted";
 import { finishModal } from "@config/moneyDestination/moneyDestinationTab/form/verificationForm";
 import { IFormsUpdateData } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IFormsUpdateData";
 import { DecisionModal } from "@design/modals/decisionModal";
-import { RequestProcessModal } from "@design/modals/requestProcessModal";
+
 import { requestProcessMessage } from "@config/moneyDestination/moneyDestinationTab/generics/requestProcessMessage";
 import { ISaveDataResponse } from "@ptypes/saveData/ISaveDataResponse";
 import { requestStatusMessage } from "@config/moneyDestination/moneyDestinationTab/generics/requestStatusMessage";
-import { requestPendingModal } from "@config/moneyDestination/moneyDestinationTab/generics/requestPendingModal";
+import { RequestProcess } from "@design/feedback/RequestProcess";
+import { RequestStatusModal } from "@design/modals/requestStatusModal";
 
 interface IVerificationForm {
   requestSteps: IRequestSteps[];
@@ -111,30 +112,31 @@ function VerificationForm(props: IVerificationForm) {
         />
       )}
       {showRequestProcessModal && saveMoneyDestination && (
-        <RequestProcessModal
+        <RequestProcess
           portalId="portal"
           saveData={saveMoneyDestination}
           descriptionRequestProcess={requestProcessMessage}
           descriptionRequestStatus={requestStatusMessage}
-          loading={loading}
           requestProcessSteps={requestSteps}
           appearance={ComponentAppearance.SUCCESS}
           onCloseRequestStatus={onCloseRequestStatus}
         />
       )}
       {showPendingReqModal && saveMoneyDestination.requestNumber && (
-        <DecisionModal
+        <RequestStatusModal
           portalId="portal"
-          title={requestPendingModal(saveMoneyDestination.requestNumber).title}
+          title={requestStatusMessage(saveMoneyDestination.responsible).title}
           description={
-            requestPendingModal(saveMoneyDestination.requestNumber).description
+            requestStatusMessage(saveMoneyDestination.responsible).description
           }
-          actionText={
-            requestPendingModal(saveMoneyDestination.requestNumber).actionText
-          }
-          onCloseModal={onClosePendingReqModal}
+          requestNumber={saveMoneyDestination.requestNumber}
           onClick={onClosePendingReqModal}
-          withCancelButton={false}
+          onCloseModal={onClosePendingReqModal}
+          isLoading={false}
+          actionText={
+            requestStatusMessage(saveMoneyDestination.responsible).actionText
+          }
+          appearance={ComponentAppearance.PRIMARY}
         />
       )}
     </Stack>

@@ -1,7 +1,6 @@
 import { IEntry } from "@design/data/table/types";
-import { editMoneyDestinationModal } from "@config/moneyDestination/moneyDestinationTab/generics/editMoneyDestinationModal";
 import { EditRecord } from "@design/feedback/editRecord";
-import { useEditDestinationModal } from "@hooks/moneyDestination/useEditDestinationModal";
+import { useEditDestinationConsultation } from "@hooks/moneyDestination/useEditDestinationConsultation";
 
 interface IEdit {
   data: IEntry;
@@ -10,17 +9,8 @@ interface IEdit {
 const Edit = (props: IEdit) => {
   const { data } = props;
 
-  const { showModal, handleEdit, handleToggleModal } =
-    useEditDestinationModal(data);
-  return (
-    <EditRecord
-      showModal={showModal}
-      portalId="portal"
-      editRecordMessage={editMoneyDestinationModal}
-      onToggleModal={handleToggleModal}
-      onEdit={handleEdit}
-    />
-  );
+  const { handleEdit } = useEditDestinationConsultation(data);
+  return <EditRecord onEdit={handleEdit} />;
 };
 
 export { Edit };

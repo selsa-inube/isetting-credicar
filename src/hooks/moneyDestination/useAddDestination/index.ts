@@ -96,6 +96,21 @@ const useAddDestination = () => {
   });
 
   const handleSubmitClick = () => {
+    console.log({
+      applicationName: "ifac",
+      businessManagerCode: appData.businessManager.publicCode,
+      businessUnitCode: appData.businessUnit.publicCode,
+      description: "solicitud de creación de un destino de dinero",
+      entityName: "MoneyDestination",
+      requestDate: formatDate(new Date()),
+      useCaseName: "AddMoneyDestination",
+      configurationRequestData: {
+        abbreviatedName: formValues.nameDestination,
+        descriptionUse: formValues.description,
+        iconReference: formValues.icon ?? "",
+        rules: decisionsData,
+      },
+    });
     setSaveData({
       applicationName: "ifac",
       businessManagerCode: appData.businessManager.publicCode,

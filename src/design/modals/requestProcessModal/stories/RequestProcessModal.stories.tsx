@@ -1,9 +1,7 @@
-import { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { Meta, StoryFn } from "@storybook/react";
-import { Button } from "@inubekit/inubekit";
 
-import { requestStatusMessage } from "@config/moneyDestination/moneyDestinationTab/generics/requestStatusMessage";
+import { ComponentAppearance } from "@enum/appearances";
 import { IRequestProcessModal, RequestProcessModal } from "..";
 
 const meta: Meta<typeof RequestProcessModal> = {
@@ -18,84 +16,39 @@ const meta: Meta<typeof RequestProcessModal> = {
   ],
 };
 
-const InterventionAutomaticData = {
-  settingRequestId: "12444",
-  requestNumber: "00001234",
-  requestStatus: "ProcessingRequest",
-};
-
-const InterventionHumanData = {
-  settingRequestId: "12444",
-  requestNumber: "00001234",
-  requestStatus: "PendingApproval",
-};
-
 const Template: StoryFn<IRequestProcessModal> = (args) => {
-  const [showModal, setShowModal] = useState(false);
-
   return (
     <>
-      <Button onClick={() => setShowModal(true)}>Show Modal</Button>
-      {showModal && (
-        <RequestProcessModal
-          {...args}
-          onCloseRequestStatus={() => setShowModal(false)}
-        />
-      )}
+      <RequestProcessModal {...args} />
     </>
   );
 };
 
-export const InterventionAutomatic = Template.bind({});
-InterventionAutomatic.args = {
+export const Default = Template.bind({});
+Default.args = {
   portalId: "portal",
-  saveData: InterventionAutomaticData,
-  descriptionRequestProcess: {
-    title: "Procesando solicitud",
-    description:
-      "Hemos recibido tu solicitud y se encuentra en proceso.Por favor, espera mientras la gestionamos.",
-  },
-  descriptionRequestStatus: () => requestStatusMessage("Juan Perez"),
-  loading: false,
-  requestProcessSteps: [
+  appearance: ComponentAppearance.SUCCESS,
+  title: "Procesando solicitud",
+  description:
+    "Hemos recibido tu solicitud y se encuentra en proceso. Por favor, espera mientras la gestionamos.",
+  requestSteps: [
     { name: "Solicitud radicada", status: "completed" },
     { name: "Agregando", status: "completed" },
     { name: "Destino agregado", status: "pending" },
   ],
 };
 
-export const InterventionHuman = Template.bind({});
-InterventionHuman.args = {
+export const WithError = Template.bind({});
+WithError.args = {
   portalId: "portal",
-  saveData: InterventionHumanData,
-  descriptionRequestProcess: {
-    title: "Procesando solicitud",
-    description:
-      "Hemos recibido tu solicitud y se encuentra en proceso.Por favor, espera mientras la gestionamos.",
-  },
-  descriptionRequestStatus: () => requestStatusMessage("Juan Perez"),
-  loading: false,
-  requestProcessSteps: [
+  appearance: ComponentAppearance.DANGER,
+  title: "Procesando solicitud",
+  description:
+    "Hemos recibido tu solicitud y se encuentra en proceso. Por favor, espera mientras la gestionamos.",
+  requestSteps: [
     { name: "Solicitud radicada", status: "completed" },
-    { name: "Agregando", status: "completed" },
-    { name: "Destino agregado", status: "pending" },
-  ],
-};
-
-export const Loading = Template.bind({});
-Loading.args = {
-  portalId: "portal",
-  saveData: undefined,
-  descriptionRequestProcess: {
-    title: "Procesando solicitud",
-    description:
-      "Hemos recibido tu solicitud y se encuentra en proceso.Por favor, espera mientras la gestionamos.",
-  },
-  descriptionRequestStatus: () => requestStatusMessage("Juan Perez"),
-  loading: true,
-  requestProcessSteps: [
-    { name: "Solicitud radicada", status: "completed" },
-    { name: "Agregando", status: "completed" },
+    { name: "Evaluando requisitos", status: "completed" },
+    { name: "Agregando", status: "error" },
     { name: "Destino agregado", status: "pending" },
   ],
 };

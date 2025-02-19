@@ -45,8 +45,8 @@ function AddDestination() {
     appData.user.userAccount,
     showRequestProcessModal,
     saveData as ISaveDataRequest,
-    setShowModal,
     setShowRequestProcessModal,
+    setShowModal,
   );
 
   return (

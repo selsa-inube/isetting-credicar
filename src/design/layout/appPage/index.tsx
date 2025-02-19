@@ -2,10 +2,8 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { MdOutlineChevronRight } from "react-icons/md";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Grid } from "@inubekit/grid";
 import { Header } from "@inubekit/header";
-import { useMediaQuery } from "@inubekit/hooks";
-import { Icon } from "@inubekit/inubekit";
+import { Icon, Grid, useMediaQuery } from "@inubekit/inubekit";
 
 import { BusinessUnitChange } from "@design/inputs/BusinessUnitChange";
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";

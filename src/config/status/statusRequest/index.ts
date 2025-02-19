@@ -6,7 +6,7 @@ const statusRequest = [
   { status: "En proceso de validación", appearance: "warning" },
   {
     status: "En proceso de complementación y validación",
-    appearance: "warning",
+    appearance: "danger",
   },
   { status: "Procesando solicitud", appearance: "warning" },
   { status: "Solicitud rechazada", appearance: "danger" },
