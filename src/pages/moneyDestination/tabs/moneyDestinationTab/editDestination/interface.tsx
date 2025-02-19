@@ -14,20 +14,20 @@ import { textValuesBusinessRules } from "@config/moneyDestination/moneyDestinati
 import { IEditDestinationTabsConfig } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/tabs/ITabConfig/IEditDestinationTabsConfig";
 import { attentionModal, deleteModal } from "@config/decisions/messages";
 import { decisionTemplateConfig } from "@config/decisions/decisionTemplateDestination";
-import { DecisionModal } from "@design/modals/decisionModal";
-import { RequestProcessModal } from "@design/modals/requestProcessModal";
-import { IRequestSteps } from "@design/feedback/RequestProcess/types";
+import { RequestProcess } from "@design/feedback/requestProcess";
+import { IRequestSteps } from "@design/modals/requestProcessModal/types";
 import { ISaveDataResponse } from "@ptypes/saveData/ISaveDataResponse";
 import { ComponentAppearance } from "@enum/appearances";
-import { requestPendingModal } from "@config/moneyDestination/moneyDestinationTab/generics/requestPendingModal";
 import { requestProcessMessage } from "@config/moneyDestination/moneyDestinationTab/generics/requestProcessMessage";
 import { requestStatusMessage } from "@config/moneyDestination/moneyDestinationTab/generics/requestStatusMessage";
+import { RequestStatusModal } from "@design/modals/requestStatusModal";
 
 interface IEditDestinationUI {
   editDestinationTabsConfig: IEditDestinationTabsConfig;
   creditLineDecisions: IRuleDecision[];
   generalInformationRef: React.RefObject<FormikProps<IGeneralInformationEntry>>;
   initialGeneralInformationValues: IGeneralInformationEntry;
+  initialGeneralInfData: IGeneralInformationEntry;
   isSelected: string;
   requestSteps: IRequestSteps[];
   loading: boolean;
@@ -49,6 +49,7 @@ const EditDestinationUI = (props: IEditDestinationUI) => {
     editDestinationTabsConfig,
     generalInformationRef,
     initialGeneralInformationValues,
+    initialGeneralInfData,
     isSelected,
     saveMoneyDestination,
     requestSteps,
@@ -100,6 +101,7 @@ const EditDestinationUI = (props: IEditDestinationUI) => {
                 onButtonClick={onButtonClick}
                 editDataOption
                 loading={loading}
+                initialGeneralInfData={initialGeneralInfData}
               />
             )}
             {isSelected === editDestinationTabsConfig.creditLine.id && (
@@ -128,30 +130,31 @@ const EditDestinationUI = (props: IEditDestinationUI) => {
         </Stack>
       </Stack>
       {showRequestProcessModal && (
-        <RequestProcessModal
+        <RequestProcess
           portalId="portal"
           saveData={saveMoneyDestination}
           descriptionRequestProcess={requestProcessMessage}
           descriptionRequestStatus={requestStatusMessage}
-          loading={loading}
           requestProcessSteps={requestSteps}
           appearance={ComponentAppearance.SUCCESS}
           onCloseRequestStatus={onCloseRequestStatus}
         />
       )}
       {showPendingReqModal && saveMoneyDestination.requestNumber && (
-        <DecisionModal
+        <RequestStatusModal
           portalId="portal"
-          title={requestPendingModal(saveMoneyDestination.requestNumber).title}
+          title={requestStatusMessage(saveMoneyDestination.responsible).title}
           description={
-            requestPendingModal(saveMoneyDestination.requestNumber).description
+            requestStatusMessage(saveMoneyDestination.responsible).description
           }
-          actionText={
-            requestPendingModal(saveMoneyDestination.requestNumber).actionText
-          }
-          onCloseModal={onClosePendingReqModal}
+          requestNumber={saveMoneyDestination.requestNumber}
           onClick={onClosePendingReqModal}
-          withCancelButton={false}
+          onCloseModal={onClosePendingReqModal}
+          isLoading={false}
+          actionText={
+            requestStatusMessage(saveMoneyDestination.responsible).actionText
+          }
+          appearance={ComponentAppearance.PRIMARY}
         />
       )}
     </Stack>

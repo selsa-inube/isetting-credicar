@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useMediaQuery } from "@inubekit/hooks";
+import { useMediaQuery } from "@inubekit/inubekit";
 
 import { mediaQueryMobile } from "@config/environment";
 import { IEntry } from "@design/data/table/types";

@@ -1,8 +1,8 @@
 import { BrowserRouter } from "react-router-dom";
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
-import { Grid } from "@inubekit/grid";
+import { Grid } from "@inubekit/inubekit";
 
-import { BoxAttribute } from "@src/design/feedback/boxAttributes";
+import { BoxAttribute } from "@design/feedback/boxAttributes";
 import { Accordion, IAccordion } from "..";
 
 const meta: Meta<typeof Accordion> = {

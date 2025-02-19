@@ -22,6 +22,7 @@ const useGeneralInformationForm = (
   loading: boolean | undefined,
   onSubmit: ((values: IGeneralInformationEntry) => void) | undefined,
   onFormValid: React.Dispatch<React.SetStateAction<boolean>> | undefined,
+  initialGeneralInfData?: IGeneralInformationEntry,
 ) => {
   const createValidationSchema = () =>
     object().shape({
@@ -98,6 +99,9 @@ const useGeneralInformationForm = (
   const valuesEqual =
     JSON.stringify(initialValues) === JSON.stringify(formik.values);
 
+  const valuesEqualBoton =
+    JSON.stringify(initialGeneralInfData) === JSON.stringify(formik.values);
+
   const valuesEmpty = Object.values(formik.values).every(
     (value) => value === "" || value === null || value === undefined,
   );
@@ -105,15 +109,20 @@ const useGeneralInformationForm = (
   useEffect(() => {
     const updateButton = () => {
       if (editDataOption) {
-        setIsDisabledButton(
-          (valuesEqual || valuesEmpty || loading) ?? !formik.isValid,
-        );
+        setIsDisabledButton(!formik.isValid || valuesEmpty || valuesEqualBoton);
       } else {
         setIsDisabledButton(loading ?? !formik.isValid);
       }
     };
     updateButton();
-  }, [formik.values, loading, formik.isValid, initialValues, editDataOption]);
+  }, [
+    formik.values,
+    loading,
+    initialGeneralInfData,
+    formik.isValid,
+    initialValues,
+    editDataOption,
+  ]);
 
   useEffect(() => {
     const updateIcon = () => {
@@ -123,7 +132,7 @@ const useGeneralInformationForm = (
         formik.values.icon ?? "",
       );
       const compare =
-        JSON.stringify(initialValues.nameDestination) ===
+        JSON.stringify(initialGeneralInfData?.nameDestination) ===
         JSON.stringify(formik.values.nameDestination);
 
       if (editDataOption) {
@@ -156,6 +165,14 @@ const useGeneralInformationForm = (
     addData,
   ]);
 
+  const handleReset = () => {
+    if (editDataOption && initialGeneralInfData) {
+      formik.setValues(initialGeneralInfData);
+    } else {
+      formik.resetForm();
+    }
+  };
+
   return {
     autosuggestValue,
     optionsDestination,
@@ -163,7 +180,9 @@ const useGeneralInformationForm = (
     isDisabledButton,
     icon,
     handleChange,
+    handleReset,
     valuesEqual,
+    valuesEqualBoton,
   };
 };
 

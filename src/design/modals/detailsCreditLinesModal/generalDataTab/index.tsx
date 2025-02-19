@@ -1,5 +1,4 @@
-import { Stack, Text } from "@inubekit/inubekit";
-import { Divider } from "@inubekit/divider";
+import { Stack, Text, Divider } from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
 import { IEntry } from "@design/data/table/types";

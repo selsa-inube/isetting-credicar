@@ -1,6 +1,6 @@
-const requestStatusMessage = (responsible: string) => ({
+const requestStatusMessage = (responsible?: string) => ({
   title: "Solicitud",
-  description: `Este proceso será gestionado por ${responsible}, puede tardar algún tiempo mientras se gestiona la aprobación.`,
+  description: `Este proceso será gestionado por ${responsible ?? "uno de nuestros funcionarios"}, puede tardar algún tiempo mientras se gestiona la aprobación.`,
   actionText: "Enterado",
 });
 

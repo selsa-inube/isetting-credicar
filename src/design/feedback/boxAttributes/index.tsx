@@ -1,6 +1,4 @@
-import { Stack, Text } from "@inubekit/inubekit";
-import { useMediaQuery } from "@inubekit/hooks";
-import { Grid } from "@inubekit/grid";
+import { Stack, Text, Grid, useMediaQuery } from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
 import { ComponentAppearance } from "@enum/appearances";

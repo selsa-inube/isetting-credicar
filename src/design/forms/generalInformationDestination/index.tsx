@@ -14,6 +14,7 @@ interface IGeneralInformationForm {
   onFormValid?: React.Dispatch<React.SetStateAction<boolean>>;
   onSubmit?: (values: IGeneralInformationEntry) => void;
   editDataOption?: boolean;
+  initialGeneralInfData?: IGeneralInformationEntry;
 }
 
 const GeneralInformationForm = forwardRef<
@@ -23,6 +24,7 @@ const GeneralInformationForm = forwardRef<
   (
     {
       initialValues,
+      initialGeneralInfData,
       onFormValid,
       onSubmit,
       onButtonClick,
@@ -45,7 +47,8 @@ const GeneralInformationForm = forwardRef<
       isDisabledButton,
       icon,
       handleChange,
-      valuesEqual,
+      handleReset,
+      valuesEqualBoton,
     } = useGeneralInformationForm(
       enumData,
       initialValues,
@@ -54,6 +57,7 @@ const GeneralInformationForm = forwardRef<
       loading,
       onSubmit,
       onFormValid,
+      initialGeneralInfData,
     );
 
     return (
@@ -67,7 +71,8 @@ const GeneralInformationForm = forwardRef<
         editDataOption={editDataOption}
         isDisabledButton={isDisabledButton}
         icon={icon}
-        valuesEqual={valuesEqual}
+        valuesEqual={valuesEqualBoton}
+        onReset={handleReset}
       />
     );
   },

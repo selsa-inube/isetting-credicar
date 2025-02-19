@@ -21,7 +21,7 @@ const useEditDestination = (
   },
   appData: IAppData,
 ) => {
-  const normalizeData = {
+  const initialGeneralInfData = {
     nameDestination: data.nameDestination,
     description: data.description,
     icon: data.icon,
@@ -31,13 +31,13 @@ const useEditDestination = (
   const [isSelected, setIsSelected] = useState<string>(
     editDestinationTabsConfig.generalInformation.id,
   );
-  const [formValues, setFormValues] =
-    useState<IGeneralInformationEntry>(normalizeData);
+  const [formValues, setFormValues] = useState<IGeneralInformationEntry>(
+    initialGeneralInfData,
+  );
   const [isCurrentFormValid, setIsCurrentFormValid] = useState(false);
 
   const [showRequestProcessModal, setShowRequestProcessModal] = useState(false);
   const [saveData, setSaveData] = useState<ISaveDataRequest>();
-  const [errorFetchSaveData, setErrorFetchSaveData] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [creditLineDecisions, setCreditLineDecisions] = useState<
     IRuleDecision[]
@@ -47,7 +47,8 @@ const useEditDestination = (
     useRef<FormikProps<IGeneralInformationEntry>>(null);
 
   const [nameDecision, setNameDecision] = useState(
-    generalInformationRef.current?.values.nameDestination ?? "",
+    generalInformationRef.current?.values?.nameDestination ??
+      data.nameDestination,
   );
 
   const ruleName = "LineOfCredit";
@@ -67,7 +68,7 @@ const useEditDestination = (
   );
 
   useEffect(() => {
-    setNameDecision(formValues.nameDestination ?? "");
+    setNameDecision(formValues.nameDestination ?? data.nameDestination);
   }, [formValues.nameDestination]);
 
   const normalizeEvaluateRuleData = evaluateRuleData?.map((item) => {
@@ -167,6 +168,9 @@ const useEditDestination = (
   }, [creditLineDecisions]);
 
   const onSubmit = () => {
+    const compare =
+      JSON.stringify(initialGeneralInfData) ===
+      JSON.stringify(generalInformationRef.current?.values);
     const configurationRequestData: {
       moneyDestinationId: string;
       abbreviatedName?: string;
@@ -177,17 +181,21 @@ const useEditDestination = (
       moneyDestinationId: data.id,
     };
     if (
-      generalInformationRef.current?.values.nameDestination !== undefined &&
-      (generalInformationRef.current?.values.nameDestination !==
-        data.nameDestination ||
-        generalInformationRef.current?.values.description !== data.description)
+      (generalInformationRef.current?.values?.nameDestination !== undefined &&
+        (generalInformationRef.current?.values?.nameDestination !==
+          data.nameDestination ||
+          generalInformationRef.current?.values?.description !==
+            data.description)) ||
+      !compare
     ) {
       configurationRequestData.abbreviatedName =
-        generalInformationRef.current?.values.nameDestination ?? "";
+        generalInformationRef.current?.values?.nameDestination ??
+        formValues.nameDestination;
       configurationRequestData.descriptionUse =
-        generalInformationRef.current?.values.description ?? "";
+        generalInformationRef.current?.values?.description ??
+        formValues.description;
       configurationRequestData.iconReference =
-        generalInformationRef.current?.values.icon ?? "";
+        generalInformationRef.current?.values?.icon ?? formValues.icon;
     }
 
     if (newDecisions && newDecisions.length > 0) {
@@ -208,24 +216,32 @@ const useEditDestination = (
   };
 
   useEffect(() => {
-    if (!errorFetchSaveData) {
-      setFormValues(
-        generalInformationRef.current?.values as IGeneralInformationEntry,
-      );
+    if (generalInformationRef.current?.values) {
+      setFormValues((prev) => ({
+        ...prev,
+        ...generalInformationRef.current?.values,
+      }));
     }
-  }, [errorFetchSaveData]);
+  }, [generalInformationRef.current?.values]);
+
+  const handleTabChange = (tabId: string) => {
+    if (generalInformationRef.current?.values) {
+      setFormValues((prev) => ({
+        ...prev,
+        ...generalInformationRef.current?.values,
+      }));
+    }
+    setIsSelected(tabId);
+  };
 
   const handleReset = () => {
     setCreditLineDecisions(evaluateRuleData ?? []);
   };
 
-  const handleTabChange = (tabId: string) => {
-    setIsSelected(tabId);
-  };
-
   return {
     creditLineDecisions,
     formValues,
+    initialGeneralInfData,
     generalInformationRef,
     isCurrentFormValid,
     nameDecision,
@@ -239,7 +255,6 @@ const useEditDestination = (
     setIsCurrentFormValid,
     handleTabChange,
     setShowRequestProcessModal,
-    setErrorFetchSaveData,
     setShowModal,
   };
 };

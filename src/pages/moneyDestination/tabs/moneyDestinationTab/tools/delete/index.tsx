@@ -6,12 +6,11 @@ import { IEntry } from "@design/data/table/types";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 import { useSaveMoneyDestination } from "@hooks/moneyDestination/useSaveMoneyDestination";
 import { ISaveDataRequest } from "@ptypes/saveData/ISaveDataRequest";
-import { RequestProcessModal } from "@design/modals/requestProcessModal";
-import { DecisionModal } from "@design/modals/decisionModal";
 import { ComponentAppearance } from "@enum/appearances";
 import { requestProcessMessage } from "@config/moneyDestination/moneyDestinationTab/generics/requestProcessMessage";
 import { requestStatusMessage } from "@config/moneyDestination/moneyDestinationTab/generics/requestStatusMessage";
-import { requestPendingModal } from "@config/moneyDestination/moneyDestinationTab/generics/requestPendingModal";
+import { RequestProcess } from "@design/feedback/requestProcess";
+import { RequestStatusModal } from "@design/modals/requestStatusModal";
 
 interface IDelete {
   data: IEntry;
@@ -58,30 +57,31 @@ const Delete = (props: IDelete) => {
         loading={loadingSendData}
       />
       {showRequestProcessModal && saveMoneyDestination && (
-        <RequestProcessModal
+        <RequestProcess
           portalId="portal"
           saveData={saveMoneyDestination}
           descriptionRequestProcess={requestProcessMessage}
           descriptionRequestStatus={requestStatusMessage}
-          loading={loadingSendData}
           requestProcessSteps={requestSteps}
           appearance={ComponentAppearance.SUCCESS}
           onCloseRequestStatus={handleCloseRequestStatus}
         />
       )}
       {showPendingReqModal && saveMoneyDestination?.requestNumber && (
-        <DecisionModal
+        <RequestStatusModal
           portalId="portal"
-          title={requestPendingModal(saveMoneyDestination?.requestNumber).title}
+          title={requestStatusMessage(saveMoneyDestination.responsible).title}
           description={
-            requestPendingModal(saveMoneyDestination.requestNumber).description
+            requestStatusMessage(saveMoneyDestination.responsible).description
           }
-          actionText={
-            requestPendingModal(saveMoneyDestination.requestNumber).actionText
-          }
-          onCloseModal={handleClosePendingReqModal}
+          requestNumber={saveMoneyDestination.requestNumber}
           onClick={handleClosePendingReqModal}
-          withCancelButton={false}
+          onCloseModal={handleClosePendingReqModal}
+          isLoading={false}
+          actionText={
+            requestStatusMessage(saveMoneyDestination.responsible).actionText
+          }
+          appearance={ComponentAppearance.PRIMARY}
         />
       )}
     </>

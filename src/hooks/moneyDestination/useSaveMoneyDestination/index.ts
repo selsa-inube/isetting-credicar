@@ -5,7 +5,7 @@ import { IFlagAppearance, useFlag } from "@inubekit/inubekit";
 import { postSaveRequest } from "@services/saveRequest/postSaveRequest";
 import { ISaveDataRequest } from "@ptypes/saveData/ISaveDataRequest";
 import { statusFlowAutomatic } from "@config/status/statusFlowAutomatic";
-import { IRequestSteps } from "@design/feedback/RequestProcess/types";
+import { IRequestSteps } from "@design/modals/requestProcessModal/types";
 import { requestStepsInitial } from "@config/moneyDestination/addDestination/requestSteps";
 import { ISaveDataResponse } from "@ptypes/saveData/ISaveDataResponse";
 import { getRequestInProgressById } from "@services/moneyDestination/getRequestInProgressById";

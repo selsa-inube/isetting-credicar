@@ -31,6 +31,7 @@ interface IGeneralInformationFormUI {
   valuesEqual: boolean;
   loading: boolean;
   onButtonClick: () => void;
+  onReset: () => void;
   onChange: (name: string, value: string) => void;
   isDisabledButton?: boolean;
 }
@@ -44,6 +45,7 @@ const GeneralInformationFormUI = (props: IGeneralInformationFormUI) => {
     icon,
     onChange,
     onButtonClick,
+    onReset,
     valuesEqual,
     autosuggestValue,
     isDisabledButton,
@@ -114,7 +116,7 @@ const GeneralInformationFormUI = (props: IGeneralInformationFormUI) => {
       <Stack justifyContent="flex-end" gap={tokens.spacing.s250}>
         <Button
           fullwidth={isMobile}
-          onClick={() => formik.resetForm()}
+          onClick={onReset}
           appearance={ComponentAppearance.GRAY}
           disabled={valuesEqual}
         >

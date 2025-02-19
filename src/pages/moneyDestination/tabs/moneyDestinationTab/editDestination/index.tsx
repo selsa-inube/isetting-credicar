@@ -16,6 +16,7 @@ const EditDestination = () => {
   const {
     creditLineDecisions,
     formValues,
+    initialGeneralInfData,
     generalInformationRef,
     isSelected,
     saveData,
@@ -26,7 +27,6 @@ const EditDestination = () => {
     setIsCurrentFormValid,
     handleTabChange,
     setShowRequestProcessModal,
-    setErrorFetchSaveData,
     setShowModal,
   } = useEditDestination(data, appData);
 
@@ -44,7 +44,6 @@ const EditDestination = () => {
     saveData as ISaveDataRequest,
     setShowRequestProcessModal,
     setShowModal,
-    setErrorFetchSaveData,
   );
 
   return (
@@ -66,6 +65,7 @@ const EditDestination = () => {
       showRequestProcessModal={showRequestProcessModal}
       onCloseRequestStatus={handleCloseRequestStatus}
       onClosePendingReqModal={handleClosePendingReqModal}
+      initialGeneralInfData={initialGeneralInfData}
     />
   );
 };
