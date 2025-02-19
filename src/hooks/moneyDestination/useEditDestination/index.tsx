@@ -171,6 +171,7 @@ const useEditDestination = (
     const compare =
       JSON.stringify(initialGeneralInfData) ===
       JSON.stringify(generalInformationRef.current?.values);
+
     const configurationRequestData: {
       moneyDestinationId: string;
       abbreviatedName?: string;
@@ -180,22 +181,21 @@ const useEditDestination = (
     } = {
       moneyDestinationId: data.id,
     };
+
+    const currentValues = generalInformationRef.current?.values;
+
     if (
-      (generalInformationRef.current?.values?.nameDestination !== undefined &&
-        (generalInformationRef.current?.values?.nameDestination !==
-          data.nameDestination ||
-          generalInformationRef.current?.values?.description !==
-            data.description)) ||
+      (currentValues?.nameDestination !== undefined &&
+        (currentValues.nameDestination !== data.nameDestination ||
+          currentValues.description !== data.description)) ||
       !compare
     ) {
       configurationRequestData.abbreviatedName =
-        generalInformationRef.current?.values?.nameDestination ??
-        formValues.nameDestination;
+        currentValues?.nameDestination ?? formValues.nameDestination;
       configurationRequestData.descriptionUse =
-        generalInformationRef.current?.values?.description ??
-        formValues.description;
+        currentValues?.description ?? formValues.description;
       configurationRequestData.iconReference =
-        generalInformationRef.current?.values?.icon ?? formValues.icon;
+        currentValues?.icon ?? formValues.icon;
     }
 
     if (newDecisions && newDecisions.length > 0) {
