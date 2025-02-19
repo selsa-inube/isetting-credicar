@@ -14,7 +14,7 @@ import { textValuesBusinessRules } from "@config/moneyDestination/moneyDestinati
 import { IEditDestinationTabsConfig } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/tabs/ITabConfig/IEditDestinationTabsConfig";
 import { attentionModal, deleteModal } from "@config/decisions/messages";
 import { decisionTemplateConfig } from "@config/decisions/decisionTemplateDestination";
-import { RequestProcess } from "@design/feedback/requestProcess";
+import { RequestProcess } from "@design/feedback/RequestProcess";
 import { IRequestSteps } from "@design/modals/requestProcessModal/types";
 import { ISaveDataResponse } from "@ptypes/saveData/ISaveDataResponse";
 import { ComponentAppearance } from "@enum/appearances";

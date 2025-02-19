@@ -14,7 +14,7 @@ import { DecisionModal } from "@design/modals/decisionModal";
 import { requestProcessMessage } from "@config/moneyDestination/moneyDestinationTab/generics/requestProcessMessage";
 import { ISaveDataResponse } from "@ptypes/saveData/ISaveDataResponse";
 import { requestStatusMessage } from "@config/moneyDestination/moneyDestinationTab/generics/requestStatusMessage";
-import { RequestProcess } from "@design/feedback/requestProcess";
+import { RequestProcess } from "@design/feedback/RequestProcess";
 import { RequestStatusModal } from "@design/modals/requestStatusModal";
 
 interface IVerificationForm {

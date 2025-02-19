@@ -9,8 +9,9 @@ import { ISaveDataRequest } from "@ptypes/saveData/ISaveDataRequest";
 import { ComponentAppearance } from "@enum/appearances";
 import { requestProcessMessage } from "@config/moneyDestination/moneyDestinationTab/generics/requestProcessMessage";
 import { requestStatusMessage } from "@config/moneyDestination/moneyDestinationTab/generics/requestStatusMessage";
-import { RequestProcess } from "@design/feedback/requestProcess";
+
 import { RequestStatusModal } from "@design/modals/requestStatusModal";
+import { RequestProcess } from "@src/design/feedback/RequestProcess";
 
 interface IDelete {
   data: IEntry;
