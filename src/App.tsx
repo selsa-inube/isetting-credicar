@@ -7,6 +7,7 @@ import { useAppData } from "./hooks/useAppData";
 import { GlobalStyles } from "./styles/global";
 import { AuthAndPortalDataProvider } from "./context/authAndPortalDataProvider";
 import { ErrorPage } from "./design/layout/errorPage";
+import { ChangeToRequestTabProvider } from "./context/changeToRequestTab";
 
 const url = new URL(window.location.href);
 const params = new URLSearchParams(url.search);
@@ -45,7 +46,9 @@ function App(props: IApp) {
       <GlobalStyles />
       <FlagProvider>
         <AuthAndPortalDataProvider>
-          <RouterProvider router={mainNavigation} />
+          <ChangeToRequestTabProvider>
+            <RouterProvider router={mainNavigation} />
+          </ChangeToRequestTabProvider>
         </AuthAndPortalDataProvider>
       </FlagProvider>
     </>

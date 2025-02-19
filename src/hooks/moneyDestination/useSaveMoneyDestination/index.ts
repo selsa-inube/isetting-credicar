@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { IFlagAppearance, useFlag } from "@inubekit/inubekit";
 
 import { postSaveRequest } from "@services/saveRequest/postSaveRequest";
@@ -13,6 +13,7 @@ import { flowAutomaticMessages } from "@config/moneyDestination/moneyDestination
 import { interventionHumanMessage } from "@config/moneyDestination/moneyDestinationTab/generics/interventionHumanMessage";
 import { statusCloseModal } from "@config/status/statusCloseModal";
 import { statusRequestFinished } from "@config/status/statusRequestFinished";
+import { ChangeToRequestTab } from "@context/changeToRequestTab";
 
 const useSaveMoneyDestination = (
   bussinesUnits: string,
@@ -31,6 +32,8 @@ const useSaveMoneyDestination = (
     useState<IRequestSteps[]>(requestStepsInitial);
   const [showPendingReqModal, setShowPendingReqModal] = useState(false);
   const [loadingSendData, setLoadingSendData] = useState(false);
+
+  const { setChangeTab } = useContext(ChangeToRequestTab);
 
   const navigate = useNavigate();
   const navigatePage = "/money-destination";
@@ -136,6 +139,7 @@ const useSaveMoneyDestination = (
     setTimeout(() => {
       if (isStatusIntAutomatic(saveMoneyDestination?.requestStatus)) {
         if (isStatusCloseModal()) {
+          setChangeTab(true);
           navigate(navigatePage);
           addFlag({
             title: flowAutomaticMessages.errorCreateRequest.title,
@@ -202,6 +206,7 @@ const useSaveMoneyDestination = (
   }, [saveMoneyDestination, statusRequest]);
 
   const handleCloseRequestStatus = () => {
+    setChangeTab(true);
     setSendData(false);
     navigate(navigatePage);
     addFlag({
@@ -216,6 +221,7 @@ const useSaveMoneyDestination = (
   };
 
   const handleClosePendingReqModal = () => {
+    setChangeTab(true);
     setShowPendingReqModal(false);
     navigate(navigatePage);
   };
