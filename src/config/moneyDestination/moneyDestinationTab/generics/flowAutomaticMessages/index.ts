@@ -17,13 +17,13 @@ const flowAutomaticMessages = {
   },
   errorCreateRequest: {
     title: "Error en la solicitud",
-    description: "Verifique su solicitud en la pestaña solicitudes en tramite",
+    description: "Verifique su solicitud en solicitudes en tramite",
     appearance: ComponentAppearance.DANGER,
     duration: 5000,
   },
   SuccessfulCreateRequest: {
     title: "¡Creación de solicitud exitosa!",
-    description: "Se creo el cargo con éxito",
+    description: "Se creo la solicitud con éxito",
     appearance: ComponentAppearance.SUCCESS,
     duration: 5000,
   },

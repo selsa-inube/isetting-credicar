@@ -1,14 +1,9 @@
-import { useState } from "react";
-
-import { MoneyDestinationUI } from "./interface";
 import { moneyDestinationTabsConfig } from "@config/moneyDestination/tabs";
+import { useMoneryDestinationPage } from "@hooks/moneyDestination/useMoneryDestinationPage";
+import { MoneyDestinationUI } from "./interface";
 
 function MoneyDestination() {
-  const [isSelected, setIsSelected] = useState<string>();
-
-  const handleTabChange = (tabId: string) => {
-    setIsSelected(tabId);
-  };
+  const { isSelected, handleTabChange } = useMoneryDestinationPage();
 
   return (
     <MoneyDestinationUI
