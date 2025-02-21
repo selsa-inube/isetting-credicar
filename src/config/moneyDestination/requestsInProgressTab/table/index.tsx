@@ -1,6 +1,6 @@
 import { Details } from "@pages/moneyDestination/tabs/requestsInProgressTab/tools/details";
 import { IAction, ITitle } from "@design/data/table/types";
-import { Delete } from "@pages/moneyDestination/tabs/requestsInProgressTab/tools/delete";
+import { Cancel } from "@pages/moneyDestination/tabs/requestsInProgressTab/tools/cancel";
 
 const titles: ITitle[] = [
   {
@@ -20,7 +20,7 @@ const titles: ITitle[] = [
   },
 ];
 
-const actionsConfig = (setEntryDeleted: (value: string | number) => void) => {
+const actionsConfig = (setEntryCanceled: (value: string | number) => void) => {
   const actions: IAction[] = [
     {
       id: "Details",
@@ -30,7 +30,7 @@ const actionsConfig = (setEntryDeleted: (value: string | number) => void) => {
     {
       id: "delete",
       content: (entry) => (
-        <Delete data={entry} setEntryDeleted={setEntryDeleted} />
+        <Cancel data={entry} setEntryCanceled={setEntryCanceled} />
       ),
     },
   ];
