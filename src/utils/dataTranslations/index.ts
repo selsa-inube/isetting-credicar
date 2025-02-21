@@ -2,6 +2,7 @@ const dataTranslations: Record<string, string> = {
   "Money destination": "Destino de dinero",
   "Client type": "Tipo de cliente",
   "Line of credit": "Línea de crédito",
+  LineOfCredit: "Línea de crédito",
   "Maximun f r cquota": "Monto máximo",
   "Payment date": "Fecha de pago",
   "Interest rate type": "Tipo de tasa de interés",

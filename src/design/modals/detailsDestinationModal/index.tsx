@@ -1,10 +1,8 @@
-import { useState } from "react";
 import { IRuleDecision } from "@isettingkit/input";
-import { useMediaQuery } from "@inubekit/inubekit";
 
-import { mediaQueryMobile } from "@config/environment";
 import { IEntry } from "@design/data/table/types";
 import { IRulesFormTextValues } from "@ptypes/decisions/IRulesFormTextValues";
+import { useDetailsDestinationModal } from "@hooks/design/useDetailsDestinationModal";
 import { DetailsDestinationModalUI } from "./interface";
 import { IDetailsTabsConfig } from "./types";
 
@@ -29,19 +27,20 @@ const DetailsDestinationModal = (props: IDetailsDestinationModal) => {
     onCloseModal,
   } = props;
 
-  const [isSelected, setIsSelected] = useState<string>();
-
-  const isMobile = useMediaQuery(mediaQueryMobile);
-
-  const handleTabChange = (tabId: string) => {
-    setIsSelected(tabId);
-  };
+  const {
+    isSelected,
+    isMobile,
+    handleTabChange,
+    filteredTabsConfig,
+    defaultSelectedTab,
+  } = useDetailsDestinationModal(data, detailsTabsConfig, decisions);
 
   return (
     <DetailsDestinationModalUI
       data={data}
+      filteredTabsConfig={filteredTabsConfig}
       detailsTabsConfig={detailsTabsConfig}
-      isSelected={isSelected ?? detailsTabsConfig.generalData.id}
+      isSelected={isSelected ?? defaultSelectedTab}
       onCloseModal={onCloseModal}
       onTabChange={handleTabChange}
       portalId={portalId}

@@ -71,18 +71,19 @@ const useEditDestination = (
     setNameDecision(formValues.nameDestination ?? data.nameDestination);
   }, [formValues.nameDestination]);
 
-  const normalizeEvaluateRuleData = evaluateRuleData?.map((item) => {
-    return {
-      ...item,
-      conditionThatEstablishesTheDecision:
-        item.conditionThatEstablishesTheDecision?.map((condition) => {
-          return {
-            ...condition,
-            hidden: condition.conditionName === conditionRule,
-          };
-        }),
-    };
-  });
+  const normalizeEvaluateRuleData: IRuleDecision[] | undefined =
+    evaluateRuleData?.map((item) => {
+      return {
+        ...item,
+        conditionThatEstablishesTheDecision:
+          item.conditionThatEstablishesTheDecision?.map((condition) => {
+            return {
+              ...condition,
+              hidden: condition.conditionName === conditionRule,
+            };
+          }),
+      };
+    });
 
   useEffect(() => {
     if (evaluateRuleData && normalizeEvaluateRuleData) {
@@ -106,6 +107,7 @@ const useEditDestination = (
               decision.conditionThatEstablishesTheDecision?.map((condition) => {
                 return {
                   conditionName: condition.conditionName,
+                  labelName: condition.labelName,
                   value: condition.value,
                 };
               }) as ICondition[],
@@ -138,6 +140,7 @@ const useEditDestination = (
               decision.conditionThatEstablishesTheDecision?.map((condition) => {
                 return {
                   conditionName: condition.conditionName,
+                  labelName: condition.labelName,
                   value: condition.value,
                 };
               }) as ICondition[],
@@ -168,9 +171,14 @@ const useEditDestination = (
   }, [creditLineDecisions]);
 
   const onSubmit = () => {
+    const currentValues = generalInformationRef.current?.values;
     const compare =
-      JSON.stringify(initialGeneralInfData) ===
-      JSON.stringify(generalInformationRef.current?.values);
+      JSON.stringify(initialGeneralInfData) === JSON.stringify(formValues);
+
+    const valuesUpdatedName =
+      initialGeneralInfData.nameDestination !== currentValues?.nameDestination;
+    const valuesUpdatedDesc =
+      initialGeneralInfData.description !== currentValues?.description;
 
     const configurationRequestData: {
       moneyDestinationId: string;
@@ -182,20 +190,24 @@ const useEditDestination = (
       moneyDestinationId: data.id,
     };
 
-    const currentValues = generalInformationRef.current?.values;
+    if (currentValues?.nameDestination !== undefined && valuesUpdatedName) {
+      configurationRequestData.abbreviatedName = currentValues?.nameDestination;
+      configurationRequestData.iconReference = currentValues?.icon;
+    }
+    if (currentValues?.description !== undefined && valuesUpdatedDesc) {
+      configurationRequestData.descriptionUse = currentValues?.description;
+    }
 
-    if (
-      (currentValues?.nameDestination !== undefined &&
-        (currentValues.nameDestination !== data.nameDestination ||
-          currentValues.description !== data.description)) ||
-      !compare
-    ) {
-      configurationRequestData.abbreviatedName =
-        currentValues?.nameDestination ?? formValues.nameDestination;
-      configurationRequestData.descriptionUse =
-        currentValues?.description ?? formValues.description;
-      configurationRequestData.iconReference =
-        currentValues?.icon ?? formValues.icon;
+    if (!compare && isSelected === editDestinationTabsConfig.creditLine.id) {
+      if (
+        initialGeneralInfData.nameDestination !== formValues.nameDestination
+      ) {
+        configurationRequestData.abbreviatedName = formValues.nameDestination;
+        configurationRequestData.iconReference = formValues.icon;
+      }
+      if (initialGeneralInfData.description !== formValues.description) {
+        configurationRequestData.descriptionUse = formValues.description;
+      }
     }
 
     if (newDecisions && newDecisions.length > 0) {
@@ -235,11 +247,12 @@ const useEditDestination = (
   };
 
   const handleReset = () => {
-    setCreditLineDecisions(evaluateRuleData ?? []);
+    setCreditLineDecisions(normalizeEvaluateRuleData ?? []);
   };
 
   return {
     creditLineDecisions,
+    normalizeEvaluateRuleData,
     formValues,
     initialGeneralInfData,
     generalInformationRef,

@@ -7,6 +7,7 @@ import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 import { ISaveDataRequest } from "@ptypes/saveData/ISaveDataRequest";
 import { ISaveDataResponse } from "@ptypes/saveData/ISaveDataResponse";
 import { EditDestinationUI } from "./interface";
+import { IRuleDecision } from "@isettingkit/input";
 
 const EditDestination = () => {
   const location = useLocation();
@@ -15,6 +16,7 @@ const EditDestination = () => {
 
   const {
     creditLineDecisions,
+    normalizeEvaluateRuleData,
     formValues,
     initialGeneralInfData,
     generalInformationRef,
@@ -66,6 +68,7 @@ const EditDestination = () => {
       onCloseRequestStatus={handleCloseRequestStatus}
       onClosePendingReqModal={handleClosePendingReqModal}
       initialGeneralInfData={initialGeneralInfData}
+      normalizeEvaluateRuleData={normalizeEvaluateRuleData as IRuleDecision[]}
     />
   );
 };

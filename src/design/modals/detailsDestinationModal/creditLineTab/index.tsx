@@ -16,7 +16,12 @@ const CreditLineTab = (props: ICreditLineTab) => {
   const { data, textValues, decisionTemplate } = props;
 
   return (
-    <Stack direction="column" gap={tokens.spacing.s300}>
+    <Stack
+      direction="column"
+      gap={tokens.spacing.s300}
+      justifyContent="space-between"
+      height="85%"
+    >
       <StyledContainer>
         <BusinessRules
           controls={false}

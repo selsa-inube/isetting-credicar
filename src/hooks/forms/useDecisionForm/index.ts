@@ -11,6 +11,7 @@ const useDecisionForm = (
   setCreditLineDecisions: (decisions: IRuleDecision[]) => void,
   setShowAttentionModal: React.Dispatch<React.SetStateAction<boolean>>,
   showAttentionModal: boolean,
+  normalizeEvaluateRuleData?: IRuleDecision[],
   editDataOption?: boolean,
 ) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -116,12 +117,21 @@ const useDecisionForm = (
   };
 
   const handleReset = () => {
-    setDecisions(initialDecisions);
-    setSavedDecisions(initialDecisions);
+    if (editDataOption && normalizeEvaluateRuleData) {
+      setDecisions(normalizeEvaluateRuleData);
+      setSavedDecisions(normalizeEvaluateRuleData);
+      setCreditLineDecisions(normalizeEvaluateRuleData);
+    } else {
+      setDecisions(initialDecisions);
+      setSavedDecisions(initialDecisions);
+    }
   };
 
   useEffect(() => {
-    if (JSON.stringify(decisions) !== JSON.stringify(initialDecisions)) {
+    if (
+      JSON.stringify(decisions) !== JSON.stringify(initialDecisions) ||
+      JSON.stringify(normalizeEvaluateRuleData) !== JSON.stringify(decisions)
+    ) {
       setHasChanges(true);
     } else {
       setHasChanges(false);

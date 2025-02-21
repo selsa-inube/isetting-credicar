@@ -20,6 +20,7 @@ import { normalizeStatusByName } from "@utils/status/normalizeStatusByName";
 
 import { IServerDomain } from "@ptypes/IServerDomain";
 import { IEntry } from "@design/data/table/types";
+import { RequestType } from "@enum/requestType";
 import {
   StyledContainerButton,
   StyledContainerFields,
@@ -101,7 +102,9 @@ function DetailsRequestsInProgressModal(
           alignItems="center"
         >
           <Text type="label" size="large" weight="bold">
-            Solicitud {data.request}
+            Solicitud{" "}
+            {RequestType[data.request as keyof typeof RequestType] ??
+              data.request}
           </Text>
 
           {labelsOfRequest.slice(0, partLabelsOfRequest).map(
