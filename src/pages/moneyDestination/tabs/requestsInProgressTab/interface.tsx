@@ -15,7 +15,7 @@ interface IRequestsInProgressTabUI {
   entries: IEntry[];
   loading: boolean;
   searchrequestProgress: string;
-  setEntryDeleted: (value: string | number) => void;
+  setEntryCanceled: (value: string | number) => void;
   onSearchrequestProgress: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -24,7 +24,7 @@ function RequestsInProgressTabUI(props: IRequestsInProgressTabUI) {
     entries,
     searchrequestProgress,
     loading,
-    setEntryDeleted,
+    setEntryCanceled,
     onSearchrequestProgress,
   } = props;
 
@@ -69,7 +69,7 @@ function RequestsInProgressTabUI(props: IRequestsInProgressTabUI) {
             id="portal"
             titles={titles}
             entries={entries}
-            actions={actionsConfig(setEntryDeleted)}
+            actions={actionsConfig(setEntryCanceled)}
             breakpoints={breakPoints}
             filter={searchrequestProgress}
             isLoading={loading}

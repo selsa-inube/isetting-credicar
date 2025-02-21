@@ -11,7 +11,7 @@ const useRequestsInProgress = (bussinesUnits: string) => {
   const [searchRequestsInProgress, setSearchRequestsInProgress] =
     useState<string>("");
   const [loading, setLoading] = useState(true);
-  const [entryDeleted, setEntryDeleted] = useState<string | number>("");
+  const [entryCanceled, setEntryCanceled] = useState<string | number>("");
 
   useEffect(() => {
     const fetchRequestsInProgressData = async () => {
@@ -31,12 +31,12 @@ const useRequestsInProgress = (bussinesUnits: string) => {
   }, []);
 
   useEffect(() => {
-    if (entryDeleted) {
+    if (entryCanceled) {
       setRequestsInProgress((prev) =>
-        prev.filter((entry) => entry.id !== entryDeleted),
+        prev.filter((entry) => entry.id !== entryCanceled),
       );
     }
-  }, [entryDeleted]);
+  }, [entryCanceled]);
 
   const handleSearchRequestsInProgress = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -50,7 +50,7 @@ const useRequestsInProgress = (bussinesUnits: string) => {
     searchRequestsInProgress,
     loading,
     handleSearchRequestsInProgress,
-    setEntryDeleted,
+    setEntryCanceled,
   };
 };
 

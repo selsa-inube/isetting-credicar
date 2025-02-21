@@ -12,7 +12,7 @@ function RequestsInProgressTab() {
     searchRequestsInProgress,
     loading,
     handleSearchRequestsInProgress,
-    setEntryDeleted,
+    setEntryCanceled,
   } = useRequestsInProgress(appData.businessUnit.publicCode);
 
   return (
@@ -21,7 +21,7 @@ function RequestsInProgressTab() {
       loading={loading}
       searchrequestProgress={searchRequestsInProgress}
       onSearchrequestProgress={handleSearchRequestsInProgress}
-      setEntryDeleted={setEntryDeleted}
+      setEntryCanceled={setEntryCanceled}
     />
   );
 }
