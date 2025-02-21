@@ -20,6 +20,7 @@ import { IDetailsTabsConfig } from "./types";
 interface IDetailsDestinationModalUI {
   data: IEntry;
   decisionTemplate: IRuleDecision;
+  filteredTabsConfig: IDetailsTabsConfig;
   detailsTabsConfig: IDetailsTabsConfig;
   isSelected: string;
   portalId: string;
@@ -33,6 +34,7 @@ interface IDetailsDestinationModalUI {
 const DetailsDestinationModalUI = (props: IDetailsDestinationModalUI) => {
   const {
     isSelected,
+    filteredTabsConfig,
     onTabChange,
     smallScreenTab,
     detailsTabsConfig,
@@ -81,24 +83,24 @@ const DetailsDestinationModalUI = (props: IDetailsDestinationModalUI) => {
           </Stack>
           <Divider />
         </Stack>
-        <Stack gap={tokens.spacing.s300} direction="column">
+        <Stack gap={tokens.spacing.s300} direction="column" height="100%">
           <Tabs
-            tabs={Object.values(detailsTabsConfig)}
+            tabs={Object.values(filteredTabsConfig)}
             selectedTab={isSelected}
             onChange={onTabChange}
             scroll={smallScreenTab ? true : false}
           />
-
           {isSelected === detailsTabsConfig.generalData.id && (
             <GeneralDataTab data={data} />
           )}
-          {isSelected === detailsTabsConfig.creditLine.id && (
-            <CreditLineTab
-              data={decisions}
-              textValues={textValues}
-              decisionTemplate={decisionTemplate}
-            />
-          )}
+          {isSelected === detailsTabsConfig.creditLine.id &&
+            decisions.length > 0 && (
+              <CreditLineTab
+                data={decisions}
+                textValues={textValues}
+                decisionTemplate={decisionTemplate}
+              />
+            )}
         </Stack>
 
         <Stack gap={tokens.spacing.s250} justifyContent="flex-end">

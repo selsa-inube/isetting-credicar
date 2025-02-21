@@ -1,23 +1,24 @@
 import {
-    MdOutline1xMobiledata,
-    MdOutlineAddHomeWork,
-    MdOutlineAssuredWorkload,
-    MdOutlineBeachAccess,
-    MdOutlineBuild,
-    MdOutlineCreditCard,
-    MdOutlineDirectionsCar,
-    MdOutlineDiversity1,
-    MdOutlineFavoriteBorder,
-    MdOutlineHandshake,
-    MdOutlineLightbulb,
-    MdOutlinePayments,
-    MdOutlinePersonalInjury,
-    MdOutlineRealEstateAgent,
-    MdOutlineSchool,
-    MdOutlineTravelExplore,
-    MdOutlineVolunteerActivism,
-  } from "react-icons/md";
-  
+  MdOutline1xMobiledata,
+  MdOutlineAddHomeWork,
+  MdOutlineAssuredWorkload,
+  MdOutlineBeachAccess,
+  MdOutlineBuild,
+  MdOutlineCreditCard,
+  MdOutlineDirectionsCar,
+  MdOutlineDiversity1,
+  MdOutlineFavoriteBorder,
+  MdOutlineFax,
+  MdOutlineHandshake,
+  MdOutlineLightbulb,
+  MdOutlinePayments,
+  MdOutlinePersonalInjury,
+  MdOutlineRealEstateAgent,
+  MdOutlineSchool,
+  MdOutlineTravelExplore,
+  MdOutlineVolunteerActivism,
+} from "react-icons/md";
+
 const iconDestination = [
   {
     value: "MdOutlineRealEstateAgent",
@@ -90,6 +91,10 @@ const iconDestination = [
   {
     value: "MdOutlineTravelExplore",
     icon: <MdOutlineTravelExplore size={20} />,
+  },
+  {
+    value: "MdOutlineFax",
+    icon: <MdOutlineFax size={20} />,
   },
 ];
 

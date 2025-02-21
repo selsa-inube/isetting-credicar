@@ -128,6 +128,7 @@ function AddCreditLinesUI(props: IAddCreditLinesUI) {
                 }
                 showAttentionModal={false}
                 setShowAttentionModal={() => console.log()}
+                normalizeEvaluateRuleData={[]}
               />
             )}
           </Stack>

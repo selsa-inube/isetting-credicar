@@ -25,6 +25,7 @@ import { RequestStatusModal } from "@design/modals/requestStatusModal";
 interface IEditDestinationUI {
   editDestinationTabsConfig: IEditDestinationTabsConfig;
   creditLineDecisions: IRuleDecision[];
+  normalizeEvaluateRuleData: IRuleDecision[];
   generalInformationRef: React.RefObject<FormikProps<IGeneralInformationEntry>>;
   initialGeneralInformationValues: IGeneralInformationEntry;
   initialGeneralInfData: IGeneralInformationEntry;
@@ -46,6 +47,7 @@ interface IEditDestinationUI {
 const EditDestinationUI = (props: IEditDestinationUI) => {
   const {
     creditLineDecisions,
+    normalizeEvaluateRuleData,
     editDestinationTabsConfig,
     generalInformationRef,
     initialGeneralInformationValues,
@@ -124,6 +126,7 @@ const EditDestinationUI = (props: IEditDestinationUI) => {
                 setShowAttentionModal={() => console.log()}
                 titleContentAddCard="Agregar línea de crédito"
                 messageEmptyDecisions="Agrega línea de crédito"
+                normalizeEvaluateRuleData={normalizeEvaluateRuleData ?? []}
               />
             )}
           </Stack>

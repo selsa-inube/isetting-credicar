@@ -29,6 +29,7 @@ interface IDecisionsForm {
   nameMoneyDestination: string;
   setShowAttentionModal: React.Dispatch<React.SetStateAction<boolean>>;
   editDataOption?: boolean;
+  normalizeEvaluateRuleData?: IRuleDecision[];
   titleContentAddCard?: string;
   messageEmptyDecisions?: string;
 }
@@ -45,6 +46,7 @@ const DecisionsForm = (props: IDecisionsForm) => {
     showAttentionModal,
     titleContentAddCard,
     messageEmptyDecisions,
+    normalizeEvaluateRuleData,
     decisionTemplateConfig,
     onButtonClick,
     onPreviousStep,
@@ -74,6 +76,7 @@ const DecisionsForm = (props: IDecisionsForm) => {
     setDecisions,
     setShowAttentionModal,
     showAttentionModal,
+    normalizeEvaluateRuleData,
     editDataOption,
   );
 

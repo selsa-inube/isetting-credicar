@@ -87,6 +87,7 @@ function MoneyDestinationTabUI(props: IMoneyDestinationTabUI) {
             filter={searchMoneyDestination}
             isLoading={loading}
             columnWidths={[widthFirstColumn, 55]}
+            pageLength={8}
           />
         </Stack>
       </Stack>
