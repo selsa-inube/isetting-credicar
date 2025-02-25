@@ -7,11 +7,11 @@ import {
   Icon,
   IIconAppearance,
   Divider,
+  useMediaQuery,
+  Blanket,
+  Textarea,
 } from "@inubekit/inubekit";
 import { Button } from "@inubekit/button";
-import { useMediaQuery } from "@inubekit/inubekit";
-import { Blanket } from "@inubekit/blanket";
-import { Textarea } from "@inubekit/textarea";
 
 import { tokens } from "@design/tokens";
 import { mediaQueryMobile } from "@config/environment";

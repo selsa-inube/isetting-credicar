@@ -1,5 +1,4 @@
-import { Stack, Tabs, useMediaQuery } from "@inubekit/inubekit";
-import { Breadcrumbs } from "@inubekit/breadcrumbs";
+import { Stack, Tabs, useMediaQuery, Breadcrumbs } from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
 import { Title } from "@design/data/title";

@@ -1,8 +1,6 @@
 import { FormikProps } from "formik";
 import { Button } from "@inubekit/button";
-import { Stack, useMediaQuery } from "@inubekit/inubekit";
-import { Textarea } from "@inubekit/textarea";
-import { Input } from "@inubekit/input";
+import { Stack, useMediaQuery, Textarea, Input } from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
 import { ComponentAppearance } from "@enum/appearances";
