@@ -28,6 +28,7 @@ const Cancel = (props: ICancel) => {
       onToggleModal={handleToggleModal}
       onClick={handleClick}
       loading={loading}
+      status={data.requestStatus}
     />
   );
 };
