@@ -1,9 +1,7 @@
-import { IRuleDecision } from "@isettingkit/input";
+import { IDecision } from "@ptypes/decisions/IDecision";
 
-const mapEnumeratorsRulesApiToEntity = (
-  enumerator: IRuleDecision,
-): IRuleDecision => {
-  const enumeratorEntry: IRuleDecision = {
+const mapEnumeratorsRulesApiToEntity = (enumerator: IDecision): IDecision => {
+  const enumeratorEntry: IDecision = {
     conditionThatEstablishesTheDecision: Object(
       enumerator.conditionThatEstablishesTheDecision,
     ),
@@ -12,8 +10,9 @@ const mapEnumeratorsRulesApiToEntity = (
     howToSetTheDecision: enumerator.howToSetTheDecision,
     labelName: String(enumerator.labelName),
     ruleName: String(enumerator.ruleName),
-    listOfPossibleValues: Object(enumerator.listOfPossibleValues),
+    listOfPossibleValues: String(enumerator.listOfPossibleValues),
   };
+
   return enumeratorEntry;
 };
 

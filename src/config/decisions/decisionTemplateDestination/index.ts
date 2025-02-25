@@ -8,6 +8,7 @@ const decisionTemplateConfig = (
     howToSetTheDecision,
     decisionDataType,
     conditionThatEstablishesTheDecision,
+    listOfPossibleValues,
   }: IRuleDecision,
   nameMoneyDestination: string,
 ) => {
@@ -23,12 +24,14 @@ const decisionTemplateConfig = (
       value: "",
       effectiveFrom: "",
       validUntil: "",
+      listOfPossibleValues: listOfPossibleValues,
       conditionThatEstablishesTheDecision:
         conditionThatEstablishesTheDecision.map((condition) => ({
           conditionName: condition.conditionName,
           labelName: dataTranslations[condition.labelName],
           conditionDataType: condition.conditionDataType,
           value: nameMoneyDestination,
+          listOfPossibleValues: condition.listOfPossibleValues,
           howToSetTheCondition: condition.howToSetTheCondition,
           hidden: condition.conditionName === "MoneyDestination",
         })),
