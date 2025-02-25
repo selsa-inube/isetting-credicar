@@ -4,6 +4,7 @@ interface IConditionEstablishesDecision {
   howToSetTheCondition: string;
   labelName: string;
   value: string;
+  listOfPossibleValues?: string;
 }
 
 export type { IConditionEstablishesDecision };
