@@ -81,7 +81,7 @@ const DecisionsForm = (props: IDecisionsForm) => {
   );
 
   const { appData } = useContext(AuthAndPortalData);
-  const { enumRuleData } = useEnumRules(
+  const { ruleData } = useEnumRules(
     labelBusinessRules,
     appData.businessUnit.publicCode,
   );
@@ -91,7 +91,7 @@ const DecisionsForm = (props: IDecisionsForm) => {
       attentionModal={attentionModal}
       decisions={decisions}
       decisionTemplate={
-        decisionTemplateConfig(enumRuleData, nameMoneyDestination) ??
+        decisionTemplateConfig(ruleData, nameMoneyDestination) ??
         ({} as IRuleDecision)
       }
       deleteModal={deleteModal}
@@ -105,7 +105,7 @@ const DecisionsForm = (props: IDecisionsForm) => {
       onSubmitForm={(dataDecision: IRuleDecision) =>
         handleSubmitForm(
           dataDecision,
-          decisionTemplateConfig(enumRuleData, nameMoneyDestination) ??
+          decisionTemplateConfig(ruleData, nameMoneyDestination) ??
             ({} as IRuleDecision),
         )
       }

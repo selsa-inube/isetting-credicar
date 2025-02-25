@@ -1,21 +1,21 @@
 import { AxiosRequestConfig } from "axios";
-import { IRuleDecision } from "@isettingkit/input";
 
 import { getWithRetries } from "@services/core/getWithRetries";
 import { axiosInstance } from "@api/isettingCredicar";
+import { IDecision } from "@ptypes/decisions/IDecision";
 import { mapEnumeratorsRulesApiToEntity } from "./mappers";
 
 const getEnumeratorsRules = async (
   ruleName: string,
   bussinesUnits: string,
-): Promise<IRuleDecision> => {
+): Promise<IDecision> => {
   const config: AxiosRequestConfig = {
     headers: {
       "X-Action": "GetByIdBusinessRuleCatalog",
       "X-Business-unit": bussinesUnits,
     },
   };
-  const data: IRuleDecision = await getWithRetries<IRuleDecision>(
+  const data: IDecision = await getWithRetries<IDecision>(
     axiosInstance,
     `/enums/business-rules-catalog/${ruleName}`,
     config,
