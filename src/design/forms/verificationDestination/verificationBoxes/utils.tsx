@@ -1,6 +1,5 @@
 import { IRuleDecision } from "@isettingkit/input";
-import { Stack, Grid } from "@inubekit/inubekit";
-import { Tag } from "@inubekit/tag";
+import { Stack, Grid, Tag } from "@inubekit/inubekit";
 
 import { BoxAttribute } from "@design/feedback/boxAttributes";
 import { tokens } from "@design/tokens";

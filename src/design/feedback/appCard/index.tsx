@@ -1,6 +1,12 @@
-import { Stack, Text, Icon, useMediaQuery } from "@inubekit/inubekit";
+import {
+  Stack,
+  Text,
+  Icon,
+  useMediaQuery,
+  SkeletonIcon,
+  SkeletonLine,
+} from "@inubekit/inubekit";
 import { tokens } from "@design/tokens";
-import { SkeletonIcon, SkeletonLine } from "@inubekit/skeleton";
 import { StyledAppCard } from "./styles";
 
 interface IAppCard {
