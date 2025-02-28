@@ -7,21 +7,20 @@ import {
   Divider,
   useMediaQuery,
   Blanket,
+  Tabs,
 } from "@inubekit/inubekit";
 import { IRuleDecision } from "@isettingkit/input";
 import { Button } from "@inubekit/button";
-import { Tabs } from "@inubekit/tabs";
 
 import { tokens } from "@design/tokens";
 import { mediaQueryMobile } from "@config/environment";
 import { ComponentAppearance } from "@enum/appearances";
-
 import { IRulesFormTextValues } from "@ptypes/decisions/IRulesFormTextValues";
 import { IEntry } from "@design/data/table/types";
 import { StyledContainerButton, StyledModal } from "./styles";
-import { CreditLineTab } from "./creditLineTab";
-import { GeneralDataTab } from "./GeneralDataTab";
-import { IDetailsTabsConfig } from "./types";
+import { GeneralDataTab } from "./tabs/GeneralDataTab";
+import { CreditLineTab } from "./tabs/creditLineTab";
+import { IDetailsTabsConfig, IMoreDetailsTabsConfig } from "./types";
 
 interface IDetailsDestinationModalUI {
   data: IEntry;
@@ -33,23 +32,33 @@ interface IDetailsDestinationModalUI {
   smallScreenTab: boolean;
   textValues: IRulesFormTextValues;
   decisions: IRuleDecision[];
+  isMoreDetails: boolean;
   onCloseModal: () => void;
   onTabChange: (id: string) => void;
+  onTabChangeMoreDetails?: (id: string) => void;
+  moreDetailsTabsConfig?: IMoreDetailsTabsConfig;
+  isSelectedMoreDetails?: string;
+  filteredTabsMoreDetConfig?: IMoreDetailsTabsConfig;
 }
 
 const DetailsDestinationModalUI = (props: IDetailsDestinationModalUI) => {
   const {
     isSelected,
+    isSelectedMoreDetails,
+    filteredTabsMoreDetConfig,
     filteredTabsConfig,
-    onTabChange,
     smallScreenTab,
     detailsTabsConfig,
+    moreDetailsTabsConfig,
+    isMoreDetails,
     data,
     portalId,
     textValues,
     decisionTemplate,
     decisions,
     onCloseModal,
+    onTabChangeMoreDetails,
+    onTabChange,
   } = props;
 
   const isMobile = useMediaQuery(mediaQueryMobile);
@@ -89,7 +98,7 @@ const DetailsDestinationModalUI = (props: IDetailsDestinationModalUI) => {
           </Stack>
           <Divider />
         </Stack>
-        <Stack gap={tokens.spacing.s300} direction="column" height="100%">
+        <Stack gap={tokens.spacing.s150} direction="column" height="100%">
           <Tabs
             tabs={Object.values(filteredTabsConfig)}
             selectedTab={isSelected}
@@ -105,10 +114,16 @@ const DetailsDestinationModalUI = (props: IDetailsDestinationModalUI) => {
                 data={decisions}
                 textValues={textValues}
                 decisionTemplate={decisionTemplate}
+                filteredTabsMoreDetConfig={filteredTabsMoreDetConfig}
+                isSelectedMoreDetails={isSelectedMoreDetails}
+                moreDetailsTabsConfig={moreDetailsTabsConfig}
+                isMoreDetails={isMoreDetails}
+                smallScreenTab={smallScreenTab}
+                onTabChangeMoreDetails={onTabChangeMoreDetails}
               />
             )}
+          <Divider />
         </Stack>
-
         <Stack gap={tokens.spacing.s250} justifyContent="flex-end">
           <Button
             spacing="wide"

@@ -1,4 +1,4 @@
-import { Stack, Text, Divider } from "@inubekit/inubekit";
+import { Stack, Text } from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
 import { IEntry } from "@design/data/table/types";
@@ -17,12 +17,7 @@ const GeneralDataTab = (props: IGeneralDataTab) => {
   const { data } = props;
 
   return (
-    <Stack
-      direction="column"
-      gap={tokens.spacing.s300}
-      justifyContent="space-between"
-      height="85%"
-    >
+    <Stack direction="column" gap={tokens.spacing.s300} height="85%">
       {data.abbreviatedName && (
         <StyledContainerName>
           <Text
@@ -54,8 +49,6 @@ const GeneralDataTab = (props: IGeneralDataTab) => {
           </Text>
         </StyledContainerDescription>
       )}
-
-      <Divider />
     </Stack>
   );
 };

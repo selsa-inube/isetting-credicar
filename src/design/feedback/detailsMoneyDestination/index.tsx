@@ -3,14 +3,13 @@ import { IRuleDecision } from "@isettingkit/input";
 import { Icon, Text, useMediaQuery } from "@inubekit/inubekit";
 
 import { ComponentAppearance } from "@enum/appearances";
-
 import {
   decisionTemplate,
   textValuesBusinessRules,
 } from "@config/moneyDestination/moneyDestinationTab/businessRules";
-import { detailsTabsConfig } from "@config/moneyDestination/moneyDestinationTab/generics/detailsTabsConfig";
 import { DetailsDestinationModal } from "@design/modals/detailsDestinationModal";
 import { IEntry } from "@design/data/table/types";
+import { IDetailsTabsConfig } from "@design/modals/detailsDestinationModal/types";
 import { StyledContainerIcon } from "./styles";
 
 interface IDetailsMoneyDestination {
@@ -18,10 +17,27 @@ interface IDetailsMoneyDestination {
   showModal: boolean;
   evaluateRuleData: IRuleDecision[] | undefined;
   handleToggleModal: () => void;
+  detailsTabsConfig: IDetailsTabsConfig;
+  defaultSelectedTab: string;
+  filteredTabsConfig: IDetailsTabsConfig;
+  isMobile: boolean;
+  isSelected: string;
+  onTabChange: (id: string) => void;
 }
 
 const DetailsMoneyDestination = (props: IDetailsMoneyDestination) => {
-  const { data, showModal, evaluateRuleData, handleToggleModal } = props;
+  const {
+    data,
+    showModal,
+    evaluateRuleData,
+    defaultSelectedTab,
+    filteredTabsConfig,
+    isMobile,
+    isSelected,
+    detailsTabsConfig,
+    handleToggleModal,
+    onTabChange,
+  } = props;
 
   const screenTablet = useMediaQuery("(max-width: 1200px)");
 
@@ -51,6 +67,12 @@ const DetailsMoneyDestination = (props: IDetailsMoneyDestination) => {
           textValues={textValuesBusinessRules}
           decisionTemplate={decisionTemplate}
           decisions={evaluateRuleData ?? []}
+          isMoreDetails={false}
+          defaultSelectedTab={defaultSelectedTab}
+          filteredTabsConfig={filteredTabsConfig}
+          isMobile={isMobile}
+          isSelected={isSelected}
+          onTabChange={onTabChange}
         />
       )}
     </>
