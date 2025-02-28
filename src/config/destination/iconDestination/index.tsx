@@ -85,7 +85,7 @@ const iconDestination = [
     icon: <MdOutlinePayments size={20} />,
   },
   {
-    value: "MdOutlineHandshak",
+    value: "MdOutlineHandshake",
     icon: <MdOutlineHandshake size={20} />,
   },
   {

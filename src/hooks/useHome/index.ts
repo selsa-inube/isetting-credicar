@@ -1,5 +1,5 @@
-import { AuthAndPortalData } from "@src/context/authAndPortalDataProvider";
-import { IBusinessUnitsPortalStaff } from "@src/types/staffPortal/IBusinessUnitsPortalStaff";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
+import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";
 import { useContext, useEffect, useRef, useState } from "react";
 
 const useHome = () => {
@@ -25,7 +25,6 @@ const useHome = () => {
   };
 
   return {
-    appData,
     businessUnitChangeRef,
     businessUnitsToTheStaff,
     collapse,

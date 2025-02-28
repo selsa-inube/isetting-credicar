@@ -47,7 +47,11 @@ const useGeneralInformationForm = (
   );
 
   const [isDisabledButton, setIsDisabledButton] = useState(false);
-  const [icon, setIcon] = useState<JSX.Element | undefined>();
+  const [icon, setIcon] = useState<JSX.Element | undefined>(
+    (editDataOption && normalizeIconDestination(initialValues.icon)?.icon) || (
+      <></>
+    ),
+  );
 
   const optionsDestination: IServerDomain[] = enumData.map((item) => {
     const name = normalizeNameDestination(item.code)?.name as unknown as string;
@@ -126,7 +130,7 @@ const useGeneralInformationForm = (
 
   useEffect(() => {
     const updateIcon = () => {
-      let iconData;
+      let iconData = normalizeIconDestination(initialValues.icon)?.icon;
       const editData = normalizeEditDestination(
         enumData,
         formik.values.icon ?? "",
@@ -135,11 +139,14 @@ const useGeneralInformationForm = (
         JSON.stringify(initialGeneralInfData?.nameDestination) ===
         JSON.stringify(formik.values.nameDestination);
 
-      if (editDataOption) {
+      if (editDataOption && formik.values.nameDestination) {
         iconData =
           editData && compare
             ? normalizeIconDestination(editData?.value ?? "")?.icon
             : normalizeIconDestination(addData?.value ?? "")?.icon;
+        if (!iconData) {
+          iconData = normalizeIconDestination(initialValues.icon)?.icon;
+        }
       } else {
         iconData = normalizeIconDestination(addData?.value ?? "")?.icon;
       }
@@ -159,10 +166,12 @@ const useGeneralInformationForm = (
     updateIcon();
   }, [
     editDataOption,
-    formik.values,
+    formik.values.icon,
     enumData,
     initialValues.nameDestination,
     addData,
+    initialGeneralInfData,
+    valuesEqual,
   ]);
 
   const handleReset = () => {

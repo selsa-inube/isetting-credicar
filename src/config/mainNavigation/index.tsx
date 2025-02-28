@@ -1,30 +1,35 @@
-import { MdCreditCard, MdOutlinePayments } from "react-icons/md";
 import { INav } from "@ptypes/home/INav";
+import { ICardData } from "@ptypes/home/ICardData";
+import { MdOutlineStart } from "react-icons/md";
 
-const mainNavigation: INav = {
+const createNavLink = (option: ICardData, defaultIcon: JSX.Element) => ({
+  id: option?.id || "",
+  label: option?.publicCode || "",
+  icon: option?.icon || defaultIcon,
+  path: option?.url || "",
+});
+
+const mainNavigation = (optionsCards: ICardData[]): INav => {
+  const linkNav = optionsCards.reduce<
+    Record<string, ReturnType<typeof createNavLink>>
+  >((acc, option) => {
+    const navLink = createNavLink(option, <MdOutlineStart />);
+    acc[navLink.id] = navLink;
+    return acc;
+  }, {});
+
+  return {
     items: {
       title: "MENU",
       sections: {
         administrate: {
           name: "",
-          links: {
-            startProcess: {
-              id: "creditLines",
-              label: "Líneas de crédito",
-              icon: <MdOutlinePayments />,
-              path: "/credit-lines",
-            },
-            confirmInitiated: {
-              id: "moneyDestination",
-              label: "Destinos de dinero",
-              icon: <MdCreditCard />,
-              path: "/money-destination",
-            },
-          },
+          links: linkNav,
         },
       },
     },
     breakpoint: "848px",
   };
+};
 
 export { mainNavigation };
