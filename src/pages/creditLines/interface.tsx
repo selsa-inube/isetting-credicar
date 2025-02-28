@@ -9,16 +9,23 @@ import { ComponentAppearance } from "@enum/appearances";
 import { dataCreditLines } from "@mocks/creditLines/creditLines.mock";
 import { crumbsCreditLines } from "@config/creditLines/navigation";
 import { actions, breakPoints, titles } from "@config/creditLines/table";
+import { ICardData } from "@ptypes/home/ICardData";
 import { StyledContent } from "./styles";
 
 interface ICreditLinesUI {
   loading: boolean;
   searchCreditLines: string;
+  descriptionOptions: ICardData;
   onSearchCreditLines: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function CreditLinesUI(props: ICreditLinesUI) {
-  const { loading, searchCreditLines, onSearchCreditLines } = props;
+  const {
+    loading,
+    searchCreditLines,
+    descriptionOptions,
+    onSearchCreditLines,
+  } = props;
 
   const smallScreen = useMediaQuery("(max-width: 990px)");
   const widthFirstColumn = smallScreen ? 64 : 25;
@@ -37,8 +44,8 @@ function CreditLinesUI(props: ICreditLinesUI) {
         <Stack gap={tokens.spacing.s300} direction="column">
           <Breadcrumbs crumbs={crumbsCreditLines} />
           <Title
-            title="Líneas de crédito"
-            description="Registra los medios de pago"
+            title={descriptionOptions?.publicCode || ""}
+            description={descriptionOptions?.description || ""}
             sizeTitle="large"
           />
         </Stack>

@@ -32,7 +32,8 @@ interface IHomeUI {
   selectedClient: string;
   handleLogoClick: (businessUnit: IBusinessUnitsPortalStaff) => void;
   setCollapse: (value: boolean) => void;
-  data?: ICardData[];
+  loading: boolean;
+  data: ICardData[];
 }
 
 const renderLogo = (imgUrl: string) => {
@@ -52,6 +53,7 @@ function HomeUI(props: IHomeUI) {
     collapse,
     collapseMenuRef,
     selectedClient,
+    loading,
     setCollapse,
     handleLogoClick,
   } = props;
@@ -73,7 +75,7 @@ function HomeUI(props: IHomeUI) {
         <StyledHeaderContainer>
           <Header
             portalId="portal"
-            navigation={mainNavigation}
+            navigation={mainNavigation(data)}
             logoURL={renderLogo(appData.businessUnit.urlLogo)}
             user={{
               username: appData.user.userName,
@@ -121,10 +123,11 @@ function HomeUI(props: IHomeUI) {
             {data?.map((card) => (
               <AppCard
                 key={card.id}
-                label={card.label}
+                label={card.publicCode}
                 description={card.description}
                 icon={card.icon}
                 url={card.url}
+                isLoading={loading}
               />
             ))}
           </StyledContainerCards>

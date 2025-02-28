@@ -1,13 +1,17 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { Outlet } from "react-router-dom";
 import { MdOutlineChevronRight } from "react-icons/md";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Header } from "@inubekit/header";
 import { Icon, Grid, useMediaQuery } from "@inubekit/inubekit";
+import { Header } from "@inubekit/header";
+import { Nav } from "@inubekit/nav";
 
 import { BusinessUnitChange } from "@design/inputs/BusinessUnitChange";
-import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";
-
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
+import { mainNavigation } from "@config/mainNavigation";
+import { userMenu } from "@config/menuMainConfiguration";
+import { actionsConfig } from "@config/mainActionLogout";
+import { useAppPage } from "@hooks/design/useAppPage";
 import {
   StyledAppPage,
   StyledCollapse,
@@ -18,11 +22,7 @@ import {
   StyledLogo,
   StyledMain,
 } from "./styles";
-import { Nav } from "@inubekit/nav";
-import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
-import { mainNavigation } from "@config/mainNavigation";
-import { userMenu } from "@config/menuMainConfiguration";
-import { actionsConfig } from "@config/mainActionLogout";
+
 const renderLogo = (imgUrl: string) => {
   return (
     <StyledContentImg to="/">
@@ -32,31 +32,25 @@ const renderLogo = (imgUrl: string) => {
 };
 
 function AppPage() {
-  const { appData, businessUnitsToTheStaff, setBusinessUnitSigla } =
-    useContext(AuthAndPortalData);
+  const {
+    appData,
+    businessUnitsToTheStaff,
+    setBusinessUnitSigla,
+    businessUnitSigla,
+  } = useContext(AuthAndPortalData);
   const { logout } = useAuth0();
-  const [collapse, setCollapse] = useState(false);
-  const collapseMenuRef = useRef<HTMLDivElement>(null);
-  const businessUnitChangeRef = useRef<HTMLDivElement>(null);
-  const [selectedClient, setSelectedClient] = useState<string>("");
 
-  const navigate = useNavigate();
+  const {
+    collapse,
+    collapseMenuRef,
+    optionsCards,
+    businessUnitChangeRef,
+    selectedClient,
+    setCollapse,
+    handleLogoClick,
+  } = useAppPage(appData, businessUnitSigla, setBusinessUnitSigla);
   const isTablet = useMediaQuery("(max-width: 849px)");
   const isTabletMain = useMediaQuery("(max-width: 1000px)");
-
-  useEffect(() => {
-    if (appData.businessUnit.publicCode) {
-      setSelectedClient(appData.businessUnit.abbreviatedName);
-    }
-  }, [appData]);
-
-  const handleLogoClick = (businessUnit: IBusinessUnitsPortalStaff) => {
-    const selectJSON = JSON.stringify(businessUnit);
-    setBusinessUnitSigla(selectJSON);
-    setSelectedClient(businessUnit.abbreviatedName);
-    setCollapse(false);
-    navigate("/");
-  };
 
   return (
     <StyledAppPage>
@@ -64,7 +58,7 @@ function AppPage() {
         <StyledHeaderContainer>
           <Header
             portalId="portal"
-            navigation={mainNavigation}
+            navigation={mainNavigation(optionsCards)}
             user={{
               username: appData.user.userName,
               breakpoint: "848px",
@@ -107,7 +101,7 @@ function AppPage() {
           >
             {!isTablet && (
               <Nav
-                navigation={mainNavigation.items}
+                navigation={mainNavigation(optionsCards).items}
                 actions={actionsConfig(logout)}
               />
             )}

@@ -1,10 +1,17 @@
-import { mainCards } from "@config/mainCard";
+import { useContext } from "react";
 import { useHome } from "@hooks/useHome";
+import { useOptionsByBusinessUnit } from "@hooks/staffPortal/useOptionsByBusinessUnit";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
+import { decrypt } from "@utils/crypto/decrypt";
+import { ICardData } from "@ptypes/home/ICardData";
 import { HomeUI } from "./interface";
 
 function Home() {
+  const { businessUnitSigla, appData } = useContext(AuthAndPortalData);
+  const portalId = localStorage.getItem("portalCode");
+  const staffPortalId = portalId ? decrypt(portalId) : "";
+
   const {
-    appData,
     businessUnitChangeRef,
     businessUnitsToTheStaff,
     collapse,
@@ -14,6 +21,11 @@ function Home() {
     handleLogoClick,
   } = useHome();
 
+  const { optionsCards, loading } = useOptionsByBusinessUnit(
+    businessUnitSigla,
+    staffPortalId,
+  );
+
   return (
     <HomeUI
       appData={appData}
@@ -21,10 +33,11 @@ function Home() {
       businessUnitsToTheStaff={businessUnitsToTheStaff}
       collapse={collapse}
       collapseMenuRef={collapseMenuRef}
-      data={mainCards}
+      data={optionsCards as ICardData[]}
       selectedClient={selectedClient}
       setCollapse={setCollapse}
       handleLogoClick={handleLogoClick}
+      loading={loading}
     />
   );
 }
