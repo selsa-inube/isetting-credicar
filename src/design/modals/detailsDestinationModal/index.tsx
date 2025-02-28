@@ -2,52 +2,69 @@ import { IRuleDecision } from "@isettingkit/input";
 
 import { IEntry } from "@design/data/table/types";
 import { IRulesFormTextValues } from "@ptypes/decisions/IRulesFormTextValues";
-import { useDetailsDestinationModal } from "@hooks/design/useDetailsDestinationModal";
 import { DetailsDestinationModalUI } from "./interface";
-import { IDetailsTabsConfig } from "./types";
-
+import { IDetailsTabsConfig, IMoreDetailsTabsConfig } from "./types";
 interface IDetailsDestinationModal {
-  detailsTabsConfig: IDetailsTabsConfig;
-  portalId: string;
   data: IEntry;
-  decisionTemplate: IRuleDecision;
   decisions: IRuleDecision[];
+  decisionTemplate: IRuleDecision;
+  defaultSelectedTab: string;
+  detailsTabsConfig: IDetailsTabsConfig;
+  filteredTabsConfig: IDetailsTabsConfig;
+  isMobile: boolean;
+  isMoreDetails: boolean;
+  isSelected: string;
+  portalId: string;
   textValues: IRulesFormTextValues;
   onCloseModal: () => void;
+  onTabChange: (id: string) => void;
+  onMoreDetailsTabChange?: (id: string) => void;
+  defaultSelectedMoreDetTab?: string;
+  filteredTabsMoreDetConfig?: IMoreDetailsTabsConfig;
+  isSelectedMoreDetails?: string;
+  moreDetailsTabsConfig?: IMoreDetailsTabsConfig;
 }
 
 const DetailsDestinationModal = (props: IDetailsDestinationModal) => {
   const {
-    detailsTabsConfig,
-    portalId,
     data,
-    decisionTemplate,
     decisions,
+    decisionTemplate,
+    defaultSelectedMoreDetTab,
+    defaultSelectedTab,
+    detailsTabsConfig,
+    filteredTabsConfig,
+    filteredTabsMoreDetConfig,
+    isMobile,
+    isMoreDetails,
+    isSelected,
+    isSelectedMoreDetails,
+    moreDetailsTabsConfig,
+    portalId,
     textValues,
     onCloseModal,
+    onMoreDetailsTabChange,
+    onTabChange,
   } = props;
-
-  const {
-    isSelected,
-    isMobile,
-    handleTabChange,
-    filteredTabsConfig,
-    defaultSelectedTab,
-  } = useDetailsDestinationModal(data, detailsTabsConfig, decisions);
 
   return (
     <DetailsDestinationModalUI
       data={data}
       filteredTabsConfig={filteredTabsConfig}
       detailsTabsConfig={detailsTabsConfig}
+      moreDetailsTabsConfig={moreDetailsTabsConfig}
       isSelected={isSelected ?? defaultSelectedTab}
       onCloseModal={onCloseModal}
-      onTabChange={handleTabChange}
+      onTabChange={onTabChange}
       portalId={portalId}
       smallScreenTab={isMobile}
       decisionTemplate={decisionTemplate}
       textValues={textValues}
       decisions={decisions}
+      isSelectedMoreDetails={isSelectedMoreDetails ?? defaultSelectedMoreDetTab}
+      filteredTabsMoreDetConfig={filteredTabsMoreDetConfig}
+      onTabChangeMoreDetails={onMoreDetailsTabChange}
+      isMoreDetails={isMoreDetails}
     />
   );
 };

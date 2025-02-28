@@ -10,4 +10,9 @@ interface IDetailsTabsConfig {
   creditLine: ITabConfig;
 }
 
-export type { IDetailsTabsConfig };
+interface IMoreDetailsTabsConfig {
+  creditLineIncluded: ITabConfig;
+  creditLineRemoved: ITabConfig;
+}
+
+export type { IDetailsTabsConfig, IMoreDetailsTabsConfig };

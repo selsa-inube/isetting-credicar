@@ -9,41 +9,66 @@ import { IServerDomain } from "@ptypes/IServerDomain";
 import { IEntry } from "@design/data/table/types";
 import { DetailsRequestsInProgressModal } from "@design/modals/detailsRequestsInProgressModal";
 import { DetailsDestinationModal } from "@design/modals/detailsDestinationModal";
-import { IDetailsTabsConfig } from "@design/modals/detailsDestinationModal/types";
+import {
+  IDetailsTabsConfig,
+  IMoreDetailsTabsConfig,
+} from "@design/modals/detailsDestinationModal/types";
 import { IRulesFormTextValues } from "@ptypes/decisions/IRulesFormTextValues";
 import { StyledContainerIcon } from "./styles";
 
 interface IDetails {
   data: IEntry;
+  dateOptions: IServerDomain[];
+  decisions: IRuleDecision[];
+  decisionTemplate: IRuleDecision;
+  defaultSelectedTab: string;
+  detailsTabsConfig: IDetailsTabsConfig;
+  filteredTabsConfig: IDetailsTabsConfig;
+  form: { name: string; dateTraceability: string };
+  isMoreDetails: boolean;
+  isSelected: string;
   moreDetailsData: IEntry;
+  moreDetailsTabsConfig: IMoreDetailsTabsConfig;
   showModal: boolean;
   showMoreDetailsModal: boolean;
-  form: { name: string; dateTraceability: string };
-  dateOptions: IServerDomain[];
-  detailsTabsConfig: IDetailsTabsConfig;
-  decisionTemplate: IRuleDecision;
-  decisions: IRuleDecision[];
   textValuesBusinessRules: IRulesFormTextValues;
+  onChange: (name: string, newValue: string) => void;
+  onTabChange: (id: string) => void;
   onToggleModal: () => void;
   onToggleMoreDetailsModal: () => void;
-  onChange: (name: string, newValue: string) => void;
+  defaultSelectedMoreDetTab?: string;
+  filteredTabsMoreDetConfig?: IMoreDetailsTabsConfig;
+  isMobile: boolean;
+  isSelectedMoreDetails?: string;
+  onTabChangeMoreDetails?: (id: string) => void;
 }
 
 const DetailsRequestInProcess = (props: IDetails) => {
   const {
     data,
-    moreDetailsData,
-    showModal,
-    detailsTabsConfig,
-    showMoreDetailsModal,
-    form,
     dateOptions,
     decisions,
     decisionTemplate,
+    defaultSelectedMoreDetTab,
+    defaultSelectedTab,
+    detailsTabsConfig,
+    filteredTabsConfig,
+    filteredTabsMoreDetConfig,
+    form,
+    isMobile,
+    isMoreDetails,
+    isSelected,
+    isSelectedMoreDetails,
+    moreDetailsData,
+    moreDetailsTabsConfig,
+    showModal,
+    showMoreDetailsModal,
     textValuesBusinessRules,
+    onChange,
+    onTabChange,
+    onTabChangeMoreDetails,
     onToggleModal,
     onToggleMoreDetailsModal,
-    onChange,
   } = props;
 
   const screenTablet = useMediaQuery("(max-width: 1200px)");
@@ -83,11 +108,24 @@ const DetailsRequestInProcess = (props: IDetails) => {
         <DetailsDestinationModal
           data={moreDetailsData}
           detailsTabsConfig={detailsTabsConfig}
+          moreDetailsTabsConfig={moreDetailsTabsConfig}
           portalId="portal"
           onCloseModal={onToggleMoreDetailsModal}
           textValues={textValuesBusinessRules}
           decisionTemplate={decisionTemplate}
           decisions={decisions}
+          isMoreDetails={isMoreDetails}
+          defaultSelectedTab={defaultSelectedTab}
+          filteredTabsConfig={filteredTabsConfig}
+          isMobile={isMobile}
+          isSelected={isSelected ?? defaultSelectedTab}
+          onTabChange={onTabChange}
+          onMoreDetailsTabChange={onTabChangeMoreDetails}
+          defaultSelectedMoreDetTab={defaultSelectedMoreDetTab}
+          filteredTabsMoreDetConfig={filteredTabsMoreDetConfig}
+          isSelectedMoreDetails={
+            isSelectedMoreDetails ?? defaultSelectedMoreDetTab
+          }
         />
       )}
     </>
