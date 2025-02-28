@@ -38,10 +38,10 @@ const Details = (props: IDetails) => {
         detailsTabsConfig={detailsTabsConfig}
         evaluateRuleData={evaluateRuleData}
         handleToggleModal={handleToggleModal}
-        defaultSelectedTab={defaultSelectedTab}
+        defaultSelectedTab={defaultSelectedTab ?? ""}
         filteredTabsConfig={filteredTabsConfig}
         isMobile={isMobile}
-        isSelected={isSelected ?? defaultSelectedTab}
+        isSelected={isSelected ?? defaultSelectedTab ?? ""}
         onTabChange={handleTabChange}
       />
     </>

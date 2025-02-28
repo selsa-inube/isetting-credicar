@@ -8,11 +8,8 @@ interface ITabConfig {
 interface IDetailsTabsConfig {
   generalData: ITabConfig;
   creditLine: ITabConfig;
+  creditLineIncluded?: ITabConfig;
+  creditLineRemoved?: ITabConfig;
 }
 
-interface IMoreDetailsTabsConfig {
-  creditLineIncluded: ITabConfig;
-  creditLineRemoved: ITabConfig;
-}
-
-export type { IDetailsTabsConfig, IMoreDetailsTabsConfig };
+export type { IDetailsTabsConfig };
