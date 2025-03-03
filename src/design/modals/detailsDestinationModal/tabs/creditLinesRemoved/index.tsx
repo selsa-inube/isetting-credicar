@@ -5,13 +5,14 @@ import { Stack } from "@inubekit/inubekit";
 import { IRulesFormTextValues } from "@ptypes/decisions/IRulesFormTextValues";
 import { tokens } from "@design/tokens";
 import { StyledContainer } from "../styles";
-interface ICreditLineTab {
+
+interface ICreditLinesRemoved {
   data: IRuleDecision[];
   textValues: IRulesFormTextValues;
   decisionTemplate: IRuleDecision;
 }
 
-const CreditLineTab = (props: ICreditLineTab) => {
+const CreditLinesRemoved = (props: ICreditLinesRemoved) => {
   const { data, textValues, decisionTemplate } = props;
 
   return (
@@ -34,11 +35,10 @@ const CreditLineTab = (props: ICreditLineTab) => {
           handleCloseModal={() => console.log("")}
           handleSubmitForm={() => console.log("")}
           handleDelete={() => console.log("")}
-          customMessageEmptyDecisions="Aún NO tienes definidas líneas de crédito, ve a editar"
         />
       </StyledContainer>
     </Stack>
   );
 };
 
-export { CreditLineTab };
+export { CreditLinesRemoved };

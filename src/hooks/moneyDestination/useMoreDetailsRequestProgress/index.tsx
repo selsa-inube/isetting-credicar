@@ -67,31 +67,6 @@ const useMoreDetailsRequestProgress = (data: IEntry) => {
       })
     : [];
 
-  //////////////////////////////////////////
-  // decisions.push({
-  //     decisionId: "Decisión 2",
-  //     labelName: "Línea de crédito",
-  //     ruleName: "LineOfCredit",
-  //     value: "angie",
-  //     effectiveFrom: "2024-12-09",
-  //     transactionOperation: "Insert",
-  //         conditionThatEstablishesTheDecision: [
-  //         {
-  //             labelName: "Destino del dinero",
-  //             conditionName: "MoneyDestination",
-  //             value: "Compra de vivienda nueva",
-  //             conditionDataType: "alphabetical",
-  //             howToSetTheCondition: "EqualTo"
-  //         },
-  //         {
-  //             labelName: "Tipo de cliente",
-  //             conditionName: "ClientType",
-  //             value: "prueba1",
-  //             conditionDataType: "alphabetical",
-  //             howToSetTheCondition: "EqualTo"
-  //         }
-  //     ]
-  // })
   const isMoreDetails =
     data.useCaseName === "DeleteMoneyDestination" ||
     data.useCaseName === "ModifyMoneyDestination";

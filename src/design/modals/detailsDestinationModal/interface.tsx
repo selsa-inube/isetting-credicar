@@ -20,7 +20,9 @@ import { IEntry } from "@design/data/table/types";
 import { StyledContainerButton, StyledModal } from "./styles";
 import { GeneralDataTab } from "./tabs/GeneralDataTab";
 import { CreditLineTab } from "./tabs/creditLineTab";
-import { IDetailsTabsConfig, IMoreDetailsTabsConfig } from "./types";
+import { IDetailsTabsConfig } from "./types";
+import { CreditLinesIncluded } from "./tabs/creditLinesIncluded";
+import { CreditLinesRemoved } from "./tabs/creditLinesRemoved";
 
 interface IDetailsDestinationModalUI {
   data: IEntry;
@@ -35,29 +37,25 @@ interface IDetailsDestinationModalUI {
   isMoreDetails: boolean;
   onCloseModal: () => void;
   onTabChange: (id: string) => void;
-  onTabChangeMoreDetails?: (id: string) => void;
-  moreDetailsTabsConfig?: IMoreDetailsTabsConfig;
-  isSelectedMoreDetails?: string;
-  filteredTabsMoreDetConfig?: IMoreDetailsTabsConfig;
+  decisionDeleted?: IRuleDecision[];
+  decisionInserted?: IRuleDecision[];
 }
 
 const DetailsDestinationModalUI = (props: IDetailsDestinationModalUI) => {
   const {
     isSelected,
-    isSelectedMoreDetails,
-    filteredTabsMoreDetConfig,
     filteredTabsConfig,
     smallScreenTab,
     detailsTabsConfig,
-    moreDetailsTabsConfig,
     isMoreDetails,
     data,
     portalId,
     textValues,
     decisionTemplate,
     decisions,
+    decisionDeleted,
+    decisionInserted,
     onCloseModal,
-    onTabChangeMoreDetails,
     onTabChange,
   } = props;
 
@@ -108,18 +106,29 @@ const DetailsDestinationModalUI = (props: IDetailsDestinationModalUI) => {
           {isSelected === detailsTabsConfig.generalData.id && (
             <GeneralDataTab data={data} />
           )}
-          {isSelected === detailsTabsConfig.creditLine.id &&
+          {!isMoreDetails &&
+            isSelected === detailsTabsConfig.creditLine.id &&
             decisions.length > 0 && (
               <CreditLineTab
                 data={decisions}
                 textValues={textValues}
                 decisionTemplate={decisionTemplate}
-                filteredTabsMoreDetConfig={filteredTabsMoreDetConfig}
-                isSelectedMoreDetails={isSelectedMoreDetails}
-                moreDetailsTabsConfig={moreDetailsTabsConfig}
-                isMoreDetails={isMoreDetails}
-                smallScreenTab={smallScreenTab}
-                onTabChangeMoreDetails={onTabChangeMoreDetails}
+              />
+            )}
+          {isMoreDetails &&
+            isSelected === detailsTabsConfig.creditLineIncluded?.id && (
+              <CreditLinesIncluded
+                data={decisionInserted ?? []}
+                textValues={textValues}
+                decisionTemplate={decisionTemplate}
+              />
+            )}
+          {isMoreDetails &&
+            isSelected === detailsTabsConfig.creditLineRemoved?.id && (
+              <CreditLinesRemoved
+                data={decisionDeleted ?? []}
+                textValues={textValues}
+                decisionTemplate={decisionTemplate}
               />
             )}
           <Divider />

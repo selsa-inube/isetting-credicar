@@ -3,7 +3,7 @@ import { IRuleDecision } from "@isettingkit/input";
 import { IEntry } from "@design/data/table/types";
 import { IRulesFormTextValues } from "@ptypes/decisions/IRulesFormTextValues";
 import { DetailsDestinationModalUI } from "./interface";
-import { IDetailsTabsConfig, IMoreDetailsTabsConfig } from "./types";
+import { IDetailsTabsConfig } from "./types";
 interface IDetailsDestinationModal {
   data: IEntry;
   decisions: IRuleDecision[];
@@ -18,32 +18,26 @@ interface IDetailsDestinationModal {
   textValues: IRulesFormTextValues;
   onCloseModal: () => void;
   onTabChange: (id: string) => void;
-  onMoreDetailsTabChange?: (id: string) => void;
-  defaultSelectedMoreDetTab?: string;
-  filteredTabsMoreDetConfig?: IMoreDetailsTabsConfig;
-  isSelectedMoreDetails?: string;
-  moreDetailsTabsConfig?: IMoreDetailsTabsConfig;
+  decisionDeleted?: IRuleDecision[];
+  decisionInserted?: IRuleDecision[];
 }
 
 const DetailsDestinationModal = (props: IDetailsDestinationModal) => {
   const {
     data,
     decisions,
+    decisionDeleted,
+    decisionInserted,
     decisionTemplate,
-    defaultSelectedMoreDetTab,
     defaultSelectedTab,
     detailsTabsConfig,
     filteredTabsConfig,
-    filteredTabsMoreDetConfig,
     isMobile,
     isMoreDetails,
     isSelected,
-    isSelectedMoreDetails,
-    moreDetailsTabsConfig,
     portalId,
     textValues,
     onCloseModal,
-    onMoreDetailsTabChange,
     onTabChange,
   } = props;
 
@@ -52,7 +46,6 @@ const DetailsDestinationModal = (props: IDetailsDestinationModal) => {
       data={data}
       filteredTabsConfig={filteredTabsConfig}
       detailsTabsConfig={detailsTabsConfig}
-      moreDetailsTabsConfig={moreDetailsTabsConfig}
       isSelected={isSelected ?? defaultSelectedTab}
       onCloseModal={onCloseModal}
       onTabChange={onTabChange}
@@ -61,10 +54,9 @@ const DetailsDestinationModal = (props: IDetailsDestinationModal) => {
       decisionTemplate={decisionTemplate}
       textValues={textValues}
       decisions={decisions}
-      isSelectedMoreDetails={isSelectedMoreDetails ?? defaultSelectedMoreDetTab}
-      filteredTabsMoreDetConfig={filteredTabsMoreDetConfig}
-      onTabChangeMoreDetails={onMoreDetailsTabChange}
       isMoreDetails={isMoreDetails}
+      decisionDeleted={decisionDeleted}
+      decisionInserted={decisionInserted}
     />
   );
 };
