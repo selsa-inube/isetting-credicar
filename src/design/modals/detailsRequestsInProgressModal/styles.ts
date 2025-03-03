@@ -11,18 +11,19 @@ const StyledModal = styled.div<IStyledModal>`
   flex-direction: column;
   background-color: ${inube.palette.neutral.N0};
   width: ${(props) => (props.$smallScreen ? "300px" : "450px")};
-  height: 626px;
+  height: auto;
   border-radius: ${tokens.spacing.s100};
   padding: ${tokens.spacing.s300};
-  gap: ${tokens.spacing.s300};
+  gap: ${(props) =>
+    props.$smallScreen ? `${tokens.spacing.s150}` : `${tokens.spacing.s300}`};
   box-sizing: border-box;
 `;
 
-const StyledContainerFields = styled.div`
+const StyledContainerFields = styled.div<IStyledModal>`
   display: flex;
   flex-direction: column;
   background-color: ${inube.palette.neutral.N0};
-  width: 402px;
+  width: ${(props) => (props.$smallScreen ? "280px" : "402px")};
   height: auto;
   border-radius: ${tokens.spacing.s100};
   padding: ${tokens.spacing.s075} ${tokens.spacing.s200};

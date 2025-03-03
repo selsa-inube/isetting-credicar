@@ -10,8 +10,8 @@ import {
   useMediaQuery,
   Blanket,
   Textarea,
+  Button,
 } from "@inubekit/inubekit";
-import { Button } from "@inubekit/button";
 
 import { tokens } from "@design/tokens";
 import { mediaQueryMobile } from "@config/environment";

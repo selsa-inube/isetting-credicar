@@ -7,8 +7,8 @@ import {
   Divider,
   useMediaQuery,
   Blanket,
+  Button,
 } from "@inubekit/inubekit";
-import { Button } from "@inubekit/button";
 import { Tabs } from "@inubekit/tabs";
 
 import { tokens } from "@design/tokens";

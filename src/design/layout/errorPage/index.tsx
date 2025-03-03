@@ -1,6 +1,5 @@
 import { MdChevronLeft } from "react-icons/md";
-import { Stack, Text, Grid, useMediaQueries } from "@inubekit/inubekit";
-import { Button } from "@inubekit/button";
+import { Stack, Text, Grid, useMediaQueries, Button } from "@inubekit/inubekit";
 
 import selsaLogo from "@assets/images/selsa.png";
 import errorImage from "@assets/images/timeout.png";

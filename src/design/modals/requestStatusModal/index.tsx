@@ -91,14 +91,17 @@ const RequestStatusModal = (props: IRequestStatusModal) => {
             <Text
               textAlign="center"
               appearance={ComponentAppearance.DARK}
-              size="large"
+              size={isMobile ? "medium" : "large"}
               weight="bold"
             >
               {`Solicitud # ${requestNumber}`}
             </Text>
           </Stack>
 
-          <Text appearance={ComponentAppearance.GRAY} size="medium">
+          <Text
+            appearance={ComponentAppearance.GRAY}
+            size={isMobile ? "small" : "medium"}
+          >
             {description}
           </Text>
         </Stack>

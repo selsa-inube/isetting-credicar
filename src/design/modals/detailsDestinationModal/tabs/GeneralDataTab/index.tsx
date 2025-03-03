@@ -1,4 +1,4 @@
-import { Stack, Text } from "@inubekit/inubekit";
+import { Stack, Text, useMediaQuery } from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
 import { IEntry } from "@design/data/table/types";
@@ -8,6 +8,7 @@ import {
   StyledContainerDescription,
   StyledContainerName,
 } from "./styles";
+import { mediaQueryMobile } from "@src/config/environment";
 
 interface IGeneralDataTab {
   data: IEntry;
@@ -15,11 +16,16 @@ interface IGeneralDataTab {
 
 const GeneralDataTab = (props: IGeneralDataTab) => {
   const { data } = props;
+  const isMobile = useMediaQuery(mediaQueryMobile);
 
   return (
-    <Stack direction="column" gap={tokens.spacing.s300} height="85%">
+    <Stack
+      direction="column"
+      gap={isMobile ? tokens.spacing.s200 : tokens.spacing.s300}
+      height="85%"
+    >
       {data.abbreviatedName && (
-        <StyledContainerName>
+        <StyledContainerName $smallScreen={isMobile}>
           <Text
             type="label"
             size="medium"
@@ -35,7 +41,7 @@ const GeneralDataTab = (props: IGeneralDataTab) => {
       )}
 
       {data.descriptionUse !== undefined && (
-        <StyledContainerDescription>
+        <StyledContainerDescription $smallScreen={isMobile}>
           <Text
             type="label"
             size="medium"

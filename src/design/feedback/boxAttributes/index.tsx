@@ -33,10 +33,12 @@ const BoxAttribute = (props: IBoxAttribute) => {
     <StyledBoxAttribute $smallScreen={isMobile}>
       <Grid
         templateColumns={direction === "column" ? "1fr" : "auto 1fr"}
+        templateRows="auto auto"
         width="100%"
-        gap={tokens.spacing.s100}
+        gap={isMobile ? tokens.spacing.s050 : tokens.spacing.s100}
         alignItems="center"
         justifyContent="space-between"
+        height="auto"
       >
         <Text
           type="label"

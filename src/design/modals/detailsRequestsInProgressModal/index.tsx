@@ -71,7 +71,10 @@ function DetailsRequestsInProgressModal(
   return createPortal(
     <Blanket>
       <StyledModal $smallScreen={isMobile}>
-        <Stack direction="column" gap={tokens.spacing.s300}>
+        <Stack
+          direction="column"
+          gap={isMobile ? tokens.spacing.s200 : tokens.spacing.s300}
+        >
           <Stack alignItems="center" justifyContent="space-between">
             <Text type="headline" size="small" appearance="dark">
               Detalles
@@ -101,7 +104,7 @@ function DetailsRequestsInProgressModal(
           justifyContent="center"
           alignItems="center"
         >
-          <Text type="label" size="large" weight="bold">
+          <Text type="label" size="large" weight="bold" textAlign="center">
             Solicitud{" "}
             {RequestType[data.request as keyof typeof RequestType] ??
               data.request}
@@ -110,7 +113,7 @@ function DetailsRequestsInProgressModal(
           {labelsOfRequest.slice(0, partLabelsOfRequest).map(
             (field, id) =>
               data[field.id] && (
-                <StyledContainerFields key={id}>
+                <StyledContainerFields key={id} $smallScreen={isMobile}>
                   <Text size="medium" type="label" weight="bold">
                     {field.titleName}
                   </Text>
@@ -128,7 +131,7 @@ function DetailsRequestsInProgressModal(
           {labelsOfRequest.slice(partLabelsOfRequest).map(
             (field, id) =>
               data[field.id] && (
-                <StyledContainerFields key={id}>
+                <StyledContainerFields key={id} $smallScreen={isMobile}>
                   <Text size="medium" type="label" weight="bold">
                     {field.titleName}
                   </Text>
@@ -181,7 +184,7 @@ function DetailsRequestsInProgressModal(
             {labelsOfTraceability.map(
               (field, id) =>
                 data[field.id] && (
-                  <StyledContainerFields key={id}>
+                  <StyledContainerFields key={id} $smallScreen={isMobile}>
                     <Text size="medium" type="label" weight="bold">
                       {field.titleName}
                     </Text>

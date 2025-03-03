@@ -2,7 +2,7 @@ import { MdOutlineWarningAmber } from "react-icons/md";
 import { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { Meta, StoryFn } from "@storybook/react";
-import { Button } from "@inubekit/button";
+import { Button } from "@inubekit/inubekit";
 
 import { ComponentAppearance } from "@enum/appearances";
 import { DecisionModal, IDecisionModal } from "..";

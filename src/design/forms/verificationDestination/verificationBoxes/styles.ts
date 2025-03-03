@@ -4,7 +4,7 @@ import { tokens } from "@design/tokens";
 
 const StyledConatinerAttribute = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
   border-radius: 8px;
   width: 100%;
   min-height: 52px;

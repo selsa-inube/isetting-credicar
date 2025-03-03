@@ -1,4 +1,3 @@
-import { useMediaQuery } from "@inubekit/inubekit";
 import {
   renderCreditlineVerification,
   renderPersonalInfoVerification,
@@ -13,15 +12,10 @@ interface IVerificationBoxes {
 function VerificationBoxes(props: IVerificationBoxes) {
   const { updatedData, stepKey } = props;
 
-  const isMobile = useMediaQuery("(max-width: 990px)");
-
   return (
     <>
       {stepKey === 1 &&
-        renderPersonalInfoVerification(
-          updatedData.personalInformation.values,
-          isMobile,
-        )}
+        renderPersonalInfoVerification(updatedData.personalInformation.values)}
       {stepKey === 2 &&
         renderCreditlineVerification(updatedData.creditline.values)}
     </>
