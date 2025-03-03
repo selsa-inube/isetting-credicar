@@ -18,7 +18,10 @@ const StyledModal = styled.div<IStyledModal>`
   width: ${(props) => (props.$smallScreen ? "350px" : "536px")};
   height: 271px;
   border-radius: ${tokens.spacing.s100};
-  padding: ${tokens.spacing.s300};
+  padding: ${(props) =>
+    props.$smallScreen
+      ? `${tokens.spacing.s200} ${tokens.spacing.s150}`
+      : `${tokens.spacing.s300}`};
   box-sizing: border-box;
 `;
 

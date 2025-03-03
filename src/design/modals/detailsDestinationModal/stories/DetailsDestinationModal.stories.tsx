@@ -2,8 +2,9 @@ import { useState } from "react";
 import { MdOutlineBeachAccess } from "react-icons/md";
 import { BrowserRouter } from "react-router-dom";
 import { Meta, StoryFn } from "@storybook/react";
-import { Button } from "@inubekit/button";
+import { Button } from "@inubekit/inubekit";
 
+import { textValuesBusinessRules } from "@config/moneyDestination/moneyDestinationTab/businessRules";
 import { IconWithText } from "@design/data/iconWithText";
 import { DetailsDestinationModal, IDetailsDestinationModal } from "..";
 
@@ -61,8 +62,28 @@ const Template: StoryFn<IDetailsDestinationModal> = (args) => {
 export const Default = Template.bind({});
 Default.args = {
   portalId: "portal",
+  filteredTabsConfig: detailsTabsConfig,
   detailsTabsConfig: detailsTabsConfig,
   data: data,
+  isMoreDetails: false,
+  isMobile: false,
+  isSelected: detailsTabsConfig.generalData.id,
+  defaultSelectedMoreDetTab: detailsTabsConfig.creditLine.id,
+  onTabChange: (selectedTabId: string) => {
+    console.log(`Tab changed to: ${selectedTabId}`);
+  },
+  textValues: textValuesBusinessRules,
+  // decisions: IRuleDecision[];
+  // decisionTemplate: IRuleDecision;
+  // defaultSelectedTab: string;
+
+  // isSelected: string;
+
+  // textValues: IRulesFormTextValues;
+  //  defaultSelectedMoreDetTab?: string;
+  // filteredTabsMoreDetConfig?: IMoreDetailsTabsConfig;
+  // isSelectedMoreDetails?: string;
+  // moreDetailsTabsConfig?: IMoreDetailsTabsConfig;
 };
 
 export default meta;

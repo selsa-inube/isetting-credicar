@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { Meta, StoryFn } from "@storybook/react";
-import { Button } from "@inubekit/button";
+import { Button } from "@inubekit/inubekit";
 
 import {
   DetailsRequestsInProgressModal,
@@ -74,6 +74,7 @@ Default.args = {
   labelsOfRequest,
   labelsOfTraceability,
   dateSelected: "19/Oct/2024",
+  dateOptions: [],
 };
 
 export default meta;

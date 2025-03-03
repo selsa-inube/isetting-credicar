@@ -73,7 +73,9 @@ function RequestsInProgressTabUI(props: IRequestsInProgressTabUI) {
             breakpoints={breakPoints}
             filter={searchrequestProgress}
             isLoading={loading}
-            columnWidths={[widthFirstColumn, 55, 23]}
+            columnWidths={
+              smallScreen ? [10, 20, 23] : [widthFirstColumn, 55, 23]
+            }
             pageLength={8}
           />
         </Stack>

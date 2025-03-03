@@ -1,8 +1,7 @@
 import { MdAddCircleOutline, MdOutlineWarningAmber } from "react-icons/md";
 import { IRuleDecision } from "@isettingkit/input";
 import { BusinessRules } from "@isettingkit/business-rules";
-import { Button } from "@inubekit/button";
-import { Stack, useMediaQuery } from "@inubekit/inubekit";
+import { Stack, useMediaQuery, Button } from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
 import { ComponentAppearance } from "@enum/appearances";

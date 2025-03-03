@@ -2,25 +2,32 @@ import styled from "styled-components";
 import { inube } from "@inubekit/inubekit";
 import { tokens } from "@design/tokens";
 
-const StyledContainerName = styled.div`
+interface IStyledContainerName {
+  $smallScreen: boolean;
+}
+
+const StyledContainerName = styled.div<IStyledContainerName>`
   display: flex;
   flex-direction: column;
   background-color: ${inube.palette.neutral.N0};
-  width: 672px;
+  width: ${(props) => (props.$smallScreen ? "270px" : "672px")};
   height: 52px;
   border-radius: ${tokens.spacing.s100};
-  padding: ${tokens.spacing.s075} ${tokens.spacing.s200};
+  padding: ${(props) =>
+    props.$smallScreen
+      ? `${tokens.spacing.s075}`
+      : `${tokens.spacing.s075} ${tokens.spacing.s200}`};
   gap: ${tokens.spacing.s050};
   box-sizing: border-box;
   background-color: ${inube.palette.neutral.N10};
 `;
 
-const StyledContainerDescription = styled.div`
+const StyledContainerDescription = styled.div<IStyledContainerName>`
   display: flex;
   flex-direction: column;
   background-color: ${inube.palette.neutral.N0};
-  width: 672px;
-  height: 288px;
+  width: ${(props) => (props.$smallScreen ? "270px" : "672px")};
+  height: ${(props) => (props.$smallScreen ? "260px" : "288px")};
   border-radius: ${tokens.spacing.s100};
   padding: ${tokens.spacing.s075} ${tokens.spacing.s200};
   gap: ${tokens.spacing.s050};

@@ -16,7 +16,7 @@ const StyledModal = styled.div<IStyledModal>`
     props.$smallScreen ? `${tokens.spacing.s150}` : `${tokens.spacing.s300}`};
   box-sizing: border-box;
   gap: ${(props) =>
-    props.$smallScreen ? `${tokens.spacing.s050}` : `${tokens.spacing.s300}`};
+    props.$smallScreen ? `${tokens.spacing.s100}` : `${tokens.spacing.s300}`};
 `;
 
 const StyledContainerButton = styled.div`

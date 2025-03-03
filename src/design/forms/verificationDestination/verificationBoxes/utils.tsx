@@ -1,5 +1,5 @@
 import { IRuleDecision } from "@isettingkit/input";
-import { Stack, Grid, Tag } from "@inubekit/inubekit";
+import { Stack, Tag, Text } from "@inubekit/inubekit";
 
 import { BoxAttribute } from "@design/feedback/boxAttributes";
 import { tokens } from "@design/tokens";
@@ -7,23 +7,14 @@ import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDes
 import { ComponentAppearance } from "@enum/appearances";
 import { StyledAttribute, StyledConatinerAttribute } from "./styles";
 
-const renderPersonalInfoVerification = (
-  values: IGeneralInformationEntry,
-  isMobile: boolean,
-) => (
+const renderPersonalInfoVerification = (values: IGeneralInformationEntry) => (
   <>
-    <Grid
-      templateColumns={isMobile ? "1fr" : "1fr 1fr"}
-      autoRows="1fr"
-      gap={tokens.spacing.s100}
-      width="100%"
-    >
+    <Stack width="100%" direction="column" gap={tokens.spacing.s200}>
       <BoxAttribute
+        direction="column"
         label="Nombre del destino:"
         value={values.nameDestination}
       />
-    </Grid>
-    <Stack width="100%" direction="column" gap={tokens.spacing.s100}>
       <BoxAttribute
         direction="column"
         label="Descripción:"
@@ -35,6 +26,19 @@ const renderPersonalInfoVerification = (
 
 const renderCreditlineVerification = (values: IRuleDecision[]) => (
   <StyledConatinerAttribute>
+    <Stack
+      padding={`${tokens.spacing.s0} ${tokens.spacing.s200}`}
+      direction="column"
+    >
+      <Text
+        type="label"
+        appearance={ComponentAppearance.DARK}
+        weight="bold"
+        size="small"
+      >
+        Líneas de crédito
+      </Text>
+    </Stack>
     <StyledAttribute>
       {values && values.length > 0 ? (
         <>
