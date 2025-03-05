@@ -3,6 +3,8 @@ import { MdOutlinePending } from "react-icons/md";
 import { Icon } from "@inubekit/inubekit";
 
 import { ActionsModal } from "@design/modals/actionsModal";
+import { eventBus } from "@events/eventBus";
+import { useOutsideClick } from "@hooks/useOutsideClick";
 import { IAction, IEntry } from "../types";
 import { StyledContainer, StyledContainerIcon } from "./styles";
 
@@ -11,41 +13,43 @@ interface IActionMobile {
   entry: IEntry;
 }
 
-let isModalOpen = false;
-
 const ActionMobile = (props: IActionMobile) => {
   const { actions, entry } = props;
   const [showModal, setShowModal] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
+  const [isSecondModalOpen, setIsSecondModalOpen] = useState(false);
+  const [isThirdModalOpen, setIsThirdModalOpen] = useState(false);
 
   useEffect(() => {
-    isModalOpen = false;
-  }, []);
+    const handleSecondModalState = (state: boolean) => {
+      setIsSecondModalOpen(state);
+    };
 
-  const handleToggleModal = () => {
-    if (!isModalOpen) {
-      setShowModal(true);
-      isModalOpen = true;
-    }
-  };
+    const handleThirdModalState = (state: boolean) => {
+      setIsThirdModalOpen(state);
+    };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-    isModalOpen = false;
-  };
+    eventBus.on("secondModalState", handleSecondModalState);
+    eventBus.on("thirdModalState", handleThirdModalState);
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-      handleCloseModal();
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      eventBus.off("secondModalState", handleSecondModalState);
+      eventBus.off("thirdModalState", handleThirdModalState);
     };
   }, []);
+
+  const handleToggleModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
+
+  useOutsideClick(modalRef, isSecondModalOpen, isThirdModalOpen, () => {
+    if (!isSecondModalOpen) {
+      handleCloseModal();
+    }
+
+    if (!isThirdModalOpen) {
+      handleCloseModal();
+    }
+  });
 
   return (
     <StyledContainer>

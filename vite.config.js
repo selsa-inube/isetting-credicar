@@ -53,6 +53,7 @@ export default defineConfig({
       "@context": path.resolve(__dirname, "./src/context"),
       "@validations": path.resolve(__dirname, "./src/validations"),
       "@routes": path.resolve(__dirname, "./src/routes"),
+      "@events": path.resolve(__dirname, "./src/events"),
     },
   },
 });

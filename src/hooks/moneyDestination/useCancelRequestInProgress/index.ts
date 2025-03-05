@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IFlagAppearance, useFlag } from "@inubekit/inubekit";
 
 import { IEntry } from "@design/data/table/types";
 import { ICancelReqInProcRequest } from "@ptypes/requestInProgress/ICancelReqInProcRequest";
 import { cancelRequestInProgMessage } from "@config/moneyDestination/moneyDestinationTab/generics/cancelRequestInProgMessage";
 import { cancelRequestInProgress } from "@services/moneyDestination/cancelRequestInProgress";
+import { eventBus } from "@events/eventBus";
 
 const useCancelRequestInProgress = (
   businessUnit: string,
@@ -56,6 +57,10 @@ const useCancelRequestInProgress = (
   const handleToggleModal = () => {
     setShowModal(!showModal);
   };
+
+  useEffect(() => {
+    eventBus.emit("secondModalState", showModal);
+  }, [showModal]);
 
   return {
     showModal,
