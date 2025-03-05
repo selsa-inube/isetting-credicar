@@ -68,22 +68,11 @@ Default.args = {
   isMoreDetails: false,
   isMobile: false,
   isSelected: detailsTabsConfig.generalData.id,
-  defaultSelectedMoreDetTab: detailsTabsConfig.creditLine.id,
+  defaultSelectedTab: detailsTabsConfig.creditLine.id,
   onTabChange: (selectedTabId: string) => {
     console.log(`Tab changed to: ${selectedTabId}`);
   },
   textValues: textValuesBusinessRules,
-  // decisions: IRuleDecision[];
-  // decisionTemplate: IRuleDecision;
-  // defaultSelectedTab: string;
-
-  // isSelected: string;
-
-  // textValues: IRulesFormTextValues;
-  //  defaultSelectedMoreDetTab?: string;
-  // filteredTabsMoreDetConfig?: IMoreDetailsTabsConfig;
-  // isSelectedMoreDetails?: string;
-  // moreDetailsTabsConfig?: IMoreDetailsTabsConfig;
 };
 
 export default meta;

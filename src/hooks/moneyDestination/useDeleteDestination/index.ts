@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IEntry } from "@design/data/table/types";
 import { IAppData } from "@ptypes/context/authAndPortalDataProvider/IAppData";
 import { ISaveDataRequest } from "@ptypes/saveData/ISaveDataRequest";
 import { formatDate } from "@utils/date/formatDate";
+import { eventBus } from "@events/eventBus";
 
 const useDeleteDestination = (data: IEntry, appData: IAppData) => {
   const [showModal, setShowModal] = useState(false);
@@ -32,6 +33,16 @@ const useDeleteDestination = (data: IEntry, appData: IAppData) => {
     });
     setShowRequestProcessModal(true);
   };
+
+  useEffect(() => {
+    if (showModal && !showRequestProcessModal) {
+      eventBus.emit("secondModalState", showModal);
+    }
+
+    if (!showModal && showRequestProcessModal) {
+      eventBus.emit("thirdModalState", showModal);
+    }
+  }, [showModal, showRequestProcessModal]);
 
   return {
     showModal,

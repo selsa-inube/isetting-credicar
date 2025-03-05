@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IServerDomain } from "@ptypes/IServerDomain";
 import { IConfigurationRequestsTraceability } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/requestsInProgress/IConfigRequestsTraceability";
 import { formatDateTable } from "@utils/date/formatDateTable";
 import { IEntry } from "@design/data/table/types";
+import { eventBus } from "@events/eventBus";
 
 const useDetailsRequestInProgress = (data: IEntry) => {
   const [showModal, setShowModal] = useState(false);
@@ -42,6 +43,10 @@ const useDetailsRequestInProgress = (data: IEntry) => {
         (option: IServerDomain) => option.value === form.dateTraceability,
       )?.observation || "",
   };
+
+  useEffect(() => {
+    eventBus.emit("secondModalState", showModal);
+  }, [showModal]);
 
   return {
     dateOptions,
