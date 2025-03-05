@@ -1,4 +1,4 @@
-import { Td } from "@inubekit/table";
+import { Td } from "@inubekit/inubekit";
 import { IAction, IEntry } from "@design/data/table/types";
 import { ActionMobile } from "@design/data/table/actionMobile";
 

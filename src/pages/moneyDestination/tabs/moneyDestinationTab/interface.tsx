@@ -46,7 +46,7 @@ function MoneyDestinationTabUI(props: IMoneyDestinationTabUI) {
         <Stack gap={tokens.spacing.s400} direction="column">
           <Stack
             justifyContent={smallScreen ? "center" : "space-between"}
-            direction={smallScreen ? "column" : "row"}
+            direction={smallScreen ? "column-reverse" : "row"}
             gap={
               smallScreen ? `${tokens.spacing.s150}` : `${tokens.spacing.s0}`
             }
@@ -71,6 +71,7 @@ function MoneyDestinationTabUI(props: IMoneyDestinationTabUI) {
               iconBefore={<MdAdd />}
               type="link"
               path="/money-destination/add-destination"
+              fullwidth={smallScreen}
             >
               Agregar destino
             </Button>

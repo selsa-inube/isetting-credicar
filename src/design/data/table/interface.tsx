@@ -1,5 +1,5 @@
-import { Text } from "@inubekit/inubekit";
 import {
+  Text,
   Colgroup,
   Pagination,
   Table,
@@ -9,7 +9,7 @@ import {
   Th,
   Thead,
   Tr,
-} from "@inubekit/table";
+} from "@inubekit/inubekit";
 
 import { IAction, IEntry, ITitle } from "./types";
 import { WidthColmnsData } from "./widthColumns";

@@ -4,7 +4,7 @@ import { MdOutlineChevronRight } from "react-icons/md";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Icon, Grid, useMediaQuery } from "@inubekit/inubekit";
 import { Header } from "@inubekit/header";
-import { Nav } from "@inubekit/nav";
+import { Nav } from "@inubekit/inubekit";
 
 import { BusinessUnitChange } from "@design/inputs/BusinessUnitChange";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
@@ -46,6 +46,7 @@ function AppPage() {
     optionsCards,
     businessUnitChangeRef,
     selectedClient,
+    location,
     setCollapse,
     handleLogoClick,
   } = useAppPage(appData, businessUnitSigla, setBusinessUnitSigla);
@@ -101,7 +102,7 @@ function AppPage() {
           >
             {!isTablet && (
               <Nav
-                navigation={mainNavigation(optionsCards).items}
+                navigation={mainNavigation(optionsCards, location).items}
                 actions={actionsConfig(logout)}
               />
             )}

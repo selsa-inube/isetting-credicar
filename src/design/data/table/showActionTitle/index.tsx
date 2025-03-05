@@ -1,4 +1,4 @@
-import { Th } from "@inubekit/table";
+import { Th } from "@inubekit/inubekit";
 
 const ShowActionTitle = (numberActions: number, mediaQuery: boolean) => {
   return (
