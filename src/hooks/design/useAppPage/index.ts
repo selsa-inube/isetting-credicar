@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useOptionsByBusinessUnit } from "@hooks/staffPortal/useOptionsByBusinessUnit";
 import { IAppData } from "@ptypes/context/authAndPortalDataProvider/IAppData";
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";
@@ -24,6 +24,8 @@ const useAppPage = (
 
   const navigate = useNavigate();
 
+  const location = useLocation();
+
   useEffect(() => {
     if (appData.businessUnit.publicCode) {
       setSelectedClient(appData.businessUnit.abbreviatedName);
@@ -44,6 +46,7 @@ const useAppPage = (
     optionsCards,
     businessUnitChangeRef,
     selectedClient,
+    location,
     setCollapse,
     handleLogoClick,
   };
