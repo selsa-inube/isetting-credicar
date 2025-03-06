@@ -1,6 +1,5 @@
 import { MdOutlineChevronRight, MdOutlineDoorFront } from "react-icons/md";
-import { Header } from "@inubekit/header";
-import { Icon, useMediaQueries } from "@inubekit/inubekit";
+import { Icon, useMediaQueries, Header } from "@inubekit/inubekit";
 
 import { AppCard } from "@design/feedback/appCard";
 import { Title } from "@design/data/title";

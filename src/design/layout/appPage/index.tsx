@@ -2,8 +2,7 @@ import { useContext } from "react";
 import { Outlet } from "react-router-dom";
 import { MdOutlineChevronRight } from "react-icons/md";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Icon, Grid, useMediaQuery } from "@inubekit/inubekit";
-import { Header } from "@inubekit/header";
+import { Icon, Grid, useMediaQuery,Header } from "@inubekit/inubekit";
 import { Nav } from "@inubekit/nav";
 
 import { BusinessUnitChange } from "@design/inputs/BusinessUnitChange";

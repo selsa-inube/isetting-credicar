@@ -18,7 +18,6 @@
     "@auth0/auth0-react": "^2.2.4",
     "@inubekit/assisted": "^7.10.1",
     "@inubekit/autosuggest": "^1.0.1",
-    "@inubekit/header": "^3.0.0",
     "@inubekit/inubekit": "^1.1.0",
     "@inubekit/nav": "^5.3.1",
     "@inubekit/select": "^6.35.0",

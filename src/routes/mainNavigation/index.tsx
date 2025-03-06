@@ -11,6 +11,7 @@ import { ErrorPage } from "@design/layout/errorPage";
 import { Logout } from "@pages/login/logout";
 import { AppPage } from "@design/layout/appPage";
 import { Landing } from "@pages/home/landing";
+import { PayrollAgreement } from "@pages/payrollAgreement";
 
 const mainNavigation = createBrowserRouter(
   createRoutesFromElements(
@@ -25,6 +26,10 @@ const mainNavigation = createBrowserRouter(
         <Route
           path="money-destination/*"
           element={<MoneyDestinationRoutes />}
+        />
+        <Route
+          path="payroll-agreement/*"
+          element={<PayrollAgreement />}
         />
       </Route>
       <Route path="logout" element={<Logout />} />
