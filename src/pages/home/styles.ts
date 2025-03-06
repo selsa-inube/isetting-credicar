@@ -32,7 +32,6 @@ const StyledContainer = styled.div`
 const StyledContainerSection = styled.div<IStyledContainerSection>`
   display: flex;
   flex-direction: column;
-  height: ${({ $isMobile }) => ($isMobile ? "100vh" : "auto")};
   padding: ${({ $isMobile }) =>
     $isMobile ? `${tokens.spacing.s200}` : `${tokens.spacing.s0}`};
   gap: ${({ $isMobile }) =>
@@ -86,8 +85,6 @@ const StyledFooter = styled.footer<IStyledFooter>`
   margin-top: auto;
   padding: ${tokens.spacing.s0} ${tokens.spacing.s1600} ${tokens.spacing.s0};
   justify-content: center;
-  padding-top: ${({ $isMobile }) => $isMobile && "50px"};
-  margin: ${({ $isMobile }) => $isMobile && `${tokens.spacing.s0}`};
 `;
 
 const StyledCollapseIcon = styled.div<IStyledCollapseIcon>`

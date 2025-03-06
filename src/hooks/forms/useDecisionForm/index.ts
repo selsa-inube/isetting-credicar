@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IRuleDecision } from "@isettingkit/input";
 
 const useDecisionForm = (
@@ -7,15 +7,23 @@ const useDecisionForm = (
     dataDecision: IRuleDecision,
     originalDecision: IRuleDecision,
   ) => void,
+  onButtonClick: () => void,
   setCreditLineDecisions: (decisions: IRuleDecision[]) => void,
+  setShowAttentionModal: React.Dispatch<React.SetStateAction<boolean>>,
+  showAttentionModal: boolean,
+  normalizeEvaluateRuleData?: IRuleDecision[],
+  editDataOption?: boolean,
 ) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDecision, setSelectedDecision] =
     useState<IRuleDecision | null>(null);
   const [decisions, setDecisions] = useState<IRuleDecision[]>(initialValues);
-  const [showAttentionModal, setShowAttentionModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [id, setId] = useState("");
+  const [hasChanges, setHasChanges] = useState(false);
+  const [savedDecisions, setSavedDecisions] = useState<IRuleDecision[]>([]);
+
+  const initialDecisions = useState(initialValues)[0];
 
   const handleOpenModal = () => {
     setSelectedDecision(null);
@@ -27,8 +35,28 @@ const useDecisionForm = (
     setSelectedDecision(null);
   };
 
-  const handleSubmitForm = (dataDecision: IRuleDecision) => {
+  const handleSubmitForm = (
+    dataDecision: IRuleDecision,
+    decisionTemplate: IRuleDecision,
+  ) => {
     const isEditing = selectedDecision !== null;
+
+    const updatedConditions =
+      decisionTemplate.conditionThatEstablishesTheDecision?.map(
+        (templateCondition) => {
+          const existingCondition =
+            dataDecision.conditionThatEstablishesTheDecision?.find(
+              (condition) =>
+                condition.conditionName === templateCondition.conditionName,
+            );
+
+          if (!existingCondition) {
+            return templateCondition;
+          }
+
+          return existingCondition;
+        },
+      );
 
     const newDecision = isEditing
       ? (revertModalDisplayData(
@@ -37,18 +65,20 @@ const useDecisionForm = (
         ) as unknown as IRuleDecision)
       : {
           ...dataDecision,
-          id: `Decisión ${decisions.length + 1}`,
+          decisionId: `Decisión ${decisions.length + 1}`,
+          conditionThatEstablishesTheDecision: updatedConditions,
         };
 
     const updatedDecisions = isEditing
       ? decisions.map((decision) =>
-          decision.id === selectedDecision.id ? newDecision : decision,
+          decision.decisionId === selectedDecision.decisionId
+            ? newDecision
+            : decision,
         )
       : [...decisions, newDecision];
 
     setDecisions(updatedDecisions);
     setCreditLineDecisions(updatedDecisions);
-
     handleCloseModal();
   };
 
@@ -62,23 +92,67 @@ const useDecisionForm = (
   };
 
   const handleDelete = () => {
-    const updatedDecisions = decisions.filter((decision) => decision.id !== id);
+    const updatedDecisions = decisions.filter(
+      (decision) => decision.decisionId !== id,
+    );
     setDecisions(updatedDecisions);
     setCreditLineDecisions(updatedDecisions);
     handleToggleDeleteModal(id);
   };
+
+  const handleSave = () => {
+    if (editDataOption) {
+      setHasChanges(false);
+      setSavedDecisions(decisions);
+      onButtonClick();
+      return decisions;
+    } else {
+      if (decisions && decisions.length > 0) {
+        onButtonClick();
+        setSavedDecisions(decisions);
+      } else {
+        handleToggleAttentionModal();
+      }
+    }
+  };
+
+  const handleReset = () => {
+    if (editDataOption && normalizeEvaluateRuleData) {
+      setDecisions(normalizeEvaluateRuleData);
+      setSavedDecisions(normalizeEvaluateRuleData);
+      setCreditLineDecisions(normalizeEvaluateRuleData);
+    } else {
+      setDecisions(initialDecisions);
+      setSavedDecisions(initialDecisions);
+    }
+  };
+
+  useEffect(() => {
+    if (
+      JSON.stringify(decisions) !== JSON.stringify(initialDecisions) ||
+      JSON.stringify(normalizeEvaluateRuleData) !== JSON.stringify(decisions)
+    ) {
+      setHasChanges(true);
+    } else {
+      setHasChanges(false);
+    }
+  }, [decisions, initialDecisions]);
+
   return {
     isModalOpen,
     selectedDecision,
     decisions,
-    showAttentionModal,
     showDeleteModal,
+    hasChanges,
+    savedDecisions,
     handleOpenModal,
     handleCloseModal,
     handleSubmitForm,
     handleToggleAttentionModal,
     handleToggleDeleteModal,
     handleDelete,
+    handleSave,
+    handleReset,
   };
 };
 

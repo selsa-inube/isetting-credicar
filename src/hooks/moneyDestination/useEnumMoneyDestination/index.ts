@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
-import { enumeratorsMoneyDestination } from "@services/moneyDestination/getEnumeratorsMoneyDestination";
 import { IEnumeratorsMoneyDestination } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/IEnumeratorsMoneyDestination";
+import { getEnumeratorsMoneyDestination } from "@services/moneyDestination/getEnumeratorsMoneyDestination";
 
 const useEnumMoneyDestination = (
   enumDestination: string,
@@ -15,7 +15,7 @@ const useEnumMoneyDestination = (
   useEffect(() => {
     const fetchEnumData = async () => {
       try {
-        const data = await enumeratorsMoneyDestination(
+        const data = await getEnumeratorsMoneyDestination(
           enumDestination,
           bussinesUnits,
         );

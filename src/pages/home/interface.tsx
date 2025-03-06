@@ -1,13 +1,15 @@
 import { MdOutlineChevronRight, MdOutlineDoorFront } from "react-icons/md";
 import { Header } from "@inubekit/header";
-import { Icon } from "@inubekit/icon";
-import { useMediaQueries } from "@inubekit/hooks";
+import { Icon, useMediaQueries } from "@inubekit/inubekit";
 
-import { AppCard } from "@components/feedback/AppCard";
-import { Title } from "@components/data/Title";
+import { AppCard } from "@design/feedback/appCard";
+import { Title } from "@design/data/title";
 import { BusinessUnitChange } from "@design/inputs/BusinessUnitChange";
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";
-
+import { mainNavigation } from "@config/mainNavigation";
+import { userMenu } from "@config/menuMainConfiguration";
+import { ICardData } from "@ptypes/home/ICardData";
+import { IAppData } from "@ptypes/context/authAndPortalDataProvider/IAppData";
 import {
   StyledCollapse,
   StyledCollapseIcon,
@@ -21,11 +23,6 @@ import {
   StyledTitle,
 } from "./styles";
 
-import { mainNavigation } from "@config/mainNavigation";
-import { userMenu } from "@config/menuMainConfiguration";
-import { ICardData } from "@ptypes/home/ICardData";
-import { IAppData } from "@ptypes/context/authAndPortalDataProvider/IAppData";
-
 interface IHomeUI {
   appData: IAppData;
   businessUnitChangeRef: React.RefObject<HTMLDivElement>;
@@ -35,7 +32,8 @@ interface IHomeUI {
   selectedClient: string;
   handleLogoClick: (businessUnit: IBusinessUnitsPortalStaff) => void;
   setCollapse: (value: boolean) => void;
-  data?: ICardData[];
+  loading: boolean;
+  data: ICardData[];
 }
 
 const renderLogo = (imgUrl: string) => {
@@ -55,6 +53,7 @@ function HomeUI(props: IHomeUI) {
     collapse,
     collapseMenuRef,
     selectedClient,
+    loading,
     setCollapse,
     handleLogoClick,
   } = props;
@@ -76,7 +75,7 @@ function HomeUI(props: IHomeUI) {
         <StyledHeaderContainer>
           <Header
             portalId="portal"
-            navigation={mainNavigation}
+            navigation={mainNavigation(data)}
             logoURL={renderLogo(appData.businessUnit.urlLogo)}
             user={{
               username: appData.user.userName,
@@ -124,10 +123,11 @@ function HomeUI(props: IHomeUI) {
             {data?.map((card) => (
               <AppCard
                 key={card.id}
-                label={card.label}
+                label={card.publicCode}
                 description={card.description}
                 icon={card.icon}
                 url={card.url}
+                isLoading={loading}
               />
             ))}
           </StyledContainerCards>

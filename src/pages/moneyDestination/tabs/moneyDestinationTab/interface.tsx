@@ -1,26 +1,33 @@
 import { MdAdd } from "react-icons/md";
-import { Stack } from "@inubekit/stack";
-import { useMediaQuery } from "@inubekit/hooks";
-import { Input } from "@inubekit/input";
-import { Button } from "@inubekit/button";
+import { Stack, useMediaQuery, Input, Button } from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
 import { ComponentAppearance } from "@enum/appearances";
-import { Table } from "@components/data/Table";
-import { IEntry } from "@components/data/Table/types";
+import { Table } from "@design/data/table";
+import { IEntry } from "@design/data/table/types";
+import {
+  actionsConfig,
+  breakPoints,
+  titles,
+} from "@config/moneyDestination/moneyDestinationTab/table";
 import { StyledContainer } from "./styles";
-import { actions, breakPoints, titles } from "@config/moneyDestination/moneyDestinationTab/table";
 
 interface IMoneyDestinationTabUI {
   entries: IEntry[];
   loading: boolean;
   searchMoneyDestination: string;
   onSearchMoneyDestination: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setEntryDeleted: (value: string | number) => void;
 }
 
 function MoneyDestinationTabUI(props: IMoneyDestinationTabUI) {
-  const { searchMoneyDestination, entries, loading, onSearchMoneyDestination } =
-    props;
+  const {
+    searchMoneyDestination,
+    entries,
+    loading,
+    onSearchMoneyDestination,
+    setEntryDeleted,
+  } = props;
 
   const smallScreen = useMediaQuery("(max-width: 690px)");
   const widthFirstColumn = smallScreen ? 64 : 25;
@@ -39,7 +46,7 @@ function MoneyDestinationTabUI(props: IMoneyDestinationTabUI) {
         <Stack gap={tokens.spacing.s400} direction="column">
           <Stack
             justifyContent={smallScreen ? "center" : "space-between"}
-            direction={smallScreen ? "column" : "row"}
+            direction={smallScreen ? "column-reverse" : "row"}
             gap={
               smallScreen ? `${tokens.spacing.s150}` : `${tokens.spacing.s0}`
             }
@@ -64,6 +71,7 @@ function MoneyDestinationTabUI(props: IMoneyDestinationTabUI) {
               iconBefore={<MdAdd />}
               type="link"
               path="/money-destination/add-destination"
+              fullwidth={smallScreen}
             >
               Agregar destino
             </Button>
@@ -73,11 +81,12 @@ function MoneyDestinationTabUI(props: IMoneyDestinationTabUI) {
             id="portal"
             titles={titles}
             entries={entries}
-            actions={actions}
+            actions={actionsConfig(setEntryDeleted)}
             breakpoints={breakPoints}
             filter={searchMoneyDestination}
             isLoading={loading}
             columnWidths={[widthFirstColumn, 55]}
+            pageLength={8}
           />
         </Stack>
       </Stack>

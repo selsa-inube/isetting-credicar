@@ -1,9 +1,9 @@
 interface ICardData {
-    id: string;
-    label: string;
-    description: string;
-    icon: string | JSX.Element;
-    url: string;
+  publicCode: string;
+  icon: string | JSX.Element;
+  url: string;
+  id?: string;
+  description?: string;
 }
 
 export type { ICardData };

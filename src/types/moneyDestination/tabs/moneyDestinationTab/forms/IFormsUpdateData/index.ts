@@ -1,5 +1,5 @@
 import { IRuleDecision } from "@isettingkit/input";
-import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationEntry";
+import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationDestination";
 
 interface IFormsUpdateData {
   personalInformation: { isValid: boolean; values: IGeneralInformationEntry };

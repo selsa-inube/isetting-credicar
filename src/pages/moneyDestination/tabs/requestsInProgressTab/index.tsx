@@ -1,21 +1,27 @@
-import { useState } from "react";
+import { useContext } from "react";
+import { useRequestsInProgress } from "@hooks/moneyDestination/useRequestsInProgress";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
+import { IEntry } from "@design/data/table/types";
 import { RequestsInProgressTabUI } from "./interface";
 
 function RequestsInProgressTab() {
-  const [searchrequestProgress, setSearchrequestProgress] =
-    useState<string>("");
+  const { appData } = useContext(AuthAndPortalData);
 
-  const handleSearchrequestProgress = (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    setSearchrequestProgress(e.target.value);
-  };
+  const {
+    requestsInProgress,
+    searchRequestsInProgress,
+    loading,
+    handleSearchRequestsInProgress,
+    setEntryCanceled,
+  } = useRequestsInProgress(appData.businessUnit.publicCode);
 
   return (
     <RequestsInProgressTabUI
-      loading={false}
-      searchrequestProgress={searchrequestProgress}
-      onSearchrequestProgress={handleSearchrequestProgress}
+      entries={requestsInProgress as IEntry[]}
+      loading={loading}
+      searchrequestProgress={searchRequestsInProgress}
+      onSearchrequestProgress={handleSearchRequestsInProgress}
+      setEntryCanceled={setEntryCanceled}
     />
   );
 }

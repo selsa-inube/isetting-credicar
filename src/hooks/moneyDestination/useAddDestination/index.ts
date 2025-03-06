@@ -1,28 +1,30 @@
-import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext, useEffect, useRef, useState } from "react";
 import { FormikProps } from "formik";
-import { IRuleDecision } from "@isettingkit/input";
+import { IRuleDecision, ICondition } from "@isettingkit/input";
 
 import { addDestinationStepsConfig } from "@config/moneyDestination/addDestination/assisted";
+import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationDestination";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
+import { formatDate } from "@utils/date/formatDate";
+import { ISaveDataRequest } from "@ptypes/saveData/ISaveDataRequest";
+import { formatDateDecision } from "@utils/date/formatDateDecision";
 
-import { IRequestSteps } from "@design/feedback/RequestProcess/types";
-import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationEntry";
-
-const useAddDestination = (requestSteps: IRequestSteps[]) => {
+const useAddDestination = () => {
+  const { appData } = useContext(AuthAndPortalData);
   const [currentStep, setCurrentStep] = useState(1);
   const [formValues, setFormValues] = useState<IGeneralInformationEntry>({
     nameDestination: "",
     description: "",
+    icon: "",
   });
-
+  const [saveData, setSaveData] = useState<ISaveDataRequest>();
   const [showModal, setShowModal] = useState(false);
   const [isCurrentFormValid, setIsCurrentFormValid] = useState(false);
   const [creditLineDecisions, setCreditLineDecisions] = useState<
     IRuleDecision[]
   >([]);
   const [showRequestProcessModal, setShowRequestProcessModal] = useState(false);
-
-  const navigate = useNavigate();
+  const [showAttentionModal, setShowAttentionModal] = useState(false);
 
   const generalInformationRef =
     useRef<FormikProps<IGeneralInformationEntry>>(null);
@@ -36,6 +38,19 @@ const useAddDestination = (requestSteps: IRequestSteps[]) => {
   }, [formValues.nameDestination]);
 
   const handleNextStep = () => {
+    if (
+      currentStep === 2 &&
+      creditLineDecisions.length === 0 &&
+      !showAttentionModal
+    ) {
+      setShowAttentionModal(true);
+      return;
+    }
+
+    if (currentStep === 2 && showAttentionModal) {
+      setShowAttentionModal(false);
+    }
+
     if (currentStep < addDestinationStepsConfig("").length) {
       if (generalInformationRef.current) {
         setFormValues(generalInformationRef.current.values);
@@ -55,22 +70,50 @@ const useAddDestination = (requestSteps: IRequestSteps[]) => {
     setShowModal(!showModal);
   };
 
+  const decisionsData = creditLineDecisions.map((decision) => {
+    const decisionByRule: IRuleDecision = {
+      conditionThatEstablishesTheDecision:
+        decision.conditionThatEstablishesTheDecision?.map((condition) => {
+          return {
+            labelName: condition.labelName,
+            conditionName: condition.conditionName,
+            value: condition.value,
+          };
+        }) as ICondition[],
+      effectiveFrom: formatDateDecision(decision.effectiveFrom as string),
+      value: decision.value,
+    };
+
+    if (decision.validUntil) {
+      decisionByRule.validUntil = formatDateDecision(
+        decision.validUntil as string,
+      );
+    }
+
+    return {
+      ruleName: decision.ruleName,
+      decisionByRule: [decisionByRule],
+    };
+  });
+
   const handleSubmitClick = () => {
-    handleToggleModal();
+    setSaveData({
+      applicationName: "ifac",
+      businessManagerCode: appData.businessManager.publicCode,
+      businessUnitCode: appData.businessUnit.publicCode,
+      description: "solicitud de creación de un destino de dinero",
+      entityName: "MoneyDestination",
+      requestDate: formatDate(new Date()),
+      useCaseName: "AddMoneyDestination",
+      configurationRequestData: {
+        abbreviatedName: formValues.nameDestination,
+        descriptionUse: formValues.description,
+        iconReference: formValues.icon ?? "",
+        rules: decisionsData,
+      },
+    });
     setShowRequestProcessModal(!showRequestProcessModal);
   };
-
-  useEffect(() => {
-    const requestLastStep = requestSteps[requestSteps.length - 1];
-    if (showRequestProcessModal && requestLastStep.status === "completed") {
-      const timer = setTimeout(() => {
-        setShowRequestProcessModal(false);
-        navigate("/money-destination");
-      }, 3000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [showRequestProcessModal, requestSteps, navigate]);
 
   return {
     creditLineDecisions,
@@ -81,6 +124,8 @@ const useAddDestination = (requestSteps: IRequestSteps[]) => {
     nameDecision,
     showModal,
     showRequestProcessModal,
+    saveData,
+    showAttentionModal,
     handleNextStep,
     handlePreviousStep,
     handleSubmitClick,
@@ -88,6 +133,9 @@ const useAddDestination = (requestSteps: IRequestSteps[]) => {
     setCreditLineDecisions,
     setCurrentStep,
     setIsCurrentFormValid,
+    setShowRequestProcessModal,
+    setShowAttentionModal,
+    setShowModal,
   };
 };
 

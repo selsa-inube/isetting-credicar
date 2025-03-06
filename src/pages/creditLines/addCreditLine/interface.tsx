@@ -7,23 +7,19 @@ import {
 } from "@inubekit/inubekit";
 import { IRuleDecision } from "@isettingkit/input";
 
-import { Title } from "@components/data/Title";
+import { Title } from "@design/data/title";
 import { tokens } from "@design/tokens";
 import { IOptionsProspect } from "@design/forms/creditProspect/types";
 import { DecisionsForm } from "@design/forms/decisions";
 import { revertModalDisplayData } from "@utils/revertModalDisplayData";
-import {
-  attentionModal,
-  deleteModal,
-} from "@design/forms/decisions/config/messages.config";
-import { decisionTemplateConfig } from "@design/forms/decisions/config/decisionTemplate.config";
 import { CreditProspectForm } from "@design/forms/creditProspect";
 import { GeneralInformationForm } from "@pages/creditLines/forms/generalInformation";
-
 import { crumbsAddCreditLines } from "@config/creditLines/addCreditLine/navigation";
 import { textValuesBusinessRules } from "@config/moneyDestination/moneyDestinationTab/businessRules";
 import { IFormsCreditlinesRefs } from "@ptypes/creditLines/addCreditLine/IFormsCreditlinesRefs";
 import { IFormsCreditlines } from "@ptypes/creditLines/addCreditLine/IFormsCreditlines";
+import { attentionModal, deleteModal } from "@config/decisions/messages";
+import { decisionTemplateConfig } from "@config/decisions/decisionTemplateCreditLine";
 
 interface IAddCreditLinesUI {
   decisions: IRuleDecision[];
@@ -121,12 +117,18 @@ function AddCreditLinesUI(props: IAddCreditLinesUI) {
                 deleteModal={deleteModal}
                 textValuesBusinessRules={textValuesBusinessRules}
                 decisionTemplateConfig={decisionTemplateConfig}
-                onNextStep={onNextStep}
+                onButtonClick={onNextStep}
                 onPreviousStep={onPreviousStep}
                 initialValues={decisions}
                 setDecisions={setDecisions}
                 revertModalDisplayData={revertModalDisplayData}
                 labelBusinessRules="MaximunFRCquota"
+                nameMoneyDestination={
+                  initialValues.generalInformation.values.nameCreditLine
+                }
+                showAttentionModal={false}
+                setShowAttentionModal={() => console.log()}
+                normalizeEvaluateRuleData={[]}
               />
             )}
           </Stack>

@@ -1,31 +1,31 @@
-import { useContext, useEffect, useRef, useState } from "react";
-
-import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortal/IBusinessUnitsPortalStaff";
-import { HomeUI } from "./interface";
+import { useContext } from "react";
+import { useHome } from "@hooks/useHome";
+import { useOptionsByBusinessUnit } from "@hooks/staffPortal/useOptionsByBusinessUnit";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
-import { mainCards } from "@config/mainCard";
+import { decrypt } from "@utils/crypto/decrypt";
+import { ICardData } from "@ptypes/home/ICardData";
+import { HomeUI } from "./interface";
 
 function Home() {
-  const { appData, businessUnitsToTheStaff, setBusinessUnitSigla } =
-    useContext(AuthAndPortalData);
-  const [collapse, setCollapse] = useState(false);
-  const [selectedClient, setSelectedClient] = useState<string>("");
+  const { businessUnitSigla, appData } = useContext(AuthAndPortalData);
+  const portalId = localStorage.getItem("portalCode");
+  const staffPortalId = portalId ? decrypt(portalId) : "";
 
-  const collapseMenuRef = useRef<HTMLDivElement>(null);
-  const businessUnitChangeRef = useRef<HTMLDivElement>(null);
+  const {
+    businessUnitChangeRef,
+    businessUnitsToTheStaff,
+    collapse,
+    collapseMenuRef,
+    selectedClient,
+    setCollapse,
+    handleLogoClick,
+  } = useHome();
 
-  useEffect(() => {
-    if (appData.businessUnit.publicCode) {
-      setSelectedClient(appData.businessUnit.abbreviatedName);
-    }
-  }, [appData]);
+  const { optionsCards, loading } = useOptionsByBusinessUnit(
+    businessUnitSigla,
+    staffPortalId,
+  );
 
-  const handleLogoClick = (businessUnit: IBusinessUnitsPortalStaff) => {
-    const selectJSON = JSON.stringify(businessUnit);
-    setBusinessUnitSigla(selectJSON);
-    setSelectedClient(businessUnit.abbreviatedName);
-    setCollapse(false);
-  };
   return (
     <HomeUI
       appData={appData}
@@ -33,10 +33,11 @@ function Home() {
       businessUnitsToTheStaff={businessUnitsToTheStaff}
       collapse={collapse}
       collapseMenuRef={collapseMenuRef}
-      data={mainCards}
+      data={optionsCards as ICardData[]}
       selectedClient={selectedClient}
       setCollapse={setCollapse}
       handleLogoClick={handleLogoClick}
+      loading={loading}
     />
   );
 }

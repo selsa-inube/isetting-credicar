@@ -1,21 +1,25 @@
+import {
+  MdCreditCard,
+  MdOutlineHandshake,
+  MdOutlinePayments,
+} from "react-icons/md";
 import { ICardData } from "@ptypes/home/ICardData";
-import { MdCreditCard, MdOutlinePayments } from "react-icons/md";
-
 
 const mainCards: ICardData[] = [
   {
-    id: "creditLines",
-    label: "Líneas de crédito",
-    description: "Líneas de crédito.",
+    publicCode: "Lineas de Credito",
     icon: <MdOutlinePayments />,
     url: "/credit-lines",
   },
   {
-    id: "moneyDestination",
-    label: "Destinos de dinero",
-    description: "Destinos de dinero.",
+    publicCode: "Destinos de dinero",
     icon: <MdCreditCard />,
     url: "/money-destination",
+  },
+  {
+    publicCode: "Nóminas de convenio",
+    icon: <MdOutlineHandshake />,
+    url: "/",
   },
 ];
 

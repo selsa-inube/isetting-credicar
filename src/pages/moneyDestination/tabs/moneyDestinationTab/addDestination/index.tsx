@@ -1,6 +1,10 @@
-import { requestStepsMock } from "@mocks/moneydestination/requestProcess.mock";
+import { useContext } from "react";
 import { useAddDestination } from "@hooks/moneyDestination/useAddDestination";
 import { addDestinationStepsConfig } from "@config/moneyDestination/addDestination/assisted";
+import { useSaveMoneyDestination } from "@hooks/moneyDestination/useSaveMoneyDestination";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
+import { ISaveDataRequest } from "@ptypes/saveData/ISaveDataRequest";
+import { ISaveDataResponse } from "@ptypes/saveData/ISaveDataResponse";
 import { AddDestinationUI } from "./interface";
 
 function AddDestination() {
@@ -13,6 +17,8 @@ function AddDestination() {
     nameDecision,
     showModal,
     showRequestProcessModal,
+    saveData,
+    showAttentionModal,
     handleNextStep,
     handlePreviousStep,
     handleSubmitClick,
@@ -20,7 +26,28 @@ function AddDestination() {
     setCreditLineDecisions,
     setCurrentStep,
     setIsCurrentFormValid,
-  } = useAddDestination(requestStepsMock);
+    setShowRequestProcessModal,
+    setShowAttentionModal,
+    setShowModal,
+  } = useAddDestination();
+
+  const { appData } = useContext(AuthAndPortalData);
+
+  const {
+    saveMoneyDestination,
+    requestSteps,
+    loadingSendData,
+    showPendingReqModal,
+    handleCloseRequestStatus,
+    handleClosePendingReqModal,
+  } = useSaveMoneyDestination(
+    appData.businessUnit.publicCode,
+    appData.user.userAccount,
+    showRequestProcessModal,
+    saveData as ISaveDataRequest,
+    setShowRequestProcessModal,
+    setShowModal,
+  );
 
   return (
     <AddDestinationUI
@@ -38,8 +65,15 @@ function AddDestination() {
       setIsCurrentFormValid={setIsCurrentFormValid}
       showModal={showModal}
       steps={addDestinationStepsConfig(nameDecision)}
-      requestSteps={requestStepsMock}
+      requestSteps={requestSteps}
       showRequestProcessModal={showRequestProcessModal}
+      saveMoneyDestination={saveMoneyDestination as ISaveDataResponse}
+      loading={loadingSendData}
+      onCloseRequestStatus={handleCloseRequestStatus}
+      showPendingReqModal={showPendingReqModal}
+      onClosePendingReqModal={handleClosePendingReqModal}
+      showAttentionModal={showAttentionModal}
+      setShowAttentionModal={setShowAttentionModal}
     />
   );
 }

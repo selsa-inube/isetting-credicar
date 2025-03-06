@@ -1,7 +1,7 @@
-import { IAction, IEntry, ITitle } from "@components/data/Table/types";
-import { Edit } from "@pages/moneyDestination/tabs/moneyDestinationTab/components/edit";
-import { Delete } from "@pages/moneyDestination/tabs/moneyDestinationTab/components/delete";
-import { Details } from "@pages/moneyDestination/tabs/moneyDestinationTab/components/details";
+import { IAction, IEntry, ITitle } from "@design/data/table/types";
+import { Edit } from "@pages/moneyDestination/tabs/moneyDestinationTab/tools/edit";
+import { Delete } from "@pages/moneyDestination/tabs/moneyDestinationTab/tools/delete";
+import { Details } from "@pages/moneyDestination/tabs/moneyDestinationTab/tools/details";
 
 const titles: ITitle[] = [
   {
@@ -16,24 +16,30 @@ const titles: ITitle[] = [
   },
 ];
 
-const actions: IAction[] = [
-  {
-    id: "Details",
-    content: (entry: IEntry) => <Details data={entry} />,
-  },
-  {
-    id: "edit",
-    content: (entry: IEntry) => <Edit data={entry} />,
-  },
-  {
-    id: "delete",
-    content: (entry: IEntry) => <Delete data={entry} />,
-  },
-];
+const actionsConfig = (setEntryDeleted: (value: string | number) => void) => {
+  const actions: IAction[] = [
+    {
+      id: "Details",
+      content: (entry: IEntry) => <Details data={entry} />,
+    },
+    {
+      id: "edit",
+      content: (entry: IEntry) => <Edit data={entry} />,
+    },
+    {
+      id: "delete",
+      content: (entry: IEntry) => (
+        <Delete data={entry} setEntryDeleted={setEntryDeleted} />
+      ),
+    },
+  ];
+
+  return actions;
+};
 
 const breakPoints = [
   { breakpoint: "(min-width: 745px)", totalColumns: 2 },
   { breakpoint: "(max-width: 744px)", totalColumns: 1 },
 ];
 
-export { titles, actions, breakPoints };
+export { titles, actionsConfig, breakPoints };

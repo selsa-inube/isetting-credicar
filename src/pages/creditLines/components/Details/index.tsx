@@ -1,15 +1,12 @@
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { useState } from "react";
-import { Icon } from "@inubekit/icon";
-import { useMediaQuery } from "@inubekit/hooks";
-import { Text } from "@inubekit/text";
+import { Icon, Text, useMediaQuery } from "@inubekit/inubekit";
 
-import { ComponentAppearance } from "@src/enum/appearances";
-import { IEntry } from "@components/data/Table/types";
-import { DetailsCreditLinesModal } from "@components/modals/DetailsCreditLinesModal";
-import { StyledContainerIcon } from "./styles";
+import { ComponentAppearance } from "@enum/appearances";
+import { IEntry } from "@design/data/table/types";
 import { detailsTabsConfig } from "@config/creditLines/details/tabs";
-
+import { DetailsCreditLinesModal } from "@design/modals/detailsCreditLinesModal";
+import { StyledContainerIcon } from "./styles";
 
 interface IDetails {
   data: IEntry;

@@ -1,22 +1,21 @@
-import { Stack } from "@inubekit/stack";
-import { useMediaQuery } from "@inubekit/hooks";
-import { Breadcrumbs } from "@inubekit/breadcrumbs";
+import { Stack, Tabs, useMediaQuery, Breadcrumbs } from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
-import { Tabs } from "@design/feedback/Tabs";
-import { Title } from "@components/data/Title";
+import { Title } from "@design/data/title";
 import { crumbsMoneyDestination } from "@config/moneyDestination/navigation";
 import { moneyDestinationTabsConfig } from "@config/moneyDestination/tabs";
 import { MoneyDestinationTab } from "@pages/moneyDestination/tabs/moneyDestinationTab";
 import { RequestsInProgressTab } from "@pages/moneyDestination/tabs/requestsInProgressTab";
+import { ICardData } from "@ptypes/home/ICardData";
 
 interface IMoneyDestinationUI {
   isSelected: string;
+  descriptionOptions: ICardData;
   handleTabChange: (id: string) => void;
 }
 
 function MoneyDestinationUI(props: IMoneyDestinationUI) {
-  const { isSelected, handleTabChange } = props;
+  const { isSelected, descriptionOptions, handleTabChange } = props;
 
   const smallScreen = useMediaQuery("(max-width: 990px)");
   const smallScreenTab = useMediaQuery("(max-width: 450px)");
@@ -35,8 +34,8 @@ function MoneyDestinationUI(props: IMoneyDestinationUI) {
         <Stack gap={tokens.spacing.s300} direction="column">
           <Breadcrumbs crumbs={crumbsMoneyDestination} />
           <Title
-            title="Destinos de dinero"
-            description=" Destino del dinero para crédito."
+            title={descriptionOptions?.publicCode || ""}
+            description={descriptionOptions?.description || ""}
             sizeTitle="large"
           />
         </Stack>

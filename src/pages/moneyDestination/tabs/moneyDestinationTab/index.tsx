@@ -2,7 +2,7 @@ import { useContext } from "react";
 
 import { useMoneyDestination } from "@hooks/moneyDestination/useMoneyDestination";
 
-import { IEntry } from "@components/data/Table/types";
+import { IEntry } from "@design/data/table/types";
 import { MoneyDestinationTabUI } from "./interface";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 
@@ -14,6 +14,7 @@ function MoneyDestinationTab() {
     searchMoneyDestination,
     loading,
     handleSearchMoneyDestination,
+    setEntryDeleted,
   } = useMoneyDestination(appData.businessUnit.publicCode);
 
   return (
@@ -22,6 +23,7 @@ function MoneyDestinationTab() {
       searchMoneyDestination={searchMoneyDestination}
       loading={loading}
       entries={moneyDestination as IEntry[]}
+      setEntryDeleted={setEntryDeleted}
     />
   );
 }

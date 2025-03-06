@@ -1,19 +1,18 @@
-import { IEnumeratorsRules } from "@design/forms/decisions/types";
+import { IDecision } from "@ptypes/decisions/IDecision";
 
-const mapEnumeratorsRulesApiToEntity = (
-  enumerator: IEnumeratorsRules,
-): IEnumeratorsRules => {
-  const enumeratorEntry: IEnumeratorsRules = {
+const mapEnumeratorsRulesApiToEntity = (enumerator: IDecision): IDecision => {
+  const enumeratorEntry: IDecision = {
     conditionThatEstablishesTheDecision: Object(
       enumerator.conditionThatEstablishesTheDecision,
     ),
-    decisionDataType: String(enumerator.decisionDataType),
+    decisionDataType: enumerator.decisionDataType,
     descriptionUse: String(enumerator.descriptionUse),
-    howToSetTheDecision: String(enumerator.howToSetTheDecision),
+    howToSetTheDecision: enumerator.howToSetTheDecision,
     labelName: String(enumerator.labelName),
     ruleName: String(enumerator.ruleName),
     listOfPossibleValues: String(enumerator.listOfPossibleValues),
   };
+
   return enumeratorEntry;
 };
 

@@ -1,34 +1,24 @@
 import { Outlet } from "react-router-dom";
-import { useContext } from "react";
-import { Grid } from "@inubekit/grid";
-import { Stack } from "@inubekit/stack";
-import { Text } from "@inubekit/text";
-import { useMediaQueries } from "@inubekit/hooks";
+import { Stack, Text, Grid } from "@inubekit/inubekit";
 
+import { IAppData } from "@ptypes/context/authAndPortalDataProvider/IAppData";
 import { tokens } from "@design/tokens";
 import {
   StyledWelcomeContainer,
   StyledOutletContainer,
   StyledImage,
 } from "./styles";
-import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 
-const SelectBusinessUnitsUI = () => {
-  const {
-    "(max-width: 1100px)": screenTablet,
-    "(min-width: 1101px) and (max-width: 2200px)": screenDesktop,
-  }: Record<string, boolean> = useMediaQueries([
-    "(max-width: 1100px)",
-    "(min-width: 1101px) and (max-width: 2200px)",
-  ]);
+interface ISelectBusinessUnitsUI {
+  appData: IAppData;
+  screenTablet: boolean;
+  screenDesktop: boolean;
+  imageWidth: () => string;
+}
 
-  const imageWidth = () => {
-    if (screenDesktop) return "240px";
-    if (screenTablet) return "200px";
-    return "160px";
-  };
+const SelectBusinessUnitsUI = (props: ISelectBusinessUnitsUI) => {
+  const { appData, screenTablet, imageWidth } = props;
 
-  const { appData } = useContext(AuthAndPortalData);
   return (
     <Grid
       templateColumns={screenTablet ? "1fr" : "repeat(2, 1fr)"}

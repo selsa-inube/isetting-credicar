@@ -1,28 +1,36 @@
 import { MdAdd } from "react-icons/md";
-import { Input } from "@inubekit/input";
-import { Stack } from "@inubekit/stack";
-import { useMediaQuery } from "@inubekit/hooks";
-import { Breadcrumbs } from "@inubekit/breadcrumbs";
-import { Button } from "@inubekit/button";
+import {
+  Stack,
+  useMediaQuery,
+  Breadcrumbs,
+  Input,
+  Button,
+} from "@inubekit/inubekit";
 
-import { Table } from "@components/data/Table";
+import { Table } from "@design/data/table";
 import { tokens } from "@design/tokens";
-import { Title } from "@components/data/Title";
-import { ComponentAppearance } from "@src/enum/appearances";
+import { Title } from "@design/data/title";
+import { ComponentAppearance } from "@enum/appearances";
 import { dataCreditLines } from "@mocks/creditLines/creditLines.mock";
-import { StyledContent } from "./styles";
 import { crumbsCreditLines } from "@config/creditLines/navigation";
 import { actions, breakPoints, titles } from "@config/creditLines/table";
-
+import { ICardData } from "@ptypes/home/ICardData";
+import { StyledContent } from "./styles";
 
 interface ICreditLinesUI {
   loading: boolean;
   searchCreditLines: string;
+  descriptionOptions: ICardData;
   onSearchCreditLines: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function CreditLinesUI(props: ICreditLinesUI) {
-  const { loading, searchCreditLines, onSearchCreditLines } = props;
+  const {
+    loading,
+    searchCreditLines,
+    descriptionOptions,
+    onSearchCreditLines,
+  } = props;
 
   const smallScreen = useMediaQuery("(max-width: 990px)");
   const widthFirstColumn = smallScreen ? 64 : 25;
@@ -41,8 +49,8 @@ function CreditLinesUI(props: ICreditLinesUI) {
         <Stack gap={tokens.spacing.s300} direction="column">
           <Breadcrumbs crumbs={crumbsCreditLines} />
           <Title
-            title="Líneas de crédito"
-            description="Registra los medios de pago"
+            title={descriptionOptions?.publicCode || ""}
+            description={descriptionOptions?.description || ""}
             sizeTitle="large"
           />
         </Stack>

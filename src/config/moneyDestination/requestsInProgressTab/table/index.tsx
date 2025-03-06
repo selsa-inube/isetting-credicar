@@ -1,13 +1,10 @@
-import { MdDeleteOutline } from "react-icons/md";
-import { Icon } from "@inubekit/icon";
-
-import { IAction, ITitle } from "@components/data/Table/types";
-import { ComponentAppearance } from "@enum/appearances";
-import { Details } from "@pages/moneyDestination/tabs/requestsInProgressTab/components/details";
+import { Details } from "@pages/moneyDestination/tabs/requestsInProgressTab/tools/details";
+import { IAction, ITitle } from "@design/data/table/types";
+import { Cancel } from "@pages/moneyDestination/tabs/requestsInProgressTab/tools/cancel";
 
 const titles: ITitle[] = [
   {
-    id: "date",
+    id: "requestDate",
     titleName: "Fecha",
     priority: 0,
   },
@@ -17,34 +14,34 @@ const titles: ITitle[] = [
     priority: 1,
   },
   {
-    id: "status",
+    id: "requestStatus",
     titleName: "Estado",
     priority: 2,
   },
 ];
 
-const actions: IAction[] = [
-  {
-    id: "Details",
-    content: (entry) => <Details data={entry} />,
-  },
+const actionsConfig = (setEntryCanceled: (value: string | number) => void) => {
+  const actions: IAction[] = [
+    {
+      id: "Details",
+      content: (entry) => <Details data={entry} />,
+    },
 
-  {
-    id: "delete",
-    content: () => (
-      <Icon
-        appearance={ComponentAppearance.DANGER}
-        icon={<MdDeleteOutline />}
-        size="16px"
-        cursorHover
-      />
-    ),
-  },
-];
+    {
+      id: "delete",
+      content: (entry) => (
+        <Cancel data={entry} setEntryCanceled={setEntryCanceled} />
+      ),
+    },
+  ];
+
+  return actions;
+};
 
 const breakPoints = [
   { breakpoint: "(min-width: 745px)", totalColumns: 3 },
-  { breakpoint: "(max-width: 744px)", totalColumns: 1 },
+  { breakpoint: "(max-width: 744px)", totalColumns: 2 },
+  { breakpoint: "(max-width: 530px)", totalColumns: 1 },
 ];
 
-export { titles, actions, breakPoints };
+export { titles, actionsConfig, breakPoints };

@@ -1,19 +1,26 @@
 import { FormikProps } from "formik";
 import { IRuleDecision } from "@isettingkit/input";
-import { useMediaQuery } from "@inubekit/hooks";
-import { Stack } from "@inubekit/stack";
-import { Breadcrumbs } from "@inubekit/breadcrumbs";
-import { Assisted, IAssistedStep } from "@inubekit/assisted";
+import {
+  Assisted,
+  Breadcrumbs,
+  IAssistedStep,
+  Stack,
+  useMediaQuery,
+} from "@inubekit/inubekit";
 
-import { Title } from "@components/data/Title";
-import { crumbsAddDestination } from "@config/moneyDestination/addDestination/navigation";
+import { Title } from "@design/data/title";
 import { tokens } from "@design/tokens";
-import { IRequestSteps } from "@design/feedback/RequestProcess/types";
-import { GeneralInformationForm } from "@pages/moneyDestination/tabs/moneyDestinationTab/forms/generalInformation";
-import { CreditLineForm } from "@pages/moneyDestination/tabs/moneyDestinationTab/forms/creditLine";
-import { VerificationForm } from "@pages/moneyDestination/tabs/moneyDestinationTab/forms/verificationForm";
-import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationEntry";
-
+import { IRequestSteps } from "@design/modals/requestProcessModal/types";
+import { GeneralInformationForm } from "@design/forms/generalInformationDestination";
+import { DecisionsForm } from "@design/forms/decisions";
+import { revertModalDisplayData } from "@utils/revertModalDisplayData";
+import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationDestination";
+import { crumbsAddDestination } from "@config/moneyDestination/addDestination/navigation";
+import { textValuesBusinessRules } from "@config/moneyDestination/moneyDestinationTab/businessRules";
+import { attentionModal, deleteModal } from "@config/decisions/messages";
+import { decisionTemplateConfig } from "@config/decisions/decisionTemplateDestination";
+import { ISaveDataResponse } from "@ptypes/saveData/ISaveDataResponse";
+import { VerificationForm } from "@design/forms/verificationDestination";
 
 interface IAddDestinationUI {
   creditLineDecisions: IRuleDecision[];
@@ -25,6 +32,10 @@ interface IAddDestinationUI {
   showModal: boolean;
   showRequestProcessModal: boolean;
   steps: IAssistedStep[];
+  saveMoneyDestination: ISaveDataResponse;
+  loading: boolean;
+  showPendingReqModal: boolean;
+  showAttentionModal: boolean;
   onFinishForm: () => void;
   onNextStep: () => void;
   onPreviousStep: () => void;
@@ -32,9 +43,12 @@ interface IAddDestinationUI {
   setCreditLineDecisions: (decisions: IRuleDecision[]) => void;
   setCurrentStep: (step: number) => void;
   setIsCurrentFormValid: React.Dispatch<React.SetStateAction<boolean>>;
+  onCloseRequestStatus: () => void;
+  onClosePendingReqModal: () => void;
+  setShowAttentionModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function AddDestinationUI(props: IAddDestinationUI) {
+const AddDestinationUI = (props: IAddDestinationUI) => {
   const {
     creditLineDecisions,
     currentStep,
@@ -45,6 +59,10 @@ function AddDestinationUI(props: IAddDestinationUI) {
     showModal,
     showRequestProcessModal,
     steps,
+    loading,
+    saveMoneyDestination,
+    showPendingReqModal,
+    showAttentionModal,
     onFinishForm,
     onNextStep,
     onPreviousStep,
@@ -52,6 +70,9 @@ function AddDestinationUI(props: IAddDestinationUI) {
     setCreditLineDecisions,
     setCurrentStep,
     setIsCurrentFormValid,
+    onCloseRequestStatus,
+    onClosePendingReqModal,
+    setShowAttentionModal,
   } = props;
 
   const smallScreen = useMediaQuery("(max-width: 990px)");
@@ -96,15 +117,28 @@ function AddDestinationUI(props: IAddDestinationUI) {
                 ref={generalInformationRef}
                 initialValues={initialGeneralInformationValues}
                 onFormValid={setIsCurrentFormValid}
-                handleNextStep={onNextStep}
+                onButtonClick={onNextStep}
               />
             )}
             {currentStep === 2 && (
-              <CreditLineForm
-                onNextStep={onNextStep}
+              <DecisionsForm
+                attentionModal={attentionModal}
+                deleteModal={deleteModal}
+                textValuesBusinessRules={textValuesBusinessRules}
+                decisionTemplateConfig={decisionTemplateConfig}
+                onButtonClick={onNextStep}
                 onPreviousStep={onPreviousStep}
                 initialValues={creditLineDecisions}
-                setCreditLineDecisions={setCreditLineDecisions}
+                setDecisions={setCreditLineDecisions}
+                revertModalDisplayData={revertModalDisplayData}
+                labelBusinessRules="LineOfCredit"
+                nameMoneyDestination={
+                  initialGeneralInformationValues.nameDestination
+                }
+                showAttentionModal={showAttentionModal}
+                setShowAttentionModal={setShowAttentionModal}
+                titleContentAddCard="Agregar línea de crédito"
+                messageEmptyDecisions="Agrega línea de crédito"
               />
             )}
             {currentStep === 3 && (
@@ -126,6 +160,11 @@ function AddDestinationUI(props: IAddDestinationUI) {
                 showRequestProcessModal={showRequestProcessModal}
                 onToggleModal={onToggleModal}
                 onFinishForm={onFinishForm}
+                saveMoneyDestination={saveMoneyDestination}
+                loading={loading}
+                onCloseRequestStatus={onCloseRequestStatus}
+                showPendingReqModal={showPendingReqModal}
+                onClosePendingReqModal={onClosePendingReqModal}
               />
             )}
           </Stack>
@@ -133,6 +172,6 @@ function AddDestinationUI(props: IAddDestinationUI) {
       </Stack>
     </Stack>
   );
-}
+};
 
 export { AddDestinationUI };

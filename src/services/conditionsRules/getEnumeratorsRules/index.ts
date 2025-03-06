@@ -1,16 +1,26 @@
-import { IEnumeratorsRules } from "@design/forms/decisions/types";
-import { getEnumeratorsRules } from "@api/isettingCredicar/getEnumeratorsRules";
+import { AxiosRequestConfig } from "axios";
+
+import { getWithRetries } from "@services/core/getWithRetries";
+import { axiosInstance } from "@api/isettingCredicar";
+import { IDecision } from "@ptypes/decisions/IDecision";
 import { mapEnumeratorsRulesApiToEntity } from "./mappers";
 
-const enumeratorsRules = async (
+const getEnumeratorsRules = async (
   ruleName: string,
   bussinesUnits: string,
-): Promise<IEnumeratorsRules> => {
-  const data: IEnumeratorsRules = await getEnumeratorsRules(
-    ruleName,
-    bussinesUnits,
+): Promise<IDecision> => {
+  const config: AxiosRequestConfig = {
+    headers: {
+      "X-Action": "GetByIdBusinessRuleCatalog",
+      "X-Business-unit": bussinesUnits,
+    },
+  };
+  const data: IDecision = await getWithRetries<IDecision>(
+    axiosInstance,
+    `/enums/business-rules-catalog/${ruleName}`,
+    config,
   );
   return mapEnumeratorsRulesApiToEntity(data);
 };
 
-export { enumeratorsRules };
+export { getEnumeratorsRules };
