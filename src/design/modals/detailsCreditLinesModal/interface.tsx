@@ -8,8 +8,8 @@ import {
   useMediaQuery,
   Blanket,
   Button,
+  Tabs,
 } from "@inubekit/inubekit";
-import { Tabs } from "@inubekit/tabs";
 
 import { tokens } from "@design/tokens";
 import { mediaQueryMobile } from "@config/environment";

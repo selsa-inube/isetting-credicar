@@ -1,4 +1,4 @@
-import { Col } from "@inubekit/table";
+import { Col } from "@inubekit/inubekit";
 import { ITitle } from "@design/data/table/types";
 
 const WidthColmnsData = (

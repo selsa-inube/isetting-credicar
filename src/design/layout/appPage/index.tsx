@@ -45,6 +45,7 @@ function AppPage() {
     optionsCards,
     businessUnitChangeRef,
     selectedClient,
+    location,
     setCollapse,
     handleLogoClick,
   } = useAppPage(appData, businessUnitSigla, setBusinessUnitSigla);
@@ -100,7 +101,7 @@ function AppPage() {
           >
             {!isTablet && (
               <Nav
-                navigation={mainNavigation(optionsCards).items}
+                navigation={mainNavigation(optionsCards, location).items}
                 actions={actionsConfig(logout)}
               />
             )}
