@@ -2,7 +2,7 @@ const payrollAgreementTabsConfig = {
   payrollAgreement: {
     id: "payrollAgreement",
     isDisabled: false,
-    label: "Destinos de dinero",
+    label: "Nóminas de convenio",
   },
   requestsInProgress: {
     id: "requestsInProgress",

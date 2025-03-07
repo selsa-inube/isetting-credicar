@@ -1,15 +1,15 @@
 import { useContext } from "react";
 
-import { useMoneryDestinationPage } from "@hooks/moneyDestination/useMoneryDestinationPage";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 import { ICardData } from "@ptypes/home/ICardData";
-import { PayrollAgreementUI } from "./interface";
 import { payrollAgreementTabsConfig } from "@config/payrollAgreement/tabs";
+import { usePayrollAgreementPage } from "@hooks/payrollAgreement/usePayrollAgreementPage";
+import { PayrollAgreementUI } from "./interface";
 
 function PayrollAgreement() {
   const { businessUnitSigla } = useContext(AuthAndPortalData);
   const { isSelected, descriptionOptions, handleTabChange } =
-    useMoneryDestinationPage(businessUnitSigla);
+  usePayrollAgreementPage(businessUnitSigla);
 
   return (
     <PayrollAgreementUI

@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { PayrollAgreement } from "@src/pages/payrollAgreement";
+import { PayrollAgreement } from "@pages/payrollAgreement";
 
 function PayrollAgreementRoutes() {
   return (
