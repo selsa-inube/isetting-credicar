@@ -16,7 +16,8 @@
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.4",
-    "@inubekit/header": "^3.0.0",
+    "@inubekit/assisted": "^7.10.1",
+    "@inubekit/autosuggest": "^1.0.1",
     "@inubekit/inubekit": "^1.1.0",
     "@isettingkit/business-rules": "^0.1.38",
     "@isettingkit/input": "^0.1.43",

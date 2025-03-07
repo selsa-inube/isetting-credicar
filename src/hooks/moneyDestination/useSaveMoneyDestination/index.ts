@@ -22,6 +22,7 @@ const useSaveMoneyDestination = (
   data: ISaveDataRequest,
   setSendData: React.Dispatch<React.SetStateAction<boolean>>,
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>,
+  setShowPendingReq?: React.Dispatch<React.SetStateAction<boolean>>,
   setErrorFetchSaveData?: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   const [saveMoneyDestination, setSaveMoneyDestination] =
@@ -167,7 +168,7 @@ const useSaveMoneyDestination = (
 
   useEffect(() => {
     if (!sendData) return;
-    fetchSaveMoneyDestinationData();
+     fetchSaveMoneyDestinationData();
   }, [sendData]);
 
   useEffect(() => {
@@ -196,6 +197,9 @@ const useSaveMoneyDestination = (
         clearInterval(timer);
         setSendData(false);
         setShowPendingReqModal(true);
+        if (setShowPendingReq)  {
+          setShowPendingReq(!showPendingReqModal);
+        }
       }, 60000);
 
       return () => {

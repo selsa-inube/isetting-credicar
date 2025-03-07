@@ -17,10 +17,6 @@ const StyledContainerTable = styled.div<IStyledContainer>`
     $entriesLength > $pageLength &&
     `1px solid ${inube.palette.neutral.N40}`};
 
-  & > div > div {
-    min-height: 220px;
-  }
-
   & > td,
   & > div {
     justify-content: center;
@@ -32,6 +28,10 @@ const StyledContainerTable = styled.div<IStyledContainer>`
     & > td {
       justify-content: flex-start;
     }
+
+    & > div > div {
+    min-height: 220px;
+  }
   `}
 `;
 
