@@ -2,8 +2,7 @@ import { useContext } from "react";
 import { Outlet } from "react-router-dom";
 import { MdOutlineChevronRight } from "react-icons/md";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Icon, Grid, useMediaQuery,Header } from "@inubekit/inubekit";
-import { Nav } from "@inubekit/nav";
+import { Icon, Grid, useMediaQuery, Header, Nav } from "@inubekit/inubekit";
 
 import { BusinessUnitChange } from "@design/inputs/BusinessUnitChange";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
