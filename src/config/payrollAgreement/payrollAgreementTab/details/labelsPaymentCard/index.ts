@@ -1,0 +1,20 @@
+const labelsPaymentCard = [
+  {
+    id: "name",
+    titleName: "Nombre",
+  },
+  {
+    id: "periodicity",
+    titleName: "Periodicidad",
+  },
+  {
+    id: "dayPayment",
+    titleName: "Día de pago",
+  },
+  {
+    id: "numberDays",
+    titleName: "No. de días para el corte",
+  },
+];
+
+export { labelsPaymentCard };
