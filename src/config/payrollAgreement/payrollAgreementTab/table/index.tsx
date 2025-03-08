@@ -1,11 +1,8 @@
-import { IAction, ITitle } from "@design/data/table/types";
 import { Icon } from "@inubekit/inubekit";
-import {
-  MdDeleteOutline,
-  MdOutlineCreate,
-  MdOutlineRemoveRedEye,
-} from "react-icons/md";
-import { ComponentAppearance } from "@src/enum/appearances";
+import { MdDeleteOutline, MdOutlineCreate } from "react-icons/md";
+import { ComponentAppearance } from "@enum/appearances";
+import { IAction, IEntry, ITitle } from "@design/data/table/types";
+import { Details } from "@pages/payrollAgreement/tabs/payrollAgreementTab/tools/details";
 
 const titles: ITitle[] = [
   {
@@ -18,13 +15,7 @@ const titles: ITitle[] = [
 const actions: IAction[] = [
   {
     id: "Details",
-    content: () => (
-      <Icon
-        icon={<MdOutlineRemoveRedEye />}
-        appearance={ComponentAppearance.DARK}
-        size="16px"
-      />
-    ),
+    content: (entry: IEntry) => <Details data={entry} />,
   },
   {
     id: "edit",
