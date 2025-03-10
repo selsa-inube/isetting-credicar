@@ -17,7 +17,7 @@ const useDetailsPayrollAgreement = (
     id: data.id,
     TypePayroll: data.payrollForDeductionAgreementType,
     daysToDetermineDate: data.numberOfDaysForReceivingTheDiscounts,
-    company: data.payrollForDeductionAgreementCode,
+    company: data.legalPersonName,
     paymentSources: "prueba",
   };
 
@@ -43,16 +43,42 @@ const useDetailsPayrollAgreement = (
   };
 
   const extraordinaryPaymentData = () => {
-    return Object.entries(data.payrollSpecialBenefitPaymentCycles).length > 0
-      ? data.payrollSpecialBenefitPaymentCycles.map((item: IEntry) => {
-          return {
-            name: item.abbreviatedName,
-            periodicity: item.paymentDay,
-            dayPayment: item.paymentDay,
-            numberDays: item.numberOfDaysBeforePaymentToBill,
-          };
-        })
-      : [];
+    let extraordinary: IEntry[] = [];
+    if (data.payrollSpecialBenefitPaymentCycles) {
+      extraordinary = extraordinary.concat(
+        Object.entries(data.payrollSpecialBenefitPaymentCycles).length > 0 &&
+          data.payrollSpecialBenefitPaymentCycles.map(
+            (item: IEntry, index: string) => {
+              return {
+                id: index,
+                name: item.abbreviatedName,
+                typePayment: "Prima",
+                cuttingDay: item.paymentDay,
+                numberDays: item.numberOfDaysBeforePaymentToBill,
+              };
+            },
+          ),
+      );
+    }
+
+    if (data.severancePaymentCycles) {
+      extraordinary = extraordinary.concat(
+        Object.entries(data.severancePaymentCycles).length > 0 &&
+          data.payrollSpecialBenefitPaymentCycles.map(
+            (item: IEntry, index: string) => {
+              return {
+                id: index,
+                name: item.abbreviatedName,
+                typePayment: "Cesantias",
+                cuttingDay: item.paymentDay,
+                numberDays: item.numberOfDaysBeforePaymentToBill,
+              };
+            },
+          ),
+      );
+    }
+
+    return extraordinary;
   };
 
   const filteredTabsConfig = Object.keys(detailsTabsConfig).reduce(

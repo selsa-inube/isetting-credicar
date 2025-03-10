@@ -1,8 +1,9 @@
-interface IPIayrollSpecialBenefit {
+interface IPayrollSpecialBenefit {
   abbreviatedName: string;
   numberOfDaysBeforePaymentToBill: number;
   paymentDay: string;
   payrollForDeductionAgreementId: string;
+  id?: string;
 }
 
-export type { IPIayrollSpecialBenefit };
+export type { IPayrollSpecialBenefit };

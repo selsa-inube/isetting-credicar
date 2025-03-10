@@ -12,6 +12,14 @@ const labelsPaymentCard = [
     titleName: "Día de pago",
   },
   {
+    id: "typePayment",
+    titleName: "Tipo de pago",
+  },
+  {
+    id: "cuttingDay",
+    titleName: "Día de corte",
+  },
+  {
     id: "numberDays",
     titleName: "No. de días para el corte",
   },

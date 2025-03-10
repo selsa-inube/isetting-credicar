@@ -39,7 +39,7 @@ const Details = (props: IDetails) => {
       labelsDetails={labelsDetails}
       labelsPaymentCard={labelsPaymentCard}
       ordinaryPaymentData={ordinaryPaymentData()}
-      extraordinaryPaymentData={extraordinaryPaymentData()}
+      extraordinaryPaymentData={extraordinaryPaymentData() as IEntry[]}
       onTabChange={handleTabChange}
     />
   );
