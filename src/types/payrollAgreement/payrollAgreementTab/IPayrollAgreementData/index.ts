@@ -1,6 +1,6 @@
+import { ISeverancePaymentCycles } from "../ISeverancePaymentCycles";
 import { IPayrollSpecialBenefit } from "../IPayrollSpecialBenefit";
 import { IRegularPaymentCycles } from "../IRegularPaymentCycles";
-import { ISeverancePaymentCycles } from "../ISeverancePaymentCycles";
 
 interface IPayrollAgreementData {
   abbreviatedName: string;
