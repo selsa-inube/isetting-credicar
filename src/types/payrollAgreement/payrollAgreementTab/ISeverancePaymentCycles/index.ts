@@ -3,6 +3,7 @@ interface ISeverancePaymentCycles {
   numberOfDaysBeforePaymentToBill: number;
   paymentDay: string;
   payrollForDeductionAgreementId: string;
+  id?: string;
 }
 
 export type { ISeverancePaymentCycles };

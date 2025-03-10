@@ -1,6 +1,6 @@
-import { IPIayrollSpecialBenefit } from "../IPIayrollSpecialBenefit";
-import { IRegularPaymentCycles } from "../IRegularPaymentCycles";
 import { ISeverancePaymentCycles } from "../ISeverancePaymentCycles";
+import { IPayrollSpecialBenefit } from "../IPayrollSpecialBenefit";
+import { IRegularPaymentCycles } from "../IRegularPaymentCycles";
 
 interface IPayrollAgreementData {
   abbreviatedName: string;
@@ -10,7 +10,7 @@ interface IPayrollAgreementData {
   payrollForDeductionAgreementCode: string;
   payrollForDeductionAgreementId: string;
   payrollForDeductionAgreementType: string;
-  payrollSpecialBenefitPaymentCycles: IPIayrollSpecialBenefit[];
+  payrollSpecialBenefitPaymentCycles: IPayrollSpecialBenefit[];
   regularPaymentCycles: IRegularPaymentCycles[];
   severancePaymentCycles: ISeverancePaymentCycles[];
   id?: string;
