@@ -50,11 +50,11 @@ const useBusinessUnits = (businessUnits: IBusinessUnitsPortalStaff[]) => {
     const searchTerm = search?.toUpperCase();
 
     return businessUnits.filter((unit) => {
-      const businessUnitName = unit?.abbreviatedName?.toUpperCase() || "";
-      const businessUnitSigla = unit?.publicCode?.toUpperCase() || "";
+      const businessUnitName = unit?.abbreviatedName?.toUpperCase() ?? "";
+      const businessUnitSigla = unit?.publicCode?.toUpperCase() ?? "";
 
       return (
-        businessUnitName.includes(searchTerm) ||
+        businessUnitName.includes(searchTerm) ??
         businessUnitSigla.includes(searchTerm)
       );
     });

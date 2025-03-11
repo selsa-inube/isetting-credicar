@@ -1,0 +1,250 @@
+import { MdHorizontalRule } from "react-icons/md";
+import { FormikProps } from "formik";
+
+import {
+  Button,
+  Date,
+  Divider,
+  Grid,
+  Input,
+  Select,
+  Stack,
+  useMediaQuery,
+} from "@inubekit/inubekit";
+import { tokens } from "@design/tokens";
+import { ComponentAppearance } from "@enum/appearances";
+import { ICompanyEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/ICompanyEntry";
+import { getDomainById } from "@mocks/domains/domainService.mocks";
+import { getFieldState } from "@utils/forms/getFieldState";
+import { IServerDomain } from "@ptypes/IServerDomain";
+import {
+  StyledContainer,
+  StyledContainerFields,
+  StyledFormContent,
+} from "./styles";
+
+interface ICompanyFormUI {
+  formik: FormikProps<ICompanyEntry>;
+  loading: boolean;
+  optionsCountries: IServerDomain[];
+  optionsCities: IServerDomain[];
+  onChange: (name: string, value: string) => void;
+  onCompanyChange: (name: string, value: string) => void;
+  onButtonClick: () => void;
+  isDisabledButton?: boolean;
+}
+
+const CompanyFormUI = (props: ICompanyFormUI) => {
+  const {
+    formik,
+    loading,
+    optionsCountries,
+    optionsCities,
+    onChange,
+    onCompanyChange,
+    onButtonClick,
+    isDisabledButton,
+  } = props;
+
+  const isMobile = useMediaQuery("(max-width: 990px)");
+
+  return (
+    <StyledContainer>
+      <StyledFormContent>
+        <StyledContainerFields $isMobile={isMobile}>
+          <Stack gap={tokens.spacing.s300} direction="column" width="100%">
+            <Select
+              fullwidth
+              disabled={false}
+              id="companySelected"
+              name="companySelected"
+              label="Empresa con convenio"
+              placeholder="Seleccione una opción"
+              onChange={onCompanyChange}
+              options={getDomainById("company")}
+              size="compact"
+              value={formik.values.companySelected}
+              required
+            />
+            <Divider dashed />
+            {formik.values.companySelected === "addCompany" && (
+              <Grid
+                templateRows="repeat(4, 1fr)"
+                templateColumns="repeat(3, 1fr)"
+                width="100%"
+                gap={isMobile ? tokens.spacing.s050 : tokens.spacing.s250}
+              >
+                <Input
+                  name="companyName"
+                  id="companyName"
+                  label="Nombre"
+                  placeholder="Nombre de la empresa"
+                  type="text"
+                  size="compact"
+                  value={formik.values.companyName}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  status={getFieldState(formik, "companyName")}
+                  message={formik.errors.companyName}
+                  fullwidth
+                />
+                <Select
+                  disabled={false}
+                  id="companyTypeIdent"
+                  name="companyTypeIdent"
+                  label="Tipo de identificación"
+                  placeholder="Seleccione una opción"
+                  onChange={onChange}
+                  options={getDomainById("typeIdentCompany")}
+                  size="compact"
+                  value={formik.values.companyTypeIdent ?? ""}
+                  fullwidth
+                  message={formik.errors.companyTypeIdent}
+                  invalid={formik.errors.companyTypeIdent ? true : false}
+                />
+                <Input
+                  name="companyNumberIdent"
+                  id="companyNumberIdent"
+                  label="Número de identificacíon"
+                  placeholder="Número de identificacíon"
+                  type="number"
+                  size="compact"
+                  value={formik.values.companyNumberIdent}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  status={getFieldState(formik, "companyNumberIdent")}
+                  message={formik.errors.companyNumberIdent}
+                  fullwidth
+                />
+                <Input
+                  name="companyVerifDigit"
+                  id="companyVerifDigit"
+                  label="Digito de verificación"
+                  placeholder="Digito de verificación de id"
+                  iconBefore={<MdHorizontalRule />}
+                  type="number"
+                  size="compact"
+                  value={formik.values.companyVerifDigit}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  status={getFieldState(formik, "companyVerifDigit")}
+                  message={formik.errors.companyVerifDigit}
+                  fullwidth
+                />
+                <Date
+                  name="companyDateIdent"
+                  id="companyDateIdent"
+                  label="Fecha de expedición de identificación"
+                  size="compact"
+                  value={formik.values.companyDateIdent}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  status={getFieldState(formik, "companyDateIdent")}
+                  message={formik.errors.companyDateIdent}
+                  fullwidth
+                />
+                <Input
+                  name="companyNameCommercial"
+                  id="companyNameCommercial"
+                  label="Nombre comercial"
+                  placeholder="Nombre comercial"
+                  type="text"
+                  size="compact"
+                  value={formik.values.companyNameCommercial}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  status={getFieldState(formik, "companyNameCommercial")}
+                  message={formik.errors.companyNameCommercial}
+                  fullwidth
+                />
+                <Input
+                  name="companyCode"
+                  id="companyCode"
+                  label="Código postal"
+                  placeholder="Código postal"
+                  type="text"
+                  size="compact"
+                  value={formik.values.companyCode}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  status={getFieldState(formik, "companyCode")}
+                  message={formik.errors.companyCode}
+                  fullwidth
+                />
+                <Select
+                  disabled={false}
+                  id="companyCity"
+                  name="companyCity"
+                  label="Ciudad de la sede"
+                  placeholder="Seleccione una opción"
+                  onChange={onChange}
+                  options={optionsCities}
+                  size="compact"
+                  value={formik.values.companyCity ?? ""}
+                  message={formik.errors.companyCity}
+                  invalid={formik.errors.companyCity ? true : false}
+                  fullwidth
+                />
+                <Input
+                  name="companyAddressRes"
+                  id="companyAddressRes"
+                  label="Dirección de la sede"
+                  placeholder="Dirección fisica"
+                  type="text"
+                  size="compact"
+                  value={formik.values.companyAddressRes}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  status={getFieldState(formik, "companyAddressRes")}
+                  message={formik.errors.companyAddressRes}
+                  fullwidth
+                />
+                <Select
+                  disabled={false}
+                  id="companyCountry"
+                  name="companyCountry"
+                  label="País de residencia fiscal"
+                  placeholder="Seleccione una opción"
+                  onChange={onChange}
+                  options={optionsCountries}
+                  size="compact"
+                  value={formik.values.companyCountry ?? ""}
+                  message={formik.errors.companyCountry}
+                  invalid={formik.errors.companyCountry ? true : false}
+                  fullwidth
+                />
+                <Select
+                  disabled={false}
+                  id="companyCountryIdent"
+                  name="companyCountryIdent"
+                  label="País del documento de identidad"
+                  placeholder="Seleccione una opción"
+                  onChange={onChange}
+                  options={optionsCountries}
+                  size="compact"
+                  value={formik.values.companyCountryIdent ?? ""}
+                  message={formik.errors.companyCountryIdent}
+                  invalid={formik.errors.companyCountryIdent ? true : false}
+                  fullwidth
+                />
+              </Grid>
+            )}
+          </Stack>
+        </StyledContainerFields>
+      </StyledFormContent>
+      <Stack justifyContent="flex-end" gap={tokens.spacing.s250}>
+        <Button
+          fullwidth={isMobile}
+          onClick={onButtonClick}
+          disabled={isDisabledButton}
+          loading={loading}
+          appearance={ComponentAppearance.PRIMARY}
+        >
+          Siguiente
+        </Button>
+      </Stack>
+    </StyledContainer>
+  );
+};
+
+export { CompanyFormUI };

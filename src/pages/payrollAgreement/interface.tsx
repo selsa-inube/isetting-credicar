@@ -33,8 +33,8 @@ function PayrollAgreementUI(props: IPayrollAgreementUI) {
         <Stack gap={tokens.spacing.s300} direction="column">
           <Breadcrumbs crumbs={crumbsPayrollAgreement} />
           <Title
-            title={descriptionOptions?.publicCode || ""}
-            description={descriptionOptions?.description || ""}
+            title={descriptionOptions?.publicCode ?? ""}
+            description={descriptionOptions?.description ?? ""}
             sizeTitle="large"
           />
         </Stack>
@@ -47,7 +47,7 @@ function PayrollAgreementUI(props: IPayrollAgreementUI) {
           />
 
           {isSelected === payrollAgreementTabsConfig.payrollAgreement.id && (
-            <PayrollAgreementTab/>
+            <PayrollAgreementTab />
           )}
           {isSelected === payrollAgreementTabsConfig.requestsInProgress.id && (
             <></>

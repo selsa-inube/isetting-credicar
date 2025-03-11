@@ -8,10 +8,10 @@ const createNavLink = (
   defaultIcon: JSX.Element,
   location?: Location,
 ) => ({
-  id: option?.id || "",
-  label: option?.publicCode || "",
-  icon: option?.icon || defaultIcon,
-  path: option?.url || "",
+  id: option?.id ?? "",
+  label: option?.publicCode ?? "",
+  icon: option?.icon ?? defaultIcon,
+  path: option?.url ?? "",
   isActive: location ? location.pathname === option?.url : false,
 });
 

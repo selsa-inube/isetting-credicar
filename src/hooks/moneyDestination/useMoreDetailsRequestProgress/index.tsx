@@ -18,13 +18,13 @@ const useMoreDetailsRequestProgress = (data: IEntry) => {
       <IconWithText
         icon={
           normalizeIconDestination(data.configurationRequestData.iconReference)
-            ?.icon || <></>
+            ?.icon ?? <></>
         }
         text={String(data.configurationRequestData.abbreviatedName)}
       />
     ),
     descriptionUse:
-      data.configurationRequestData.descriptionUse ||
+      data.configurationRequestData.descriptionUse ??
       data.configurationRequestData.justification,
   };
 
@@ -36,9 +36,7 @@ const useMoreDetailsRequestProgress = (data: IEntry) => {
 
         return {
           decisionId: `Decisión ${index + 1}`,
-          labelName: dataTranslations[rule.ruleName]
-            ? dataTranslations[rule.ruleName]
-            : rule.ruleName,
+          labelName: dataTranslations[rule.ruleName] ?? rule.ruleName,
           ruleName: rule.ruleName,
           value: decisionByRule.value,
           effectiveFrom: decisionByRule.effectiveFrom

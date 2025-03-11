@@ -11,7 +11,7 @@ import { IRuleDecision } from "@isettingkit/input";
 
 const EditDestination = () => {
   const location = useLocation();
-  const { data } = location.state || {};
+  const { data } = location.state ?? {};
   const { appData } = useContext(AuthAndPortalData);
 
   const {

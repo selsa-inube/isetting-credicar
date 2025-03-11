@@ -45,8 +45,8 @@ const useOptionsByBusinessUnit = (
         id: option.publicCode,
         publicCode: option.abbreviatedName,
         description: option.descriptionUse,
-        icon: normalizedOption?.icon || "",
-        url: normalizedOption?.url || "",
+        icon: normalizedOption?.icon ?? "",
+        url: normalizedOption?.url ?? "",
       };
     });
 

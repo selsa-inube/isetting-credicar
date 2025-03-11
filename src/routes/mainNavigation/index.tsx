@@ -6,12 +6,12 @@ import {
 import { SelectBusinessUnitsRoutes } from "@routes/selectBusinessunits";
 import { CreditLinesRoutes } from "@routes/creditLines";
 import { MoneyDestinationRoutes } from "@routes/moneyDestination";
+import { PayrollAgreementRoutes } from "@routes/payrollAgreement";
 
 import { ErrorPage } from "@design/layout/errorPage";
 import { Logout } from "@pages/login/logout";
 import { AppPage } from "@design/layout/appPage";
 import { Landing } from "@pages/home/landing";
-import { PayrollAgreement } from "@pages/payrollAgreement";
 
 const mainNavigation = createBrowserRouter(
   createRoutesFromElements(
@@ -29,7 +29,7 @@ const mainNavigation = createBrowserRouter(
         />
         <Route
           path="payroll-agreement/*"
-          element={<PayrollAgreement />}
+          element={<PayrollAgreementRoutes />}
         />
       </Route>
       <Route path="logout" element={<Logout />} />
