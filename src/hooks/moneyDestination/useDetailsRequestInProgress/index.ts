@@ -41,7 +41,7 @@ const useDetailsRequestInProgress = (data: IEntry) => {
     observation:
       dateOptions.find(
         (option: IServerDomain) => option.value === form.dateTraceability,
-      )?.observation || "",
+      )?.observation ?? "",
   };
 
   useEffect(() => {

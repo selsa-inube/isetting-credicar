@@ -72,7 +72,7 @@ const useSaveMoneyDestination = (
       if (!isStatusIntAutomatic(saveMoneyDestination?.requestStatus)) return;
       const data = await getRequestInProgressById(
         bussinesUnits,
-        saveMoneyDestination?.settingRequestId || "",
+        saveMoneyDestination?.settingRequestId ?? "",
       );
       setStatusRequest(data.requestStatus);
     } catch (error) {
@@ -168,7 +168,7 @@ const useSaveMoneyDestination = (
 
   useEffect(() => {
     if (!sendData) return;
-     fetchSaveMoneyDestinationData();
+    fetchSaveMoneyDestinationData();
   }, [sendData]);
 
   useEffect(() => {
@@ -197,7 +197,7 @@ const useSaveMoneyDestination = (
         clearInterval(timer);
         setSendData(false);
         setShowPendingReqModal(true);
-        if (setShowPendingReq)  {
+        if (setShowPendingReq) {
           setShowPendingReq(!showPendingReqModal);
         }
       }, 60000);

@@ -21,20 +21,20 @@ const StyledAppCard = styled(Link)<IStyledAppCard>`
   border-radius: ${tokens.spacing.s050};
   text-decoration: none;
   color: ${({ theme }) =>
-    theme?.color?.stroke.dark.regular || inube.palette.neutral.N900};
+    theme?.color?.stroke.dark.regular ?? inube.palette.neutral.N900};
   border: 1px solid
     ${({ theme }) =>
-      theme?.color?.stroke.dark.regular || inube.palette.neutral.N30};
+      theme?.color?.stroke.dark.regular ?? inube.palette.neutral.N30};
   box-shadow: 3px 3px 5px 1px
     ${({ theme }) =>
-      theme?.color?.surface?.gray?.regular || inube.palette.neutral.N30};
+      theme?.color?.surface?.gray?.regular ?? inube.palette.neutral.N30};
   cursor: pointer;
 
   &:hover {
     color: ${({ theme }) =>
-      theme?.color?.surface?.gray?.regular || inube.palette.neutral.N30};
+      theme?.color?.surface?.gray?.regular ?? inube.palette.neutral.N30};
     background-color: ${({ theme }) =>
-      theme?.color?.surface?.gray?.regular || inube.palette.neutral.N30};
+      theme?.color?.surface?.gray?.regular ?? inube.palette.neutral.N30};
     box-shadow: none;
   }
   ${({ $isMobile }) =>

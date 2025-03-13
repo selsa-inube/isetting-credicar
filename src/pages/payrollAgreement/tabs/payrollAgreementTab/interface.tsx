@@ -64,7 +64,7 @@ const PayrollAgreementTabUI = (props: IpayrollAgreementTabUI) => {
               variant="filled"
               iconBefore={<MdAdd />}
               type="link"
-              path="/payroll-agreement"
+              path="/payroll-agreement/add-payroll-agreement"
               fullwidth={smallScreen}
             >
               Agregar nómina

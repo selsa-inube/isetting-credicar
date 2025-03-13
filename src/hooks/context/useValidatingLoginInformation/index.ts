@@ -46,10 +46,10 @@ const useValidatingLoginInformation = () => {
       urlLogo: "",
     },
     businessUnit: {
-      publicCode: businessUnitData?.publicCode || "",
-      abbreviatedName: businessUnitData?.abbreviatedName || "",
-      languageId: businessUnitData?.languageId || "",
-      urlLogo: businessUnitData?.urlLogo || "",
+      publicCode: businessUnitData?.publicCode ?? "",
+      abbreviatedName: businessUnitData?.abbreviatedName ?? "",
+      languageId: businessUnitData?.languageId ?? "",
+      urlLogo: businessUnitData?.urlLogo ?? "",
     },
     user: {
       userAccount: user?.email ?? "",
@@ -64,17 +64,17 @@ const useValidatingLoginInformation = () => {
       ...prev,
       portal: {
         ...prev.portal,
-        abbreviatedName: portalData?.abbreviatedName || "",
-        staffPortalCatalogId: portalData?.staffPortalId || "",
-        businessManagerId: portalData?.businessManagerId || "",
-        publicCode: portalData?.publicCode || "",
+        abbreviatedName: portalData?.abbreviatedName ?? "",
+        staffPortalCatalogId: portalData?.staffPortalId ?? "",
+        businessManagerId: portalData?.businessManagerId ?? "",
+        publicCode: portalData?.publicCode ?? "",
       },
       businessManager: {
         ...prev.businessManager,
-        publicCode: businessManagersData.publicCode || "",
-        abbreviatedName: businessManagersData.abbreviatedName || "",
-        urlBrand: businessManagersData.urlBrand || "",
-        urlLogo: businessManagersData.urlLogo || "",
+        publicCode: businessManagersData.publicCode ?? "",
+        abbreviatedName: businessManagersData.abbreviatedName ?? "",
+        urlBrand: businessManagersData.urlBrand ?? "",
+        urlLogo: businessManagersData.urlLogo ?? "",
       },
     }));
   }, [businessManagersData, portalData, portalCode]);

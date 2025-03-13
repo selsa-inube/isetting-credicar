@@ -7,6 +7,7 @@ interface IStyledContainerIcon {
 
 const StyledContainerIcon = styled.div<IStyledContainerIcon>`
   display: flex;
+  justify-content: center;
   gap: ${tokens.spacing.s100};
   padding: ${({ $isTablet }) =>
     $isTablet

@@ -34,8 +34,8 @@ function MoneyDestinationUI(props: IMoneyDestinationUI) {
         <Stack gap={tokens.spacing.s300} direction="column">
           <Breadcrumbs crumbs={crumbsMoneyDestination} />
           <Title
-            title={descriptionOptions?.publicCode || ""}
-            description={descriptionOptions?.description || ""}
+            title={descriptionOptions?.publicCode ?? ""}
+            description={descriptionOptions?.description ?? ""}
             sizeTitle="large"
           />
         </Stack>

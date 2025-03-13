@@ -27,11 +27,11 @@ const Details = (props: IDetails) => {
 
   return (
     <DetailsPayrollAgreement
-      namePayroll={data.abbreviatedName || ""}
+      namePayroll={data.abbreviatedName ?? ""}
       showModal={showModal}
       onToggleModal={handleToggleModal}
-      isSelected={isSelected || defaultSelectedTab || ""}
-      defaultSelectedTab={defaultSelectedTab || ""}
+      isSelected={isSelected ?? defaultSelectedTab ?? ""}
+      defaultSelectedTab={defaultSelectedTab ?? ""}
       filteredTabsConfig={filteredTabsConfig}
       detailsTabsConfig={detailsPayrollAgreementTabsConfig}
       data={normalizeData}

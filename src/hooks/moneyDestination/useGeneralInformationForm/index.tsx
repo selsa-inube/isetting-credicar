@@ -43,12 +43,14 @@ const useGeneralInformationForm = (
   });
 
   const [autosuggestValue, setAutosuggestValue] = useState(
-    formik.values.nameDestination || "",
+    formik.values.nameDestination ?? "",
   );
 
   const [isDisabledButton, setIsDisabledButton] = useState(false);
   const [icon, setIcon] = useState<JSX.Element | undefined>(
-    (editDataOption && normalizeIconDestination(initialValues.icon)?.icon) || (
+    editDataOption && normalizeIconDestination(initialValues.icon)?.icon ? (
+      normalizeIconDestination(initialValues.icon)?.icon
+    ) : (
       <></>
     ),
   );
@@ -74,7 +76,7 @@ const useGeneralInformationForm = (
   }, [formik.values, onFormValid]);
 
   useEffect(() => {
-    setAutosuggestValue(formik.values.nameDestination || "");
+    setAutosuggestValue(formik.values.nameDestination ?? "");
   }, [formik.values.nameDestination]);
 
   const handleChange = (name: string, value: string) => {
@@ -82,14 +84,14 @@ const useGeneralInformationForm = (
     formik.setFieldValue(name, value);
 
     if (name === "nameDestination") {
-      const normalizeData = normalizeCodeDestination(value)?.code || "";
+      const normalizeData = normalizeCodeDestination(value)?.code ?? "";
       const description =
-        normalizeDestination(enumData, normalizeData)?.description || "";
+        normalizeDestination(enumData, normalizeData)?.description ?? "";
 
       if (value === "") {
         formik.setFieldValue("description", "");
       } else {
-        const currentDescription = formik.values.description || "";
+        const currentDescription = formik.values.description ?? "";
         const newDescription = `${currentDescription} ${description}`.trim();
         formik.setFieldValue("description", newDescription);
       }
@@ -97,7 +99,7 @@ const useGeneralInformationForm = (
   };
 
   const nameEnum =
-    normalizeCodeDestination(formik.values.nameDestination || "")?.code || "";
+    normalizeCodeDestination(formik.values.nameDestination ?? "")?.code ?? "";
   const addData = normalizeDestination(enumData, nameEnum);
 
   const valuesEqual =

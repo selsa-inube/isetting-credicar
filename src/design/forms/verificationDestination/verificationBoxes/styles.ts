@@ -9,7 +9,7 @@ const StyledConatinerAttribute = styled.div`
   width: 100%;
   min-height: 52px;
   background-color: ${({ theme }) =>
-    theme.color?.surface?.gray.clear || inube.palette.neutral.N10};
+    theme.color?.surface?.gray.clear ?? inube.palette.neutral.N10};
 `;
 
 const StyledAttribute = styled.div`

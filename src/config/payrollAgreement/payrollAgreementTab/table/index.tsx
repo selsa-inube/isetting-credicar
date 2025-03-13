@@ -22,7 +22,7 @@ const actions: IAction[] = [
     content: () => (
       <Icon
         icon={<MdOutlineCreate />}
-        appearance={ComponentAppearance.DARK}
+        appearance={ComponentAppearance.PRIMARY}
         size="16px"
       />
     ),
@@ -32,7 +32,7 @@ const actions: IAction[] = [
     content: () => (
       <Icon
         icon={<MdDeleteOutline />}
-        appearance={ComponentAppearance.DARK}
+        appearance={ComponentAppearance.DANGER}
         size="16px"
       />
     ),
