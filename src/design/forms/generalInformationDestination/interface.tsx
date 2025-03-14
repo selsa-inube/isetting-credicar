@@ -114,14 +114,16 @@ const GeneralInformationFormUI = (props: IGeneralInformationFormUI) => {
         </form>
       </StyledFormContent>
       <Stack justifyContent="flex-end" gap={tokens.spacing.s250}>
-        <Button
-          fullwidth={isMobile}
-          onClick={onReset}
-          appearance={ComponentAppearance.GRAY}
-          disabled={valuesEqual}
-        >
-          Cancelar
-        </Button>
+        {editDataOption && (
+          <Button
+            fullwidth={isMobile}
+            onClick={onReset}
+            appearance={ComponentAppearance.GRAY}
+            disabled={valuesEqual}
+          >
+            Cancelar
+          </Button>
+        )}
 
         <Button
           fullwidth={isMobile}
