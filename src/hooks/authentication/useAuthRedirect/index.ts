@@ -11,6 +11,7 @@ const useAuthRedirect = (
   const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0();
   const [hasRedirected, setHasRedirected] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [errorCode, setErrorCode] = useState<number>(0);
 
   useEffect(() => {
     if (hasRedirected) return;
@@ -22,9 +23,11 @@ const useAuthRedirect = (
         setHasRedirected(true);
       } else {
         setHasError(true);
+        setErrorCode(1001);
       }
     } else {
       setHasError(true);
+      setErrorCode(1001);
     }
   }, [
     portalPublicCode,
@@ -36,7 +39,7 @@ const useAuthRedirect = (
     portalCode,
   ]);
 
-  return { hasRedirected, hasError, isLoading, isAuthenticated };
+  return { hasRedirected, hasError, isLoading, isAuthenticated, errorCode };
 };
 
 export { useAuthRedirect };
