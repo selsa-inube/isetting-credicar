@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { MdOutlinePending } from "react-icons/md";
+import { MdPending } from "react-icons/md";
 import { Icon } from "@inubekit/inubekit";
 
 import { ActionsModal } from "@design/modals/actionsModal";
@@ -56,7 +56,7 @@ const ActionMobile = (props: IActionMobile) => {
       <StyledContainerIcon>
         <Icon
           appearance="primary"
-          icon={<MdOutlinePending />}
+          icon={<MdPending />}
           size="20px"
           onClick={handleToggleModal}
           cursorHover
