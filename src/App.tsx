@@ -22,7 +22,7 @@ interface IApp {
 function App(props: IApp) {
   const { code, user, businessUnit } = props;
 
-  const { hasError, isLoading, isAuthenticated } = useAppData(
+  const { hasError, isLoading, isAuthenticated, errorCode } = useAppData(
     portalCode,
     code,
     user as IUser,
@@ -34,7 +34,7 @@ function App(props: IApp) {
   }
 
   if (hasError && !isAuthenticated) {
-    return <ErrorPage />;
+    return <ErrorPage errorCode={errorCode} />;
   }
 
   if (!isAuthenticated) {

@@ -31,13 +31,16 @@ const SelectBusinessUnitsRoutes = () => {
         />
         <Route path="loading-app" element={<LoadingApp />} />
       </Route>
-      <Route path="error/not-available" element={<ErrorPage />} />
+      <Route
+        path="error/not-available"
+        element={<ErrorPage errorCode={1005} />}
+      />
       <Route
         path="error/not-related-businessUnits"
         element={<NotBusinessUnit />}
       />
-      <Route path="*" element={<ErrorPage />} />
-      <Route path="/*" element={<ErrorPage />} />
+      <Route path="*" element={<ErrorPage errorCode={404} />} />
+      <Route path="/*" element={<ErrorPage errorCode={404} />} />
     </Routes>
   );
 };
