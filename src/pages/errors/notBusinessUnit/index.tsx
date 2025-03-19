@@ -1,6 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { ErrorPage } from "@design/layout/errorPage";
-import clientNotFound from "@assets/images/Expired.png";
 import { enviroment } from "@config/environment";
 import { useClearLocalStorage } from "@hooks/authentication/useClearLocalStorage";
 
@@ -15,10 +14,8 @@ function NotBusinessUnit() {
 
   return (
     <ErrorPage
-      image={clientNotFound}
-      imageAlt="Unidad de negocio no encontrada"
+      errorCode={1004}
       heading="No hay resultados..."
-      description="Su usuario no tiene unidades de negocio relacionados, consulte con su administrador."
       onClick={handlelogout}
     />
   );

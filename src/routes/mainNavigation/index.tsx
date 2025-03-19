@@ -20,7 +20,11 @@ const mainNavigation = createBrowserRouter(
         path="selectBusinessUnit/*"
         element={<SelectBusinessUnitsRoutes />}
       />
-      <Route path="/" element={<Landing />} errorElement={<ErrorPage />} />
+      <Route
+        path="/"
+        element={<Landing />}
+        errorElement={<ErrorPage errorCode={1005} />}
+      />
       <Route path="/" element={<AppPage />}>
         <Route path="credit-lines/*" element={<CreditLinesRoutes />} />
         <Route
