@@ -25,6 +25,7 @@ interface IDecisionModal {
   justificationOfDecision?: boolean;
   withIcon?: boolean;
   withCancelButton?: boolean;
+  moreDetails?: string;
 }
 
 const initialValues: IDecisionEntry = {
@@ -43,6 +44,7 @@ const DecisionModal = (props: IDecisionModal) => {
     title,
     appearance = ComponentAppearance.PRIMARY,
     withCancelButton = true,
+    moreDetails,
     onClick,
     onCloseModal,
     setFieldEntered,
@@ -100,6 +102,7 @@ const DecisionModal = (props: IDecisionModal) => {
       title={title}
       withIcon={withIcon}
       withCancelButton={withCancelButton}
+      moreDetails={moreDetails}
     />
   );
 };

@@ -33,6 +33,7 @@ interface IDecisionModalUI {
   withCancelButton: boolean;
   onClick: () => void;
   onCloseModal: () => void;
+  moreDetails?: string;
 }
 
 const DecisionModalUI = (props: IDecisionModalUI) => {
@@ -49,6 +50,7 @@ const DecisionModalUI = (props: IDecisionModalUI) => {
     title,
     withIcon,
     withCancelButton,
+    moreDetails,
     onCloseModal,
     onClick,
   } = props;
@@ -122,6 +124,15 @@ const DecisionModalUI = (props: IDecisionModalUI) => {
               onChange={formik.handleChange}
             />
           </StyledTextarea>
+        )}
+
+        {moreDetails && (
+          <Stack direction="column" gap={tokens.spacing.s200}>
+            <Divider dashed />
+            <Text size="medium" appearance="dark">
+              {moreDetails}
+            </Text>
+          </Stack>
         )}
 
         <Stack gap={tokens.spacing.s250} justifyContent="flex-end">

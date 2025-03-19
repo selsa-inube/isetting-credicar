@@ -203,6 +203,7 @@ const GeneralInformationPayrollFormUI = (
           appearance={ComponentAppearance.PRIMARY}
           onCloseModal={onToggleInfoModalModal}
           onClick={onToggleInfoModalModal}
+          moreDetails={infoModal.moreDetails}
         />
       )}
     </StyledContainer>
