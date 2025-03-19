@@ -101,7 +101,7 @@ const useAddDestination = () => {
       applicationName: "ifac",
       businessManagerCode: appData.businessManager.publicCode,
       businessUnitCode: appData.businessUnit.publicCode,
-      description: "solicitud de creación de un destino de dinero",
+      description: "Solicitud de creación de un destino de dinero",
       entityName: "MoneyDestination",
       requestDate: formatDate(new Date()),
       useCaseName: "AddMoneyDestination",

@@ -54,14 +54,14 @@ const useTable = (
     return entries.filter((entry) => {
       for (const attribute in entry) {
         const attributeValue = entry[attribute]?.toString().toLowerCase();
-        const statusValue = entry?.[attribute]?.props?.status
+        const textValue = entry?.[attribute]?.props?.text
           ?.toString()
           .toLowerCase();
 
         if (
           titlesId.includes(attribute.toLowerCase()) &&
           (attributeValue?.includes(filter.toLowerCase()) ||
-            statusValue?.includes(filter.toLowerCase()))
+            textValue?.includes(filter.toLowerCase()))
         ) {
           return true;
         }

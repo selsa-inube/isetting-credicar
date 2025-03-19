@@ -5,9 +5,14 @@ import { addPayrollAgreementSteps } from "@config/payrollAgreement/payrollAgreem
 import { IAddPayrollAgreementForms } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IAddPayrollAgreementForms";
 import { ICompanyEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/ICompanyEntry";
 import { IAddPayrollAgreementRef } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IAddPayrollAgreementRef";
+import { IGeneralInformationEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IGeneralInformationPayroll";
+import { getDomainById } from "@mocks/domains/domainService.mocks";
 
 const useAddPayrollAgreement = () => {
   const [currentStep, setCurrentStep] = useState(1);
+  const [sourcesOfIncomeValues, setSourcesOfIncomeValues] = useState(
+    getDomainById("sourcesOfIncome"),
+  );
   const [formValues, setFormValues] = useState<IAddPayrollAgreementForms>({
     company: {
       isValid: false,
@@ -26,22 +31,48 @@ const useAddPayrollAgreement = () => {
         companyCountryIdent: "",
       },
     },
+    generalInformation: {
+      isValid: false,
+      values: {
+        namePayroll: "",
+        typePayroll: "",
+        sourcesOfIncome: "",
+        applicationDaysPayroll: "",
+      },
+    },
   });
   const [isCurrentFormValid, setIsCurrentFormValid] = useState(false);
 
-  const generalInformationRef = useRef<FormikProps<ICompanyEntry>>(null);
+  const companyRef = useRef<FormikProps<ICompanyEntry>>(null);
+  const generalInformationRef =
+    useRef<FormikProps<IGeneralInformationEntry>>(null);
 
   const formReferences: IAddPayrollAgreementRef = {
-    company: generalInformationRef,
+    company: companyRef,
+    generalInformation: generalInformationRef,
   };
 
   const handleNextStep = () => {
     if (currentStep < addPayrollAgreementSteps.length) {
-      if (generalInformationRef.current) {
+      if (companyRef.current) {
         setFormValues((prevValues) => ({
           ...prevValues,
           company: {
             ...prevValues.company,
+            values: companyRef.current!.values,
+          },
+        }));
+        setIsCurrentFormValid(companyRef.current.isValid);
+      }
+      setCurrentStep(currentStep + 1);
+    }
+
+    if (currentStep < addPayrollAgreementSteps.length) {
+      if (generalInformationRef.current) {
+        setFormValues((prevValues) => ({
+          ...prevValues,
+          generalInformation: {
+            ...prevValues.generalInformation,
             values: generalInformationRef.current!.values,
           },
         }));
@@ -62,6 +93,8 @@ const useAddPayrollAgreement = () => {
     formValues,
     formReferences,
     isCurrentFormValid,
+    sourcesOfIncomeValues,
+    setSourcesOfIncomeValues,
     handleNextStep,
     handlePreviousStep,
     setCurrentStep,

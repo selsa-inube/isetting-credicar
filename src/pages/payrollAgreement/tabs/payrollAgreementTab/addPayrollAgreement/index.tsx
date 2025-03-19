@@ -8,6 +8,8 @@ function AddPayrollAgreement() {
     formValues,
     formReferences,
     isCurrentFormValid,
+    sourcesOfIncomeValues,
+    setSourcesOfIncomeValues,
     handleNextStep,
     handlePreviousStep,
     setIsCurrentFormValid,
@@ -23,6 +25,8 @@ function AddPayrollAgreement() {
       onNextStep={handleNextStep}
       onPreviousStep={handlePreviousStep}
       setIsCurrentFormValid={setIsCurrentFormValid}
+      sourcesOfIncomeValues={sourcesOfIncomeValues}
+      setSourcesOfIncomeValues={setSourcesOfIncomeValues}
     />
   );
 }
