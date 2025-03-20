@@ -18,6 +18,7 @@ interface ITitle {
   icon?: JSX.Element;
   navigatePage?: string;
   sizeTitle?: ITextSize;
+  onClick?: () => void;
 }
 
 const Title = (props: ITitle) => {
@@ -27,11 +28,24 @@ const Title = (props: ITitle) => {
     description,
     icon,
     navigatePage,
+    onClick,
   } = props;
 
   const smallScreen = useMediaQuery(mediaQueryMobile);
 
   const navigate = useNavigate();
+
+  const onGoBack = () => {
+    if (onClick) {
+      onClick();
+    } else {
+      if (navigatePage) {
+        navigate(navigatePage);
+      } else {
+        navigate(-1);
+      }
+    }
+  };
 
   return (
     <>
@@ -52,9 +66,7 @@ const Title = (props: ITitle) => {
               icon={<MdArrowBack />}
               spacing="narrow"
               size="20px"
-              onClick={() =>
-                navigatePage ? navigate(navigatePage) : navigate(-1)
-              }
+              onClick={onGoBack}
             />
           )}
           <StyledContainerText>

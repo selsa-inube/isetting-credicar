@@ -8,11 +8,15 @@ function AddPayrollAgreement() {
     formValues,
     formReferences,
     isCurrentFormValid,
+    showGoBackModal,
     sourcesOfIncomeValues,
     setSourcesOfIncomeValues,
     handleNextStep,
     handlePreviousStep,
     setIsCurrentFormValid,
+    handleOpenModal,
+    handleCloseModal,
+    handleGoBack,
   } = useAddPayrollAgreement();
 
   return (
@@ -27,6 +31,10 @@ function AddPayrollAgreement() {
       setIsCurrentFormValid={setIsCurrentFormValid}
       sourcesOfIncomeValues={sourcesOfIncomeValues}
       setSourcesOfIncomeValues={setSourcesOfIncomeValues}
+      onGoBack={handleGoBack}
+      showGoBackModal={showGoBackModal}
+      onOpenModal={handleOpenModal}
+      onCloseModal={handleCloseModal}
     />
   );
 }

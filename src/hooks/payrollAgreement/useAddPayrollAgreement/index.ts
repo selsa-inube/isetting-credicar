@@ -1,19 +1,17 @@
-import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 import { FormikProps } from "formik";
 
 import { addPayrollAgreementSteps } from "@config/payrollAgreement/payrollAgreementTab/assisted";
 import { IAddPayrollAgreementForms } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IAddPayrollAgreementForms";
 import { ICompanyEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/ICompanyEntry";
 import { IAddPayrollAgreementRef } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IAddPayrollAgreementRef";
+import { compareObjects } from "@utils/compareObjects";
 import { IGeneralInformationEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IGeneralInformationPayroll";
 import { getDomainById } from "@mocks/domains/domainService.mocks";
 
 const useAddPayrollAgreement = () => {
-  const [currentStep, setCurrentStep] = useState(1);
-  const [sourcesOfIncomeValues, setSourcesOfIncomeValues] = useState(
-    getDomainById("sourcesOfIncome"),
-  );
-  const [formValues, setFormValues] = useState<IAddPayrollAgreementForms>({
+  const initialValues = {
     company: {
       isValid: false,
       values: {
@@ -40,8 +38,18 @@ const useAddPayrollAgreement = () => {
         applicationDaysPayroll: "",
       },
     },
-  });
+  };
+
+  const [currentStep, setCurrentStep] = useState(1);
+  const [formValues, setFormValues] =
+    useState<IAddPayrollAgreementForms>(initialValues);
   const [isCurrentFormValid, setIsCurrentFormValid] = useState(false);
+  const [showGoBackModal, setShowGoBackModal] = useState(false);
+  const [sourcesOfIncomeValues, setSourcesOfIncomeValues] = useState(
+    getDomainById("sourcesOfIncome"),
+  );
+  const [canRefresh, setCanRefresh] = useState(false);
+  const navigate = useNavigate();
 
   const companyRef = useRef<FormikProps<ICompanyEntry>>(null);
   const generalInformationRef =
@@ -51,7 +59,6 @@ const useAddPayrollAgreement = () => {
     company: companyRef,
     generalInformation: generalInformationRef,
   };
-
   const handleNextStep = () => {
     if (currentStep < addPayrollAgreementSteps.length) {
       if (companyRef.current) {
@@ -88,17 +95,67 @@ const useAddPayrollAgreement = () => {
     }
   };
 
+  const handleOpenModal = () => {
+    const compare = compareObjects(initialValues, formValues);
+    const compareCompany = compareObjects(
+      companyRef.current?.initialValues,
+      companyRef.current?.values,
+    );
+    if (!compare || !compareCompany) {
+      setShowGoBackModal(true);
+    } else {
+      navigate(-1);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setShowGoBackModal(false);
+  };
+
+  const handleGoBack = () => {
+    setCanRefresh(true);
+    navigate(-1);
+  };
+
+  useEffect(() => {
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      const hasUnsavedChanges =
+        !compareObjects(initialValues, formValues) ||
+        (companyRef.current &&
+          !compareObjects(
+            companyRef.current.initialValues,
+            companyRef.current.values,
+          ));
+
+      if (hasUnsavedChanges) {
+        event.preventDefault();
+        setShowGoBackModal(!showGoBackModal);
+
+        event.returnValue = "";
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [formValues, initialValues, companyRef, canRefresh]);
+
   return {
     currentStep,
     formValues,
     formReferences,
     isCurrentFormValid,
+    showGoBackModal,
     sourcesOfIncomeValues,
     setSourcesOfIncomeValues,
     handleNextStep,
     handlePreviousStep,
     setCurrentStep,
     setIsCurrentFormValid,
+    handleGoBack,
+    handleOpenModal,
+    handleCloseModal,
   };
 };
 
