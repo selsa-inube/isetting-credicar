@@ -19,6 +19,7 @@ interface ITable {
   widthPercentageTotalColumns?: number;
   columnWidths?: number[];
   emptyDataMessage?: string;
+  withActionsTitles?: boolean;
 }
 
 const Table = (props: ITable) => {
@@ -35,6 +36,7 @@ const Table = (props: ITable) => {
     widthPercentageTotalColumns,
     columnWidths,
     emptyDataMessage,
+    withActionsTitles,
   } = props;
 
   const {
@@ -81,6 +83,7 @@ const Table = (props: ITable) => {
           widthPercentageTotalColumns={widthPercentageTotalColumns}
           columnWidths={columnWidths}
           emptyDataMessage={emptyDataMessage}
+          withActionsTitles={withActionsTitles}
         />
       </Stack>
     </StyledContainerTable>

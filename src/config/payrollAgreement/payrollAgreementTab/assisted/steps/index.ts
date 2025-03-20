@@ -13,6 +13,18 @@ const addPayrollAgreementSteps: IAssistedStep[] = [
     name: "Informacion general",
     description: "Registra los datos de nóminas de convenio de descuento.",
   },
+  {
+    id: 3,
+    number: 3,
+    name: "Ciclos de pago ordinario",
+    description: "Registra los ciclos de pago ordinarios.",
+  },
+  {
+    id: 4,
+    number: 4,
+    name: "Verificación",
+    description: "Confirma la información diligenciada en pasos anteriores.",
+  },
 ];
 
 export { addPayrollAgreementSteps };

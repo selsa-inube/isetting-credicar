@@ -1,4 +1,4 @@
-import { addPayrollAgreementSteps } from "@config/payrollAgreement/payrollAgreementTab/assisted";
+import { addPayrollAgreementSteps } from "@config/payrollAgreement/payrollAgreementTab/assisted/steps";
 import { useAddPayrollAgreement } from "@hooks/payrollAgreement/useAddPayrollAgreement";
 import { AddPayrollAgreementUI } from "./interface";
 

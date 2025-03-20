@@ -13,6 +13,7 @@ import { IAddPayrollAgreementForms } from "@ptypes/payrollAgreement/payrollAgree
 import { IAddPayrollAgreementRef } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IAddPayrollAgreementRef";
 import { crumbsAddPayrollAgreement } from "@config/payrollAgreement/payrollAgreementTab/navigation";
 import { CompanyForm } from "@design/forms/companyPayrollAgreement";
+import { RegularPaymentCyclesForm } from "@design/forms/regularPaymentCycles";
 interface IAddPayrollAgreementUI {
   currentStep: number;
   formReferences: IAddPayrollAgreementRef;
@@ -82,6 +83,17 @@ const AddPayrollAgreementUI = (props: IAddPayrollAgreementUI) => {
                 initialValues={initialGeneralInformationValues.company.values}
                 onFormValid={setIsCurrentFormValid}
                 onButtonClick={onNextStep}
+              />
+            )}
+            {currentStep === 3 && (
+              <RegularPaymentCyclesForm
+                ref={formReferences.ordinaryCycles}
+                initialValues={
+                  initialGeneralInformationValues.ordinaryCycles.values
+                }
+                onFormValid={setIsCurrentFormValid}
+                onButtonClick={onNextStep}
+                onPreviousStep={onPreviousStep}
               />
             )}
           </Stack>
