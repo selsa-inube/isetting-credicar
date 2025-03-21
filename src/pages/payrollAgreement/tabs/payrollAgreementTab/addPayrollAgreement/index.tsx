@@ -8,9 +8,13 @@ function AddPayrollAgreement() {
     formValues,
     formReferences,
     isCurrentFormValid,
+    showGoBackModal,
     handleNextStep,
     handlePreviousStep,
     setIsCurrentFormValid,
+    handleOpenModal,
+    handleCloseModal,
+    handleGoBack,
   } = useAddPayrollAgreement();
 
   return (
@@ -23,6 +27,10 @@ function AddPayrollAgreement() {
       onNextStep={handleNextStep}
       onPreviousStep={handlePreviousStep}
       setIsCurrentFormValid={setIsCurrentFormValid}
+      onGoBack={handleGoBack}
+      showGoBackModal={showGoBackModal}
+      onOpenModal={handleOpenModal}
+      onCloseModal={handleCloseModal}
     />
   );
 }
