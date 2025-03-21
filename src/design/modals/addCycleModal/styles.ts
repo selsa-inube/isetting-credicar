@@ -26,4 +26,10 @@ const StyledContainerButton = styled.div`
   }
 `;
 
-export { StyledModal, StyledContainerButton };
+const StyledSelectConatiner = styled.div`
+  & > div > div > input {
+    width: 100%;
+  }
+`;
+
+export { StyledModal, StyledContainerButton, StyledSelectConatiner };

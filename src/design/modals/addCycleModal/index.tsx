@@ -19,7 +19,11 @@ import { tokens } from "@design/tokens";
 import { mediaQueryMobile } from "@config/environment";
 import { ComponentAppearance } from "@enum/appearances";
 import { IServerDomain } from "@ptypes/IServerDomain";
-import { StyledContainerButton, StyledModal } from "./styles";
+import {
+  StyledContainerButton,
+  StyledModal,
+  StyledSelectConatiner,
+} from "./styles";
 
 interface IAddCycleModal {
   actionText: string;
@@ -198,31 +202,34 @@ const AddCycleModal = (props: IAddCycleModal) => {
                   autoRows="auto"
                   width="100%"
                 >
-                  <Select
-                    id="month"
-                    name="month"
-                    placeholder="Mes"
-                    onChange={onChange}
-                    options={monthOptions ?? []}
-                    size="compact"
-                    fullwidth
-                    value={formik.values.month ?? ""}
-                    message={formik.errors.month}
-                    invalid={formik.errors.month ? true : false}
-                  />
-
-                  <Select
-                    id="day"
-                    name="day"
-                    placeholder="Día"
-                    onChange={onChange}
-                    options={dayOptions ?? []}
-                    size="compact"
-                    fullwidth
-                    value={formik.values.day ?? ""}
-                    message={formik.errors.day}
-                    invalid={formik.errors.day ? true : false}
-                  />
+                  <StyledSelectConatiner>
+                    <Select
+                      id="month"
+                      name="month"
+                      placeholder="Mes"
+                      onChange={onChange}
+                      options={monthOptions ?? []}
+                      size="compact"
+                      fullwidth
+                      value={formik.values.month ?? ""}
+                      message={formik.errors.month}
+                      invalid={formik.errors.month ? true : false}
+                    />
+                  </StyledSelectConatiner>
+                  <StyledSelectConatiner>
+                    <Select
+                      id="day"
+                      name="day"
+                      placeholder="Día"
+                      onChange={onChange}
+                      options={dayOptions ?? []}
+                      size="compact"
+                      fullwidth
+                      value={formik.values.day ?? ""}
+                      message={formik.errors.day}
+                      invalid={formik.errors.day ? true : false}
+                    />
+                  </StyledSelectConatiner>
                 </Grid>
               </Stack>
             </>
