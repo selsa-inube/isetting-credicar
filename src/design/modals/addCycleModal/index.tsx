@@ -32,7 +32,7 @@ interface IAddCycleModal {
   onClick: () => void;
   onCloseModal: () => void;
   onChange: (name: string, value: string) => void;
-  onToggleInfoModalModal: () => void;
+  onToggleInfoModal: () => void;
   periodicityOptions?: IServerDomain[];
   paydayOptions?: IServerDomain[];
   typePaymentOptions?: IServerDomain[];
@@ -61,7 +61,7 @@ const AddCycleModal = (props: IAddCycleModal) => {
     onCloseModal,
     onClick,
     onChange,
-    onToggleInfoModalModal,
+    onToggleInfoModal,
   } = props;
 
   const isMobile = useMediaQuery(mediaQueryMobile);
@@ -148,7 +148,7 @@ const AddCycleModal = (props: IAddCycleModal) => {
                   <Icon
                     icon={<MdInfoOutline />}
                     appearance={ComponentAppearance.PRIMARY}
-                    onClick={onToggleInfoModalModal}
+                    onClick={onToggleInfoModal}
                     size="12px"
                     cursorHover
                   />
