@@ -38,6 +38,7 @@ interface ITableUI {
   numberActions: number;
   TitleColumns: ITitle[];
   emptyDataMessage?: string;
+  withActionsTitles?: boolean;
 }
 
 const TableUI = (props: ITableUI) => {
@@ -57,6 +58,7 @@ const TableUI = (props: ITableUI) => {
     numberActions,
     TitleColumns,
     emptyDataMessage,
+    withActionsTitles,
     goToEndPage,
     goToFirstPage,
     nextPage,
@@ -80,7 +82,12 @@ const TableUI = (props: ITableUI) => {
               {title.titleName}
             </Th>
           ))}
-          {ShowActionTitle(numberActions, mediaActionOpen)}
+          {ShowActionTitle(
+            numberActions,
+            mediaActionOpen,
+            actions,
+            withActionsTitles,
+          )}
         </Tr>
       </Thead>
       <Tbody>
@@ -88,8 +95,7 @@ const TableUI = (props: ITableUI) => {
           DataLoading(TitleColumns, numberActions)
         ) : (
           <>
-          {
-            entriesLength === 0 ? (
+            {entriesLength === 0 ? (
               <Tr>
                 <Td type="custom" colSpan={titles.length + actions.length}>
                   <Text type="label" size="large" appearance="dark" ellipsis>
@@ -97,42 +103,45 @@ const TableUI = (props: ITableUI) => {
                   </Text>
                 </Td>
               </Tr>
-            ) :(
+            ) : (
               <>
-              {entries.length > 0 ? (
-                entries.map((entry, index) => (
-                  <Tr key={index} zebra={index % 2 === 1}>
-                    {TitleColumns.map((title) => (
-                      <Td
-                        key={`e-${entry[title.id]}`}
-                        align={entry.action ? "center" : "left"}
-                        type="custom"
+                {entries.length > 0 ? (
+                  entries.map((entry, index) => (
+                    <Tr key={index} zebra={index % 2 === 1}>
+                      {TitleColumns.map((title) => (
+                        <Td
+                          key={`e-${entry[title.id]}`}
+                          align={entry.action ? "center" : "left"}
+                          type="custom"
+                        >
+                          {typeof entry[title.id] !== "string" ? (
+                            entry[title.id]
+                          ) : (
+                            <Text type="body" size="small" ellipsis>
+                              {entry[title.id]}
+                            </Text>
+                          )}
+                        </Td>
+                      ))}
+                      {ShowAction(actions, entry, mediaActionOpen)}
+                    </Tr>
+                  ))
+                ) : (
+                  <Tr>
+                    <Td type="custom" colSpan={titles.length + actions.length}>
+                      <Text
+                        type="label"
+                        size="large"
+                        appearance="dark"
+                        ellipsis
                       >
-                        {typeof entry[title.id] !== "string" ? (
-                          entry[title.id]
-                        ) : (
-                          <Text type="body" size="small" ellipsis>
-                            {entry[title.id]}
-                          </Text>
-                        )}
-                      </Td>
-                    ))}
-                    {ShowAction(actions, entry, mediaActionOpen)}
+                        No hay resultados que coincidan con la búsqueda.
+                      </Text>
+                    </Td>
                   </Tr>
-                ))
-              ) : (
-                <Tr>
-                  <Td type="custom" colSpan={titles.length + actions.length}>
-                    <Text type="label" size="large" appearance="dark" ellipsis>
-                    No hay resultados que coincidan con la búsqueda.
-                    </Text>
-                  </Td>
-                </Tr>
-              )}
+                )}
               </>
-            )
-          }
-            
+            )}
           </>
         )}
       </Tbody>
