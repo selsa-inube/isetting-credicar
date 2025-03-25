@@ -3,7 +3,6 @@ import {
   Breadcrumbs,
   IAssistedStep,
   Stack,
-  useMediaQuery,
 } from "@inubekit/inubekit";
 
 import { Title } from "@design/data/title";
@@ -23,6 +22,7 @@ interface IAddPayrollAgreementUI {
   isCurrentFormValid: boolean;
   steps: IAssistedStep[];
   sourcesOfIncomeValues: IServerDomain[];
+  smallScreen: boolean;
   setSourcesOfIncomeValues: React.Dispatch<
     React.SetStateAction<IServerDomain[]>
   >;
@@ -43,6 +43,7 @@ const AddPayrollAgreementUI = (props: IAddPayrollAgreementUI) => {
     isCurrentFormValid,
     steps,
     showGoBackModal,
+    smallScreen,
     onOpenModal,
     onCloseModal,
     sourcesOfIncomeValues,
@@ -52,8 +53,6 @@ const AddPayrollAgreementUI = (props: IAddPayrollAgreementUI) => {
     onPreviousStep,
     onGoBack,
   } = props;
-
-  const smallScreen = useMediaQuery("(max-width: 990px)");
 
   return (
     <Stack

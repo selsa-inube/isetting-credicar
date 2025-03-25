@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
+import { useMediaQuery } from "@inubekit/inubekit";
 import { FormikProps } from "formik";
 
 import { addPayrollAgreementSteps } from "@config/payrollAgreement/payrollAgreementTab/assisted";
@@ -50,6 +51,8 @@ const useAddPayrollAgreement = () => {
   );
   const [canRefresh, setCanRefresh] = useState(false);
   const navigate = useNavigate();
+
+  const smallScreen = useMediaQuery("(max-width: 990px)");
 
   const companyRef = useRef<FormikProps<ICompanyEntry>>(null);
   const generalInformationRef =
@@ -148,6 +151,7 @@ const useAddPayrollAgreement = () => {
     isCurrentFormValid,
     showGoBackModal,
     sourcesOfIncomeValues,
+    smallScreen,
     setSourcesOfIncomeValues,
     handleNextStep,
     handlePreviousStep,

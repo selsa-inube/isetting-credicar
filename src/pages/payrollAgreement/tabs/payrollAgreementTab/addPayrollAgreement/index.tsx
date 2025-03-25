@@ -10,6 +10,7 @@ function AddPayrollAgreement() {
     isCurrentFormValid,
     showGoBackModal,
     sourcesOfIncomeValues,
+    smallScreen,
     setSourcesOfIncomeValues,
     handleNextStep,
     handlePreviousStep,
@@ -35,6 +36,7 @@ function AddPayrollAgreement() {
       showGoBackModal={showGoBackModal}
       onOpenModal={handleOpenModal}
       onCloseModal={handleCloseModal}
+      smallScreen={smallScreen}
     />
   );
 }

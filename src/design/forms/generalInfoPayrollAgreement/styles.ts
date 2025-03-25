@@ -7,10 +7,6 @@ interface IStyledContainerFields {
   $isMobile: boolean;
 }
 
-interface IStyledIcon {
-  $isMobile: boolean;
-}
-
 const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -31,20 +27,4 @@ const StyledContainerFields = styled.div<IStyledContainerFields>`
     $isMobile ? `${tokens.spacing.s150}` : `${tokens.spacing.s300}`};
 `;
 
-const StyledIcon = styled.div<IStyledIcon>`
-  display: flex;
-  justify-content: center;
-  border: 1px solid ${inube.palette.neutral.N40};
-  border-radius: ${tokens.spacing.s100};
-  width: ${({ $isMobile }) => ($isMobile ? "100%" : "56px")};
-  height: 40px;
-  padding: ${tokens.spacing.s100};
-  box-sizing: border-box;
-`;
-
-export {
-  StyledContainer,
-  StyledFormContent,
-  StyledIcon,
-  StyledContainerFields,
-};
+export { StyledContainer, StyledFormContent, StyledContainerFields };

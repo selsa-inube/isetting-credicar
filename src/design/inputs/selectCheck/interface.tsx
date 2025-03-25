@@ -4,6 +4,7 @@ import { Text, Icon, Label, Stack } from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
 import { ComponentAppearance } from "@enum/appearances";
+import { getTypo } from "@utils/getTypo";
 import { OptionList } from "./optionList";
 import { Size, Status } from "./types";
 import {
@@ -38,10 +39,6 @@ interface ISelectCheckUI {
   onClick?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onFocus?: (event: FocusEvent) => void;
 }
-
-const getTypo = (size: Size) => {
-  return size === "compact" ? "small" : "medium";
-};
 
 const SelectCheckUI = forwardRef<HTMLDivElement, ISelectCheckUI>(
   (props: ISelectCheckUI, ref) => {

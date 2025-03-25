@@ -9,7 +9,6 @@ import {
   Label,
   Select,
   Stack,
-  useMediaQuery,
 } from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
@@ -35,7 +34,13 @@ interface IGeneralInformationPayrollFormUI {
   loading: boolean;
   showModal: boolean;
   valuesEqual: boolean;
+  isMobile: boolean;
   sourcesOfIncomeValues: IServerDomain[];
+  displayList: boolean;
+  focused: boolean;
+  selectRef: React.RefObject<HTMLDivElement>;
+  setFocused: React.Dispatch<React.SetStateAction<boolean>>;
+  setDisplayList: React.Dispatch<React.SetStateAction<boolean>>;
   onToggleInfoModalModal: () => void;
   onChangeCheck: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onButtonClick: () => void;
@@ -59,6 +64,12 @@ const GeneralInformationPayrollFormUI = (
     isDisabledButton,
     showModal,
     sourcesOfIncomeValues,
+    isMobile,
+    displayList,
+    focused,
+    selectRef,
+    setFocused,
+    setDisplayList,
     onChangeSelect,
     onChangeAutosuggest,
     onButtonClick,
@@ -67,8 +78,6 @@ const GeneralInformationPayrollFormUI = (
     onChangeCheck,
     onPreviousStep,
   } = props;
-
-  const isMobile = useMediaQuery("(max-width: 990px)");
 
   return (
     <StyledContainer>
@@ -127,6 +136,11 @@ const GeneralInformationPayrollFormUI = (
                   onChangeCheck={onChangeCheck}
                   size="compact"
                   onChange={formik.handleChange}
+                  displayList={displayList}
+                  focused={focused}
+                  selectRef={selectRef}
+                  setFocused={setFocused}
+                  setDisplayList={setDisplayList}
                 />
 
                 <Stack direction="column">

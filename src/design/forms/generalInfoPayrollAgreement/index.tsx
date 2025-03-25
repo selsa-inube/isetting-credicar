@@ -45,6 +45,12 @@ const GeneralInformationPayrollForm = forwardRef<
       formik,
       showModal,
       valuesEqual,
+      isMobile,
+      focused,
+      displayList,
+      selectRef,
+      setFocused,
+      setDisplayList,
       handleChangeSelect,
       handleChangeAutosuggest,
       handleReset,
@@ -79,6 +85,12 @@ const GeneralInformationPayrollForm = forwardRef<
         onToggleInfoModalModal={handleToggleModal}
         onChangeCheck={handleChangeCheck}
         sourcesOfIncomeValues={sourcesOfIncomeValues}
+        isMobile={isMobile}
+        displayList={displayList}
+        focused={focused}
+        selectRef={selectRef}
+        setFocused={setFocused}
+        setDisplayList={setDisplayList}
       />
     );
   },

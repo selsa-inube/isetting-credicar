@@ -1,5 +1,6 @@
-import { useEffect, useImperativeHandle, useState } from "react";
+import { useEffect, useImperativeHandle, useRef, useState } from "react";
 import { FormikProps, useFormik } from "formik";
+import { useMediaQuery } from "@inubekit/inubekit";
 import { object } from "yup";
 
 import { validationRules } from "@validations/validationRules";
@@ -46,6 +47,11 @@ const useGeneralInformationForm = (
   );
   const [isDisabledButton, setIsDisabledButton] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const [displayList, setDisplayList] = useState(false);
+  const selectRef = useRef<HTMLDivElement>(null);
+
+  const isMobile = useMediaQuery("(max-width: 990px)");
 
   useImperativeHandle(ref, () => formik);
 
@@ -120,6 +126,12 @@ const useGeneralInformationForm = (
     showModal,
     sourcesOfIncomeValues,
     valuesEqual,
+    isMobile,
+    focused,
+    displayList,
+    selectRef,
+    setFocused,
+    setDisplayList,
     handleChangeSelect,
     handleChangeAutosuggest,
     handleChangeCheck,

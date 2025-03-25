@@ -17,6 +17,7 @@ import { ICompanyEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/form
 import { getDomainById } from "@mocks/domains/domainService.mocks";
 import { getFieldState } from "@utils/forms/getFieldState";
 import { IServerDomain } from "@ptypes/IServerDomain";
+import { companyLabels } from "@config/payrollAgreement/payrollAgreementTab/forms/goBackModal/companyLabels";
 import {
   StyledContainer,
   StyledContainerFields,
@@ -58,7 +59,7 @@ const CompanyFormUI = (props: ICompanyFormUI) => {
               disabled={false}
               id="companySelected"
               name="companySelected"
-              label="Empresa con convenio"
+              label={companyLabels.companySelected}
               placeholder="Seleccione una opción"
               onChange={onCompanyChange}
               options={getDomainById("company")}
@@ -79,7 +80,7 @@ const CompanyFormUI = (props: ICompanyFormUI) => {
                   <Input
                     name="companyName"
                     id="companyName"
-                    label="Nombre"
+                    label={companyLabels.companyName}
                     placeholder="Nombre de la empresa"
                     type="text"
                     size="compact"
@@ -94,7 +95,7 @@ const CompanyFormUI = (props: ICompanyFormUI) => {
                     disabled={false}
                     id="companyTypeIdent"
                     name="companyTypeIdent"
-                    label="Tipo de identificación"
+                    label={companyLabels.companyTypeIdent}
                     placeholder="Seleccione una opción"
                     onChange={onChange}
                     options={getDomainById("typeIdentCompany")}
@@ -107,7 +108,7 @@ const CompanyFormUI = (props: ICompanyFormUI) => {
                   <Input
                     name="companyNumberIdent"
                     id="companyNumberIdent"
-                    label="Número de identificacíon"
+                    label={companyLabels.companyNumberIdent}
                     placeholder="Número de identificacíon"
                     type="number"
                     size="compact"
@@ -121,7 +122,7 @@ const CompanyFormUI = (props: ICompanyFormUI) => {
                   <Input
                     name="companyVerifDigit"
                     id="companyVerifDigit"
-                    label="Digito de verificación"
+                    label={companyLabels.companyVerifDigit}
                     placeholder="Digito de verificación de id"
                     iconBefore={<MdHorizontalRule />}
                     type="number"
@@ -136,7 +137,7 @@ const CompanyFormUI = (props: ICompanyFormUI) => {
                   <Date
                     name="companyDateIdent"
                     id="companyDateIdent"
-                    label="Fecha de expedición de identificación"
+                    label={companyLabels.companyDateIdent}
                     size="compact"
                     value={formik.values.companyDateIdent}
                     onChange={formik.handleChange}
@@ -148,7 +149,7 @@ const CompanyFormUI = (props: ICompanyFormUI) => {
                   <Input
                     name="companyNameCommercial"
                     id="companyNameCommercial"
-                    label="Nombre comercial"
+                    label={companyLabels.companyNameCommercial}
                     placeholder="Nombre comercial"
                     type="text"
                     size="compact"
@@ -162,7 +163,7 @@ const CompanyFormUI = (props: ICompanyFormUI) => {
                   <Input
                     name="companyCode"
                     id="companyCode"
-                    label="Código postal"
+                    label={companyLabels.companyCode}
                     placeholder="Código postal"
                     type="text"
                     size="compact"
@@ -177,7 +178,7 @@ const CompanyFormUI = (props: ICompanyFormUI) => {
                     disabled={false}
                     id="companyCity"
                     name="companyCity"
-                    label="Ciudad de la sede"
+                    label={companyLabels.companyCity}
                     placeholder="Seleccione una opción"
                     onChange={onChange}
                     options={optionsCities}
@@ -191,7 +192,7 @@ const CompanyFormUI = (props: ICompanyFormUI) => {
                     name="companyAddressRes"
                     id="companyAddressRes"
                     label="Dirección de la sede"
-                    placeholder="Dirección fisica"
+                    placeholder={companyLabels.companyAddressRes}
                     type="text"
                     size="compact"
                     value={formik.values.companyAddressRes}
@@ -205,7 +206,7 @@ const CompanyFormUI = (props: ICompanyFormUI) => {
                     disabled={false}
                     id="companyCountry"
                     name="companyCountry"
-                    label="País de residencia fiscal"
+                    label={companyLabels.companyCountry}
                     placeholder="Seleccione una opción"
                     onChange={onChange}
                     options={optionsCountries}
@@ -219,7 +220,7 @@ const CompanyFormUI = (props: ICompanyFormUI) => {
                     disabled={false}
                     id="companyCountryIdent"
                     name="companyCountryIdent"
-                    label="País del documento de identidad"
+                    label={companyLabels.companyCountryIdent}
                     placeholder="Seleccione una opción"
                     onChange={onChange}
                     options={optionsCountries}
