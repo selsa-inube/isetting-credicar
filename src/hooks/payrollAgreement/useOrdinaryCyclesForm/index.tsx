@@ -11,6 +11,7 @@ import { IServerDomain } from "@ptypes/IServerDomain";
 import { payDayOrdinaryOptions } from "@utils/payDayOrdinary";
 import { addLeadingZero } from "@utils/addLeadingZero";
 import { courtDaysOrdinaryOptions } from "@utils/courtDaysOrdinary";
+import { payDayValues } from "@utils/payDayValues";
 
 const useOrdinaryCyclesForm = (
   ref: React.ForwardedRef<FormikProps<IOrdinaryCyclesEntry>>,
@@ -135,7 +136,7 @@ const useOrdinaryCyclesForm = (
     cycleId: addLeadingZero(id).toString(),
     nameCycle: formik.values.nameCycle,
     periodicity: formik.values.periodicity,
-    payday: formik.values.payday,
+    payday: payDayValues(formik.values.periodicity, formik.values.payday),
     numberDaysUntilCut: formik.values.numberDaysUntilCut,
   });
 

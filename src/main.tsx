@@ -39,6 +39,8 @@ root.render(
       authorizationParams={{
         redirect_uri,
       }}
+      cacheLocation="localstorage"
+      useRefreshTokens={true}
     >
       <AuthAndPortalDataProvider>
         {/* <App
