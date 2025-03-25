@@ -19,11 +19,7 @@ import { tokens } from "@design/tokens";
 import { mediaQueryMobile } from "@config/environment";
 import { ComponentAppearance } from "@enum/appearances";
 import { IServerDomain } from "@ptypes/IServerDomain";
-import {
-  StyledContainerButton,
-  StyledModal,
-  StyledSelectConatiner,
-} from "./styles";
+import { StyledModal, StyledSelectConatiner } from "./styles";
 
 interface IAddCycleModal {
   actionText: string;
@@ -90,22 +86,20 @@ const AddCycleModal = (props: IAddCycleModal) => {
             <Text type="headline" size="small" appearance="dark">
               {title}
             </Text>
-            <StyledContainerButton>
-              <Button
-                spacing="compact"
-                appearance={ComponentAppearance.DARK}
-                variant="none"
-                onClick={onCloseModal}
-                iconAfter={
-                  <Icon
-                    appearance={ComponentAppearance.DARK}
-                    icon={<MdClear />}
-                  />
-                }
-              >
-                Cerrar
-              </Button>
-            </StyledContainerButton>
+            <Button
+              spacing="compact"
+              appearance={ComponentAppearance.DARK}
+              variant="none"
+              onClick={onCloseModal}
+              iconAfter={
+                <Icon
+                  appearance={ComponentAppearance.DARK}
+                  icon={<MdClear />}
+                />
+              }
+            >
+              Cerrar
+            </Button>
           </Stack>
           <Divider />
         </Stack>

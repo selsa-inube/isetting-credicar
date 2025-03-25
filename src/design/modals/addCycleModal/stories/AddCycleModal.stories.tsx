@@ -2,7 +2,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 
 import { AddCycleModal } from "..";
-import { ControllerAddCycle } from "./controller";
+import { ControllerAddCycle } from "./AddCycle.controller";
 
 type Story = StoryObj<typeof AddCycleModal>;
 
