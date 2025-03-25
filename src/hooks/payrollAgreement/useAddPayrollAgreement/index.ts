@@ -2,11 +2,12 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { FormikProps } from "formik";
 
-import { addPayrollAgreementSteps } from "@config/payrollAgreement/payrollAgreementTab/assisted";
+import { addPayrollAgreementSteps } from "@config/payrollAgreement/payrollAgreementTab/assisted/steps";
 import { IAddPayrollAgreementForms } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IAddPayrollAgreementForms";
 import { ICompanyEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/ICompanyEntry";
 import { IAddPayrollAgreementRef } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IAddPayrollAgreementRef";
 import { compareObjects } from "@utils/compareObjects";
+import { IExtraordinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IExtraordinaryCyclesEntry";
 
 const useAddPayrollAgreement = () => {
   const initialValues = {
@@ -27,6 +28,34 @@ const useAddPayrollAgreement = () => {
         companyCountryIdent: "",
       },
     },
+    generalInformation: {
+      isValid: false,
+      values: {
+        namePayroll: "",
+        typePayroll: "",
+        sourcesOfIncome: "",
+        applicationDaysPayroll: "",
+      },
+    },
+    ordinaryCycles: {
+      isValid: false,
+      values: {
+        cycleId: "",
+        nameCycle: "",
+        periodicity: "",
+        payday: "",
+        numberDaysUntilCut: "",
+      },
+    },
+    extraordinaryCycles: {
+      isValid: false,
+      values: {
+        nameCycle: "",
+        typePayment: "",
+        payday: "",
+        numberDaysUntilCut: "",
+      },
+    },
   };
 
   const [currentStep, setCurrentStep] = useState(1);
@@ -34,6 +63,9 @@ const useAddPayrollAgreement = () => {
     useState<IAddPayrollAgreementForms>(initialValues);
   const [isCurrentFormValid, setIsCurrentFormValid] = useState(false);
   const [showGoBackModal, setShowGoBackModal] = useState(false);
+  const [extraordinaryPayment, setExtraordinaryPayment] = useState<
+    IExtraordinaryCyclesEntry[]
+  >([]);
   const companyRef = useRef<FormikProps<ICompanyEntry>>(null);
   const [canRefresh, setCanRefresh] = useState(false);
   const navigate = useNavigate();
@@ -116,6 +148,8 @@ const useAddPayrollAgreement = () => {
     formReferences,
     isCurrentFormValid,
     showGoBackModal,
+    extraordinaryPayment,
+    setExtraordinaryPayment,
     handleNextStep,
     handlePreviousStep,
     setCurrentStep,

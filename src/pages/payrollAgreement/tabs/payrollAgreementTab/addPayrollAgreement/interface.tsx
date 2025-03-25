@@ -14,6 +14,8 @@ import { crumbsAddPayrollAgreement } from "@config/payrollAgreement/payrollAgree
 import { CompanyForm } from "@design/forms/companyPayrollAgreement";
 import { DecisionModal } from "@design/modals/decisionModal";
 import { goBackModal } from "@config/payrollAgreement/payrollAgreementTab/forms/goBackModal";
+import { IExtraordinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IExtraordinaryCyclesEntry";
+import { ExtraordinaryPaymentCyclesForm } from "@design/forms/extraordinaryPaymentCycles";
 interface IAddPayrollAgreementUI {
   currentStep: number;
   formReferences: IAddPayrollAgreementRef;
@@ -21,12 +23,16 @@ interface IAddPayrollAgreementUI {
   isCurrentFormValid: boolean;
   steps: IAssistedStep[];
   showGoBackModal: boolean;
+  extraordinaryPayment: IExtraordinaryCyclesEntry[];
   onOpenModal: () => void;
   onCloseModal: () => void;
   onGoBack: () => void;
   onNextStep: () => void;
   onPreviousStep: () => void;
   setIsCurrentFormValid: React.Dispatch<React.SetStateAction<boolean>>;
+  setExtraordinaryPayment: React.Dispatch<
+    React.SetStateAction<IExtraordinaryCyclesEntry[]>
+  >;
 }
 
 const AddPayrollAgreementUI = (props: IAddPayrollAgreementUI) => {
@@ -34,6 +40,7 @@ const AddPayrollAgreementUI = (props: IAddPayrollAgreementUI) => {
     currentStep,
     formReferences,
     initialGeneralInformationValues,
+    extraordinaryPayment,
     setIsCurrentFormValid,
     isCurrentFormValid,
     steps,
@@ -43,6 +50,7 @@ const AddPayrollAgreementUI = (props: IAddPayrollAgreementUI) => {
     onNextStep,
     onPreviousStep,
     onGoBack,
+    setExtraordinaryPayment,
   } = props;
 
   const smallScreen = useMediaQuery("(max-width: 990px)");
@@ -91,6 +99,15 @@ const AddPayrollAgreementUI = (props: IAddPayrollAgreementUI) => {
                 initialValues={initialGeneralInformationValues.company.values}
                 onFormValid={setIsCurrentFormValid}
                 onButtonClick={onNextStep}
+              />
+            )}
+            {currentStep === 4 && (
+              <ExtraordinaryPaymentCyclesForm
+                extraordinaryPayment={extraordinaryPayment}
+                setExtraordinaryPayment={setExtraordinaryPayment}
+                onFormValid={setIsCurrentFormValid}
+                onButtonClick={onNextStep}
+                onPreviousStep={onPreviousStep}
               />
             )}
           </Stack>

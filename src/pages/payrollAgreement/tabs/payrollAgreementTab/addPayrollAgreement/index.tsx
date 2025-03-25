@@ -1,4 +1,4 @@
-import { addPayrollAgreementSteps } from "@config/payrollAgreement/payrollAgreementTab/assisted";
+import { addPayrollAgreementSteps } from "@config/payrollAgreement/payrollAgreementTab/assisted/steps";
 import { useAddPayrollAgreement } from "@hooks/payrollAgreement/useAddPayrollAgreement";
 import { AddPayrollAgreementUI } from "./interface";
 
@@ -9,12 +9,14 @@ function AddPayrollAgreement() {
     formReferences,
     isCurrentFormValid,
     showGoBackModal,
+    extraordinaryPayment,
     handleNextStep,
     handlePreviousStep,
     setIsCurrentFormValid,
     handleOpenModal,
     handleCloseModal,
     handleGoBack,
+    setExtraordinaryPayment,
   } = useAddPayrollAgreement();
 
   return (
@@ -31,6 +33,8 @@ function AddPayrollAgreement() {
       showGoBackModal={showGoBackModal}
       onOpenModal={handleOpenModal}
       onCloseModal={handleCloseModal}
+      extraordinaryPayment={extraordinaryPayment}
+      setExtraordinaryPayment={setExtraordinaryPayment}
     />
   );
 }
