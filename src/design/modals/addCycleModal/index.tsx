@@ -20,6 +20,7 @@ import { mediaQueryMobile } from "@config/environment";
 import { ComponentAppearance } from "@enum/appearances";
 import { IServerDomain } from "@ptypes/IServerDomain";
 import { StyledModal, StyledSelectConatiner } from "./styles";
+import { getFieldState } from "@utils/forms/getFieldState";
 
 interface IAddCycleModal {
   actionText: string;
@@ -65,10 +66,6 @@ const AddCycleModal = (props: IAddCycleModal) => {
   } = props;
 
   const isMobile = useMediaQuery(mediaQueryMobile);
-
-  const getFieldState = (formik: FormikValues, fieldName: string) => {
-    if (formik.errors[fieldName]) return "invalid";
-  };
 
   const node = document.getElementById(portalId);
 
