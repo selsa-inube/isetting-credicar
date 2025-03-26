@@ -1,5 +1,6 @@
 import { useEffect, useImperativeHandle, useState } from "react";
 import { FormikProps, useFormik } from "formik";
+import { useMediaQuery } from "@inubekit/inubekit";
 import { object } from "yup";
 
 import { validationRules } from "@validations/validationRules";
@@ -35,6 +36,8 @@ const useOrdinaryCyclesForm = (
     });
 
   const validationSchema = createValidationSchema();
+
+  const isMobile = useMediaQuery("(max-width: 990px)");
 
   const initialValues: IOrdinaryCyclesEntry = {
     cycleId: "",
@@ -163,6 +166,7 @@ const useOrdinaryCyclesForm = (
     numberDaysUntilCutOptions,
     paydayOptions,
     periodicityOptions,
+    isMobile,
     onToggleInfoModal,
     handleChange,
     handleReset,

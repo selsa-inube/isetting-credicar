@@ -169,14 +169,21 @@ const useAddPayrollAgreement = () => {
     };
   }, [formValues, initialValues, companyRef, canRefresh]);
 
+  const formValid =
+    regularPaymentCycles && regularPaymentCycles.length > 0
+      ? false
+      : !isCurrentFormValid;
+
   return {
     currentStep,
     formValues,
     formReferences,
-    isCurrentFormValid,
+    formValid,
     showGoBackModal,
     sourcesOfIncomeValues,
     smallScreen,
+    regularPaymentCycles,
+    isCurrentFormValid,
     setSourcesOfIncomeValues,
     setRegularPaymentCycles,
     handleNextStep,

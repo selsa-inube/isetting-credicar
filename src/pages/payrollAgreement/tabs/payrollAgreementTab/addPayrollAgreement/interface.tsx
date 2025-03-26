@@ -14,10 +14,10 @@ import { CompanyForm } from "@design/forms/companyPayrollAgreement";
 import { DecisionModal } from "@design/modals/decisionModal";
 
 import { IServerDomain } from "@ptypes/IServerDomain";
-import { GeneralInformationPayrollForm } from "@design/forms/generalInfoPayrollAgreement";
 import { RegularPaymentCyclesForm } from "@design/forms/regularPaymentCycles";
 import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
 import { goBackModal } from "@config/payrollAgreement/payrollAgreementTab/forms/goBackModal";
+import { GeneralInformationPayrollForm } from "@src/design/forms/generalInfoPayrollAgreement";
 
 interface IAddPayrollAgreementUI {
   currentStep: number;

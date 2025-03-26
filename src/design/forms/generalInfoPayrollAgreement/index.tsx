@@ -3,8 +3,8 @@ import { FormikProps } from "formik";
 
 import { IGeneralInformationEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IGeneralInformationPayroll";
 import { useGeneralInformationForm } from "@hooks/payrollAgreement/useGeneralInformationForm";
-import { infoModal } from "@config/payrollAgreement/payrollAgreementTab/generics/infoModal";
 import { IServerDomain } from "@ptypes/IServerDomain";
+import { infoModal } from "@config/payrollAgreement/payrollAgreementTab/generic/infoModal";
 import { GeneralInformationPayrollFormUI } from "./interface";
 
 interface IGeneralInformationPayrollForm {

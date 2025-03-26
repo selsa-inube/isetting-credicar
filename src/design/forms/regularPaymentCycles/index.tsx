@@ -46,6 +46,7 @@ const RegularPaymentCyclesForm = forwardRef<
       paydayOptions,
       periodicityOptions,
       showInfoModal,
+      isMobile,
       onToggleInfoModal,
       handleToggleModal,
       handleChange,
@@ -82,6 +83,7 @@ const RegularPaymentCyclesForm = forwardRef<
         periodicityOptions={periodicityOptions}
         showInfoModal={showInfoModal}
         onToggleInfoModal={onToggleInfoModal}
+        isMobile={isMobile}
       />
     );
   },

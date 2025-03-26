@@ -1,6 +1,6 @@
 import { MdInfoOutline, MdOutlineAdd } from "react-icons/md";
 import { FormikProps } from "formik";
-import { Button, Stack, useMediaQuery } from "@inubekit/inubekit";
+import { Button, Stack } from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
 import { Table } from "@design/data/table";
@@ -34,6 +34,7 @@ interface IRegularPaymentCyclesFormUI {
   showAddModal: boolean;
   showInfoModal: boolean;
   valuesEqual: boolean;
+  isMobile: boolean;
   onToggleInfoModal: () => void;
   onAddCycle: () => void;
   onToggleModal: () => void;
@@ -58,6 +59,7 @@ const RegularPaymentCyclesFormUI = (props: IRegularPaymentCyclesFormUI) => {
     showAddModal,
     showInfoModal,
     valuesEqual,
+    isMobile,
     onChange,
     onAddCycle,
     onToggleInfoModal,
@@ -66,8 +68,6 @@ const RegularPaymentCyclesFormUI = (props: IRegularPaymentCyclesFormUI) => {
     onToggleModal,
     onPreviousStep,
   } = props;
-
-  const isMobile = useMediaQuery("(max-width: 990px)");
 
   return (
     <StyledContainer>

@@ -17,7 +17,7 @@ import { ICompanyEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/form
 import { getDomainById } from "@mocks/domains/domainService.mocks";
 import { getFieldState } from "@utils/forms/getFieldState";
 import { IServerDomain } from "@ptypes/IServerDomain";
-import { companyLabels } from "@config/payrollAgreement/payrollAgreementTab/forms/goBackModal/companyLabels";
+import { companyLabels } from "@src/config/payrollAgreement/payrollAgreementTab/forms/companyLabels";
 import {
   StyledContainer,
   StyledContainerFields,
