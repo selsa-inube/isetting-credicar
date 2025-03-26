@@ -46,26 +46,26 @@ const useDetailsPayrollAgreement = (
     let extraordinary: IEntry[] = [];
     if (data.payrollSpecialBenefitPaymentCycles) {
       extraordinary = extraordinary.concat(
-        Object.entries(data.payrollSpecialBenefitPaymentCycles).length > 0 &&
-          data.payrollSpecialBenefitPaymentCycles.map(
-            (item: IEntry, index: string) => {
-              return {
-                id: index,
-                name: item.abbreviatedName,
-                typePayment: "Prima",
-                cuttingDay: item.paymentDay,
-                numberDays: item.numberOfDaysBeforePaymentToBill,
-              };
-            },
-          ),
+        Object.entries(data.payrollSpecialBenefitPaymentCycles).length > 0
+          ? data.payrollSpecialBenefitPaymentCycles.map(
+              (item: IEntry, index: string) => {
+                return {
+                  id: index,
+                  name: item.abbreviatedName,
+                  typePayment: "Prima",
+                  cuttingDay: item.paymentDay,
+                  numberDays: item.numberOfDaysBeforePaymentToBill,
+                };
+              },
+            )
+          : [],
       );
     }
 
     if (data.severancePaymentCycles) {
       extraordinary = extraordinary.concat(
-        Object.entries(data.severancePaymentCycles).length > 0 &&
-          data.payrollSpecialBenefitPaymentCycles.map(
-            (item: IEntry, index: string) => {
+        Object.entries(data.severancePaymentCycles).length > 0
+          ? data.severancePaymentCycles.map((item: IEntry, index: string) => {
               return {
                 id: index,
                 name: item.abbreviatedName,
@@ -73,11 +73,10 @@ const useDetailsPayrollAgreement = (
                 cuttingDay: item.paymentDay,
                 numberDays: item.numberOfDaysBeforePaymentToBill,
               };
-            },
-          ),
+            })
+          : [],
       );
     }
-
     return extraordinary;
   };
 
