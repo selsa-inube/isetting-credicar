@@ -3,13 +3,14 @@ import { useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "@inubekit/inubekit";
 import { FormikProps } from "formik";
 
-import { addPayrollAgreementSteps } from "@config/payrollAgreement/payrollAgreementTab/assisted";
+import { addPayrollAgreementSteps } from "@config/payrollAgreement/payrollAgreementTab/assisted/steps";
 import { IAddPayrollAgreementForms } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IAddPayrollAgreementForms";
 import { ICompanyEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/ICompanyEntry";
 import { IAddPayrollAgreementRef } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IAddPayrollAgreementRef";
 import { compareObjects } from "@utils/compareObjects";
 import { IGeneralInformationEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IGeneralInformationPayroll";
 import { getDomainById } from "@mocks/domains/domainService.mocks";
+import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
 
 const useAddPayrollAgreement = () => {
   const initialValues = {
@@ -39,6 +40,16 @@ const useAddPayrollAgreement = () => {
         applicationDaysPayroll: "",
       },
     },
+    ordinaryCycles: {
+      isValid: false,
+      values: {
+        cycleId: "",
+        nameCycle: "",
+        periodicity: "",
+        payday: "",
+        numberDaysUntilCut: 0,
+      },
+    },
   };
 
   const [currentStep, setCurrentStep] = useState(1);
@@ -58,9 +69,12 @@ const useAddPayrollAgreement = () => {
   const generalInformationRef =
     useRef<FormikProps<IGeneralInformationEntry>>(null);
 
+  const ordinaryCyclesRef = useRef<FormikProps<IOrdinaryCyclesEntry>>(null);
+
   const formReferences: IAddPayrollAgreementRef = {
     company: companyRef,
     generalInformation: generalInformationRef,
+    ordinaryCycles: ordinaryCyclesRef,
   };
   const handleNextStep = () => {
     if (currentStep < addPayrollAgreementSteps.length) {

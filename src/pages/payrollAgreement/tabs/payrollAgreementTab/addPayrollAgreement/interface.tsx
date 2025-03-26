@@ -15,6 +15,7 @@ import { DecisionModal } from "@design/modals/decisionModal";
 import { goBackModal } from "@config/payrollAgreement/payrollAgreementTab/forms/goBackModal";
 import { IServerDomain } from "@ptypes/IServerDomain";
 import { GeneralInformationPayrollForm } from "@design/forms/generalInfoPayrollAgreement";
+import { RegularPaymentCyclesForm } from "@design/forms/regularPaymentCycles";
 interface IAddPayrollAgreementUI {
   currentStep: number;
   formReferences: IAddPayrollAgreementRef;
@@ -111,6 +112,17 @@ const AddPayrollAgreementUI = (props: IAddPayrollAgreementUI) => {
                 onPreviousStep={onPreviousStep}
                 sourcesOfIncomeValues={sourcesOfIncomeValues}
                 setSourcesOfIncomeValues={setSourcesOfIncomeValues}
+              />
+            )}
+            {currentStep === 3 && (
+              <RegularPaymentCyclesForm
+                ref={formReferences.ordinaryCycles}
+                initialValues={
+                  initialGeneralInformationValues.ordinaryCycles.values
+                }
+                onFormValid={setIsCurrentFormValid}
+                onButtonClick={onNextStep}
+                onPreviousStep={onPreviousStep}
               />
             )}
           </Stack>
