@@ -3,7 +3,6 @@ import {
   Breadcrumbs,
   IAssistedStep,
   Stack,
-  useMediaQuery,
 } from "@inubekit/inubekit";
 
 import { Title } from "@design/data/title";
@@ -14,12 +13,19 @@ import { crumbsAddPayrollAgreement } from "@config/payrollAgreement/payrollAgree
 import { CompanyForm } from "@design/forms/companyPayrollAgreement";
 import { DecisionModal } from "@design/modals/decisionModal";
 import { goBackModal } from "@config/payrollAgreement/payrollAgreementTab/forms/goBackModal";
+import { IServerDomain } from "@ptypes/IServerDomain";
+import { GeneralInformationPayrollForm } from "@design/forms/generalInfoPayrollAgreement";
 interface IAddPayrollAgreementUI {
   currentStep: number;
   formReferences: IAddPayrollAgreementRef;
   initialGeneralInformationValues: IAddPayrollAgreementForms;
   isCurrentFormValid: boolean;
   steps: IAssistedStep[];
+  sourcesOfIncomeValues: IServerDomain[];
+  smallScreen: boolean;
+  setSourcesOfIncomeValues: React.Dispatch<
+    React.SetStateAction<IServerDomain[]>
+  >;
   showGoBackModal: boolean;
   onOpenModal: () => void;
   onCloseModal: () => void;
@@ -34,18 +40,19 @@ const AddPayrollAgreementUI = (props: IAddPayrollAgreementUI) => {
     currentStep,
     formReferences,
     initialGeneralInformationValues,
-    setIsCurrentFormValid,
     isCurrentFormValid,
     steps,
     showGoBackModal,
+    smallScreen,
     onOpenModal,
     onCloseModal,
+    sourcesOfIncomeValues,
+    setSourcesOfIncomeValues,
+    setIsCurrentFormValid,
     onNextStep,
     onPreviousStep,
     onGoBack,
   } = props;
-
-  const smallScreen = useMediaQuery("(max-width: 990px)");
 
   return (
     <Stack
@@ -91,6 +98,19 @@ const AddPayrollAgreementUI = (props: IAddPayrollAgreementUI) => {
                 initialValues={initialGeneralInformationValues.company.values}
                 onFormValid={setIsCurrentFormValid}
                 onButtonClick={onNextStep}
+              />
+            )}
+            {currentStep === 2 && (
+              <GeneralInformationPayrollForm
+                ref={formReferences.generalInformation}
+                initialValues={
+                  initialGeneralInformationValues.generalInformation.values
+                }
+                onFormValid={setIsCurrentFormValid}
+                onButtonClick={onNextStep}
+                onPreviousStep={onPreviousStep}
+                sourcesOfIncomeValues={sourcesOfIncomeValues}
+                setSourcesOfIncomeValues={setSourcesOfIncomeValues}
               />
             )}
           </Stack>
