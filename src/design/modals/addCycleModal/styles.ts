@@ -18,18 +18,10 @@ const StyledModal = styled.div<IStyledModal>`
   box-sizing: border-box;
 `;
 
-const StyledContainerButton = styled.div`
-  & button {
-    display: flex;
-    padding-right: ${tokens.spacing.s0};
-    justify-content: flex-end;
-  }
-`;
-
 const StyledSelectConatiner = styled.div`
   & > div > div > input {
     width: 100%;
   }
 `;
 
-export { StyledModal, StyledContainerButton, StyledSelectConatiner };
+export { StyledModal, StyledSelectConatiner };

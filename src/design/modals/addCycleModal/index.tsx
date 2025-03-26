@@ -19,11 +19,8 @@ import { tokens } from "@design/tokens";
 import { mediaQueryMobile } from "@config/environment";
 import { ComponentAppearance } from "@enum/appearances";
 import { IServerDomain } from "@ptypes/IServerDomain";
-import {
-  StyledContainerButton,
-  StyledModal,
-  StyledSelectConatiner,
-} from "./styles";
+import { StyledModal, StyledSelectConatiner } from "./styles";
+import { getFieldState } from "@utils/forms/getFieldState";
 
 interface IAddCycleModal {
   actionText: string;
@@ -36,7 +33,7 @@ interface IAddCycleModal {
   onClick: () => void;
   onCloseModal: () => void;
   onChange: (name: string, value: string) => void;
-  onToggleInfoModal: () => void;
+  onToggleInfoModal?: () => void;
   periodicityOptions?: IServerDomain[];
   paydayOptions?: IServerDomain[];
   typePaymentOptions?: IServerDomain[];
@@ -70,10 +67,6 @@ const AddCycleModal = (props: IAddCycleModal) => {
 
   const isMobile = useMediaQuery(mediaQueryMobile);
 
-  const getFieldState = (formik: FormikValues, fieldName: string) => {
-    if (formik.errors[fieldName]) return "invalid";
-  };
-
   const node = document.getElementById(portalId);
 
   if (!node) {
@@ -90,22 +83,20 @@ const AddCycleModal = (props: IAddCycleModal) => {
             <Text type="headline" size="small" appearance="dark">
               {title}
             </Text>
-            <StyledContainerButton>
-              <Button
-                spacing="compact"
-                appearance={ComponentAppearance.DARK}
-                variant="none"
-                onClick={onCloseModal}
-                iconAfter={
-                  <Icon
-                    appearance={ComponentAppearance.DARK}
-                    icon={<MdClear />}
-                  />
-                }
-              >
-                Cerrar
-              </Button>
-            </StyledContainerButton>
+            <Button
+              spacing="compact"
+              appearance={ComponentAppearance.DARK}
+              variant="none"
+              onClick={onCloseModal}
+              iconAfter={
+                <Icon
+                  appearance={ComponentAppearance.DARK}
+                  icon={<MdClear />}
+                />
+              }
+            >
+              Cerrar
+            </Button>
           </Stack>
           <Divider />
         </Stack>
@@ -162,7 +153,6 @@ const AddCycleModal = (props: IAddCycleModal) => {
                   name="payday"
                   placeholder="Selecciónalo de la lista"
                   onChange={onChange}
-                  disabled={!formik.values.periodicity}
                   options={paydayOptions ?? []}
                   size="compact"
                   value={formik.values.payday ?? ""}
@@ -246,7 +236,6 @@ const AddCycleModal = (props: IAddCycleModal) => {
             size="compact"
             value={formik.values.numberDaysUntilCut ?? ""}
             fullwidth
-            disabled={!formik.values.periodicity}
             message={formik.errors.numberDaysUntilCut}
             invalid={formik.errors.numberDaysUntilCut ? true : false}
           />

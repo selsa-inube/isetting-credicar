@@ -8,12 +8,19 @@ function AddPayrollAgreement() {
     currentStep,
     formValues,
     formReferences,
-    isCurrentFormValid,
+    formValid,
+    showGoBackModal,
+    sourcesOfIncomeValues,
+    smallScreen,
     regularPaymentCycles,
+    setSourcesOfIncomeValues,
     handleNextStep,
     handlePreviousStep,
     setIsCurrentFormValid,
     setRegularPaymentCycles,
+    handleGoBack,
+    handleOpenModal,
+    handleCloseModal,
   } = useAddPayrollAgreement();
 
   return (
@@ -21,11 +28,18 @@ function AddPayrollAgreement() {
       currentStep={currentStep}
       formReferences={formReferences}
       initialGeneralInformationValues={formValues}
-      isCurrentFormValid={isCurrentFormValid}
+      formValid={formValid}
       steps={addPayrollAgreementSteps}
       onNextStep={handleNextStep}
       onPreviousStep={handlePreviousStep}
       setIsCurrentFormValid={setIsCurrentFormValid}
+      sourcesOfIncomeValues={sourcesOfIncomeValues}
+      setSourcesOfIncomeValues={setSourcesOfIncomeValues}
+      onGoBack={handleGoBack}
+      showGoBackModal={showGoBackModal}
+      onOpenModal={handleOpenModal}
+      onCloseModal={handleCloseModal}
+      smallScreen={smallScreen}
       regularPaymentCycles={regularPaymentCycles as IOrdinaryCyclesEntry[]}
       setRegularPaymentCycles={
         setRegularPaymentCycles as React.Dispatch<

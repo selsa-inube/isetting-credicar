@@ -114,16 +114,10 @@ const useOrdinaryCyclesForm = (
     updateButton();
   }, [formik.values, loading, formik.isValid, initialValues, editDataOption]);
 
-  const resetFormFields = () => {
-    formik.setFieldValue("nameCycle", "");
-    formik.setFieldValue("periodicity", "");
-    formik.setFieldValue("payday", "");
-    formik.setFieldValue("numberDaysUntilCut", "");
-  };
   const handleToggleModal = () => {
     setPaydayOptions([]);
     setNumberDaysUntilCutOptions([]);
-    resetFormFields();
+    formik.resetForm();
     setShowAddModal(!showAddModal);
   };
 

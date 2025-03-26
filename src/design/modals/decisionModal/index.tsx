@@ -1,15 +1,7 @@
-import { string, object } from "yup";
-import { useEffect, useState } from "react";
-import { useFormik } from "formik";
-import { IIconAppearance } from "@inubekit/inubekit";
-
+import { IIconAppearance, useMediaQuery } from "@inubekit/inubekit";
 import { ComponentAppearance } from "@enum/appearances";
 import { DecisionModalUI } from "./interface";
-import { IDecisionEntry } from "./types";
-
-const validationSchema = object({
-  justification: string(),
-});
+import { mediaQueryMobile } from "@config/environment";
 
 interface IDecisionModal {
   actionText: string;
@@ -18,19 +10,13 @@ interface IDecisionModal {
   title: string;
   onClick: () => void;
   onCloseModal: () => void;
-  setFieldEntered?: (value: string) => void;
   appearance?: IIconAppearance;
   icon?: React.JSX.Element;
   isLoading?: boolean;
-  justificationOfDecision?: boolean;
   withIcon?: boolean;
   withCancelButton?: boolean;
   moreDetails?: string;
 }
-
-const initialValues: IDecisionEntry = {
-  justification: "",
-};
 
 const DecisionModal = (props: IDecisionModal) => {
   const {
@@ -39,7 +25,6 @@ const DecisionModal = (props: IDecisionModal) => {
     withIcon = false,
     description,
     isLoading = false,
-    justificationOfDecision = false,
     portalId,
     title,
     appearance = ComponentAppearance.PRIMARY,
@@ -47,62 +32,33 @@ const DecisionModal = (props: IDecisionModal) => {
     moreDetails,
     onClick,
     onCloseModal,
-    setFieldEntered,
   } = props;
 
-  const [dynamicValidationSchema, setDynamicValidationSchema] =
-    useState(validationSchema);
+  const isMobile = useMediaQuery(mediaQueryMobile);
 
-  const formik = useFormik({
-    initialValues,
-    validationSchema: dynamicValidationSchema,
-    validateOnChange: false,
-    validateOnBlur: true,
-    onSubmit: async () => {
-      return Promise.resolve(true);
-    },
-  });
+  const node = document.getElementById(portalId);
 
-  useEffect(() => {
-    if (justificationOfDecision) {
-      setDynamicValidationSchema(
-        validationSchema.shape({
-          justification: string()
-            .required("El dato es requerido")
-            .min(5, "Debe registrar como mínimo 5 caracteres.")
-            .max(130, "No puede superar de 130 caracteres."),
-        }),
-      );
-    }
-  }, [justificationOfDecision, setDynamicValidationSchema]);
-
-  useEffect(() => {
-    if (formik.values && setFieldEntered)
-      setFieldEntered(formik.values.justification);
-  }, [formik.values, setFieldEntered]);
-
-  const comparisonData = Boolean(
-    justificationOfDecision &&
-      formik.values.justification === initialValues.justification,
-  );
+  if (!node) {
+    throw new Error(
+      "The portal node is not defined. This can occur when the specific node used to render the portal has not been defined correctly.",
+    );
+  }
 
   return (
     <DecisionModalUI
       actionText={actionText}
       appearance={appearance}
-      comparisonData={comparisonData}
       description={description}
-      formik={formik}
       icon={icon}
       isLoading={isLoading}
-      justificationOfDecision={justificationOfDecision}
       onClick={onClick}
       onCloseModal={onCloseModal}
-      portalId={portalId}
+      isMobile={isMobile}
       title={title}
       withIcon={withIcon}
       withCancelButton={withCancelButton}
       moreDetails={moreDetails}
+      node={node}
     />
   );
 };
