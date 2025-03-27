@@ -12,6 +12,7 @@ import { IGeneralInformationEntry } from "@ptypes/payrollAgreement/payrollAgreem
 import { getDomainById } from "@mocks/domains/domainService.mocks";
 import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
 import { compareObjects } from "@utils/compareObjects";
+import { IExtraordinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IExtraordinaryCyclesEntry";
 
 const useAddPayrollAgreement = () => {
   const initialValues = {
@@ -53,6 +54,15 @@ const useAddPayrollAgreement = () => {
         },
       ],
     },
+    extraordinaryCycles: {
+      isValid: false,
+      values: {
+        nameCycle: "",
+        typePayment: "",
+        payday: "",
+        numberDaysUntilCut: "",
+      },
+    },
   };
 
   const [currentStep, setCurrentStep] = useState(1);
@@ -66,6 +76,9 @@ const useAddPayrollAgreement = () => {
   const [sourcesOfIncomeValues, setSourcesOfIncomeValues] = useState(
     getDomainById("sourcesOfIncome"),
   );
+  const [extraordinaryPayment, setExtraordinaryPayment] = useState<
+    IExtraordinaryCyclesEntry[]
+  >([]);
   const [canRefresh, setCanRefresh] = useState(false);
   const navigate = useNavigate();
 
@@ -184,6 +197,8 @@ const useAddPayrollAgreement = () => {
     smallScreen,
     regularPaymentCycles,
     isCurrentFormValid,
+    extraordinaryPayment,
+    setExtraordinaryPayment,
     setSourcesOfIncomeValues,
     setRegularPaymentCycles,
     handleNextStep,

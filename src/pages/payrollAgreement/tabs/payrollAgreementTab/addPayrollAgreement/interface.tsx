@@ -17,7 +17,9 @@ import { IServerDomain } from "@ptypes/IServerDomain";
 import { RegularPaymentCyclesForm } from "@design/forms/regularPaymentCycles";
 import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
 import { goBackModal } from "@config/payrollAgreement/payrollAgreementTab/forms/goBackModal";
-import { GeneralInformationPayrollForm } from "@src/design/forms/generalInfoPayrollAgreement";
+import { GeneralInformationPayrollForm } from "@design/forms/generalInfoPayrollAgreement";
+import { IExtraordinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IExtraordinaryCyclesEntry";
+import { ExtraordinaryPaymentCyclesForm } from "@design/forms/extraordinaryPaymentCycles";
 
 interface IAddPayrollAgreementUI {
   currentStep: number;
@@ -31,6 +33,7 @@ interface IAddPayrollAgreementUI {
     React.SetStateAction<IServerDomain[]>
   >;
   showGoBackModal: boolean;
+  extraordinaryPayment: IExtraordinaryCyclesEntry[];
   onOpenModal: () => void;
   onCloseModal: () => void;
   onGoBack: () => void;
@@ -41,6 +44,9 @@ interface IAddPayrollAgreementUI {
   setRegularPaymentCycles: React.Dispatch<
     React.SetStateAction<IOrdinaryCyclesEntry[]>
   >;
+  setExtraordinaryPayment: React.Dispatch<
+    React.SetStateAction<IExtraordinaryCyclesEntry[]>
+  >;
 }
 
 const AddPayrollAgreementUI = (props: IAddPayrollAgreementUI) => {
@@ -50,6 +56,7 @@ const AddPayrollAgreementUI = (props: IAddPayrollAgreementUI) => {
     initialGeneralInformationValues,
     formValid,
     regularPaymentCycles,
+    extraordinaryPayment,
     steps,
     showGoBackModal,
     smallScreen,
@@ -62,6 +69,7 @@ const AddPayrollAgreementUI = (props: IAddPayrollAgreementUI) => {
     onNextStep,
     onPreviousStep,
     setRegularPaymentCycles,
+    setExtraordinaryPayment,
   } = props;
 
   return (
@@ -130,6 +138,15 @@ const AddPayrollAgreementUI = (props: IAddPayrollAgreementUI) => {
                 onButtonClick={onNextStep}
                 onPreviousStep={onPreviousStep}
                 setRegularPaymentCycles={setRegularPaymentCycles}
+              />
+            )}
+            {currentStep === 4 && (
+              <ExtraordinaryPaymentCyclesForm
+                extraordinaryPayment={extraordinaryPayment}
+                setExtraordinaryPayment={setExtraordinaryPayment}
+                onFormValid={setIsCurrentFormValid}
+                onButtonClick={onNextStep}
+                onPreviousStep={onPreviousStep}
               />
             )}
           </Stack>

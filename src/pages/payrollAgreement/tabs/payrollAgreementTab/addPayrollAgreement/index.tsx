@@ -13,6 +13,7 @@ function AddPayrollAgreement() {
     sourcesOfIncomeValues,
     smallScreen,
     regularPaymentCycles,
+    extraordinaryPayment,
     setSourcesOfIncomeValues,
     handleNextStep,
     handlePreviousStep,
@@ -21,6 +22,7 @@ function AddPayrollAgreement() {
     handleGoBack,
     handleOpenModal,
     handleCloseModal,
+    setExtraordinaryPayment,
   } = useAddPayrollAgreement();
 
   return (
@@ -46,6 +48,8 @@ function AddPayrollAgreement() {
           React.SetStateAction<IOrdinaryCyclesEntry[]>
         >
       }
+      extraordinaryPayment={extraordinaryPayment}
+      setExtraordinaryPayment={setExtraordinaryPayment}
     />
   );
 }
