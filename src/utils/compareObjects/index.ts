@@ -17,7 +17,6 @@ const compareObjects = (object1: any, object2: any): boolean => {
   if (keys1.length !== keys2.length) return false;
 
   for (const key of keys1) {
-    console.log({ key, keys1 });
     if (!keys2.includes(key)) return false;
     if (!compareObjects(object1[key], object2[key])) return false;
   }

@@ -1,72 +1,51 @@
 import { MdClear } from "react-icons/md";
 import { createPortal } from "react-dom";
-import { FormikValues } from "formik";
 import {
   Stack,
   Text,
   Icon,
   IIconAppearance,
   Divider,
-  useMediaQuery,
   Blanket,
-  Textarea,
   Button,
 } from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
-import { mediaQueryMobile } from "@config/environment";
 import { ComponentAppearance } from "@enum/appearances";
-import { StyledContainerButton, StyledModal, StyledTextarea } from "./styles";
+import { StyledContainerButton, StyledModal } from "./styles";
 
 interface IDecisionModalUI {
   actionText: string;
   appearance: IIconAppearance;
-  comparisonData: boolean;
   description: string;
-  formik: FormikValues;
   icon: React.JSX.Element;
   isLoading: boolean;
-  justificationOfDecision: boolean;
-  portalId: string;
+  node: HTMLElement;
   title: string;
   withIcon: boolean;
   withCancelButton: boolean;
+  isMobile: boolean;
   onClick: () => void;
   onCloseModal: () => void;
+  moreDetails?: string;
 }
 
 const DecisionModalUI = (props: IDecisionModalUI) => {
   const {
     actionText,
     appearance,
-    comparisonData,
     description,
-    formik,
     isLoading,
     icon,
-    justificationOfDecision,
-    portalId,
+    node,
     title,
     withIcon,
     withCancelButton,
+    moreDetails,
+    isMobile,
     onCloseModal,
     onClick,
   } = props;
-
-  const isMobile = useMediaQuery(mediaQueryMobile);
-  const isMobileTextarea = useMediaQuery("(max-width: 490px)");
-
-  const getFieldState = (formik: FormikValues, fieldName: string) => {
-    if (formik.errors[fieldName]) return "invalid";
-  };
-
-  const node = document.getElementById(portalId);
-
-  if (!node) {
-    throw new Error(
-      "The portal node is not defined. This can occur when the specific node used to render the portal has not been defined correctly.",
-    );
-  }
 
   return createPortal(
     <Blanket>
@@ -106,22 +85,13 @@ const DecisionModalUI = (props: IDecisionModalUI) => {
           {description}
         </Text>
 
-        {justificationOfDecision && (
-          <StyledTextarea $smallScreen={isMobileTextarea}>
-            <Textarea
-              label=""
-              name="justification"
-              id="justification"
-              placeholder="Indique la razón por la que desea realizar esta acción"
-              value={formik.values.justification}
-              message={formik.errors.justification}
-              fullwidth
-              maxLength={130}
-              status={getFieldState(formik, "justification")}
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-            />
-          </StyledTextarea>
+        {moreDetails && (
+          <Stack direction="column" gap={tokens.spacing.s200}>
+            <Divider dashed />
+            <Text size="medium" appearance="dark">
+              {moreDetails}
+            </Text>
+          </Stack>
         )}
 
         <Stack gap={tokens.spacing.s250} justifyContent="flex-end">
@@ -141,7 +111,6 @@ const DecisionModalUI = (props: IDecisionModalUI) => {
             variant="filled"
             loading={isLoading}
             onClick={onClick}
-            disabled={comparisonData || !formik.isValid}
           >
             {actionText}
           </Button>

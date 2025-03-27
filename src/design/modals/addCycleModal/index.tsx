@@ -33,7 +33,7 @@ interface IAddCycleModal {
   onClick: () => void;
   onCloseModal: () => void;
   onChange: (name: string, value: string) => void;
-  onToggleInfoModal: () => void;
+  onToggleInfoModal?: () => void;
   periodicityOptions?: IServerDomain[];
   paydayOptions?: IServerDomain[];
   typePaymentOptions?: IServerDomain[];
@@ -154,6 +154,7 @@ const AddCycleModal = (props: IAddCycleModal) => {
                   placeholder="Selecciónalo de la lista"
                   onChange={onChange}
                   options={paydayOptions ?? []}
+                  disabled={!formik.values.periodicity}
                   size="compact"
                   value={formik.values.payday ?? ""}
                   fullwidth
@@ -237,6 +238,7 @@ const AddCycleModal = (props: IAddCycleModal) => {
             value={formik.values.numberDaysUntilCut ?? ""}
             fullwidth
             message={formik.errors.numberDaysUntilCut}
+            disabled={!formik.values.periodicity}
             invalid={formik.errors.numberDaysUntilCut ? true : false}
           />
         </Stack>

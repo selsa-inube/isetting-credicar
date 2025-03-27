@@ -1,5 +1,6 @@
 import { addPayrollAgreementSteps } from "@config/payrollAgreement/payrollAgreementTab/assisted/steps";
 import { useAddPayrollAgreement } from "@hooks/payrollAgreement/useAddPayrollAgreement";
+import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
 import { AddPayrollAgreementUI } from "./interface";
 
 function AddPayrollAgreement() {
@@ -7,15 +8,20 @@ function AddPayrollAgreement() {
     currentStep,
     formValues,
     formReferences,
-    isCurrentFormValid,
+    formValid,
     showGoBackModal,
+    sourcesOfIncomeValues,
+    smallScreen,
+    regularPaymentCycles,
     extraordinaryPayment,
+    setSourcesOfIncomeValues,
     handleNextStep,
     handlePreviousStep,
     setIsCurrentFormValid,
+    setRegularPaymentCycles,
+    handleGoBack,
     handleOpenModal,
     handleCloseModal,
-    handleGoBack,
     setExtraordinaryPayment,
   } = useAddPayrollAgreement();
 
@@ -24,15 +30,24 @@ function AddPayrollAgreement() {
       currentStep={currentStep}
       formReferences={formReferences}
       initialGeneralInformationValues={formValues}
-      isCurrentFormValid={isCurrentFormValid}
+      formValid={formValid}
       steps={addPayrollAgreementSteps}
       onNextStep={handleNextStep}
       onPreviousStep={handlePreviousStep}
       setIsCurrentFormValid={setIsCurrentFormValid}
+      sourcesOfIncomeValues={sourcesOfIncomeValues}
+      setSourcesOfIncomeValues={setSourcesOfIncomeValues}
       onGoBack={handleGoBack}
       showGoBackModal={showGoBackModal}
       onOpenModal={handleOpenModal}
       onCloseModal={handleCloseModal}
+      smallScreen={smallScreen}
+      regularPaymentCycles={regularPaymentCycles as IOrdinaryCyclesEntry[]}
+      setRegularPaymentCycles={
+        setRegularPaymentCycles as React.Dispatch<
+          React.SetStateAction<IOrdinaryCyclesEntry[]>
+        >
+      }
       extraordinaryPayment={extraordinaryPayment}
       setExtraordinaryPayment={setExtraordinaryPayment}
     />

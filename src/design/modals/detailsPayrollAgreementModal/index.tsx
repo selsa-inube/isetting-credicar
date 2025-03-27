@@ -140,26 +140,33 @@ const DetailsPayrollAgreementModal = (props: IDetailsPayrollAgreementModal) => {
             gap={tokens.spacing.s150}
             padding={`${tokens.spacing.s0} ${tokens.spacing.s0} ${tokens.spacing.s150}`}
           >
-            <Tabs
-              tabs={Object.values(filteredTabsConfig)}
-              selectedTab={isSelected ?? defaultSelectedTab}
-              onChange={onTabChange}
-              scroll={smallScreenTab ? true : false}
-            />
-            {ordinaryPaymentData &&
-              isSelected === detailsTabsConfig.ordinaryPayment?.id && (
-                <OrdinaryPaymentCycles
-                  data={ordinaryPaymentData}
-                  labelsPaymentCard={labelsPaymentCard}
+            {((ordinaryPaymentData && ordinaryPaymentData.length > 0) ||
+              (extraordinaryPaymentData &&
+                extraordinaryPaymentData.length > 0)) && (
+              <>
+                <Tabs
+                  tabs={Object.values(filteredTabsConfig)}
+                  selectedTab={isSelected ?? defaultSelectedTab}
+                  onChange={onTabChange}
+                  scroll={smallScreenTab ? true : false}
                 />
-              )}
-            {extraordinaryPaymentData &&
-              isSelected === detailsTabsConfig.extraordinaryPayment?.id && (
-                <ExtraordinaryPaymentCycles
-                  data={extraordinaryPaymentData}
-                  labelsPaymentCard={labelsPaymentCard}
-                />
-              )}
+                {ordinaryPaymentData &&
+                  isSelected === detailsTabsConfig.ordinaryPayment?.id && (
+                    <OrdinaryPaymentCycles
+                      data={ordinaryPaymentData}
+                      labelsPaymentCard={labelsPaymentCard}
+                    />
+                  )}
+                {extraordinaryPaymentData &&
+                  extraordinaryPaymentData.length > 0 &&
+                  isSelected === detailsTabsConfig.extraordinaryPayment?.id && (
+                    <ExtraordinaryPaymentCycles
+                      data={extraordinaryPaymentData}
+                      labelsPaymentCard={labelsPaymentCard}
+                    />
+                  )}
+              </>
+            )}
           </Stack>
         </StyledBorder>
         <Stack gap={tokens.spacing.s250} justifyContent="flex-end">

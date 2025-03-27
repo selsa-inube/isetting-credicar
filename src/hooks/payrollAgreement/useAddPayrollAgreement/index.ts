@@ -1,11 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
+import { useMediaQuery } from "@inubekit/inubekit";
 import { FormikProps } from "formik";
 
 import { addPayrollAgreementSteps } from "@config/payrollAgreement/payrollAgreementTab/assisted/steps";
 import { IAddPayrollAgreementForms } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IAddPayrollAgreementForms";
 import { ICompanyEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/ICompanyEntry";
 import { IAddPayrollAgreementRef } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IAddPayrollAgreementRef";
+
+import { IGeneralInformationEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IGeneralInformationPayroll";
+import { getDomainById } from "@mocks/domains/domainService.mocks";
+import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
 import { compareObjects } from "@utils/compareObjects";
 import { IExtraordinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IExtraordinaryCyclesEntry";
 
@@ -39,13 +44,15 @@ const useAddPayrollAgreement = () => {
     },
     ordinaryCycles: {
       isValid: false,
-      values: {
-        cycleId: "",
-        nameCycle: "",
-        periodicity: "",
-        payday: "",
-        numberDaysUntilCut: "",
-      },
+      values: [
+        {
+          cycleId: "",
+          nameCycle: "",
+          periodicity: "",
+          payday: "",
+          numberDaysUntilCut: "",
+        },
+      ],
     },
     extraordinaryCycles: {
       isValid: false,
@@ -61,19 +68,30 @@ const useAddPayrollAgreement = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formValues, setFormValues] =
     useState<IAddPayrollAgreementForms>(initialValues);
+  const [regularPaymentCycles, setRegularPaymentCycles] = useState<
+    IOrdinaryCyclesEntry[]
+  >([]);
   const [isCurrentFormValid, setIsCurrentFormValid] = useState(false);
   const [showGoBackModal, setShowGoBackModal] = useState(false);
+  const [sourcesOfIncomeValues, setSourcesOfIncomeValues] = useState(
+    getDomainById("sourcesOfIncome"),
+  );
   const [extraordinaryPayment, setExtraordinaryPayment] = useState<
     IExtraordinaryCyclesEntry[]
   >([]);
-  const companyRef = useRef<FormikProps<ICompanyEntry>>(null);
   const [canRefresh, setCanRefresh] = useState(false);
   const navigate = useNavigate();
 
+  const smallScreen = useMediaQuery("(max-width: 990px)");
+
+  const companyRef = useRef<FormikProps<ICompanyEntry>>(null);
+  const generalInformationRef =
+    useRef<FormikProps<IGeneralInformationEntry>>(null);
+
   const formReferences: IAddPayrollAgreementRef = {
     company: companyRef,
+    generalInformation: generalInformationRef,
   };
-
   const handleNextStep = () => {
     if (currentStep < addPayrollAgreementSteps.length) {
       if (companyRef.current) {
@@ -85,6 +103,28 @@ const useAddPayrollAgreement = () => {
           },
         }));
         setIsCurrentFormValid(companyRef.current.isValid);
+      }
+
+      if (generalInformationRef.current) {
+        setFormValues((prevValues) => ({
+          ...prevValues,
+          generalInformation: {
+            ...prevValues.generalInformation,
+            values: generalInformationRef.current!.values,
+          },
+        }));
+        setIsCurrentFormValid(generalInformationRef.current.isValid);
+      }
+
+      if (currentStep === 3) {
+        setFormValues((prevValues) => ({
+          ...prevValues,
+          ordinaryCycles: {
+            ...prevValues.ordinaryCycles,
+            values: regularPaymentCycles ?? [],
+          },
+        }));
+        setIsCurrentFormValid(true);
       }
       setCurrentStep(currentStep + 1);
     }
@@ -142,14 +182,25 @@ const useAddPayrollAgreement = () => {
     };
   }, [formValues, initialValues, companyRef, canRefresh]);
 
+  const formValid =
+    regularPaymentCycles && regularPaymentCycles.length > 0
+      ? false
+      : !isCurrentFormValid;
+
   return {
     currentStep,
     formValues,
     formReferences,
-    isCurrentFormValid,
+    formValid,
     showGoBackModal,
+    sourcesOfIncomeValues,
+    smallScreen,
+    regularPaymentCycles,
+    isCurrentFormValid,
     extraordinaryPayment,
     setExtraordinaryPayment,
+    setSourcesOfIncomeValues,
+    setRegularPaymentCycles,
     handleNextStep,
     handlePreviousStep,
     setCurrentStep,
