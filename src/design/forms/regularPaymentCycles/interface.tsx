@@ -1,6 +1,6 @@
-import { MdOutlineAdd } from "react-icons/md";
+import { MdInfoOutline, MdOutlineAdd } from "react-icons/md";
 import { FormikProps } from "formik";
-import { Button, Stack, useMediaQuery } from "@inubekit/inubekit";
+import { Button, Stack } from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
 import { Table } from "@design/data/table";
@@ -12,6 +12,10 @@ import {
   titles,
 } from "@config/payrollAgreement/payrollAgreementTab/assisted/ordinaryCyclesTable";
 import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
+import { AddCycleModal } from "@design/modals/addCycleModal";
+import { IServerDomain } from "@ptypes/IServerDomain";
+import { DecisionModal } from "@design/modals/decisionModal";
+import { IMessageModal } from "@ptypes/decisions/IMessageModal";
 import {
   StyledContainer,
   StyledContainerFields,
@@ -19,12 +23,19 @@ import {
 } from "./styles";
 
 interface IRegularPaymentCyclesFormUI {
-  formik: FormikProps<IOrdinaryCyclesEntry>;
-  entries: IEntry[];
   editDataOption: boolean;
-  valuesEqual: boolean;
+  entries: IEntry[];
+  formik: FormikProps<IOrdinaryCyclesEntry>;
+  infoModal: IMessageModal;
   loading: boolean;
-  showModal: boolean;
+  numberDaysUntilCutOptions: IServerDomain[];
+  paydayOptions: IServerDomain[];
+  periodicityOptions: IServerDomain[];
+  showAddModal: boolean;
+  showInfoModal: boolean;
+  valuesEqual: boolean;
+  isMobile: boolean;
+  onToggleInfoModal: () => void;
   onAddCycle: () => void;
   onToggleModal: () => void;
   onButtonClick: () => void;
@@ -36,22 +47,27 @@ interface IRegularPaymentCyclesFormUI {
 
 const RegularPaymentCyclesFormUI = (props: IRegularPaymentCyclesFormUI) => {
   const {
-    //formik,
-    loading,
     editDataOption,
     entries,
-    showModal,
-    // onChange,
-    // onAddCycle,
-    valuesEqual,
+    formik,
+    infoModal,
     isDisabledButton,
+    loading,
+    numberDaysUntilCutOptions,
+    paydayOptions,
+    periodicityOptions,
+    showAddModal,
+    showInfoModal,
+    valuesEqual,
+    isMobile,
+    onChange,
+    onAddCycle,
+    onToggleInfoModal,
     onButtonClick,
     onReset,
     onToggleModal,
     onPreviousStep,
   } = props;
-
-  const isMobile = useMediaQuery("(max-width: 990px)");
 
   return (
     <StyledContainer>
@@ -102,14 +118,49 @@ const RegularPaymentCyclesFormUI = (props: IRegularPaymentCyclesFormUI) => {
         <Button
           fullwidth={isMobile}
           onClick={onButtonClick}
-          disabled={editDataOption ? isDisabledButton && !loading : true}
+          disabled={
+            editDataOption ? isDisabledButton && !loading : entries.length === 0
+          }
           loading={loading}
           appearance={ComponentAppearance.PRIMARY}
         >
           {editDataOption ? "Guardar" : "Siguiente"}
         </Button>
       </Stack>
-      {showModal && <></>}
+      {showAddModal && (
+        <AddCycleModal
+          actionText="Agregar"
+          comparisonData={valuesEqual}
+          formik={formik}
+          isLoading={loading}
+          portalId="portal"
+          title="Agregar ciclo de pago"
+          isOrdinary={true}
+          periodicityOptions={periodicityOptions}
+          paydayOptions={paydayOptions}
+          numberDaysUntilCutOptions={numberDaysUntilCutOptions}
+          onCloseModal={onToggleModal}
+          onClick={onAddCycle}
+          onChange={onChange}
+          onToggleInfoModal={onToggleInfoModal}
+        />
+      )}
+
+      {showInfoModal && (
+        <DecisionModal
+          portalId="portal"
+          title={infoModal.title}
+          description={infoModal.description}
+          actionText={infoModal.actionText}
+          withIcon
+          withCancelButton={false}
+          icon={<MdInfoOutline />}
+          appearance={ComponentAppearance.PRIMARY}
+          onCloseModal={onToggleInfoModal}
+          onClick={onToggleInfoModal}
+          moreDetails={infoModal.moreDetails}
+        />
+      )}
     </StyledContainer>
   );
 };

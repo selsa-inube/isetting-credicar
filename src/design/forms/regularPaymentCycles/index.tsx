@@ -3,12 +3,16 @@ import { FormikProps } from "formik";
 
 import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
 import { useOrdinaryCyclesForm } from "@hooks/payrollAgreement/useOrdinaryCyclesForm";
+import { infoPeriodicityModal } from "@config/payrollAgreement/payrollAgreementTab/generic/infoPeriodicityModal";
 import { RegularPaymentCyclesFormUI } from "./interface";
 
 interface IRegularPaymentCyclesForm {
-  initialValues: IOrdinaryCyclesEntry;
+  regularPaymentCycles: IOrdinaryCyclesEntry[];
   onButtonClick: () => void;
   onPreviousStep: () => void;
+  setRegularPaymentCycles: React.Dispatch<
+    React.SetStateAction<IOrdinaryCyclesEntry[]>
+  >;
   loading?: boolean;
   onFormValid?: React.Dispatch<React.SetStateAction<boolean>>;
   onSubmit?: (values: IOrdinaryCyclesEntry) => void;
@@ -21,11 +25,12 @@ const RegularPaymentCyclesForm = forwardRef<
 >(
   (
     {
-      initialValues,
+      regularPaymentCycles,
       onFormValid,
       onSubmit,
       onButtonClick,
       onPreviousStep,
+      setRegularPaymentCycles,
       loading = false,
       editDataOption = false,
     },
@@ -36,18 +41,25 @@ const RegularPaymentCyclesForm = forwardRef<
       isDisabledButton,
       valuesEqual,
       entries,
-      showModal,
+      showAddModal,
+      numberDaysUntilCutOptions,
+      paydayOptions,
+      periodicityOptions,
+      showInfoModal,
+      isMobile,
+      onToggleInfoModal,
       handleToggleModal,
       handleChange,
       handleReset,
       handleAddCycle,
     } = useOrdinaryCyclesForm(
-      initialValues,
       ref,
       editDataOption,
       loading,
       onSubmit,
       onFormValid,
+      regularPaymentCycles,
+      setRegularPaymentCycles,
     );
 
     return (
@@ -59,12 +71,19 @@ const RegularPaymentCyclesForm = forwardRef<
         editDataOption={editDataOption}
         isDisabledButton={isDisabledButton}
         valuesEqual={valuesEqual}
-        showModal={showModal}
+        showAddModal={showAddModal}
         onToggleModal={handleToggleModal}
         onReset={handleReset}
         entries={entries}
         onAddCycle={handleAddCycle}
         onPreviousStep={onPreviousStep}
+        infoModal={infoPeriodicityModal}
+        numberDaysUntilCutOptions={numberDaysUntilCutOptions ?? []}
+        paydayOptions={paydayOptions ?? []}
+        periodicityOptions={periodicityOptions}
+        showInfoModal={showInfoModal}
+        onToggleInfoModal={onToggleInfoModal}
+        isMobile={isMobile}
       />
     );
   },

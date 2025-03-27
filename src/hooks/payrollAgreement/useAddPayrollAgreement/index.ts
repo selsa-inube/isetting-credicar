@@ -7,10 +7,11 @@ import { addPayrollAgreementSteps } from "@config/payrollAgreement/payrollAgreem
 import { IAddPayrollAgreementForms } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IAddPayrollAgreementForms";
 import { ICompanyEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/ICompanyEntry";
 import { IAddPayrollAgreementRef } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IAddPayrollAgreementRef";
-import { compareObjects } from "@utils/compareObjects";
+
 import { IGeneralInformationEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IGeneralInformationPayroll";
 import { getDomainById } from "@mocks/domains/domainService.mocks";
 import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
+import { compareObjects } from "@utils/compareObjects";
 
 const useAddPayrollAgreement = () => {
   const initialValues = {
@@ -42,19 +43,24 @@ const useAddPayrollAgreement = () => {
     },
     ordinaryCycles: {
       isValid: false,
-      values: {
-        cycleId: "",
-        nameCycle: "",
-        periodicity: "",
-        payday: "",
-        numberDaysUntilCut: 0,
-      },
+      values: [
+        {
+          cycleId: "",
+          nameCycle: "",
+          periodicity: "",
+          payday: "",
+          numberDaysUntilCut: "",
+        },
+      ],
     },
   };
 
   const [currentStep, setCurrentStep] = useState(1);
   const [formValues, setFormValues] =
     useState<IAddPayrollAgreementForms>(initialValues);
+  const [regularPaymentCycles, setRegularPaymentCycles] = useState<
+    IOrdinaryCyclesEntry[]
+  >([]);
   const [isCurrentFormValid, setIsCurrentFormValid] = useState(false);
   const [showGoBackModal, setShowGoBackModal] = useState(false);
   const [sourcesOfIncomeValues, setSourcesOfIncomeValues] = useState(
@@ -69,12 +75,9 @@ const useAddPayrollAgreement = () => {
   const generalInformationRef =
     useRef<FormikProps<IGeneralInformationEntry>>(null);
 
-  const ordinaryCyclesRef = useRef<FormikProps<IOrdinaryCyclesEntry>>(null);
-
   const formReferences: IAddPayrollAgreementRef = {
     company: companyRef,
     generalInformation: generalInformationRef,
-    ordinaryCycles: ordinaryCyclesRef,
   };
   const handleNextStep = () => {
     if (currentStep < addPayrollAgreementSteps.length) {
@@ -88,10 +91,7 @@ const useAddPayrollAgreement = () => {
         }));
         setIsCurrentFormValid(companyRef.current.isValid);
       }
-      setCurrentStep(currentStep + 1);
-    }
 
-    if (currentStep < addPayrollAgreementSteps.length) {
       if (generalInformationRef.current) {
         setFormValues((prevValues) => ({
           ...prevValues,
@@ -101,6 +101,17 @@ const useAddPayrollAgreement = () => {
           },
         }));
         setIsCurrentFormValid(generalInformationRef.current.isValid);
+      }
+
+      if (currentStep === 3) {
+        setFormValues((prevValues) => ({
+          ...prevValues,
+          ordinaryCycles: {
+            ...prevValues.ordinaryCycles,
+            values: regularPaymentCycles ?? [],
+          },
+        }));
+        setIsCurrentFormValid(true);
       }
       setCurrentStep(currentStep + 1);
     }
@@ -158,15 +169,23 @@ const useAddPayrollAgreement = () => {
     };
   }, [formValues, initialValues, companyRef, canRefresh]);
 
+  const formValid =
+    regularPaymentCycles && regularPaymentCycles.length > 0
+      ? false
+      : !isCurrentFormValid;
+
   return {
     currentStep,
     formValues,
     formReferences,
-    isCurrentFormValid,
+    formValid,
     showGoBackModal,
     sourcesOfIncomeValues,
     smallScreen,
+    regularPaymentCycles,
+    isCurrentFormValid,
     setSourcesOfIncomeValues,
+    setRegularPaymentCycles,
     handleNextStep,
     handlePreviousStep,
     setCurrentStep,
