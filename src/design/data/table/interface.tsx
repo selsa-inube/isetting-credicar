@@ -19,6 +19,7 @@ import { DataLoading } from "./dataLoading";
 
 interface ITableUI {
   actions: IAction[];
+  entriesLength: number;
   entries: IEntry[];
   filteredEntries: IEntry[];
   firstEntryInPage: number;
@@ -36,12 +37,15 @@ interface ITableUI {
   mediaActionOpen: boolean;
   numberActions: number;
   TitleColumns: ITitle[];
+  emptyDataMessage?: string;
+  withActionsTitles?: boolean;
 }
 
 const TableUI = (props: ITableUI) => {
   const {
     actions,
     entries,
+    entriesLength,
     filteredEntries,
     firstEntryInPage,
     isLoading,
@@ -53,6 +57,8 @@ const TableUI = (props: ITableUI) => {
     mediaActionOpen,
     numberActions,
     TitleColumns,
+    emptyDataMessage,
+    withActionsTitles,
     goToEndPage,
     goToFirstPage,
     nextPage,
@@ -76,7 +82,12 @@ const TableUI = (props: ITableUI) => {
               {title.titleName}
             </Th>
           ))}
-          {ShowActionTitle(numberActions, mediaActionOpen)}
+          {ShowActionTitle(
+            numberActions,
+            mediaActionOpen,
+            actions,
+            withActionsTitles,
+          )}
         </Tr>
       </Thead>
       <Tbody>
@@ -84,35 +95,52 @@ const TableUI = (props: ITableUI) => {
           DataLoading(TitleColumns, numberActions)
         ) : (
           <>
-            {entries.length > 0 ? (
-              entries.map((entry, index) => (
-                <Tr key={index} zebra={index % 2 === 1}>
-                  {TitleColumns.map((title) => (
-                    <Td
-                      key={`e-${entry[title.id]}`}
-                      align={entry.action ? "center" : "left"}
-                      type="custom"
-                    >
-                      {typeof entry[title.id] !== "string" ? (
-                        entry[title.id]
-                      ) : (
-                        <Text type="body" size="small" ellipsis>
-                          {entry[title.id]}
-                        </Text>
-                      )}
-                    </Td>
-                  ))}
-                  {ShowAction(actions, entry, mediaActionOpen)}
-                </Tr>
-              ))
-            ) : (
+            {entriesLength === 0 ? (
               <Tr>
                 <Td type="custom" colSpan={titles.length + actions.length}>
-                  <Text type="body" size="small" appearance="dark" ellipsis>
-                    No se encontró información
+                  <Text type="label" size="large" appearance="dark" ellipsis>
+                    {`${emptyDataMessage}` || "No se encontró información"}
                   </Text>
                 </Td>
               </Tr>
+            ) : (
+              <>
+                {entries.length > 0 ? (
+                  entries.map((entry, index) => (
+                    <Tr key={index} zebra={index % 2 === 1}>
+                      {TitleColumns.map((title) => (
+                        <Td
+                          key={`e-${entry[title.id]}`}
+                          align={entry.action ? "center" : "left"}
+                          type="custom"
+                        >
+                          {typeof entry[title.id] !== "string" ? (
+                            entry[title.id]
+                          ) : (
+                            <Text type="body" size="small" ellipsis>
+                              {entry[title.id]}
+                            </Text>
+                          )}
+                        </Td>
+                      ))}
+                      {ShowAction(actions, entry, mediaActionOpen)}
+                    </Tr>
+                  ))
+                ) : (
+                  <Tr>
+                    <Td type="custom" colSpan={titles.length + actions.length}>
+                      <Text
+                        type="label"
+                        size="large"
+                        appearance="dark"
+                        ellipsis
+                      >
+                        No hay resultados que coincidan con la búsqueda.
+                      </Text>
+                    </Td>
+                  </Tr>
+                )}
+              </>
             )}
           </>
         )}

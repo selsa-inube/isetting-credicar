@@ -142,7 +142,7 @@ function DetailsRequestsInProgressModal(
                           ?.appearance as ITagAppearance) || "light"
                       }
                       label={
-                        normalizeStatusByName(data[field.id])?.status || ""
+                        normalizeStatusByName(data[field.id])?.status ?? ""
                       }
                     />
                   </Stack>

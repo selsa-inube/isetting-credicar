@@ -1,4 +1,5 @@
 import { useContext } from "react";
+
 import { deleteMoneyDestinationModal } from "@config/moneyDestination/moneyDestinationTab/generics/deleteMoneyDestinationModal";
 import { DeleteRecord } from "@design/feedback/DeleteRecord";
 import { useDeleteDestination } from "@hooks/moneyDestination/useDeleteDestination";
@@ -9,9 +10,8 @@ import { ISaveDataRequest } from "@ptypes/saveData/ISaveDataRequest";
 import { ComponentAppearance } from "@enum/appearances";
 import { requestProcessMessage } from "@config/moneyDestination/moneyDestinationTab/generics/requestProcessMessage";
 import { requestStatusMessage } from "@config/moneyDestination/moneyDestinationTab/generics/requestStatusMessage";
-
 import { RequestStatusModal } from "@design/modals/requestStatusModal";
-import { RequestProcess } from "@src/design/feedback/RequestProcess";
+import { RequestProcess } from "@design/feedback/RequestProcess";
 
 interface IDelete {
   data: IEntry;
@@ -30,6 +30,7 @@ const Delete = (props: IDelete) => {
     handleClick,
     setShowRequestProcessModal,
     setShowModal,
+    setShowPendingReq,
   } = useDeleteDestination(data, appData);
 
   const {
@@ -46,6 +47,7 @@ const Delete = (props: IDelete) => {
     saveData as ISaveDataRequest,
     setShowRequestProcessModal,
     setShowModal,
+    setShowPendingReq
   );
 
   return (

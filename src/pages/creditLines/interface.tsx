@@ -49,8 +49,8 @@ function CreditLinesUI(props: ICreditLinesUI) {
         <Stack gap={tokens.spacing.s300} direction="column">
           <Breadcrumbs crumbs={crumbsCreditLines} />
           <Title
-            title={descriptionOptions?.publicCode || ""}
-            description={descriptionOptions?.description || ""}
+            title={descriptionOptions?.publicCode ?? ""}
+            description={descriptionOptions?.description ?? ""}
             sizeTitle="large"
           />
         </Stack>

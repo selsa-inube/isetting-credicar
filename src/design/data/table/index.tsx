@@ -18,6 +18,8 @@ interface ITable {
   pageLength?: number;
   widthPercentageTotalColumns?: number;
   columnWidths?: number[];
+  emptyDataMessage?: string;
+  withActionsTitles?: boolean;
 }
 
 const Table = (props: ITable) => {
@@ -33,6 +35,8 @@ const Table = (props: ITable) => {
     breakpoints,
     widthPercentageTotalColumns,
     columnWidths,
+    emptyDataMessage,
+    withActionsTitles,
   } = props;
 
   const {
@@ -61,6 +65,7 @@ const Table = (props: ITable) => {
         <TableUI
           titles={titles}
           actions={actions}
+          entriesLength={entries.length}
           entries={getPageEntries()}
           isLoading={isLoading}
           mediaActionOpen={mediaActionOpen}
@@ -77,6 +82,8 @@ const Table = (props: ITable) => {
           filteredEntries={filteredEntries}
           widthPercentageTotalColumns={widthPercentageTotalColumns}
           columnWidths={columnWidths}
+          emptyDataMessage={emptyDataMessage}
+          withActionsTitles={withActionsTitles}
         />
       </Stack>
     </StyledContainerTable>

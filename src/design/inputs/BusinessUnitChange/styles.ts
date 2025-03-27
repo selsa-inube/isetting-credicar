@@ -4,10 +4,10 @@ import { tokens } from "@design/tokens";
 
 const StyledContainer = styled.div`
   box-shadow: 2px 2px 3px 2px
-    ${({ theme }) => theme?.palette?.neutral?.N30 || inube.palette.neutral.N30};
+    ${({ theme }) => theme?.palette?.neutral?.N30 ?? inube.palette.neutral.N30};
   border-radius: ${tokens.spacing.s100};
   background-color: ${({ theme }) =>
-    theme?.palette?.neutral?.N0 || inube.palette.neutral.N0};
+    theme?.palette?.neutral?.N0 ?? inube.palette.neutral.N0};
   margin-left: 10px;
   z-index: 3;
 `;

@@ -8,6 +8,8 @@ import { eventBus } from "@events/eventBus";
 const useDeleteDestination = (data: IEntry, appData: IAppData) => {
   const [showModal, setShowModal] = useState(false);
   const [showRequestProcessModal, setShowRequestProcessModal] = useState(false);
+  const [showPendingReq, setShowPendingReq] = useState(false);
+  
   const [saveData, setSaveData] = useState<ISaveDataRequest>();
 
   const handleToggleModal = () => {
@@ -35,19 +37,26 @@ const useDeleteDestination = (data: IEntry, appData: IAppData) => {
   };
 
   useEffect(() => {
+    console.log({ showModal, showRequestProcessModal, showPendingReq });
+  
+    const emitEvent = (eventName: string) => {
+      eventBus.emit(eventName, showModal);
+    };
+  
     if (showModal && !showRequestProcessModal) {
-      eventBus.emit("secondModalState", showModal);
+      emitEvent("secondModalState");
+    } else if (!showModal && !showRequestProcessModal && !showPendingReq) {
+      emitEvent("secondModalState");
+    } else if (!showModal && showRequestProcessModal) {
+      emitEvent("thirdModalState");
     }
-
-    if (!showModal && showRequestProcessModal) {
-      eventBus.emit("thirdModalState", showModal);
-    }
-  }, [showModal, showRequestProcessModal]);
+  }, [showModal, showRequestProcessModal, showPendingReq]);
 
   return {
     showModal,
     saveData,
     showRequestProcessModal,
+    setShowPendingReq,
     handleToggleModal,
     handleClick,
     setShowRequestProcessModal,

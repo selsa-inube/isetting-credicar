@@ -1,32 +1,32 @@
-import { MdChevronLeft } from "react-icons/md";
-import { Stack, Text, Grid, useMediaQueries, Button } from "@inubekit/inubekit";
+import { Stack, Text, useMediaQueries, Button, Tag } from "@inubekit/inubekit";
 
-import selsaLogo from "@assets/images/selsa.png";
-import errorImage from "@assets/images/timeout.png";
+import inubeLogo from "@assets/images/logo-inube.png";
+import errorImage from "@assets/images/errorPage.png";
 import { tokens } from "@design/tokens";
-
-import { StyledCompanyLogo, StyledErrorImage } from "./styles";
+import { ComponentAppearance } from "@enum/appearances";
+import {
+  StyledCompanyLogo,
+  StyledContainer,
+  StyledDividerContainer,
+  StyledErrorImage,
+  StyledItem,
+  StyledList,
+  StyledTextErrorContainer,
+} from "./styles";
+import { errorCodes } from "@src/config/errorCodes";
 
 interface IErrorPage {
-  logo?: string;
-  logoAlt?: string;
+  errorCode?: number;
   heading?: string;
-  description?: string;
-  image?: string;
-  imageAlt?: string;
   nameButton?: string;
   onClick?: () => void;
 }
 
-function ErrorPage(props: IErrorPage) {
+const ErrorPage = (props: IErrorPage) => {
   const {
-    logo = selsaLogo,
-    logoAlt = "Sistemas Enlinea",
-    heading = "!Oh! Algo ha salido mal",
-    description = "El servicio no se encuentra disponible en el momento. Por favor intenta de nuevo más tarde.",
-    image = errorImage,
-    imageAlt = "Ha surgido un error. Revisa la descripción",
-    nameButton = "volver",
+    errorCode = 0,
+    heading = "¡Ups! Algo salió mal...",
+    nameButton = "Regresar",
     onClick,
   } = props;
 
@@ -37,62 +37,111 @@ function ErrorPage(props: IErrorPage) {
   ];
   const matches = useMediaQueries(mediaQueries);
 
+  const DetailsErrors = errorCodes[errorCode] ?? {
+    descriptionError: ["No se proporcionó información sobre el error."],
+    solutionError: ["Intenta nuevamente más tarde."],
+  };
+
   return (
-    <Stack
-      padding={
-        matches["(max-width: 770px)"]
-          ? `${tokens.spacing.s400}`
-          : `${tokens.spacing.s1000}`
-      }
-      gap={
-        matches["(min-width: 771px)"]
-          ? `${tokens.spacing.s600}`
-          : `${tokens.spacing.s800}`
-      }
-      direction="column"
-    >
-      <StyledCompanyLogo
-        src={logo}
-        alt={logoAlt}
-        $isTablet={matches["(max-width: 1000px)"]}
-      />
-      <Grid
-        templateRows={matches["(max-width: 770px)"] ? "repeat(2, 1fr)" : "1fr"}
-        templateColumns={
-          matches["(max-width: 770px)"] ? "auto" : "repeat(2, 1fr)"
-        }
-        alignItems="center"
-        gap={
-          matches["(max-width: 770px)"]
-            ? `${tokens.spacing.s0}`
-            : `${tokens.spacing.s1000}`
-        }
-      >
-        <Stack gap={tokens.spacing.s300} direction="column">
-          <Stack gap={tokens.spacing.s300} direction="column">
-            <Text
-              type="title"
-              weight="bold"
-              size={matches["(max-width: 770px)"] ? "small" : "medium"}
-            >
-              {heading}
-            </Text>
-            <Text
-              type="title"
-              size={matches["(max-width: 770px)"] ? "small" : "medium"}
-            >
-              {description}
-            </Text>
-          </Stack>
-          <Button iconBefore={<MdChevronLeft size={18} />} onClick={onClick}>
-            {nameButton}
-          </Button>
+    <StyledContainer $isTablet={matches["(max-width: 1000px)"]}>
+      <Stack direction="column" gap={tokens.spacing.s500} height="100%">
+        <Stack justifyContent="left" alignItems="start">
+          <StyledCompanyLogo
+            src={inubeLogo}
+            alt={"logo"}
+            $isTablet={matches["(max-width: 1000px)"]}
+          />
         </Stack>
-        <StyledErrorImage src={image} alt={imageAlt} />
-      </Grid>
-    </Stack>
+        <Stack
+          justifyContent="center"
+          alignItems="center"
+          height="100px"
+          width="100%"
+          direction="column"
+          gap={tokens.spacing.s150}
+        >
+          <Text
+            type="headline"
+            weight="bold"
+            size={matches["(max-width: 770px)"] ? "medium" : "large"}
+            appearance={ComponentAppearance.DARK}
+          >
+            {heading}
+          </Text>
+          <Tag
+            appearance="gray"
+            label={`Código de error: ${errorCode}`}
+            weight="strong"
+          />
+        </Stack>
+        <StyledErrorImage
+          $isTablet={matches["(max-width: 770pxpx)"]}
+          src={errorImage}
+          alt="error"
+        />
+        <StyledTextErrorContainer $isTablet={matches["(max-width: 770px)"]}>
+          <Stack direction="column" gap={tokens.spacing.s150} width="100%">
+            <Text
+              type="title"
+              size="large"
+              weight="bold"
+              appearance={ComponentAppearance.DARK}
+            >
+              ¿Qué salió mal?
+            </Text>
+            <StyledList>
+              {DetailsErrors.descriptionError.map((item, index) => (
+                <StyledItem key={index}>
+                  <Text
+                    type="title"
+                    size="small"
+                    appearance={ComponentAppearance.GRAY}
+                  >
+                    {item}
+                  </Text>
+                </StyledItem>
+              ))}
+            </StyledList>
+          </Stack>
+
+          <StyledDividerContainer $isTablet={matches["(max-width: 1000px)"]} />
+
+          <Stack direction="column" gap={tokens.spacing.s150} width="100%">
+            <Text
+              type="title"
+              size="large"
+              weight="bold"
+              appearance={ComponentAppearance.DARK}
+            >
+              ¿Cómo solucionarlo?
+            </Text>
+            <StyledList>
+              {DetailsErrors.solutionError.map((item, index) => (
+                <StyledItem key={index}>
+                  <Text
+                    type="title"
+                    size="small"
+                    appearance={ComponentAppearance.GRAY}
+                  >
+                    {item}
+                  </Text>
+                </StyledItem>
+              ))}
+            </StyledList>
+            <Stack alignContent="center" justifyContent="center">
+              <Button appearance="primary" onClick={onClick}>
+                {nameButton}
+              </Button>
+            </Stack>
+          </Stack>
+        </StyledTextErrorContainer>
+        <Text appearance="gray" textAlign="center" size="small" weight="bold">
+          © 2025 Inube
+        </Text>
+      </Stack>
+    </StyledContainer>
   );
-}
+};
 
 export { ErrorPage };
 export type { IErrorPage };

@@ -38,7 +38,6 @@ DeleteProcess.args = {
   title: "Eliminar",
   description: "¿Realmente deseas eliminar este destino de dinero?",
   actionText: "Eliminar",
-  justificationOfDecision: true,
 };
 
 export const EditProcess = Template.bind({});

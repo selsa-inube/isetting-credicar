@@ -6,6 +6,7 @@ import {
 import { SelectBusinessUnitsRoutes } from "@routes/selectBusinessunits";
 import { CreditLinesRoutes } from "@routes/creditLines";
 import { MoneyDestinationRoutes } from "@routes/moneyDestination";
+import { PayrollAgreementRoutes } from "@routes/payrollAgreement";
 
 import { ErrorPage } from "@design/layout/errorPage";
 import { Logout } from "@pages/login/logout";
@@ -19,12 +20,20 @@ const mainNavigation = createBrowserRouter(
         path="selectBusinessUnit/*"
         element={<SelectBusinessUnitsRoutes />}
       />
-      <Route path="/" element={<Landing />} errorElement={<ErrorPage />} />
+      <Route
+        path="/"
+        element={<Landing />}
+        errorElement={<ErrorPage errorCode={1005} />}
+      />
       <Route path="/" element={<AppPage />}>
         <Route path="credit-lines/*" element={<CreditLinesRoutes />} />
         <Route
           path="money-destination/*"
           element={<MoneyDestinationRoutes />}
+        />
+        <Route
+          path="payroll-agreement/*"
+          element={<PayrollAgreementRoutes />}
         />
       </Route>
       <Route path="logout" element={<Logout />} />

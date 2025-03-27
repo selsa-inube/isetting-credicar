@@ -15,7 +15,7 @@ const StyledBoxAttribute = styled.div<IStyledBoxAttribute>`
   width: auto;
   height: auto;
   background-color: ${({ theme }) =>
-    theme.color?.surface?.gray.clear || inube.palette.neutral.N10};
+    theme.color?.surface?.gray.clear ?? inube.palette.neutral.N10};
 `;
 
 export { StyledBoxAttribute };

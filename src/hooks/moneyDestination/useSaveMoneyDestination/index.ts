@@ -22,6 +22,7 @@ const useSaveMoneyDestination = (
   data: ISaveDataRequest,
   setSendData: React.Dispatch<React.SetStateAction<boolean>>,
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>,
+  setShowPendingReq?: React.Dispatch<React.SetStateAction<boolean>>,
   setErrorFetchSaveData?: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   const [saveMoneyDestination, setSaveMoneyDestination] =
@@ -71,7 +72,7 @@ const useSaveMoneyDestination = (
       if (!isStatusIntAutomatic(saveMoneyDestination?.requestStatus)) return;
       const data = await getRequestInProgressById(
         bussinesUnits,
-        saveMoneyDestination?.settingRequestId || "",
+        saveMoneyDestination?.settingRequestId ?? "",
       );
       setStatusRequest(data.requestStatus);
     } catch (error) {
@@ -196,6 +197,9 @@ const useSaveMoneyDestination = (
         clearInterval(timer);
         setSendData(false);
         setShowPendingReqModal(true);
+        if (setShowPendingReq) {
+          setShowPendingReq(!showPendingReqModal);
+        }
       }, 60000);
 
       return () => {

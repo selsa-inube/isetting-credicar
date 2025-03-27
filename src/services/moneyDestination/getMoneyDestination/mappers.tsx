@@ -11,7 +11,7 @@ const mapMoneyDestinationToEntity = (
     abbreviatedName: (
       <IconWithText
         icon={
-          normalizeIconDestination(data.iconReference)?.icon || (
+          normalizeIconDestination(data.iconReference)?.icon ?? (
             <MdCategory size={20} />
           )
         }
