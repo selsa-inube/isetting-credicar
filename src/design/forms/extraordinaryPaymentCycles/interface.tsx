@@ -114,9 +114,7 @@ const ExtraordinaryPaymentCyclesFormUI = (
         <Button
           fullwidth={isMobile}
           onClick={onButtonClick}
-          disabled={
-            editDataOption ? isDisabledButton && !loading : entries.length === 0
-          }
+          disabled={isDisabledButton}
           loading={loading}
           appearance={ComponentAppearance.PRIMARY}
         >

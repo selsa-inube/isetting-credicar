@@ -10,6 +10,7 @@ import { IAddPayrollAgreementRef } from "@ptypes/payrollAgreement/payrollAgreeme
 import { IGeneralInformationEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IGeneralInformationPayroll";
 import { IExtraordinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IExtraordinaryCyclesEntry";
 import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
+import { typePayrollForCyclesExtraord } from "@config/payrollAgreement/payrollAgreementTab/assisted/typePayrollForCyclesExtraord";
 import { getDomainById } from "@mocks/domains/domainService.mocks";
 import { compareObjects } from "@utils/compareObjects";
 
@@ -97,8 +98,9 @@ const useAddPayrollAgreement = () => {
 
   useEffect(() => {
     setTypeRegularPayroll(
-      formValues.generalInformation.values.typePayroll ===
-        "ordinaryRemuneration"
+      typePayrollForCyclesExtraord.includes(
+        formValues.generalInformation.values.typePayroll,
+      )
         ? false
         : true,
     );
@@ -129,8 +131,9 @@ const useAddPayrollAgreement = () => {
         setIsCurrentFormValid(generalInformationRef.current.isValid);
         const typePayroll =
           generalInformationRef.current.values.typePayroll &&
-          generalInformationRef.current.values.typePayroll ===
-            "ordinaryRemuneration";
+          typePayrollForCyclesExtraord.includes(
+            generalInformationRef.current.values.typePayroll,
+          );
         const stepOrdinaryCycles = typePayroll ? currentStep + 1 : 4;
         setCurrentStep(stepOrdinaryCycles);
       } else {

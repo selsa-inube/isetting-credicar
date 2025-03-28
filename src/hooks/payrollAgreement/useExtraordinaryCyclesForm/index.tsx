@@ -21,7 +21,7 @@ import { generateExtraOrdPayDays } from "@utils/generateExtraOrdPayDays";
 const useExtraordinaryCyclesForm = (
   ref: React.ForwardedRef<FormikProps<IExtraordinaryCyclesEntry>>,
   editDataOption: boolean,
-  typePayrollAgreement: boolean,
+  typeRegularPayroll: boolean,
   loading: boolean | undefined,
   onSubmit: ((values: IExtraordinaryCyclesEntry) => void) | undefined,
   onFormValid: React.Dispatch<React.SetStateAction<boolean>> | undefined,
@@ -99,7 +99,7 @@ const useExtraordinaryCyclesForm = (
       formik.setFieldValue("day", "");
     }
 
-    if (formik.values.month && typePayrollAgreement) {
+    if (formik.values.month && typeRegularPayroll) {
       formik.setFieldValue("day", "");
       const options: IServerDomain[] = convertToOptions(
         daysOfMonth(
@@ -109,14 +109,9 @@ const useExtraordinaryCyclesForm = (
       setDayOptions(options);
     }
 
-    if (formik.values.month && !typePayrollAgreement && regularPaymentCycles) {
+    if (formik.values.month && !typeRegularPayroll && regularPaymentCycles) {
       formik.setFieldValue("day", "");
 
-      console.log(
-        "mes",
-        formik.values.month,
-        monthsInNumber[formik.values.month as keyof typeof monthsInNumber],
-      );
       const options: IServerDomain[] = convertToOptions(
         generateExtraOrdPayDays(
           regularPaymentCycles,
@@ -130,9 +125,9 @@ const useExtraordinaryCyclesForm = (
   useEffect(() => {
     const updateButton = () => {
       if (editDataOption) {
-        setIsDisabledButton(!formik.isValid || valuesEmpty);
+        setIsDisabledButton((!formik.isValid || valuesEmpty) && !loading);
       } else {
-        setIsDisabledButton(loading ?? !formik.isValid);
+        setIsDisabledButton(!typeRegularPayroll ? false : entries.length === 0);
       }
     };
     updateButton();
