@@ -12,15 +12,13 @@ import { IAddPayrollAgreementRef } from "@ptypes/payrollAgreement/payrollAgreeme
 import { crumbsAddPayrollAgreement } from "@config/payrollAgreement/payrollAgreementTab/navigation";
 import { CompanyForm } from "@design/forms/companyPayrollAgreement";
 import { DecisionModal } from "@design/modals/decisionModal";
-
-import { IServerDomain } from "@ptypes/IServerDomain";
-import { RegularPaymentCyclesForm } from "@design/forms/regularPaymentCycles";
-import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
 import { goBackModal } from "@config/payrollAgreement/payrollAgreementTab/forms/goBackModal";
+import { IServerDomain } from "@ptypes/IServerDomain";
 import { GeneralInformationPayrollForm } from "@design/forms/generalInfoPayrollAgreement";
-import { IExtraordinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IExtraordinaryCyclesEntry";
+import { RegularPaymentCyclesForm } from "@design/forms/regularPaymentCycles";
 import { ExtraordinaryPaymentCyclesForm } from "@design/forms/extraordinaryPaymentCycles";
-
+import { IExtraordinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IExtraordinaryCyclesEntry";
+import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
 interface IAddPayrollAgreementUI {
   currentStep: number;
   formReferences: IAddPayrollAgreementRef;
@@ -29,23 +27,24 @@ interface IAddPayrollAgreementUI {
   steps: IAssistedStep[];
   sourcesOfIncomeValues: IServerDomain[];
   smallScreen: boolean;
+  extraordinaryPayment: IExtraordinaryCyclesEntry[];
+  typeRegularPayroll: boolean;
   setSourcesOfIncomeValues: React.Dispatch<
     React.SetStateAction<IServerDomain[]>
   >;
   showGoBackModal: boolean;
-  extraordinaryPayment: IExtraordinaryCyclesEntry[];
+  regularPaymentCycles: IOrdinaryCyclesEntry[];
   onOpenModal: () => void;
   onCloseModal: () => void;
   onGoBack: () => void;
   onNextStep: () => void;
   onPreviousStep: () => void;
   setIsCurrentFormValid: React.Dispatch<React.SetStateAction<boolean>>;
-  regularPaymentCycles: IOrdinaryCyclesEntry[];
-  setRegularPaymentCycles: React.Dispatch<
-    React.SetStateAction<IOrdinaryCyclesEntry[]>
-  >;
   setExtraordinaryPayment: React.Dispatch<
     React.SetStateAction<IExtraordinaryCyclesEntry[]>
+  >;
+  setRegularPaymentCycles: React.Dispatch<
+    React.SetStateAction<IOrdinaryCyclesEntry[]>
   >;
 }
 
@@ -55,21 +54,22 @@ const AddPayrollAgreementUI = (props: IAddPayrollAgreementUI) => {
     formReferences,
     initialGeneralInformationValues,
     formValid,
-    regularPaymentCycles,
-    extraordinaryPayment,
     steps,
     showGoBackModal,
     smallScreen,
+    regularPaymentCycles,
     onOpenModal,
     onCloseModal,
-    onGoBack,
     sourcesOfIncomeValues,
+    extraordinaryPayment,
+    typeRegularPayroll,
     setSourcesOfIncomeValues,
     setIsCurrentFormValid,
     onNextStep,
     onPreviousStep,
-    setRegularPaymentCycles,
+    onGoBack,
     setExtraordinaryPayment,
+    setRegularPaymentCycles,
   } = props;
 
   return (
@@ -147,11 +147,14 @@ const AddPayrollAgreementUI = (props: IAddPayrollAgreementUI) => {
                 onFormValid={setIsCurrentFormValid}
                 onButtonClick={onNextStep}
                 onPreviousStep={onPreviousStep}
+                typeRegularPayroll={typeRegularPayroll}
+                regularPaymentCycles={regularPaymentCycles}
               />
             )}
           </Stack>
         </Stack>
       </Stack>
+
       {showGoBackModal && (
         <DecisionModal
           portalId="portal"

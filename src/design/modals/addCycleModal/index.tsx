@@ -217,6 +217,7 @@ const AddCycleModal = (props: IAddCycleModal) => {
                       options={dayOptions ?? []}
                       size="compact"
                       fullwidth
+                      disabled={!formik.values.month}
                       value={formik.values.day ?? ""}
                       message={formik.errors.day}
                       invalid={formik.errors.day ? true : false}
@@ -238,7 +239,7 @@ const AddCycleModal = (props: IAddCycleModal) => {
             value={formik.values.numberDaysUntilCut ?? ""}
             fullwidth
             message={formik.errors.numberDaysUntilCut}
-            disabled={!formik.values.periodicity}
+            disabled={formik.values.periodicity && !formik.values.periodicity}
             invalid={formik.errors.numberDaysUntilCut ? true : false}
           />
         </Stack>

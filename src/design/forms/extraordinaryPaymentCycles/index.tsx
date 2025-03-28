@@ -3,10 +3,13 @@ import { FormikProps } from "formik";
 
 import { IExtraordinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IExtraordinaryCyclesEntry";
 import { useExtraordinaryCyclesForm } from "@hooks/payrollAgreement/useExtraordinaryCyclesForm";
+import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
 import { ExtraordinaryPaymentCyclesFormUI } from "./interface";
 
 interface IExtraordinaryPaymentCyclesForm {
   extraordinaryPayment: IExtraordinaryCyclesEntry[];
+  typeRegularPayroll: boolean;
+  regularPaymentCycles: IOrdinaryCyclesEntry[];
   setExtraordinaryPayment: React.Dispatch<
     React.SetStateAction<IExtraordinaryCyclesEntry[]>
   >;
@@ -25,6 +28,8 @@ const ExtraordinaryPaymentCyclesForm = forwardRef<
   (
     {
       extraordinaryPayment,
+      typeRegularPayroll,
+      regularPaymentCycles,
       setExtraordinaryPayment,
       onFormValid,
       onSubmit,
@@ -42,6 +47,10 @@ const ExtraordinaryPaymentCyclesForm = forwardRef<
       entries,
       showModal,
       isMobile,
+      typePaymentOptions,
+      numberDaysUntilCutOptions,
+      monthOptions,
+      dayOptions,
       handleToggleModal,
       handleChange,
       handleReset,
@@ -49,11 +58,13 @@ const ExtraordinaryPaymentCyclesForm = forwardRef<
     } = useExtraordinaryCyclesForm(
       ref,
       editDataOption,
+      typeRegularPayroll,
       loading,
       onSubmit,
       onFormValid,
       extraordinaryPayment,
       setExtraordinaryPayment,
+      regularPaymentCycles,
     );
 
     return (
@@ -72,6 +83,10 @@ const ExtraordinaryPaymentCyclesForm = forwardRef<
         onAddCycle={handleAddCycle}
         onPreviousStep={onPreviousStep}
         isMobile={isMobile}
+        typePaymentOptions={typePaymentOptions}
+        numberDaysUntilCutOptions={numberDaysUntilCutOptions}
+        monthOptions={monthOptions}
+        dayOptions={dayOptions ?? []}
       />
     );
   },

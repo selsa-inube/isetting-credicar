@@ -98,8 +98,15 @@ const TableUI = (props: ITableUI) => {
             {entriesLength === 0 ? (
               <Tr>
                 <Td type="custom" colSpan={titles.length + actions.length}>
-                  <Text type="label" size="large" appearance="dark" ellipsis>
-                    {`${emptyDataMessage}` || "No se encontró información"}
+                  <Text
+                    type="label"
+                    size={mediaActionOpen ? "medium" : "large"}
+                    appearance="dark"
+                    ellipsis
+                  >
+                    {emptyDataMessage
+                      ? `${emptyDataMessage}`
+                      : "No se encontró información"}
                   </Text>
                 </Td>
               </Tr>
