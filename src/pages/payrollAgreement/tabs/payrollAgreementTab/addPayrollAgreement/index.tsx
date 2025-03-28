@@ -14,15 +14,16 @@ function AddPayrollAgreement() {
     smallScreen,
     regularPaymentCycles,
     extraordinaryPayment,
+    typeRegularPayroll,
     setSourcesOfIncomeValues,
     handleNextStep,
     handlePreviousStep,
     setIsCurrentFormValid,
-    setRegularPaymentCycles,
-    handleGoBack,
     handleOpenModal,
     handleCloseModal,
+    handleGoBack,
     setExtraordinaryPayment,
+    setRegularPaymentCycles,
   } = useAddPayrollAgreement();
 
   return (
@@ -42,14 +43,15 @@ function AddPayrollAgreement() {
       onOpenModal={handleOpenModal}
       onCloseModal={handleCloseModal}
       smallScreen={smallScreen}
+      setExtraordinaryPayment={setExtraordinaryPayment}
+      extraordinaryPayment={extraordinaryPayment}
+      typeRegularPayroll={typeRegularPayroll}
       regularPaymentCycles={regularPaymentCycles as IOrdinaryCyclesEntry[]}
       setRegularPaymentCycles={
         setRegularPaymentCycles as React.Dispatch<
           React.SetStateAction<IOrdinaryCyclesEntry[]>
         >
       }
-      extraordinaryPayment={extraordinaryPayment}
-      setExtraordinaryPayment={setExtraordinaryPayment}
     />
   );
 }

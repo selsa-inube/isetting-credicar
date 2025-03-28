@@ -7,12 +7,11 @@ import { addPayrollAgreementSteps } from "@config/payrollAgreement/payrollAgreem
 import { IAddPayrollAgreementForms } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IAddPayrollAgreementForms";
 import { ICompanyEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/ICompanyEntry";
 import { IAddPayrollAgreementRef } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IAddPayrollAgreementRef";
-
 import { IGeneralInformationEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IGeneralInformationPayroll";
-import { getDomainById } from "@mocks/domains/domainService.mocks";
-import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
-import { compareObjects } from "@utils/compareObjects";
 import { IExtraordinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IExtraordinaryCyclesEntry";
+import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
+import { getDomainById } from "@mocks/domains/domainService.mocks";
+import { compareObjects } from "@utils/compareObjects";
 
 const useAddPayrollAgreement = () => {
   const initialValues = {
@@ -56,12 +55,14 @@ const useAddPayrollAgreement = () => {
     },
     extraordinaryCycles: {
       isValid: false,
-      values: {
-        nameCycle: "",
-        typePayment: "",
-        payday: "",
-        numberDaysUntilCut: "",
-      },
+      values: [
+        {
+          nameCycle: "",
+          typePayment: "",
+          payday: "",
+          numberDaysUntilCut: "",
+        },
+      ],
     },
   };
 
@@ -79,6 +80,7 @@ const useAddPayrollAgreement = () => {
   const [extraordinaryPayment, setExtraordinaryPayment] = useState<
     IExtraordinaryCyclesEntry[]
   >([]);
+  const [typeRegularPayroll, setTypeRegularPayroll] = useState<boolean>(true);
   const [canRefresh, setCanRefresh] = useState(false);
   const navigate = useNavigate();
 
@@ -92,6 +94,16 @@ const useAddPayrollAgreement = () => {
     company: companyRef,
     generalInformation: generalInformationRef,
   };
+
+  useEffect(() => {
+    setTypeRegularPayroll(
+      formValues.generalInformation.values.typePayroll ===
+        "ordinaryRemuneration"
+        ? false
+        : true,
+    );
+  }, [formValues.generalInformation.values.typePayroll]);
+
   const handleNextStep = () => {
     if (currentStep < addPayrollAgreementSteps.length) {
       if (companyRef.current) {
@@ -103,6 +115,7 @@ const useAddPayrollAgreement = () => {
           },
         }));
         setIsCurrentFormValid(companyRef.current.isValid);
+        setCurrentStep(currentStep + 1);
       }
 
       if (generalInformationRef.current) {
@@ -114,6 +127,14 @@ const useAddPayrollAgreement = () => {
           },
         }));
         setIsCurrentFormValid(generalInformationRef.current.isValid);
+        const typePayroll =
+          generalInformationRef.current.values.typePayroll &&
+          generalInformationRef.current.values.typePayroll ===
+            "ordinaryRemuneration";
+        const stepOrdinaryCycles = typePayroll ? currentStep + 1 : 4;
+        setCurrentStep(stepOrdinaryCycles);
+      } else {
+        setCurrentStep(currentStep + 1);
       }
 
       if (currentStep === 3) {
@@ -125,14 +146,31 @@ const useAddPayrollAgreement = () => {
           },
         }));
         setIsCurrentFormValid(true);
+        setCurrentStep(currentStep + 1);
       }
-      setCurrentStep(currentStep + 1);
+
+      if (currentStep === 4) {
+        setFormValues((prevValues) => ({
+          ...prevValues,
+          extraordinaryCycles: {
+            ...prevValues.extraordinaryCycles,
+            values: extraordinaryPayment ?? [],
+          },
+        }));
+        setIsCurrentFormValid(true);
+        setCurrentStep(currentStep + 1);
+      }
     }
   };
 
   const handlePreviousStep = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
+    }
+
+    if (currentStep === 4) {
+      const stepOrdinaryCycles = !typeRegularPayroll ? currentStep - 1 : 2;
+      setCurrentStep(stepOrdinaryCycles);
     }
   };
 
@@ -183,7 +221,8 @@ const useAddPayrollAgreement = () => {
   }, [formValues, initialValues, companyRef, canRefresh]);
 
   const formValid =
-    regularPaymentCycles && regularPaymentCycles.length > 0
+    (regularPaymentCycles && regularPaymentCycles.length > 0) ||
+    (extraordinaryPayment && extraordinaryPayment.length > 0)
       ? false
       : !isCurrentFormValid;
 
@@ -198,6 +237,7 @@ const useAddPayrollAgreement = () => {
     regularPaymentCycles,
     isCurrentFormValid,
     extraordinaryPayment,
+    typeRegularPayroll,
     setExtraordinaryPayment,
     setSourcesOfIncomeValues,
     setRegularPaymentCycles,

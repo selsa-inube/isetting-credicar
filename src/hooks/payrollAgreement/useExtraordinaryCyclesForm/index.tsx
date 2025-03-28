@@ -8,10 +8,20 @@ import { validationMessages } from "@validations/validationMessages";
 import { IEntry } from "@design/data/table/types";
 import { IExtraordinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IExtraordinaryCyclesEntry";
 import { addLeadingZero } from "@utils/addLeadingZero";
+import { IServerDomain } from "@ptypes/IServerDomain";
+import { extraordinaryDaysOptions } from "@config/payrollAgreement/payrollAgreementTab/assisted/extraordinaryDay";
+import { monthExtraordinaryOptions } from "@config/payrollAgreement/payrollAgreementTab/assisted/monthExtraordinary";
+import { typePaymentExtraordinaryOptions } from "@config/payrollAgreement/payrollAgreementTab/assisted/typePaymentExtraordinary";
+import { daysOfMonth } from "@utils/daysOfMonth";
+import { convertToOptions } from "@utils/convertToOptions";
+import { monthsInNumber } from "@config/payrollAgreement/payrollAgreementTab/generic/monthsInNumber";
+import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
+import { generateExtraOrdPayDays } from "@utils/generateExtraOrdPayDays";
 
 const useExtraordinaryCyclesForm = (
   ref: React.ForwardedRef<FormikProps<IExtraordinaryCyclesEntry>>,
   editDataOption: boolean,
+  typePayrollAgreement: boolean,
   loading: boolean | undefined,
   onSubmit: ((values: IExtraordinaryCyclesEntry) => void) | undefined,
   onFormValid: React.Dispatch<React.SetStateAction<boolean>> | undefined,
@@ -19,12 +29,14 @@ const useExtraordinaryCyclesForm = (
   setExtraordinaryPayment: React.Dispatch<
     React.SetStateAction<IExtraordinaryCyclesEntry[]>
   >,
+  regularPaymentCycles?: IOrdinaryCyclesEntry[],
 ) => {
   const createValidationSchema = () =>
     object().shape({
       nameCycle: validationRules.string.required(validationMessages.required),
       typePayment: validationRules.string.required(validationMessages.required),
-      payday: validationRules.string.required(validationMessages.required),
+      day: validationRules.number.required(validationMessages.required),
+      month: validationRules.string.required(validationMessages.required),
       numberDaysUntilCut: validationRules.string.required(
         validationMessages.required,
       ),
@@ -35,7 +47,8 @@ const useExtraordinaryCyclesForm = (
   const initialValues: IExtraordinaryCyclesEntry = {
     nameCycle: "",
     typePayment: "",
-    payday: "",
+    day: "",
+    month: "",
     numberDaysUntilCut: "",
   };
 
@@ -51,6 +64,10 @@ const useExtraordinaryCyclesForm = (
   const [entries, setEntries] = useState<IEntry[]>(
     extraordinaryPayment as IEntry[],
   );
+  const [dayOptions, setDayOptions] = useState<IServerDomain[] | undefined>([]);
+  const typePaymentOptions = typePaymentExtraordinaryOptions;
+  const monthOptions = monthExtraordinaryOptions;
+  const numberDaysUntilCutOptions = extraordinaryDaysOptions;
 
   const isMobile = useMediaQuery("(max-width: 990px)");
 
@@ -77,6 +94,40 @@ const useExtraordinaryCyclesForm = (
   );
 
   useEffect(() => {
+    if (!formik.values.month) {
+      setDayOptions([]);
+      formik.setFieldValue("day", "");
+    }
+
+    if (formik.values.month && typePayrollAgreement) {
+      formik.setFieldValue("day", "");
+      const options: IServerDomain[] = convertToOptions(
+        daysOfMonth(
+          monthsInNumber[formik.values.month as keyof typeof monthsInNumber],
+        ),
+      );
+      setDayOptions(options);
+    }
+
+    if (formik.values.month && !typePayrollAgreement && regularPaymentCycles) {
+      formik.setFieldValue("day", "");
+
+      console.log(
+        "mes",
+        formik.values.month,
+        monthsInNumber[formik.values.month as keyof typeof monthsInNumber],
+      );
+      const options: IServerDomain[] = convertToOptions(
+        generateExtraOrdPayDays(
+          regularPaymentCycles,
+          monthsInNumber[formik.values.month as keyof typeof monthsInNumber],
+        ),
+      );
+      setDayOptions(options);
+    }
+  }, [formik.values.month]);
+
+  useEffect(() => {
     const updateButton = () => {
       if (editDataOption) {
         setIsDisabledButton(!formik.isValid || valuesEmpty);
@@ -89,13 +140,14 @@ const useExtraordinaryCyclesForm = (
 
   const handleToggleModal = () => {
     setShowModal(!showModal);
+    formik.resetForm();
   };
 
   const createNewCycle = (id: number) => ({
     id: `cycle-${addLeadingZero(id).toString()}`,
     nameCycle: formik.values.nameCycle,
     typePayment: formik.values.typePayment,
-    payday: formik.values.payday,
+    payday: `${formik.values.month}-${formik.values.day}`,
     numberDaysUntilCut: formik.values.numberDaysUntilCut,
   });
 
@@ -110,6 +162,7 @@ const useExtraordinaryCyclesForm = (
       return [...prev, createNewCycle(prev.length + 1)];
     });
 
+    setShowModal(false);
     formik.resetForm();
   };
 
@@ -124,6 +177,10 @@ const useExtraordinaryCyclesForm = (
     entries,
     showModal,
     isMobile,
+    typePaymentOptions,
+    numberDaysUntilCutOptions,
+    monthOptions,
+    dayOptions,
     handleChange,
     handleReset,
     handleAddCycle,

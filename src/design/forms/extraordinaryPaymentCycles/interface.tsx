@@ -12,6 +12,8 @@ import {
   titles,
 } from "@config/payrollAgreement/payrollAgreementTab/assisted/extraordinaryCyclesTable";
 import { IExtraordinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IExtraordinaryCyclesEntry";
+import { IServerDomain } from "@ptypes/IServerDomain";
+import { AddCycleModal } from "@design/modals/addCycleModal";
 import {
   StyledContainer,
   StyledContainerFields,
@@ -26,6 +28,10 @@ interface IExtraordinaryPaymentCyclesFormUI {
   loading: boolean;
   showModal: boolean;
   isMobile: boolean;
+  typePaymentOptions: IServerDomain[];
+  numberDaysUntilCutOptions: IServerDomain[];
+  monthOptions: IServerDomain[];
+  dayOptions: IServerDomain[];
   onAddCycle: () => void;
   onToggleModal: () => void;
   onButtonClick: () => void;
@@ -39,16 +45,20 @@ const ExtraordinaryPaymentCyclesFormUI = (
   props: IExtraordinaryPaymentCyclesFormUI,
 ) => {
   const {
-    //formik,
+    formik,
     loading,
     editDataOption,
     entries,
     showModal,
-    // onChange,
-    // onAddCycle,
+    onChange,
+    onAddCycle,
     valuesEqual,
     isDisabledButton,
     isMobile,
+    typePaymentOptions,
+    monthOptions,
+    dayOptions,
+    numberDaysUntilCutOptions,
     onButtonClick,
     onReset,
     onToggleModal,
@@ -82,7 +92,7 @@ const ExtraordinaryPaymentCyclesFormUI = (
                 actions={actions}
                 breakpoints={breakPoints}
                 isLoading={loading}
-                columnWidths={[38, 20, 18, 15]}
+                columnWidths={[50, 12, 10, 14]}
                 withActionsTitles
                 emptyDataMessage="Aún no hay ningún ciclo de pago registrado, presiona “+ Agregar ciclo de pago” para empezar."
               />
@@ -104,14 +114,33 @@ const ExtraordinaryPaymentCyclesFormUI = (
         <Button
           fullwidth={isMobile}
           onClick={onButtonClick}
-          disabled={editDataOption ? isDisabledButton && !loading : true}
+          disabled={
+            editDataOption ? isDisabledButton && !loading : entries.length === 0
+          }
           loading={loading}
           appearance={ComponentAppearance.PRIMARY}
         >
           {editDataOption ? "Guardar" : "Siguiente"}
         </Button>
       </Stack>
-      {showModal && <></>}
+      {showModal && (
+        <AddCycleModal
+          actionText="Agregar"
+          comparisonData={valuesEqual}
+          formik={formik}
+          isLoading={loading}
+          portalId="portal"
+          title="Agregar ciclo de pago"
+          isExtraordinary
+          typePaymentOptions={typePaymentOptions}
+          monthOptions={monthOptions}
+          dayOptions={dayOptions}
+          numberDaysUntilCutOptions={numberDaysUntilCutOptions}
+          onCloseModal={onToggleModal}
+          onClick={onAddCycle}
+          onChange={onChange}
+        />
+      )}
     </StyledContainer>
   );
 };
