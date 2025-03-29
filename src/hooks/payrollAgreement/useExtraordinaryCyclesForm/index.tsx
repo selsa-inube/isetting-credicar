@@ -51,6 +51,7 @@ const useExtraordinaryCyclesForm = (
   const [entries, setEntries] = useState<IEntry[]>(
     extraordinaryPayment as IEntry[],
   );
+  const [entryDeleted, setEntryDeleted] = useState<string | number>("");
 
   const isMobile = useMediaQuery("(max-width: 990px)");
 
@@ -117,6 +118,16 @@ const useExtraordinaryCyclesForm = (
     formik.resetForm();
   };
 
+  useEffect(() => {
+    if (entryDeleted) {
+      setEntries((prev) => prev.filter((entry) => entry.id !== entryDeleted));
+
+      setExtraordinaryPayment((prev) =>
+        prev.filter((entry) => entry.id !== entryDeleted),
+      );
+    }
+  }, [entryDeleted]);
+
   return {
     formik,
     isDisabledButton,
@@ -128,6 +139,7 @@ const useExtraordinaryCyclesForm = (
     handleReset,
     handleAddCycle,
     handleToggleModal,
+    setEntryDeleted,
   };
 };
 

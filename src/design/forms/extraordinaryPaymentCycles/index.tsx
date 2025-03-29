@@ -46,6 +46,7 @@ const ExtraordinaryPaymentCyclesForm = forwardRef<
       handleChange,
       handleReset,
       handleAddCycle,
+      setEntryDeleted,
     } = useExtraordinaryCyclesForm(
       ref,
       editDataOption,
@@ -72,6 +73,7 @@ const ExtraordinaryPaymentCyclesForm = forwardRef<
         onAddCycle={handleAddCycle}
         onPreviousStep={onPreviousStep}
         isMobile={isMobile}
+        setEntryDeleted={setEntryDeleted}
       />
     );
   },
