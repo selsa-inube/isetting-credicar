@@ -1,11 +1,17 @@
 import { MdCancel, MdCheckCircle } from "react-icons/md";
-import { Icon, IIconAppearance, Stack, Text } from "@inubekit/inubekit";
+import {
+  Icon,
+  IIconAppearance,
+  ProgressBar,
+  Stack,
+  Text,
+} from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
 import { ComponentAppearance } from "@enum/appearances";
 import { verifiedErrorRequest } from "@utils/verifiedErrorRequest";
 import { countVerifiedRequests } from "@utils/countVerifiedRequests";
-import { StyledBar, StyledContainerBar } from "../styles";
+import { StyledContainerProgressBar } from "../styles";
 import { IRequestSteps } from "../types";
 
 interface IRequestProcessMobile {
@@ -53,12 +59,20 @@ const RequestProcessMobile = (props: IRequestProcessMobile) => {
         padding={`${tokens.spacing.s100} ${tokens.spacing.s0}`}
       >
         {requestSteps && requestSteps.length > 1 && (
-          <StyledContainerBar>
-            <StyledBar
-              $progress={countVerifiedRequests(requestSteps)}
-              $statusError={verifiedErrorRequest(requestSteps)}
+          <StyledContainerProgressBar
+            $appearance={ComponentAppearance.GRAY}
+            $height="8px"
+          >
+            <ProgressBar
+              height="8px"
+              appearance={
+                verifiedErrorRequest(requestSteps)
+                  ? ComponentAppearance.DANGER
+                  : ComponentAppearance.SUCCESS
+              }
+              progress={countVerifiedRequests(requestSteps)}
             />
-          </StyledContainerBar>
+          </StyledContainerProgressBar>
         )}
       </Stack>
       <Stack

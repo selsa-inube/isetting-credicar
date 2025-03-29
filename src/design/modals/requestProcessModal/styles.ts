@@ -11,11 +11,6 @@ interface IStyledContainerProgressBar {
   $height: string;
 }
 
-interface IStyledBar {
-  $progress: number;
-  $statusError: boolean;
-}
-
 interface IStyledStepIndicator {
   $statusError: boolean;
 }
@@ -30,25 +25,6 @@ const StyledModal = styled.div<IStyledModal>`
   padding: ${(props) =>
     props.$smallScreen ? `${tokens.spacing.s150}` : `${tokens.spacing.s300}`};
   box-sizing: border-box;
-`;
-
-const StyledContainerBar = styled.div`
-  width: 100%;
-  background-color: ${inube.palette.neutral.N30};
-  border-radius: 4px;
-  height: 8px;
-`;
-
-const StyledBar = styled.div<IStyledBar>`
-  position: relative;
-  width: ${({ $progress }) => `${$progress}%`};
-  height: 8px;
-  border-radius: 4px;
-  transform-origin: left;
-  animation-fill-mode: forwards;
-  background-color: ${({ $statusError }) =>
-    $statusError ? `${inube.palette.red.R300}` : `${inube.palette.green.G300}`};
-  transition: width 0.5s ease-in-out;
 `;
 
 const StyledContainerFields = styled.div`
@@ -82,8 +58,6 @@ const StyledStepIndicator = styled.div<IStyledStepIndicator>`
 
 export {
   StyledModal,
-  StyledBar,
-  StyledContainerBar,
   StyledContainerFields,
   StyledContainerProgressBar,
   StyledStepIndicator,
