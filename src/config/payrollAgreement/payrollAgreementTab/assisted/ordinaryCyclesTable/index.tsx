@@ -1,7 +1,5 @@
-import { Icon } from "@inubekit/inubekit";
-import { MdDeleteOutline } from "react-icons/md";
-import { ComponentAppearance } from "@enum/appearances";
-import { IAction, ITitle } from "@design/data/table/types";
+import { IAction, IEntry, ITitle } from "@design/data/table/types";
+import { DeleteCyclePayment } from "@pages/payrollAgreement/tabs/payrollAgreementTab/addPayrollAgreement/tools/deleteCyclePayment";
 
 const titles: ITitle[] = [
   {
@@ -31,23 +29,23 @@ const titles: ITitle[] = [
   },
 ];
 
-const actions: IAction[] = [
-  {
-    id: "delete",
-    actionName: "Eliminar",
-    content: () => (
-      <Icon
-        icon={<MdDeleteOutline />}
-        appearance={ComponentAppearance.DANGER}
-        size="16px"
-      />
-    ),
-  },
-];
+const actionsConfig = (setEntryDeleted: (value: string | number) => void) => {
+  const actions: IAction[] = [
+    {
+      id: "delete",
+      actionName: "Eliminar",
+      content: (entry: IEntry) => (
+        <DeleteCyclePayment data={entry} setEntryDeleted={setEntryDeleted} />
+      ),
+    },
+  ];
+
+  return actions;
+};
 
 const breakPoints = [
   { breakpoint: "(min-width: 745px)", totalColumns: 5 },
   { breakpoint: "(max-width: 744px)", totalColumns: 3 },
 ];
 
-export { titles, actions, breakPoints };
+export { titles, actionsConfig, breakPoints };

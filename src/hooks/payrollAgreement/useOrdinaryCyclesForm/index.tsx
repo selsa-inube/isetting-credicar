@@ -60,6 +60,7 @@ const useOrdinaryCyclesForm = (
   const [entries, setEntries] = useState<IEntry[]>(
     regularPaymentCycles as IEntry[],
   );
+  const [entryDeleted, setEntryDeleted] = useState<string | number>("");
   const [paydayOptions, setPaydayOptions] = useState<
     IServerDomain[] | undefined
   >([]);
@@ -156,6 +157,16 @@ const useOrdinaryCyclesForm = (
     formik.resetForm();
   };
 
+  useEffect(() => {
+    if (entryDeleted) {
+      setEntries((prev) => prev.filter((entry) => entry.id !== entryDeleted));
+
+      setRegularPaymentCycles((prev) =>
+        prev.filter((entry) => entry.id !== entryDeleted),
+      );
+    }
+  }, [entryDeleted]);
+
   return {
     formik,
     isDisabledButton,
@@ -172,6 +183,7 @@ const useOrdinaryCyclesForm = (
     handleReset,
     handleAddCycle,
     handleToggleModal,
+    setEntryDeleted,
   };
 };
 

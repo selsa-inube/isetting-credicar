@@ -52,6 +52,7 @@ const RegularPaymentCyclesForm = forwardRef<
       handleChange,
       handleReset,
       handleAddCycle,
+      setEntryDeleted,
     } = useOrdinaryCyclesForm(
       ref,
       editDataOption,
@@ -84,6 +85,7 @@ const RegularPaymentCyclesForm = forwardRef<
         showInfoModal={showInfoModal}
         onToggleInfoModal={onToggleInfoModal}
         isMobile={isMobile}
+        setEntryDeleted={setEntryDeleted}
       />
     );
   },

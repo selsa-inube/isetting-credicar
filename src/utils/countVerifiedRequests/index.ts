@@ -7,8 +7,4 @@ const countVerifiedRequests = (requests: IRequestSteps[]) => {
   return (countVerified * 100) / requests.length;
 };
 
-const verifiedErrorRequest = (requests: IRequestSteps[]): boolean => {
-  return requests.find((request) => request.status === "error") ? true : false;
-};
-
-export { countVerifiedRequests, verifiedErrorRequest };
+export { countVerifiedRequests };

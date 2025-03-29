@@ -1,21 +1,20 @@
-import { MdCancel, MdCheckCircle } from "react-icons/md";
+import { createPortal } from "react-dom";
 import {
   Stack,
   Text,
-  Icon,
   IIconAppearance,
   Blanket,
+  Divider,
 } from "@inubekit/inubekit";
 
 import { ComponentAppearance } from "@enum/appearances";
 import { tokens } from "@design/tokens";
-import { StyledBar, StyledContainerBar, StyledModal } from "./styles";
-import { IRequestSteps } from "@src/design/modals/requestProcessModal/types";
-import {
-  countVerifiedRequests,
-  verifiedErrorRequest,
-} from "@src/design/modals/requestProcessModal/utils";
-import { createPortal } from "react-dom";
+import { IRequestSteps } from "@design/modals/requestProcessModal/types";
+
+import { lastCompletedIndex } from "@utils/lastCompletedIndex";
+import { StyledModal } from "./styles";
+import { RequestProcessMobile } from "./requestProcessMobile";
+import { RequestProcessDesktop } from "./requestProcessDesktop";
 
 interface IRequestProcessModal {
   portalId: string;
@@ -31,7 +30,7 @@ const RequestProcessModal = (props: IRequestProcessModal) => {
   const {
     portalId,
     appearance,
-    sizeIcon = "32px",
+    sizeIcon = "28px",
     requestSteps,
     isMobile,
     description,
@@ -46,104 +45,41 @@ const RequestProcessModal = (props: IRequestProcessModal) => {
     );
   }
 
+  const stepCurrentIndex = lastCompletedIndex(requestSteps);
+  const stepCurrent = stepCurrentIndex + 1;
+
   return createPortal(
     <Blanket>
       <StyledModal $smallScreen={isMobile}>
         <Stack direction="column" gap={tokens.spacing.s200} width="100%">
-          <Stack direction="column" gap={tokens.spacing.s300}>
-            <Text type="title" size="small" weight="bold">
+          <Stack direction="column" gap={tokens.spacing.s100}>
+            <Text type="title" size="medium" weight="bold">
               {title}
             </Text>
+            <Divider />
           </Stack>
-          <Stack
-            gap={tokens.spacing.s100}
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
-            padding={
-              isMobile
-                ? `${tokens.spacing.s100}`
-                : `${tokens.spacing.s0} ${tokens.spacing.s150} ${tokens.spacing.s250} ${tokens.spacing.s450}`
-            }
-          >
-            <Text size="medium">{description}</Text>
+          <Stack direction="column" justifyContent="center" alignItems="center">
+            <Text
+              size={isMobile ? "small" : "medium"}
+              appearance={ComponentAppearance.GRAY}
+            >
+              {description}
+            </Text>
           </Stack>
-
-          <Stack
-            direction="column"
-            gap={tokens.spacing.s100}
-            padding={`${tokens.spacing.s0} ${tokens.spacing.s350}`}
-          >
-            <Stack
-              justifyContent={
-                requestSteps.length === 1 ? "center" : "space-between"
-              }
-              padding={`${tokens.spacing.s0} ${tokens.spacing.s100}`}
-            >
-              {requestSteps &&
-                requestSteps.length > 0 &&
-                requestSteps.map((item, index) =>
-                  item.status === "error" ? (
-                    <Icon
-                      key={index}
-                      icon={<MdCancel />}
-                      size={sizeIcon}
-                      appearance={ComponentAppearance.DANGER}
-                    />
-                  ) : (
-                    <Icon
-                      key={index}
-                      icon={<MdCheckCircle />}
-                      size={sizeIcon}
-                      appearance={
-                        item.status === "pending"
-                          ? ComponentAppearance.GRAY
-                          : appearance
-                      }
-                    />
-                  ),
-                )}
-            </Stack>
-
-            <Stack
-              padding={`${tokens.spacing.s0} ${tokens.spacing.s300}`}
-              justifyContent="center"
-            >
-              {requestSteps && requestSteps.length > 1 && (
-                <StyledContainerBar>
-                  <StyledBar
-                    $progress={countVerifiedRequests(requestSteps)}
-                    $statusError={verifiedErrorRequest(requestSteps)}
-                  />
-                </StyledContainerBar>
-              )}
-            </Stack>
-            <Stack
-              justifyContent={
-                requestSteps.length === 1 ? "center" : "space-between"
-              }
-            >
-              {requestSteps &&
-                requestSteps.length > 0 &&
-                requestSteps.map((item, index) => (
-                  <Stack key={index} width="58px">
-                    <Text
-                      type="label"
-                      textAlign="center"
-                      size={isMobile ? "medium" : "large"}
-                      weight="bold"
-                      appearance={
-                        item.status === "completed"
-                          ? ComponentAppearance.DARK
-                          : ComponentAppearance.GRAY
-                      }
-                    >
-                      {item.name}
-                    </Text>
-                  </Stack>
-                ))}
-            </Stack>
-          </Stack>
+          {isMobile ? (
+            <RequestProcessMobile
+              requestSteps={requestSteps}
+              sizeIcon={sizeIcon}
+              appearance={appearance}
+            />
+          ) : (
+            <RequestProcessDesktop
+              requestSteps={requestSteps}
+              sizeIcon={sizeIcon}
+              stepCurrent={stepCurrent}
+              stepCurrentIndex={stepCurrentIndex}
+            />
+          )}
         </Stack>
       </StyledModal>
     </Blanket>,
