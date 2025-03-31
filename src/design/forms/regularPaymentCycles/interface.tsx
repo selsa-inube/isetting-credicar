@@ -7,9 +7,9 @@ import { Table } from "@design/data/table";
 import { ComponentAppearance } from "@enum/appearances";
 import { IEntry } from "@design/data/table/types";
 import {
-  actions,
   breakPoints,
   titles,
+  actionsConfig,
 } from "@config/payrollAgreement/payrollAgreementTab/assisted/ordinaryCyclesTable";
 import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
 import { AddCycleModal } from "@design/modals/addCycleModal";
@@ -42,6 +42,7 @@ interface IRegularPaymentCyclesFormUI {
   onReset: () => void;
   onChange: (name: string, value: string) => void;
   onPreviousStep: () => void;
+  setEntryDeleted: (value: string | number) => void;
   isDisabledButton?: boolean;
 }
 
@@ -60,6 +61,7 @@ const RegularPaymentCyclesFormUI = (props: IRegularPaymentCyclesFormUI) => {
     showInfoModal,
     valuesEqual,
     isMobile,
+    setEntryDeleted,
     onChange,
     onAddCycle,
     onToggleInfoModal,
@@ -93,7 +95,7 @@ const RegularPaymentCyclesFormUI = (props: IRegularPaymentCyclesFormUI) => {
                 id="portal"
                 titles={titles}
                 entries={entries}
-                actions={actions}
+                actions={actionsConfig(setEntryDeleted)}
                 breakpoints={breakPoints}
                 isLoading={loading}
                 columnWidths={[8, 30, 20, 18, 15]}

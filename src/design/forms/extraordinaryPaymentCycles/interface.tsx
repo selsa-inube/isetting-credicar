@@ -7,9 +7,9 @@ import { Table } from "@design/data/table";
 import { ComponentAppearance } from "@enum/appearances";
 import { IEntry } from "@design/data/table/types";
 import {
-  actions,
   breakPoints,
   titles,
+  actionsConfig,
 } from "@config/payrollAgreement/payrollAgreementTab/assisted/extraordinaryCyclesTable";
 import { IExtraordinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IExtraordinaryCyclesEntry";
 import { IServerDomain } from "@ptypes/IServerDomain";
@@ -38,6 +38,7 @@ interface IExtraordinaryPaymentCyclesFormUI {
   onReset: () => void;
   onChange: (name: string, value: string) => void;
   onPreviousStep: () => void;
+  setEntryDeleted: (value: string | number) => void;
   isDisabledButton?: boolean;
 }
 
@@ -63,6 +64,7 @@ const ExtraordinaryPaymentCyclesFormUI = (
     onReset,
     onToggleModal,
     onPreviousStep,
+    setEntryDeleted,
   } = props;
 
   return (
@@ -89,7 +91,7 @@ const ExtraordinaryPaymentCyclesFormUI = (
                 id="portal"
                 titles={titles}
                 entries={entries}
-                actions={actions}
+                actions={actionsConfig(setEntryDeleted)}
                 breakpoints={breakPoints}
                 isLoading={loading}
                 columnWidths={[50, 12, 10, 14]}

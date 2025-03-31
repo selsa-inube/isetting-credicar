@@ -55,6 +55,7 @@ const ExtraordinaryPaymentCyclesForm = forwardRef<
       handleChange,
       handleReset,
       handleAddCycle,
+      setEntryDeleted,
     } = useExtraordinaryCyclesForm(
       ref,
       editDataOption,
@@ -87,6 +88,7 @@ const ExtraordinaryPaymentCyclesForm = forwardRef<
         numberDaysUntilCutOptions={numberDaysUntilCutOptions}
         monthOptions={monthOptions}
         dayOptions={dayOptions ?? []}
+        setEntryDeleted={setEntryDeleted}
       />
     );
   },
