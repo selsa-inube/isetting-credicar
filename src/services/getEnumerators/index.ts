@@ -1,23 +1,26 @@
 import { AxiosRequestConfig } from "axios";
-import { IEnumeratorsMoneyDestination } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/IEnumeratorsMoneyDestination";
+
 import { getWithRetries } from "@services/core/getWithRetries";
 import { axiosInstance } from "@api/isettingCredicar";
+import { IEnumerators } from "@ptypes/IEnumerators";
 import { mapEnumMoneyDestinationToEntities } from "./mappers";
 
-const getEnumeratorsMoneyDestination = async (
-  enumDestination: string,
+const getEnumerators = async (
+  enumCredicar: string,
   bussinesUnits: string,
-): Promise<IEnumeratorsMoneyDestination[]> => {
+): Promise<IEnumerators[]> => {
   const config: AxiosRequestConfig = {
     headers: {
       "X-Action": "GetEnum",
       "X-Business-unit": bussinesUnits,
     },
   };
-  const data: IEnumeratorsMoneyDestination[] = await getWithRetries<
-    IEnumeratorsMoneyDestination[]
-  >(axiosInstance, `/enumerators/${enumDestination}`, config);
+  const data: IEnumerators[] = await getWithRetries<IEnumerators[]>(
+    axiosInstance,
+    `/enumerators/${enumCredicar}`,
+    config,
+  );
   return Array.isArray(data) ? mapEnumMoneyDestinationToEntities(data) : [];
 };
 
-export { getEnumeratorsMoneyDestination };
+export { getEnumerators };

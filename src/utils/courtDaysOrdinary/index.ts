@@ -6,15 +6,15 @@ import { weeklyCourtDaysOptions } from "@config/payrollAgreement/payrollAgreemen
 
 const courtDaysOrdinaryOptions = (periodicity: string) => {
   switch (periodicity) {
-    case "Semanal":
+    case "weekly":
       return weeklyCourtDaysOptions;
-    case "Cada 10 días":
+    case "Intervals_10_days":
       return everyTenPayDayOptions;
-    case "Quincenal":
+    case "Biweekly":
       return biweeklyPayDayOptions;
-    case "Mensual":
+    case "Monthly":
       return monthlyCourtDaysOptions;
-    case "Bimensual":
+    case "Semimonthly":
       return bimonthlyCourtDaysOptions;
   }
 };

@@ -19,21 +19,32 @@ import { RegularPaymentCyclesForm } from "@design/forms/regularPaymentCycles";
 import { ExtraordinaryPaymentCyclesForm } from "@design/forms/extraordinaryPaymentCycles";
 import { IExtraordinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IExtraordinaryCyclesEntry";
 import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
+import { VerificationForm } from "@design/forms/verificationPayrollAgreement";
+import { ISaveDataResponse } from "@ptypes/saveData/ISaveDataResponse";
+import { IRequestSteps } from "@design/modals/requestProcessModal/types";
 interface IAddPayrollAgreementUI {
   currentStep: number;
-  formReferences: IAddPayrollAgreementRef;
-  initialGeneralInformationValues: IAddPayrollAgreementForms;
-  formValid: boolean;
-  steps: IAssistedStep[];
-  sourcesOfIncomeValues: IServerDomain[];
-  smallScreen: boolean;
   extraordinaryPayment: IExtraordinaryCyclesEntry[];
+  formReferences: IAddPayrollAgreementRef;
+  formValid: boolean;
+  initialGeneralInformationValues: IAddPayrollAgreementForms;
+  isCurrentFormValid: boolean;
+  loading: boolean;
+  regularPaymentCycles: IOrdinaryCyclesEntry[];
+  requestSteps: IRequestSteps[];
+  savePayrollAgreement: ISaveDataResponse;
+  showGoBackModal: boolean;
+  showModal: boolean;
+  showPendingReqModal: boolean;
+  showRequestProcessModal: boolean;
+  smallScreen: boolean;
+  sourcesOfIncomeValues: IServerDomain[];
+  steps: IAssistedStep[];
   typeRegularPayroll: boolean;
+  onToggleModal: () => void;
   setSourcesOfIncomeValues: React.Dispatch<
     React.SetStateAction<IServerDomain[]>
   >;
-  showGoBackModal: boolean;
-  regularPaymentCycles: IOrdinaryCyclesEntry[];
   onOpenModal: () => void;
   onCloseModal: () => void;
   onGoBack: () => void;
@@ -46,30 +57,46 @@ interface IAddPayrollAgreementUI {
   setRegularPaymentCycles: React.Dispatch<
     React.SetStateAction<IOrdinaryCyclesEntry[]>
   >;
+  onCloseRequestStatus: () => void;
+  onClosePendingReqModal: () => void;
+  onFinishForm: () => void;
+  setCurrentStep: (step: number) => void;
 }
 
 const AddPayrollAgreementUI = (props: IAddPayrollAgreementUI) => {
   const {
     currentStep,
-    formReferences,
-    initialGeneralInformationValues,
-    formValid,
-    steps,
-    showGoBackModal,
-    smallScreen,
-    regularPaymentCycles,
-    onOpenModal,
-    onCloseModal,
-    sourcesOfIncomeValues,
     extraordinaryPayment,
+    formReferences,
+    formValid,
+    initialGeneralInformationValues,
+    isCurrentFormValid,
+    loading,
+    regularPaymentCycles,
+    requestSteps,
+    savePayrollAgreement,
+    showGoBackModal,
+    showModal,
+    showPendingReqModal,
+    showRequestProcessModal,
+    smallScreen,
+    sourcesOfIncomeValues,
+    steps,
     typeRegularPayroll,
-    setSourcesOfIncomeValues,
-    setIsCurrentFormValid,
-    onNextStep,
-    onPreviousStep,
+    onCloseModal,
+    onClosePendingReqModal,
+    onCloseRequestStatus,
+    onFinishForm,
     onGoBack,
+    onNextStep,
+    onOpenModal,
+    onPreviousStep,
+    onToggleModal,
+    setCurrentStep,
     setExtraordinaryPayment,
+    setIsCurrentFormValid,
     setRegularPaymentCycles,
+    setSourcesOfIncomeValues,
   } = props;
 
   return (
@@ -98,9 +125,7 @@ const AddPayrollAgreementUI = (props: IAddPayrollAgreementUI) => {
             totalSteps={steps.length}
             onBackClick={onPreviousStep}
             onNextClick={onNextStep}
-            onSubmitClick={() => {
-              console.log();
-            }}
+            onSubmitClick={onToggleModal}
             disableNext={formValid}
             controls={{
               goBackText: "Anterior",
@@ -149,6 +174,42 @@ const AddPayrollAgreementUI = (props: IAddPayrollAgreementUI) => {
                 onPreviousStep={onPreviousStep}
                 typeRegularPayroll={typeRegularPayroll}
                 regularPaymentCycles={regularPaymentCycles}
+              />
+            )}
+            {currentStep === 5 && (
+              <VerificationForm
+                updatedData={{
+                  company: {
+                    isValid: isCurrentFormValid,
+                    values: initialGeneralInformationValues.company.values,
+                  },
+                  generalInformation: {
+                    isValid: isCurrentFormValid,
+                    values:
+                      initialGeneralInformationValues.generalInformation.values,
+                  },
+                  ordinaryCycles: {
+                    isValid: formValid,
+                    values: regularPaymentCycles,
+                  },
+                  extraordinaryCycles: {
+                    isValid: formValid,
+                    values: extraordinaryPayment,
+                  },
+                }}
+                requestSteps={requestSteps}
+                onPreviousStep={onPreviousStep}
+                handleStepChange={(stepId) => setCurrentStep(stepId)}
+                showModal={showModal}
+                showRequestProcessModal={showRequestProcessModal}
+                onToggleModal={onToggleModal}
+                onFinishForm={onFinishForm}
+                savePayrollAgreement={savePayrollAgreement}
+                loading={loading}
+                onCloseRequestStatus={onCloseRequestStatus}
+                showPendingReqModal={showPendingReqModal}
+                onClosePendingReqModal={onClosePendingReqModal}
+                typeRegularPayroll={typeRegularPayroll}
               />
             )}
           </Stack>

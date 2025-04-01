@@ -1,5 +1,5 @@
 import { useMediaQuery } from "@inubekit/inubekit";
-import { useEffect, useImperativeHandle, useState } from "react";
+import { useContext, useEffect, useImperativeHandle, useState } from "react";
 import { FormikProps, useFormik } from "formik";
 import { object } from "yup";
 
@@ -11,12 +11,14 @@ import { addLeadingZero } from "@utils/addLeadingZero";
 import { IServerDomain } from "@ptypes/IServerDomain";
 import { extraordinaryDaysOptions } from "@config/payrollAgreement/payrollAgreementTab/assisted/extraordinaryDay";
 import { monthExtraordinaryOptions } from "@config/payrollAgreement/payrollAgreementTab/assisted/monthExtraordinary";
-import { typePaymentExtraordinaryOptions } from "@config/payrollAgreement/payrollAgreementTab/assisted/typePaymentExtraordinary";
 import { daysOfMonth } from "@utils/daysOfMonth";
 import { convertToOptions } from "@utils/convertToOptions";
 import { monthsInNumber } from "@config/payrollAgreement/payrollAgreementTab/generic/monthsInNumber";
 import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
 import { generateExtraOrdPayDays } from "@utils/generateExtraOrdPayDays";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
+import { useEnumerators } from "@hooks/useEnumerators";
+import { optionsFromEnumerators } from "@utils/optionsFromEnumerators";
 
 const useExtraordinaryCyclesForm = (
   ref: React.ForwardedRef<FormikProps<IExtraordinaryCyclesEntry>>,
@@ -65,12 +67,19 @@ const useExtraordinaryCyclesForm = (
     extraordinaryPayment as IEntry[],
   );
   const [dayOptions, setDayOptions] = useState<IServerDomain[] | undefined>([]);
-  const typePaymentOptions = typePaymentExtraordinaryOptions;
   const monthOptions = monthExtraordinaryOptions;
   const numberDaysUntilCutOptions = extraordinaryDaysOptions;
   const [entryDeleted, setEntryDeleted] = useState<string | number>("");
 
   const isMobile = useMediaQuery("(max-width: 990px)");
+
+  const { appData } = useContext(AuthAndPortalData);
+  const { enumData } = useEnumerators(
+    "extraordinarypaymenttype",
+    appData.businessUnit.publicCode,
+  );
+
+  const typePaymentOptions = optionsFromEnumerators(enumData);
 
   useImperativeHandle(ref, () => formik);
 

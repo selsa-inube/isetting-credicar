@@ -17,7 +17,7 @@ import { ICompanyEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/form
 import { getDomainById } from "@mocks/domains/domainService.mocks";
 import { getFieldState } from "@utils/forms/getFieldState";
 import { IServerDomain } from "@ptypes/IServerDomain";
-import { companyLabels } from "@src/config/payrollAgreement/payrollAgreementTab/forms/companyLabels";
+import { companyLabels } from "@config/payrollAgreement/payrollAgreementTab/forms/companyLabels";
 import {
   StyledContainer,
   StyledContainerFields,
@@ -29,6 +29,7 @@ interface ICompanyFormUI {
   loading: boolean;
   optionsCountries: IServerDomain[];
   optionsCities: IServerDomain[];
+  legalPerson: IServerDomain[];
   onChange: (name: string, value: string) => void;
   onCompanyChange: (name: string, value: string) => void;
   onButtonClick: () => void;
@@ -41,10 +42,11 @@ const CompanyFormUI = (props: ICompanyFormUI) => {
     loading,
     optionsCountries,
     optionsCities,
+    legalPerson,
+    isDisabledButton,
     onChange,
     onCompanyChange,
     onButtonClick,
-    isDisabledButton,
   } = props;
 
   const isMobile = useMediaQuery("(max-width: 990px)");
@@ -62,7 +64,7 @@ const CompanyFormUI = (props: ICompanyFormUI) => {
               label={companyLabels.companySelected}
               placeholder="Seleccione una opción"
               onChange={onCompanyChange}
-              options={getDomainById("company")}
+              options={legalPerson}
               size="compact"
               value={formik.values.companySelected}
               required

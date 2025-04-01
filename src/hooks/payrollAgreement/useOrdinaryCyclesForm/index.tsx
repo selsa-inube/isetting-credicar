@@ -1,4 +1,4 @@
-import { useEffect, useImperativeHandle, useState } from "react";
+import { useContext, useEffect, useImperativeHandle, useState } from "react";
 import { FormikProps, useFormik } from "formik";
 import { useMediaQuery } from "@inubekit/inubekit";
 import { object } from "yup";
@@ -7,12 +7,14 @@ import { validationRules } from "@validations/validationRules";
 import { validationMessages } from "@validations/validationMessages";
 import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
 import { IEntry } from "@design/data/table/types";
-import { getDomainById } from "@mocks/domains/domainService.mocks";
 import { IServerDomain } from "@ptypes/IServerDomain";
 import { payDayOrdinaryOptions } from "@utils/payDayOrdinary";
 import { addLeadingZero } from "@utils/addLeadingZero";
 import { courtDaysOrdinaryOptions } from "@utils/courtDaysOrdinary";
 import { payDayValues } from "@utils/payDayValues";
+import { useEnumerators } from "@hooks/useEnumerators";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
+import { optionsFromEnumerators } from "@utils/optionsFromEnumerators";
 
 const useOrdinaryCyclesForm = (
   ref: React.ForwardedRef<FormikProps<IOrdinaryCyclesEntry>>,
@@ -68,7 +70,13 @@ const useOrdinaryCyclesForm = (
     IServerDomain[] | undefined
   >([]);
 
-  const periodicityOptions = getDomainById("periodicity");
+  const { appData } = useContext(AuthAndPortalData);
+  const { enumData: periodicity } = useEnumerators(
+    "schedule",
+    appData.businessUnit.publicCode,
+  );
+
+  const periodicityOptions = optionsFromEnumerators(periodicity);
 
   useImperativeHandle(ref, () => formik);
 

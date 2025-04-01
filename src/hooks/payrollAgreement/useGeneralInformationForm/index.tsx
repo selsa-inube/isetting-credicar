@@ -1,4 +1,10 @@
-import { useEffect, useImperativeHandle, useRef, useState } from "react";
+import {
+  useContext,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import { FormikProps, useFormik } from "formik";
 import { useMediaQuery } from "@inubekit/inubekit";
 import { object } from "yup";
@@ -8,6 +14,9 @@ import { validationMessages } from "@validations/validationMessages";
 import { IGeneralInformationEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IGeneralInformationPayroll";
 import { getDomainById } from "@mocks/domains/domainService.mocks";
 import { IServerDomain } from "@ptypes/IServerDomain";
+import { useEnumerators } from "@hooks/useEnumerators";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
+import { optionsFromEnumerators } from "@utils/optionsFromEnumerators";
 
 const useGeneralInformationForm = (
   initialValues: IGeneralInformationEntry,
@@ -50,6 +59,14 @@ const useGeneralInformationForm = (
   const [focused, setFocused] = useState(false);
   const [displayList, setDisplayList] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
+
+  const { appData } = useContext(AuthAndPortalData);
+  const { enumData: typePayroll } = useEnumerators(
+    "deductionagreementtype",
+    appData.businessUnit.publicCode,
+  );
+
+  const typePayrollOptions = optionsFromEnumerators(typePayroll);
 
   const isMobile = useMediaQuery("(max-width: 990px)");
 
@@ -130,6 +147,7 @@ const useGeneralInformationForm = (
     focused,
     displayList,
     selectRef,
+    typePayrollOptions,
     setFocused,
     setDisplayList,
     handleChangeSelect,

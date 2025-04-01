@@ -39,6 +39,7 @@ interface IGeneralInformationPayrollFormUI {
   displayList: boolean;
   focused: boolean;
   selectRef: React.RefObject<HTMLDivElement>;
+  typePayrollOptions: IServerDomain[];
   setFocused: React.Dispatch<React.SetStateAction<boolean>>;
   setDisplayList: React.Dispatch<React.SetStateAction<boolean>>;
   onToggleInfoModalModal: () => void;
@@ -68,6 +69,7 @@ const GeneralInformationPayrollFormUI = (
     displayList,
     focused,
     selectRef,
+    typePayrollOptions,
     setFocused,
     setDisplayList,
     onChangeSelect,
@@ -113,7 +115,7 @@ const GeneralInformationPayrollFormUI = (
                   label="Tipo de nómina de convenio"
                   placeholder="Selecciónalo de la lista"
                   onChange={onChangeSelect}
-                  options={getDomainById("typePayroll")}
+                  options={typePayrollOptions}
                   size="compact"
                   value={formik.values.typePayroll ?? ""}
                   fullwidth

@@ -1,9 +1,9 @@
-import { IEnumeratorsMoneyDestination } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/IEnumeratorsMoneyDestination";
+import { IEnumerators } from "@ptypes/IEnumerators";
 
 const mapEnumMoneyDestinationToEntity = (
-  enumData: IEnumeratorsMoneyDestination,
-): IEnumeratorsMoneyDestination => {
-  const business: IEnumeratorsMoneyDestination = {
+  enumData: IEnumerators,
+): IEnumerators => {
+  const business: IEnumerators = {
     code: String(enumData.code),
     description: String(enumData.description),
     value: String(enumData.value),
@@ -12,8 +12,8 @@ const mapEnumMoneyDestinationToEntity = (
 };
 
 const mapEnumMoneyDestinationToEntities = (
-  enums: IEnumeratorsMoneyDestination[],
-): IEnumeratorsMoneyDestination[] => {
+  enums: IEnumerators[],
+): IEnumerators[] => {
   return enums.map(mapEnumMoneyDestinationToEntity);
 };
 

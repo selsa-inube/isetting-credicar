@@ -11,10 +11,15 @@ import { IGeneralInformationEntry } from "@ptypes/payrollAgreement/payrollAgreem
 import { IExtraordinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IExtraordinaryCyclesEntry";
 import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
 import { typePayrollForCyclesExtraord } from "@config/payrollAgreement/payrollAgreementTab/assisted/typePayrollForCyclesExtraord";
-import { getDomainById } from "@mocks/domains/domainService.mocks";
 import { compareObjects } from "@utils/compareObjects";
+import { ISaveDataRequest } from "@ptypes/saveData/ISaveDataRequest";
+import { IAppData } from "@ptypes/context/authAndPortalDataProvider/IAppData";
+import { formatDate } from "@utils/date/formatDate";
+import { useEnumerators } from "@hooks/useEnumerators";
+import { optionsFromEnumerators } from "@utils/optionsFromEnumerators";
+import { IServerDomain } from "@ptypes/IServerDomain";
 
-const useAddPayrollAgreement = () => {
+const useAddPayrollAgreement = (appData: IAppData) => {
   const initialValues = {
     company: {
       isValid: false,
@@ -75,14 +80,23 @@ const useAddPayrollAgreement = () => {
   >([]);
   const [isCurrentFormValid, setIsCurrentFormValid] = useState(false);
   const [showGoBackModal, setShowGoBackModal] = useState(false);
-  const [sourcesOfIncomeValues, setSourcesOfIncomeValues] = useState(
-    getDomainById("sourcesOfIncome"),
-  );
   const [extraordinaryPayment, setExtraordinaryPayment] = useState<
     IExtraordinaryCyclesEntry[]
   >([]);
+  const [showRequestProcessModal, setShowRequestProcessModal] = useState(false);
   const [typeRegularPayroll, setTypeRegularPayroll] = useState<boolean>(true);
   const [canRefresh, setCanRefresh] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [saveData, setSaveData] = useState<ISaveDataRequest>();
+  const [sourcesOfIncomeValues, setSourcesOfIncomeValues] = useState<
+    IServerDomain[]
+  >([]);
+
+  const { enumData: incometype } = useEnumerators(
+    "incometype",
+    appData.businessUnit.publicCode,
+  );
+
   const navigate = useNavigate();
 
   const smallScreen = useMediaQuery("(max-width: 990px)");
@@ -95,6 +109,10 @@ const useAddPayrollAgreement = () => {
     company: companyRef,
     generalInformation: generalInformationRef,
   };
+
+  useEffect(() => {
+    setSourcesOfIncomeValues(optionsFromEnumerators(incometype));
+  }, [incometype]);
 
   useEffect(() => {
     setTypeRegularPayroll(
@@ -199,6 +217,10 @@ const useAddPayrollAgreement = () => {
     navigate(-1);
   };
 
+  const handleToggleModal = () => {
+    setShowModal(!showModal);
+  };
+
   useEffect(() => {
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
       const hasUnsavedChanges =
@@ -229,6 +251,20 @@ const useAddPayrollAgreement = () => {
       ? false
       : !isCurrentFormValid;
 
+  const handleSubmitClick = () => {
+    setSaveData({
+      applicationName: "ifac",
+      businessManagerCode: appData.businessManager.publicCode,
+      businessUnitCode: appData.businessUnit.publicCode,
+      description: "Solicitud de creación de una nómina de convenio",
+      entityName: "PayrollAgreement",
+      requestDate: formatDate(new Date()),
+      useCaseName: "AddPayrollAgreement",
+      configurationRequestData: {},
+    });
+    setShowRequestProcessModal(!showRequestProcessModal);
+  };
+
   return {
     currentStep,
     formValues,
@@ -241,6 +277,10 @@ const useAddPayrollAgreement = () => {
     isCurrentFormValid,
     extraordinaryPayment,
     typeRegularPayroll,
+    showModal,
+    showRequestProcessModal,
+    saveData,
+    handleToggleModal,
     setExtraordinaryPayment,
     setSourcesOfIncomeValues,
     setRegularPaymentCycles,
@@ -251,6 +291,9 @@ const useAddPayrollAgreement = () => {
     handleGoBack,
     handleOpenModal,
     handleCloseModal,
+    setShowModal,
+    setShowRequestProcessModal,
+    handleSubmitClick,
   };
 };
 
