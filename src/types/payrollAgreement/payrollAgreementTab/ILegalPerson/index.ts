@@ -10,7 +10,7 @@ interface ILegalPerson {
   identificationTypeLegalPerson: string;
   legalPersonId: string;
   legalPersonName: string;
-  registeredContactsByCustomerLegalEntity: IRegisteredContactsByLegalEntity[];
+  registeredContactsByCustomerLegalEntity?: IRegisteredContactsByLegalEntity[];
   tradename: string;
 }
 

@@ -18,6 +18,10 @@ import { formatDate } from "@utils/date/formatDate";
 import { useEnumerators } from "@hooks/useEnumerators";
 import { optionsFromEnumerators } from "@utils/optionsFromEnumerators";
 import { IServerDomain } from "@ptypes/IServerDomain";
+import { ILegalPerson } from "@ptypes/payrollAgreement/payrollAgreementTab/ILegalPerson";
+import { normalizeEnumTranslationCode } from "@utils/normalizeEnumTranslationCode";
+import { IPayrollSpecialBenefit } from "@ptypes/payrollAgreement/payrollAgreementTab/IPayrollSpecialBenefit";
+import { ISeverancePaymentCycles } from "@ptypes/payrollAgreement/payrollAgreementTab/ISeverancePaymentCycles";
 
 const useAddPayrollAgreement = (appData: IAppData) => {
   const initialValues = {
@@ -251,7 +255,96 @@ const useAddPayrollAgreement = (appData: IAppData) => {
       ? false
       : !isCurrentFormValid;
 
+  const company = {
+    legalPersonId: "",
+    identificationDocumentNumber: formValues.company.values.companyNumberIdent,
+    identificationTypeLegalPerson: formValues.company.values.companyTypeIdent,
+    legalPersonName: formValues.company.values.companyName,
+    tradename: formValues.company.values.companyNameCommercial,
+    identificationDocumentVerificationDigit:
+      formValues.company.values.companyVerifDigit,
+    countryTaxResidence: formValues.company.values.companyCountry,
+    headquarterCity: formValues.company.values.companyCity,
+    headquarterAddress: formValues.company.values.companyAddressRes,
+    countryOfIdentityDocument: formValues.company.values.companyCountryIdent,
+  };
+
+  const regularPayment = formValues.ordinaryCycles.values
+    .filter((item) => item.cycleId !== "")
+    .map((item) => ({
+      cycleId: item.cycleId,
+      nameCycle: item.nameCycle,
+      periodicity:
+        normalizeEnumTranslationCode(item.periodicity)?.code ??
+        item.periodicity,
+      payday: item.payday,
+      numberDaysUntilCut: Number(item.numberDaysUntilCut),
+      transactionOperation: "Insert",
+    }));
+
+  const payrollSpecialBenefit = formValues.extraordinaryCycles.values
+    .filter((item) => item.typePayment === "Prima")
+    .map((item) => ({
+      abbreviatedName: item.nameCycle,
+      numberOfDaysBeforePaymentToBill: Number(item.numberDaysUntilCut),
+      paymentDay: item.payday ?? "",
+      payrollForDeductionAgreementId: item.id ?? "",
+      transactionOperation: "Insert",
+    }));
+
+  const severancePayment = formValues.extraordinaryCycles.values
+    .filter((item) => item.typePayment === "Cesantías")
+    .map((item) => ({
+      abbreviatedName: item.nameCycle,
+      numberOfDaysBeforePaymentToBill: Number(item.numberDaysUntilCut),
+      paymentDay: item.payday ?? "",
+      payrollForDeductionAgreementId: "",
+      transactionOperation: "Insert",
+    }));
+
   const handleSubmitClick = () => {
+    const configurationRequestData: {
+      abbreviatedName?: string;
+      numberOfDaysForReceivingTheDiscounts?: string;
+      payrollForDeductionAgreementType?: string;
+      legalPersonIdentification?: string;
+      legalPersonName?: string;
+      company?: ILegalPerson;
+      regularPaymentCycles?: IOrdinaryCyclesEntry[];
+      payrollSpecialBenefitPaymentCycles?: IPayrollSpecialBenefit[];
+      severancePaymentCycles?: ISeverancePaymentCycles[];
+    } = {
+      abbreviatedName: formValues.generalInformation.values.namePayroll,
+      numberOfDaysForReceivingTheDiscounts:
+        formValues.generalInformation.values.applicationDaysPayroll,
+      payrollForDeductionAgreementType:
+        formValues.generalInformation.values.typePayroll,
+    };
+
+    if (formValues.company.values.companySelected) {
+      configurationRequestData.legalPersonIdentification = "";
+      configurationRequestData.legalPersonName =
+        formValues.company.values.companySelected;
+    }
+
+    if ((formValues.company.values.companyNumberIdent, length > 0)) {
+      configurationRequestData.company = company as ILegalPerson;
+    }
+
+    if (formValues.extraordinaryCycles.values.length > 0) {
+      if (severancePayment.length > 0) {
+        configurationRequestData.severancePaymentCycles = severancePayment;
+      }
+      if (payrollSpecialBenefit.length > 0) {
+        configurationRequestData.payrollSpecialBenefitPaymentCycles =
+          payrollSpecialBenefit;
+      }
+
+      if (regularPayment.length > 0) {
+        configurationRequestData.regularPaymentCycles = regularPayment;
+      }
+    }
+
     setSaveData({
       applicationName: "ifac",
       businessManagerCode: appData.businessManager.publicCode,
@@ -260,11 +353,12 @@ const useAddPayrollAgreement = (appData: IAppData) => {
       entityName: "PayrollAgreement",
       requestDate: formatDate(new Date()),
       useCaseName: "AddPayrollAgreement",
-      configurationRequestData: {},
+      configurationRequestData,
     });
     setShowRequestProcessModal(!showRequestProcessModal);
   };
 
+  console.log({ saveData });
   return {
     currentStep,
     formValues,

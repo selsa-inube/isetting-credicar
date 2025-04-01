@@ -15,6 +15,7 @@ import { payDayValues } from "@utils/payDayValues";
 import { useEnumerators } from "@hooks/useEnumerators";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 import { optionsFromEnumerators } from "@utils/optionsFromEnumerators";
+import { normalizeEnumTranslation } from "@utils/normalizeEnumTranslation";
 
 const useOrdinaryCyclesForm = (
   ref: React.ForwardedRef<FormikProps<IOrdinaryCyclesEntry>>,
@@ -141,7 +142,9 @@ const useOrdinaryCyclesForm = (
     id: `cycle-${addLeadingZero(id).toString()}`,
     cycleId: addLeadingZero(id).toString(),
     nameCycle: formik.values.nameCycle,
-    periodicity: formik.values.periodicity,
+    periodicity:
+      normalizeEnumTranslation(formik.values.periodicity)?.name ??
+      formik.values.periodicity,
     payday: payDayValues(formik.values.periodicity, formik.values.payday),
     numberDaysUntilCut: formik.values.numberDaysUntilCut,
   });

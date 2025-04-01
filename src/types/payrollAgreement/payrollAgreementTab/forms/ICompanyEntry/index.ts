@@ -1,5 +1,5 @@
 interface ICompanyEntry {
-  companySelected: string;
+  companySelected?: string;
   companyName?: string;
   companyTypeIdent?: string;
   companyNumberIdent?: string;

@@ -66,7 +66,7 @@ const CompanyFormUI = (props: ICompanyFormUI) => {
               onChange={onCompanyChange}
               options={legalPerson}
               size="compact"
-              value={formik.values.companySelected}
+              value={formik.values.companySelected ?? ""}
               required
             />
 

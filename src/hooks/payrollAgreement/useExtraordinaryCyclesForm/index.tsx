@@ -19,6 +19,7 @@ import { generateExtraOrdPayDays } from "@utils/generateExtraOrdPayDays";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 import { useEnumerators } from "@hooks/useEnumerators";
 import { optionsFromEnumerators } from "@utils/optionsFromEnumerators";
+import { normalizeEnumTranslation } from "@utils/normalizeEnumTranslation";
 
 const useExtraordinaryCyclesForm = (
   ref: React.ForwardedRef<FormikProps<IExtraordinaryCyclesEntry>>,
@@ -151,7 +152,9 @@ const useExtraordinaryCyclesForm = (
   const createNewCycle = (id: number) => ({
     id: `cycle-${addLeadingZero(id).toString()}`,
     nameCycle: formik.values.nameCycle,
-    typePayment: formik.values.typePayment,
+    typePayment:
+      normalizeEnumTranslation(formik.values.typePayment)?.name ??
+      formik.values.typePayment,
     payday: `${formik.values.month}-${formik.values.day}`,
     numberDaysUntilCut: formik.values.numberDaysUntilCut,
   });

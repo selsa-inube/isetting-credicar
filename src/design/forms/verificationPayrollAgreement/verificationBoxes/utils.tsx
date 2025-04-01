@@ -87,6 +87,7 @@ const renderRegularVerification = (values: IOrdinaryCyclesEntry[]) => (
   <StyledConatinerAttribute>
     {values && values.length > 0 && (
       <Grid
+        key={values[0].cycleId}
         width="100%"
         templateColumns={columnsAttribute(values as IEntry[])}
         templateRows={rowsAttribute(values as IEntry[])}
@@ -98,7 +99,7 @@ const renderRegularVerification = (values: IOrdinaryCyclesEntry[]) => (
               key={item.cycleId}
               direction="column"
               label={`${item.cycleId} ${item.nameCycle}`}
-              value={normalizeEnumTranslation(item.periodicity)?.name}
+              value={item.periodicity}
             />
           </>
         ))}
@@ -113,6 +114,7 @@ const renderExtraordinaryVerification = (
   <StyledConatinerAttribute>
     {values && values.length > 0 && (
       <Grid
+        key={values[0].id}
         width="100%"
         templateColumns={columnsAttribute(values as IEntry[])}
         templateRows={rowsAttribute(values as IEntry[])}
@@ -123,7 +125,7 @@ const renderExtraordinaryVerification = (
             key={item.id}
             direction="column"
             label={item.nameCycle}
-            value={normalizeEnumTranslation(item.typePayment)?.name}
+            value={item.typePayment}
           />
         ))}
       </Grid>
