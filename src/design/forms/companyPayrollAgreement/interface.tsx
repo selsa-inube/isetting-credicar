@@ -9,7 +9,6 @@ import {
   Input,
   Select,
   Stack,
-  useMediaQuery,
 } from "@inubekit/inubekit";
 import { tokens } from "@design/tokens";
 import { ComponentAppearance } from "@enum/appearances";
@@ -17,7 +16,7 @@ import { ICompanyEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/form
 import { getDomainById } from "@mocks/domains/domainService.mocks";
 import { getFieldState } from "@utils/forms/getFieldState";
 import { IServerDomain } from "@ptypes/IServerDomain";
-import { companyLabels } from "@src/config/payrollAgreement/payrollAgreementTab/forms/companyLabels";
+import { companyLabels } from "@config/payrollAgreement/payrollAgreementTab/forms/companyLabels";
 import {
   StyledContainer,
   StyledContainerFields,
@@ -29,6 +28,8 @@ interface ICompanyFormUI {
   loading: boolean;
   optionsCountries: IServerDomain[];
   optionsCities: IServerDomain[];
+  legalPerson: IServerDomain[];
+  isMobile: boolean;
   onChange: (name: string, value: string) => void;
   onCompanyChange: (name: string, value: string) => void;
   onButtonClick: () => void;
@@ -41,13 +42,13 @@ const CompanyFormUI = (props: ICompanyFormUI) => {
     loading,
     optionsCountries,
     optionsCities,
+    legalPerson,
+    isDisabledButton,
+    isMobile,
     onChange,
     onCompanyChange,
     onButtonClick,
-    isDisabledButton,
   } = props;
-
-  const isMobile = useMediaQuery("(max-width: 990px)");
 
   return (
     <StyledContainer>
@@ -62,9 +63,9 @@ const CompanyFormUI = (props: ICompanyFormUI) => {
               label={companyLabels.companySelected}
               placeholder="Seleccione una opción"
               onChange={onCompanyChange}
-              options={getDomainById("company")}
+              options={legalPerson}
               size="compact"
-              value={formik.values.companySelected}
+              value={formik.values.companySelected ?? ""}
               required
             />
 

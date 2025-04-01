@@ -1,3 +1,3 @@
-const typePayrollForCyclesExtraord = ["ordinaryRemuneration"];
+const typePayrollForCyclesExtraord = ["OrdinaryRemuneration"];
 
 export { typePayrollForCyclesExtraord };

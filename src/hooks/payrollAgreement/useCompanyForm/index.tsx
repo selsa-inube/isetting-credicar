@@ -1,10 +1,15 @@
-import { useEffect, useImperativeHandle, useState } from "react";
+import { useContext, useEffect, useImperativeHandle, useState } from "react";
+import { useMediaQuery } from "@inubekit/inubekit";
 import { FormikProps, useFormik } from "formik";
 import { object } from "yup";
 
 import { validationRules } from "@validations/validationRules";
 import { validationMessages } from "@validations/validationMessages";
 import { ICompanyEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/ICompanyEntry";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
+import { useCountries } from "@hooks/generic/useCountries";
+import { useCities } from "@hooks/generic/useCities";
+import { useLegalPerson } from "../useLegalPerson";
 
 const useCompanyForm = (
   initialValues: ICompanyEntry,
@@ -40,6 +45,15 @@ const useCompanyForm = (
   });
 
   useImperativeHandle(ref, () => formik);
+
+  const { appData } = useContext(AuthAndPortalData);
+  const { legalPersonOptions } = useLegalPerson(
+    appData.businessUnit.publicCode,
+  );
+  const { optionsCountries } = useCountries();
+  const { optionsCities } = useCities();
+
+  const isMobile = useMediaQuery("(max-width: 990px)");
 
   useEffect(() => {
     if (onFormValid) {
@@ -116,6 +130,10 @@ const useCompanyForm = (
 
   return {
     formik,
+    legalPersonOptions,
+    optionsCountries,
+    optionsCities,
+    isMobile,
     handleChange,
     handleCompanyChange,
   };

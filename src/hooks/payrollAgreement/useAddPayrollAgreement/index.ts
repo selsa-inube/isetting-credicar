@@ -11,10 +11,20 @@ import { IGeneralInformationEntry } from "@ptypes/payrollAgreement/payrollAgreem
 import { IExtraordinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IExtraordinaryCyclesEntry";
 import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
 import { typePayrollForCyclesExtraord } from "@config/payrollAgreement/payrollAgreementTab/assisted/typePayrollForCyclesExtraord";
-import { getDomainById } from "@mocks/domains/domainService.mocks";
 import { compareObjects } from "@utils/compareObjects";
+import { ISaveDataRequest } from "@ptypes/saveData/ISaveDataRequest";
+import { IAppData } from "@ptypes/context/authAndPortalDataProvider/IAppData";
+import { formatDate } from "@utils/date/formatDate";
+import { useEnumerators } from "@hooks/useEnumerators";
+import { optionsFromEnumerators } from "@utils/optionsFromEnumerators";
+import { IServerDomain } from "@ptypes/IServerDomain";
+import { ILegalPerson } from "@ptypes/payrollAgreement/payrollAgreementTab/ILegalPerson";
+import { normalizeEnumTranslationCode } from "@utils/normalizeEnumTranslationCode";
+import { IPayrollSpecialBenefit } from "@ptypes/payrollAgreement/payrollAgreementTab/IPayrollSpecialBenefit";
+import { ISeverancePaymentCycles } from "@ptypes/payrollAgreement/payrollAgreementTab/ISeverancePaymentCycles";
+import { useLegalPerson } from "../useLegalPerson";
 
-const useAddPayrollAgreement = () => {
+const useAddPayrollAgreement = (appData: IAppData) => {
   const initialValues = {
     company: {
       isValid: false,
@@ -75,14 +85,25 @@ const useAddPayrollAgreement = () => {
   >([]);
   const [isCurrentFormValid, setIsCurrentFormValid] = useState(false);
   const [showGoBackModal, setShowGoBackModal] = useState(false);
-  const [sourcesOfIncomeValues, setSourcesOfIncomeValues] = useState(
-    getDomainById("sourcesOfIncome"),
-  );
   const [extraordinaryPayment, setExtraordinaryPayment] = useState<
     IExtraordinaryCyclesEntry[]
   >([]);
+  const [showRequestProcessModal, setShowRequestProcessModal] = useState(false);
   const [typeRegularPayroll, setTypeRegularPayroll] = useState<boolean>(true);
   const [canRefresh, setCanRefresh] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [saveData, setSaveData] = useState<ISaveDataRequest>();
+  const [sourcesOfIncomeValues, setSourcesOfIncomeValues] = useState<
+    IServerDomain[]
+  >([]);
+
+  const { enumData: incometype } = useEnumerators(
+    "incometype",
+    appData.businessUnit.publicCode,
+  );
+
+  const { legalPersonData } = useLegalPerson(appData.businessUnit.publicCode);
+
   const navigate = useNavigate();
 
   const smallScreen = useMediaQuery("(max-width: 990px)");
@@ -95,6 +116,10 @@ const useAddPayrollAgreement = () => {
     company: companyRef,
     generalInformation: generalInformationRef,
   };
+
+  useEffect(() => {
+    setSourcesOfIncomeValues(optionsFromEnumerators(incometype));
+  }, [incometype]);
 
   useEffect(() => {
     setTypeRegularPayroll(
@@ -199,6 +224,10 @@ const useAddPayrollAgreement = () => {
     navigate(-1);
   };
 
+  const handleToggleModal = () => {
+    setShowModal(!showModal);
+  };
+
   useEffect(() => {
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
       const hasUnsavedChanges =
@@ -229,6 +258,117 @@ const useAddPayrollAgreement = () => {
       ? false
       : !isCurrentFormValid;
 
+  const company = {
+    legalPersonId: formValues.company.values.companyCode,
+    identificationDocumentNumber: formValues.company.values.companyNumberIdent,
+    identificationTypeLegalPerson: formValues.company.values.companyTypeIdent,
+    legalPersonName: formValues.company.values.companyName,
+    tradename: formValues.company.values.companyNameCommercial,
+    identificationDocumentVerificationDigit:
+      formValues.company.values.companyVerifDigit,
+    countryTaxResidence: formValues.company.values.companyCountry,
+    headquarterCity: formValues.company.values.companyCity,
+    headquarterAddress: formValues.company.values.companyAddressRes,
+    countryOfIdentityDocument: formValues.company.values.companyCountryIdent,
+  };
+
+  const regularPayment = formValues.ordinaryCycles.values
+    .filter((item) => item.cycleId !== "")
+    .map((item) => ({
+      cycleId: item.cycleId,
+      nameCycle: item.nameCycle,
+      periodicity:
+        normalizeEnumTranslationCode(item.periodicity)?.code ??
+        item.periodicity,
+      payday: item.payday,
+      numberDaysUntilCut: Number(item.numberDaysUntilCut),
+      transactionOperation: "Insert",
+    }));
+
+  const payrollSpecialBenefit = formValues.extraordinaryCycles.values
+    .filter((item) => item.typePayment === "Prima")
+    .map((item) => ({
+      abbreviatedName: item.nameCycle,
+      numberOfDaysBeforePaymentToBill: Number(item.numberDaysUntilCut),
+      paymentDay: item.payday ?? "",
+      payrollForDeductionAgreementId: item.id ?? "",
+      transactionOperation: "Insert",
+    }));
+
+  const severancePayment = formValues.extraordinaryCycles.values
+    .filter((item) => item.typePayment === "Cesantías")
+    .map((item) => ({
+      abbreviatedName: item.nameCycle,
+      numberOfDaysBeforePaymentToBill: Number(item.numberDaysUntilCut),
+      paymentDay: item.payday ?? "",
+      payrollForDeductionAgreementId: "",
+      transactionOperation: "Insert",
+    }));
+
+  const handleSubmitClick = () => {
+    const legalPersonIdent = legalPersonData.find(
+      (item) =>
+        item.legalPersonName === formValues.company.values.companySelected,
+    );
+
+    const configurationRequestData: {
+      abbreviatedName?: string;
+      numberOfDaysForReceivingTheDiscounts?: string;
+      payrollForDeductionAgreementType?: string;
+      legalPersonIdentification?: string;
+      legalPersonName?: string;
+      company?: ILegalPerson;
+      regularPaymentCycles?: IOrdinaryCyclesEntry[];
+      payrollSpecialBenefitPaymentCycles?: IPayrollSpecialBenefit[];
+      severancePaymentCycles?: ISeverancePaymentCycles[];
+    } = {
+      abbreviatedName: formValues.generalInformation.values.namePayroll,
+      numberOfDaysForReceivingTheDiscounts:
+        formValues.generalInformation.values.applicationDaysPayroll,
+      payrollForDeductionAgreementType:
+        formValues.generalInformation.values.typePayroll,
+    };
+
+    if (formValues.company.values.companySelected) {
+      configurationRequestData.legalPersonName =
+        formValues.company.values.companySelected;
+      if (legalPersonIdent) {
+        configurationRequestData.legalPersonIdentification =
+          legalPersonIdent.identificationDocumentNumber;
+      }
+    }
+
+    if ((formValues.company.values.companyNumberIdent, length > 0)) {
+      configurationRequestData.company = company as ILegalPerson;
+    }
+
+    if (formValues.extraordinaryCycles.values.length > 0) {
+      if (severancePayment.length > 0) {
+        configurationRequestData.severancePaymentCycles = severancePayment;
+      }
+      if (payrollSpecialBenefit.length > 0) {
+        configurationRequestData.payrollSpecialBenefitPaymentCycles =
+          payrollSpecialBenefit;
+      }
+
+      if (regularPayment.length > 0) {
+        configurationRequestData.regularPaymentCycles = regularPayment;
+      }
+    }
+
+    setSaveData({
+      applicationName: "ifac",
+      businessManagerCode: appData.businessManager.publicCode,
+      businessUnitCode: appData.businessUnit.publicCode,
+      description: "Solicitud de creación de una nómina de convenio",
+      entityName: "PayrollAgreement",
+      requestDate: formatDate(new Date()),
+      useCaseName: "AddPayrollAgreement",
+      configurationRequestData,
+    });
+    setShowRequestProcessModal(!showRequestProcessModal);
+  };
+
   return {
     currentStep,
     formValues,
@@ -241,6 +381,10 @@ const useAddPayrollAgreement = () => {
     isCurrentFormValid,
     extraordinaryPayment,
     typeRegularPayroll,
+    showModal,
+    showRequestProcessModal,
+    saveData,
+    handleToggleModal,
     setExtraordinaryPayment,
     setSourcesOfIncomeValues,
     setRegularPaymentCycles,
@@ -251,6 +395,9 @@ const useAddPayrollAgreement = () => {
     handleGoBack,
     handleOpenModal,
     handleCloseModal,
+    setShowModal,
+    setShowRequestProcessModal,
+    handleSubmitClick,
   };
 };
 

@@ -7,7 +7,7 @@ import { validationRules } from "@validations/validationRules";
 import { validationMessages } from "@validations/validationMessages";
 import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationDestination";
 import { IServerDomain } from "@ptypes/IServerDomain";
-import { IEnumeratorsMoneyDestination } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/IEnumeratorsMoneyDestination";
+import { IEnumerators } from "@ptypes/IEnumerators";
 import { normalizeNameDestination } from "@utils/destination/normalizeNameDestination";
 import { normalizeCodeDestination } from "@utils/destination/normalizeCodeDestination";
 import { normalizeDestination } from "@utils/destination/normalizeDestination";
@@ -16,7 +16,7 @@ import { normalizeIconDestination } from "@utils/destination/normalizeIconDestin
 import { normalizeIconTextDestination } from "@utils/destination/normalizeIconTextDestination";
 
 const useGeneralInformationForm = (
-  enumData: IEnumeratorsMoneyDestination[],
+  enumData: IEnumerators[],
   initialValues: IGeneralInformationEntry,
   ref: React.ForwardedRef<FormikProps<IGeneralInformationEntry>>,
   editDataOption: boolean,

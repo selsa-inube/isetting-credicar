@@ -49,6 +49,7 @@ const GeneralInformationPayrollForm = forwardRef<
       focused,
       displayList,
       selectRef,
+      typePayrollOptions,
       setFocused,
       setDisplayList,
       handleChangeSelect,
@@ -91,6 +92,7 @@ const GeneralInformationPayrollForm = forwardRef<
         selectRef={selectRef}
         setFocused={setFocused}
         setDisplayList={setDisplayList}
+        typePayrollOptions={typePayrollOptions as IServerDomain[]}
       />
     );
   },
