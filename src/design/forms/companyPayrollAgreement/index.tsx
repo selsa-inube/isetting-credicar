@@ -22,6 +22,7 @@ const CompanyForm = forwardRef<FormikProps<ICompanyEntry>, ICompanyForm>(
       optionsCountries,
       optionsCities,
       legalPersonOptions,
+      isMobile,
       handleChange,
       handleCompanyChange,
     } = useCompanyForm(initialValues, ref, onSubmit, onFormValid);
@@ -37,6 +38,7 @@ const CompanyForm = forwardRef<FormikProps<ICompanyEntry>, ICompanyForm>(
         optionsCountries={optionsCountries}
         optionsCities={optionsCities}
         legalPerson={legalPersonOptions}
+        isMobile={isMobile}
       />
     );
   },

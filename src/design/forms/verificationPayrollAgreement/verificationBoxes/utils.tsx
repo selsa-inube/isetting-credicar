@@ -11,13 +11,14 @@ import { IEntry } from "@design/data/table/types";
 import { rowsAttribute } from "@utils/rowsAttribute";
 import { normalizeEnumTranslation } from "@utils/normalizeEnumTranslation";
 import { StyledConatinerAttribute } from "./styles";
+import { verificationLabels } from "@src/config/payrollAgreement/payrollAgreementTab/forms/verificationLabels";
 
 const renderCompanyVerification = (values: ICompanyEntry) => (
   <>
     <Stack width="100%" direction="column" gap={tokens.spacing.s200}>
       <BoxAttribute
         direction="column"
-        label="Razón social:"
+        label={verificationLabels.companyName}
         value={values.companyName}
       />
     </Stack>
@@ -29,22 +30,22 @@ const renderCompanyVerification = (values: ICompanyEntry) => (
     >
       <BoxAttribute
         direction="column"
-        label="Nombre comercial o alias:"
+        label={verificationLabels.tradeName}
         value={values.companyNameCommercial}
       />
       <BoxAttribute
         direction="column"
-        label="País de residencia fiscal:"
+        label={verificationLabels.countryTaxResidence}
         value={values.companyCountry}
       />
       <BoxAttribute
         direction="column"
-        label="Identificación:"
+        label={verificationLabels.companyId}
         value={values.companyNumberIdent}
       />
       <BoxAttribute
         direction="column"
-        label="Dirección de la sede:"
+        label={verificationLabels.headquartersAddress}
         value={values.companyAddressRes}
       />
     </Grid>
@@ -61,22 +62,22 @@ const renderGeneralinfoVerification = (values: IGeneralInformationEntry) => (
     >
       <BoxAttribute
         direction="column"
-        label="Nombre de nómina:"
+        label={verificationLabels.payrollName}
         value={values.namePayroll}
       />
       <BoxAttribute
         direction="column"
-        label="Tipo de nómina de convenio:"
+        label={verificationLabels.PayrollTypeAgreement}
         value={normalizeEnumTranslation(values.typePayroll)?.name}
       />
       <BoxAttribute
         direction="column"
-        label="Fuentes de ingreso:"
+        label={verificationLabels.SourcesIncome}
         value={values.sourcesOfIncome}
       />
       <BoxAttribute
         direction="column"
-        label="Días para determinar la fecha de aplicación:"
+        label={verificationLabels.daysToDetermineApplication}
         value={values.applicationDaysPayroll}
       />
     </Grid>

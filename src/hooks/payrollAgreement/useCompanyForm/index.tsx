@@ -1,4 +1,5 @@
 import { useContext, useEffect, useImperativeHandle, useState } from "react";
+import { useMediaQuery } from "@inubekit/inubekit";
 import { FormikProps, useFormik } from "formik";
 import { object } from "yup";
 
@@ -51,6 +52,8 @@ const useCompanyForm = (
   );
   const { optionsCountries } = useCountries();
   const { optionsCities } = useCities();
+
+  const isMobile = useMediaQuery("(max-width: 990px)");
 
   useEffect(() => {
     if (onFormValid) {
@@ -130,6 +133,7 @@ const useCompanyForm = (
     legalPersonOptions,
     optionsCountries,
     optionsCities,
+    isMobile,
     handleChange,
     handleCompanyChange,
   };

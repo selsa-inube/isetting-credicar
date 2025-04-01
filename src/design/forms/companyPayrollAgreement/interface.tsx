@@ -9,7 +9,6 @@ import {
   Input,
   Select,
   Stack,
-  useMediaQuery,
 } from "@inubekit/inubekit";
 import { tokens } from "@design/tokens";
 import { ComponentAppearance } from "@enum/appearances";
@@ -30,6 +29,7 @@ interface ICompanyFormUI {
   optionsCountries: IServerDomain[];
   optionsCities: IServerDomain[];
   legalPerson: IServerDomain[];
+  isMobile: boolean;
   onChange: (name: string, value: string) => void;
   onCompanyChange: (name: string, value: string) => void;
   onButtonClick: () => void;
@@ -44,12 +44,11 @@ const CompanyFormUI = (props: ICompanyFormUI) => {
     optionsCities,
     legalPerson,
     isDisabledButton,
+    isMobile,
     onChange,
     onCompanyChange,
     onButtonClick,
   } = props;
-
-  const isMobile = useMediaQuery("(max-width: 990px)");
 
   return (
     <StyledContainer>

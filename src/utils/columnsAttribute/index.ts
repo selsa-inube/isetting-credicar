@@ -1,10 +1,12 @@
 import { IEntry } from "@design/data/table/types";
 
-const columnsAttribute = (values: IEntry[]) =>
-  values.length === 1
-    ? "1fr"
-    : values.length === 2
-      ? "1fr 1fr"
-      : `repeat(${Math.ceil(values.length / 2)}, 1fr)`;
+const columnsMapping: Record<number, string> = {
+  1: "1fr",
+  2: "1fr 1fr",
+};
+
+const columnsAttribute = (values: IEntry[]): string =>
+  columnsMapping[values.length] ||
+  `repeat(${Math.ceil(values.length / 2)}, 1fr)`;
 
 export { columnsAttribute };
