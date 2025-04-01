@@ -153,7 +153,7 @@ const monthPayDayOptions = [
   {
     id: "31",
     label: "Ultimo día del mes",
-    value: "lastDayOfMonth",
+    value: "Ultimo día del mes",
   },
 ];
 
