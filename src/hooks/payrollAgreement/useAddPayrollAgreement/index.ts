@@ -22,6 +22,7 @@ import { ILegalPerson } from "@ptypes/payrollAgreement/payrollAgreementTab/ILega
 import { normalizeEnumTranslationCode } from "@utils/normalizeEnumTranslationCode";
 import { IPayrollSpecialBenefit } from "@ptypes/payrollAgreement/payrollAgreementTab/IPayrollSpecialBenefit";
 import { ISeverancePaymentCycles } from "@ptypes/payrollAgreement/payrollAgreementTab/ISeverancePaymentCycles";
+import { useLegalPerson } from "../useLegalPerson";
 
 const useAddPayrollAgreement = (appData: IAppData) => {
   const initialValues = {
@@ -100,6 +101,8 @@ const useAddPayrollAgreement = (appData: IAppData) => {
     "incometype",
     appData.businessUnit.publicCode,
   );
+
+  const { legalPersonData } = useLegalPerson(appData.businessUnit.publicCode);
 
   const navigate = useNavigate();
 
@@ -256,7 +259,7 @@ const useAddPayrollAgreement = (appData: IAppData) => {
       : !isCurrentFormValid;
 
   const company = {
-    legalPersonId: "",
+    legalPersonId: formValues.company.values.companyCode,
     identificationDocumentNumber: formValues.company.values.companyNumberIdent,
     identificationTypeLegalPerson: formValues.company.values.companyTypeIdent,
     legalPersonName: formValues.company.values.companyName,
@@ -303,6 +306,11 @@ const useAddPayrollAgreement = (appData: IAppData) => {
     }));
 
   const handleSubmitClick = () => {
+    const legalPersonIdent = legalPersonData.find(
+      (item) =>
+        item.legalPersonName === formValues.company.values.companySelected,
+    );
+
     const configurationRequestData: {
       abbreviatedName?: string;
       numberOfDaysForReceivingTheDiscounts?: string;
@@ -322,9 +330,12 @@ const useAddPayrollAgreement = (appData: IAppData) => {
     };
 
     if (formValues.company.values.companySelected) {
-      configurationRequestData.legalPersonIdentification = "";
       configurationRequestData.legalPersonName =
         formValues.company.values.companySelected;
+      if (legalPersonIdent) {
+        configurationRequestData.legalPersonIdentification =
+          legalPersonIdent.identificationDocumentNumber;
+      }
     }
 
     if ((formValues.company.values.companyNumberIdent, length > 0)) {
@@ -358,7 +369,6 @@ const useAddPayrollAgreement = (appData: IAppData) => {
     setShowRequestProcessModal(!showRequestProcessModal);
   };
 
-  console.log({ saveData });
   return {
     currentStep,
     formValues,
