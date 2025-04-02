@@ -28,6 +28,7 @@ interface IDecisionModalUI {
   onClick: () => void;
   onCloseModal: () => void;
   moreDetails?: string;
+  sizeIcon: string;
 }
 
 const DecisionModalUI = (props: IDecisionModalUI) => {
@@ -37,6 +38,7 @@ const DecisionModalUI = (props: IDecisionModalUI) => {
     description,
     isLoading,
     icon,
+    sizeIcon,
     node,
     title,
     withIcon,
@@ -77,7 +79,7 @@ const DecisionModalUI = (props: IDecisionModalUI) => {
 
         {withIcon && (
           <Stack width="100%" alignItems="center" justifyContent="center">
-            <Icon icon={icon} appearance={appearance} size="60px" />
+            <Icon icon={icon} appearance={appearance} size={sizeIcon} />
           </Stack>
         )}
 
