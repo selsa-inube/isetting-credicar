@@ -24,10 +24,8 @@ const useCompanyForm = (
     companyName: validationRules.string,
     companyTypeIdent: validationRules.string,
     companyNumberIdent: validationRules.string,
-    companyVerifDigit: validationRules.string,
-    companyDateIdent: validationRules.string,
     companyNameCommercial: validationRules.string,
-    companyCode: validationRules.string,
+    companyComplement: validationRules.string,
     companyCity: validationRules.string,
     companyAddressRes: validationRules.string,
     companyCountry: validationRules.string,
@@ -83,16 +81,10 @@ const useCompanyForm = (
           companyNumberIdent: validationRules.string.required(
             validationMessages.required,
           ),
-          companyVerifDigit: validationRules.string.required(
-            validationMessages.required,
-          ),
-          companyDateIdent: validationRules.string.required(
-            validationMessages.required,
-          ),
           companyNameCommercial: validationRules.string.required(
             validationMessages.required,
           ),
-          companyCode: validationRules.string.required(
+          companyComplement: validationRules.string.required(
             validationMessages.required,
           ),
           companyCity: validationRules.string.required(
