@@ -3,10 +3,8 @@ interface ICompanyEntry {
   companyName?: string;
   companyTypeIdent?: string;
   companyNumberIdent?: string;
-  companyVerifDigit?: string;
-  companyDateIdent?: string;
   companyNameCommercial?: string;
-  companyCode?: string;
+  companyComplement?: string;
   companyCity?: string;
   companyAddressRes?: string;
   companyCountry?: string;

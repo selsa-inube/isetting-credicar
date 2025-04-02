@@ -33,10 +33,8 @@ const useAddPayrollAgreement = (appData: IAppData) => {
         companyName: "",
         companyTypeIdent: "",
         companyNumberIdent: "",
-        companyVerifDigit: "",
-        companyDateIdent: "",
         companyNameCommercial: "",
-        companyCode: "",
+        companyComplement: "",
         companyCity: "",
         companyAddressRes: "",
         companyCountry: "",
@@ -259,16 +257,14 @@ const useAddPayrollAgreement = (appData: IAppData) => {
       : !isCurrentFormValid;
 
   const company = {
-    legalPersonId: formValues.company.values.companyCode,
+    legalPersonId: formValues.company.values.companyNumberIdent,
     identificationDocumentNumber: formValues.company.values.companyNumberIdent,
     identificationTypeLegalPerson: formValues.company.values.companyTypeIdent,
     legalPersonName: formValues.company.values.companyName,
     tradename: formValues.company.values.companyNameCommercial,
-    identificationDocumentVerificationDigit:
-      formValues.company.values.companyVerifDigit,
     countryTaxResidence: formValues.company.values.companyCountry,
     headquarterCity: formValues.company.values.companyCity,
-    headquarterAddress: formValues.company.values.companyAddressRes,
+    headquarterAddress: `${formValues.company.values.companyAddressRes} - ${formValues.company.values.companyComplement}`,
     countryOfIdentityDocument: formValues.company.values.companyCountryIdent,
   };
 
@@ -301,7 +297,7 @@ const useAddPayrollAgreement = (appData: IAppData) => {
       abbreviatedName: item.nameCycle,
       numberOfDaysBeforePaymentToBill: Number(item.numberDaysUntilCut),
       paymentDay: item.payday ?? "",
-      payrollForDeductionAgreementId: "",
+      payrollForDeductionAgreementId: item.id ?? "",
       transactionOperation: "Insert",
     }));
 
@@ -329,7 +325,7 @@ const useAddPayrollAgreement = (appData: IAppData) => {
         formValues.generalInformation.values.typePayroll,
     };
 
-    if (formValues.company.values.companySelected) {
+    if (formValues.company.values.companySelected !== "addCompany") {
       configurationRequestData.legalPersonName =
         formValues.company.values.companySelected;
       if (legalPersonIdent) {
@@ -338,7 +334,10 @@ const useAddPayrollAgreement = (appData: IAppData) => {
       }
     }
 
-    if ((formValues.company.values.companyNumberIdent, length > 0)) {
+    if (
+      formValues.company.values.companySelected === "addCompany" &&
+      company.legalPersonId
+    ) {
       configurationRequestData.company = company as ILegalPerson;
     }
 
