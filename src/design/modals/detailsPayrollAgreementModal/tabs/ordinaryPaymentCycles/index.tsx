@@ -1,7 +1,7 @@
 import { Stack } from "@inubekit/inubekit";
 
 import { PaymentCycleCardGroup } from "@design/feedback/paymentCycleCardGroup";
-import { ILabel } from "@design/modals/detailsRequestsInProgressModal/types";
+import { ILabel } from "@ptypes/ILabel";
 import { IEntry } from "@design/data/table/types";
 
 interface IOrdinaryPaymentCycles {
