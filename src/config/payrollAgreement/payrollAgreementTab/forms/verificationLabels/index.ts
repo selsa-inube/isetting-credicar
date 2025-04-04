@@ -1,5 +1,6 @@
 const verificationLabels = {
   companyName: "Razón social:",
+  companyAgreement: "Empresa con convenio:",
   tradeName: "Nombre comercial o alias:",
   countryTaxResidence: "País de residencia fiscal:",
   companyId: "Identificación:",
