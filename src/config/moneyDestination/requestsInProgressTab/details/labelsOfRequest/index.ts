@@ -1,15 +1,11 @@
 const labelsOfRequest = [
   {
-    id: "requestDate",
-    titleName: "Fecha de solicitud:",
-  },
-  {
     id: "responsable",
-    titleName: "Responsable:",
+    titleName: "Responsable",
   },
   {
-    id: "status",
-    titleName: "Estado:",
+    id: "requestNumber",
+    titleName: "No. de solicitud",
   },
 ];
 
