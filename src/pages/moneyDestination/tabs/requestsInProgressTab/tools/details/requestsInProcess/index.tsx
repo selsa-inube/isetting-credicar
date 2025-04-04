@@ -1,3 +1,4 @@
+import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { Divider, inube, Stack, Text } from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
@@ -34,7 +35,8 @@ function RequestsInProcess(props: IRequestsInProcess) {
       portalId="portal"
       width={isMobile ? "335px" : "600px"}
       isMobile={isMobile}
-      nameButtonOnClick="Entendido"
+      nameButtonOnClick="Más detalles"
+      iconBeforeButton={<MdOutlineRemoveRedEye />}
       title="Detalles de solicitud"
       withCancelButton={true}
       onCloseModal={onCloseModal}
