@@ -8,11 +8,12 @@ import {
   Divider,
   Blanket,
   Button,
+  inube,
 } from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
 import { ComponentAppearance } from "@enum/appearances";
-import { StyledContainerButton, StyledModal } from "./styles";
+import { BoxContainer } from "@design/layout/boxContainer";
 
 interface IDecisionModalUI {
   actionText: string;
@@ -51,28 +52,35 @@ const DecisionModalUI = (props: IDecisionModalUI) => {
 
   return createPortal(
     <Blanket>
-      <StyledModal $smallScreen={isMobile}>
+      <BoxContainer
+        direction="column"
+        backgroundColor={inube.palette.neutral.N0}
+        width={isMobile ? "335px" : "450px"}
+        height="auto"
+        borderRadius={tokens.spacing.s100}
+        padding={tokens.spacing.s300}
+        gap={tokens.spacing.s300}
+        boxSizing="border-box"
+      >
         <Stack direction="column" gap={tokens.spacing.s200}>
           <Stack alignItems="center" justifyContent="space-between">
             <Text type="headline" size="small" appearance="dark">
               {title}
             </Text>
-            <StyledContainerButton>
-              <Button
-                spacing="compact"
-                appearance={ComponentAppearance.DARK}
-                variant="none"
-                onClick={onCloseModal}
-                iconAfter={
-                  <Icon
-                    appearance={ComponentAppearance.DARK}
-                    icon={<MdClear />}
-                  />
-                }
-              >
-                Cerrar
-              </Button>
-            </StyledContainerButton>
+            <Button
+              spacing="compact"
+              appearance={ComponentAppearance.DARK}
+              variant="none"
+              onClick={onCloseModal}
+              iconAfter={
+                <Icon
+                  appearance={ComponentAppearance.DARK}
+                  icon={<MdClear />}
+                />
+              }
+            >
+              Cerrar
+            </Button>
           </Stack>
           <Divider />
         </Stack>
@@ -117,7 +125,7 @@ const DecisionModalUI = (props: IDecisionModalUI) => {
             {actionText}
           </Button>
         </Stack>
-      </StyledModal>
+      </BoxContainer>
     </Blanket>,
     node,
   );
