@@ -14,8 +14,7 @@ const useDetailsRequestInProgress = (data: IEntry) => {
   const normalizeData = {
     ...data,
     request: data.useCaseName,
-    responsable:
-      data.configurationRequestsTraceability[0].userWhoExecutedAction,
+    responsable: "",
     status: data.requestStatus,
     traceability: data.configurationRequestsTraceability.map(
       (traceability: IEntry) => ({
