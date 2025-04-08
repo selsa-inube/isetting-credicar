@@ -3,6 +3,7 @@ import { tokens } from "@design/tokens";
 
 interface IStyledRow {
   $isMobile: boolean;
+  $editOption: boolean;
 }
 
 const StyledContainer = styled.div`
@@ -17,7 +18,8 @@ const StyledFormContent = styled.div`
 `;
 
 const StyledRow = styled.div<IStyledRow>`
-  grid-column: ${({ $isMobile }) => ($isMobile ? "span 1" : "span 2")};
+  grid-column: ${({ $editOption, $isMobile }) =>
+    $editOption ? ($isMobile ? "span 1" : "span 2") : ""};
   width: 100%;
 `;
 

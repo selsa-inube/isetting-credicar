@@ -138,7 +138,7 @@ const GeneralInformationPayrollFormUI = (
                     />
                   </>
                 )}
-                <StyledRow $isMobile={isMobile}>
+                <StyledRow $isMobile={isMobile} $editOption={editDataOption}>
                   <Input
                     name="namePayroll"
                     id="namePayroll"
