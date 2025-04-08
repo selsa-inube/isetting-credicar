@@ -1,4 +1,3 @@
-import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { Divider, inube, Stack, Text } from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
@@ -9,7 +8,9 @@ import { RequestType } from "@enum/requestType";
 import { TraceabilityCard } from "@design/feedback/traceabilityCard";
 import { ModalWrapper } from "@design/modals/modalWrapper";
 import { BoxContainer } from "@design/layout/boxContainer";
+import { detailsRequestInProgressModal } from "@config/moneyDestination/requestsInProgressTab/details/detailsRequestInProgressModal";
 import { ILabel } from "@ptypes/ILabel";
+import { DetailBox } from "@design/feedback/detailBox";
 
 interface IRequestsInProcess {
   data: IEntry;
@@ -35,9 +36,11 @@ function RequestsInProcess(props: IRequestsInProcess) {
       portalId="portal"
       width={isMobile ? "335px" : "600px"}
       isMobile={isMobile}
-      nameButtonOnClick="Más detalles"
-      iconBeforeButton={<MdOutlineRemoveRedEye />}
-      title="Detalles de solicitud"
+      labelActionButton={detailsRequestInProgressModal.labelActionButton}
+      labelCloseButton={detailsRequestInProgressModal.labelCloseButton}
+      labelCloseModal={detailsRequestInProgressModal.labelCloseModal}
+      iconBeforeButton={detailsRequestInProgressModal.iconBeforeButton}
+      title={detailsRequestInProgressModal.title}
       withCancelButton={true}
       onCloseModal={onCloseModal}
       onClick={onClick}
@@ -71,9 +74,10 @@ function RequestsInProcess(props: IRequestsInProcess) {
               weight="bold"
               appearance={ComponentAppearance.GRAY}
             >
-              Solicitud{" "}
-              {RequestType[data.request as keyof typeof RequestType] ??
-                data.request}
+              {`${detailsRequestInProgressModal.labelRequest} ${
+                RequestType[data.request as keyof typeof RequestType] ??
+                data.request
+              }`}
             </Text>
             <Divider dashed />
           </Stack>
@@ -93,28 +97,18 @@ function RequestsInProcess(props: IRequestsInProcess) {
             {labelsOfRequest.map(
               (field, id) =>
                 data[field.id] && (
-                  <BoxContainer
+                  <DetailBox
                     key={id}
-                    direction="column"
-                    width={isMobile ? "253px" : "240px"}
-                    height="52px"
+                    field={field}
+                    data={data}
+                    id={id}
                     backgroundColor={inube.palette.neutral.N10}
                     borderRadius={tokens.spacing.s100}
-                    borderColor={inube.palette.neutral.N40}
-                    boxSizing="border-box"
                     padding={`${tokens.spacing.s075} ${tokens.spacing.s150}`}
-                  >
-                    <Text size="medium" type="label" weight="bold">
-                      {field.titleName}
-                    </Text>
-                    <Text
-                      size="small"
-                      appearance={ComponentAppearance.GRAY}
-                      ellipsis
-                    >
-                      {data[field.id]}
-                    </Text>
-                  </BoxContainer>
+                    width={isMobile ? "253px" : "240px"}
+                    borderColor={inube.palette.neutral.N40}
+                    ellipsis
+                  />
                 ),
             )}
           </Stack>
@@ -128,7 +122,7 @@ function RequestsInProcess(props: IRequestsInProcess) {
             gap={tokens.spacing.s150}
           >
             <Text type="label" size="large" weight="bold">
-              Trazabilidad
+              {detailsRequestInProgressModal.labelsTraceability}
             </Text>
 
             <Stack

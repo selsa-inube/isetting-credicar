@@ -1,10 +1,10 @@
-import { inube, Stack, Tag, Text } from "@inubekit/inubekit";
+import { inube, Stack } from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
-import { ComponentAppearance } from "@enum/appearances";
 import { IEntry } from "@design/data/table/types";
 import { BoxContainer } from "@design/layout/boxContainer";
 import { ILabel } from "@ptypes/ILabel";
+import { DetailBox } from "../detailBox";
 
 interface ITraceabilityCard {
   data: IEntry;
@@ -34,68 +34,49 @@ const TraceabilityCard = (props: ITraceabilityCard) => {
         justifyContent="center"
         direction={isMobile ? "column" : "row"}
       >
-        {labels.slice(0, 1).map(
-          (field, id) =>
-            data[field.id] && (
-              <BoxContainer
-                key={id}
-                direction="column"
-                width="100%"
-                min-height="52px"
-                borderRadius={tokens.spacing.s100}
-                padding={
-                  isMobile
-                    ? `${tokens.spacing.s075}`
-                    : `${tokens.spacing.s075} ${tokens.spacing.s150}`
-                }
-                box-sizing="border-box"
-                backgroundColor={inube.palette.neutral.N10}
-                boxSizing="border-box"
-              >
-                <Text size="medium" type="label" weight="bold">
-                  {field.titleName}
-                </Text>
-                <Text
-                  size="small"
-                  type="body"
-                  appearance={ComponentAppearance.GRAY}
-                >
-                  {data[field.id]}
-                </Text>
-              </BoxContainer>
-            ),
-        )}
-        {labels.slice(1, 2).map(
-          (field, id) =>
-            data[field.id] && (
-              <BoxContainer
-                key={id}
-                direction="column"
-                width="100%"
-                min-height="52px"
-                borderRadius={tokens.spacing.s100}
-                padding={
-                  isMobile
-                    ? `${tokens.spacing.s075}`
-                    : `${tokens.spacing.s075} ${tokens.spacing.s150}`
-                }
-                box-sizing="border-box"
-                backgroundColor={inube.palette.neutral.N10}
-                boxSizing="border-box"
-              >
-                <Text size="medium" type="label" weight="bold">
-                  {field.titleName}
-                </Text>
-                <Stack width="auto">
-                  <Tag
-                    appearance={ComponentAppearance.GRAY}
-                    label={data[field.id]}
-                    weight="strong"
-                  />
-                </Stack>
-              </BoxContainer>
-            ),
-        )}
+        {labels
+          .slice(0, 1)
+          .map(
+            (field, id) =>
+              data[field.id] && (
+                <DetailBox
+                  key={id}
+                  field={field}
+                  data={data}
+                  id={id}
+                  backgroundColor={inube.palette.neutral.N10}
+                  borderRadius={tokens.spacing.s100}
+                  padding={
+                    isMobile
+                      ? `${tokens.spacing.s075}`
+                      : `${tokens.spacing.s075} ${tokens.spacing.s150}`
+                  }
+                  width="100%"
+                />
+              ),
+          )}
+        {labels
+          .slice(1, 2)
+          .map(
+            (field, id) =>
+              data[field.id] && (
+                <DetailBox
+                  key={id}
+                  field={field}
+                  data={data}
+                  id={id}
+                  backgroundColor={inube.palette.neutral.N10}
+                  borderRadius={tokens.spacing.s100}
+                  padding={
+                    isMobile
+                      ? `${tokens.spacing.s075}`
+                      : `${tokens.spacing.s075} ${tokens.spacing.s150}`
+                  }
+                  width="100%"
+                  withTag
+                />
+              ),
+          )}
       </Stack>
 
       <Stack
@@ -103,37 +84,27 @@ const TraceabilityCard = (props: ITraceabilityCard) => {
         direction="column"
         justifyContent="center"
       >
-        {labels.slice(2, partLabels).map(
-          (field, id) =>
-            data[field.id] && (
-              <BoxContainer
-                key={id}
-                direction="column"
-                width="100%"
-                min-height="52px"
-                borderRadius={tokens.spacing.s100}
-                padding={
-                  isMobile
-                    ? `${tokens.spacing.s075}`
-                    : `${tokens.spacing.s075} ${tokens.spacing.s150}`
-                }
-                box-sizing="border-box"
-                backgroundColor={inube.palette.neutral.N10}
-                boxSizing="border-box"
-              >
-                <Text size="medium" type="label" weight="bold">
-                  {field.titleName}
-                </Text>
-                <Text
-                  size="small"
-                  type="body"
-                  appearance={ComponentAppearance.GRAY}
-                >
-                  {data[field.id]}
-                </Text>
-              </BoxContainer>
-            ),
-        )}
+        {labels
+          .slice(2, partLabels)
+          .map(
+            (field, id) =>
+              data[field.id] && (
+                <DetailBox
+                  key={id}
+                  field={field}
+                  data={data}
+                  id={id}
+                  backgroundColor={inube.palette.neutral.N10}
+                  borderRadius={tokens.spacing.s100}
+                  padding={
+                    isMobile
+                      ? `${tokens.spacing.s075}`
+                      : `${tokens.spacing.s075} ${tokens.spacing.s150}`
+                  }
+                  width="100%"
+                />
+              ),
+          )}
       </Stack>
     </BoxContainer>
   );

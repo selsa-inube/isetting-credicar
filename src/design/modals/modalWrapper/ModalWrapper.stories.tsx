@@ -36,7 +36,9 @@ Default.args = {
   height: "500px",
   width: "600px",
   isMobile: false,
-  nameButtonOnClick: "Entendido",
+  labelActionButton: "Entendido",
+  labelCloseButton: "Cerrar",
+  labelCloseModal: "Cerrar",
   title: "titulo",
   withCancelButton: true,
 };
