@@ -29,6 +29,7 @@ const useGeneralInformationForm = (
   setSourcesOfIncomeValues: React.Dispatch<
     React.SetStateAction<IServerDomain[]>
   >,
+  initialGeneralInfData?: IGeneralInformationEntry,
 ) => {
   const createValidationSchema = () =>
     object().shape({
@@ -116,10 +117,13 @@ const useGeneralInformationForm = (
     (value) => value === "" || value === null || value === undefined,
   );
 
+  const valuesEqualBoton =
+    JSON.stringify(initialGeneralInfData) === JSON.stringify(formik.values);
+
   useEffect(() => {
     const updateButton = () => {
       if (editDataOption) {
-        setIsDisabledButton(!formik.isValid || valuesEmpty);
+        setIsDisabledButton(!formik.isValid || valuesEmpty || valuesEqualBoton);
       } else {
         setIsDisabledButton(loading ?? !formik.isValid);
       }
