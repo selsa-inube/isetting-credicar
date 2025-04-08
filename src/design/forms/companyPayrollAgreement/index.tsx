@@ -23,6 +23,12 @@ const CompanyForm = forwardRef<FormikProps<ICompanyEntry>, ICompanyForm>(
       optionsCities,
       legalPersonOptions,
       isMobile,
+      showModal,
+      title,
+      description,
+      actionText,
+      moreDetails,
+      handleToggleAlertModal,
       handleChange,
       handleCompanyChange,
     } = useCompanyForm(initialValues, ref, onSubmit, onFormValid);
@@ -39,6 +45,12 @@ const CompanyForm = forwardRef<FormikProps<ICompanyEntry>, ICompanyForm>(
         optionsCities={optionsCities}
         legalPerson={legalPersonOptions}
         isMobile={isMobile}
+        showModal={showModal}
+        onToggleAlertModal={handleToggleAlertModal}
+        titleAlertModal={title}
+        descriptionModal={description}
+        actionTextModal={actionText}
+        moreDetailsModal={moreDetails}
       />
     );
   },
