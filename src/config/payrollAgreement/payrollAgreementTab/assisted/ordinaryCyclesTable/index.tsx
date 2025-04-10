@@ -29,13 +29,22 @@ const titles: ITitle[] = [
   },
 ];
 
-const actionsConfig = (setEntryDeleted: (value: string | number) => void) => {
+const actionsConfig = (
+  setEntryDeleted: (value: string | number) => void,
+  uniqueEditionRecord?: number,
+  setShowDeletedAlertModal?: React.Dispatch<React.SetStateAction<boolean>>,
+) => {
   const actions: IAction[] = [
     {
       id: "delete",
       actionName: "Eliminar",
       content: (entry: IEntry) => (
-        <DeleteCyclePayment data={entry} setEntryDeleted={setEntryDeleted} />
+        <DeleteCyclePayment
+          data={entry}
+          setEntryDeleted={setEntryDeleted}
+          uniqueEditionRecord={uniqueEditionRecord}
+          setShowDeletedAlertModal={setShowDeletedAlertModal}
+        />
       ),
     },
   ];

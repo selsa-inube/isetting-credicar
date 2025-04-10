@@ -4,6 +4,7 @@ import { FormikProps } from "formik";
 import { IExtraordinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IExtraordinaryCyclesEntry";
 import { useExtraordinaryCyclesForm } from "@hooks/payrollAgreement/useExtraordinaryCyclesForm";
 import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
+import { deletedAlertModal } from "@config/payrollAgreement/payrollAgreementTab/generic/deletedAlertModal";
 import { ExtraordinaryPaymentCyclesFormUI } from "./interface";
 
 interface IExtraordinaryPaymentCyclesForm {
@@ -19,6 +20,7 @@ interface IExtraordinaryPaymentCyclesForm {
   onFormValid?: React.Dispatch<React.SetStateAction<boolean>>;
   onSubmit?: (values: IExtraordinaryCyclesEntry) => void;
   editDataOption?: boolean;
+  initialData?: IExtraordinaryCyclesEntry[];
 }
 
 const ExtraordinaryPaymentCyclesForm = forwardRef<
@@ -37,6 +39,7 @@ const ExtraordinaryPaymentCyclesForm = forwardRef<
       onPreviousStep,
       loading = false,
       editDataOption = false,
+      initialData,
     },
     ref,
   ) => {
@@ -51,9 +54,12 @@ const ExtraordinaryPaymentCyclesForm = forwardRef<
       numberDaysUntilCutOptions,
       monthOptions,
       dayOptions,
+      showDeletedAlertModal,
+      uniqueEditionRecord,
+      handleToggleDeletedAlertModal,
+      setShowDeletedAlertModal,
       handleToggleModal,
       handleChange,
-      handleReset,
       handleAddCycle,
       setEntryDeleted,
     } = useExtraordinaryCyclesForm(
@@ -66,6 +72,7 @@ const ExtraordinaryPaymentCyclesForm = forwardRef<
       extraordinaryPayment,
       setExtraordinaryPayment,
       regularPaymentCycles,
+      initialData,
     );
 
     return (
@@ -79,7 +86,6 @@ const ExtraordinaryPaymentCyclesForm = forwardRef<
         valuesEqual={valuesEqual}
         showModal={showModal}
         onToggleModal={handleToggleModal}
-        onReset={handleReset}
         entries={entries}
         onAddCycle={handleAddCycle}
         onPreviousStep={onPreviousStep}
@@ -89,6 +95,11 @@ const ExtraordinaryPaymentCyclesForm = forwardRef<
         monthOptions={monthOptions}
         dayOptions={dayOptions ?? []}
         setEntryDeleted={setEntryDeleted}
+        showDeletedAlertModal={showDeletedAlertModal}
+        deletedAlertModal={deletedAlertModal}
+        onToggleDeletedAlertModal={handleToggleDeletedAlertModal}
+        uniqueEditionRecord={uniqueEditionRecord}
+        setShowDeletedAlertModal={setShowDeletedAlertModal}
       />
     );
   },

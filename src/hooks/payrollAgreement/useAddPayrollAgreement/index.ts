@@ -22,6 +22,8 @@ import { ILegalPerson } from "@ptypes/payrollAgreement/payrollAgreementTab/ILega
 import { normalizeEnumTranslationCode } from "@utils/normalizeEnumTranslationCode";
 import { IPayrollSpecialBenefit } from "@ptypes/payrollAgreement/payrollAgreementTab/IPayrollSpecialBenefit";
 import { ISeverancePaymentCycles } from "@ptypes/payrollAgreement/payrollAgreementTab/ISeverancePaymentCycles";
+import { specialBenefitPayment } from "@config/payrollAgreement/payrollAgreementTab/assisted/specialBenefitPaymentCycles";
+import { severancePay } from "@config/payrollAgreement/payrollAgreementTab/assisted/severancePaymentCycles";
 import { useLegalPerson } from "../useLegalPerson";
 
 const useAddPayrollAgreement = (appData: IAppData) => {
@@ -87,7 +89,7 @@ const useAddPayrollAgreement = (appData: IAppData) => {
     IExtraordinaryCyclesEntry[]
   >([]);
   const [showRequestProcessModal, setShowRequestProcessModal] = useState(false);
-  const [typeRegularPayroll, setTypeRegularPayroll] = useState<boolean>(true);
+  const [typeRegularPayroll, setTypeRegularPayroll] = useState<boolean>(false);
   const [canRefresh, setCanRefresh] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [saveData, setSaveData] = useState<ISaveDataRequest>();
@@ -124,8 +126,8 @@ const useAddPayrollAgreement = (appData: IAppData) => {
       typePayrollForCyclesExtraord.includes(
         formValues.generalInformation.values.typePayroll,
       )
-        ? false
-        : true,
+        ? true
+        : false,
     );
   }, [formValues.generalInformation.values.typePayroll]);
 
@@ -195,7 +197,7 @@ const useAddPayrollAgreement = (appData: IAppData) => {
     }
 
     if (currentStep === 4) {
-      const stepOrdinaryCycles = !typeRegularPayroll ? currentStep - 1 : 2;
+      const stepOrdinaryCycles = typeRegularPayroll ? currentStep - 1 : 2;
       setCurrentStep(stepOrdinaryCycles);
     }
   };
@@ -282,7 +284,7 @@ const useAddPayrollAgreement = (appData: IAppData) => {
     }));
 
   const payrollSpecialBenefit = formValues.extraordinaryCycles.values
-    .filter((item) => item.typePayment === "Prima")
+    .filter((item) => specialBenefitPayment.includes(item.typePayment))
     .map((item) => ({
       abbreviatedName: item.nameCycle,
       numberOfDaysBeforePaymentToBill: Number(item.numberDaysUntilCut),
@@ -292,7 +294,7 @@ const useAddPayrollAgreement = (appData: IAppData) => {
     }));
 
   const severancePayment = formValues.extraordinaryCycles.values
-    .filter((item) => item.typePayment === "Cesantías")
+    .filter((item) => severancePay.includes(item.typePayment))
     .map((item) => ({
       abbreviatedName: item.nameCycle,
       numberOfDaysBeforePaymentToBill: Number(item.numberDaysUntilCut),
@@ -319,8 +321,9 @@ const useAddPayrollAgreement = (appData: IAppData) => {
       severancePaymentCycles?: ISeverancePaymentCycles[];
     } = {
       abbreviatedName: formValues.generalInformation.values.namePayroll,
-      numberOfDaysForReceivingTheDiscounts:
+      numberOfDaysForReceivingTheDiscounts: String(
         formValues.generalInformation.values.applicationDaysPayroll,
+      ),
       payrollForDeductionAgreementType:
         formValues.generalInformation.values.typePayroll,
     };
@@ -349,10 +352,10 @@ const useAddPayrollAgreement = (appData: IAppData) => {
         configurationRequestData.payrollSpecialBenefitPaymentCycles =
           payrollSpecialBenefit;
       }
+    }
 
-      if (regularPayment.length > 0) {
-        configurationRequestData.regularPaymentCycles = regularPayment;
-      }
+    if (regularPayment.length > 0) {
+      configurationRequestData.regularPaymentCycles = regularPayment;
     }
 
     setSaveData({

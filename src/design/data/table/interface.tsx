@@ -115,9 +115,9 @@ const TableUI = (props: ITableUI) => {
                 {entries.length > 0 ? (
                   entries.map((entry, index) => (
                     <Tr key={index} zebra={index % 2 === 1}>
-                      {TitleColumns.map((title) => (
+                      {TitleColumns.map((title, index) => (
                         <Td
-                          key={`e-${entry[title.id]}`}
+                          key={`${index}-${entry[title.id]}`}
                           align={entry.action ? "center" : "left"}
                           type="custom"
                         >

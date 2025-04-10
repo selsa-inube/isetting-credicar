@@ -4,6 +4,7 @@ import { FormikProps } from "formik";
 import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
 import { useOrdinaryCyclesForm } from "@hooks/payrollAgreement/useOrdinaryCyclesForm";
 import { infoPeriodicityModal } from "@config/payrollAgreement/payrollAgreementTab/generic/infoPeriodicityModal";
+import { deletedAlertModal } from "@config/payrollAgreement/payrollAgreementTab/generic/deletedAlertModal";
 import { RegularPaymentCyclesFormUI } from "./interface";
 
 interface IRegularPaymentCyclesForm {
@@ -17,6 +18,7 @@ interface IRegularPaymentCyclesForm {
   onFormValid?: React.Dispatch<React.SetStateAction<boolean>>;
   onSubmit?: (values: IOrdinaryCyclesEntry) => void;
   editDataOption?: boolean;
+  initialData?: IOrdinaryCyclesEntry[];
 }
 
 const RegularPaymentCyclesForm = forwardRef<
@@ -33,6 +35,7 @@ const RegularPaymentCyclesForm = forwardRef<
       setRegularPaymentCycles,
       loading = false,
       editDataOption = false,
+      initialData,
     },
     ref,
   ) => {
@@ -47,12 +50,15 @@ const RegularPaymentCyclesForm = forwardRef<
       periodicityOptions,
       showInfoModal,
       isMobile,
+      showDeletedAlertModal,
+      uniqueEditionRecord,
       onToggleInfoModal,
       handleToggleModal,
       handleChange,
-      handleReset,
       handleAddCycle,
       setEntryDeleted,
+      handleToggleDeletedAlertModal,
+      setShowDeletedAlertModal,
     } = useOrdinaryCyclesForm(
       ref,
       editDataOption,
@@ -61,6 +67,7 @@ const RegularPaymentCyclesForm = forwardRef<
       onFormValid,
       regularPaymentCycles,
       setRegularPaymentCycles,
+      initialData,
     );
 
     return (
@@ -74,7 +81,6 @@ const RegularPaymentCyclesForm = forwardRef<
         valuesEqual={valuesEqual}
         showAddModal={showAddModal}
         onToggleModal={handleToggleModal}
-        onReset={handleReset}
         entries={entries}
         onAddCycle={handleAddCycle}
         onPreviousStep={onPreviousStep}
@@ -86,6 +92,11 @@ const RegularPaymentCyclesForm = forwardRef<
         onToggleInfoModal={onToggleInfoModal}
         isMobile={isMobile}
         setEntryDeleted={setEntryDeleted}
+        showDeletedAlertModal={showDeletedAlertModal}
+        deletedAlertModal={deletedAlertModal}
+        onToggleDeletedAlertModal={handleToggleDeletedAlertModal}
+        uniqueEditionRecord={uniqueEditionRecord}
+        setShowDeletedAlertModal={setShowDeletedAlertModal}
       />
     );
   },

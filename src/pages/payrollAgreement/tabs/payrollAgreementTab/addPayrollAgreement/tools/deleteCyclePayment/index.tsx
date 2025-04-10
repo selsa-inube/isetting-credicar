@@ -6,14 +6,23 @@ import { deleteCyclePaymentModal } from "@config/payrollAgreement/payrollAgreeme
 interface IDeleteCyclePayment {
   data: IEntry;
   setEntryDeleted: (value: string | number) => void;
+  uniqueEditionRecord?: number;
+  setShowDeletedAlertModal?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const DeleteCyclePayment = (props: IDeleteCyclePayment) => {
-  const { data, setEntryDeleted } = props;
+  const {
+    data,
+    setEntryDeleted,
+    uniqueEditionRecord,
+    setShowDeletedAlertModal,
+  } = props;
 
   const { showModal, handleToggleModal, handleClick } = useDeleteCyclePayment(
     data,
     setEntryDeleted,
+    uniqueEditionRecord,
+    setShowDeletedAlertModal,
   );
 
   return (

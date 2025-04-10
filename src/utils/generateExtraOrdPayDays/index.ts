@@ -34,20 +34,29 @@ const generateExtraOrdPayDays = (
     return daysWeekSelected.flatMap((day) => generateDatesOfMonth(month, day));
   };
 
-  const getLastDayOfMonth = (daysWeekSelected: string[]): number[] => {
-    return daysWeekSelected
+  const getLastDayOfMonth = (paydays: string[]): number[] => {
+    return paydays
       .filter((payday) => payday === "Ultimo día del mes")
       .map(() => lastDayMonth(month));
   };
+
   const uniquePaydays = getUniquePaydays();
   const daysInNumber = getDaysInNumber(uniquePaydays);
   const daysWeekSelected = getDaysWeekSelected(uniquePaydays);
   const datesFromDaysWeek = getDatesFromDaysWeek(daysWeekSelected);
   const lastDayOfMonth = getLastDayOfMonth(uniquePaydays);
+  const daysNotInFebruary = [29, 30];
 
-  const result = Array.from(
-    new Set([...daysInNumber, ...datesFromDaysWeek, ...lastDayOfMonth]),
-  )
+  let days = [...daysInNumber, ...datesFromDaysWeek, ...lastDayOfMonth];
+
+  if (month === 1) {
+    const lastDayOfFebruary = lastDayMonth(month);
+    days = days.map((day) =>
+      daysNotInFebruary.includes(day) ? lastDayOfFebruary : day,
+    );
+  }
+
+  const result = Array.from(new Set(days))
     .sort((a, b) => a - b)
     .map((day) => day.toString());
 

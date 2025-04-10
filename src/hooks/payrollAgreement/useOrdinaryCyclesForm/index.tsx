@@ -16,6 +16,7 @@ import { useEnumerators } from "@hooks/useEnumerators";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 import { optionsFromEnumerators } from "@utils/optionsFromEnumerators";
 import { normalizeEnumTranslation } from "@utils/normalizeEnumTranslation";
+import { compareObjects } from "@utils/compareObjects";
 
 const useOrdinaryCyclesForm = (
   ref: React.ForwardedRef<FormikProps<IOrdinaryCyclesEntry>>,
@@ -27,6 +28,7 @@ const useOrdinaryCyclesForm = (
   setRegularPaymentCycles: React.Dispatch<
     React.SetStateAction<IOrdinaryCyclesEntry[]>
   >,
+  initialData?: IOrdinaryCyclesEntry[],
 ) => {
   const createValidationSchema = () =>
     object().shape({
@@ -60,6 +62,7 @@ const useOrdinaryCyclesForm = (
   const [isDisabledButton, setIsDisabledButton] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
+  const [showDeletedAlertModal, setShowDeletedAlertModal] = useState(false);
   const [entries, setEntries] = useState<IEntry[]>(
     regularPaymentCycles as IEntry[],
   );
@@ -95,7 +98,14 @@ const useOrdinaryCyclesForm = (
   };
 
   useEffect(() => {
+    if (!formik.values.periodicity) {
+      formik.setFieldValue("payday", "");
+      setPaydayOptions([]);
+      setNumberDaysUntilCutOptions([]);
+    }
+
     if (formik.values.periodicity) {
+      formik.setFieldValue("payday", "");
       const Payday = payDayOrdinaryOptions(formik.values.periodicity);
       setPaydayOptions(Payday);
 
@@ -103,29 +113,32 @@ const useOrdinaryCyclesForm = (
         formik.values.periodicity,
       );
       setNumberDaysUntilCutOptions(numberDaysUntilCut);
-    } else {
-      setPaydayOptions([]);
-      setNumberDaysUntilCutOptions([]);
     }
   }, [formik.values.periodicity]);
 
   const valuesEqual =
     JSON.stringify(initialValues) === JSON.stringify(formik.values);
 
-  const valuesEmpty = Object.values(formik.values).every(
-    (value) => value === "" || value === null || value === undefined,
-  );
+  const valuesEqualBoton = compareObjects(initialData, entries);
 
   useEffect(() => {
     const updateButton = () => {
       if (editDataOption) {
-        setIsDisabledButton(!formik.isValid || valuesEmpty);
+        setIsDisabledButton(valuesEqualBoton);
       } else {
         setIsDisabledButton(loading ?? !formik.isValid);
       }
     };
     updateButton();
-  }, [formik.values, loading, formik.isValid, initialValues, editDataOption]);
+  }, [
+    entries,
+    loading,
+    initialData,
+    entries,
+    formik.isValid,
+    initialValues,
+    editDataOption,
+  ]);
 
   const handleToggleModal = () => {
     setPaydayOptions([]);
@@ -136,6 +149,10 @@ const useOrdinaryCyclesForm = (
 
   const onToggleInfoModal = () => {
     setShowInfoModal(!showInfoModal);
+  };
+
+  const handleToggleDeletedAlertModal = () => {
+    setShowDeletedAlertModal(!showDeletedAlertModal);
   };
 
   const createNewCycle = (id: number) => ({
@@ -164,10 +181,6 @@ const useOrdinaryCyclesForm = (
     setShowAddModal(false);
   };
 
-  const handleReset = () => {
-    formik.resetForm();
-  };
-
   useEffect(() => {
     if (entryDeleted) {
       setEntries((prev) => prev.filter((entry) => entry.id !== entryDeleted));
@@ -177,6 +190,8 @@ const useOrdinaryCyclesForm = (
       );
     }
   }, [entryDeleted]);
+
+  const uniqueEditionRecord = editDataOption ? entries.length : undefined;
 
   return {
     formik,
@@ -189,12 +204,15 @@ const useOrdinaryCyclesForm = (
     paydayOptions,
     periodicityOptions,
     isMobile,
+    showDeletedAlertModal,
+    uniqueEditionRecord,
+    setShowDeletedAlertModal,
     onToggleInfoModal,
     handleChange,
-    handleReset,
     handleAddCycle,
     handleToggleModal,
     setEntryDeleted,
+    handleToggleDeletedAlertModal,
   };
 };
 
