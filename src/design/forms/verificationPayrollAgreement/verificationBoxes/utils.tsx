@@ -10,45 +10,57 @@ import { columnsAttribute } from "@utils/columnsAttribute";
 import { IEntry } from "@design/data/table/types";
 import { rowsAttribute } from "@utils/rowsAttribute";
 import { normalizeEnumTranslation } from "@utils/normalizeEnumTranslation";
+import { verificationLabels } from "@config/payrollAgreement/payrollAgreementTab/forms/verificationLabels";
 import { StyledConatinerAttribute } from "./styles";
-import { verificationLabels } from "@src/config/payrollAgreement/payrollAgreementTab/forms/verificationLabels";
 
 const renderCompanyVerification = (values: ICompanyEntry) => (
   <>
-    <Stack width="100%" direction="column" gap={tokens.spacing.s200}>
-      <BoxAttribute
-        direction="column"
-        label={verificationLabels.companyName}
-        value={values.companyName}
-      />
-    </Stack>
-    <Grid
-      width="100%"
-      templateColumns="repeat(2, 1fr)"
-      templateRows="repeat(2, 1fr)"
-      gap={tokens.spacing.s200}
-    >
-      <BoxAttribute
-        direction="column"
-        label={verificationLabels.tradeName}
-        value={values.companyNameCommercial}
-      />
-      <BoxAttribute
-        direction="column"
-        label={verificationLabels.countryTaxResidence}
-        value={values.companyCountry}
-      />
-      <BoxAttribute
-        direction="column"
-        label={verificationLabels.companyId}
-        value={values.companyNumberIdent}
-      />
-      <BoxAttribute
-        direction="column"
-        label={verificationLabels.headquartersAddress}
-        value={values.companyAddressRes}
-      />
-    </Grid>
+    {values.companySelected !== "addCompany" ? (
+      <Stack width="100%" direction="column" gap={tokens.spacing.s200}>
+        <BoxAttribute
+          direction="column"
+          label={verificationLabels.companyAgreement}
+          value={values.companySelected}
+        />
+      </Stack>
+    ) : (
+      <>
+        <Stack width="100%" direction="column" gap={tokens.spacing.s200}>
+          <BoxAttribute
+            direction="column"
+            label={verificationLabels.companyName}
+            value={values.companyName}
+          />
+        </Stack>
+        <Grid
+          width="100%"
+          templateColumns="repeat(2, 1fr)"
+          templateRows="repeat(2, 1fr)"
+          gap={tokens.spacing.s200}
+        >
+          <BoxAttribute
+            direction="column"
+            label={verificationLabels.tradeName}
+            value={values.companyNameCommercial}
+          />
+          <BoxAttribute
+            direction="column"
+            label={verificationLabels.countryTaxResidence}
+            value={values.companyCountry}
+          />
+          <BoxAttribute
+            direction="column"
+            label={verificationLabels.companyId}
+            value={values.companyNumberIdent}
+          />
+          <BoxAttribute
+            direction="column"
+            label={verificationLabels.headquartersAddress}
+            value={values.companyAddressRes}
+          />
+        </Grid>
+      </>
+    )}
   </>
 );
 
