@@ -4,7 +4,7 @@ const flowAutomaticMessages = {
   errorSendingData: {
     title: "¡Ups! Algo salió mal",
     description: "La solicitud de edición no se pudo radicar correctamente",
-    appearance: ComponentAppearance.WARNING,
+    appearance: ComponentAppearance.DANGER,
     duration: 5000,
   },
   errorQueryingData: {

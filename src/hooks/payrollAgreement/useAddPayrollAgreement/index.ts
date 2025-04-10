@@ -24,6 +24,7 @@ import { IPayrollSpecialBenefit } from "@ptypes/payrollAgreement/payrollAgreemen
 import { ISeverancePaymentCycles } from "@ptypes/payrollAgreement/payrollAgreementTab/ISeverancePaymentCycles";
 import { specialBenefitPayment } from "@config/payrollAgreement/payrollAgreementTab/assisted/specialBenefitPaymentCycles";
 import { severancePay } from "@config/payrollAgreement/payrollAgreementTab/assisted/severancePaymentCycles";
+import { TransactionOperation } from "@enum/transactionOperation";
 import { useLegalPerson } from "../useLegalPerson";
 
 const useAddPayrollAgreement = (appData: IAppData) => {
@@ -280,7 +281,7 @@ const useAddPayrollAgreement = (appData: IAppData) => {
         item.periodicity,
       payday: item.payday,
       numberDaysUntilCut: Number(item.numberDaysUntilCut),
-      transactionOperation: "Insert",
+      transactionOperation: TransactionOperation.INSERT,
     }));
 
   const payrollSpecialBenefit = formValues.extraordinaryCycles.values
@@ -290,7 +291,7 @@ const useAddPayrollAgreement = (appData: IAppData) => {
       numberOfDaysBeforePaymentToBill: Number(item.numberDaysUntilCut),
       paymentDay: item.payday ?? "",
       payrollForDeductionAgreementId: item.id ?? "",
-      transactionOperation: "Insert",
+      transactionOperation: TransactionOperation.INSERT,
     }));
 
   const severancePayment = formValues.extraordinaryCycles.values
@@ -300,7 +301,7 @@ const useAddPayrollAgreement = (appData: IAppData) => {
       numberOfDaysBeforePaymentToBill: Number(item.numberDaysUntilCut),
       paymentDay: item.payday ?? "",
       payrollForDeductionAgreementId: item.id ?? "",
-      transactionOperation: "Insert",
+      transactionOperation: TransactionOperation.INSERT,
     }));
 
   const handleSubmitClick = () => {

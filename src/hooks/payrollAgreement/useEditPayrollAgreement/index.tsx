@@ -26,6 +26,7 @@ import { ISeverancePaymentCycles } from "@ptypes/payrollAgreement/payrollAgreeme
 import { IRegularPaymentCycles } from "@ptypes/payrollAgreement/payrollAgreementTab/IRegularPaymentCycles";
 import { severancePay } from "@config/payrollAgreement/payrollAgreementTab/assisted/severancePaymentCycles";
 import { specialBenefitPayment } from "@config/payrollAgreement/payrollAgreementTab/assisted/specialBenefitPaymentCycles";
+import { TransactionOperation } from "@enum/transactionOperation";
 
 const useEditPayrollAgreement = (data: IPayrollAgreementData) => {
   const regularPaymentValues = () => {
@@ -52,7 +53,7 @@ const useEditPayrollAgreement = (data: IPayrollAgreementData) => {
               return {
                 id: `cycle-special-benefit-${addLeadingZero(index + 1).toString()}`,
                 nameCycle: entry.abbreviatedName,
-                typePayment: "Prima",
+                typePayment: specialBenefitPayment[0],
                 payday: entry.paymentDay,
                 numberDaysUntilCut: String(
                   entry.numberOfDaysBeforePaymentToBill,
@@ -69,7 +70,7 @@ const useEditPayrollAgreement = (data: IPayrollAgreementData) => {
               return {
                 id: `cycle-severance-${addLeadingZero(index + 1).toString()}`,
                 nameCycle: entry.abbreviatedName,
-                typePayment: "Cesantias",
+                typePayment: severancePay[0],
                 payday: entry.paymentDay,
                 numberDaysUntilCut: String(
                   entry.numberOfDaysBeforePaymentToBill,
@@ -317,8 +318,8 @@ const useEditPayrollAgreement = (data: IPayrollAgreementData) => {
     );
 
     const regularPayment = [
-      ...newObjRegularPayment(newValues, "Insert"),
-      ...newObjRegularPayment(deleteValues, "Delete"),
+      ...newObjRegularPayment(newValues, TransactionOperation.INSERT),
+      ...newObjRegularPayment(deleteValues, TransactionOperation.DELETE),
     ];
     return regularPayment;
   };
@@ -358,12 +359,24 @@ const useEditPayrollAgreement = (data: IPayrollAgreementData) => {
 
     return {
       severancePayment: [
-        ...newObjExtraordinaryPayment(newValSeverance, "Insert"),
-        ...newObjExtraordinaryPayment(newDelSeverance, "Delete"),
+        ...newObjExtraordinaryPayment(
+          newValSeverance,
+          TransactionOperation.INSERT,
+        ),
+        ...newObjExtraordinaryPayment(
+          newDelSeverance,
+          TransactionOperation.DELETE,
+        ),
       ],
       payrollSpeBenPayment: [
-        ...newObjExtraordinaryPayment(newValSpecialBenefit, "Insert"),
-        ...newObjExtraordinaryPayment(newDelSpecialBenefit, "Delete"),
+        ...newObjExtraordinaryPayment(
+          newValSpecialBenefit,
+          TransactionOperation.INSERT,
+        ),
+        ...newObjExtraordinaryPayment(
+          newDelSpecialBenefit,
+          TransactionOperation.DELETE,
+        ),
       ],
     };
   };

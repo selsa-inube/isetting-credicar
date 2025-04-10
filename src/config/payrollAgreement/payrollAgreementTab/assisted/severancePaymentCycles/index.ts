@@ -1,3 +1,3 @@
-const severancePay = ["Cesantías", "Cesantias", "cesantias"];
+const severancePay = ["Cesantias", "Cesantías", "cesantias"];
 
 export { severancePay };
