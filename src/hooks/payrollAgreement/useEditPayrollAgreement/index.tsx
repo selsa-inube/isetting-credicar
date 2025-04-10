@@ -23,7 +23,7 @@ const useEditPayrollAgreement = (data: IPayrollAgreementData) => {
       values: {
         namePayroll: data.abbreviatedName ?? "",
         typePayroll: data.payrollForDeductionAgreementType ?? "",
-        sourcesOfIncome: "Independiente", ///cambiar por el valor correcto
+        sourcesOfIncome: "Independiente",
         applicationDaysPayroll: String(
           data.numberOfDaysForReceivingTheDiscounts ?? 0,
         ),

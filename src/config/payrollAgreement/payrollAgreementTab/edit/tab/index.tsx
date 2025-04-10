@@ -2,7 +2,7 @@ const editPayrollAgTabsConfig = {
   generalInformation: {
     id: "generalInformation",
     isDisabled: false,
-    label: "Datos generales",
+    label: "Informacion general",
   },
   regularPaymentCycles: {
     id: "regularPaymentCycles",

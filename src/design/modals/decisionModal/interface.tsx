@@ -81,7 +81,7 @@ const DecisionModalUI = (props: IDecisionModalUI) => {
           </Stack>
         )}
 
-        <Text appearance={ComponentAppearance.GRAY} type="body" size="medium">
+        <Text appearance={ComponentAppearance.DARK} type="body" size="medium">
           {description}
         </Text>
 
