@@ -1,3 +1,4 @@
+import { MdOutlineWarningAmber } from "react-icons/md";
 import { FormikProps } from "formik";
 
 import {
@@ -15,7 +16,7 @@ import { getDomainById } from "@mocks/domains/domainService.mocks";
 import { getFieldState } from "@utils/forms/getFieldState";
 import { IServerDomain } from "@ptypes/IServerDomain";
 import { companyLabels } from "@config/payrollAgreement/payrollAgreementTab/forms/companyLabels";
-
+import { DecisionModal } from "@design/modals/decisionModal";
 import {
   StyledContainer,
   StyledContainerFields,
@@ -29,6 +30,12 @@ interface ICompanyFormUI {
   optionsCities: IServerDomain[];
   legalPerson: IServerDomain[];
   isMobile: boolean;
+  showModal: boolean;
+  titleAlertModal: string;
+  descriptionModal: string;
+  actionTextModal: string;
+  moreDetailsModal?: string;
+  onToggleAlertModal: () => void;
   onChange: (name: string, value: string) => void;
   onCompanyChange: (name: string, value: string) => void;
   onButtonClick: () => void;
@@ -44,6 +51,12 @@ const CompanyFormUI = (props: ICompanyFormUI) => {
     legalPerson,
     isDisabledButton,
     isMobile,
+    showModal,
+    titleAlertModal,
+    descriptionModal,
+    actionTextModal,
+    moreDetailsModal,
+    onToggleAlertModal,
     onChange,
     onCompanyChange,
     onButtonClick,
@@ -256,6 +269,22 @@ const CompanyFormUI = (props: ICompanyFormUI) => {
           Siguiente
         </Button>
       </Stack>
+      {showModal && (
+        <DecisionModal
+          portalId="portal"
+          icon={<MdOutlineWarningAmber />}
+          withIcon
+          sizeIcon="75px"
+          withCancelButton={false}
+          title={titleAlertModal}
+          description={descriptionModal}
+          actionText={actionTextModal}
+          onCloseModal={onToggleAlertModal}
+          onClick={onToggleAlertModal}
+          moreDetails={moreDetailsModal}
+          appearance={ComponentAppearance.WARNING}
+        />
+      )}
     </StyledContainer>
   );
 };
