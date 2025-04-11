@@ -12,7 +12,7 @@ import { getDaysWeekSelected } from "@utils/getDaysWeekSelected";
 import { areObjectsEqual } from "@utils/payrollAgreement/areObjectEqual";
 import { getUniquePaydays } from "@utils/getUniqueDays";
 import { getDaysInNumber } from "@utils/getDaysInNumber";
-import { editPayrollAgTabsConfig } from "@src/config/payrollAgreement/payrollAgreementTab/edit/tab";
+import { editPayrollAgTabsConfig } from "@config/payrollAgreement/payrollAgreementTab/edit/tab";
 
 const useManagePayrollCycles = (
   initialData: IEditPayrollAgreementForms,
