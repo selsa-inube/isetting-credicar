@@ -1,8 +1,4 @@
-import {
-  MdInfoOutline,
-  MdOutlineAdd,
-  MdOutlineWarningAmber,
-} from "react-icons/md";
+import { MdInfoOutline, MdOutlineAdd } from "react-icons/md";
 import { FormikProps } from "formik";
 import { Button, Stack } from "@inubekit/inubekit";
 
@@ -31,7 +27,6 @@ interface IRegularPaymentCyclesFormUI {
   entries: IEntry[];
   formik: FormikProps<IOrdinaryCyclesEntry>;
   infoModal: IMessageModal;
-  deletedAlertModal: IMessageModal;
   loading: boolean;
   numberDaysUntilCutOptions: IServerDomain[];
   paydayOptions: IServerDomain[];
@@ -40,10 +35,6 @@ interface IRegularPaymentCyclesFormUI {
   showInfoModal: boolean;
   valuesEqual: boolean;
   isMobile: boolean;
-  uniqueEditionRecord: number | undefined;
-  showDeletedAlertModal: boolean;
-  setShowDeletedAlertModal: React.Dispatch<React.SetStateAction<boolean>>;
-  onToggleDeletedAlertModal: () => void;
   onToggleInfoModal: () => void;
   onAddCycle: () => void;
   onToggleModal: () => void;
@@ -69,9 +60,6 @@ const RegularPaymentCyclesFormUI = (props: IRegularPaymentCyclesFormUI) => {
     showInfoModal,
     valuesEqual,
     isMobile,
-    showDeletedAlertModal,
-    deletedAlertModal,
-    uniqueEditionRecord,
     setEntryDeleted,
     onChange,
     onAddCycle,
@@ -79,8 +67,6 @@ const RegularPaymentCyclesFormUI = (props: IRegularPaymentCyclesFormUI) => {
     onButtonClick,
     onToggleModal,
     onPreviousStep,
-    onToggleDeletedAlertModal,
-    setShowDeletedAlertModal,
   } = props;
 
   return (
@@ -107,11 +93,7 @@ const RegularPaymentCyclesFormUI = (props: IRegularPaymentCyclesFormUI) => {
                 id="portal"
                 titles={titles}
                 entries={entries}
-                actions={actionsConfig(
-                  setEntryDeleted,
-                  uniqueEditionRecord,
-                  setShowDeletedAlertModal,
-                )}
+                actions={actionsConfig(setEntryDeleted)}
                 breakpoints={breakPoints}
                 isLoading={loading}
                 columnWidths={[8, 30, 20, 18, 15]}
@@ -176,22 +158,6 @@ const RegularPaymentCyclesFormUI = (props: IRegularPaymentCyclesFormUI) => {
           onCloseModal={onToggleInfoModal}
           onClick={onToggleInfoModal}
           moreDetails={infoModal.moreDetails}
-        />
-      )}
-
-      {showDeletedAlertModal && (
-        <DecisionModal
-          portalId="portal"
-          title={deletedAlertModal.title}
-          description={deletedAlertModal.description}
-          actionText={deletedAlertModal.actionText}
-          withIcon
-          withCancelButton={false}
-          icon={<MdOutlineWarningAmber />}
-          appearance={ComponentAppearance.WARNING}
-          onCloseModal={onToggleDeletedAlertModal}
-          onClick={onToggleDeletedAlertModal}
-          moreDetails={deletedAlertModal.moreDetails}
         />
       )}
     </StyledContainer>

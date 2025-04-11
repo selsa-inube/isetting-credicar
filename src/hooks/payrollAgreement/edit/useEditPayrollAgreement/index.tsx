@@ -20,13 +20,12 @@ import { IExtraordinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgree
 import { addLeadingZero } from "@utils/addLeadingZero";
 import { typePayrollForCyclesExtraord } from "@config/payrollAgreement/payrollAgreementTab/assisted/typePayrollForCyclesExtraord";
 import { IEditPayrollTabsConfig } from "@ptypes/payrollAgreement/payrollAgreementTab/IEditPayrollTabsConfig";
-import { normalizeEnumTranslationCode } from "@utils/normalizeEnumTranslationCode";
 import { IPayrollSpecialBenefit } from "@ptypes/payrollAgreement/payrollAgreementTab/IPayrollSpecialBenefit";
 import { ISeverancePaymentCycles } from "@ptypes/payrollAgreement/payrollAgreementTab/ISeverancePaymentCycles";
 import { IRegularPaymentCycles } from "@ptypes/payrollAgreement/payrollAgreementTab/IRegularPaymentCycles";
 import { severancePay } from "@config/payrollAgreement/payrollAgreementTab/assisted/severancePaymentCycles";
 import { specialBenefitPayment } from "@config/payrollAgreement/payrollAgreementTab/assisted/specialBenefitPaymentCycles";
-import { TransactionOperation } from "@enum/transactionOperation";
+import { useManagePayrollCycles } from "../useManagePayrollCycles";
 
 const useEditPayrollAgreement = (data: IPayrollAgreementData) => {
   const regularPaymentValues = () => {
@@ -89,7 +88,7 @@ const useEditPayrollAgreement = (data: IPayrollAgreementData) => {
       values: {
         namePayroll: data.abbreviatedName ?? "",
         typePayroll: data.payrollForDeductionAgreementType ?? "",
-        sourcesOfIncome: "Independiente", ///cambiar por el valor correcto
+        sourcesOfIncome: "Independiente",
         applicationDaysPayroll: String(
           data.numberOfDaysForReceivingTheDiscounts ?? 0,
         ),
@@ -114,6 +113,7 @@ const useEditPayrollAgreement = (data: IPayrollAgreementData) => {
     useState<IEditPayrollAgreementForms>(initialData);
   const [isCurrentFormValid, setIsCurrentFormValid] = useState(false);
   const [showRequestProcessModal, setShowRequestProcessModal] = useState(false);
+  const [showDeletedAlertModal, setShowDeletedAlertModal] = useState(false);
   const [typeRegularPayroll, setTypeRegularPayroll] = useState<boolean>(false);
   const [regularPaymentCycles, setRegularPaymentCycles] = useState<
     IOrdinaryCyclesEntry[]
@@ -141,6 +141,14 @@ const useEditPayrollAgreement = (data: IPayrollAgreementData) => {
     appData.businessUnit.publicCode,
   );
 
+  const { newRegularPayment, newExtraordinaryPayment } = useManagePayrollCycles(
+    initialData,
+    regularPaymentCycles,
+    isSelected,
+    extraordinaryPayment,
+    setExtraordinaryPayment,
+  );
+
   useEffect(() => {
     setTypeRegularPayroll(
       typePayrollForCyclesExtraord.includes(
@@ -158,7 +166,10 @@ const useEditPayrollAgreement = (data: IPayrollAgreementData) => {
 
       const ordinaryData = regularPaymentValues();
 
-      if (key === "regularPaymentCycles" && ordinaryData.length === 0) {
+      if (
+        key === editPayrollAgTabsConfig.regularPaymentCycles.id &&
+        ordinaryData.length === 0
+      ) {
         return acc;
       }
 
@@ -222,6 +233,20 @@ const useEditPayrollAgreement = (data: IPayrollAgreementData) => {
   }, [generalInformationRef.current?.values]);
 
   const handleTabChange = (tabId: string) => {
+    const currentTabRegularEmpty =
+      isSelected === editPayrollAgTabsConfig.regularPaymentCycles.id &&
+      regularPaymentCycles.length === 0;
+
+    const currentTabExtraOrdEmpty =
+      isSelected === editPayrollAgTabsConfig.extraordinaryPaymentCycles.id &&
+      !typeRegularPayroll &&
+      extraordinaryPayment.length === 0;
+
+    if (currentTabRegularEmpty || currentTabExtraOrdEmpty) {
+      setShowDeletedAlertModal(true);
+      return;
+    }
+
     if (generalInformationRef.current?.values) {
       setFormValues((prev) => ({
         ...prev,
@@ -235,6 +260,10 @@ const useEditPayrollAgreement = (data: IPayrollAgreementData) => {
       }));
     }
     setIsSelected(tabId);
+  };
+
+  const handleToggleDeletedAlertModal = () => {
+    setShowDeletedAlertModal(!showDeletedAlertModal);
   };
 
   const handleToggleEditedModal = () => {
@@ -270,115 +299,6 @@ const useEditPayrollAgreement = (data: IPayrollAgreementData) => {
   const handleGoBack = () => {
     setCanRefresh(true);
     navigate(-1);
-  };
-
-  const newObjRegularPayment = (
-    newValues: IOrdinaryCyclesEntry[],
-    transactionOperation: string,
-  ): IRegularPaymentCycles[] =>
-    newValues.map((item) => ({
-      payrollForDeductionAgreementId: item.cycleId,
-      regularPaymentCycleNumber: item.cycleId,
-      regularPaymentCycleName: item.nameCycle,
-      schedule:
-        normalizeEnumTranslationCode(item.periodicity)?.code ??
-        item.periodicity,
-      paymentDay: item.payday,
-      numberOfDaysBeforePaymentToBill: Number(item.numberDaysUntilCut),
-      transactionOperation: transactionOperation,
-    }));
-
-  const newObjExtraordinaryPayment = (
-    newValues: IExtraordinaryCyclesEntry[],
-    transactionOperation: string,
-  ) =>
-    newValues.map((item) => ({
-      abbreviatedName: item.nameCycle,
-      numberOfDaysBeforePaymentToBill: Number(item.numberDaysUntilCut),
-      paymentDay: item.payday ?? "",
-      payrollForDeductionAgreementId: item.id ?? "",
-      transactionOperation: transactionOperation,
-    }));
-
-  const newRegularPayment = () => {
-    const newValues = regularPaymentCycles.filter(
-      (formValue) =>
-        !initialData.ordinaryCycles.values.some(
-          (initialValue) =>
-            JSON.stringify(initialValue) === JSON.stringify(formValue),
-        ),
-    );
-
-    const deleteValues = initialData.ordinaryCycles.values.filter(
-      (formValue) =>
-        !regularPaymentCycles.some(
-          (initialValue) =>
-            JSON.stringify(initialValue) === JSON.stringify(formValue),
-        ),
-    );
-
-    const regularPayment = [
-      ...newObjRegularPayment(newValues, TransactionOperation.INSERT),
-      ...newObjRegularPayment(deleteValues, TransactionOperation.DELETE),
-    ];
-    return regularPayment;
-  };
-
-  const newExtraordinaryPayment = () => {
-    const newValues = extraordinaryPayment.filter(
-      (formValue) =>
-        !initialData.extraordinaryCycles.values.some(
-          (initialValue) =>
-            JSON.stringify(initialValue) === JSON.stringify(formValue),
-        ),
-    );
-
-    const deleteValues = initialData.extraordinaryCycles.values.filter(
-      (formValue) =>
-        !extraordinaryPayment.some(
-          (initialValue) =>
-            JSON.stringify(initialValue) === JSON.stringify(formValue),
-        ),
-    );
-
-    const newValSeverance = newValues.filter((item) =>
-      severancePay.includes(item.typePayment),
-    );
-
-    const newDelSeverance = deleteValues.filter((item) =>
-      severancePay.includes(item.typePayment),
-    );
-
-    const newValSpecialBenefit = newValues.filter((item) =>
-      specialBenefitPayment.includes(item.typePayment),
-    );
-
-    const newDelSpecialBenefit = deleteValues.filter((item) =>
-      specialBenefitPayment.includes(item.typePayment),
-    );
-
-    return {
-      severancePayment: [
-        ...newObjExtraordinaryPayment(
-          newValSeverance,
-          TransactionOperation.INSERT,
-        ),
-        ...newObjExtraordinaryPayment(
-          newDelSeverance,
-          TransactionOperation.DELETE,
-        ),
-      ],
-      payrollSpeBenPayment: [
-        ...newObjExtraordinaryPayment(
-          newValSpecialBenefit,
-          TransactionOperation.INSERT,
-        ),
-        ...newObjExtraordinaryPayment(
-          newDelSpecialBenefit,
-          TransactionOperation.DELETE,
-        ),
-      ],
-    };
   };
 
   const onSubmit = () => {
@@ -493,6 +413,8 @@ const useEditPayrollAgreement = (data: IPayrollAgreementData) => {
     regularPaymentCycles,
     extraordinaryPayment,
     filteredTabsConfig,
+    showDeletedAlertModal,
+    handleToggleDeletedAlertModal,
     setExtraordinaryPayment,
     setRegularPaymentCycles,
     setShowModal,

@@ -6,20 +6,12 @@ import { deletedCycleMessage } from "@config/payrollAgreement/payrollAgreementTa
 const useDeleteCyclePayment = (
   data: IEntry,
   setEntryDeleted: (id: string | number) => void,
-  uniqueEditionRecord?: number,
-  setShowDeletedAlertModal?: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   const [showModal, setShowModal] = useState(false);
   const { addFlag } = useFlag();
 
   const handleToggleModal = () => {
-    if (uniqueEditionRecord === undefined || uniqueEditionRecord !== 1) {
-      setShowModal(!showModal);
-    } else {
-      if (setShowDeletedAlertModal) {
-        setShowDeletedAlertModal(true);
-      }
-    }
+    setShowModal(!showModal);
   };
 
   const handleClick = () => {

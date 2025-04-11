@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useLocation } from "react-router-dom";
-import { useEditPayrollAgreement } from "@hooks/payrollAgreement/useEditPayrollAgreement";
+import { useEditPayrollAgreement } from "@hooks/payrollAgreement/edit/useEditPayrollAgreement";
 import { useSavePayrollAgreement } from "@hooks/payrollAgreement/useSavePayrollAgreement";
 import { ISaveDataRequest } from "@ptypes/saveData/ISaveDataRequest";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
@@ -28,6 +28,8 @@ const EditPayrollAgreement = () => {
     regularPaymentCycles,
     extraordinaryPayment,
     filteredTabsConfig,
+    showDeletedAlertModal,
+    handleToggleDeletedAlertModal,
     setExtraordinaryPayment,
     setRegularPaymentCycles,
     handleCloseGoBackModal,
@@ -98,6 +100,8 @@ const EditPayrollAgreement = () => {
       setExtraordinaryPayment={setExtraordinaryPayment}
       setRegularPaymentCycles={setRegularPaymentCycles}
       filteredTabsConfig={filteredTabsConfig}
+      showDeletedAlertModal={showDeletedAlertModal}
+      onToggleDeletedAlertModal={handleToggleDeletedAlertModal}
     />
   );
 };

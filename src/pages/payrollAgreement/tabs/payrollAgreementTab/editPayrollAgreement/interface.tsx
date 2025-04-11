@@ -1,3 +1,4 @@
+import { MdOutlineWarningAmber } from "react-icons/md";
 import { FormikProps } from "formik";
 import { Breadcrumbs, Stack, Tabs } from "@inubekit/inubekit";
 
@@ -24,6 +25,7 @@ import { ExtraordinaryPaymentCyclesForm } from "@design/forms/extraordinaryPayme
 import { IExtraordinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IExtraordinaryCyclesEntry";
 import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
 import { IEditPayrollTabsConfig } from "@ptypes/payrollAgreement/payrollAgreementTab/IEditPayrollTabsConfig";
+import { deletedAlertModal } from "@config/payrollAgreement/payrollAgreementTab/generic/deletedAlertModal";
 
 interface IEditPayrollAgreementUI {
   isSelected: string;
@@ -45,6 +47,7 @@ interface IEditPayrollAgreementUI {
   regularPaymentCycles: IOrdinaryCyclesEntry[];
   extraordinaryPayment: IExtraordinaryCyclesEntry[];
   filteredTabsConfig: IEditPayrollTabsConfig;
+  showDeletedAlertModal: boolean;
   setExtraordinaryPayment: React.Dispatch<
     React.SetStateAction<IExtraordinaryCyclesEntry[]>
   >;
@@ -63,6 +66,7 @@ interface IEditPayrollAgreementUI {
   onClosePendingReqModal: () => void;
   onToggleEditedModal: () => void;
   onEditedModal: () => void;
+  onToggleDeletedAlertModal: () => void;
 }
 
 const EditPayrollAgreementUI = (props: IEditPayrollAgreementUI) => {
@@ -85,6 +89,7 @@ const EditPayrollAgreementUI = (props: IEditPayrollAgreementUI) => {
     typeRegularPayroll,
     extraordinaryPayment,
     filteredTabsConfig,
+    showDeletedAlertModal,
     setExtraordinaryPayment,
     setRegularPaymentCycles,
     onTabChange,
@@ -98,6 +103,7 @@ const EditPayrollAgreementUI = (props: IEditPayrollAgreementUI) => {
     onClosePendingReqModal,
     onToggleEditedModal,
     onEditedModal,
+    onToggleDeletedAlertModal,
   } = props;
 
   return (
@@ -193,6 +199,21 @@ const EditPayrollAgreementUI = (props: IEditPayrollAgreementUI) => {
           actionText={goBackModal.actionText}
           onCloseModal={onCloseGoBackModal}
           onClick={onGoBack}
+        />
+      )}
+      {showDeletedAlertModal && (
+        <DecisionModal
+          portalId="portal"
+          title={deletedAlertModal.title}
+          description={deletedAlertModal.description}
+          actionText={deletedAlertModal.actionText}
+          withIcon
+          withCancelButton={false}
+          icon={<MdOutlineWarningAmber />}
+          appearance={ComponentAppearance.WARNING}
+          onCloseModal={onToggleDeletedAlertModal}
+          onClick={onToggleDeletedAlertModal}
+          moreDetails={deletedAlertModal.moreDetails}
         />
       )}
       {showRequestProcessModal && (

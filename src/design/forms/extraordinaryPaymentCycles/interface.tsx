@@ -1,4 +1,4 @@
-import { MdOutlineAdd, MdOutlineWarningAmber } from "react-icons/md";
+import { MdOutlineAdd } from "react-icons/md";
 import { FormikProps } from "formik";
 import { Button, Stack } from "@inubekit/inubekit";
 
@@ -14,8 +14,6 @@ import {
 import { IExtraordinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IExtraordinaryCyclesEntry";
 import { IServerDomain } from "@ptypes/IServerDomain";
 import { AddCycleModal } from "@design/modals/addCycleModal";
-import { DecisionModal } from "@design/modals/decisionModal";
-import { IMessageModal } from "@ptypes/decisions/IMessageModal";
 import {
   StyledContainer,
   StyledContainerFields,
@@ -34,11 +32,6 @@ interface IExtraordinaryPaymentCyclesFormUI {
   numberDaysUntilCutOptions: IServerDomain[];
   monthOptions: IServerDomain[];
   dayOptions: IServerDomain[];
-  showDeletedAlertModal: boolean;
-  deletedAlertModal: IMessageModal;
-  uniqueEditionRecord: number | undefined;
-  onToggleDeletedAlertModal: () => void;
-  setShowDeletedAlertModal: React.Dispatch<React.SetStateAction<boolean>>;
   onAddCycle: () => void;
   onToggleModal: () => void;
   onButtonClick: () => void;
@@ -64,17 +57,12 @@ const ExtraordinaryPaymentCyclesFormUI = (
     monthOptions,
     dayOptions,
     numberDaysUntilCutOptions,
-    deletedAlertModal,
-    uniqueEditionRecord,
-    showDeletedAlertModal,
-    setShowDeletedAlertModal,
     onChange,
     onAddCycle,
     onButtonClick,
     onToggleModal,
     onPreviousStep,
     setEntryDeleted,
-    onToggleDeletedAlertModal,
   } = props;
 
   return (
@@ -101,11 +89,7 @@ const ExtraordinaryPaymentCyclesFormUI = (
                 id="portal"
                 titles={titles}
                 entries={entries}
-                actions={actionsConfig(
-                  setEntryDeleted,
-                  uniqueEditionRecord,
-                  setShowDeletedAlertModal,
-                )}
+                actions={actionsConfig(setEntryDeleted)}
                 breakpoints={breakPoints}
                 isLoading={loading}
                 columnWidths={[50, 12, 10, 14]}
@@ -152,21 +136,6 @@ const ExtraordinaryPaymentCyclesFormUI = (
           onCloseModal={onToggleModal}
           onClick={onAddCycle}
           onChange={onChange}
-        />
-      )}
-      {showDeletedAlertModal && (
-        <DecisionModal
-          portalId="portal"
-          title={deletedAlertModal.title}
-          description={deletedAlertModal.description}
-          actionText={deletedAlertModal.actionText}
-          withIcon
-          withCancelButton={false}
-          icon={<MdOutlineWarningAmber />}
-          appearance={ComponentAppearance.WARNING}
-          onCloseModal={onToggleDeletedAlertModal}
-          onClick={onToggleDeletedAlertModal}
-          moreDetails={deletedAlertModal.moreDetails}
         />
       )}
     </StyledContainer>

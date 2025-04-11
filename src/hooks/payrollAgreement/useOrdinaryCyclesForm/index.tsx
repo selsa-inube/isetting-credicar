@@ -62,7 +62,6 @@ const useOrdinaryCyclesForm = (
   const [isDisabledButton, setIsDisabledButton] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
-  const [showDeletedAlertModal, setShowDeletedAlertModal] = useState(false);
   const [entries, setEntries] = useState<IEntry[]>(
     regularPaymentCycles as IEntry[],
   );
@@ -124,7 +123,7 @@ const useOrdinaryCyclesForm = (
   useEffect(() => {
     const updateButton = () => {
       if (editDataOption) {
-        setIsDisabledButton(valuesEqualBoton);
+        setIsDisabledButton(entries.length === 0 || valuesEqualBoton);
       } else {
         setIsDisabledButton(loading ?? !formik.isValid);
       }
@@ -149,10 +148,6 @@ const useOrdinaryCyclesForm = (
 
   const onToggleInfoModal = () => {
     setShowInfoModal(!showInfoModal);
-  };
-
-  const handleToggleDeletedAlertModal = () => {
-    setShowDeletedAlertModal(!showDeletedAlertModal);
   };
 
   const createNewCycle = (id: number) => ({
@@ -191,8 +186,6 @@ const useOrdinaryCyclesForm = (
     }
   }, [entryDeleted]);
 
-  const uniqueEditionRecord = editDataOption ? entries.length : undefined;
-
   return {
     formik,
     isDisabledButton,
@@ -204,15 +197,11 @@ const useOrdinaryCyclesForm = (
     paydayOptions,
     periodicityOptions,
     isMobile,
-    showDeletedAlertModal,
-    uniqueEditionRecord,
-    setShowDeletedAlertModal,
     onToggleInfoModal,
     handleChange,
     handleAddCycle,
     handleToggleModal,
     setEntryDeleted,
-    handleToggleDeletedAlertModal,
   };
 };
 

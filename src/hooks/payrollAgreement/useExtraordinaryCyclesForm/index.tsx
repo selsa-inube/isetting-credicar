@@ -66,7 +66,6 @@ const useExtraordinaryCyclesForm = (
 
   const [isDisabledButton, setIsDisabledButton] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [showDeletedAlertModal, setShowDeletedAlertModal] = useState(false);
   const [entries, setEntries] = useState<IEntry[]>(
     extraordinaryPayment as IEntry[],
   );
@@ -149,10 +148,6 @@ const useExtraordinaryCyclesForm = (
     formik.resetForm();
   };
 
-  const handleToggleDeletedAlertModal = () => {
-    setShowDeletedAlertModal(!showDeletedAlertModal);
-  };
-
   const createNewCycle = (id: number) => ({
     id: `cycle-${addLeadingZero(id).toString()}`,
     nameCycle: formik.values.nameCycle,
@@ -188,9 +183,6 @@ const useExtraordinaryCyclesForm = (
     }
   }, [entryDeleted]);
 
-  const uniqueEditionRecord =
-    editDataOption && !typeRegularPayroll ? entries.length : undefined;
-
   return {
     formik,
     isDisabledButton,
@@ -202,10 +194,6 @@ const useExtraordinaryCyclesForm = (
     numberDaysUntilCutOptions,
     monthOptions,
     dayOptions,
-    showDeletedAlertModal,
-    uniqueEditionRecord,
-    handleToggleDeletedAlertModal,
-    setShowDeletedAlertModal,
     handleChange,
     handleAddCycle,
     handleToggleModal,

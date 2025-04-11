@@ -4,7 +4,6 @@ import { FormikProps } from "formik";
 import { IExtraordinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IExtraordinaryCyclesEntry";
 import { useExtraordinaryCyclesForm } from "@hooks/payrollAgreement/useExtraordinaryCyclesForm";
 import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
-import { deletedAlertModal } from "@config/payrollAgreement/payrollAgreementTab/generic/deletedAlertModal";
 import { ExtraordinaryPaymentCyclesFormUI } from "./interface";
 
 interface IExtraordinaryPaymentCyclesForm {
@@ -54,10 +53,6 @@ const ExtraordinaryPaymentCyclesForm = forwardRef<
       numberDaysUntilCutOptions,
       monthOptions,
       dayOptions,
-      showDeletedAlertModal,
-      uniqueEditionRecord,
-      handleToggleDeletedAlertModal,
-      setShowDeletedAlertModal,
       handleToggleModal,
       handleChange,
       handleAddCycle,
@@ -95,11 +90,6 @@ const ExtraordinaryPaymentCyclesForm = forwardRef<
         monthOptions={monthOptions}
         dayOptions={dayOptions ?? []}
         setEntryDeleted={setEntryDeleted}
-        showDeletedAlertModal={showDeletedAlertModal}
-        deletedAlertModal={deletedAlertModal}
-        onToggleDeletedAlertModal={handleToggleDeletedAlertModal}
-        uniqueEditionRecord={uniqueEditionRecord}
-        setShowDeletedAlertModal={setShowDeletedAlertModal}
       />
     );
   },

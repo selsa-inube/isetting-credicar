@@ -4,7 +4,6 @@ import { FormikProps } from "formik";
 import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
 import { useOrdinaryCyclesForm } from "@hooks/payrollAgreement/useOrdinaryCyclesForm";
 import { infoPeriodicityModal } from "@config/payrollAgreement/payrollAgreementTab/generic/infoPeriodicityModal";
-import { deletedAlertModal } from "@config/payrollAgreement/payrollAgreementTab/generic/deletedAlertModal";
 import { RegularPaymentCyclesFormUI } from "./interface";
 
 interface IRegularPaymentCyclesForm {
@@ -50,15 +49,11 @@ const RegularPaymentCyclesForm = forwardRef<
       periodicityOptions,
       showInfoModal,
       isMobile,
-      showDeletedAlertModal,
-      uniqueEditionRecord,
       onToggleInfoModal,
       handleToggleModal,
       handleChange,
       handleAddCycle,
       setEntryDeleted,
-      handleToggleDeletedAlertModal,
-      setShowDeletedAlertModal,
     } = useOrdinaryCyclesForm(
       ref,
       editDataOption,
@@ -92,11 +87,6 @@ const RegularPaymentCyclesForm = forwardRef<
         onToggleInfoModal={onToggleInfoModal}
         isMobile={isMobile}
         setEntryDeleted={setEntryDeleted}
-        showDeletedAlertModal={showDeletedAlertModal}
-        deletedAlertModal={deletedAlertModal}
-        onToggleDeletedAlertModal={handleToggleDeletedAlertModal}
-        uniqueEditionRecord={uniqueEditionRecord}
-        setShowDeletedAlertModal={setShowDeletedAlertModal}
       />
     );
   },
