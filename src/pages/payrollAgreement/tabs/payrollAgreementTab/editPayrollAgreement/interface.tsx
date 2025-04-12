@@ -48,6 +48,7 @@ interface IEditPayrollAgreementUI {
   extraordinaryPayment: IExtraordinaryCyclesEntry[];
   filteredTabsConfig: IEditPayrollTabsConfig;
   showDeletedAlertModal: boolean;
+  typePayroll: string;
   setExtraordinaryPayment: React.Dispatch<
     React.SetStateAction<IExtraordinaryCyclesEntry[]>
   >;
@@ -90,6 +91,7 @@ const EditPayrollAgreementUI = (props: IEditPayrollAgreementUI) => {
     extraordinaryPayment,
     filteredTabsConfig,
     showDeletedAlertModal,
+    typePayroll,
     setExtraordinaryPayment,
     setRegularPaymentCycles,
     onTabChange,
@@ -204,16 +206,16 @@ const EditPayrollAgreementUI = (props: IEditPayrollAgreementUI) => {
       {showDeletedAlertModal && (
         <DecisionModal
           portalId="portal"
-          title={deletedAlertModal.title}
-          description={deletedAlertModal.description}
-          actionText={deletedAlertModal.actionText}
+          title={deletedAlertModal(typePayroll).title}
+          description={deletedAlertModal(typePayroll).description}
+          actionText={deletedAlertModal(typePayroll).actionText}
           withIcon
           withCancelButton={false}
           icon={<MdOutlineWarningAmber />}
           appearance={ComponentAppearance.WARNING}
           onCloseModal={onToggleDeletedAlertModal}
           onClick={onToggleDeletedAlertModal}
-          moreDetails={deletedAlertModal.moreDetails}
+          moreDetails={deletedAlertModal(typePayroll).moreDetails}
         />
       )}
       {showRequestProcessModal && (

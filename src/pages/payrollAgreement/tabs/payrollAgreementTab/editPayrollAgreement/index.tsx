@@ -29,6 +29,7 @@ const EditPayrollAgreement = () => {
     extraordinaryPayment,
     filteredTabsConfig,
     showDeletedAlertModal,
+    typePayroll,
     handleToggleDeletedAlertModal,
     setExtraordinaryPayment,
     setRegularPaymentCycles,
@@ -102,6 +103,7 @@ const EditPayrollAgreement = () => {
       filteredTabsConfig={filteredTabsConfig}
       showDeletedAlertModal={showDeletedAlertModal}
       onToggleDeletedAlertModal={handleToggleDeletedAlertModal}
+      typePayroll={typePayroll}
     />
   );
 };

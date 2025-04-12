@@ -135,7 +135,7 @@ const useExtraordinaryCyclesForm = (
   useEffect(() => {
     const updateButton = () => {
       if (editDataOption) {
-        setIsDisabledButton(valuesEqualBoton);
+        setIsDisabledButton(entries.length === 0 || valuesEqualBoton);
       } else {
         setIsDisabledButton(typeRegularPayroll ? false : entries.length === 0);
       }

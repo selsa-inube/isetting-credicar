@@ -396,6 +396,10 @@ const useEditPayrollAgreement = (data: IPayrollAgreementData) => {
     setShowRequestProcessModal(true);
   };
 
+  const typePayroll = typeRegularPayroll
+    ? "remuneración ordinaria"
+    : "Primas o cesantias";
+
   return {
     formValues,
     generalInformationRef,
@@ -414,6 +418,7 @@ const useEditPayrollAgreement = (data: IPayrollAgreementData) => {
     extraordinaryPayment,
     filteredTabsConfig,
     showDeletedAlertModal,
+    typePayroll,
     handleToggleDeletedAlertModal,
     setExtraordinaryPayment,
     setRegularPaymentCycles,
