@@ -10,6 +10,7 @@ const usePayrollAgreementTab = (bussinesUnits: string) => {
   const [searchPayrollAgreement, setSearchPayrollAgreement] =
     useState<string>("");
   const [loading, setLoading] = useState(true);
+  const [entryDeleted, setEntryDeleted] = useState<string | number>("");
 
   useEffect(() => {
     const fetchPayrollAgreementData = async () => {
@@ -28,6 +29,14 @@ const usePayrollAgreementTab = (bussinesUnits: string) => {
     fetchPayrollAgreementData();
   }, []);
 
+  useEffect(() => {
+    if (entryDeleted) {
+      setPayrollAgreement((prev) =>
+        prev.filter((entry) => entry.id !== entryDeleted),
+      );
+    }
+  }, [entryDeleted]);
+
   const handleSearchPayrollAgreement = (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
@@ -39,6 +48,7 @@ const usePayrollAgreementTab = (bussinesUnits: string) => {
     searchPayrollAgreement,
     loading,
     hasError,
+    setEntryDeleted,
     handleSearchPayrollAgreement,
   };
 };

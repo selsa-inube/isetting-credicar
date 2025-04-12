@@ -11,6 +11,7 @@ const PayrollAgreementTab = () => {
     payrollAgreement,
     searchPayrollAgreement,
     loading,
+    setEntryDeleted,
     handleSearchPayrollAgreement,
   } = usePayrollAgreementTab(appData.businessUnit.publicCode);
 
@@ -20,6 +21,7 @@ const PayrollAgreementTab = () => {
       searchPayrollAgreement={searchPayrollAgreement}
       loading={loading}
       entries={payrollAgreement as IEntry[]}
+      setEntryDeleted={setEntryDeleted}
     />
   );
 };

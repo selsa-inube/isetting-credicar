@@ -6,7 +6,7 @@ import { ComponentAppearance } from "@enum/appearances";
 import { Table } from "@design/data/table";
 import { IEntry } from "@design/data/table/types";
 import {
-  actions,
+  actionsConfig,
   breakPoints,
   titles,
 } from "@config/payrollAgreement/payrollAgreementTab/table";
@@ -16,12 +16,18 @@ interface IpayrollAgreementTabUI {
   entries: IEntry[];
   loading: boolean;
   searchPayrollAgreement: string;
+  setEntryDeleted: (id: string | number) => void;
   onSearchPayrollAgreement: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const PayrollAgreementTabUI = (props: IpayrollAgreementTabUI) => {
-  const { searchPayrollAgreement, entries, loading, onSearchPayrollAgreement } =
-    props;
+  const {
+    searchPayrollAgreement,
+    entries,
+    loading,
+    setEntryDeleted,
+    onSearchPayrollAgreement,
+  } = props;
 
   const smallScreen = useMediaQuery("(max-width: 690px)");
 
@@ -81,7 +87,7 @@ const PayrollAgreementTabUI = (props: IpayrollAgreementTabUI) => {
             id="portal"
             titles={titles}
             entries={entries}
-            actions={actions}
+            actions={actionsConfig(setEntryDeleted)}
             breakpoints={breakPoints}
             filter={searchPayrollAgreement}
             isLoading={loading}
