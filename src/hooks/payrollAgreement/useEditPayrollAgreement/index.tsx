@@ -140,78 +140,43 @@ const useEditPayrollAgreement = (data: IPayrollAgreementData) => {
 
   const onSubmit = () => {
     const currentValues = generalInformationRef.current?.values;
-    const formValuesGenInf = formValues.generalInformation.values;
-    const initialDataValues = initialData.generalInformation.values;
-    const compare = JSON.stringify(initialData) === JSON.stringify(formValues);
 
-    const valueUpdatedName =
-      initialDataValues.namePayroll !== currentValues?.namePayroll;
+    if (!currentValues) return;
 
-    const valueUpdourcesOfIncome =
-      initialDataValues.sourcesOfIncome !== currentValues?.sourcesOfIncome;
-
-    const valueUpdatedApplDays =
-      initialDataValues.applicationDaysPayroll !==
-      currentValues?.applicationDaysPayroll;
-
-    const configurationRequestData: {
+    const changedFields: {
       namePayroll?: string;
       sourcesOfIncome?: string;
       applicationDaysPayroll?: string;
     } = {};
 
-    if (currentValues?.namePayroll !== undefined && valueUpdatedName) {
-      configurationRequestData.namePayroll = currentValues?.namePayroll;
-    }
+    const initialValues = initialData.generalInformation.values;
+
+    (
+      ["namePayroll", "sourcesOfIncome", "applicationDaysPayroll"] as const
+    ).forEach((key) => {
+      if (currentValues[key] !== initialValues[key]) {
+        changedFields[key] = currentValues[key];
+      }
+    });
+
+    const hasChanges = Object.keys(changedFields).length > 0;
 
     if (
-      currentValues?.sourcesOfIncome !== undefined &&
-      valueUpdourcesOfIncome
-    ) {
-      configurationRequestData.sourcesOfIncome = currentValues?.sourcesOfIncome;
-    }
-
-    if (
-      currentValues?.applicationDaysPayroll !== undefined &&
-      valueUpdatedApplDays
-    ) {
-      configurationRequestData.applicationDaysPayroll =
-        currentValues?.applicationDaysPayroll;
-    }
-
-    if (
-      !compare &&
+      hasChanges &&
       isSelected === editPayrollAgTabsConfig.generalInformation.id
     ) {
-      if (initialDataValues.namePayroll !== formValuesGenInf.namePayroll) {
-        configurationRequestData.namePayroll = formValuesGenInf.namePayroll;
-      }
-      if (
-        initialDataValues.sourcesOfIncome !== formValuesGenInf.sourcesOfIncome
-      ) {
-        configurationRequestData.sourcesOfIncome =
-          formValuesGenInf.sourcesOfIncome;
-      }
-
-      if (
-        initialDataValues.applicationDaysPayroll !==
-        formValuesGenInf.applicationDaysPayroll
-      ) {
-        configurationRequestData.namePayroll =
-          formValuesGenInf.applicationDaysPayroll;
-      }
+      setSaveData({
+        applicationName: "ifac",
+        businessManagerCode: appData.businessManager.publicCode,
+        businessUnitCode: appData.businessUnit.publicCode,
+        description: "Solicitud de modificación de una nómina de convenio",
+        entityName: conditionRule,
+        requestDate: formatDate(new Date()),
+        useCaseName: "ModifyPayrollAgreement",
+        configurationRequestData: changedFields,
+      });
+      setShowRequestProcessModal(true);
     }
-
-    setSaveData({
-      applicationName: "ifac",
-      businessManagerCode: appData.businessManager.publicCode,
-      businessUnitCode: appData.businessUnit.publicCode,
-      description: "Solicitud de modificación de una nómina de convenio",
-      entityName: conditionRule,
-      requestDate: formatDate(new Date()),
-      useCaseName: "ModifyPayrollAgreement",
-      configurationRequestData,
-    });
   };
 
   const handleReset = () => {
