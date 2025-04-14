@@ -4,7 +4,7 @@ import { tokens } from "@design/tokens";
 import { IEntry } from "@design/data/table/types";
 import { BoxContainer } from "@design/layout/boxContainer";
 import { ILabel } from "@ptypes/ILabel";
-import { DetailBox } from "../detailBox";
+import { RenderDetailBox } from "./renderDetailBox";
 
 interface ITraceabilityCard {
   data: IEntry;
@@ -23,24 +23,6 @@ const TraceabilityCard = (props: ITraceabilityCard) => {
     .slice(2, partLabels)
     .filter((field) => data[field.id]);
 
-  const renderDetailBox = (field: ILabel, id: number, withTag = false) => (
-    <DetailBox
-      key={id}
-      field={field}
-      data={data}
-      id={id}
-      backgroundColor={inube.palette.neutral.N10}
-      borderRadius={tokens.spacing.s100}
-      padding={
-        isMobile
-          ? `${tokens.spacing.s075}`
-          : `${tokens.spacing.s075} ${tokens.spacing.s150}`
-      }
-      width="100%"
-      {...(withTag && { withTag })}
-    />
-  );
-
   return (
     <BoxContainer
       direction="column"
@@ -58,8 +40,25 @@ const TraceabilityCard = (props: ITraceabilityCard) => {
         justifyContent="center"
         direction={isMobile ? "column" : "row"}
       >
-        {firstDetail.map((field, id) => renderDetailBox(field, id))}
-        {secondDetail.map((field, id) => renderDetailBox(field, id, true))}
+        {firstDetail.map((field, id) => (
+          <RenderDetailBox
+            key={id}
+            data={data}
+            field={field}
+            id={id}
+            isMobile={isMobile}
+          />
+        ))}
+        {secondDetail.map((field, id) => (
+          <RenderDetailBox
+            key={id}
+            data={data}
+            field={field}
+            id={id}
+            isMobile={isMobile}
+            withTag
+          />
+        ))}
       </Stack>
 
       <Stack
@@ -67,7 +66,15 @@ const TraceabilityCard = (props: ITraceabilityCard) => {
         direction="column"
         justifyContent="center"
       >
-        {remainingDetails.map((field, id) => renderDetailBox(field, id))}
+        {remainingDetails.map((field, id) => (
+          <RenderDetailBox
+            key={id}
+            data={data}
+            field={field}
+            id={id}
+            isMobile={isMobile}
+          />
+        ))}
       </Stack>
     </BoxContainer>
   );
