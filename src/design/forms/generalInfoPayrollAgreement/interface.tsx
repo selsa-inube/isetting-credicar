@@ -6,25 +6,24 @@ import {
   Grid,
   Icon,
   Input,
+  inube,
   Label,
   Select,
   Stack,
 } from "@inubekit/inubekit";
 
-import { tokens } from "@design/tokens";
+import { IGeneralInformationEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IGeneralInformationPayroll";
+import { generalInfoLabels } from "@config/payrollAgreement/payrollAgreementTab/forms/generalInfoLabels";
 import { ComponentAppearance } from "@enum/appearances";
 import { getFieldState } from "@utils/forms/getFieldState";
-import { IGeneralInformationEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IGeneralInformationPayroll";
 import { getDomainById } from "@mocks/domains/domainService.mocks";
 import { DecisionModal } from "@design/modals/decisionModal";
 import { IMessageModal } from "@ptypes/decisions/IMessageModal";
 import { SelectCheck } from "@design/inputs/selectCheck";
 import { IServerDomain } from "@ptypes/IServerDomain";
-import {
-  StyledContainer,
-  StyledContainerFields,
-  StyledFormContent,
-} from "./styles";
+import { BoxContainer } from "@design/layout/boxContainer";
+import { tokens } from "@design/tokens";
+import { StyledContainer, StyledFormContent, StyledRow } from "./styles";
 
 interface IGeneralInformationPayrollFormUI {
   autosuggestValue: string;
@@ -45,11 +44,13 @@ interface IGeneralInformationPayrollFormUI {
   onToggleInfoModalModal: () => void;
   onChangeCheck: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onButtonClick: () => void;
-  onPreviousStep: () => void;
-  onReset: () => void;
   onChangeSelect: (name: string, value: string) => void;
   onChangeAutosuggest: (name: string, value: string) => void;
+  onPreviousStep?: () => void;
+  onResetEdit?: () => void;
+  onResetAdd?: () => void;
   isDisabledButton?: boolean;
+  companyAgreement?: string;
 }
 
 const GeneralInformationPayrollFormUI = (
@@ -61,7 +62,6 @@ const GeneralInformationPayrollFormUI = (
     infoModal,
     editDataOption,
     autosuggestValue,
-    valuesEqual,
     isDisabledButton,
     showModal,
     sourcesOfIncomeValues,
@@ -70,15 +70,16 @@ const GeneralInformationPayrollFormUI = (
     focused,
     selectRef,
     typePayrollOptions,
+    companyAgreement,
     setFocused,
     setDisplayList,
     onChangeSelect,
     onChangeAutosuggest,
     onButtonClick,
-    onReset,
+    onResetEdit,
     onToggleInfoModalModal,
     onChangeCheck,
-    onPreviousStep,
+    onResetAdd,
   } = props;
 
   return (
@@ -86,42 +87,89 @@ const GeneralInformationPayrollFormUI = (
       <StyledFormContent>
         <form>
           <Stack direction="column">
-            <StyledContainerFields $isMobile={isMobile}>
+            <BoxContainer
+              borderColor={inube.palette.neutral.N40}
+              borderRadius={tokens.spacing.s100}
+              width="auto"
+              gap={tokens.spacing.s300}
+              backgroundColor={inube.palette.neutral.N0}
+              boxSizing="border-box"
+              padding={
+                isMobile ? `${tokens.spacing.s150}` : `${tokens.spacing.s300}`
+              }
+            >
               <Grid
-                templateColumns={isMobile ? "1fr" : "repeat(2, 1fr)"}
-                templateRows={isMobile ? "repeat(4, 1fr)" : "repeat(2, 1fr)"}
+                templateColumns={isMobile ? "1fr" : "repeat(2, 1fr) "}
+                templateRows={
+                  editDataOption
+                    ? isMobile
+                      ? "repeat(5, 1fr)"
+                      : "repeat(3, auto)"
+                    : isMobile
+                      ? "repeat(4, 1fr)"
+                      : "repeat(2, 1fr)"
+                }
                 width="100%"
-                gap={tokens.spacing.s250}
+                gap={isMobile ? tokens.spacing.s050 : tokens.spacing.s250}
               >
-                <Input
-                  name="namePayroll"
-                  id="namePayroll"
-                  label="Nombre de nómina"
-                  placeholder="Nombre de nómina de convenio"
-                  type="text"
-                  size="compact"
-                  value={formik.values.namePayroll}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  status={getFieldState(formik, "namePayroll")}
-                  message={formik.errors.namePayroll}
-                  fullwidth
-                />
-
-                <Select
-                  disabled={false}
-                  id="typePayroll"
-                  name="typePayroll"
-                  label="Tipo de nómina de convenio"
-                  placeholder="Selecciónalo de la lista"
-                  onChange={onChangeSelect}
-                  options={typePayrollOptions}
-                  size="compact"
-                  value={formik.values.typePayroll ?? ""}
-                  fullwidth
-                  message={formik.errors.typePayroll}
-                  invalid={formik.errors.typePayroll ? true : false}
-                />
+                {editDataOption && (
+                  <>
+                    <Input
+                      name="companyAgreement"
+                      id="companyAgreement"
+                      label={generalInfoLabels.companyAgreement}
+                      readOnly
+                      type="text"
+                      size="compact"
+                      value={companyAgreement}
+                      fullwidth
+                      disabled
+                    />
+                    <Input
+                      name="typePayrollSelected"
+                      id="typePayrollSelected"
+                      label={generalInfoLabels.typePayrollSelected}
+                      readOnly
+                      type="text"
+                      size="compact"
+                      value={formik.values.typePayroll}
+                      fullwidth
+                      disabled
+                    />
+                  </>
+                )}
+                <StyledRow $isMobile={isMobile} $editOption={editDataOption}>
+                  <Input
+                    name="namePayroll"
+                    id="namePayroll"
+                    label="Nombre de nómina"
+                    placeholder="Nombre de nómina de convenio"
+                    type="text"
+                    size="compact"
+                    value={formik.values.namePayroll}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    status={getFieldState(formik, "namePayroll")}
+                    message={formik.errors.namePayroll}
+                    fullwidth
+                  />
+                </StyledRow>
+                {!editDataOption && (
+                  <Select
+                    disabled={false}
+                    id="typePayroll"
+                    name="typePayroll"
+                    label="Tipo de nómina de convenio"
+                    placeholder="Selecciónalo de la lista"
+                    onChange={onChangeSelect}
+                    options={typePayrollOptions}
+                    size="compact"
+                    value={formik.values.typePayroll ?? ""}
+                    fullwidth
+                    message={formik.errors.typePayroll}
+                    invalid={formik.errors.typePayroll ? true : false}
+                  />
+                )}
 
                 <SelectCheck
                   label="Fuentes de ingreso"
@@ -162,6 +210,7 @@ const GeneralInformationPayrollFormUI = (
                       cursorHover
                     />
                   </Stack>
+
                   <Autosuggest
                     label=""
                     name="applicationDaysPayroll"
@@ -180,17 +229,16 @@ const GeneralInformationPayrollFormUI = (
                   />
                 </Stack>
               </Grid>
-            </StyledContainerFields>
+            </BoxContainer>
           </Stack>
         </form>
       </StyledFormContent>
       <Stack justifyContent="flex-end" gap={tokens.spacing.s250}>
         <Button
           fullwidth={isMobile}
-          onClick={editDataOption ? onReset : onPreviousStep}
+          onClick={editDataOption ? onResetEdit : onResetAdd}
           variant="outlined"
           appearance={ComponentAppearance.GRAY}
-          disabled={editDataOption ? valuesEqual : false}
         >
           {editDataOption ? "Cancelar" : "Anterior"}
         </Button>
@@ -198,13 +246,11 @@ const GeneralInformationPayrollFormUI = (
         <Button
           fullwidth={isMobile}
           onClick={onButtonClick}
-          disabled={
-            editDataOption ? isDisabledButton && !loading : isDisabledButton
-          }
+          disabled={isDisabledButton}
           loading={loading}
           appearance={ComponentAppearance.PRIMARY}
         >
-          {editDataOption ? "Guardar" : "Siguiente"}
+          {editDataOption ? "Enviar" : "Siguiente"}
         </Button>
       </Stack>
       {showModal && (

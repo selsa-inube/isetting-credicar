@@ -22,10 +22,10 @@ const useEditDestination = (
   appData: IAppData,
 ) => {
   const initialGeneralInfData = {
-    nameDestination: data.nameDestination,
-    description: data.description,
-    icon: data.icon,
-    id: data.id,
+    nameDestination: data.nameDestination ?? "",
+    description: data.description ?? "",
+    icon: data.icon ?? "",
+    id: data.id ?? "",
   };
 
   const [isSelected, setIsSelected] = useState<string>(

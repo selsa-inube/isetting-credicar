@@ -1,9 +1,7 @@
-import { Icon } from "@inubekit/inubekit";
-import { MdOutlineCreate } from "react-icons/md";
-import { ComponentAppearance } from "@enum/appearances";
 import { IAction, IEntry, ITitle } from "@design/data/table/types";
 import { Details } from "@pages/payrollAgreement/tabs/payrollAgreementTab/tools/details";
 import { Delete } from "@pages/payrollAgreement/tabs/payrollAgreementTab/tools/delete";
+import { Edit } from "@src/pages/payrollAgreement/tabs/payrollAgreementTab/tools/edit";
 
 const titles: ITitle[] = [
   {
@@ -21,13 +19,7 @@ const actionsConfig = (setEntryDeleted: (id: string | number) => void) => {
     },
     {
       id: "edit",
-      content: () => (
-        <Icon
-          icon={<MdOutlineCreate />}
-          appearance={ComponentAppearance.PRIMARY}
-          size="16px"
-        />
-      ),
+      content: (entry: IEntry) => <Edit data={entry} />,
     },
     {
       id: "delete",

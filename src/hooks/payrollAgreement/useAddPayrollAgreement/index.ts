@@ -319,8 +319,9 @@ const useAddPayrollAgreement = (appData: IAppData) => {
       severancePaymentCycles?: ISeverancePaymentCycles[];
     } = {
       abbreviatedName: formValues.generalInformation.values.namePayroll,
-      numberOfDaysForReceivingTheDiscounts:
+      numberOfDaysForReceivingTheDiscounts: String(
         formValues.generalInformation.values.applicationDaysPayroll,
+      ),
       payrollForDeductionAgreementType:
         formValues.generalInformation.values.typePayroll,
     };
