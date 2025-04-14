@@ -12,9 +12,9 @@ const crumbsEditDestination = [
     isActive: false,
   },
   {
-    path: "/money-destination/add-destination",
+    path: "/money-destination/edit-destination",
     label: "Editar destino",
-    id: "addDestination",
+    id: "editDestination",
     isActive: true,
   },
 ];

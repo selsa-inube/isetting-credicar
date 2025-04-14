@@ -30,7 +30,15 @@ const EditDestination = () => {
     handleTabChange,
     setShowRequestProcessModal,
     setShowModal,
-  } = useEditDestination(data, appData);
+  } = useEditDestination(
+    data ?? {
+      id: "",
+      nameDestination: "",
+      description: "",
+      icon: "",
+    },
+    appData,
+  );
 
   const {
     saveMoneyDestination,
