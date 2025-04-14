@@ -16,6 +16,7 @@ import { tokens } from "@design/tokens";
 import { mediaQueryMobile } from "@config/environment";
 import { ComponentAppearance } from "@enum/appearances";
 import { IEntry } from "@design/data/table/types";
+import { ILabel } from "@ptypes/ILabel";
 import {
   StyledBorder,
   StyledContainerButton,
@@ -23,7 +24,7 @@ import {
   StyledModal,
 } from "./styles";
 import { IDetailsTabsConfig } from "./types";
-import { ILabel } from "../detailsRequestsInProgressModal/types";
+
 import { OrdinaryPaymentCycles } from "./tabs/ordinaryPaymentCycles";
 import { ExtraordinaryPaymentCycles } from "./tabs/extraordinaryPaymentCycles";
 
