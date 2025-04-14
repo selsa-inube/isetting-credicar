@@ -17,6 +17,30 @@ const TraceabilityCard = (props: ITraceabilityCard) => {
 
   const partLabels = labels.length;
 
+  const firstDetail = labels.slice(0, 1).filter((field) => data[field.id]);
+  const secondDetail = labels.slice(1, 2).filter((field) => data[field.id]);
+  const remainingDetails = labels
+    .slice(2, partLabels)
+    .filter((field) => data[field.id]);
+
+  const renderDetailBox = (field: ILabel, id: number, withTag = false) => (
+    <DetailBox
+      key={id}
+      field={field}
+      data={data}
+      id={id}
+      backgroundColor={inube.palette.neutral.N10}
+      borderRadius={tokens.spacing.s100}
+      padding={
+        isMobile
+          ? `${tokens.spacing.s075}`
+          : `${tokens.spacing.s075} ${tokens.spacing.s150}`
+      }
+      width="100%"
+      {...(withTag && { withTag })}
+    />
+  );
+
   return (
     <BoxContainer
       direction="column"
@@ -24,8 +48,8 @@ const TraceabilityCard = (props: ITraceabilityCard) => {
       width={isMobile ? "244px" : "400px"}
       height="auto"
       borderRadius={tokens.spacing.s100}
-      padding={isMobile ? `${tokens.spacing.s150}` : `${tokens.spacing.s200}`}
-      gap={isMobile ? `${tokens.spacing.s050}` : `${tokens.spacing.s150}`}
+      padding={isMobile ? tokens.spacing.s150 : tokens.spacing.s200}
+      gap={isMobile ? tokens.spacing.s050 : tokens.spacing.s150}
       boxSizing="border-box"
       boxShadow="1px 0px 3px 1px rgba(0, 0, 0, 0.15)"
     >
@@ -34,49 +58,8 @@ const TraceabilityCard = (props: ITraceabilityCard) => {
         justifyContent="center"
         direction={isMobile ? "column" : "row"}
       >
-        {labels
-          .slice(0, 1)
-          .map(
-            (field, id) =>
-              data[field.id] && (
-                <DetailBox
-                  key={id}
-                  field={field}
-                  data={data}
-                  id={id}
-                  backgroundColor={inube.palette.neutral.N10}
-                  borderRadius={tokens.spacing.s100}
-                  padding={
-                    isMobile
-                      ? `${tokens.spacing.s075}`
-                      : `${tokens.spacing.s075} ${tokens.spacing.s150}`
-                  }
-                  width="100%"
-                />
-              ),
-          )}
-        {labels
-          .slice(1, 2)
-          .map(
-            (field, id) =>
-              data[field.id] && (
-                <DetailBox
-                  key={id}
-                  field={field}
-                  data={data}
-                  id={id}
-                  backgroundColor={inube.palette.neutral.N10}
-                  borderRadius={tokens.spacing.s100}
-                  padding={
-                    isMobile
-                      ? `${tokens.spacing.s075}`
-                      : `${tokens.spacing.s075} ${tokens.spacing.s150}`
-                  }
-                  width="100%"
-                  withTag
-                />
-              ),
-          )}
+        {firstDetail.map((field, id) => renderDetailBox(field, id))}
+        {secondDetail.map((field, id) => renderDetailBox(field, id, true))}
       </Stack>
 
       <Stack
@@ -84,27 +67,7 @@ const TraceabilityCard = (props: ITraceabilityCard) => {
         direction="column"
         justifyContent="center"
       >
-        {labels
-          .slice(2, partLabels)
-          .map(
-            (field, id) =>
-              data[field.id] && (
-                <DetailBox
-                  key={id}
-                  field={field}
-                  data={data}
-                  id={id}
-                  backgroundColor={inube.palette.neutral.N10}
-                  borderRadius={tokens.spacing.s100}
-                  padding={
-                    isMobile
-                      ? `${tokens.spacing.s075}`
-                      : `${tokens.spacing.s075} ${tokens.spacing.s150}`
-                  }
-                  width="100%"
-                />
-              ),
-          )}
+        {remainingDetails.map((field, id) => renderDetailBox(field, id))}
       </Stack>
     </BoxContainer>
   );

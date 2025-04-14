@@ -31,6 +31,14 @@ function RequestsInProcess(props: IRequestsInProcess) {
     onClick,
   } = props;
 
+  const labelsOfRequestDetails = labelsOfRequest.filter(
+    (field) => data[field.id],
+  );
+
+  const title = `${detailsRequestInProgressModal.labelRequest} ${
+    RequestType[data.request as keyof typeof RequestType] ?? data.request
+  }`;
+
   return (
     <ModalWrapper
       portalId="portal"
@@ -74,10 +82,7 @@ function RequestsInProcess(props: IRequestsInProcess) {
               weight="bold"
               appearance={ComponentAppearance.GRAY}
             >
-              {`${detailsRequestInProgressModal.labelRequest} ${
-                RequestType[data.request as keyof typeof RequestType] ??
-                data.request
-              }`}
+              {title}
             </Text>
             <Divider dashed />
           </Stack>
@@ -94,23 +99,20 @@ function RequestsInProcess(props: IRequestsInProcess) {
             gap={tokens.spacing.s250}
             direction={isMobile ? "column" : "row"}
           >
-            {labelsOfRequest.map(
-              (field, id) =>
-                data[field.id] && (
-                  <DetailBox
-                    key={id}
-                    field={field}
-                    data={data}
-                    id={id}
-                    backgroundColor={inube.palette.neutral.N10}
-                    borderRadius={tokens.spacing.s100}
-                    padding={`${tokens.spacing.s075} ${tokens.spacing.s150}`}
-                    width={isMobile ? "253px" : "240px"}
-                    borderColor={inube.palette.neutral.N40}
-                    ellipsis
-                  />
-                ),
-            )}
+            {labelsOfRequestDetails.map((field, id) => (
+              <DetailBox
+                key={id}
+                field={field}
+                data={data}
+                id={id}
+                backgroundColor={inube.palette.neutral.N10}
+                borderRadius={tokens.spacing.s100}
+                padding={`${tokens.spacing.s075} ${tokens.spacing.s150}`}
+                width={isMobile ? "253px" : "240px"}
+                borderColor={inube.palette.neutral.N40}
+                ellipsis
+              />
+            ))}
           </Stack>
 
           <Stack
