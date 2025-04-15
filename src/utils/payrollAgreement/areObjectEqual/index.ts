@@ -1,10 +1,13 @@
 import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
 
 const areObjectsEqual = (
-  obj1: IOrdinaryCyclesEntry,
-  obj2: IOrdinaryCyclesEntry,
+  originalCycle: IOrdinaryCyclesEntry,
+  newCycle: IOrdinaryCyclesEntry,
 ) => {
-  return obj1.cycleId === obj2.cycleId && obj1.payday === obj2.payday;
+  return (
+    originalCycle.cycleId === newCycle.cycleId &&
+    originalCycle.payday === newCycle.payday
+  );
 };
 
 export { areObjectsEqual };
