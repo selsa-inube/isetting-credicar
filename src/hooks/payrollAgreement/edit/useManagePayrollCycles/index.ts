@@ -13,6 +13,7 @@ import { areObjectsEqual } from "@utils/payrollAgreement/areObjectEqual";
 import { getUniquePaydays } from "@utils/getUniqueDays";
 import { getDaysInNumber } from "@utils/getDaysInNumber";
 import { editPayrollAgTabsConfig } from "@config/payrollAgreement/payrollAgreementTab/edit/tab";
+import { getLastDayOfMonth } from "@utils/getLastDayOfMonth";
 
 const useManagePayrollCycles = (
   initialData: IEditPayrollAgreementForms,
@@ -70,13 +71,17 @@ const useManagePayrollCycles = (
 
     let daysMonth: number[] = [];
     let verifyDays: number[] = [];
+    let lastDayOfMonth: number[] = [];
 
     extraordinaryPayment.forEach((item) => {
       const month = Number(item.payday?.slice(0, 2));
       const paydayValue = Number(item.payday?.slice(-2));
       daysMonth = getDatesFromDaysWeek(daysWeekSelected, month - 1);
+      lastDayOfMonth = getLastDayOfMonth(days, month - 1);
 
-      verifyDays = Array.from(new Set([...daysInNumber, ...daysMonth]));
+      verifyDays = Array.from(
+        new Set([...daysInNumber, ...daysMonth, ...lastDayOfMonth]),
+      );
 
       const filteredRegularPaymentCycles = regularPaymentCycles.flatMap(
         (item) => {

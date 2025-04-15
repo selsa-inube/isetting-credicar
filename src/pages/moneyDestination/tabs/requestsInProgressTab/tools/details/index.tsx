@@ -1,7 +1,6 @@
-import { DetailsRequestInProcess } from "@design/feedback/detailsRequestInProcess";
+import { DetailsRequestInProcess } from "@pages/moneyDestination/tabs/requestsInProgressTab/tools/details/detailsRequestInProcess";
 import { useDetailsRequestInProgress } from "@hooks/moneyDestination/useDetailsRequestInProgress";
 import { IEntry } from "@design/data/table/types";
-
 import {
   decisionTemplate,
   textValuesBusinessRules,
@@ -16,14 +15,8 @@ interface IDetails {
 const Details = (props: IDetails) => {
   const { data } = props;
 
-  const {
-    dateOptions,
-    form,
-    showModal,
-    normalizeData,
-    handleChange,
-    handleToggleModal,
-  } = useDetailsRequestInProgress(data);
+  const { showModal, normalizeData, handleToggleModal } =
+    useDetailsRequestInProgress(data);
 
   const {
     showMoreDetailsModal,
@@ -52,10 +45,7 @@ const Details = (props: IDetails) => {
     <DetailsRequestInProcess
       data={normalizeData}
       showModal={showModal}
-      form={form}
       onToggleModal={handleToggleModal}
-      onChange={handleChange}
-      dateOptions={dateOptions}
       moreDetailsData={moreDetailsData}
       showMoreDetailsModal={showMoreDetailsModal}
       detailsTabsConfig={detailsTabsConfig}

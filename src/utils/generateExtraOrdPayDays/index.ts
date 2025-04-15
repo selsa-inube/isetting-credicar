@@ -4,22 +4,17 @@ import { getUniquePaydays } from "../getUniqueDays";
 import { getDatesFromDaysWeek } from "../getDatesFromDaysWeek";
 import { getDaysWeekSelected } from "../getDaysWeekSelected";
 import { getDaysInNumber } from "../getDaysInNumber";
+import { getLastDayOfMonth } from "../getLastDayOfMonth";
 
 const generateExtraOrdPayDays = (
   regularPaymentCycles: IOrdinaryCyclesEntry[],
   month: number,
 ) => {
-  const getLastDayOfMonth = (paydays: string[]): number[] => {
-    return paydays
-      .filter((payday) => payday === "Ultimo día del mes")
-      .map(() => lastDayMonth(month));
-  };
-
   const uniquePaydays = getUniquePaydays(regularPaymentCycles);
   const daysInNumber = getDaysInNumber(uniquePaydays);
   const daysWeekSelected = getDaysWeekSelected(uniquePaydays);
   const datesFromDaysWeek = getDatesFromDaysWeek(daysWeekSelected, month);
-  const lastDayOfMonth = getLastDayOfMonth(uniquePaydays);
+  const lastDayOfMonth = getLastDayOfMonth(uniquePaydays, month);
   const daysNotInFebruary = [29, 30];
 
   let days = [...daysInNumber, ...datesFromDaysWeek, ...lastDayOfMonth];

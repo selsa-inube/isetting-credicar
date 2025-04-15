@@ -5,23 +5,20 @@ import { IRuleDecision } from "@isettingkit/input";
 import { ComponentAppearance } from "@enum/appearances";
 import { labelsOfRequest } from "@config/moneyDestination/requestsInProgressTab/details/labelsOfRequest";
 import { labelsOfTraceability } from "@config/moneyDestination/requestsInProgressTab/details/labelsOfTraceability";
-import { IServerDomain } from "@ptypes/IServerDomain";
 import { IEntry } from "@design/data/table/types";
-import { DetailsRequestsInProgressModal } from "@design/modals/detailsRequestsInProgressModal";
 import { DetailsDestinationModal } from "@design/modals/detailsDestinationModal";
 import { IDetailsTabsConfig } from "@design/modals/detailsDestinationModal/types";
 import { IRulesFormTextValues } from "@ptypes/decisions/IRulesFormTextValues";
 import { StyledContainerIcon } from "./styles";
+import { RequestsInProcess } from "../requestsInProcess";
 
 interface IDetails {
   data: IEntry;
-  dateOptions: IServerDomain[];
   decisions: IRuleDecision[];
   decisionTemplate: IRuleDecision;
   defaultSelectedTab: string;
   detailsTabsConfig: IDetailsTabsConfig;
   filteredTabsConfig: IDetailsTabsConfig;
-  form: { name: string; dateTraceability: string };
   isMobile: boolean;
   isMoreDetails: boolean;
   isSelected: string;
@@ -29,7 +26,6 @@ interface IDetails {
   showModal: boolean;
   showMoreDetailsModal: boolean;
   textValuesBusinessRules: IRulesFormTextValues;
-  onChange: (name: string, newValue: string) => void;
   onTabChange: (id: string) => void;
   onToggleModal: () => void;
   onToggleMoreDetailsModal: () => void;
@@ -40,7 +36,6 @@ interface IDetails {
 const DetailsRequestInProcess = (props: IDetails) => {
   const {
     data,
-    dateOptions,
     decisionDeleted,
     decisionInserted,
     decisions,
@@ -48,7 +43,6 @@ const DetailsRequestInProcess = (props: IDetails) => {
     defaultSelectedTab,
     detailsTabsConfig,
     filteredTabsConfig,
-    form,
     isMobile,
     isMoreDetails,
     isSelected,
@@ -56,7 +50,6 @@ const DetailsRequestInProcess = (props: IDetails) => {
     showModal,
     showMoreDetailsModal,
     textValuesBusinessRules,
-    onChange,
     onTabChange,
     onToggleModal,
     onToggleMoreDetailsModal,
@@ -82,16 +75,13 @@ const DetailsRequestInProcess = (props: IDetails) => {
       </StyledContainerIcon>
 
       {showModal && (
-        <DetailsRequestsInProgressModal
+        <RequestsInProcess
           data={data}
-          portalId="portal"
-          dateOptions={dateOptions}
           labelsOfRequest={labelsOfRequest}
           labelsOfTraceability={labelsOfTraceability}
-          dateSelected={form.dateTraceability}
           onCloseModal={onToggleModal}
-          onChange={onChange}
-          onMoreDetails={onToggleMoreDetailsModal}
+          isMobile={isMobile}
+          onClick={onToggleMoreDetailsModal}
         />
       )}
 

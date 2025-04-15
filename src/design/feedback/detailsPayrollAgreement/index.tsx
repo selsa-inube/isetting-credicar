@@ -5,7 +5,7 @@ import { ComponentAppearance } from "@enum/appearances";
 import { IEntry } from "@design/data/table/types";
 import { DetailsPayrollAgreementModal } from "@design/modals/detailsPayrollAgreementModal";
 import { IDetailsTabsConfig } from "@design/modals/detailsPayrollAgreementModal/types";
-import { ILabel } from "@design/modals/detailsRequestsInProgressModal/types";
+import { ILabel } from "@ptypes/ILabel";
 import { StyledContainerIcon } from "./styles";
 
 interface IDetailsPayrollAgreement {

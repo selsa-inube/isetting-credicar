@@ -302,24 +302,7 @@ const useEditPayrollAgreement = (data: IPayrollAgreementData) => {
   };
 
   const onSubmit = () => {
-    const currentValues = generalInformationRef.current?.values;
-    const formValuesGenInf = formValues.generalInformation.values;
-    const initialDataValues = initialData.generalInformation.values;
-    const compare =
-      JSON.stringify(initialData.generalInformation) ===
-      JSON.stringify(formValues.generalInformation);
-
-    const valueUpdatedName =
-      initialDataValues.namePayroll !== currentValues?.namePayroll;
-
-    const valueUpdourcesOfIncome =
-      initialDataValues.sourcesOfIncome !== currentValues?.sourcesOfIncome;
-
-    const valueUpdatedApplDays =
-      initialDataValues.applicationDaysPayroll !==
-      currentValues?.applicationDaysPayroll;
-
-    const configurationRequestData: {
+    const changedFields: {
       namePayroll?: string;
       sourcesOfIncome?: string;
       applicationDaysPayroll?: string;
@@ -328,72 +311,51 @@ const useEditPayrollAgreement = (data: IPayrollAgreementData) => {
       severancePaymentCycles?: ISeverancePaymentCycles[];
     } = {};
 
-    if (currentValues?.namePayroll !== undefined && valueUpdatedName) {
-      configurationRequestData.namePayroll = currentValues?.namePayroll;
-    }
+    const initialValues = initialData.generalInformation.values;
 
-    if (
-      currentValues?.sourcesOfIncome !== undefined &&
-      valueUpdourcesOfIncome
-    ) {
-      configurationRequestData.sourcesOfIncome = currentValues?.sourcesOfIncome;
-    }
-
-    if (
-      currentValues?.applicationDaysPayroll !== undefined &&
-      valueUpdatedApplDays
-    ) {
-      configurationRequestData.applicationDaysPayroll =
-        currentValues?.applicationDaysPayroll;
-    }
-
-    if (
-      !compare &&
-      isSelected !== editPayrollAgTabsConfig.generalInformation.id
-    ) {
-      if (initialDataValues.namePayroll !== formValuesGenInf.namePayroll) {
-        configurationRequestData.namePayroll = formValuesGenInf.namePayroll;
+    (
+      ["namePayroll", "sourcesOfIncome", "applicationDaysPayroll"] as const
+    ).forEach((key) => {
+      if (formValues.generalInformation.values[key] !== initialValues[key]) {
+        changedFields[key] = formValues.generalInformation.values[key];
       }
-      if (
-        initialDataValues.sourcesOfIncome !== formValuesGenInf.sourcesOfIncome
-      ) {
-        configurationRequestData.sourcesOfIncome =
-          formValuesGenInf.sourcesOfIncome;
-      }
-
-      if (
-        initialDataValues.applicationDaysPayroll !==
-        formValuesGenInf.applicationDaysPayroll
-      ) {
-        configurationRequestData.applicationDaysPayroll =
-          formValuesGenInf.applicationDaysPayroll;
-      }
-    }
-
-    if (newRegularPayment().length > 0) {
-      configurationRequestData.regularPaymentCycles = newRegularPayment();
-    }
-
-    if (newExtraordinaryPayment().severancePayment.length > 0) {
-      configurationRequestData.severancePaymentCycles =
-        newExtraordinaryPayment().severancePayment;
-    }
-    if (newExtraordinaryPayment().payrollSpeBenPayment.length > 0) {
-      configurationRequestData.payrollSpecialBenefitPaymentCycles =
-        newExtraordinaryPayment().payrollSpeBenPayment;
-    }
-
-    setSaveData({
-      applicationName: "ifac",
-      businessManagerCode: appData.businessManager.publicCode,
-      businessUnitCode: appData.businessUnit.publicCode,
-      description: "Solicitud de modificación de una nómina de convenio",
-      entityName: conditionRule,
-      requestDate: formatDate(new Date()),
-      useCaseName: "ModifyPayrollAgreement",
-      configurationRequestData,
     });
-    setShowRequestProcessModal(true);
+
+    const hasChanges = Object.keys(changedFields).length > 0;
+
+    const regularPayments = newRegularPayment();
+    if (regularPayments.length > 0) {
+      changedFields.regularPaymentCycles = regularPayments;
+    }
+
+    const { severancePayment, payrollSpeBenPayment } =
+      newExtraordinaryPayment();
+    if (severancePayment.length > 0) {
+      changedFields.severancePaymentCycles = severancePayment;
+    }
+
+    if (payrollSpeBenPayment.length > 0) {
+      changedFields.payrollSpecialBenefitPaymentCycles = payrollSpeBenPayment;
+    }
+
+    if (
+      hasChanges ||
+      newRegularPayment().length > 0 ||
+      newExtraordinaryPayment().severancePayment.length > 0 ||
+      newExtraordinaryPayment().payrollSpeBenPayment.length > 0
+    ) {
+      setSaveData({
+        applicationName: "ifac",
+        businessManagerCode: appData.businessManager.publicCode,
+        businessUnitCode: appData.businessUnit.publicCode,
+        description: "Solicitud de modificación de una nómina de convenio",
+        entityName: conditionRule,
+        requestDate: formatDate(new Date()),
+        useCaseName: "ModifyPayrollAgreement",
+        configurationRequestData: changedFields,
+      });
+      setShowRequestProcessModal(true);
+    }
   };
 
   const typePayroll = typeRegularPayroll

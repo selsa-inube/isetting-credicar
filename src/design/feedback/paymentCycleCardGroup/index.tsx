@@ -1,6 +1,6 @@
 import { useMediaQuery, Stack } from "@inubekit/inubekit";
 import { IEntry } from "@design/data/table/types";
-import { ILabel } from "@design/modals/detailsRequestsInProgressModal/types";
+import { ILabel } from "@ptypes/ILabel";
 import { mediaQueryMobile } from "@config/environment";
 import { StyledContainer } from "./styles";
 import { PaymentCycleCard } from "../paymentCycleCard";

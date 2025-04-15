@@ -123,7 +123,7 @@ const RegularPaymentCyclesFormUI = (props: IRegularPaymentCyclesFormUI) => {
           loading={loading}
           appearance={ComponentAppearance.PRIMARY}
         >
-          {editDataOption ? "Guardar" : "Siguiente"}
+          {editDataOption ? "Enviar" : "Siguiente"}
         </Button>
       </Stack>
       {showAddModal && (
