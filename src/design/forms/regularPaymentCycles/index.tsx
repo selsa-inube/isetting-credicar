@@ -4,20 +4,8 @@ import { FormikProps } from "formik";
 import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
 import { useOrdinaryCyclesForm } from "@hooks/payrollAgreement/useOrdinaryCyclesForm";
 import { infoPeriodicityModal } from "@config/payrollAgreement/payrollAgreementTab/generic/infoPeriodicityModal";
+import { IRegularPaymentCyclesForm } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IRegularPaymentCyclesForm";
 import { RegularPaymentCyclesFormUI } from "./interface";
-
-interface IRegularPaymentCyclesForm {
-  regularPaymentCycles: IOrdinaryCyclesEntry[];
-  onButtonClick: () => void;
-  onPreviousStep: () => void;
-  setRegularPaymentCycles: React.Dispatch<
-    React.SetStateAction<IOrdinaryCyclesEntry[]>
-  >;
-  loading?: boolean;
-  onFormValid?: React.Dispatch<React.SetStateAction<boolean>>;
-  onSubmit?: (values: IOrdinaryCyclesEntry) => void;
-  editDataOption?: boolean;
-}
 
 const RegularPaymentCyclesForm = forwardRef<
   FormikProps<IOrdinaryCyclesEntry>,
@@ -33,6 +21,7 @@ const RegularPaymentCyclesForm = forwardRef<
       setRegularPaymentCycles,
       loading = false,
       editDataOption = false,
+      initialData,
     },
     ref,
   ) => {
@@ -50,7 +39,6 @@ const RegularPaymentCyclesForm = forwardRef<
       onToggleInfoModal,
       handleToggleModal,
       handleChange,
-      handleReset,
       handleAddCycle,
       setEntryDeleted,
     } = useOrdinaryCyclesForm(
@@ -61,6 +49,7 @@ const RegularPaymentCyclesForm = forwardRef<
       onFormValid,
       regularPaymentCycles,
       setRegularPaymentCycles,
+      initialData,
     );
 
     return (
@@ -74,7 +63,6 @@ const RegularPaymentCyclesForm = forwardRef<
         valuesEqual={valuesEqual}
         showAddModal={showAddModal}
         onToggleModal={handleToggleModal}
-        onReset={handleReset}
         entries={entries}
         onAddCycle={handleAddCycle}
         onPreviousStep={onPreviousStep}

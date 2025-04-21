@@ -5,7 +5,7 @@ const daysWeek = [
   "Miércoles",
   "Jueves",
   "Viernes",
-  "Sábado",
+  "Sabado",
 ];
 
 export { daysWeek };

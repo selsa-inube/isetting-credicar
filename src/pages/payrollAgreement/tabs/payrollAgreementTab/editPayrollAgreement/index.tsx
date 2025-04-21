@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useLocation } from "react-router-dom";
-import { useEditPayrollAgreement } from "@hooks/payrollAgreement/useEditPayrollAgreement";
+import { useEditPayrollAgreement } from "@hooks/payrollAgreement/edit/useEditPayrollAgreement";
 import { useSavePayrollAgreement } from "@hooks/payrollAgreement/useSavePayrollAgreement";
 import { ISaveDataRequest } from "@ptypes/saveData/ISaveDataRequest";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
@@ -24,6 +24,18 @@ const EditPayrollAgreement = () => {
     smallScreen,
     sourcesOfIncomeValues,
     initialData,
+    typeRegularPayroll,
+    regularPaymentCycles,
+    extraordinaryPayment,
+    filteredTabsConfig,
+    showDeletedAlertModal,
+    typePayroll,
+    showGeneralInfPayrollForm,
+    showRegularPaymentCyclesForm,
+    showExtraPaymentCyclesForm,
+    handleToggleDeletedAlertModal,
+    setExtraordinaryPayment,
+    setRegularPaymentCycles,
     handleCloseGoBackModal,
     handleEditedModal,
     handleGoBack,
@@ -62,7 +74,8 @@ const EditPayrollAgreement = () => {
   return (
     <EditPayrollAgreementUI
       formReferences={generalInformationRef}
-      initialValues={formValues}
+      formValues={formValues}
+      initialValues={initialData}
       setIsCurrentFormValid={setIsCurrentFormValid}
       smallScreen={smallScreen}
       sourcesOfIncomeValues={sourcesOfIncomeValues}
@@ -85,7 +98,18 @@ const EditPayrollAgreement = () => {
       onEditedModal={handleEditedModal}
       showGoBackModal={showGoBackModal}
       loadingSendData={loadingSendData}
-      initialGeneralInfData={initialData.generalInformation.values}
+      typeRegularPayroll={typeRegularPayroll}
+      regularPaymentCycles={regularPaymentCycles}
+      extraordinaryPayment={extraordinaryPayment}
+      setExtraordinaryPayment={setExtraordinaryPayment}
+      setRegularPaymentCycles={setRegularPaymentCycles}
+      filteredTabsConfig={filteredTabsConfig}
+      showDeletedAlertModal={showDeletedAlertModal}
+      onToggleDeletedAlertModal={handleToggleDeletedAlertModal}
+      typePayroll={typePayroll}
+      showGeneralInfPayrollForm={showGeneralInfPayrollForm}
+      showRegularPaymentCyclesForm={showRegularPaymentCyclesForm}
+      showExtraPaymentCyclesForm={showExtraPaymentCyclesForm}
     />
   );
 };
