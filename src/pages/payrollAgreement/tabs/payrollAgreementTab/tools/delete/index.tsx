@@ -50,6 +50,10 @@ const Delete = (props: IDelete) => {
     setShowPendingReq,
   );
 
+  const showRequestProcess = showRequestProcessModal && savePayrollAgreement;
+  const showRequestStatus =
+    showPendingReqModal && savePayrollAgreement?.requestNumber;
+
   return (
     <>
       <DeleteRecord
@@ -59,7 +63,7 @@ const Delete = (props: IDelete) => {
         onClick={handleClick}
         loading={loadingSendData}
       />
-      {showRequestProcessModal && savePayrollAgreement && (
+      {showRequestProcess && (
         <RequestProcess
           portalId="portal"
           saveData={savePayrollAgreement}
@@ -70,7 +74,7 @@ const Delete = (props: IDelete) => {
           onCloseRequestStatus={handleCloseRequestStatus}
         />
       )}
-      {showPendingReqModal && savePayrollAgreement?.requestNumber && (
+      {showRequestStatus && (
         <RequestStatusModal
           portalId="portal"
           title={requestStatusMessage(savePayrollAgreement.responsible).title}

@@ -1,5 +1,5 @@
 import { MdAdd } from "react-icons/md";
-import { Stack, useMediaQuery, Input, Button, Text } from "@inubekit/inubekit";
+import { Stack, Input, Button, Text } from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
 import { ComponentAppearance } from "@enum/appearances";
@@ -16,6 +16,7 @@ interface IpayrollAgreementTabUI {
   entries: IEntry[];
   loading: boolean;
   searchPayrollAgreement: string;
+  smallScreen: boolean;
   setEntryDeleted: (id: string | number) => void;
   onSearchPayrollAgreement: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -25,11 +26,10 @@ const PayrollAgreementTabUI = (props: IpayrollAgreementTabUI) => {
     searchPayrollAgreement,
     entries,
     loading,
+    smallScreen,
     setEntryDeleted,
     onSearchPayrollAgreement,
   } = props;
-
-  const smallScreen = useMediaQuery("(max-width: 690px)");
 
   return (
     <StyledContainer $smallScreen={smallScreen}>
