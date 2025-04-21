@@ -1,12 +1,12 @@
 import { MdAdd } from "react-icons/md";
-import { Stack, useMediaQuery, Input, Button, Text } from "@inubekit/inubekit";
+import { Stack, Input, Button, Text } from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
 import { ComponentAppearance } from "@enum/appearances";
 import { Table } from "@design/data/table";
 import { IEntry } from "@design/data/table/types";
 import {
-  actions,
+  actionsConfig,
   breakPoints,
   titles,
 } from "@config/payrollAgreement/payrollAgreementTab/table";
@@ -16,14 +16,20 @@ interface IpayrollAgreementTabUI {
   entries: IEntry[];
   loading: boolean;
   searchPayrollAgreement: string;
+  smallScreen: boolean;
+  setEntryDeleted: (id: string | number) => void;
   onSearchPayrollAgreement: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const PayrollAgreementTabUI = (props: IpayrollAgreementTabUI) => {
-  const { searchPayrollAgreement, entries, loading, onSearchPayrollAgreement } =
-    props;
-
-  const smallScreen = useMediaQuery("(max-width: 690px)");
+  const {
+    searchPayrollAgreement,
+    entries,
+    loading,
+    smallScreen,
+    setEntryDeleted,
+    onSearchPayrollAgreement,
+  } = props;
 
   return (
     <StyledContainer $smallScreen={smallScreen}>
@@ -81,7 +87,7 @@ const PayrollAgreementTabUI = (props: IpayrollAgreementTabUI) => {
             id="portal"
             titles={titles}
             entries={entries}
-            actions={actions}
+            actions={actionsConfig(setEntryDeleted)}
             breakpoints={breakPoints}
             filter={searchPayrollAgreement}
             isLoading={loading}
