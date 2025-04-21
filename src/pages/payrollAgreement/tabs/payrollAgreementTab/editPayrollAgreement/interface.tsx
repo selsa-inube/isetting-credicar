@@ -7,7 +7,6 @@ import { IGeneralInformationEntry } from "@ptypes/payrollAgreement/payrollAgreem
 import { requestStatusMessage } from "@config/payrollAgreement/payrollAgreementTab/generic/requestStatusMessage";
 import { requestProcessMessage } from "@config/payrollAgreement/payrollAgreementTab/generic/requestProcessMessage";
 import { crumbsEditPayrollAgreement } from "@config/payrollAgreement/payrollAgreementTab/edit/navigation";
-import { editPayrollAgTabsConfig } from "@config/payrollAgreement/payrollAgreementTab/edit/tab";
 import { goBackModal } from "@config/payrollAgreement/payrollAgreementTab/forms/goBackModal";
 import { GeneralInformationPayrollForm } from "@design/forms/generalInfoPayrollAgreement";
 import { RequestStatusModal } from "@design/modals/requestStatusModal";
@@ -49,6 +48,9 @@ interface IEditPayrollAgreementUI {
   filteredTabsConfig: IEditPayrollTabsConfig;
   showDeletedAlertModal: boolean;
   typePayroll: string;
+  showRegularPaymentCyclesForm: boolean;
+  showExtraPaymentCyclesForm: boolean;
+  showGeneralInfPayrollForm: boolean;
   setExtraordinaryPayment: React.Dispatch<
     React.SetStateAction<IExtraordinaryCyclesEntry[]>
   >;
@@ -92,6 +94,9 @@ const EditPayrollAgreementUI = (props: IEditPayrollAgreementUI) => {
     filteredTabsConfig,
     showDeletedAlertModal,
     typePayroll,
+    showGeneralInfPayrollForm,
+    showRegularPaymentCyclesForm,
+    showExtraPaymentCyclesForm,
     setExtraordinaryPayment,
     setRegularPaymentCycles,
     onTabChange,
@@ -136,7 +141,7 @@ const EditPayrollAgreementUI = (props: IEditPayrollAgreementUI) => {
             onChange={onTabChange}
           />
           <Stack direction="column">
-            {isSelected === editPayrollAgTabsConfig.generalInformation.id && (
+            {showGeneralInfPayrollForm && (
               <GeneralInformationPayrollForm
                 ref={formReferences}
                 initialValues={formValues.generalInformation.values}
@@ -150,21 +155,18 @@ const EditPayrollAgreementUI = (props: IEditPayrollAgreementUI) => {
                 initialGeneralInfData={initialValues.generalInformation.values}
               />
             )}
-            {typeRegularPayroll &&
-              isSelected ===
-                editPayrollAgTabsConfig.regularPaymentCycles.id && (
-                <RegularPaymentCyclesForm
-                  regularPaymentCycles={regularPaymentCycles}
-                  onFormValid={setIsCurrentFormValid}
-                  onButtonClick={onToggleEditedModal}
-                  onPreviousStep={onReset}
-                  setRegularPaymentCycles={setRegularPaymentCycles}
-                  editDataOption
-                  initialData={initialValues.ordinaryCycles.values}
-                />
-              )}
-            {isSelected ===
-              editPayrollAgTabsConfig.extraordinaryPaymentCycles.id && (
+            {showRegularPaymentCyclesForm && (
+              <RegularPaymentCyclesForm
+                regularPaymentCycles={regularPaymentCycles}
+                onFormValid={setIsCurrentFormValid}
+                onButtonClick={onToggleEditedModal}
+                onPreviousStep={onReset}
+                setRegularPaymentCycles={setRegularPaymentCycles}
+                editDataOption
+                initialData={initialValues.ordinaryCycles.values}
+              />
+            )}
+            {showExtraPaymentCyclesForm && (
               <ExtraordinaryPaymentCyclesForm
                 extraordinaryPayment={extraordinaryPayment}
                 setExtraordinaryPayment={setExtraordinaryPayment}

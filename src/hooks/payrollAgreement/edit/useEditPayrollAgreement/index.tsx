@@ -362,6 +362,16 @@ const useEditPayrollAgreement = (data: IPayrollAgreementData) => {
     ? "remuneración ordinaria"
     : "Primas o cesantias";
 
+  const showGeneralInfPayrollForm =
+    isSelected === editPayrollAgTabsConfig.generalInformation.id;
+
+  const showRegularPaymentCyclesForm =
+    typeRegularPayroll &&
+    isSelected === editPayrollAgTabsConfig.regularPaymentCycles.id;
+
+  const showExtraPaymentCyclesForm =
+    isSelected === editPayrollAgTabsConfig.extraordinaryPaymentCycles.id;
+
   return {
     formValues,
     generalInformationRef,
@@ -381,6 +391,9 @@ const useEditPayrollAgreement = (data: IPayrollAgreementData) => {
     filteredTabsConfig,
     showDeletedAlertModal,
     typePayroll,
+    showGeneralInfPayrollForm,
+    showRegularPaymentCyclesForm,
+    showExtraPaymentCyclesForm,
     handleToggleDeletedAlertModal,
     setExtraordinaryPayment,
     setRegularPaymentCycles,

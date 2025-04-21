@@ -30,6 +30,9 @@ const EditPayrollAgreement = () => {
     filteredTabsConfig,
     showDeletedAlertModal,
     typePayroll,
+    showGeneralInfPayrollForm,
+    showRegularPaymentCyclesForm,
+    showExtraPaymentCyclesForm,
     handleToggleDeletedAlertModal,
     setExtraordinaryPayment,
     setRegularPaymentCycles,
@@ -104,6 +107,9 @@ const EditPayrollAgreement = () => {
       showDeletedAlertModal={showDeletedAlertModal}
       onToggleDeletedAlertModal={handleToggleDeletedAlertModal}
       typePayroll={typePayroll}
+      showGeneralInfPayrollForm={showGeneralInfPayrollForm}
+      showRegularPaymentCyclesForm={showRegularPaymentCyclesForm}
+      showExtraPaymentCyclesForm={showExtraPaymentCyclesForm}
     />
   );
 };
