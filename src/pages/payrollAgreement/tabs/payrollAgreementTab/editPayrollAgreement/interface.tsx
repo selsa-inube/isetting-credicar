@@ -1,3 +1,4 @@
+import { MdOutlineWarningAmber } from "react-icons/md";
 import { FormikProps } from "formik";
 import { Breadcrumbs, Stack, Tabs } from "@inubekit/inubekit";
 
@@ -6,7 +7,6 @@ import { IGeneralInformationEntry } from "@ptypes/payrollAgreement/payrollAgreem
 import { requestStatusMessage } from "@config/payrollAgreement/payrollAgreementTab/generic/requestStatusMessage";
 import { requestProcessMessage } from "@config/payrollAgreement/payrollAgreementTab/generic/requestProcessMessage";
 import { crumbsEditPayrollAgreement } from "@config/payrollAgreement/payrollAgreementTab/edit/navigation";
-import { editPayrollAgTabsConfig } from "@config/payrollAgreement/payrollAgreementTab/edit/tab";
 import { goBackModal } from "@config/payrollAgreement/payrollAgreementTab/forms/goBackModal";
 import { GeneralInformationPayrollForm } from "@design/forms/generalInfoPayrollAgreement";
 import { RequestStatusModal } from "@design/modals/requestStatusModal";
@@ -19,11 +19,18 @@ import { Title } from "@design/data/title";
 import { tokens } from "@design/tokens";
 import { IRequestSteps } from "@design/modals/requestProcessModal/types";
 import { sendEditedModal } from "@config/payrollAgreement/payrollAgreementTab/generic/sendEditModal";
+import { RegularPaymentCyclesForm } from "@design/forms/regularPaymentCycles";
+import { ExtraordinaryPaymentCyclesForm } from "@design/forms/extraordinaryPaymentCycles";
+import { IExtraordinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IExtraordinaryCyclesEntry";
+import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
+import { IEditPayrollTabsConfig } from "@ptypes/payrollAgreement/payrollAgreementTab/IEditPayrollTabsConfig";
+import { deletedAlertModal } from "@config/payrollAgreement/payrollAgreementTab/generic/deletedAlertModal";
 
 interface IEditPayrollAgreementUI {
   isSelected: string;
   onTabChange: (id: string) => void;
   formReferences: React.RefObject<FormikProps<IGeneralInformationEntry>>;
+  formValues: IEditPayrollAgreementForms;
   initialValues: IEditPayrollAgreementForms;
   smallScreen: boolean;
   sourcesOfIncomeValues: IServerDomain[];
@@ -35,7 +42,21 @@ interface IEditPayrollAgreementUI {
   requestSteps: IRequestSteps[];
   showEditedModal: boolean;
   loadingSendData: boolean;
-  initialGeneralInfData: IGeneralInformationEntry;
+  typeRegularPayroll: boolean;
+  regularPaymentCycles: IOrdinaryCyclesEntry[];
+  extraordinaryPayment: IExtraordinaryCyclesEntry[];
+  filteredTabsConfig: IEditPayrollTabsConfig;
+  showDeletedAlertModal: boolean;
+  typePayroll: string;
+  showRegularPaymentCyclesForm: boolean;
+  showExtraPaymentCyclesForm: boolean;
+  showGeneralInfPayrollForm: boolean;
+  setExtraordinaryPayment: React.Dispatch<
+    React.SetStateAction<IExtraordinaryCyclesEntry[]>
+  >;
+  setRegularPaymentCycles: React.Dispatch<
+    React.SetStateAction<IOrdinaryCyclesEntry[]>
+  >;
   setSourcesOfIncomeValues: React.Dispatch<
     React.SetStateAction<IServerDomain[]>
   >;
@@ -48,11 +69,13 @@ interface IEditPayrollAgreementUI {
   onClosePendingReqModal: () => void;
   onToggleEditedModal: () => void;
   onEditedModal: () => void;
+  onToggleDeletedAlertModal: () => void;
 }
 
 const EditPayrollAgreementUI = (props: IEditPayrollAgreementUI) => {
   const {
     formReferences,
+    formValues,
     isSelected,
     initialValues,
     smallScreen,
@@ -65,7 +88,17 @@ const EditPayrollAgreementUI = (props: IEditPayrollAgreementUI) => {
     requestSteps,
     showEditedModal,
     loadingSendData,
-    initialGeneralInfData,
+    regularPaymentCycles,
+    typeRegularPayroll,
+    extraordinaryPayment,
+    filteredTabsConfig,
+    showDeletedAlertModal,
+    typePayroll,
+    showGeneralInfPayrollForm,
+    showRegularPaymentCyclesForm,
+    showExtraPaymentCyclesForm,
+    setExtraordinaryPayment,
+    setRegularPaymentCycles,
     onTabChange,
     handleOpenModal,
     onReset,
@@ -77,6 +110,7 @@ const EditPayrollAgreementUI = (props: IEditPayrollAgreementUI) => {
     onClosePendingReqModal,
     onToggleEditedModal,
     onEditedModal,
+    onToggleDeletedAlertModal,
   } = props;
 
   return (
@@ -102,15 +136,15 @@ const EditPayrollAgreementUI = (props: IEditPayrollAgreementUI) => {
         </Stack>
         <Stack gap={tokens.spacing.s300} direction="column">
           <Tabs
-            tabs={Object.values(editPayrollAgTabsConfig)}
+            tabs={Object.values(filteredTabsConfig)}
             selectedTab={isSelected}
             onChange={onTabChange}
           />
           <Stack direction="column">
-            {isSelected === editPayrollAgTabsConfig.generalInformation.id && (
+            {showGeneralInfPayrollForm && (
               <GeneralInformationPayrollForm
                 ref={formReferences}
-                initialValues={initialValues.generalInformation.values}
+                initialValues={formValues.generalInformation.values}
                 onFormValid={setIsCurrentFormValid}
                 onButtonClick={onToggleEditedModal}
                 onReset={onReset}
@@ -118,7 +152,31 @@ const EditPayrollAgreementUI = (props: IEditPayrollAgreementUI) => {
                 setSourcesOfIncomeValues={setSourcesOfIncomeValues}
                 editDataOption
                 companyAgreement={companyAgreement}
-                initialGeneralInfData={initialGeneralInfData}
+                initialGeneralInfData={initialValues.generalInformation.values}
+              />
+            )}
+            {showRegularPaymentCyclesForm && (
+              <RegularPaymentCyclesForm
+                regularPaymentCycles={regularPaymentCycles}
+                onFormValid={setIsCurrentFormValid}
+                onButtonClick={onToggleEditedModal}
+                onPreviousStep={onReset}
+                setRegularPaymentCycles={setRegularPaymentCycles}
+                editDataOption
+                initialData={initialValues.ordinaryCycles.values}
+              />
+            )}
+            {showExtraPaymentCyclesForm && (
+              <ExtraordinaryPaymentCyclesForm
+                extraordinaryPayment={extraordinaryPayment}
+                setExtraordinaryPayment={setExtraordinaryPayment}
+                onFormValid={setIsCurrentFormValid}
+                onButtonClick={onToggleEditedModal}
+                onPreviousStep={onReset}
+                typeRegularPayroll={typeRegularPayroll}
+                regularPaymentCycles={regularPaymentCycles}
+                initialData={initialValues.extraordinaryCycles.values}
+                editDataOption
               />
             )}
           </Stack>
@@ -145,6 +203,21 @@ const EditPayrollAgreementUI = (props: IEditPayrollAgreementUI) => {
           actionText={goBackModal.actionText}
           onCloseModal={onCloseGoBackModal}
           onClick={onGoBack}
+        />
+      )}
+      {showDeletedAlertModal && (
+        <DecisionModal
+          portalId="portal"
+          title={deletedAlertModal(typePayroll).title}
+          description={deletedAlertModal(typePayroll).description}
+          actionText={deletedAlertModal(typePayroll).actionText}
+          withIcon
+          withCancelButton={false}
+          icon={<MdOutlineWarningAmber />}
+          appearance={ComponentAppearance.WARNING}
+          onCloseModal={onToggleDeletedAlertModal}
+          onClick={onToggleDeletedAlertModal}
+          moreDetails={deletedAlertModal(typePayroll).moreDetails}
         />
       )}
       {showRequestProcessModal && (

@@ -50,6 +50,7 @@ const useSavePayrollAgreement = (
         setErrorFetchSaveData(true);
       }
       setSendData(false);
+      navigate(navigatePage);
       addFlag({
         title: flowAutomaticMessages.errorSendingData.title,
         description: flowAutomaticMessages.errorSendingData.description,
@@ -77,6 +78,7 @@ const useSavePayrollAgreement = (
       setStatusRequest(data.requestStatus);
     } catch (error) {
       console.info(error);
+      navigate(navigatePage);
       addFlag({
         title: flowAutomaticMessages.errorQueryingData.title,
         description: flowAutomaticMessages.errorQueryingData.description,

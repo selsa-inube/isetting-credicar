@@ -125,7 +125,7 @@ const useGeneralInformationForm = (
       if (editDataOption) {
         setIsDisabledButton(!formik.isValid || valuesEmpty || valuesEqualBoton);
       } else {
-        setIsDisabledButton(loading ?? !formik.isValid);
+        setIsDisabledButton(!formik.isValid);
       }
     };
     updateButton();

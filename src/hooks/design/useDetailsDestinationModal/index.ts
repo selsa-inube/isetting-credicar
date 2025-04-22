@@ -5,6 +5,7 @@ import { useMediaQuery } from "@inubekit/inubekit";
 import { mediaQueryMobile } from "@config/environment";
 import { IDetailsTabsConfig } from "@design/modals/detailsDestinationModal/types";
 import { IEntry } from "@design/data/table/types";
+import { TransactionOperation } from "@enum/transactionOperation";
 
 const useDetailsDestinationModal = (
   data: IEntry,
@@ -38,7 +39,8 @@ const useDetailsDestinationModal = (
 
       if (
         !decisions.some(
-          (decision) => decision.transactionOperation === "Insert",
+          (decision) =>
+            decision.transactionOperation === TransactionOperation.INSERT,
         ) &&
         tab?.id === detailsTabsConfig.creditLineIncluded?.id
       ) {
@@ -46,7 +48,8 @@ const useDetailsDestinationModal = (
       }
       if (
         !decisions.some(
-          (decision) => decision.transactionOperation === "Delete",
+          (decision) =>
+            decision.transactionOperation === TransactionOperation.DELETE,
         ) &&
         tab?.id === detailsTabsConfig.creditLineRemoved?.id
       ) {
@@ -61,10 +64,12 @@ const useDetailsDestinationModal = (
   );
 
   const decisionDeleted = decisions.filter(
-    (decision: IRuleDecision) => decision.transactionOperation === "Delete",
+    (decision: IRuleDecision) =>
+      decision.transactionOperation === TransactionOperation.DELETE,
   );
   const decisionInserted = decisions.filter(
-    (decision: IRuleDecision) => decision.transactionOperation === "Insert",
+    (decision: IRuleDecision) =>
+      decision.transactionOperation === TransactionOperation.INSERT,
   );
 
   const getFirstFilteredTab = (filteredTabsConfig: IDetailsTabsConfig) => {

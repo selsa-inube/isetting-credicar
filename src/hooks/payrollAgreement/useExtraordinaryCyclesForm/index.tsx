@@ -20,6 +20,7 @@ import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 import { useEnumerators } from "@hooks/useEnumerators";
 import { optionsFromEnumerators } from "@utils/optionsFromEnumerators";
 import { normalizeEnumTranslation } from "@utils/normalizeEnumTranslation";
+import { compareObjects } from "@utils/compareObjects";
 
 const useExtraordinaryCyclesForm = (
   ref: React.ForwardedRef<FormikProps<IExtraordinaryCyclesEntry>>,
@@ -33,6 +34,7 @@ const useExtraordinaryCyclesForm = (
     React.SetStateAction<IExtraordinaryCyclesEntry[]>
   >,
   regularPaymentCycles?: IOrdinaryCyclesEntry[],
+  initialData?: IExtraordinaryCyclesEntry[],
 ) => {
   const createValidationSchema = () =>
     object().shape({
@@ -100,9 +102,7 @@ const useExtraordinaryCyclesForm = (
   const valuesEqual =
     JSON.stringify(initialValues) === JSON.stringify(formik.values);
 
-  const valuesEmpty = Object.values(formik.values).every(
-    (value) => value === "" || value === null || value === undefined,
-  );
+  const valuesEqualBoton = compareObjects(initialData, entries);
 
   useEffect(() => {
     if (!formik.values.month) {
@@ -110,7 +110,7 @@ const useExtraordinaryCyclesForm = (
       formik.setFieldValue("day", "");
     }
 
-    if (formik.values.month && typeRegularPayroll) {
+    if (formik.values.month && !typeRegularPayroll) {
       formik.setFieldValue("day", "");
       const options: IServerDomain[] = convertToOptions(
         daysOfMonth(
@@ -120,9 +120,8 @@ const useExtraordinaryCyclesForm = (
       setDayOptions(options);
     }
 
-    if (formik.values.month && !typeRegularPayroll && regularPaymentCycles) {
+    if (formik.values.month && typeRegularPayroll && regularPaymentCycles) {
       formik.setFieldValue("day", "");
-
       const options: IServerDomain[] = convertToOptions(
         generateExtraOrdPayDays(
           regularPaymentCycles,
@@ -136,13 +135,13 @@ const useExtraordinaryCyclesForm = (
   useEffect(() => {
     const updateButton = () => {
       if (editDataOption) {
-        setIsDisabledButton((!formik.isValid || valuesEmpty) && !loading);
+        setIsDisabledButton(entries.length === 0 || valuesEqualBoton);
       } else {
-        setIsDisabledButton(!typeRegularPayroll ? false : entries.length === 0);
+        setIsDisabledButton(typeRegularPayroll ? false : entries.length === 0);
       }
     };
     updateButton();
-  }, [formik.values, loading, formik.isValid, initialValues, editDataOption]);
+  }, [loading, initialValues, editDataOption, entries]);
 
   const handleToggleModal = () => {
     setShowModal(!showModal);
@@ -174,10 +173,6 @@ const useExtraordinaryCyclesForm = (
     formik.resetForm();
   };
 
-  const handleReset = () => {
-    formik.resetForm();
-  };
-
   useEffect(() => {
     if (entryDeleted) {
       setEntries((prev) => prev.filter((entry) => entry.id !== entryDeleted));
@@ -200,7 +195,6 @@ const useExtraordinaryCyclesForm = (
     monthOptions,
     dayOptions,
     handleChange,
-    handleReset,
     handleAddCycle,
     handleToggleModal,
     setEntryDeleted,

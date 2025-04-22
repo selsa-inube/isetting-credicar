@@ -79,7 +79,7 @@ const GeneralInformationPayrollFormUI = (
     onResetEdit,
     onToggleInfoModalModal,
     onChangeCheck,
-    onResetAdd,
+    onPreviousStep,
   } = props;
 
   return (
@@ -236,7 +236,7 @@ const GeneralInformationPayrollFormUI = (
       <Stack justifyContent="flex-end" gap={tokens.spacing.s250}>
         <Button
           fullwidth={isMobile}
-          onClick={editDataOption ? onResetEdit : onResetAdd}
+          onClick={editDataOption ? onResetEdit : onPreviousStep}
           variant="outlined"
           appearance={ComponentAppearance.GRAY}
         >
