@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
-import { IRequestsInProgress } from "@src/types/requestInProgress/IRequestsInProgress";
-import { getRequestsInProgress } from "@src/services/requestInProgress/getRequestsInProgress";
+import { getRequestsInProgress } from "@services/requestInProgress/getRequestsInProgress";
+import { IRequestsInProgress } from "@ptypes/payrollAgreement/requestInProgTab/IRequestsInProgress";
 
 const useRequestsInProgress = (bussinesUnits: string) => {
   const [requestsInProgress, setRequestsInProgress] = useState<
@@ -19,7 +19,7 @@ const useRequestsInProgress = (bussinesUnits: string) => {
       try {
         const data = await getRequestsInProgress(
           bussinesUnits,
-          "MoneyDestination",
+          "PayrollAgreement",
         );
         setRequestsInProgress(data);
       } catch (error) {

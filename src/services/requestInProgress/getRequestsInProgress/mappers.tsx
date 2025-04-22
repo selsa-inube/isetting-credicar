@@ -1,4 +1,4 @@
-import { IRequestsInProgress } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/requestsInProgress/IRequestsInProgress";
+import { IRequestsInProgress } from "@src/types/requestInProgress/IRequestsInProgress";
 import { RequestStatus } from "@enum/requestStatus";
 import { formatDateTable } from "@utils/date/formatDateTable";
 

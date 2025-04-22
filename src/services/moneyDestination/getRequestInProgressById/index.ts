@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from "axios";
 import { getWithRetries } from "@services/core/getWithRetries";
 import { axiosInstance } from "@api/isettingProcess";
-import { IRequestsInProgress } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/requestsInProgress/IRequestsInProgress";
+import { IRequestsInProgress } from "@src/types/requestInProgress/IRequestsInProgress";
 import { mapRequestsInProgressToEntity } from "./mappers";
 
 const getRequestInProgressById = async (

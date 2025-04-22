@@ -6,6 +6,7 @@ import { ICardData } from "@ptypes/home/ICardData";
 import { crumbsPayrollAgreement } from "@config/payrollAgreement/navigation";
 import { payrollAgreementTabsConfig } from "@config/payrollAgreement/tabs";
 import { PayrollAgreementTab } from "./tabs/payrollAgreementTab";
+import { RequestsInProgressTab } from "./tabs/requestsInProgressTab";
 
 interface IPayrollAgreementUI {
   isSelected: string;
@@ -50,7 +51,7 @@ function PayrollAgreementUI(props: IPayrollAgreementUI) {
             <PayrollAgreementTab />
           )}
           {isSelected === payrollAgreementTabsConfig.requestsInProgress.id && (
-            <></>
+            <RequestsInProgressTab />
           )}
         </Stack>
       </Stack>

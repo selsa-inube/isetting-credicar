@@ -2,12 +2,12 @@ const payrollAgreementTabsConfig = {
   payrollAgreement: {
     id: "payrollAgreement",
     isDisabled: false,
-    label: "Nóminas de convenio",
+    label: "Nóminas de convenio vigentes",
   },
   requestsInProgress: {
     id: "requestsInProgress",
     isDisabled: false,
-    label: "Solicitudes en trámite",
+    label: "Nóminas de convenio en trámite de creación",
     notificationIndicators: 2,
   },
 };
