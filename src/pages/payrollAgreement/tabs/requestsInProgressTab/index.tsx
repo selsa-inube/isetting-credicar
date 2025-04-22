@@ -11,6 +11,8 @@ function RequestsInProgressTab() {
     requestsInProgress,
     searchRequestsInProgress,
     loading,
+    widthFirstColumn,
+    smallScreen,
     handleSearchRequestsInProgress,
     setEntryCanceled,
   } = useRequestsInProgress(appData.businessUnit.publicCode);
@@ -22,6 +24,8 @@ function RequestsInProgressTab() {
       searchrequestProgress={searchRequestsInProgress}
       onSearchrequestProgress={handleSearchRequestsInProgress}
       setEntryCanceled={setEntryCanceled}
+      widthFirstColumn={widthFirstColumn}
+      smallScreen={smallScreen}
     />
   );
 }

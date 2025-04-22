@@ -8,7 +8,6 @@ const payrollAgreementTabsConfig = {
     id: "requestsInProgress",
     isDisabled: false,
     label: "Nóminas de convenio en trámite de creación",
-    notificationIndicators: 2,
   },
 };
 

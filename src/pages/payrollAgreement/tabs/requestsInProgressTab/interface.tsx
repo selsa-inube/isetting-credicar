@@ -1,4 +1,4 @@
-import { Input, Stack, useMediaQuery } from "@inubekit/inubekit";
+import { Input, inube, Stack } from "@inubekit/inubekit";
 import { tokens } from "@design/tokens";
 import { IRequestsInProgressTabUI } from "@ptypes/payrollAgreement/requestInProgTab/IRequestsInProgressTabUI";
 import {
@@ -7,22 +7,28 @@ import {
   breakPoints,
 } from "@config/payrollAgreement/requestsInProgressTab/table";
 import { Table } from "@design/data/table";
-import { StyledContainer } from "./styles";
+import { BoxContainer } from "@design/layout/boxContainer";
 
 const RequestsInProgressTabUI = (props: IRequestsInProgressTabUI) => {
   const {
     entries,
     searchrequestProgress,
     loading,
+    widthFirstColumn,
+    smallScreen,
     setEntryCanceled,
     onSearchrequestProgress,
   } = props;
 
-  const smallScreen = useMediaQuery("(max-width: 690px)");
-  const widthFirstColumn = smallScreen ? 60 : 10;
-
   return (
-    <StyledContainer $smallScreen={smallScreen}>
+    <BoxContainer
+      backgroundColor={inube.palette.neutral.N0}
+      boxSizing="initial"
+      borderColor={inube.palette.neutral.N40}
+      borderRadius={tokens.spacing.s100}
+      width="auto"
+      padding={smallScreen ? `${tokens.spacing.s150}` : `${tokens.spacing.s0}`}
+    >
       <Stack
         width="-webkit-fill-available"
         direction="column"
@@ -70,7 +76,7 @@ const RequestsInProgressTabUI = (props: IRequestsInProgressTabUI) => {
           />
         </Stack>
       </Stack>
-    </StyledContainer>
+    </BoxContainer>
   );
 };
 

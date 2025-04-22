@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import { getRequestsInProgress } from "@services/requestInProgress/getRequestsInProgress";
 import { IRequestsInProgress } from "@ptypes/payrollAgreement/requestInProgTab/IRequestsInProgress";
+import { useMediaQuery } from "@inubekit/inubekit";
 
 const useRequestsInProgress = (bussinesUnits: string) => {
   const [requestsInProgress, setRequestsInProgress] = useState<
@@ -47,11 +48,16 @@ const useRequestsInProgress = (bussinesUnits: string) => {
     setSearchRequestsInProgress(e.target.value);
   };
 
+  const smallScreen = useMediaQuery("(max-width: 690px)");
+  const widthFirstColumn = smallScreen ? 60 : 10;
+
   return {
     requestsInProgress,
     hasError,
     searchRequestsInProgress,
     loading,
+    widthFirstColumn,
+    smallScreen,
     handleSearchRequestsInProgress,
     setEntryCanceled,
   };

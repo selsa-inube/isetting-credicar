@@ -1,9 +1,11 @@
-import { IEntry } from "@src/design/data/table/types";
+import { IEntry } from "@design/data/table/types";
 
 interface IRequestsInProgressTabUI {
   entries: IEntry[];
   loading: boolean;
   searchrequestProgress: string;
+  widthFirstColumn: number;
+  smallScreen: boolean;
   setEntryCanceled: (value: string | number) => void;
   onSearchrequestProgress: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
