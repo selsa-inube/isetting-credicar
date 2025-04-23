@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 
-import { IRequestsInProgress } from "@src/types/requestInProgress/IRequestsInProgress";
-import { getRequestsInProgress } from "@src/services/requestInProgress/getRequestsInProgress";
+import { IRequestsInProgress } from "@ptypes/requestInProgress/IRequestsInProgress";
+import { getRequestsInProgress } from "@services/requestInProgress/getRequestsInProgress";
+import { IUseRequestsInProgress } from "@ptypes/hooks/payrollAgreement/IUseRequestsInProgress";
 
-const useRequestsInProgress = (bussinesUnits: string) => {
+const useRequestsInProgress = (props: IUseRequestsInProgress) => {
+  const { bussinesUnits } = props;
   const [requestsInProgress, setRequestsInProgress] = useState<
     IRequestsInProgress[]
   >([]);

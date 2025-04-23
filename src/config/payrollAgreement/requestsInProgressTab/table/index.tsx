@@ -1,8 +1,6 @@
-import { Icon } from "@inubekit/inubekit";
-import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { IAction, ITitle } from "@design/data/table/types";
-import { ComponentAppearance } from "@enum/appearances";
 import { Cancel } from "@pages/payrollAgreement/tabs/requestsInProgressTab/tools/cancel";
+import { Details } from "@pages/payrollAgreement/tabs/requestsInProgressTab/tools/details";
 
 const titles: ITitle[] = [
   {
@@ -26,13 +24,7 @@ const actionsConfig = (setEntryCanceled: (value: string | number) => void) => {
   const actions: IAction[] = [
     {
       id: "Details",
-      content: () => (
-        <Icon
-          icon={<MdOutlineRemoveRedEye />}
-          appearance={ComponentAppearance.DARK}
-          size="16px"
-        />
-      ),
+      content: (entry) => <Details data={entry} />,
     },
 
     {

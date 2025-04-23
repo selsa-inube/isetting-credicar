@@ -140,17 +140,17 @@ const GeneralInformationPayrollFormUI = (
                 )}
                 <StyledRow $isMobile={isMobile} $editOption={editDataOption}>
                   <Input
-                    name="namePayroll"
-                    id="namePayroll"
+                    name="abbreviatedName"
+                    id="abbreviatedName"
                     label="Nombre de nómina"
                     placeholder="Nombre de nómina de convenio"
                     type="text"
                     size="compact"
-                    value={formik.values.namePayroll}
+                    value={formik.values.abbreviatedName}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    status={getFieldState(formik, "namePayroll")}
-                    message={formik.errors.namePayroll}
+                    status={getFieldState(formik, "abbreviatedName")}
+                    message={formik.errors.abbreviatedName}
                     fullwidth
                   />
                 </StyledRow>

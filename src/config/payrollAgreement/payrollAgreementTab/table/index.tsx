@@ -1,7 +1,7 @@
 import { IAction, IEntry, ITitle } from "@design/data/table/types";
-import { Details } from "@pages/payrollAgreement/tabs/payrollAgreementTab/tools/details";
 import { Delete } from "@pages/payrollAgreement/tabs/payrollAgreementTab/tools/delete";
-import { Edit } from "@src/pages/payrollAgreement/tabs/payrollAgreementTab/tools/edit";
+import { Edit } from "@pages/payrollAgreement/tabs/payrollAgreementTab/tools/edit";
+import { Details } from "@pages/payrollAgreement/tabs/payrollAgreementTab/tools/details";
 
 const titles: ITitle[] = [
   {

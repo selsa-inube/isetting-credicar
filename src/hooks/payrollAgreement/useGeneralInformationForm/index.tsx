@@ -33,7 +33,9 @@ const useGeneralInformationForm = (
 ) => {
   const createValidationSchema = () =>
     object().shape({
-      namePayroll: validationRules.string.required(validationMessages.required),
+      abbreviatedName: validationRules.string.required(
+        validationMessages.required,
+      ),
       typePayroll: validationRules.string.required(validationMessages.required),
       sourcesOfIncome: validationRules.string.required(
         validationMessages.required,

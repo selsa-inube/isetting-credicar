@@ -1,34 +1,14 @@
 import { MdOutlineRemoveRedEye } from "react-icons/md";
-import { Icon, Text, useMediaQuery } from "@inubekit/inubekit";
-
+import { Icon, Text } from "@inubekit/inubekit";
 import { ComponentAppearance } from "@enum/appearances";
-import { IEntry } from "@design/data/table/types";
-import { DetailsPayrollAgreementModal } from "@design/modals/detailsPayrollAgreementModal";
-import { IDetailsTabsConfig } from "@design/modals/detailsPayrollAgreementModal/types";
-import { ILabel } from "@ptypes/ILabel";
+import { MoreDetails } from "@design/modals/moreDetails";
+import { IDetailsUI } from "@ptypes/payrollAgreement/payrollAgreementTab/IDetailsUI";
 import { StyledContainerIcon } from "./styles";
 
-interface IDetailsPayrollAgreement {
-  data: IEntry;
-  namePayroll: string;
-  showModal: boolean;
-  onToggleModal: () => void;
-  detailsTabsConfig: IDetailsTabsConfig;
-  defaultSelectedTab: string;
-  filteredTabsConfig: IDetailsTabsConfig;
-  isMobile: boolean;
-  isSelected: string;
-  labelsDetails: ILabel[];
-  labelsPaymentCard: ILabel[];
-  ordinaryPaymentData: IEntry[];
-  extraordinaryPaymentData: IEntry[];
-  onTabChange: (id: string) => void;
-}
-
-const DetailsPayrollAgreement = (props: IDetailsPayrollAgreement) => {
+const DetailsUI = (props: IDetailsUI) => {
   const {
     data,
-    namePayroll,
+    abbreviatedName,
     showModal,
     defaultSelectedTab,
     filteredTabsConfig,
@@ -39,11 +19,10 @@ const DetailsPayrollAgreement = (props: IDetailsPayrollAgreement) => {
     labelsPaymentCard,
     ordinaryPaymentData,
     extraordinaryPaymentData,
+    screenTablet,
     onToggleModal,
     onTabChange,
   } = props;
-
-  const screenTablet = useMediaQuery("(max-width: 1200px)");
 
   return (
     <>
@@ -63,8 +42,8 @@ const DetailsPayrollAgreement = (props: IDetailsPayrollAgreement) => {
       </StyledContainerIcon>
 
       {showModal && (
-        <DetailsPayrollAgreementModal
-          namePayroll={namePayroll}
+        <MoreDetails
+          abbreviatedName={abbreviatedName}
           isSelected={isSelected}
           defaultSelectedTab={defaultSelectedTab}
           filteredTabsConfig={filteredTabsConfig}
@@ -84,4 +63,4 @@ const DetailsPayrollAgreement = (props: IDetailsPayrollAgreement) => {
   );
 };
 
-export { DetailsPayrollAgreement };
+export { DetailsUI };

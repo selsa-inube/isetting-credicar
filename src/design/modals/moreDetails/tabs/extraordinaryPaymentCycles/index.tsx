@@ -1,14 +1,7 @@
 import { Stack } from "@inubekit/inubekit";
-
-import { IEntry } from "@design/data/table/types";
-import { ILabel } from "@ptypes/ILabel";
 import { PaymentCycleCardGroup } from "@design/feedback/paymentCycleCardGroup";
+import { IExtraordinaryPaymentCycles } from "@ptypes/design/IExtraordinaryPaymentCycles";
 import { StyledContainer } from "../styles";
-
-interface IExtraordinaryPaymentCycles {
-  data: IEntry[];
-  labelsPaymentCard: ILabel[];
-}
 
 const ExtraordinaryPaymentCycles = (props: IExtraordinaryPaymentCycles) => {
   const { data, labelsPaymentCard } = props;

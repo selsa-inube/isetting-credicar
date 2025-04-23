@@ -47,7 +47,7 @@ const useAddPayrollAgreement = (appData: IAppData) => {
     generalInformation: {
       isValid: false,
       values: {
-        namePayroll: "",
+        abbreviatedName: "",
         typePayroll: "",
         sourcesOfIncome: "",
         applicationDaysPayroll: "",
@@ -321,7 +321,7 @@ const useAddPayrollAgreement = (appData: IAppData) => {
       payrollSpecialBenefitPaymentCycles?: IPayrollSpecialBenefit[];
       severancePaymentCycles?: ISeverancePaymentCycles[];
     } = {
-      abbreviatedName: formValues.generalInformation.values.namePayroll,
+      abbreviatedName: formValues.generalInformation.values.abbreviatedName,
       numberOfDaysForReceivingTheDiscounts: String(
         formValues.generalInformation.values.applicationDaysPayroll,
       ),

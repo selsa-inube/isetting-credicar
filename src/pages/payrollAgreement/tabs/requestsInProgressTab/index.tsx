@@ -4,7 +4,7 @@ import { IEntry } from "@design/data/table/types";
 import { useRequestsInProgress } from "@hooks/payrollAgreement/useRequestsInProgress";
 import { RequestsInProgressTabUI } from "./interface";
 
-function RequestsInProgressTab() {
+const RequestsInProgressTab = () => {
   const { appData } = useContext(AuthAndPortalData);
 
   const {
@@ -28,6 +28,6 @@ function RequestsInProgressTab() {
       smallScreen={smallScreen}
     />
   );
-}
+};
 
 export { RequestsInProgressTab };
