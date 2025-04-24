@@ -86,7 +86,7 @@ const useEditPayrollAgreement = (data: IPayrollAgreementData) => {
     generalInformation: {
       isValid: false,
       values: {
-        namePayroll: data.abbreviatedName ?? "",
+        abbreviatedName: data.abbreviatedName ?? "",
         typePayroll: data.payrollForDeductionAgreementType ?? "",
         sourcesOfIncome: "Independiente",
         applicationDaysPayroll: String(
@@ -303,7 +303,7 @@ const useEditPayrollAgreement = (data: IPayrollAgreementData) => {
 
   const onSubmit = () => {
     const changedFields: {
-      namePayroll?: string;
+      abbreviatedName?: string;
       sourcesOfIncome?: string;
       applicationDaysPayroll?: string;
       regularPaymentCycles?: IRegularPaymentCycles[];
@@ -314,7 +314,7 @@ const useEditPayrollAgreement = (data: IPayrollAgreementData) => {
     const initialValues = initialData.generalInformation.values;
 
     (
-      ["namePayroll", "sourcesOfIncome", "applicationDaysPayroll"] as const
+      ["abbreviatedName", "sourcesOfIncome", "applicationDaysPayroll"] as const
     ).forEach((key) => {
       if (formValues.generalInformation.values[key] !== initialValues[key]) {
         changedFields[key] = formValues.generalInformation.values[key];

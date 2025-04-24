@@ -19,6 +19,8 @@ interface IStyledFlex {
   $overflowY?: string;
   $overflowX?: string;
   $boxShadow?: string;
+  $minHeight?: string;
+  $maxHeight?: string;
 }
 
 const StyledFlex = styled.div<IStyledFlex>`
@@ -40,6 +42,8 @@ const StyledFlex = styled.div<IStyledFlex>`
   overflow-y: ${({ $overflowY }) => $overflowY};
   overflow-x: ${({ $overflowX }) => $overflowX};
   box-shadow: ${({ $boxShadow }) => $boxShadow};
+  min-height: ${({ $minHeight }) => $minHeight};
+  max-height: ${({ $maxHeight }) => $maxHeight};
 `;
 
 export { StyledFlex };

@@ -1,33 +1,5 @@
-import {
-  IStackAlignContent,
-  IStackAlignItem,
-  IStackDirectionAlignment,
-  IStackJustifyContent,
-  IStackWrapControl,
-} from "@inubekit/inubekit";
-
 import { StyledFlex } from "./styles";
-
-interface IBoxContainer {
-  children: React.ReactNode;
-  backgroundColor: string;
-  boxSizing: string;
-  borderColor?: string;
-  borderRadius?: string;
-  wrap?: IStackWrapControl;
-  direction?: IStackDirectionAlignment;
-  justifyContent?: IStackJustifyContent;
-  alignItems?: IStackAlignItem;
-  alignContent?: IStackAlignContent;
-  height?: string;
-  width?: string;
-  gap?: string;
-  margin?: string;
-  padding?: string;
-  overflowY?: string;
-  overflowX?: string;
-  boxShadow?: string;
-}
+import { IBoxContainer } from "@ptypes/design/IBoxContainer";
 
 const BoxContainer = (props: IBoxContainer) => {
   const {
@@ -49,6 +21,8 @@ const BoxContainer = (props: IBoxContainer) => {
     overflowY,
     overflowX,
     boxShadow,
+    minHeight,
+    maxHeight,
   } = props;
 
   return (
@@ -70,6 +44,8 @@ const BoxContainer = (props: IBoxContainer) => {
       $overflowY={overflowY}
       $overflowX={overflowX}
       $boxShadow={boxShadow}
+      $minHeight={minHeight}
+      $maxHeight={maxHeight}
     >
       {children}
     </StyledFlex>

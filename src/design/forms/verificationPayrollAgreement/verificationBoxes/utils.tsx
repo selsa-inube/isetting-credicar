@@ -75,7 +75,7 @@ const renderGeneralinfoVerification = (values: IGeneralInformationEntry) => (
       <BoxAttribute
         direction="column"
         label={verificationLabels.payrollName}
-        value={values.namePayroll}
+        value={values.abbreviatedName}
       />
       <BoxAttribute
         direction="column"

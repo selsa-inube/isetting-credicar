@@ -13,7 +13,7 @@ function RequestsInProgressTab() {
     loading,
     handleSearchRequestsInProgress,
     setEntryCanceled,
-  } = useRequestsInProgress(appData.businessUnit.publicCode);
+  } = useRequestsInProgress({ bussinesUnits: appData.businessUnit.publicCode });
 
   return (
     <RequestsInProgressTabUI

@@ -3,12 +3,16 @@ import { useMediaQuery } from "@inubekit/inubekit";
 
 import { mediaQueryMobile } from "@config/environment";
 import { IEntry } from "@design/data/table/types";
-import { IDetailsTabsConfig } from "@design/modals/detailsPayrollAgreementModal/types";
+import { normalizeEnumName } from "@utils/normalizeEnumName";
+import { IUseDetailsPayrollAgreement } from "@ptypes/hooks/payrollAgreement/IUseDetailsPayrollAgreement";
+import { labelsOfRequest } from "@config/payrollAgreement/requestsInProgressTab/details/labelsOfRequest";
+import { detailsRequestInProgressModal } from "@config/payrollAgreement/requestsInProgressTab/details/detailsRequestInProgressModal";
+import { RequestType } from "@enum/requestType";
+import { IDetailsTabsConfig } from "@ptypes/payrollAgreement/requestInProgTab/IDetailsTabsConfig";
 
-const useDetailsPayrollAgreement = (
-  data: IEntry,
-  detailsTabsConfig: IDetailsTabsConfig,
-) => {
+const useDetailsPayrollAgreement = (props: IUseDetailsPayrollAgreement) => {
+  const { data, detailsTabsConfig } = props;
+
   const [isSelected, setIsSelected] = useState<string>();
   const [showModal, setShowModal] = useState(false);
   const isMobile = useMediaQuery(mediaQueryMobile);
@@ -18,7 +22,6 @@ const useDetailsPayrollAgreement = (
     TypePayroll: data.payrollForDeductionAgreementType,
     daysToDetermineDate: data.numberOfDaysForReceivingTheDiscounts,
     company: data.legalPersonName,
-    paymentSources: "prueba",
   };
 
   const handleToggleModal = () => {
@@ -29,18 +32,52 @@ const useDetailsPayrollAgreement = (
     setIsSelected(tabId);
   };
 
+  const createOrdinaryCycle = (item: IEntry) => ({
+    name: item.regularPaymentCycleName ?? item.nameCycle,
+    periodicity:
+      normalizeEnumName(item.schedule) ?? normalizeEnumName(item.periodicity),
+    dayPayment: item.paymentDay ?? item.payday,
+    numberDays: item.numberOfDaysBeforePaymentToBill ?? item.numberDaysUntilCut,
+  });
+
   const ordinaryPaymentData = () => {
-    return Object.entries(data.regularPaymentCycles).length > 0
+    return data.regularPaymentCycles &&
+      Object.entries(data.regularPaymentCycles).length > 0
       ? data.regularPaymentCycles.map((item: IEntry) => {
-          return {
-            name: item.regularPaymentCycleName,
-            periodicity: item.schedule,
-            dayPayment: item.paymentDay,
-            numberDays: item.regularPaymentCycleNumber,
-          };
+          return createOrdinaryCycle(item);
         })
       : [];
   };
+
+  const ordinaryIncludedData = () => {
+    return data.regularCyclesIncluded &&
+      Object.entries(data.regularCyclesIncluded).length > 0
+      ? data.regularCyclesIncluded.map((item: IEntry) => {
+          return createOrdinaryCycle(item);
+        })
+      : [];
+  };
+
+  const ordinaryEliminatedData = (): IEntry[] => {
+    return data.regularCyclesEliminated &&
+      Object.entries(data.regularCyclesEliminated).length > 0
+      ? data.regularCyclesEliminated.map((item: IEntry) => {
+          return createOrdinaryCycle(item);
+        })
+      : [];
+  };
+
+  const createExtraOrdinaryCycle = (
+    item: IEntry,
+    index: string,
+    typePayment: string,
+  ) => ({
+    id: index,
+    name: item.abbreviatedName,
+    typePayment,
+    cuttingDay: item.paymentDay,
+    numberDays: item.numberOfDaysBeforePaymentToBill,
+  });
 
   const extraordinaryPaymentData = () => {
     let extraordinary: IEntry[] = [];
@@ -49,13 +86,7 @@ const useDetailsPayrollAgreement = (
         Object.entries(data.payrollSpecialBenefitPaymentCycles).length > 0
           ? data.payrollSpecialBenefitPaymentCycles.map(
               (item: IEntry, index: string) => {
-                return {
-                  id: index,
-                  name: item.abbreviatedName,
-                  typePayment: "Prima",
-                  cuttingDay: item.paymentDay,
-                  numberDays: item.numberOfDaysBeforePaymentToBill,
-                };
+                return createExtraOrdinaryCycle(item, index, "Prima");
               },
             )
           : [],
@@ -66,14 +97,62 @@ const useDetailsPayrollAgreement = (
       extraordinary = extraordinary.concat(
         Object.entries(data.severancePaymentCycles).length > 0
           ? data.severancePaymentCycles.map((item: IEntry, index: string) => {
-              return {
-                id: index,
-                name: item.abbreviatedName,
-                typePayment: "Cesantias",
-                cuttingDay: item.paymentDay,
-                numberDays: item.numberOfDaysBeforePaymentToBill,
-              };
+              return createExtraOrdinaryCycle(item, index, "Cesantias");
             })
+          : [],
+      );
+    }
+    return extraordinary;
+  };
+
+  const extraordinaryIncludedData = () => {
+    let extraordinary: IEntry[] = [];
+    if (data.payrollSpecialBenCyclesIncluded) {
+      extraordinary = extraordinary.concat(
+        Object.entries(data.payrollSpecialBenCyclesIncluded).length > 0
+          ? data.payrollSpecialBenCyclesIncluded.map(
+              (item: IEntry, index: string) => {
+                return createExtraOrdinaryCycle(item, index, "Prima");
+              },
+            )
+          : [],
+      );
+    }
+
+    if (data.severanceCyclesIncluded) {
+      extraordinary = extraordinary.concat(
+        Object.entries(data.severanceCyclesIncluded).length > 0
+          ? data.severanceCyclesIncluded.map((item: IEntry, index: string) => {
+              return createExtraOrdinaryCycle(item, index, "Cesantias");
+            })
+          : [],
+      );
+    }
+    return extraordinary;
+  };
+
+  const extraordinaryEliminatedData = () => {
+    let extraordinary: IEntry[] = [];
+    if (data.payrollSpecialBenCyclesEliminated) {
+      extraordinary = extraordinary.concat(
+        Object.entries(data.payrollSpecialBenCyclesEliminated).length > 0
+          ? data.payrollSpecialBenCyclesEliminated.map(
+              (item: IEntry, index: string) => {
+                return createExtraOrdinaryCycle(item, index, "Prima");
+              },
+            )
+          : [],
+      );
+    }
+
+    if (data.severanceCyclesEliminated) {
+      extraordinary = extraordinary.concat(
+        Object.entries(data.severanceCyclesEliminated).length > 0
+          ? data.severanceCyclesEliminated.map(
+              (item: IEntry, index: string) => {
+                return createExtraOrdinaryCycle(item, index, "Cesantias");
+              },
+            )
           : [],
       );
     }
@@ -86,12 +165,40 @@ const useDetailsPayrollAgreement = (
 
       const ordinaryData = ordinaryPaymentData();
       const extraordinaryData = extraordinaryPaymentData();
+      const ordinaryIncludedPayData = ordinaryIncludedData();
+      const ordinaryPayEliminatedData = ordinaryEliminatedData();
+      const extraordinaryPayIncludedData = extraordinaryIncludedData();
+      const extraordinaryPayEliminatedData = extraordinaryEliminatedData();
 
       if (key === "ordinaryPayment" && ordinaryData.length === 0) {
         return acc;
       }
 
       if (key === "extraordinaryPayment" && extraordinaryData.length === 0) {
+        return acc;
+      }
+      if (
+        key === "ordinaryPaymentIncluded" &&
+        ordinaryIncludedPayData.length === 0
+      ) {
+        return acc;
+      }
+      if (
+        key === "ordinaryPaymentRemoved" &&
+        ordinaryPayEliminatedData.length === 0
+      ) {
+        return acc;
+      }
+      if (
+        key === "extraordinaryPaymentIncluded" &&
+        extraordinaryPayIncludedData.length === 0
+      ) {
+        return acc;
+      }
+      if (
+        key === "extraordinaryPaymentRemoved" &&
+        extraordinaryPayEliminatedData.length === 0
+      ) {
         return acc;
       }
 
@@ -113,6 +220,16 @@ const useDetailsPayrollAgreement = (
 
   const defaultSelectedTab = getFirstFilteredTab(filteredTabsConfig)?.id;
 
+  const labelsOfRequestDetails = labelsOfRequest.filter(
+    (field) => data[field.id],
+  );
+
+  const title = `${detailsRequestInProgressModal.labelRequest} ${
+    RequestType[data.request as keyof typeof RequestType] ?? data.request
+  }`;
+
+  const screenTablet = useMediaQuery("(max-width: 1200px)");
+
   return {
     showModal,
     normalizeData,
@@ -120,8 +237,15 @@ const useDetailsPayrollAgreement = (
     isMobile,
     filteredTabsConfig,
     defaultSelectedTab,
+    labelsOfRequestDetails,
+    title,
+    screenTablet,
     ordinaryPaymentData,
     extraordinaryPaymentData,
+    ordinaryIncludedData,
+    ordinaryEliminatedData,
+    extraordinaryIncludedData,
+    extraordinaryEliminatedData,
     handleTabChange,
     handleToggleModal,
   };

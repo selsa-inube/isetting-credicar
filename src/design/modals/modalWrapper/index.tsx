@@ -14,23 +14,7 @@ import {
 import { tokens } from "@design/tokens";
 import { ComponentAppearance } from "@enum/appearances";
 import { BoxContainer } from "@design/layout/boxContainer";
-
-interface IModalWrapper {
-  children: React.ReactNode;
-  isMobile: boolean;
-  labelActionButton: string;
-  labelCloseButton: string;
-  labelCloseModal: string;
-  portalId: string;
-  title: string;
-  onClick: () => void;
-  appearanceButton?: ComponentAppearance;
-  iconBeforeButton?: React.ReactElement;
-  height?: string;
-  width?: string;
-  withCancelButton?: boolean;
-  onCloseModal?: () => void;
-}
+import { IModalWrapper } from "@ptypes/design/IModalWrapper";
 
 function ModalWrapper(props: IModalWrapper) {
   const {
@@ -46,6 +30,9 @@ function ModalWrapper(props: IModalWrapper) {
     title,
     width = "auto",
     withCancelButton,
+    isLoading = false,
+    minHeight,
+    maxHeight,
     onClick,
     onCloseModal,
   } = props;
@@ -67,27 +54,34 @@ function ModalWrapper(props: IModalWrapper) {
         backgroundColor={inube.palette.neutral.N0}
         borderRadius={tokens.spacing.s100}
         padding={tokens.spacing.s300}
-        gap={isMobile ? `${tokens.spacing.s150}` : `${tokens.spacing.s300}`}
+        gap={isMobile ? `${tokens.spacing.s150}` : `${tokens.spacing.s250}`}
         boxSizing="border-box"
+        minHeight={minHeight}
+        maxHeight={maxHeight}
       >
-        <Grid templateColumns="1fr auto" templateRows="1fr">
-          <Text type="headline" size="small" appearance="dark">
-            {title}
-          </Text>
+        <Stack direction="column" gap={tokens.spacing.s150}>
+          <Grid templateColumns="1fr auto" templateRows="1fr">
+            <Text type="headline" size="small" appearance="dark">
+              {title}
+            </Text>
 
-          <Button
-            spacing="compact"
-            appearance={ComponentAppearance.DARK}
-            variant="none"
-            onClick={onCloseModal}
-            iconAfter={
-              <Icon appearance={ComponentAppearance.DARK} icon={<MdClear />} />
-            }
-          >
-            {labelCloseModal}
-          </Button>
-        </Grid>
-        <Divider />
+            <Button
+              spacing="compact"
+              appearance={ComponentAppearance.DARK}
+              variant="none"
+              onClick={onCloseModal}
+              iconAfter={
+                <Icon
+                  appearance={ComponentAppearance.DARK}
+                  icon={<MdClear />}
+                />
+              }
+            >
+              {labelCloseModal}
+            </Button>
+          </Grid>
+          <Divider />
+        </Stack>
 
         <Stack height="100%" width="100%">
           {children}
@@ -110,6 +104,7 @@ function ModalWrapper(props: IModalWrapper) {
             appearance={appearanceButton ?? ComponentAppearance.PRIMARY}
             variant="filled"
             onClick={onClick}
+            loading={isLoading}
             iconBefore={iconBeforeButton ?? <></>}
           >
             {labelActionButton}
