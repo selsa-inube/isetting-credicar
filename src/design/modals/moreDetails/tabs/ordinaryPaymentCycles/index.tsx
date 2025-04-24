@@ -1,13 +1,7 @@
 import { Stack } from "@inubekit/inubekit";
 
 import { PaymentCycleCardGroup } from "@design/feedback/paymentCycleCardGroup";
-import { ILabel } from "@ptypes/ILabel";
-import { IEntry } from "@design/data/table/types";
-
-interface IOrdinaryPaymentCycles {
-  data: IEntry[];
-  labelsPaymentCard: ILabel[];
-}
+import { IOrdinaryPaymentCycles } from "@ptypes/payrollAgreement/payrollAgreementTab/IOrdinaryPaymentCycles";
 
 const OrdinaryPaymentCycles = (props: IOrdinaryPaymentCycles) => {
   const { data, labelsPaymentCard } = props;
