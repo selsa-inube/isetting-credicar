@@ -1,4 +1,4 @@
-import { IRequestsInProgress } from "@src/types/requestInProgress/IRequestsInProgress";
+import { IRequestsInProgress } from "@ptypes/requestInProgress/IRequestsInProgress";
 import { formatDateTable } from "@utils/date/formatDateTable";
 
 const mapRequestsInProgressToEntity = (
