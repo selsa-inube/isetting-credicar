@@ -12,6 +12,7 @@ import { ErrorPage } from "@design/layout/errorPage";
 import { Logout } from "@pages/login/logout";
 import { AppPage } from "@design/layout/appPage";
 import { Landing } from "@pages/home/landing";
+import { GeneralCreditPoliciesRoutes } from "../generalCreditPolicies";
 
 const mainNavigation = createBrowserRouter(
   createRoutesFromElements(
@@ -34,6 +35,10 @@ const mainNavigation = createBrowserRouter(
         <Route
           path="payroll-agreement/*"
           element={<PayrollAgreementRoutes />}
+        />
+        <Route
+          path="general-credit-policies/*"
+          element={<GeneralCreditPoliciesRoutes />}
         />
       </Route>
       <Route path="logout" element={<Logout />} />
