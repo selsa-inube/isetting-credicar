@@ -12,6 +12,7 @@ const decisionsGenLabels = {
   buttonCancelLabel: "Cancelar",
   buttonSaveLabel: "Guardar",
   buttonNextLabel: "Siguiente",
+  placeholderReference: "Seleccione de la lista",
 };
 
 export { decisionsGenLabels };

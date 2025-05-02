@@ -7,56 +7,43 @@ import { validationRules } from "@validations/validationRules";
 import { validationMessages } from "@validations/validationMessages";
 import { mediaQueryMobile } from "@config/environment";
 import { IUseDecisionsGenForm } from "@ptypes/hooks/IUseDecisionsGenForm";
+import { decisionsGenLabels } from "@config/generalCreditPolicies/assisted/decisionsGenLabels";
 
 const useDecisionsGenForm = (props: IUseDecisionsGenForm) => {
-  const { initialValues, ref, onSubmit, onFormValid } = props;
-  const validationSchema = object().shape({
-    reference: validationRules.string.required(validationMessages.required),
-    additionalDebtors: validationRules.boolean,
-    sourcesIncome: validationRules.boolean,
-    financialObligations: validationRules.boolean,
-    realGuarantees: validationRules.boolean,
-    calculation: validationRules.boolean,
-    reciprocity: validationRules.boolean,
-    factor: validationRules.boolean,
-  });
+  const { initialValues, ref, editDataOption, onSubmit, onFormValid } = props;
 
-  const [showModal, setShowModal] = useState(false);
-  const [isDisabledButton, setIsDisabledButton] = useState(false);
+  const createValidationSchema = () =>
+    object().shape({
+      reference: validationRules.string.required(validationMessages.required),
+      additionalDebtors: validationRules.boolean,
+      sourcesIncome: validationRules.boolean,
+      financialObligations: validationRules.boolean,
+      realGuarantees: validationRules.boolean,
+      calculation: validationRules.boolean,
+      reciprocity: validationRules.boolean,
+      factor: validationRules.boolean,
+    });
+
+  const validationSchema = createValidationSchema();
 
   const formik = useFormik({
     initialValues,
     validationSchema,
-    validateOnBlur: true,
+    validateOnBlur: false,
     validateOnMount: true,
     onSubmit: onSubmit ?? (() => true),
   });
 
   useImperativeHandle(ref, () => formik);
 
-  useEffect(() => {
-    if (onFormValid) {
-      formik.validateForm().then((errors) => {
-        const isFormValid = Object.keys(errors).length === 0;
-        onFormValid(isFormValid);
-      });
-    }
-  }, [formik.values, onFormValid]);
-
-  useEffect(() => {
-    setIsDisabledButton(!formik.isValid);
-  }, [formik.isValid]);
+  const [showModal, setShowModal] = useState(false);
+  const [isDisabledButton, setIsDisabledButton] = useState(false);
 
   const handleInfoModal = () => {
     setShowModal(!showModal);
   };
 
   const handleToggleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = event.target;
-    formik.setFieldValue(name, checked);
-  };
-
-  const handleChangeMethods = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
     formik.setFieldValue(name, checked);
   };
@@ -69,14 +56,34 @@ const useDecisionsGenForm = (props: IUseDecisionsGenForm) => {
     });
   };
 
+  useEffect(() => {
+    const updateButton = () => {
+      setIsDisabledButton(!formik.isValid);
+    };
+    updateButton();
+  }, [formik.values, formik.isValid, initialValues]);
+
+  useEffect(() => {
+    if (onFormValid) {
+      formik.validateForm().then((errors) => {
+        const isFormValid = Object.keys(errors).length === 0;
+        onFormValid(isFormValid);
+      });
+    }
+  }, [formik.values, onFormValid]);
+
   const isMobile = useMediaQuery(mediaQueryMobile);
+
+  const buttonLabel = editDataOption
+    ? decisionsGenLabels.buttonSaveLabel
+    : decisionsGenLabels.buttonNextLabel;
 
   return {
     formik,
     showModal,
     isMobile,
     isDisabledButton,
-    handleChangeMethods,
+    buttonLabel,
     handleInfoModal,
     handleChange,
     handleToggleChange,

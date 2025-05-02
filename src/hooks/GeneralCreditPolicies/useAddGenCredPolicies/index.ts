@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useMediaQuery } from "@inubekit/inubekit";
 import { FormikProps } from "formik";
 
-import { addGenCredPoliciesSteps } from "@config/generalCreditPolicies/assisted/steps";
+import { addPayrollAgreementSteps } from "@config/payrollAgreement/payrollAgreementTab/assisted/steps";
 import { IAddGenCredPoliciesForms } from "@ptypes/generalCredPolicies/forms/IAddGenCredPoliciesForms";
 import { IAddGenCredPoliciesRef } from "@ptypes/generalCredPolicies/forms/IAddGenCredPoliciesRef";
 import { IDecisionsGeneralEntry } from "@ptypes/generalCredPolicies/forms/IDecisionsGeneralEntry";
@@ -27,9 +27,9 @@ const useAddGenCredPolicies = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formValues, setFormValues] =
     useState<IAddGenCredPoliciesForms>(initialValues);
-  const [showModal, setShowModal] = useState(false);
-
   const [isCurrentFormValid, setIsCurrentFormValid] = useState(false);
+
+  const [showModal, setShowModal] = useState(false);
 
   const smallScreen = useMediaQuery("(max-width: 990px)");
 
@@ -39,25 +39,19 @@ const useAddGenCredPolicies = () => {
     decisionsGeneral: decisionsGeneralRef,
   };
 
-  const handleToggleModal = () => {
-    setShowModal(!showModal);
-  };
-
   const handleNextStep = () => {
-    if (currentStep < addGenCredPoliciesSteps.length) {
+    if (currentStep < addPayrollAgreementSteps.length) {
       if (decisionsGeneralRef.current) {
         setFormValues((prevValues) => ({
           ...prevValues,
           decisionsGeneral: {
             ...prevValues.decisionsGeneral,
-            values: decisionsGeneralRef.current
-              ? decisionsGeneralRef.current.values
-              : ({} as IDecisionsGeneralEntry),
+            values: decisionsGeneralRef.current!.values,
           },
         }));
         setIsCurrentFormValid(decisionsGeneralRef.current.isValid);
+        setCurrentStep(currentStep + 1);
       }
-      setCurrentStep(currentStep + 1);
     }
   };
 
@@ -67,6 +61,12 @@ const useAddGenCredPolicies = () => {
     }
   };
 
+  const handleToggleModal = () => {
+    setShowModal(!showModal);
+  };
+
+  const formValid = !isCurrentFormValid;
+
   const handleSubmitClick = () => {
     console.log();
   };
@@ -75,13 +75,16 @@ const useAddGenCredPolicies = () => {
     currentStep,
     formValues,
     formReferences,
+    formValid,
     smallScreen,
     isCurrentFormValid,
+    showModal,
     handleToggleModal,
     handleNextStep,
     handlePreviousStep,
     setCurrentStep,
     setIsCurrentFormValid,
+    setShowModal,
     handleSubmitClick,
   };
 };

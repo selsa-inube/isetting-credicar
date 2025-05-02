@@ -4,6 +4,7 @@ import { tokens } from "@design/tokens";
 import { IAddGenCreditPoliciesUI } from "@ptypes/generalCredPolicies/IAddGenCreditPoliciesUI";
 import { addLabels } from "@config/generalCreditPolicies/assisted/addLabels";
 import { crumbsAddGenCredPolicies } from "@config/generalCreditPolicies/assisted/navigation";
+import { controlsAssisted } from "@config/generalCreditPolicies/assisted/controlsAssisted";
 import { DecisionsGeneralForm } from "../forms/decisionsGeneral";
 
 const AddGenCreditPoliciesUI = (props: IAddGenCreditPoliciesUI) => {
@@ -47,11 +48,7 @@ const AddGenCreditPoliciesUI = (props: IAddGenCreditPoliciesUI) => {
             onNextClick={onNextStep}
             onSubmitClick={onToggleModal}
             disableNext={formValid}
-            controls={{
-              goBackText: "Anterior",
-              goNextText: "Siguiente",
-              submitText: "Finalizar",
-            }}
+            controls={controlsAssisted}
             size={smallScreen ? "small" : "large"}
           />
           <Stack direction="column">

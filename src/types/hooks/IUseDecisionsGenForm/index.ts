@@ -6,6 +6,7 @@ interface IUseDecisionsGenForm {
   ref: React.ForwardedRef<FormikProps<IDecisionsGeneralEntry>>;
   onSubmit: ((values: IDecisionsGeneralEntry) => void) | undefined;
   onFormValid: React.Dispatch<React.SetStateAction<boolean>> | undefined;
+  editDataOption?: boolean;
 }
 
 export type { IUseDecisionsGenForm };

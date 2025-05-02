@@ -8,13 +8,13 @@ interface IDecisionsGeneralFormUI {
   showModal: boolean;
   isMobile: boolean;
   isDisabledButton: boolean;
+  buttonLabel: string;
   onToggle: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onInfoModal: () => void;
   onButtonClick: () => void;
   onResetEdit?: () => void;
   onResetAdd?: () => void;
   onReferenceChange: (name: string, value: string) => void;
-  onChangeMethods: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export type { IDecisionsGeneralFormUI };

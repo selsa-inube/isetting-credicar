@@ -13,11 +13,11 @@ const DecisionsGeneralForm = forwardRef<
   (
     {
       initialValues,
-      editDataOption = false,
       onFormValid,
       onSubmit,
       handleNextStep,
       loading = false,
+      editDataOption = false,
     },
     ref,
   ) => {
@@ -26,11 +26,17 @@ const DecisionsGeneralForm = forwardRef<
       showModal,
       isMobile,
       isDisabledButton,
-      handleChangeMethods,
+      buttonLabel,
       handleChange,
       handleInfoModal,
       handleToggleChange,
-    } = useDecisionsGenForm({ initialValues, ref, onSubmit, onFormValid });
+    } = useDecisionsGenForm({
+      initialValues,
+      ref,
+      editDataOption,
+      onSubmit,
+      onFormValid,
+    });
 
     return (
       <DecisionsGeneralFormUI
@@ -43,8 +49,8 @@ const DecisionsGeneralForm = forwardRef<
         showModal={showModal}
         onInfoModal={handleInfoModal}
         isMobile={isMobile}
-        onChangeMethods={handleChangeMethods}
         isDisabledButton={isDisabledButton}
+        buttonLabel={buttonLabel}
       />
     );
   },

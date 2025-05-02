@@ -8,6 +8,9 @@ const ToggleGeneralDecision = (props: IToggleGeneralDecision) => {
   const { name, label, isChecked, onToggle } = props;
 
   const text = isChecked ? toggleDecisionsLabels.yes : toggleDecisionsLabels.no;
+  const appearance = isChecked
+    ? ComponentAppearance.SUCCESS
+    : ComponentAppearance.DANGER;
 
   return (
     <Stack direction="column" gap={tokens.spacing.s200}>
@@ -21,16 +24,11 @@ const ToggleGeneralDecision = (props: IToggleGeneralDecision) => {
           id={name}
           name={name}
           onChange={onToggle}
+          value={name}
           padding="0px"
           size="large"
         />
-        <Text
-          size="medium"
-          weight="bold"
-          appearance={
-            isChecked ? ComponentAppearance.SUCCESS : ComponentAppearance.DANGER
-          }
-        >
+        <Text size="medium" weight="bold" appearance={appearance}>
           {text}
         </Text>
       </Stack>
