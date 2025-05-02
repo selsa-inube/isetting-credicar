@@ -7,6 +7,7 @@ interface IDecisionsGeneralForm {
   loading?: boolean;
   onFormValid?: React.Dispatch<React.SetStateAction<boolean>>;
   onSubmit?: (values: IDecisionsGeneralEntry) => void;
+  handleFormValidChange?: (isValid: boolean) => void;
 }
 
 export type { IDecisionsGeneralForm };

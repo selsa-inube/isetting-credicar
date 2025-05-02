@@ -7,6 +7,7 @@ interface IUseDecisionsGenForm {
   onSubmit: ((values: IDecisionsGeneralEntry) => void) | undefined;
   onFormValid: React.Dispatch<React.SetStateAction<boolean>> | undefined;
   editDataOption?: boolean;
+  handleFormValidChange?: (isValid: boolean) => void;
 }
 
 export type { IUseDecisionsGenForm };

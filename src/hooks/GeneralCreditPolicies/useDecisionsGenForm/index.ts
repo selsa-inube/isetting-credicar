@@ -10,7 +10,14 @@ import { IUseDecisionsGenForm } from "@ptypes/hooks/IUseDecisionsGenForm";
 import { decisionsGenLabels } from "@config/generalCreditPolicies/assisted/decisionsGenLabels";
 
 const useDecisionsGenForm = (props: IUseDecisionsGenForm) => {
-  const { initialValues, ref, editDataOption, onSubmit, onFormValid } = props;
+  const {
+    initialValues,
+    ref,
+    editDataOption,
+    onSubmit,
+    onFormValid,
+    handleFormValidChange,
+  } = props;
 
   const createValidationSchema = () =>
     object().shape({
@@ -71,6 +78,12 @@ const useDecisionsGenForm = (props: IUseDecisionsGenForm) => {
       });
     }
   }, [formik.values, onFormValid]);
+
+  useEffect(() => {
+    if (handleFormValidChange) {
+      handleFormValidChange(!formik.isValid);
+    }
+  }, [formik.isValid, handleFormValidChange]);
 
   const isMobile = useMediaQuery(mediaQueryMobile);
 

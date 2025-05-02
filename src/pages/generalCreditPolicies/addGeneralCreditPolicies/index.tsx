@@ -9,6 +9,7 @@ const AddGenCreditPolicies = () => {
     formReferences,
     isCurrentFormValid,
     smallScreen,
+    handleFormValidChange,
     handleNextStep,
     handlePreviousStep,
     handleToggleModal,
@@ -20,13 +21,14 @@ const AddGenCreditPolicies = () => {
       currentStep={currentStep}
       formReferences={formReferences}
       initialValues={formValues}
-      formValid={!isCurrentFormValid}
+      formValid={isCurrentFormValid}
       steps={addGenCredPoliciesSteps}
       onNextStep={handleNextStep}
       onPreviousStep={handlePreviousStep}
       setIsCurrentFormValid={setIsCurrentFormValid}
       smallScreen={smallScreen}
       onToggleModal={handleToggleModal}
+      handleFormValidChange={handleFormValidChange}
     />
   );
 };

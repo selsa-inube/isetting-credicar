@@ -15,6 +15,7 @@ const AddGenCreditPoliciesUI = (props: IAddGenCreditPoliciesUI) => {
     initialValues,
     smallScreen,
     steps,
+    handleFormValidChange,
     onNextStep,
     onPreviousStep,
     onToggleModal,
@@ -57,6 +58,7 @@ const AddGenCreditPoliciesUI = (props: IAddGenCreditPoliciesUI) => {
                 ref={formReferences.decisionsGeneral}
                 initialValues={initialValues.decisionsGeneral.values}
                 handleNextStep={onNextStep}
+                handleFormValidChange={handleFormValidChange}
               />
             )}
           </Stack>

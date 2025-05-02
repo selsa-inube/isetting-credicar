@@ -39,6 +39,10 @@ const useAddGenCredPolicies = () => {
     decisionsGeneral: decisionsGeneralRef,
   };
 
+  const handleFormValidChange = (isValid: boolean) => {
+    setIsCurrentFormValid(isValid);
+  };
+
   const handleNextStep = () => {
     if (currentStep < addPayrollAgreementSteps.length) {
       if (decisionsGeneralRef.current) {
@@ -46,10 +50,11 @@ const useAddGenCredPolicies = () => {
           ...prevValues,
           decisionsGeneral: {
             ...prevValues.decisionsGeneral,
-            values: decisionsGeneralRef.current!.values,
+            values: decisionsGeneralRef.current
+              ? decisionsGeneralRef.current.values
+              : ({} as IDecisionsGeneralEntry),
           },
         }));
-        setIsCurrentFormValid(decisionsGeneralRef.current.isValid);
         setCurrentStep(currentStep + 1);
       }
     }
@@ -65,8 +70,6 @@ const useAddGenCredPolicies = () => {
     setShowModal(!showModal);
   };
 
-  const formValid = !isCurrentFormValid;
-
   const handleSubmitClick = () => {
     console.log();
   };
@@ -75,10 +78,10 @@ const useAddGenCredPolicies = () => {
     currentStep,
     formValues,
     formReferences,
-    formValid,
     smallScreen,
     isCurrentFormValid,
     showModal,
+    handleFormValidChange,
     handleToggleModal,
     handleNextStep,
     handlePreviousStep,

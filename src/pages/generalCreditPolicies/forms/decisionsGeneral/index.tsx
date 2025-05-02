@@ -18,6 +18,7 @@ const DecisionsGeneralForm = forwardRef<
       handleNextStep,
       loading = false,
       editDataOption = false,
+      handleFormValidChange,
     },
     ref,
   ) => {
@@ -36,6 +37,7 @@ const DecisionsGeneralForm = forwardRef<
       editDataOption,
       onSubmit,
       onFormValid,
+      handleFormValidChange,
     });
 
     return (
