@@ -1,5 +1,6 @@
 import {
   MdCreditCard,
+  MdOutlineFeed,
   MdOutlineHandshake,
   MdOutlinePayments,
 } from "react-icons/md";
@@ -20,6 +21,11 @@ const mainCards: ICardData[] = [
     publicCode: "Nóminas de convenio",
     icon: <MdOutlineHandshake />,
     url: "/payroll-agreement",
+  },
+  {
+    publicCode: "Politicas generales de credito",
+    icon: <MdOutlineFeed />,
+    url: "/general-credit-policies",
   },
 ];
 

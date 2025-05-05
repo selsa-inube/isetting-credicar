@@ -36,24 +36,26 @@ const DecisionModalUI = (props: IDecisionModalUI) => {
       onClick={onClick}
       isLoading={isLoading}
     >
-      {withIcon && (
-        <Stack width="100%" alignItems="center" justifyContent="center">
-          <Icon icon={icon} appearance={appearance} size={sizeIcon} />
-        </Stack>
-      )}
+      <Stack direction="column" gap={tokens.spacing.s200}>
+        {withIcon && (
+          <Stack width="100%" alignItems="center" justifyContent="center">
+            <Icon icon={icon} appearance={appearance} size={sizeIcon} />
+          </Stack>
+        )}
 
-      <Text appearance={ComponentAppearance.DARK} type="body" size="medium">
-        {description}
-      </Text>
+        <Text appearance={ComponentAppearance.DARK} type="body" size="medium">
+          {description}
+        </Text>
 
-      {moreDetails && (
-        <Stack direction="column" gap={tokens.spacing.s200}>
-          <Divider dashed />
-          <Text size="medium" appearance="dark">
-            {moreDetails}
-          </Text>
-        </Stack>
-      )}
+        {moreDetails && (
+          <Stack direction="column" gap={tokens.spacing.s200}>
+            <Divider dashed />
+            <Text size="medium" appearance={ComponentAppearance.DARK}>
+              {moreDetails}
+            </Text>
+          </Stack>
+        )}
+      </Stack>
     </ModalWrapper>
   );
 };
