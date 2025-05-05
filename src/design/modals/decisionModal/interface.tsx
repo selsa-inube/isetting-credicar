@@ -50,7 +50,7 @@ const DecisionModalUI = (props: IDecisionModalUI) => {
         {moreDetails && (
           <Stack direction="column" gap={tokens.spacing.s200}>
             <Divider dashed />
-            <Text size="medium" appearance="dark">
+            <Text size="medium" appearance={ComponentAppearance.DARK}>
               {moreDetails}
             </Text>
           </Stack>

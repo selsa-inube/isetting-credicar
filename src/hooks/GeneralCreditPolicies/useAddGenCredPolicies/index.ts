@@ -70,10 +70,6 @@ const useAddGenCredPolicies = () => {
     setShowModal(!showModal);
   };
 
-  const handleSubmitClick = () => {
-    console.log();
-  };
-
   return {
     currentStep,
     formValues,
@@ -88,7 +84,6 @@ const useAddGenCredPolicies = () => {
     setCurrentStep,
     setIsCurrentFormValid,
     setShowModal,
-    handleSubmitClick,
   };
 };
 

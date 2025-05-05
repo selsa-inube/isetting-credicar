@@ -25,7 +25,6 @@ const ToggleGeneralDecision = (props: IToggleGeneralDecision) => {
           name={name}
           onChange={onToggle}
           value={name}
-          padding="0px"
           size="large"
         />
         <Text size="medium" weight="bold" appearance={appearance}>
