@@ -1,49 +1,22 @@
 import { MdInfoOutline, MdOutlineAdd } from "react-icons/md";
-import { FormikProps } from "formik";
 import { Button, Stack } from "@inubekit/inubekit";
-
 import { tokens } from "@design/tokens";
 import { Table } from "@design/data/table";
 import { ComponentAppearance } from "@enum/appearances";
-import { IEntry } from "@design/data/table/types";
 import {
-  actions,
   breakPoints,
   titles,
+  actionsConfig,
 } from "@config/payrollAgreement/payrollAgreementTab/assisted/ordinaryCyclesTable";
-import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
 import { AddCycleModal } from "@design/modals/addCycleModal";
-import { IServerDomain } from "@ptypes/IServerDomain";
 import { DecisionModal } from "@design/modals/decisionModal";
-import { IMessageModal } from "@ptypes/decisions/IMessageModal";
+import { IRegularPaymentCyclesFormUI } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IRegularPaymentCyclesFormUI";
+import { cyclespaymentLabels } from "@config/payrollAgreement/payrollAgreementTab/forms/cyclespaymentLabels";
 import {
   StyledContainer,
   StyledContainerFields,
   StyledFormContent,
 } from "./styles";
-
-interface IRegularPaymentCyclesFormUI {
-  editDataOption: boolean;
-  entries: IEntry[];
-  formik: FormikProps<IOrdinaryCyclesEntry>;
-  infoModal: IMessageModal;
-  loading: boolean;
-  numberDaysUntilCutOptions: IServerDomain[];
-  paydayOptions: IServerDomain[];
-  periodicityOptions: IServerDomain[];
-  showAddModal: boolean;
-  showInfoModal: boolean;
-  valuesEqual: boolean;
-  isMobile: boolean;
-  onToggleInfoModal: () => void;
-  onAddCycle: () => void;
-  onToggleModal: () => void;
-  onButtonClick: () => void;
-  onReset: () => void;
-  onChange: (name: string, value: string) => void;
-  onPreviousStep: () => void;
-  isDisabledButton?: boolean;
-}
 
 const RegularPaymentCyclesFormUI = (props: IRegularPaymentCyclesFormUI) => {
   const {
@@ -60,11 +33,11 @@ const RegularPaymentCyclesFormUI = (props: IRegularPaymentCyclesFormUI) => {
     showInfoModal,
     valuesEqual,
     isMobile,
+    setEntryDeleted,
     onChange,
     onAddCycle,
     onToggleInfoModal,
     onButtonClick,
-    onReset,
     onToggleModal,
     onPreviousStep,
   } = props;
@@ -86,19 +59,19 @@ const RegularPaymentCyclesFormUI = (props: IRegularPaymentCyclesFormUI) => {
                 onClick={onToggleModal}
                 appearance={ComponentAppearance.PRIMARY}
               >
-                Agregar ciclo de pago
+                {cyclespaymentLabels.titlePaymentCycle}
               </Button>
 
               <Table
                 id="portal"
                 titles={titles}
                 entries={entries}
-                actions={actions}
+                actions={actionsConfig(setEntryDeleted)}
                 breakpoints={breakPoints}
                 isLoading={loading}
                 columnWidths={[8, 30, 20, 18, 15]}
                 withActionsTitles
-                emptyDataMessage="Aún no hay ningún ciclo de pago registrado, presiona “+ Agregar ciclo de pago” para empezar."
+                emptyDataMessage={cyclespaymentLabels.emptyDataMessage}
               />
             </Stack>
           </StyledContainerFields>
@@ -107,12 +80,13 @@ const RegularPaymentCyclesFormUI = (props: IRegularPaymentCyclesFormUI) => {
       <Stack justifyContent="flex-end" gap={tokens.spacing.s250}>
         <Button
           fullwidth={isMobile}
-          onClick={editDataOption ? onReset : onPreviousStep}
+          onClick={onPreviousStep}
           appearance={ComponentAppearance.GRAY}
-          disabled={editDataOption ? valuesEqual : false}
           variant="outlined"
         >
-          {editDataOption ? "Cancelar" : "Anterior"}
+          {editDataOption
+            ? cyclespaymentLabels.cancelButton
+            : cyclespaymentLabels.previousButton}
         </Button>
 
         <Button
@@ -124,17 +98,19 @@ const RegularPaymentCyclesFormUI = (props: IRegularPaymentCyclesFormUI) => {
           loading={loading}
           appearance={ComponentAppearance.PRIMARY}
         >
-          {editDataOption ? "Guardar" : "Siguiente"}
+          {editDataOption
+            ? cyclespaymentLabels.sendButton
+            : cyclespaymentLabels.nextButton}
         </Button>
       </Stack>
       {showAddModal && (
         <AddCycleModal
-          actionText="Agregar"
+          actionText={cyclespaymentLabels.actionText}
           comparisonData={valuesEqual}
           formik={formik}
           isLoading={loading}
           portalId="portal"
-          title="Agregar ciclo de pago"
+          title={cyclespaymentLabels.addPaymentCycle}
           isOrdinary={true}
           periodicityOptions={periodicityOptions}
           paydayOptions={paydayOptions}

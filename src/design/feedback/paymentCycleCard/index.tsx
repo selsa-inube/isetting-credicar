@@ -5,7 +5,7 @@ import { tokens } from "@design/tokens";
 import { mediaQueryMobile } from "@config/environment";
 import { ComponentAppearance } from "@enum/appearances";
 import { IEntry } from "@design/data/table/types";
-import { ILabel } from "@design/modals/detailsRequestsInProgressModal/types";
+import { ILabel } from "@ptypes/ILabel";
 import { StyledCard } from "./styles";
 
 interface IPaymentCycleCard {

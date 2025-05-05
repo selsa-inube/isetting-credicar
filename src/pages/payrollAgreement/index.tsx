@@ -6,18 +6,29 @@ import { payrollAgreementTabsConfig } from "@config/payrollAgreement/tabs";
 import { usePayrollAgreementPage } from "@hooks/payrollAgreement/usePayrollAgreementPage";
 import { PayrollAgreementUI } from "./interface";
 
-function PayrollAgreement() {
+const PayrollAgreement = () => {
   const { businessUnitSigla } = useContext(AuthAndPortalData);
-  const { isSelected, descriptionOptions, handleTabChange } =
-  usePayrollAgreementPage(businessUnitSigla);
+  const {
+    isSelected,
+    descriptionOptions,
+    showPayrollAgreementTab,
+    showRequestsInProgressTab,
+    smallScreen,
+    smallScreenTab,
+    handleTabChange,
+  } = usePayrollAgreementPage({ businessUnitSigla });
 
   return (
     <PayrollAgreementUI
       isSelected={isSelected ?? payrollAgreementTabsConfig.payrollAgreement.id}
       handleTabChange={handleTabChange}
       descriptionOptions={descriptionOptions as ICardData}
+      showPayrollAgreementTab={showPayrollAgreementTab}
+      showRequestsInProgressTab={showRequestsInProgressTab}
+      smallScreen={smallScreen}
+      smallScreenTab={smallScreenTab}
     />
   );
-}
+};
 
 export { PayrollAgreement };

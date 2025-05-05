@@ -11,6 +11,7 @@ import { formatDate } from "@utils/date/formatDate";
 import { formatDateDecision } from "@utils/date/formatDateDecision";
 import { arraysEqual } from "@utils/destination/arraysEqual";
 import { findDecision } from "@utils/destination/findDecision";
+import { TransactionOperation } from "@enum/transactionOperation";
 
 const useEditDestination = (
   data: {
@@ -22,10 +23,10 @@ const useEditDestination = (
   appData: IAppData,
 ) => {
   const initialGeneralInfData = {
-    nameDestination: data.nameDestination,
-    description: data.description,
-    icon: data.icon,
-    id: data.id,
+    nameDestination: data.nameDestination ?? "",
+    description: data.description ?? "",
+    icon: data.icon ?? "",
+    id: data.id ?? "",
   };
 
   const [isSelected, setIsSelected] = useState<string>(
@@ -113,7 +114,7 @@ const useEditDestination = (
               }) as ICondition[],
             effectiveFrom: formatDateDecision(decision.effectiveFrom as string),
             value: decision.value,
-            transactionOperation: "Insert",
+            transactionOperation: TransactionOperation.INSERT,
           };
 
           if (decision.validUntil) {
@@ -146,7 +147,7 @@ const useEditDestination = (
               }) as ICondition[],
             effectiveFrom: formatDateDecision(decision.effectiveFrom as string),
             value: decision.value,
-            transactionOperation: "Delete",
+            transactionOperation: TransactionOperation.DELETE,
           };
 
           if (decision.validUntil) {

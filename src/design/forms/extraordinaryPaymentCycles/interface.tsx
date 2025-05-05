@@ -1,58 +1,44 @@
 import { MdOutlineAdd } from "react-icons/md";
-import { FormikProps } from "formik";
 import { Button, Stack } from "@inubekit/inubekit";
-
 import { tokens } from "@design/tokens";
 import { Table } from "@design/data/table";
 import { ComponentAppearance } from "@enum/appearances";
-import { IEntry } from "@design/data/table/types";
 import {
-  actions,
   breakPoints,
   titles,
+  actionsConfig,
 } from "@config/payrollAgreement/payrollAgreementTab/assisted/extraordinaryCyclesTable";
-import { IExtraordinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IExtraordinaryCyclesEntry";
+import { AddCycleModal } from "@design/modals/addCycleModal";
+import { cyclespaymentLabels } from "@config/payrollAgreement/payrollAgreementTab/forms/cyclespaymentLabels";
+import { IExtraordinaryPaymentCyclesFormUI } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IExtraordinaryPaymentCyclesFormUI";
 import {
   StyledContainer,
   StyledContainerFields,
   StyledFormContent,
 } from "./styles";
 
-interface IExtraordinaryPaymentCyclesFormUI {
-  formik: FormikProps<IExtraordinaryCyclesEntry>;
-  entries: IEntry[];
-  editDataOption: boolean;
-  valuesEqual: boolean;
-  loading: boolean;
-  showModal: boolean;
-  isMobile: boolean;
-  onAddCycle: () => void;
-  onToggleModal: () => void;
-  onButtonClick: () => void;
-  onReset: () => void;
-  onChange: (name: string, value: string) => void;
-  onPreviousStep: () => void;
-  isDisabledButton?: boolean;
-}
-
 const ExtraordinaryPaymentCyclesFormUI = (
   props: IExtraordinaryPaymentCyclesFormUI,
 ) => {
   const {
-    //formik,
+    formik,
     loading,
     editDataOption,
     entries,
     showModal,
-    // onChange,
-    // onAddCycle,
     valuesEqual,
     isDisabledButton,
     isMobile,
+    typePaymentOptions,
+    monthOptions,
+    dayOptions,
+    numberDaysUntilCutOptions,
+    onChange,
+    onAddCycle,
     onButtonClick,
-    onReset,
     onToggleModal,
     onPreviousStep,
+    setEntryDeleted,
   } = props;
 
   return (
@@ -72,19 +58,19 @@ const ExtraordinaryPaymentCyclesFormUI = (
                 onClick={onToggleModal}
                 appearance={ComponentAppearance.PRIMARY}
               >
-                Agregar ciclo de pago
+                {cyclespaymentLabels.titlePaymentCycle}
               </Button>
 
               <Table
                 id="portal"
                 titles={titles}
                 entries={entries}
-                actions={actions}
+                actions={actionsConfig(setEntryDeleted)}
                 breakpoints={breakPoints}
                 isLoading={loading}
-                columnWidths={[38, 20, 18, 15]}
+                columnWidths={[50, 12, 10, 14]}
                 withActionsTitles
-                emptyDataMessage="Aún no hay ningún ciclo de pago registrado, presiona “+ Agregar ciclo de pago” para empezar."
+                emptyDataMessage={cyclespaymentLabels.emptyDataMessage}
               />
             </Stack>
           </StyledContainerFields>
@@ -93,25 +79,45 @@ const ExtraordinaryPaymentCyclesFormUI = (
       <Stack justifyContent="flex-end" gap={tokens.spacing.s250}>
         <Button
           fullwidth={isMobile}
-          onClick={editDataOption ? onReset : onPreviousStep}
+          onClick={onPreviousStep}
           appearance={ComponentAppearance.GRAY}
-          disabled={editDataOption ? valuesEqual : false}
           variant="outlined"
         >
-          {editDataOption ? "Cancelar" : "Anterior"}
+          {editDataOption
+            ? cyclespaymentLabels.cancelButton
+            : cyclespaymentLabels.previousButton}
         </Button>
 
         <Button
           fullwidth={isMobile}
           onClick={onButtonClick}
-          disabled={editDataOption ? isDisabledButton && !loading : true}
+          disabled={isDisabledButton}
           loading={loading}
           appearance={ComponentAppearance.PRIMARY}
         >
-          {editDataOption ? "Guardar" : "Siguiente"}
+          {editDataOption
+            ? cyclespaymentLabels.sendButton
+            : cyclespaymentLabels.nextButton}
         </Button>
       </Stack>
-      {showModal && <></>}
+      {showModal && (
+        <AddCycleModal
+          actionText={cyclespaymentLabels.actionText}
+          comparisonData={valuesEqual}
+          formik={formik}
+          isLoading={loading}
+          portalId="portal"
+          title={cyclespaymentLabels.addPaymentCycle}
+          isExtraordinary
+          typePaymentOptions={typePaymentOptions}
+          monthOptions={monthOptions}
+          dayOptions={dayOptions}
+          numberDaysUntilCutOptions={numberDaysUntilCutOptions}
+          onCloseModal={onToggleModal}
+          onClick={onAddCycle}
+          onChange={onChange}
+        />
+      )}
     </StyledContainer>
   );
 };

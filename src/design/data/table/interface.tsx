@@ -98,8 +98,15 @@ const TableUI = (props: ITableUI) => {
             {entriesLength === 0 ? (
               <Tr>
                 <Td type="custom" colSpan={titles.length + actions.length}>
-                  <Text type="label" size="large" appearance="dark" ellipsis>
-                    {`${emptyDataMessage}` || "No se encontró información"}
+                  <Text
+                    type="label"
+                    size={mediaActionOpen ? "medium" : "large"}
+                    appearance="dark"
+                    ellipsis
+                  >
+                    {emptyDataMessage
+                      ? `${emptyDataMessage}`
+                      : "No se encontró información"}
                   </Text>
                 </Td>
               </Tr>
@@ -108,9 +115,9 @@ const TableUI = (props: ITableUI) => {
                 {entries.length > 0 ? (
                   entries.map((entry, index) => (
                     <Tr key={index} zebra={index % 2 === 1}>
-                      {TitleColumns.map((title) => (
+                      {TitleColumns.map((title, index) => (
                         <Td
-                          key={`e-${entry[title.id]}`}
+                          key={`${index}-${entry[title.id]}`}
                           align={entry.action ? "center" : "left"}
                           type="custom"
                         >

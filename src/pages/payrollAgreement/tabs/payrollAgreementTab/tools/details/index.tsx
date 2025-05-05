@@ -1,13 +1,11 @@
 import { IEntry } from "@design/data/table/types";
-import { DetailsPayrollAgreement } from "@design/feedback/detailsPayrollAgreement";
+
 import { useDetailsPayrollAgreement } from "@hooks/payrollAgreement/useDetailsPayrollAgreement";
 import { detailsPayrollAgreementTabsConfig } from "@config/payrollAgreement/payrollAgreementTab/details/tabs";
 import { labelsDetails } from "@config/payrollAgreement/payrollAgreementTab/details/labels";
 import { labelsPaymentCard } from "@config/payrollAgreement/payrollAgreementTab/details/labelsPaymentCard";
-
-interface IDetails {
-  data: IEntry;
-}
+import { IDetails } from "@ptypes/payrollAgreement/payrollAgreementTab/IDetails";
+import { DetailsUI } from "./interface";
 
 const Details = (props: IDetails) => {
   const { data } = props;
@@ -19,15 +17,19 @@ const Details = (props: IDetails) => {
     isMobile,
     filteredTabsConfig,
     defaultSelectedTab,
+    screenTablet,
     ordinaryPaymentData,
     extraordinaryPaymentData,
     handleTabChange,
     handleToggleModal,
-  } = useDetailsPayrollAgreement(data, detailsPayrollAgreementTabsConfig);
+  } = useDetailsPayrollAgreement({
+    data,
+    detailsTabsConfig: detailsPayrollAgreementTabsConfig,
+  });
 
   return (
-    <DetailsPayrollAgreement
-      namePayroll={data.abbreviatedName ?? ""}
+    <DetailsUI
+      abbreviatedName={data.abbreviatedName ?? ""}
       showModal={showModal}
       onToggleModal={handleToggleModal}
       isSelected={isSelected ?? defaultSelectedTab ?? ""}
@@ -41,6 +43,7 @@ const Details = (props: IDetails) => {
       ordinaryPaymentData={ordinaryPaymentData()}
       extraordinaryPaymentData={extraordinaryPaymentData() as IEntry[]}
       onTabChange={handleTabChange}
+      screenTablet={screenTablet}
     />
   );
 };

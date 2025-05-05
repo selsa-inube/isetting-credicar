@@ -1,4 +1,4 @@
-import { useEffect, useImperativeHandle, useState } from "react";
+import { useContext, useEffect, useImperativeHandle, useState } from "react";
 import { FormikProps, useFormik } from "formik";
 import { useMediaQuery } from "@inubekit/inubekit";
 import { object } from "yup";
@@ -7,12 +7,16 @@ import { validationRules } from "@validations/validationRules";
 import { validationMessages } from "@validations/validationMessages";
 import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
 import { IEntry } from "@design/data/table/types";
-import { getDomainById } from "@mocks/domains/domainService.mocks";
 import { IServerDomain } from "@ptypes/IServerDomain";
 import { payDayOrdinaryOptions } from "@utils/payDayOrdinary";
 import { addLeadingZero } from "@utils/addLeadingZero";
 import { courtDaysOrdinaryOptions } from "@utils/courtDaysOrdinary";
 import { payDayValues } from "@utils/payDayValues";
+import { useEnumerators } from "@hooks/useEnumerators";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
+import { optionsFromEnumerators } from "@utils/optionsFromEnumerators";
+import { normalizeEnumTranslation } from "@utils/normalizeEnumTranslation";
+import { compareObjects } from "@utils/compareObjects";
 
 const useOrdinaryCyclesForm = (
   ref: React.ForwardedRef<FormikProps<IOrdinaryCyclesEntry>>,
@@ -24,6 +28,7 @@ const useOrdinaryCyclesForm = (
   setRegularPaymentCycles: React.Dispatch<
     React.SetStateAction<IOrdinaryCyclesEntry[]>
   >,
+  initialData?: IOrdinaryCyclesEntry[],
 ) => {
   const createValidationSchema = () =>
     object().shape({
@@ -60,6 +65,7 @@ const useOrdinaryCyclesForm = (
   const [entries, setEntries] = useState<IEntry[]>(
     regularPaymentCycles as IEntry[],
   );
+  const [entryDeleted, setEntryDeleted] = useState<string | number>("");
   const [paydayOptions, setPaydayOptions] = useState<
     IServerDomain[] | undefined
   >([]);
@@ -67,7 +73,13 @@ const useOrdinaryCyclesForm = (
     IServerDomain[] | undefined
   >([]);
 
-  const periodicityOptions = getDomainById("periodicity");
+  const { appData } = useContext(AuthAndPortalData);
+  const { enumData: periodicity } = useEnumerators(
+    "schedule",
+    appData.businessUnit.publicCode,
+  );
+
+  const periodicityOptions = optionsFromEnumerators(periodicity);
 
   useImperativeHandle(ref, () => formik);
 
@@ -85,7 +97,14 @@ const useOrdinaryCyclesForm = (
   };
 
   useEffect(() => {
+    if (!formik.values.periodicity) {
+      formik.setFieldValue("payday", "");
+      setPaydayOptions([]);
+      setNumberDaysUntilCutOptions([]);
+    }
+
     if (formik.values.periodicity) {
+      formik.setFieldValue("payday", "");
       const Payday = payDayOrdinaryOptions(formik.values.periodicity);
       setPaydayOptions(Payday);
 
@@ -93,29 +112,32 @@ const useOrdinaryCyclesForm = (
         formik.values.periodicity,
       );
       setNumberDaysUntilCutOptions(numberDaysUntilCut);
-    } else {
-      setPaydayOptions([]);
-      setNumberDaysUntilCutOptions([]);
     }
   }, [formik.values.periodicity]);
 
   const valuesEqual =
     JSON.stringify(initialValues) === JSON.stringify(formik.values);
 
-  const valuesEmpty = Object.values(formik.values).every(
-    (value) => value === "" || value === null || value === undefined,
-  );
+  const valuesEqualBoton = compareObjects(initialData, entries);
 
   useEffect(() => {
     const updateButton = () => {
       if (editDataOption) {
-        setIsDisabledButton(!formik.isValid || valuesEmpty);
+        setIsDisabledButton(entries.length === 0 || valuesEqualBoton);
       } else {
         setIsDisabledButton(loading ?? !formik.isValid);
       }
     };
     updateButton();
-  }, [formik.values, loading, formik.isValid, initialValues, editDataOption]);
+  }, [
+    entries,
+    loading,
+    initialData,
+    entries,
+    formik.isValid,
+    initialValues,
+    editDataOption,
+  ]);
 
   const handleToggleModal = () => {
     setPaydayOptions([]);
@@ -132,7 +154,9 @@ const useOrdinaryCyclesForm = (
     id: `cycle-${addLeadingZero(id).toString()}`,
     cycleId: addLeadingZero(id).toString(),
     nameCycle: formik.values.nameCycle,
-    periodicity: formik.values.periodicity,
+    periodicity:
+      normalizeEnumTranslation(formik.values.periodicity)?.name ??
+      formik.values.periodicity,
     payday: payDayValues(formik.values.periodicity, formik.values.payday),
     numberDaysUntilCut: formik.values.numberDaysUntilCut,
   });
@@ -152,9 +176,15 @@ const useOrdinaryCyclesForm = (
     setShowAddModal(false);
   };
 
-  const handleReset = () => {
-    formik.resetForm();
-  };
+  useEffect(() => {
+    if (entryDeleted) {
+      setEntries((prev) => prev.filter((entry) => entry.id !== entryDeleted));
+
+      setRegularPaymentCycles((prev) =>
+        prev.filter((entry) => entry.id !== entryDeleted),
+      );
+    }
+  }, [entryDeleted]);
 
   return {
     formik,
@@ -169,9 +199,9 @@ const useOrdinaryCyclesForm = (
     isMobile,
     onToggleInfoModal,
     handleChange,
-    handleReset,
     handleAddCycle,
     handleToggleModal,
+    setEntryDeleted,
   };
 };
 

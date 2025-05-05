@@ -1,9 +1,16 @@
+import { useContext } from "react";
 import { addPayrollAgreementSteps } from "@config/payrollAgreement/payrollAgreementTab/assisted/steps";
 import { useAddPayrollAgreement } from "@hooks/payrollAgreement/useAddPayrollAgreement";
 import { IOrdinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IOrdinaryCyclesEntry";
+import { useSavePayrollAgreement } from "@hooks/payrollAgreement/useSavePayrollAgreement";
+import { ISaveDataRequest } from "@ptypes/saveData/ISaveDataRequest";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
+import { ISaveDataResponse } from "@ptypes/saveData/ISaveDataResponse";
+import { IServerDomain } from "@ptypes/IServerDomain";
 import { AddPayrollAgreementUI } from "./interface";
 
 function AddPayrollAgreement() {
+  const { appData } = useContext(AuthAndPortalData);
   const {
     currentStep,
     formValues,
@@ -14,16 +21,41 @@ function AddPayrollAgreement() {
     smallScreen,
     regularPaymentCycles,
     extraordinaryPayment,
-    setSourcesOfIncomeValues,
+    typeRegularPayroll,
+    showModal,
+    showRequestProcessModal,
+    saveData,
+    handleCloseModal,
+    handleGoBack,
     handleNextStep,
+    handleOpenModal,
     handlePreviousStep,
+    handleSubmitClick,
+    handleToggleModal,
+    setCurrentStep,
+    setExtraordinaryPayment,
     setIsCurrentFormValid,
     setRegularPaymentCycles,
-    handleGoBack,
-    handleOpenModal,
-    handleCloseModal,
-    setExtraordinaryPayment,
-  } = useAddPayrollAgreement();
+    setShowModal,
+    setShowRequestProcessModal,
+    setSourcesOfIncomeValues,
+  } = useAddPayrollAgreement(appData);
+
+  const {
+    savePayrollAgreement,
+    requestSteps,
+    loadingSendData,
+    showPendingReqModal,
+    handleCloseRequestStatus,
+    handleClosePendingReqModal,
+  } = useSavePayrollAgreement(
+    appData.businessUnit.publicCode,
+    appData.user.userAccount,
+    showRequestProcessModal,
+    saveData as ISaveDataRequest,
+    setShowRequestProcessModal,
+    setShowModal,
+  );
 
   return (
     <AddPayrollAgreementUI
@@ -35,21 +67,38 @@ function AddPayrollAgreement() {
       onNextStep={handleNextStep}
       onPreviousStep={handlePreviousStep}
       setIsCurrentFormValid={setIsCurrentFormValid}
-      sourcesOfIncomeValues={sourcesOfIncomeValues}
-      setSourcesOfIncomeValues={setSourcesOfIncomeValues}
+      sourcesOfIncomeValues={sourcesOfIncomeValues ?? []}
+      setSourcesOfIncomeValues={
+        setSourcesOfIncomeValues as React.Dispatch<
+          React.SetStateAction<IServerDomain[]>
+        >
+      }
       onGoBack={handleGoBack}
       showGoBackModal={showGoBackModal}
       onOpenModal={handleOpenModal}
       onCloseModal={handleCloseModal}
       smallScreen={smallScreen}
+      setExtraordinaryPayment={setExtraordinaryPayment}
+      extraordinaryPayment={extraordinaryPayment}
+      typeRegularPayroll={typeRegularPayroll}
       regularPaymentCycles={regularPaymentCycles as IOrdinaryCyclesEntry[]}
       setRegularPaymentCycles={
         setRegularPaymentCycles as React.Dispatch<
           React.SetStateAction<IOrdinaryCyclesEntry[]>
         >
       }
-      extraordinaryPayment={extraordinaryPayment}
-      setExtraordinaryPayment={setExtraordinaryPayment}
+      isCurrentFormValid={formValid}
+      showModal={showModal}
+      onToggleModal={handleToggleModal}
+      onCloseRequestStatus={handleCloseRequestStatus}
+      onClosePendingReqModal={handleClosePendingReqModal}
+      showPendingReqModal={showPendingReqModal}
+      showRequestProcessModal={showRequestProcessModal}
+      requestSteps={requestSteps}
+      savePayrollAgreement={savePayrollAgreement as ISaveDataResponse}
+      loading={loadingSendData}
+      onFinishForm={handleSubmitClick}
+      setCurrentStep={setCurrentStep}
     />
   );
 }

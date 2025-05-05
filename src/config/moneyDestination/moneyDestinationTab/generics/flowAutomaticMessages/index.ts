@@ -1,10 +1,9 @@
-import { ComponentAppearance } from "@src/enum/appearances";
+import { ComponentAppearance } from "@enum/appearances";
 
 const flowAutomaticMessages = {
   errorSendingData: {
-    title: "Error al enviar los datos",
-    description:
-      "No fue posible al enviar los datos, por favor intenta más tarde",
+    title: "¡Ups! Algo salió mal",
+    description: "La solicitud de edición no se pudo radicar correctamente",
     appearance: ComponentAppearance.DANGER,
     duration: 5000,
   },

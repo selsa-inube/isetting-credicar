@@ -2,15 +2,15 @@ const payDayValues = (periodicity: string, payDay: string) => {
   const everyTen = Number(payDay) + 10;
 
   switch (periodicity) {
-    case "Semanal":
+    case "weekly":
       return payDay;
-    case "Cada 10 días":
+    case "Intervals_10_days":
       return `${payDay}, ${everyTen}, ${Number(everyTen) + 10}`;
-    case "Quincenal":
+    case "Biweekly":
       return `${payDay}, ${Number(payDay) + 15}`;
-    case "Mensual":
+    case "Monthly":
       return payDay;
-    case "Bimensual":
+    case "Semimonthly":
       return payDay;
     default:
       return payDay;

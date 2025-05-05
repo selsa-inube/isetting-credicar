@@ -3,20 +3,8 @@ import { FormikProps } from "formik";
 
 import { IExtraordinaryCyclesEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IExtraordinaryCyclesEntry";
 import { useExtraordinaryCyclesForm } from "@hooks/payrollAgreement/useExtraordinaryCyclesForm";
+import { IExtraordinaryPaymentCyclesForm } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IExtraordinaryPaymentCyclesForm";
 import { ExtraordinaryPaymentCyclesFormUI } from "./interface";
-
-interface IExtraordinaryPaymentCyclesForm {
-  extraordinaryPayment: IExtraordinaryCyclesEntry[];
-  setExtraordinaryPayment: React.Dispatch<
-    React.SetStateAction<IExtraordinaryCyclesEntry[]>
-  >;
-  onButtonClick: () => void;
-  onPreviousStep: () => void;
-  loading?: boolean;
-  onFormValid?: React.Dispatch<React.SetStateAction<boolean>>;
-  onSubmit?: (values: IExtraordinaryCyclesEntry) => void;
-  editDataOption?: boolean;
-}
 
 const ExtraordinaryPaymentCyclesForm = forwardRef<
   FormikProps<IExtraordinaryCyclesEntry>,
@@ -25,6 +13,8 @@ const ExtraordinaryPaymentCyclesForm = forwardRef<
   (
     {
       extraordinaryPayment,
+      typeRegularPayroll,
+      regularPaymentCycles,
       setExtraordinaryPayment,
       onFormValid,
       onSubmit,
@@ -32,6 +22,7 @@ const ExtraordinaryPaymentCyclesForm = forwardRef<
       onPreviousStep,
       loading = false,
       editDataOption = false,
+      initialData,
     },
     ref,
   ) => {
@@ -42,18 +33,25 @@ const ExtraordinaryPaymentCyclesForm = forwardRef<
       entries,
       showModal,
       isMobile,
+      typePaymentOptions,
+      numberDaysUntilCutOptions,
+      monthOptions,
+      dayOptions,
       handleToggleModal,
       handleChange,
-      handleReset,
       handleAddCycle,
+      setEntryDeleted,
     } = useExtraordinaryCyclesForm(
       ref,
       editDataOption,
+      typeRegularPayroll,
       loading,
       onSubmit,
       onFormValid,
       extraordinaryPayment,
       setExtraordinaryPayment,
+      regularPaymentCycles,
+      initialData,
     );
 
     return (
@@ -67,11 +65,15 @@ const ExtraordinaryPaymentCyclesForm = forwardRef<
         valuesEqual={valuesEqual}
         showModal={showModal}
         onToggleModal={handleToggleModal}
-        onReset={handleReset}
         entries={entries}
         onAddCycle={handleAddCycle}
         onPreviousStep={onPreviousStep}
         isMobile={isMobile}
+        typePaymentOptions={typePaymentOptions}
+        numberDaysUntilCutOptions={numberDaysUntilCutOptions}
+        monthOptions={monthOptions}
+        dayOptions={dayOptions ?? []}
+        setEntryDeleted={setEntryDeleted}
       />
     );
   },

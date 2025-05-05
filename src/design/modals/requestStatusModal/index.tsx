@@ -13,7 +13,7 @@ import {
 
 import { tokens } from "@design/tokens";
 import { ComponentAppearance } from "@enum/appearances";
-import { StyledContainerButton, StyledModal } from "./styles";
+import { StyledModal } from "./styles";
 
 interface IRequestStatusModal {
   portalId: string;
@@ -58,22 +58,21 @@ const RequestStatusModal = (props: IRequestStatusModal) => {
             <Text type="headline" size="small" weight="bold" appearance="dark">
               {title}
             </Text>
-            <StyledContainerButton>
-              <Button
-                spacing="compact"
-                appearance={ComponentAppearance.DARK}
-                variant="none"
-                onClick={onCloseModal}
-                iconAfter={
-                  <Icon
-                    appearance={ComponentAppearance.DARK}
-                    icon={<MdClear />}
-                  />
-                }
-              >
-                Cerrar
-              </Button>
-            </StyledContainerButton>
+
+            <Button
+              spacing="compact"
+              appearance={ComponentAppearance.DARK}
+              variant="none"
+              onClick={onCloseModal}
+              iconAfter={
+                <Icon
+                  appearance={ComponentAppearance.DARK}
+                  icon={<MdClear />}
+                />
+              }
+            >
+              Cerrar
+            </Button>
           </Stack>
           <Divider />
         </Stack>
@@ -82,7 +81,7 @@ const RequestStatusModal = (props: IRequestStatusModal) => {
           <Icon
             icon={<MdCheckCircle />}
             appearance={ComponentAppearance.SUCCESS}
-            size={isMobile ? "50px" : "68px"}
+            size="68px"
           />
         </Stack>
 
@@ -91,28 +90,26 @@ const RequestStatusModal = (props: IRequestStatusModal) => {
             <Text
               textAlign="center"
               appearance={ComponentAppearance.DARK}
-              size={isMobile ? "medium" : "large"}
+              size="large"
               weight="bold"
             >
               {`Solicitud # ${requestNumber}`}
             </Text>
           </Stack>
 
-          <Text
-            appearance={ComponentAppearance.GRAY}
-            size={isMobile ? "small" : "medium"}
-          >
+          <Text appearance={ComponentAppearance.GRAY} size="medium">
             {description}
           </Text>
         </Stack>
 
-        <Stack justifyContent="flex-end">
+        <Stack width="100%" justifyContent="flex-end">
           <Button
             spacing="wide"
             appearance={appearance}
             variant="filled"
             loading={isLoading}
             onClick={onClick}
+            fullwidth={isMobile ? true : false}
           >
             {actionText}
           </Button>

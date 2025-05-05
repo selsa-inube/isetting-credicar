@@ -1,4 +1,10 @@
-import { useEffect, useImperativeHandle, useRef, useState } from "react";
+import {
+  useContext,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import { FormikProps, useFormik } from "formik";
 import { useMediaQuery } from "@inubekit/inubekit";
 import { object } from "yup";
@@ -8,6 +14,9 @@ import { validationMessages } from "@validations/validationMessages";
 import { IGeneralInformationEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/IGeneralInformationPayroll";
 import { getDomainById } from "@mocks/domains/domainService.mocks";
 import { IServerDomain } from "@ptypes/IServerDomain";
+import { useEnumerators } from "@hooks/useEnumerators";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
+import { optionsFromEnumerators } from "@utils/optionsFromEnumerators";
 
 const useGeneralInformationForm = (
   initialValues: IGeneralInformationEntry,
@@ -20,10 +29,13 @@ const useGeneralInformationForm = (
   setSourcesOfIncomeValues: React.Dispatch<
     React.SetStateAction<IServerDomain[]>
   >,
+  initialGeneralInfData?: IGeneralInformationEntry,
 ) => {
   const createValidationSchema = () =>
     object().shape({
-      namePayroll: validationRules.string.required(validationMessages.required),
+      abbreviatedName: validationRules.string.required(
+        validationMessages.required,
+      ),
       typePayroll: validationRules.string.required(validationMessages.required),
       sourcesOfIncome: validationRules.string.required(
         validationMessages.required,
@@ -50,6 +62,14 @@ const useGeneralInformationForm = (
   const [focused, setFocused] = useState(false);
   const [displayList, setDisplayList] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
+
+  const { appData } = useContext(AuthAndPortalData);
+  const { enumData: typePayroll } = useEnumerators(
+    "deductionagreementtype",
+    appData.businessUnit.publicCode,
+  );
+
+  const typePayrollOptions = optionsFromEnumerators(typePayroll);
 
   const isMobile = useMediaQuery("(max-width: 990px)");
 
@@ -99,12 +119,15 @@ const useGeneralInformationForm = (
     (value) => value === "" || value === null || value === undefined,
   );
 
+  const valuesEqualBoton =
+    JSON.stringify(initialGeneralInfData) === JSON.stringify(formik.values);
+
   useEffect(() => {
     const updateButton = () => {
       if (editDataOption) {
-        setIsDisabledButton(!formik.isValid || valuesEmpty);
+        setIsDisabledButton(!formik.isValid || valuesEmpty || valuesEqualBoton);
       } else {
-        setIsDisabledButton(loading ?? !formik.isValid);
+        setIsDisabledButton(!formik.isValid);
       }
     };
     updateButton();
@@ -130,6 +153,7 @@ const useGeneralInformationForm = (
     focused,
     displayList,
     selectRef,
+    typePayrollOptions,
     setFocused,
     setDisplayList,
     handleChangeSelect,

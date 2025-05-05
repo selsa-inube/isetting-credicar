@@ -1,10 +1,16 @@
-import { useEffect, useImperativeHandle, useState } from "react";
+import { useContext, useEffect, useImperativeHandle, useState } from "react";
+import { useMediaQuery } from "@inubekit/inubekit";
 import { FormikProps, useFormik } from "formik";
 import { object } from "yup";
 
 import { validationRules } from "@validations/validationRules";
 import { validationMessages } from "@validations/validationMessages";
 import { ICompanyEntry } from "@ptypes/payrollAgreement/payrollAgreementTab/forms/ICompanyEntry";
+import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
+import { useCountries } from "@hooks/generic/useCountries";
+import { useCities } from "@hooks/generic/useCities";
+import { alertModal } from "@config/payrollAgreement/payrollAgreementTab/generic/alertModal";
+import { useLegalPerson } from "../useLegalPerson";
 
 const useCompanyForm = (
   initialValues: ICompanyEntry,
@@ -19,10 +25,8 @@ const useCompanyForm = (
     companyName: validationRules.string,
     companyTypeIdent: validationRules.string,
     companyNumberIdent: validationRules.string,
-    companyVerifDigit: validationRules.string,
-    companyDateIdent: validationRules.string,
     companyNameCommercial: validationRules.string,
-    companyCode: validationRules.string,
+    companyComplement: validationRules.string,
     companyCity: validationRules.string,
     companyAddressRes: validationRules.string,
     companyCountry: validationRules.string,
@@ -40,6 +44,48 @@ const useCompanyForm = (
   });
 
   useImperativeHandle(ref, () => formik);
+
+  const { appData } = useContext(AuthAndPortalData);
+  const { legalPersonOptions, legalPersonData } = useLegalPerson(
+    appData.businessUnit.publicCode,
+  );
+  const { optionsCountries } = useCountries();
+  const { optionsCities } = useCities();
+  const [showModal, setShowModal] = useState(false);
+  const isMobile = useMediaQuery("(max-width: 990px)");
+
+  const legalPersonExists = (companyNumberIdent: string) => {
+    return legalPersonData.find(
+      (item) =>
+        item.identificationDocumentNumber === String(companyNumberIdent),
+    );
+  };
+
+  useEffect(() => {
+    legalPersonExists(formik.values.companyNumberIdent ?? "");
+    const inter = setTimeout(() => {
+      const personExists = legalPersonExists(
+        formik.values.companyNumberIdent ?? "",
+      );
+
+      if (personExists) {
+        setShowModal(true);
+      } else {
+        setShowModal(false);
+      }
+    }, 500);
+
+    return () => {
+      if (inter) {
+        clearTimeout(inter);
+      }
+    };
+  }, [formik.values.companyNumberIdent]);
+
+  const { title, description, actionText, moreDetails } = alertModal(
+    legalPersonExists(formik.values.companyNumberIdent ?? "")
+      ?.legalPersonName ?? "",
+  );
 
   useEffect(() => {
     if (onFormValid) {
@@ -66,19 +112,19 @@ const useCompanyForm = (
           companyTypeIdent: validationRules.string.required(
             validationMessages.required,
           ),
-          companyNumberIdent: validationRules.string.required(
-            validationMessages.required,
-          ),
-          companyVerifDigit: validationRules.string.required(
-            validationMessages.required,
-          ),
-          companyDateIdent: validationRules.string.required(
-            validationMessages.required,
-          ),
+          companyNumberIdent: validationRules.string
+            .required(validationMessages.required)
+            .test(
+              "valid-identification",
+              validationMessages.identification,
+              (value) =>
+                legalPersonExists(value)?.identificationDocumentNumber !==
+                String(value),
+            ),
           companyNameCommercial: validationRules.string.required(
             validationMessages.required,
           ),
-          companyCode: validationRules.string.required(
+          companyComplement: validationRules.string.required(
             validationMessages.required,
           ),
           companyCity: validationRules.string.required(
@@ -114,10 +160,24 @@ const useCompanyForm = (
     });
   };
 
+  const handleToggleAlertModal = () => {
+    setShowModal(!showModal);
+  };
+
   return {
     formik,
+    legalPersonOptions,
+    optionsCountries,
+    optionsCities,
+    isMobile,
+    title,
+    description,
+    actionText,
+    moreDetails,
+    showModal,
     handleChange,
     handleCompanyChange,
+    handleToggleAlertModal,
   };
 };
 

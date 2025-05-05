@@ -5,15 +5,15 @@ import { weeklyPayDayOptions } from "@config/payrollAgreement/payrollAgreementTa
 
 const payDayOrdinaryOptions = (periodicity: string) => {
   switch (periodicity) {
-    case "Semanal":
+    case "weekly":
       return weeklyPayDayOptions;
-    case "Cada 10 días":
+    case "Intervals_10_days":
       return everyTenPayDayOptions;
-    case "Quincenal":
+    case "Biweekly":
       return biweeklyPayDayOptions;
-    case "Mensual":
+    case "Monthly":
       return monthPayDayOptions;
-    case "Bimensual":
+    case "Semimonthly":
       return weeklyPayDayOptions;
   }
 };

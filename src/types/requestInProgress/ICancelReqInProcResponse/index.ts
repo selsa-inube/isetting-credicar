@@ -1,4 +1,4 @@
-import { IConfigurationRequestsTraceability } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/requestsInProgress/IConfigRequestsTraceability";
+import { IConfigurationRequestsTraceability } from "@ptypes/requestInProgress/IConfigRequestsTraceability";
 import { IUserManConfigRequests } from "../IUserManConfigRequests";
 
 interface ICancelReqInProcResponse {

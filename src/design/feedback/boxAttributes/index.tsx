@@ -35,7 +35,7 @@ const BoxAttribute = (props: IBoxAttribute) => {
         templateColumns={direction === "column" ? "1fr" : "auto 1fr"}
         templateRows="auto auto"
         width="100%"
-        gap={isMobile ? tokens.spacing.s050 : tokens.spacing.s100}
+        gap={tokens.spacing.s050}
         alignItems="center"
         justifyContent="space-between"
         height="auto"

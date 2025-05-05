@@ -1,23 +1,23 @@
-import { Stack, Tabs, useMediaQuery, Breadcrumbs } from "@inubekit/inubekit";
+import { Stack, Tabs, Breadcrumbs } from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
 import { Title } from "@design/data/title";
-import { ICardData } from "@ptypes/home/ICardData";
 import { crumbsPayrollAgreement } from "@config/payrollAgreement/navigation";
+import { IPayrollAgreementUI } from "@ptypes/payrollAgreement/requestInProgTab/IPayrollAgreementUI";
 import { payrollAgreementTabsConfig } from "@config/payrollAgreement/tabs";
 import { PayrollAgreementTab } from "./tabs/payrollAgreementTab";
+import { RequestsInProgressTab } from "./tabs/requestsInProgressTab";
 
-interface IPayrollAgreementUI {
-  isSelected: string;
-  descriptionOptions: ICardData;
-  handleTabChange: (id: string) => void;
-}
-
-function PayrollAgreementUI(props: IPayrollAgreementUI) {
-  const { isSelected, descriptionOptions, handleTabChange } = props;
-
-  const smallScreen = useMediaQuery("(max-width: 990px)");
-  const smallScreenTab = useMediaQuery("(max-width: 450px)");
+const PayrollAgreementUI = (props: IPayrollAgreementUI) => {
+  const {
+    isSelected,
+    descriptionOptions,
+    showPayrollAgreementTab,
+    showRequestsInProgressTab,
+    smallScreen,
+    smallScreenTab,
+    handleTabChange,
+  } = props;
 
   return (
     <Stack
@@ -46,16 +46,12 @@ function PayrollAgreementUI(props: IPayrollAgreementUI) {
             scroll={smallScreenTab ? true : false}
           />
 
-          {isSelected === payrollAgreementTabsConfig.payrollAgreement.id && (
-            <PayrollAgreementTab />
-          )}
-          {isSelected === payrollAgreementTabsConfig.requestsInProgress.id && (
-            <></>
-          )}
+          {showPayrollAgreementTab && <PayrollAgreementTab />}
+          {showRequestsInProgressTab && <RequestsInProgressTab />}
         </Stack>
       </Stack>
     </Stack>
   );
-}
+};
 
 export { PayrollAgreementUI };

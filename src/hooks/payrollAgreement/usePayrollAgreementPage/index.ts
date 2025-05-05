@@ -1,13 +1,18 @@
+import { useMediaQuery } from "@inubekit/inubekit";
 import { useContext, useEffect, useState } from "react";
 import { ChangeToRequestTab } from "@context/changeToRequestTab";
 import { decrypt } from "@utils/crypto/decrypt";
 import { useOptionsByBusinessUnit } from "@hooks/staffPortal/useOptionsByBusinessUnit";
 import { payrollAgreementTabsConfig } from "@config/payrollAgreement/tabs";
+import { IUsePayrollAgreementPage } from "@ptypes/hooks/payrollAgreement/IUsePayrollAgreementPage";
 
-const usePayrollAgreementPage = (businessUnitSigla: string) => {
+const usePayrollAgreementPage = (props: IUsePayrollAgreementPage) => {
+  const { businessUnitSigla } = props;
   const portalId = localStorage.getItem("portalCode");
   const staffPortalId = portalId ? decrypt(portalId) : "";
-  const [isSelected, setIsSelected] = useState<string>();
+  const [isSelected, setIsSelected] = useState<string>(
+    payrollAgreementTabsConfig.payrollAgreement.id,
+  );
 
   const { descriptionOptions } = useOptionsByBusinessUnit(
     businessUnitSigla,
@@ -33,9 +38,22 @@ const usePayrollAgreementPage = (businessUnitSigla: string) => {
     }
   }, [isSelected]);
 
+  const smallScreen = useMediaQuery("(max-width: 990px)");
+  const smallScreenTab = useMediaQuery("(max-width: 450px)");
+
+  const showPayrollAgreementTab =
+    isSelected === payrollAgreementTabsConfig.payrollAgreement.id;
+
+  const showRequestsInProgressTab =
+    isSelected === payrollAgreementTabsConfig.requestsInProgress.id;
+
   return {
     isSelected,
     descriptionOptions,
+    showPayrollAgreementTab,
+    showRequestsInProgressTab,
+    smallScreen,
+    smallScreenTab,
     handleTabChange,
   };
 };

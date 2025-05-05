@@ -9,7 +9,7 @@ const useDeleteDestination = (data: IEntry, appData: IAppData) => {
   const [showModal, setShowModal] = useState(false);
   const [showRequestProcessModal, setShowRequestProcessModal] = useState(false);
   const [showPendingReq, setShowPendingReq] = useState(false);
-  
+
   const [saveData, setSaveData] = useState<ISaveDataRequest>();
 
   const handleToggleModal = () => {
@@ -37,12 +37,10 @@ const useDeleteDestination = (data: IEntry, appData: IAppData) => {
   };
 
   useEffect(() => {
-    console.log({ showModal, showRequestProcessModal, showPendingReq });
-  
     const emitEvent = (eventName: string) => {
       eventBus.emit(eventName, showModal);
     };
-  
+
     if (showModal && !showRequestProcessModal) {
       emitEvent("secondModalState");
     } else if (!showModal && !showRequestProcessModal && !showPendingReq) {

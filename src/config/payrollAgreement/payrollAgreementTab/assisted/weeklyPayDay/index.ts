@@ -26,8 +26,8 @@ const weeklyPayDayOptions = [
   },
   {
     id: "saturday",
-    label: "Sábado",
-    value: "Sábado",
+    label: "Sabado",
+    value: "Sabado",
   },
   {
     id: "sunday",

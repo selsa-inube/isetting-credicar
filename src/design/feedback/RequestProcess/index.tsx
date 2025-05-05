@@ -54,7 +54,7 @@ const RequestProcess = (props: IRequestProcess) => {
             appearance={ComponentAppearance.SUCCESS}
             requestSteps={requestProcessSteps}
             isMobile={isMobile}
-            sizeIcon={isMobile ? "20px " : "32px"}
+            sizeIcon="28px"
           />
         ) : (
           <RequestStatusModal

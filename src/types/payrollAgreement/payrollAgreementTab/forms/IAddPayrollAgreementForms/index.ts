@@ -7,7 +7,10 @@ interface IAddPayrollAgreementForms {
   company: { isValid: boolean; values: ICompanyEntry };
   generalInformation: { isValid: boolean; values: IGeneralInformationEntry };
   ordinaryCycles: { isValid: boolean; values: IOrdinaryCyclesEntry[] };
-  extraordinaryCycles: { isValid: boolean; values: IExtraordinaryCyclesEntry };
+  extraordinaryCycles: {
+    isValid: boolean;
+    values: IExtraordinaryCyclesEntry[];
+  };
 }
 
 export type { IAddPayrollAgreementForms };

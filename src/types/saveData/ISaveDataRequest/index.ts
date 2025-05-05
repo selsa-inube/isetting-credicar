@@ -1,18 +1,8 @@
-import { IRuleDecision } from "@isettingkit/input";
-
 interface ISaveDataRequest {
   applicationName: string;
   businessManagerCode: string;
   businessUnitCode: string;
-  configurationRequestData: Record<
-    string,
-    | string
-    | number
-    | boolean
-    | string[]
-    | Record<string, string>
-    | IRuleDecision[]
-  >;
+  configurationRequestData: Record<string, unknown>;
   description: string;
   entityName: string;
   requestDate: string;

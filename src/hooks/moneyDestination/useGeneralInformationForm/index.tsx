@@ -1,4 +1,5 @@
 import { useEffect, useImperativeHandle, useState } from "react";
+import { MdOutlineFax } from "react-icons/md";
 import { FormikProps, useFormik } from "formik";
 import { object } from "yup";
 
@@ -6,7 +7,7 @@ import { validationRules } from "@validations/validationRules";
 import { validationMessages } from "@validations/validationMessages";
 import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationDestination";
 import { IServerDomain } from "@ptypes/IServerDomain";
-import { IEnumeratorsMoneyDestination } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/IEnumeratorsMoneyDestination";
+import { IEnumerators } from "@ptypes/IEnumerators";
 import { normalizeNameDestination } from "@utils/destination/normalizeNameDestination";
 import { normalizeCodeDestination } from "@utils/destination/normalizeCodeDestination";
 import { normalizeDestination } from "@utils/destination/normalizeDestination";
@@ -15,7 +16,7 @@ import { normalizeIconDestination } from "@utils/destination/normalizeIconDestin
 import { normalizeIconTextDestination } from "@utils/destination/normalizeIconTextDestination";
 
 const useGeneralInformationForm = (
-  enumData: IEnumeratorsMoneyDestination[],
+  enumData: IEnumerators[],
   initialValues: IGeneralInformationEntry,
   ref: React.ForwardedRef<FormikProps<IGeneralInformationEntry>>,
   editDataOption: boolean,
@@ -92,8 +93,13 @@ const useGeneralInformationForm = (
         formik.setFieldValue("description", "");
       } else {
         const currentDescription = formik.values.description ?? "";
-        const newDescription = `${currentDescription} ${description}`.trim();
-        formik.setFieldValue("description", newDescription);
+        const descriptionToAdd = description.trim();
+
+        if (!currentDescription.includes(descriptionToAdd)) {
+          const newDescription =
+            `${currentDescription} ${descriptionToAdd}`.trim();
+          formik.setFieldValue("description", newDescription);
+        }
       }
     }
   };
@@ -117,7 +123,7 @@ const useGeneralInformationForm = (
       if (editDataOption) {
         setIsDisabledButton(!formik.isValid || valuesEmpty || valuesEqualBoton);
       } else {
-        setIsDisabledButton(loading ?? !formik.isValid);
+        setIsDisabledButton(!formik.isValid);
       }
     };
     updateButton();
@@ -132,36 +138,43 @@ const useGeneralInformationForm = (
 
   useEffect(() => {
     const updateIcon = () => {
-      let iconData = normalizeIconDestination(initialValues.icon)?.icon;
-      const editData = normalizeEditDestination(
-        enumData,
-        formik.values.icon ?? "",
-      );
-      const compare =
+      const getNormalizedIcon = (value: string | undefined) =>
+        normalizeIconDestination(value ?? "")?.icon;
+
+      const isNameDestinationEqual =
         JSON.stringify(initialGeneralInfData?.nameDestination) ===
         JSON.stringify(formik.values.nameDestination);
 
+      let iconData = getNormalizedIcon(initialValues.icon);
+
       if (editDataOption && formik.values.nameDestination) {
+        const editData = normalizeEditDestination(
+          enumData,
+          formik.values.icon ?? "",
+        );
+
         iconData =
-          editData && compare
-            ? normalizeIconDestination(editData?.value ?? "")?.icon
-            : normalizeIconDestination(addData?.value ?? "")?.icon;
-        if (!iconData) {
-          iconData = normalizeIconDestination(initialValues.icon)?.icon;
-        }
+          editData && isNameDestinationEqual ? (
+            getNormalizedIcon(editData?.value)
+          ) : addData ? (
+            getNormalizedIcon(addData?.value)
+          ) : (
+            <MdOutlineFax size={24} />
+          );
+
+        iconData ??= getNormalizedIcon(initialValues.icon);
       } else {
-        iconData = normalizeIconDestination(addData?.value ?? "")?.icon;
+        iconData = getNormalizedIcon(addData?.value);
       }
 
       if (editDataOption && valuesEqual) {
         formik.setFieldValue("icon", initialValues.icon);
       } else {
-        formik.setFieldValue(
-          "icon",
-          normalizeIconTextDestination(iconData ?? <></>)?.value ??
-            "MdOutlineFax",
-        );
+        const normalizedIconValue =
+          normalizeIconTextDestination(iconData)?.value ?? "MdOutlineFax";
+        formik.setFieldValue("icon", normalizedIconValue);
       }
+
       setIcon(iconData);
     };
 
@@ -169,6 +182,7 @@ const useGeneralInformationForm = (
   }, [
     editDataOption,
     formik.values.icon,
+    formik.values.nameDestination,
     enumData,
     initialValues.nameDestination,
     addData,

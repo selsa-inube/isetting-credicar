@@ -14,12 +14,14 @@ interface IGeneralInformationPayrollForm {
     React.SetStateAction<IServerDomain[]>
   >;
   onButtonClick: () => void;
-  onPreviousStep: () => void;
   loading?: boolean;
   onFormValid?: React.Dispatch<React.SetStateAction<boolean>>;
   onSubmit?: (values: IGeneralInformationEntry) => void;
+  onReset?: () => void;
+  onPreviousStep?: () => void;
   editDataOption?: boolean;
   initialGeneralInfData?: IGeneralInformationEntry;
+  companyAgreement?: string;
 }
 
 const GeneralInformationPayrollForm = forwardRef<
@@ -30,13 +32,16 @@ const GeneralInformationPayrollForm = forwardRef<
     {
       initialValues,
       sourcesOfIncomeValues,
+      companyAgreement,
       onFormValid,
       onSubmit,
       onButtonClick,
       onPreviousStep,
       setSourcesOfIncomeValues,
+      onReset,
       loading = false,
       editDataOption = false,
+      initialGeneralInfData,
     },
     ref,
   ) => {
@@ -49,6 +54,8 @@ const GeneralInformationPayrollForm = forwardRef<
       focused,
       displayList,
       selectRef,
+      typePayrollOptions,
+      isDisabledButton,
       setFocused,
       setDisplayList,
       handleChangeSelect,
@@ -65,6 +72,7 @@ const GeneralInformationPayrollForm = forwardRef<
       onSubmit,
       onFormValid,
       setSourcesOfIncomeValues,
+      initialGeneralInfData,
     );
 
     return (
@@ -77,10 +85,11 @@ const GeneralInformationPayrollForm = forwardRef<
         autosuggestValue={autosuggestValue}
         onPreviousStep={onPreviousStep}
         editDataOption={editDataOption}
-        isDisabledButton={!formik.isValid}
+        isDisabledButton={isDisabledButton}
         showModal={showModal}
         valuesEqual={valuesEqual}
-        onReset={handleReset}
+        onResetAdd={handleReset}
+        onResetEdit={onReset}
         infoModal={infoModal}
         onToggleInfoModalModal={handleToggleModal}
         onChangeCheck={handleChangeCheck}
@@ -91,6 +100,8 @@ const GeneralInformationPayrollForm = forwardRef<
         selectRef={selectRef}
         setFocused={setFocused}
         setDisplayList={setDisplayList}
+        typePayrollOptions={typePayrollOptions as IServerDomain[]}
+        companyAgreement={companyAgreement}
       />
     );
   },

@@ -3,7 +3,7 @@ interface IOrdinaryCyclesEntry {
   nameCycle: string;
   periodicity: string;
   payday: string;
-  numberDaysUntilCut: string;
+  numberDaysUntilCut: string | number;
   id?: string;
 }
 

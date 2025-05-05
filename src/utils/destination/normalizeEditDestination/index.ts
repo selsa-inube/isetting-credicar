@@ -1,8 +1,6 @@
-import { IEnumeratorsMoneyDestination } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/IEnumeratorsMoneyDestination";
+import { IEnumerators } from "@ptypes/IEnumerators";
 
-const normalizeEditDestination = (
-  enumData: IEnumeratorsMoneyDestination[],
-  value: string,
-) => enumData.find((element) => element.value === value);
+const normalizeEditDestination = (enumData: IEnumerators[], value: string) =>
+  enumData.find((element) => element.value === value);
 
 export { normalizeEditDestination };
