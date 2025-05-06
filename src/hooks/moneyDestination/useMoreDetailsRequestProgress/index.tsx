@@ -30,7 +30,7 @@ const useMoreDetailsRequestProgress = (data: IEntry) => {
 
   const decisions = data.configurationRequestData.rules
     ? data.configurationRequestData.rules.map((rule: IEntry, index: number) => {
-        const decisionByRule = rule.decisionByRule.find(
+        const decisionByRule = rule.decisionsByRule.find(
           (decision: IEntry) => decision,
         );
 
