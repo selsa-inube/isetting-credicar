@@ -18,6 +18,7 @@ const DecisionModalUI = (props: IDecisionModalUI) => {
     withCancelButton,
     moreDetails,
     isMobile,
+    appearanceButton,
     onCloseModal,
     onClick,
   } = props;
@@ -35,6 +36,7 @@ const DecisionModalUI = (props: IDecisionModalUI) => {
       onCloseModal={onCloseModal}
       onClick={onClick}
       isLoading={isLoading}
+      appearanceButton={appearanceButton}
     >
       {withIcon && (
         <Stack width="100%" alignItems="center" justifyContent="center">

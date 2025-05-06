@@ -46,6 +46,7 @@ const DeleteRecord = (props: IDelete) => {
           onCloseModal={onToggleModal}
           appearance={ComponentAppearance.DANGER}
           isLoading={loading}
+          appearanceButton={ComponentAppearance.DANGER}
         />
       )}
     </>

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { IRuleDecision } from "@isettingkit/input";
 
 import { evaluateRuleByBusinessUnit } from "@services/conditionsRules/postEvaluateRuleByBusinessUnit";
-import { IEvaluateRuleRequest } from "@src/types/decisions/IEvaluateRuleRequest";
+import { IEvaluateRuleRequest } from "@ptypes/decisions/IEvaluateRuleRequest";
 
 const useEvaluateRuleByBusinessUnit = (
   bussinesUnits: string,

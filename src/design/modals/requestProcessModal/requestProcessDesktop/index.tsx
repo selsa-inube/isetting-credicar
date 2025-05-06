@@ -4,7 +4,6 @@ import { tokens } from "@design/tokens";
 import { ComponentAppearance } from "@enum/appearances";
 import { countVerifiedRequests } from "@utils/countVerifiedRequests";
 import { verifiedErrorRequest } from "@utils/verifiedErrorRequest";
-import { lastCompletedIndex } from "@utils/lastCompletedIndex";
 import {
   StyledContainerFields,
   StyledContainerProgressBar,
@@ -36,8 +35,7 @@ const RequestProcessDesktop = (props: IRequestProcessDesktop) => {
               icon={<MdCheckCircle />}
               size={sizeIcon}
               appearance={
-                requestSteps[lastCompletedIndex(requestSteps)].status ===
-                "error"
+                requestSteps[stepCurrentIndex].status === "error"
                   ? ComponentAppearance.DANGER
                   : ComponentAppearance.SUCCESS
               }

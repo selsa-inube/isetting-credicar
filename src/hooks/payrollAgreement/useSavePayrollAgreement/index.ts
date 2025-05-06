@@ -9,11 +9,11 @@ import { IRequestSteps } from "@design/modals/requestProcessModal/types";
 import { requestStepsInitial } from "@config/moneyDestination/addDestination/requestSteps";
 import { ISaveDataResponse } from "@ptypes/saveData/ISaveDataResponse";
 import { getRequestInProgressById } from "@services/moneyDestination/getRequestInProgressById";
-import { flowAutomaticMessages } from "@config/moneyDestination/moneyDestinationTab/generics/flowAutomaticMessages";
 import { interventionHumanMessage } from "@config/moneyDestination/moneyDestinationTab/generics/interventionHumanMessage";
 import { statusCloseModal } from "@config/status/statusCloseModal";
 import { statusRequestFinished } from "@config/status/statusRequestFinished";
 import { ChangeToRequestTab } from "@context/changeToRequestTab";
+import { flowAutomaticMessages } from "@config/payrollAgreement/payrollAgreementTab/generic/flowAutomaticMessages";
 
 const useSavePayrollAgreement = (
   bussinesUnits: string,

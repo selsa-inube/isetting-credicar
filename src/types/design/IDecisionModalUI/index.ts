@@ -1,4 +1,5 @@
 import { IIconAppearance } from "@inubekit/inubekit";
+import { ComponentAppearance } from "@enum/appearances";
 
 interface IDecisionModalUI {
   actionText: string;
@@ -15,6 +16,7 @@ interface IDecisionModalUI {
   onCloseModal: () => void;
   moreDetails?: string;
   sizeIcon: string;
+  appearanceButton?: ComponentAppearance;
 }
 
 export type { IDecisionModalUI };
