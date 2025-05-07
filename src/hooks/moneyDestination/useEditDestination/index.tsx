@@ -126,6 +126,7 @@ const useEditDestination = (
           }
 
           return {
+            modifyJustification: `La modificación de la decisión es solicitada por ${appData.user.userAccount}`,
             ruleName: decision.ruleName,
             decisionsByRule: [decisionsByRule],
           };
@@ -161,6 +162,7 @@ const useEditDestination = (
           }
 
           return {
+            modifyJustification: `La modificación de la decisión es solicitada por ${appData.user.userAccount}`,
             ruleName: decision.ruleName,
             decisionsByRule: [decisionsByRule],
           };
