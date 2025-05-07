@@ -10,6 +10,7 @@ const dataTranslations: Record<string, string> = {
   "Increase factor guarantee offered":
     "Factor de incremento de garantía ofrecido",
   "Risk free interest rate": "Tasa de interés libre de riesgo",
+  "Employment contract term type": "Tipo de plazo del contrato de trabajo",
 };
 
 export { dataTranslations };

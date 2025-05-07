@@ -2,9 +2,8 @@ import { ComponentAppearance } from "@enum/appearances";
 
 const interventionHumanMessage = {
   SuccessfulCreateRequestIntHuman: {
-    title: "¡Creación de solicitud exitosa!",
-    description:
-      "Para realizar el seguimiento ve a la pestaña solicitudes en tramite.",
+    title: "Solicitud agregada con éxito",
+    description: "Tu solicitud ha sido agregadda a las solicitudes en trámite.",
     appearance: ComponentAppearance.SUCCESS,
     duration: 5000,
   },

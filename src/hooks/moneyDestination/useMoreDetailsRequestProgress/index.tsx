@@ -30,7 +30,7 @@ const useMoreDetailsRequestProgress = (data: IEntry) => {
 
   const decisions = data.configurationRequestData.rules
     ? data.configurationRequestData.rules.map((rule: IEntry, index: number) => {
-        const decisionByRule = rule.decisionByRule.find(
+        const decisionByRule = rule.decisionsByRule.find(
           (decision: IEntry) => decision,
         );
 
@@ -47,13 +47,15 @@ const useMoreDetailsRequestProgress = (data: IEntry) => {
             : undefined,
           transactionOperation: decisionByRule.transactionOperation,
           dataEvaluated: ["MoneyDestination"],
-          conditionThatEstablishesTheDecision:
-            decisionByRule.conditionThatEstablishesTheDecision
-              ? decisionByRule.conditionThatEstablishesTheDecision.map(
+          conditionsThatEstablishesTheDecision:
+            decisionByRule.conditionsThatEstablishesTheDecision
+              ? decisionByRule.conditionsThatEstablishesTheDecision.map(
                   (condition: IEntry) => {
                     return {
                       conditionName: condition.conditionName,
-                      labelName: condition.labelName,
+                      labelName:
+                        dataTranslations[condition.labelName] ??
+                        condition.labelName,
                       value: condition.value,
                       conditionDataType: "Alphabetical",
                       howToSetTheCondition: "EqualTo",

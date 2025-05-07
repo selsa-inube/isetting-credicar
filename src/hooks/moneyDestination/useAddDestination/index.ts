@@ -71,9 +71,9 @@ const useAddDestination = () => {
   };
 
   const decisionsData = creditLineDecisions.map((decision) => {
-    const decisionByRule: IRuleDecision = {
-      conditionThatEstablishesTheDecision:
-        decision.conditionThatEstablishesTheDecision?.map((condition) => {
+    const decisionsByRule: IRuleDecision = {
+      conditionsThatEstablishesTheDecision:
+        decision.conditionsThatEstablishesTheDecision?.map((condition) => {
           return {
             labelName: condition.labelName,
             conditionName: condition.conditionName,
@@ -85,14 +85,14 @@ const useAddDestination = () => {
     };
 
     if (decision.validUntil) {
-      decisionByRule.validUntil = formatDateDecision(
+      decisionsByRule.validUntil = formatDateDecision(
         decision.validUntil as string,
       );
     }
 
     return {
       ruleName: decision.ruleName,
-      decisionByRule: [decisionByRule],
+      decisionsByRule: [decisionsByRule],
     };
   });
 

@@ -12,6 +12,7 @@ import { requestProcessMessage } from "@config/moneyDestination/moneyDestination
 import { requestStatusMessage } from "@config/moneyDestination/moneyDestinationTab/generics/requestStatusMessage";
 import { RequestStatusModal } from "@design/modals/requestStatusModal";
 import { RequestProcess } from "@design/feedback/RequestProcess";
+import { UseCase } from "@enum/useCase";
 
 interface IDelete {
   data: IEntry;
@@ -19,7 +20,7 @@ interface IDelete {
 }
 
 const Delete = (props: IDelete) => {
-  const { data } = props;
+  const { data, setEntryDeleted } = props;
   const { appData } = useContext(AuthAndPortalData);
 
   const {
@@ -30,7 +31,6 @@ const Delete = (props: IDelete) => {
     handleClick,
     setShowRequestProcessModal,
     setShowModal,
-    setShowPendingReq,
   } = useDeleteDestination(data, appData);
 
   const {
@@ -41,13 +41,14 @@ const Delete = (props: IDelete) => {
     handleCloseRequestStatus,
     handleClosePendingReqModal,
   } = useSaveMoneyDestination(
+    UseCase.DELETE,
     appData.businessUnit.publicCode,
     appData.user.userAccount,
     showRequestProcessModal,
     saveData as ISaveDataRequest,
     setShowRequestProcessModal,
     setShowModal,
-    setShowPendingReq
+    setEntryDeleted,
   );
 
   return (
@@ -73,16 +74,16 @@ const Delete = (props: IDelete) => {
       {showPendingReqModal && saveMoneyDestination?.requestNumber && (
         <RequestStatusModal
           portalId="portal"
-          title={requestStatusMessage(saveMoneyDestination.responsible).title}
+          title={requestStatusMessage(saveMoneyDestination.staffName).title}
           description={
-            requestStatusMessage(saveMoneyDestination.responsible).description
+            requestStatusMessage(saveMoneyDestination.staffName).description
           }
           requestNumber={saveMoneyDestination.requestNumber}
           onClick={handleClosePendingReqModal}
           onCloseModal={handleClosePendingReqModal}
           isLoading={false}
           actionText={
-            requestStatusMessage(saveMoneyDestination.responsible).actionText
+            requestStatusMessage(saveMoneyDestination.staffName).actionText
           }
           appearance={ComponentAppearance.PRIMARY}
         />

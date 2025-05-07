@@ -28,9 +28,7 @@ const useDeleteDestination = (data: IEntry, appData: IAppData) => {
       configurationRequestData: {
         moneyDestinationId: data.id,
         abbreviatedName: data.name,
-        descriptionUse: data.descriptionUse,
-        iconReference: data.icon,
-        justification: `La eliminación del destino de dinero es solicitada por ${appData.user.userAccount}`,
+        removalJustification: `La eliminación del destino de dinero es solicitada por ${appData.user.userAccount}`,
       },
     });
     setShowRequestProcessModal(true);

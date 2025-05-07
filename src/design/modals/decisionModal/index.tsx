@@ -17,6 +17,7 @@ interface IDecisionModal {
   withCancelButton?: boolean;
   moreDetails?: string;
   sizeIcon?: string;
+  appearanceButton?: ComponentAppearance;
 }
 
 const DecisionModal = (props: IDecisionModal) => {
@@ -30,6 +31,7 @@ const DecisionModal = (props: IDecisionModal) => {
     portalId,
     title,
     appearance = ComponentAppearance.PRIMARY,
+    appearanceButton,
     withCancelButton = true,
     moreDetails,
     onClick,
@@ -62,6 +64,7 @@ const DecisionModal = (props: IDecisionModal) => {
       moreDetails={moreDetails}
       node={node}
       sizeIcon={sizeIcon}
+      appearanceButton={appearanceButton}
     />
   );
 };

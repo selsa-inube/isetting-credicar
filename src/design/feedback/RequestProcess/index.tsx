@@ -61,12 +61,12 @@ const RequestProcess = (props: IRequestProcess) => {
             portalId={portalId}
             title={
               descriptionRequestStatus(
-                saveData.responsible ?? "uno de nuestros funcionarios",
+                saveData.staffName ?? "uno de nuestros funcionarios",
               ).title
             }
             description={
               descriptionRequestStatus(
-                saveData.responsible ?? "uno de nuestros funcionarios",
+                saveData.staffName ?? "uno de nuestros funcionarios",
               ).description
             }
             requestNumber={saveData.requestNumber}
@@ -75,7 +75,7 @@ const RequestProcess = (props: IRequestProcess) => {
             isLoading={false}
             actionText={
               descriptionRequestStatus(
-                saveData.responsible ?? "uno de nuestros funcionarios",
+                saveData.staffName ?? "uno de nuestros funcionarios",
               ).actionText
             }
             appearance={ComponentAppearance.PRIMARY}

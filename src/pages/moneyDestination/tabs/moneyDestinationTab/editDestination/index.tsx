@@ -8,6 +8,7 @@ import { ISaveDataRequest } from "@ptypes/saveData/ISaveDataRequest";
 import { ISaveDataResponse } from "@ptypes/saveData/ISaveDataResponse";
 import { EditDestinationUI } from "./interface";
 import { IRuleDecision } from "@isettingkit/input";
+import { UseCase } from "@enum/useCase";
 
 const EditDestination = () => {
   const location = useLocation();
@@ -48,6 +49,7 @@ const EditDestination = () => {
     handleCloseRequestStatus,
     handleClosePendingReqModal,
   } = useSaveMoneyDestination(
+    UseCase.EDIT,
     appData.businessUnit.publicCode,
     appData.user.userAccount,
     showRequestProcessModal,
