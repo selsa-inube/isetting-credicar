@@ -123,7 +123,7 @@ const useGeneralInformationForm = (
       if (editDataOption) {
         setIsDisabledButton(!formik.isValid || valuesEmpty || valuesEqualBoton);
       } else {
-        setIsDisabledButton(loading ?? !formik.isValid);
+        setIsDisabledButton(!formik.isValid);
       }
     };
     updateButton();
@@ -162,9 +162,7 @@ const useGeneralInformationForm = (
             <MdOutlineFax size={24} />
           );
 
-        if (!iconData) {
-          iconData = getNormalizedIcon(initialValues.icon);
-        }
+        iconData ??= getNormalizedIcon(initialValues.icon);
       } else {
         iconData = getNormalizedIcon(addData?.value);
       }
