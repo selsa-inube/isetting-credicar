@@ -47,13 +47,15 @@ const useMoreDetailsRequestProgress = (data: IEntry) => {
             : undefined,
           transactionOperation: decisionByRule.transactionOperation,
           dataEvaluated: ["MoneyDestination"],
-          conditionThatEstablishesTheDecision:
-            decisionByRule.conditionThatEstablishesTheDecision
-              ? decisionByRule.conditionThatEstablishesTheDecision.map(
+          conditionsThatEstablishesTheDecision:
+            decisionByRule.conditionsThatEstablishesTheDecision
+              ? decisionByRule.conditionsThatEstablishesTheDecision.map(
                   (condition: IEntry) => {
                     return {
                       conditionName: condition.conditionName,
-                      labelName: condition.labelName,
+                      labelName:
+                        dataTranslations[condition.labelName] ??
+                        condition.labelName,
                       value: condition.value,
                       conditionDataType: "Alphabetical",
                       howToSetTheCondition: "EqualTo",
