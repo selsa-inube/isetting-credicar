@@ -21,6 +21,21 @@ interface IRequestProcessDesktop {
 const RequestProcessDesktop = (props: IRequestProcessDesktop) => {
   const { requestSteps, sizeIcon, stepCurrent, stepCurrentIndex } = props;
 
+  const appearance =
+    requestSteps[stepCurrentIndex].status === "error"
+      ? ComponentAppearance.DANGER
+      : ComponentAppearance.SUCCESS;
+
+  const isError = requestSteps[stepCurrentIndex].status === "error";
+
+  const appearanceProgressBar = verifiedErrorRequest(requestSteps)
+    ? ComponentAppearance.DANGER
+    : ComponentAppearance.SUCCESS;
+
+  const percentage = `${countVerifiedRequests(requestSteps).toFixed()}%`;
+
+  const numberOfSteps = `${stepCurrent}/${requestSteps.length}`;
+
   return (
     <StyledContainerFields>
       <Stack
@@ -34,24 +49,14 @@ const RequestProcessDesktop = (props: IRequestProcessDesktop) => {
             <Icon
               icon={<MdCheckCircle />}
               size={sizeIcon}
-              appearance={
-                requestSteps[stepCurrentIndex].status === "error"
-                  ? ComponentAppearance.DANGER
-                  : ComponentAppearance.SUCCESS
-              }
+              appearance={appearance}
             />
           ) : (
-            <StyledStepIndicator
-              $statusError={requestSteps[stepCurrentIndex].status === "error"}
-            >
+            <StyledStepIndicator $statusError={isError}>
               <Text
                 type="label"
                 size="medium"
-                appearance={
-                  requestSteps[stepCurrentIndex].status === "error"
-                    ? ComponentAppearance.DANGER
-                    : ComponentAppearance.SUCCESS
-                }
+                appearance={appearance}
                 weight="bold"
               >
                 {stepCurrent}
@@ -75,25 +80,17 @@ const RequestProcessDesktop = (props: IRequestProcessDesktop) => {
           >
             <ProgressBar
               height="8px"
-              appearance={
-                verifiedErrorRequest(requestSteps)
-                  ? ComponentAppearance.DANGER
-                  : ComponentAppearance.SUCCESS
-              }
+              appearance={appearanceProgressBar}
               progress={countVerifiedRequests(requestSteps)}
             />
           </StyledContainerProgressBar>
-          <Text
-            type="label"
-            size="medium"
-            weight="bold"
-          >{`${stepCurrent}/${requestSteps.length}`}</Text>
+          <Text type="label" size="medium" weight="bold">
+            {numberOfSteps}
+          </Text>
         </Stack>
-        <Text
-          type="label"
-          size="large"
-          appearance={ComponentAppearance.GRAY}
-        >{`${countVerifiedRequests(requestSteps).toFixed()}%`}</Text>
+        <Text type="label" size="large" appearance={ComponentAppearance.GRAY}>
+          {percentage}
+        </Text>
       </Stack>
     </StyledContainerFields>
   );
