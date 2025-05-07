@@ -19,6 +19,7 @@ import { patchEditMoneyDestination } from "@services/moneyDestination/patchEditM
 import { deleteMoneyDestination } from "@services/moneyDestination/deleteMoneyDestination";
 import { UseCase } from "@enum/useCase";
 import { operationTypes } from "@config/useCase";
+import { RequestStepsStatus } from "@src/enum/requestStepsStatus";
 
 const useSaveMoneyDestination = (
   useCase: "add" | "edit" | "delete",
@@ -51,7 +52,11 @@ const useSaveMoneyDestination = (
       const saveData = await postSaveRequest(userAccount, data);
       setSaveMoneyDestination(saveData);
       setRequestSteps((prev) =>
-        updateRequestSteps(prev, requestStepsInitial[0].name, "pending"),
+        updateRequestSteps(
+          prev,
+          requestStepsInitial[0].name,
+          RequestStepsStatus.PENDING,
+        ),
       );
     } catch (error) {
       console.info(error);
@@ -164,34 +169,58 @@ const useSaveMoneyDestination = (
     setTimeout(() => {
       if (errorFetchRequest) {
         setRequestSteps((prev) =>
-          updateRequestSteps(prev, requestStepsInitial[0].name, "error"),
+          updateRequestSteps(
+            prev,
+            requestStepsInitial[0].name,
+            RequestStepsStatus.ERROR,
+          ),
         );
         setSendData(false);
       } else {
         setRequestSteps((prev) =>
-          updateRequestSteps(prev, requestStepsInitial[0].name, "completed"),
+          updateRequestSteps(
+            prev,
+            requestStepsInitial[0].name,
+            RequestStepsStatus.COMPLETED,
+          ),
         );
       }
     }, 1000);
     setTimeout(() => {
       if (isStatusIntAutomatic(statusRequest)) {
         setRequestSteps((prev) =>
-          updateRequestSteps(prev, requestStepsInitial[1].name, "completed"),
+          updateRequestSteps(
+            prev,
+            requestStepsInitial[1].name,
+            RequestStepsStatus.COMPLETED,
+          ),
         );
       }
 
       if (isStatusRequestFinished()) {
         setRequestSteps((prev) =>
-          updateRequestSteps(prev, requestStepsInitial[1].name, "completed"),
+          updateRequestSteps(
+            prev,
+            requestStepsInitial[1].name,
+            RequestStepsStatus.COMPLETED,
+          ),
         );
         setRequestSteps((prev) =>
-          updateRequestSteps(prev, requestStepsInitial[2].name, "completed"),
+          updateRequestSteps(
+            prev,
+            requestStepsInitial[2].name,
+            RequestStepsStatus.COMPLETED,
+          ),
         );
       }
 
       if (isStatusCloseModal()) {
         setRequestSteps((prev) =>
-          updateRequestSteps(prev, requestStepsInitial[1].name, "error"),
+          updateRequestSteps(
+            prev,
+            requestStepsInitial[1].name,
+            RequestStepsStatus.ERROR,
+          ),
         );
       }
     }, 2000);
