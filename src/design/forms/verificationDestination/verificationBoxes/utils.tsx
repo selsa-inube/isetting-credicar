@@ -3,7 +3,7 @@ import { Stack, Tag, Text } from "@inubekit/inubekit";
 
 import { BoxAttribute } from "@design/feedback/boxAttributes";
 import { tokens } from "@design/tokens";
-import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationDestination";
+import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationEntry";
 import { ComponentAppearance } from "@enum/appearances";
 import { StyledAttribute, StyledConatinerAttribute } from "./styles";
 

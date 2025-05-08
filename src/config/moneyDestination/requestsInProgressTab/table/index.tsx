@@ -5,17 +5,17 @@ import { Cancel } from "@pages/moneyDestination/tabs/requestsInProgressTab/tools
 const titles: ITitle[] = [
   {
     id: "requestDate",
-    titleName: "Fecha",
+    titleName: "Fecha de solicitud",
     priority: 0,
   },
   {
     id: "description",
-    titleName: "Descripción",
+    titleName: "Descripción de solicitud",
     priority: 1,
   },
   {
     id: "requestStatus",
-    titleName: "Estado",
+    titleName: "Estado de solicitud",
     priority: 2,
   },
 ];

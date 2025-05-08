@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { IRuleDecision } from "@isettingkit/input";
+import { decisionsLabels } from "@config/decisions/decisionsLabels";
 
 const useDecisionForm = (
   initialValues: IRuleDecision[],
@@ -138,6 +139,14 @@ const useDecisionForm = (
     }
   }, [decisions, initialDecisions]);
 
+  const cancelButtonLabel = editDataOption
+    ? decisionsLabels.cancelButton
+    : decisionsLabels.previusButton;
+
+  const saveButtonLabel = editDataOption
+    ? decisionsLabels.saveButton
+    : decisionsLabels.nextButton;
+
   return {
     isModalOpen,
     selectedDecision,
@@ -145,6 +154,8 @@ const useDecisionForm = (
     showDeleteModal,
     hasChanges,
     savedDecisions,
+    cancelButtonLabel,
+    saveButtonLabel,
     handleOpenModal,
     handleCloseModal,
     handleSubmitForm,

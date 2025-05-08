@@ -6,12 +6,12 @@ import { Details } from "@pages/moneyDestination/tabs/moneyDestinationTab/tools/
 const titles: ITitle[] = [
   {
     id: "abbreviatedName",
-    titleName: "Nombre",
+    titleName: "Nombre del destino",
     priority: 0,
   },
   {
     id: "descriptionUse",
-    titleName: "Descripción",
+    titleName: "Descripción del destino",
     priority: 1,
   },
 ];

@@ -19,7 +19,7 @@ import { patchEditMoneyDestination } from "@services/moneyDestination/patchEditM
 import { deleteMoneyDestination } from "@services/moneyDestination/deleteMoneyDestination";
 import { UseCase } from "@enum/useCase";
 import { operationTypes } from "@config/useCase";
-import { RequestStepsStatus } from "@src/enum/requestStepsStatus";
+import { RequestStepsStatus } from "@enum/requestStepsStatus";
 
 const useSaveMoneyDestination = (
   useCase: "add" | "edit" | "delete",
