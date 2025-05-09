@@ -1,12 +1,8 @@
 import { Th } from "@inubekit/inubekit";
-import { IAction } from "../types";
+import { IShowActionTitle } from "@ptypes/design/IShowActionTitle";
 
-const ShowActionTitle = (
-  numberActions: number,
-  mediaQuery: boolean,
-  actionTitle: IAction[],
-  title?: boolean,
-) => {
+const ShowActionTitle = (props: IShowActionTitle) => {
+  const { numberActions, mediaQuery, actionTitle, title } = props;
   return title ? (
     actionTitle.map((action) => (
       <Th key={`action-${action.id}`} action={true}>

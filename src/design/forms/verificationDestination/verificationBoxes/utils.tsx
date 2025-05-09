@@ -51,7 +51,7 @@ const renderCreditlineVerification = (values: IRuleDecision[]) => (
                   ? JSON.stringify(decision.value)
                   : String(decision.value)
               }
-              weight="strong"
+              displayIcon={false}
             />
           ))}
         </>

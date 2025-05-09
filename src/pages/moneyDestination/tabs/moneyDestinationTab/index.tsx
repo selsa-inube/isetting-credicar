@@ -1,10 +1,9 @@
 import { useContext } from "react";
 
 import { useMoneyDestination } from "@hooks/moneyDestination/useMoneyDestination";
-
-import { IEntry } from "@design/data/table/types";
-import { MoneyDestinationTabUI } from "./interface";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
+import { IEntry } from "@ptypes/design/table/IEntry";
+import { MoneyDestinationTabUI } from "./interface";
 
 function MoneyDestinationTab() {
   const { appData } = useContext(AuthAndPortalData);

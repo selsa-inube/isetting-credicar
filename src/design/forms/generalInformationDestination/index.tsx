@@ -26,10 +26,10 @@ const GeneralInformationForm = forwardRef<
   ) => {
     const { appData } = useContext(AuthAndPortalData);
 
-    const { enumData } = useEnumerators(
-      "moneydestination",
-      appData.businessUnit.publicCode,
-    );
+    const { enumData } = useEnumerators({
+      enumDestination: "moneydestination",
+      bussinesUnits: appData.businessUnit.publicCode,
+    });
 
     const {
       autosuggestValue,

@@ -1,4 +1,9 @@
-import { MdCreditCard, MdOutlineFeed, MdOutlinePayments } from "react-icons/md";
+import {
+  MdCreditCard,
+  MdOutlineFeed,
+  MdOutlineHandshake,
+  MdOutlinePayments,
+} from "react-icons/md";
 import { ICardData } from "@ptypes/home/ICardData";
 
 const mainCards: ICardData[] = [
@@ -11,6 +16,11 @@ const mainCards: ICardData[] = [
     publicCode: "Destinos de dinero",
     icon: <MdCreditCard />,
     url: "/money-destination",
+  },
+  {
+    publicCode: "Nóminas de convenio",
+    icon: <MdOutlineHandshake />,
+    url: "/payroll-agreement",
   },
   {
     publicCode: "Politicas generales de credito",
