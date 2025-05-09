@@ -3,7 +3,7 @@ import { FormikProps } from "formik";
 import { IRuleDecision, ICondition } from "@isettingkit/input";
 
 import { addDestinationStepsConfig } from "@config/moneyDestination/addDestination/assisted";
-import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationDestination";
+import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationEntry";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 import { formatDate } from "@utils/date/formatDate";
 import { ISaveDataRequest } from "@ptypes/saveData/ISaveDataRequest";

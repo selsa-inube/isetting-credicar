@@ -2,7 +2,7 @@ import { AxiosRequestConfig } from "axios";
 
 import { IRequestMoneyDestination } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/IRequestMoneyDestination";
 import { deleteWithRetries } from "@services/core/deleteWithRetries";
-import { axiosInstance } from "@api/isettingCredicar";
+import { credicarAxiosInstance } from "@api/isettingCredicar";
 import { mapDeleteMoneyDestToApi } from "./mappers";
 
 const deleteMoneyDestination = async (
@@ -20,7 +20,7 @@ const deleteMoneyDestination = async (
     `/money-destinations`,
     config,
     mapDeleteMoneyDestToApi(data) as unknown as string[],
-    axiosInstance,
+    credicarAxiosInstance,
   );
 
   return deleteData;

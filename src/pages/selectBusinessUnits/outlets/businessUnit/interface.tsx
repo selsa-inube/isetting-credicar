@@ -1,6 +1,6 @@
 import React from "react";
 import { MdSearch } from "react-icons/md";
-import { Button, Input, Stack, Text } from "@inubekit/inubekit";
+import { Button, Searchfield, Stack, Text } from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
 import { RadioBusinessUnit } from "@design/feedback/radioBusinessUnit";
@@ -56,7 +56,7 @@ function BusinessUnitsUI(props: IBusinessUnitsUI) {
       <form>
         <Stack direction="column" alignItems="center" gap={tokens.spacing.s300}>
           {businessUnits.length > 5 && (
-            <Input
+            <Searchfield
               placeholder="Buscar..."
               type="search"
               name="searchBusinessUnits"

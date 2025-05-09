@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { FormikProps } from "formik";
 import { ICondition, IRuleDecision } from "@isettingkit/input";
+import { useMediaQuery } from "@inubekit/inubekit";
 
 import { editDestinationTabsConfig } from "@config/moneyDestination/editDestination/tabs";
 import { useEvaluateRuleByBusinessUnit } from "@hooks/rules/useEvaluateRuleByBusinessUnit";
-import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationDestination";
+import { IGeneralInformationEntry } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/forms/IGeneralInformationEntry";
 import { IAppData } from "@ptypes/context/authAndPortalDataProvider/IAppData";
 import { ISaveDataRequest } from "@ptypes/saveData/ISaveDataRequest";
 import { formatDate } from "@utils/date/formatDate";
@@ -259,6 +260,8 @@ const useEditDestination = (
     setCreditLineDecisions(normalizeEvaluateRuleData ?? []);
   };
 
+  const smallScreen = useMediaQuery("(max-width: 990px)");
+
   return {
     creditLineDecisions,
     normalizeEvaluateRuleData,
@@ -271,6 +274,7 @@ const useEditDestination = (
     saveData,
     showRequestProcessModal,
     showModal,
+    smallScreen,
     handleReset,
     onSubmit,
     setCreditLineDecisions,

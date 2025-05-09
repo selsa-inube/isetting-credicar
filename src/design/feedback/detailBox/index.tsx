@@ -2,8 +2,7 @@ import { Stack, Tag, Text } from "@inubekit/inubekit";
 import { BoxContainer } from "@design/layout/boxContainer";
 
 import { ComponentAppearance } from "@enum/appearances";
-import { IEntry } from "@design/data/table/types";
-
+import { IEntry } from "@ptypes/design/table/IEntry";
 interface IDetailBox {
   field: { id: string; titleName: string };
   data: IEntry;
@@ -50,7 +49,7 @@ const DetailBox = (props: IDetailBox) => {
           <Tag
             appearance={ComponentAppearance.GRAY}
             label={data[field.id]}
-            weight="strong"
+            displayIcon={false}
           />
         </Stack>
       ) : (

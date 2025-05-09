@@ -3,14 +3,14 @@ import { ComponentAppearance } from "@enum/appearances";
 const flowAutomaticMessages = {
   errorSendingData: {
     title: "¡Ups! Algo salió mal",
-    description: "La solicitud no se pudo radicar correctamente",
+    description: "La solicitud de edición no se pudo radicar correctamente",
     appearance: ComponentAppearance.DANGER,
     duration: 5000,
   },
   errorQueryingData: {
-    title: "Error al realizar la acción",
+    title: "Error al consultar la creacion solicitud",
     description:
-      "No fue posible realizar la acción, por favor intenta más tarde",
+      "No fue posible consultar la creacion solicitud por favor intenta más tarde",
     appearance: ComponentAppearance.DANGER,
     duration: 5000,
   },
@@ -21,7 +21,7 @@ const flowAutomaticMessages = {
     duration: 5000,
   },
   SuccessfulCreateRequest: {
-    title: "¡la accion solicitud exitosa!",
+    title: "¡Creación de solicitud exitosa!",
     description: "Se creo la solicitud con éxito",
     appearance: ComponentAppearance.SUCCESS,
     duration: 5000,

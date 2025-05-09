@@ -1,10 +1,11 @@
 import { MdAdd } from "react-icons/md";
-import { Stack, useMediaQuery, Input, Button } from "@inubekit/inubekit";
+import { Stack, Button, Text, Searchfield } from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
 import { ComponentAppearance } from "@enum/appearances";
 import { Table } from "@design/data/table";
-import { IEntry } from "@design/data/table/types";
+import { IMoneyDestinationTabUI } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/IMoneyDestinationTabUI";
+import { tablabels } from "@config/moneyDestination/moneyDestinationTab/tabLabels";
 import {
   actionsConfig,
   breakPoints,
@@ -12,25 +13,16 @@ import {
 } from "@config/moneyDestination/moneyDestinationTab/table";
 import { StyledContainer } from "./styles";
 
-interface IMoneyDestinationTabUI {
-  entries: IEntry[];
-  loading: boolean;
-  searchMoneyDestination: string;
-  onSearchMoneyDestination: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  setEntryDeleted: (value: string | number) => void;
-}
-
 function MoneyDestinationTabUI(props: IMoneyDestinationTabUI) {
   const {
     searchMoneyDestination,
     entries,
     loading,
+    smallScreen,
+    columnWidths,
     onSearchMoneyDestination,
     setEntryDeleted,
   } = props;
-
-  const smallScreen = useMediaQuery("(max-width: 690px)");
-  const widthFirstColumn = smallScreen ? 64 : 25;
 
   return (
     <StyledContainer $smallScreen={smallScreen}>
@@ -52,11 +44,11 @@ function MoneyDestinationTabUI(props: IMoneyDestinationTabUI) {
             }
           >
             <Stack justifyContent="center">
-              <Input
+              <Searchfield
                 name="searchMoneyDestination"
                 id="searchMoneyDestination"
-                placeholder="Palabra clave..."
-                type="search"
+                placeholder={tablabels.searchPlaceholder}
+                label={tablabels.searchLabel}
                 size="compact"
                 value={searchMoneyDestination}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -73,8 +65,18 @@ function MoneyDestinationTabUI(props: IMoneyDestinationTabUI) {
               path="/money-destination/add-destination"
               fullwidth={smallScreen}
             >
-              Agregar destino
+              {tablabels.addButton}
             </Button>
+          </Stack>
+
+          <Stack>
+            <Text
+              type="title"
+              size="medium"
+              appearance={ComponentAppearance.DARK}
+            >
+              {tablabels.description}
+            </Text>
           </Stack>
 
           <Table
@@ -85,7 +87,7 @@ function MoneyDestinationTabUI(props: IMoneyDestinationTabUI) {
             breakpoints={breakPoints}
             filter={searchMoneyDestination}
             isLoading={loading}
-            columnWidths={[widthFirstColumn, 55]}
+            columnWidths={columnWidths}
             pageLength={8}
           />
         </Stack>

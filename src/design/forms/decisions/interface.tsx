@@ -1,41 +1,13 @@
 import { MdAddCircleOutline, MdOutlineWarningAmber } from "react-icons/md";
-import { IRuleDecision } from "@isettingkit/input";
 import { BusinessRules } from "@isettingkit/business-rules";
 import { Stack, useMediaQuery, Button } from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
 import { ComponentAppearance } from "@enum/appearances";
-import { IMessageModal } from "@ptypes/decisions/IMessageModal";
-import { IRulesFormTextValues } from "@ptypes/decisions/IRulesFormTextValues";
 import { DecisionModal } from "@design/modals/decisionModal";
+import { IDecisionsFormUI } from "@ptypes/decisions/IDecisionsFormUI";
+import { decisionsLabels } from "@config/decisions/decisionsLabels";
 import { StyledContainer } from "./styles";
-
-interface IDecisionsFormUI {
-  attentionModal: IMessageModal;
-  decisions: IRuleDecision[];
-  decisionTemplate: IRuleDecision;
-  deleteModal: IMessageModal;
-  isModalOpen: boolean;
-  loading: boolean;
-  selectedDecision: IRuleDecision | null;
-  showAttentionModal: boolean;
-  showDeleteModal: boolean;
-  textValuesBusinessRules: IRulesFormTextValues;
-  hasChanges: boolean;
-  onButtonClick: () => void;
-  onPreviousStep: () => void;
-  onCloseModal: () => void;
-  onDelete: () => void;
-  onOpenModal: () => void;
-  onSubmitForm: (dataDecision: IRuleDecision) => void;
-  onToggleAttentionModal: () => void;
-  onToggleDeleteModal: (id: string) => void;
-  onSave: () => void;
-  handleReset: () => void;
-  editDataOption?: boolean;
-  titleContentAddCard?: string;
-  messageEmptyDecisions?: string;
-}
 
 const DecisionsFormUI = (props: IDecisionsFormUI) => {
   const {
@@ -53,6 +25,8 @@ const DecisionsFormUI = (props: IDecisionsFormUI) => {
     hasChanges,
     titleContentAddCard,
     messageEmptyDecisions,
+    cancelButtonLabel,
+    saveButtonLabel,
     onCloseModal,
     onDelete,
     onButtonClick,
@@ -82,7 +56,7 @@ const DecisionsFormUI = (props: IDecisionsFormUI) => {
               onClick={onOpenModal}
               fullwidth={isMobile}
             >
-              Agregar decisión
+              {decisionsLabels.addButton}
             </Button>
           </Stack>
           <BusinessRules
@@ -108,7 +82,7 @@ const DecisionsFormUI = (props: IDecisionsFormUI) => {
             appearance={ComponentAppearance.GRAY}
             disabled={editDataOption ? !hasChanges : false}
           >
-            {editDataOption ? "Cancelar" : "Anterior"}
+            {cancelButtonLabel}
           </Button>
 
           <Button
@@ -117,7 +91,7 @@ const DecisionsFormUI = (props: IDecisionsFormUI) => {
             appearance={ComponentAppearance.PRIMARY}
             disabled={editDataOption ? !hasChanges : false}
           >
-            {editDataOption ? "Guardar" : "Siguiente"}
+            {saveButtonLabel}
           </Button>
         </Stack>
         {showAttentionModal && (

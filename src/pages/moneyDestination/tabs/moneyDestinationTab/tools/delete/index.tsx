@@ -3,7 +3,6 @@ import { useContext } from "react";
 import { deleteMoneyDestinationModal } from "@config/moneyDestination/moneyDestinationTab/generics/deleteMoneyDestinationModal";
 import { DeleteRecord } from "@design/feedback/DeleteRecord";
 import { useDeleteDestination } from "@hooks/moneyDestination/useDeleteDestination";
-import { IEntry } from "@design/data/table/types";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 import { useSaveMoneyDestination } from "@hooks/moneyDestination/useSaveMoneyDestination";
 import { ISaveDataRequest } from "@ptypes/saveData/ISaveDataRequest";
@@ -13,6 +12,7 @@ import { requestStatusMessage } from "@config/moneyDestination/moneyDestinationT
 import { RequestStatusModal } from "@design/modals/requestStatusModal";
 import { RequestProcess } from "@design/feedback/RequestProcess";
 import { UseCase } from "@enum/useCase";
+import { IEntry } from "@ptypes/design/table/IEntry";
 
 interface IDelete {
   data: IEntry;
