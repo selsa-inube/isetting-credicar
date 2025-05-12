@@ -55,7 +55,7 @@ const ModalWrapper = (props: IModalWrapper) => {
         height={height}
         direction="column"
         backgroundColor={
-          theme ? theme?.palette?.neutral?.N0 : inube.palette.neutral.N0
+          theme?.palette?.neutral?.N0 ?? inube.palette.neutral.N0
         }
         borderRadius={tokens.spacing.s100}
         padding={tokens.spacing.s300}

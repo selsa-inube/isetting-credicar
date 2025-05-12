@@ -194,7 +194,7 @@ const useExtraordinaryCyclesForm = (props: IUseExtraordinaryCyclesForm) => {
     ? cyclespaymentLabels.sendButton
     : cyclespaymentLabels.nextButton;
 
-  const columnWidths = isMobile ? [70, 12, 10, 14] : [50, 12, 10, 14];
+  const columnWidths = isMobile ? [70, 12, 10, 14] : [40, 15, 15, 14];
 
   useEffect(() => {
     eventBus.emit("secondModalState", showModal);

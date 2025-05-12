@@ -41,12 +41,10 @@ const RequestsInProcess = (props: IRequestsInProcess) => {
       <BoxContainer
         direction="column"
         backgroundColor={
-          theme ? theme?.palette?.neutral?.N0 : inube.palette.neutral.N0
+          theme?.palette?.neutral?.N0 ?? inube.palette.neutral.N0
         }
         borderRadius={tokens.spacing.s100}
-        borderColor={
-          theme ? theme?.palette?.neutral?.N40 : inube.palette.neutral.N40
-        }
+        borderColor={theme?.palette?.neutral?.N40 ?? inube.palette.neutral.N40}
         boxSizing="border-box"
         width="100%"
         height={isMobile ? "400px" : "430px"}
@@ -78,7 +76,7 @@ const RequestsInProcess = (props: IRequestsInProcess) => {
         </Stack>
         <BoxContainer
           backgroundColor={
-            theme ? theme?.palette?.neutral?.N0 : inube.palette.neutral.N0
+            theme?.palette?.neutral?.N0 ?? inube.palette.neutral.N0
           }
           overflowY="auto"
           boxSizing="border-box"
