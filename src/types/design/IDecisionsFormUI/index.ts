@@ -23,6 +23,7 @@ interface IDecisionsFormUI {
   onToggleDeleteModal: (id: string) => void;
   onSave: () => void;
   handleReset: () => void;
+  disabledButton?: boolean;
   showAttentionModal?: boolean;
   attentionModal?: IMessageModal;
   editDataOption?: boolean;

@@ -129,6 +129,12 @@ const useAddGenCredPolicies = () => {
     setShowModal(!showModal);
   };
 
+  const formValid =
+    (currentStep === 2 && contributionsPortfolio.length === 0) ||
+    (currentStep === 3 && incomePortfolio.length === 0)
+      ? true
+      : isCurrentFormValid;
+
   return {
     currentStep,
     formValues,
@@ -138,6 +144,7 @@ const useAddGenCredPolicies = () => {
     showModal,
     contributionsPortfolio,
     incomePortfolio,
+    formValid,
     setIncomePortfolio,
     setContributionsPortfolio,
     handleFormValidChange,

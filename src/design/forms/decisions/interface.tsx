@@ -26,6 +26,7 @@ const DecisionsFormUI = (props: IDecisionsFormUI) => {
     titleContentAddCard,
     messageEmptyDecisions,
     isMobile,
+    disabledButton = false,
     onCloseModal,
     onDelete,
     onButtonClick,
@@ -38,16 +39,21 @@ const DecisionsFormUI = (props: IDecisionsFormUI) => {
     handleReset,
   } = props;
 
-  const saveButton = editDataOption
+  const saveButtonLabel = editDataOption
     ? decisionsLabels.labelSaveButton
     : decisionsLabels.labelNextButton;
 
-  const cancelButton = editDataOption
+  const cancelButtonLabel = editDataOption
     ? decisionsLabels.labelCancelButton
     : decisionsLabels.labelPreviusButton;
 
   const shouldShowAttentionModal = showAttentionModal && attentionModal;
-  const disabled = editDataOption ? !hasChanges : false;
+
+  const disabledNext = editDataOption ? !hasChanges : disabledButton;
+
+  const disabledPrevius = editDataOption ? !hasChanges : false;
+
+  const cancelButton = editDataOption ? handleReset : onPreviousStep;
 
   return (
     <form>
@@ -86,20 +92,20 @@ const DecisionsFormUI = (props: IDecisionsFormUI) => {
         <Stack justifyContent="flex-end" gap={tokens.spacing.s250}>
           <Button
             fullwidth={isMobile}
-            onClick={editDataOption ? handleReset : onPreviousStep}
+            onClick={cancelButton}
             appearance={ComponentAppearance.GRAY}
-            disabled={disabled}
+            disabled={disabledPrevius}
           >
-            {cancelButton}
+            {cancelButtonLabel}
           </Button>
 
           <Button
             fullwidth={isMobile}
             onClick={onSave}
             appearance={ComponentAppearance.PRIMARY}
-            disabled={disabled}
+            disabled={disabledNext}
           >
-            {saveButton}
+            {saveButtonLabel}
           </Button>
         </Stack>
         {shouldShowAttentionModal && (

@@ -19,6 +19,7 @@ interface IDecisionsForm {
     originalDecision: IRuleDecision,
   ) => void;
   nameRule: string;
+  disabledButton?: boolean;
   editDataOption?: boolean;
   showAttentionModal?: boolean;
   attentionModal?: IMessageModal;

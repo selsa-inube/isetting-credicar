@@ -93,6 +93,7 @@ const AddGenCreditPoliciesUI = (props: IAddGenCreditPoliciesUI) => {
                 messageEmptyDecisions={
                   contributionsPortfLabels.messageEmptyDecisions
                 }
+                disabledButton={contributionsPortfolio.length === 0}
               />
             )}
             {currentStep === 3 && (
@@ -109,6 +110,7 @@ const AddGenCreditPoliciesUI = (props: IAddGenCreditPoliciesUI) => {
                 nameRule=""
                 titleContentAddCard={incomePortfLabels.titleContentAddCard}
                 messageEmptyDecisions={incomePortfLabels.messageEmptyDecisions}
+                disabledButton={incomePortfolio.length === 0}
               />
             )}
           </Stack>

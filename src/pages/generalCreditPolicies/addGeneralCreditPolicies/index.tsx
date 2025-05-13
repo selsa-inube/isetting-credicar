@@ -7,10 +7,10 @@ const AddGenCreditPolicies = () => {
     currentStep,
     formValues,
     formReferences,
-    isCurrentFormValid,
     smallScreen,
     contributionsPortfolio,
     incomePortfolio,
+    formValid,
     setIncomePortfolio,
     setContributionsPortfolio,
     handleFormValidChange,
@@ -25,7 +25,7 @@ const AddGenCreditPolicies = () => {
       currentStep={currentStep}
       formReferences={formReferences}
       initialValues={formValues}
-      formValid={isCurrentFormValid}
+      formValid={formValid}
       steps={addGenCredPoliciesSteps}
       onNextStep={handleNextStep}
       onPreviousStep={handlePreviousStep}

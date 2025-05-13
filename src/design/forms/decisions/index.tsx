@@ -20,6 +20,7 @@ const DecisionsForm = (props: IDecisionsForm) => {
     titleContentAddCard,
     messageEmptyDecisions,
     normalizeEvaluateRuleData,
+    disabledButton,
     decisionTemplateConfig,
     onButtonClick,
     onPreviousStep,
@@ -94,6 +95,7 @@ const DecisionsForm = (props: IDecisionsForm) => {
       titleContentAddCard={titleContentAddCard}
       messageEmptyDecisions={messageEmptyDecisions}
       isMobile={isMobile}
+      disabledButton={disabledButton}
     />
   );
 };
