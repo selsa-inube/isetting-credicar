@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useMediaQuery } from "@inubekit/inubekit";
 import { IRuleDecision } from "@isettingkit/input";
+import { decisionsLabels } from "@config/decisions/decisionsLabels";
+import { IMessageModal } from "@ptypes/decisions/IMessageModal";
 
 const useDecisionForm = (
   initialValues: IRuleDecision[],
@@ -14,6 +16,9 @@ const useDecisionForm = (
   setShowAttentionModal?: React.Dispatch<React.SetStateAction<boolean>>,
   normalizeEvaluateRuleData?: IRuleDecision[],
   editDataOption?: boolean,
+  disabledButton?: boolean,
+  onPreviousStep?: () => void,
+  attentionModal?: IMessageModal,
 ) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDecision, setSelectedDecision] =
@@ -141,6 +146,24 @@ const useDecisionForm = (
 
   const isMobile = useMediaQuery("(max-width: 990px)");
 
+  const saveButtonLabel = editDataOption
+    ? decisionsLabels.labelSaveButton
+    : decisionsLabels.labelNextButton;
+
+  const cancelButtonLabel = editDataOption
+    ? decisionsLabels.labelCancelButton
+    : decisionsLabels.labelPreviusButton;
+
+  const shouldShowAttentionModal = Boolean(
+    showAttentionModal && attentionModal,
+  );
+
+  const disabledNext = editDataOption ? !hasChanges : disabledButton;
+
+  const disabledPrevius = editDataOption ? !hasChanges : false;
+
+  const cancelButton = editDataOption ? handleReset : onPreviousStep;
+
   return {
     isModalOpen,
     selectedDecision,
@@ -149,6 +172,12 @@ const useDecisionForm = (
     hasChanges,
     savedDecisions,
     isMobile,
+    saveButtonLabel,
+    cancelButtonLabel,
+    shouldShowAttentionModal,
+    disabledNext,
+    disabledPrevius,
+    cancelButton,
     handleOpenModal,
     handleCloseModal,
     handleSubmitForm,

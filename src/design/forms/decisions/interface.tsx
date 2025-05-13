@@ -18,42 +18,26 @@ const DecisionsFormUI = (props: IDecisionsFormUI) => {
     isModalOpen,
     loading,
     selectedDecision,
-    showAttentionModal,
     showDeleteModal,
     textValuesBusinessRules,
-    editDataOption,
-    hasChanges,
     titleContentAddCard,
     messageEmptyDecisions,
     isMobile,
-    disabledButton = false,
+    saveButtonLabel,
+    cancelButtonLabel,
+    shouldShowAttentionModal,
+    disabledNext,
+    disabledPrevius,
+    cancelButton,
     onCloseModal,
     onDelete,
     onButtonClick,
     onOpenModal,
-    onPreviousStep,
     onSubmitForm,
     onToggleAttentionModal,
     onToggleDeleteModal,
     onSave,
-    handleReset,
   } = props;
-
-  const saveButtonLabel = editDataOption
-    ? decisionsLabels.labelSaveButton
-    : decisionsLabels.labelNextButton;
-
-  const cancelButtonLabel = editDataOption
-    ? decisionsLabels.labelCancelButton
-    : decisionsLabels.labelPreviusButton;
-
-  const shouldShowAttentionModal = showAttentionModal && attentionModal;
-
-  const disabledNext = editDataOption ? !hasChanges : disabledButton;
-
-  const disabledPrevius = editDataOption ? !hasChanges : false;
-
-  const cancelButton = editDataOption ? handleReset : onPreviousStep;
 
   return (
     <form>
@@ -108,7 +92,7 @@ const DecisionsFormUI = (props: IDecisionsFormUI) => {
             {saveButtonLabel}
           </Button>
         </Stack>
-        {shouldShowAttentionModal && (
+        {shouldShowAttentionModal && attentionModal && (
           <DecisionModal
             portalId="portal"
             title={attentionModal.title}

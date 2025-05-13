@@ -11,10 +11,12 @@ interface IDecisionsFormUI {
   selectedDecision: IRuleDecision | null;
   showDeleteModal: boolean;
   textValuesBusinessRules: IRulesFormTextValues;
-  hasChanges: boolean;
   isMobile: boolean;
+  saveButtonLabel: string;
+  cancelButtonLabel: string;
+  disabledNext: boolean;
+  disabledPrevius: boolean;
   onButtonClick: () => void;
-  onPreviousStep: () => void;
   onCloseModal: () => void;
   onDelete: () => void;
   onOpenModal: () => void;
@@ -22,11 +24,9 @@ interface IDecisionsFormUI {
   onToggleAttentionModal: () => void;
   onToggleDeleteModal: (id: string) => void;
   onSave: () => void;
-  handleReset: () => void;
-  disabledButton?: boolean;
-  showAttentionModal?: boolean;
+  shouldShowAttentionModal?: boolean;
+  cancelButton?: () => void;
   attentionModal?: IMessageModal;
-  editDataOption?: boolean;
   titleContentAddCard?: string;
   messageEmptyDecisions?: string;
 }

@@ -34,8 +34,13 @@ const DecisionsForm = (props: IDecisionsForm) => {
     selectedDecision,
     decisions,
     showDeleteModal,
-    hasChanges,
     isMobile,
+    saveButtonLabel,
+    cancelButtonLabel,
+    shouldShowAttentionModal,
+    disabledNext,
+    disabledPrevius,
+    cancelButton,
     handleOpenModal,
     handleCloseModal,
     handleSubmitForm,
@@ -43,7 +48,6 @@ const DecisionsForm = (props: IDecisionsForm) => {
     handleToggleDeleteModal,
     handleDelete,
     handleSave,
-    handleReset,
   } = useDecisionForm(
     initialValues,
     revertModalDisplayData,
@@ -53,6 +57,9 @@ const DecisionsForm = (props: IDecisionsForm) => {
     setShowAttentionModal,
     normalizeEvaluateRuleData,
     editDataOption,
+    disabledButton,
+    onPreviousStep,
+    attentionModal,
   );
 
   const { appData } = useContext(AuthAndPortalData);
@@ -75,7 +82,6 @@ const DecisionsForm = (props: IDecisionsForm) => {
       onDelete={handleDelete}
       onButtonClick={onButtonClick}
       onOpenModal={handleOpenModal}
-      onPreviousStep={onPreviousStep}
       onSubmitForm={(dataDecision: IRuleDecision) =>
         handleSubmitForm(
           dataDecision,
@@ -85,17 +91,18 @@ const DecisionsForm = (props: IDecisionsForm) => {
       onToggleAttentionModal={handleToggleAttentionModal}
       onToggleDeleteModal={handleToggleDeleteModal}
       selectedDecision={selectedDecision}
-      showAttentionModal={showAttentionModal}
       showDeleteModal={showDeleteModal}
       textValuesBusinessRules={textValuesBusinessRules}
-      editDataOption={editDataOption}
       onSave={handleSave}
-      handleReset={handleReset}
-      hasChanges={hasChanges}
       titleContentAddCard={titleContentAddCard}
       messageEmptyDecisions={messageEmptyDecisions}
       isMobile={isMobile}
-      disabledButton={disabledButton}
+      saveButtonLabel={saveButtonLabel}
+      cancelButtonLabel={cancelButtonLabel}
+      shouldShowAttentionModal={shouldShowAttentionModal}
+      disabledNext={disabledNext ?? false}
+      disabledPrevius={disabledPrevius}
+      cancelButton={cancelButton}
     />
   );
 };
