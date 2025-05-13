@@ -11,6 +11,15 @@ const dataTranslations: Record<string, string> = {
     "Factor de incremento de garantía ofrecido",
   "Risk free interest rate": "Tasa de interés libre de riesgo",
   "Employment contract term type": "Tipo de plazo del contrato de trabajo",
+  "Reciprocity factor for credit limit g p":
+    "Factor de reciprocidad para el límite de crédito g p",
+  "Risk score factor for credit limit g p":
+    "Factor de puntuación de riesgo para el límite de crédito g p",
+  "Affiliate seniority": "Antigüedad del afiliado",
+  AffiliateSeniority: "Antigüedad del afiliado",
+  "Primary income type": "Tipo de ingreso primario",
+  "Credit risk score": "Puntuación de riesgo crediticio",
+  CreditRiskScore: "Puntuación de riesgo crediticio",
 };
 
 export { dataTranslations };

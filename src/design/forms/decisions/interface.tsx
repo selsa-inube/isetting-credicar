@@ -1,11 +1,11 @@
 import { MdAddCircleOutline, MdOutlineWarningAmber } from "react-icons/md";
 import { BusinessRules } from "@isettingkit/business-rules";
-import { Stack, useMediaQuery, Button } from "@inubekit/inubekit";
+import { Stack, Button } from "@inubekit/inubekit";
 
 import { tokens } from "@design/tokens";
 import { ComponentAppearance } from "@enum/appearances";
 import { DecisionModal } from "@design/modals/decisionModal";
-import { IDecisionsFormUI } from "@ptypes/decisions/IDecisionsFormUI";
+import { IDecisionsFormUI } from "@ptypes/design/IDecisionsFormUI";
 import { decisionsLabels } from "@config/decisions/decisionsLabels";
 import { StyledContainer } from "./styles";
 
@@ -18,28 +18,26 @@ const DecisionsFormUI = (props: IDecisionsFormUI) => {
     isModalOpen,
     loading,
     selectedDecision,
-    showAttentionModal,
     showDeleteModal,
     textValuesBusinessRules,
-    editDataOption,
-    hasChanges,
     titleContentAddCard,
     messageEmptyDecisions,
-    cancelButtonLabel,
+    isMobile,
     saveButtonLabel,
+    cancelButtonLabel,
+    shouldShowAttentionModal,
+    disabledNext,
+    disabledPrevius,
+    cancelButton,
     onCloseModal,
     onDelete,
     onButtonClick,
     onOpenModal,
-    onPreviousStep,
     onSubmitForm,
     onToggleAttentionModal,
     onToggleDeleteModal,
     onSave,
-    handleReset,
   } = props;
-
-  const isMobile = useMediaQuery("(max-width: 990px)");
 
   return (
     <form>
@@ -56,7 +54,7 @@ const DecisionsFormUI = (props: IDecisionsFormUI) => {
               onClick={onOpenModal}
               fullwidth={isMobile}
             >
-              {decisionsLabels.addButton}
+              {decisionsLabels.labelAddButton}
             </Button>
           </Stack>
           <BusinessRules
@@ -78,9 +76,9 @@ const DecisionsFormUI = (props: IDecisionsFormUI) => {
         <Stack justifyContent="flex-end" gap={tokens.spacing.s250}>
           <Button
             fullwidth={isMobile}
-            onClick={editDataOption ? handleReset : onPreviousStep}
+            onClick={cancelButton}
             appearance={ComponentAppearance.GRAY}
-            disabled={editDataOption ? !hasChanges : false}
+            disabled={disabledPrevius}
           >
             {cancelButtonLabel}
           </Button>
@@ -89,12 +87,12 @@ const DecisionsFormUI = (props: IDecisionsFormUI) => {
             fullwidth={isMobile}
             onClick={onSave}
             appearance={ComponentAppearance.PRIMARY}
-            disabled={editDataOption ? !hasChanges : false}
+            disabled={disabledNext}
           >
             {saveButtonLabel}
           </Button>
         </Stack>
-        {showAttentionModal && (
+        {shouldShowAttentionModal && attentionModal && (
           <DecisionModal
             portalId="portal"
             title={attentionModal.title}

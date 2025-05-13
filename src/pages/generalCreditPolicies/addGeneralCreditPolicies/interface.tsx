@@ -5,6 +5,15 @@ import { IAddGenCreditPoliciesUI } from "@ptypes/generalCredPolicies/IAddGenCred
 import { addLabels } from "@config/generalCreditPolicies/assisted/addLabels";
 import { crumbsAddGenCredPolicies } from "@config/generalCreditPolicies/assisted/navigation";
 import { controlsAssisted } from "@config/generalCreditPolicies/assisted/controlsAssisted";
+import { DecisionsForm } from "@design/forms/decisions";
+import { deleteModal } from "@config/decisions/messages";
+import { decisionContributionsPortfConfig } from "@config/decisions/decisionTempContributionsPortfolio";
+import { revertModalDisplayData } from "@utils/revertModalDisplayData";
+import { decisionIncomePortfolioConfig } from "@config/decisions/decisionTempIncomePortfolio";
+import { textValuesBusinessRules } from "@config/generalCreditPolicies/assisted/businessRules";
+import { contributionsPortfLabels } from "@config/generalCreditPolicies/assisted/contributionsPortfLabels";
+import { incomePortfLabels } from "@config/generalCreditPolicies/assisted/incomePortfLabels";
+import { nameRules } from "@config/generalCreditPolicies/assisted/nameRules";
 import { DecisionsGeneralForm } from "../forms/decisionsGeneral";
 
 const AddGenCreditPoliciesUI = (props: IAddGenCreditPoliciesUI) => {
@@ -15,6 +24,10 @@ const AddGenCreditPoliciesUI = (props: IAddGenCreditPoliciesUI) => {
     initialValues,
     smallScreen,
     steps,
+    contributionsPortfolio,
+    incomePortfolio,
+    setIncomePortfolio,
+    setContributionsPortfolio,
     handleFormValidChange,
     onNextStep,
     onPreviousStep,
@@ -50,6 +63,7 @@ const AddGenCreditPoliciesUI = (props: IAddGenCreditPoliciesUI) => {
             onSubmitClick={onToggleModal}
             disableNext={formValid}
             controls={controlsAssisted}
+            showCurrentStepNumber={false}
             size={smallScreen ? "small" : "large"}
           />
           <Stack direction="column">
@@ -59,6 +73,44 @@ const AddGenCreditPoliciesUI = (props: IAddGenCreditPoliciesUI) => {
                 initialValues={initialValues.decisionsGeneral.values}
                 handleNextStep={onNextStep}
                 handleFormValidChange={handleFormValidChange}
+              />
+            )}
+            {currentStep === 2 && (
+              <DecisionsForm
+                deleteModal={deleteModal}
+                textValuesBusinessRules={textValuesBusinessRules}
+                decisionTemplateConfig={decisionContributionsPortfConfig}
+                onButtonClick={onNextStep}
+                onPreviousStep={onPreviousStep}
+                initialValues={contributionsPortfolio}
+                setDecisions={setContributionsPortfolio}
+                revertModalDisplayData={revertModalDisplayData}
+                labelBusinessRules={nameRules.contributionsPortfolio}
+                nameRule=""
+                titleContentAddCard={
+                  contributionsPortfLabels.titleContentAddCard
+                }
+                messageEmptyDecisions={
+                  contributionsPortfLabels.messageEmptyDecisions
+                }
+                disabledButton={contributionsPortfolio.length === 0}
+              />
+            )}
+            {currentStep === 3 && (
+              <DecisionsForm
+                deleteModal={deleteModal}
+                textValuesBusinessRules={textValuesBusinessRules}
+                decisionTemplateConfig={decisionIncomePortfolioConfig}
+                onButtonClick={onNextStep}
+                onPreviousStep={onPreviousStep}
+                initialValues={incomePortfolio}
+                setDecisions={setIncomePortfolio}
+                revertModalDisplayData={revertModalDisplayData}
+                labelBusinessRules={nameRules.incomePortfolio}
+                nameRule=""
+                titleContentAddCard={incomePortfLabels.titleContentAddCard}
+                messageEmptyDecisions={incomePortfLabels.messageEmptyDecisions}
+                disabledButton={incomePortfolio.length === 0}
               />
             )}
           </Stack>

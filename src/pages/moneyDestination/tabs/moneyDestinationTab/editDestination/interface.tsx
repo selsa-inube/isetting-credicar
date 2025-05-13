@@ -89,10 +89,8 @@ const EditDestinationUI = (props: IEditDestinationUI) => {
                 initialValues={creditLineDecisions}
                 setDecisions={setCreditLineDecisions}
                 revertModalDisplayData={revertModalDisplayData}
-                labelBusinessRules={editDestinationLabels.labelBusinessRules}
-                nameMoneyDestination={
-                  initialGeneralInformationValues.nameDestination
-                }
+                labelBusinessRules="LineOfCredit"
+                nameRule={initialGeneralInformationValues.nameDestination}
                 editDataOption
                 showAttentionModal={false}
                 setShowAttentionModal={() => console.log()}

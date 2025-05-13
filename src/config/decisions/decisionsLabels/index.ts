@@ -1,9 +1,9 @@
 const decisionsLabels = {
-  addButton: "Agregar decisión",
-  cancelButton: "Cancelar",
-  previusButton: "Anterior",
-  saveButton: "Guardar",
-  nextButton: "Siguiente",
+  labelAddButton: "Agregar decisión",
+  labelCancelButton: "Cancelar",
+  labelPreviusButton: "Anterior",
+  labelNextButton: "Siguiente",
+  labelSaveButton: "Guardar",
 };
 
 export { decisionsLabels };
