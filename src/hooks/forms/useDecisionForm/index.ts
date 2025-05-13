@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useMediaQuery } from "@inubekit/inubekit";
 import { IRuleDecision } from "@isettingkit/input";
 
 const useDecisionForm = (
@@ -9,8 +10,8 @@ const useDecisionForm = (
   ) => void,
   onButtonClick: () => void,
   setCreditLineDecisions: (decisions: IRuleDecision[]) => void,
-  setShowAttentionModal: React.Dispatch<React.SetStateAction<boolean>>,
-  showAttentionModal: boolean,
+  showAttentionModal?: boolean,
+  setShowAttentionModal?: React.Dispatch<React.SetStateAction<boolean>>,
   normalizeEvaluateRuleData?: IRuleDecision[],
   editDataOption?: boolean,
 ) => {
@@ -83,7 +84,7 @@ const useDecisionForm = (
   };
 
   const handleToggleAttentionModal = () => {
-    setShowAttentionModal(!showAttentionModal);
+    if (setShowAttentionModal) setShowAttentionModal(!showAttentionModal);
   };
 
   const handleToggleDeleteModal = (id: string) => {
@@ -138,6 +139,8 @@ const useDecisionForm = (
     }
   }, [decisions, initialDecisions]);
 
+  const isMobile = useMediaQuery("(max-width: 990px)");
+
   return {
     isModalOpen,
     selectedDecision,
@@ -145,6 +148,7 @@ const useDecisionForm = (
     showDeleteModal,
     hasChanges,
     savedDecisions,
+    isMobile,
     handleOpenModal,
     handleCloseModal,
     handleSubmitForm,

@@ -132,9 +132,7 @@ const AddDestinationUI = (props: IAddDestinationUI) => {
                 setDecisions={setCreditLineDecisions}
                 revertModalDisplayData={revertModalDisplayData}
                 labelBusinessRules="LineOfCredit"
-                nameMoneyDestination={
-                  initialGeneralInformationValues.nameDestination
-                }
+                nameRule={initialGeneralInformationValues.nameDestination}
                 showAttentionModal={showAttentionModal}
                 setShowAttentionModal={setShowAttentionModal}
                 titleContentAddCard="Agregar línea de crédito"

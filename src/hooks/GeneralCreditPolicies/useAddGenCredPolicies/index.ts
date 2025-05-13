@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { useMediaQuery } from "@inubekit/inubekit";
+import { IRuleDecision } from "@isettingkit/input";
 import { FormikProps } from "formik";
 
 import { addPayrollAgreementSteps } from "@config/payrollAgreement/payrollAgreementTab/assisted/steps";
@@ -28,7 +29,10 @@ const useAddGenCredPolicies = () => {
   const [formValues, setFormValues] =
     useState<IAddGenCredPoliciesForms>(initialValues);
   const [isCurrentFormValid, setIsCurrentFormValid] = useState(false);
-
+  const [contributionsPortfolio, setContributionsPortfolio] = useState<
+    IRuleDecision[]
+  >([]);
+  const [incomePortfolio, setIncomePortfolio] = useState<IRuleDecision[]>([]);
   const [showModal, setShowModal] = useState(false);
 
   const smallScreen = useMediaQuery("(max-width: 990px)");
@@ -44,7 +48,9 @@ const useAddGenCredPolicies = () => {
   };
 
   const handleNextStep = () => {
-    if (currentStep < addPayrollAgreementSteps.length) {
+    if (currentStep >= addPayrollAgreementSteps.length) return;
+
+    const updateFormValues = () => {
       if (decisionsGeneralRef.current) {
         setFormValues((prevValues) => ({
           ...prevValues,
@@ -55,14 +61,67 @@ const useAddGenCredPolicies = () => {
               : ({} as IDecisionsGeneralEntry),
           },
         }));
-        setCurrentStep(currentStep + 1);
       }
-    }
+    };
+
+    const calculateNextStep = () => {
+      const isFactor =
+        decisionsGeneralRef.current?.values.factor ??
+        formValues.decisionsGeneral.values.factor;
+      const isReciprocity =
+        decisionsGeneralRef.current?.values.reciprocity ??
+        formValues.decisionsGeneral.values.reciprocity;
+
+      if (currentStep === 2) {
+        return isFactor ? currentStep + 1 : 4;
+      }
+
+      if (currentStep === 3 || currentStep === 4) {
+        return currentStep + 1;
+      }
+
+      return isReciprocity ? currentStep + 1 : isFactor ? 3 : 4;
+    };
+
+    updateFormValues();
+    setCurrentStep(calculateNextStep());
   };
 
   const handlePreviousStep = () => {
-    if (currentStep > 1) {
-      setCurrentStep(currentStep - 1);
+    if (currentStep <= 1) return;
+
+    const isReciprocity =
+      formValues.decisionsGeneral.values.reciprocity === true;
+    const isFactor = formValues.decisionsGeneral.values.factor === true;
+
+    const calculateStep = (
+      defaultStep: number,
+      condition: boolean,
+      stepIfTrue: number,
+    ) => (condition ? stepIfTrue : defaultStep);
+
+    switch (currentStep) {
+      case 4:
+        setCurrentStep(
+          calculateStep(
+            calculateStep(1, isReciprocity, 2),
+            isFactor,
+            currentStep - 1,
+          ),
+        );
+        break;
+
+      case 3:
+        setCurrentStep(calculateStep(1, isReciprocity, currentStep - 1));
+        break;
+
+      case 2:
+      case 5:
+        setCurrentStep(currentStep - 1);
+        break;
+
+      default:
+        break;
     }
   };
 
@@ -77,6 +136,10 @@ const useAddGenCredPolicies = () => {
     smallScreen,
     isCurrentFormValid,
     showModal,
+    contributionsPortfolio,
+    incomePortfolio,
+    setIncomePortfolio,
+    setContributionsPortfolio,
     handleFormValidChange,
     handleToggleModal,
     handleNextStep,

@@ -4,35 +4,8 @@ import { IRuleDecision } from "@isettingkit/input";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 import { useEnumRules } from "@hooks/moneyDestination/useEnumRules";
 import { useDecisionForm } from "@hooks/forms/useDecisionForm";
-import { IMessageModal } from "@ptypes/decisions/IMessageModal";
-import { IRulesFormTextValues } from "@ptypes/decisions/IRulesFormTextValues";
+import { IDecisionsForm } from "@ptypes/design/IDecisionsForm";
 import { DecisionsFormUI } from "./interface";
-
-interface IDecisionsForm {
-  attentionModal: IMessageModal;
-  deleteModal: IMessageModal;
-  initialValues: IRuleDecision[];
-  labelBusinessRules: string;
-  textValuesBusinessRules: IRulesFormTextValues;
-  showAttentionModal: boolean;
-  decisionTemplateConfig: (
-    enumeratorsRules: IRuleDecision,
-    nameMoneyDestination: string,
-  ) => IRuleDecision | undefined;
-  onButtonClick: () => void;
-  onPreviousStep: () => void;
-  setDecisions: (decisions: IRuleDecision[]) => void;
-  revertModalDisplayData: (
-    dataDecision: IRuleDecision,
-    originalDecision: IRuleDecision,
-  ) => void;
-  nameMoneyDestination: string;
-  setShowAttentionModal: React.Dispatch<React.SetStateAction<boolean>>;
-  editDataOption?: boolean;
-  normalizeEvaluateRuleData?: IRuleDecision[];
-  titleContentAddCard?: string;
-  messageEmptyDecisions?: string;
-}
 
 const DecisionsForm = (props: IDecisionsForm) => {
   const {
@@ -42,7 +15,7 @@ const DecisionsForm = (props: IDecisionsForm) => {
     labelBusinessRules,
     textValuesBusinessRules,
     editDataOption,
-    nameMoneyDestination,
+    nameRule,
     showAttentionModal,
     titleContentAddCard,
     messageEmptyDecisions,
@@ -61,6 +34,7 @@ const DecisionsForm = (props: IDecisionsForm) => {
     decisions,
     showDeleteModal,
     hasChanges,
+    isMobile,
     handleOpenModal,
     handleCloseModal,
     handleSubmitForm,
@@ -74,8 +48,8 @@ const DecisionsForm = (props: IDecisionsForm) => {
     revertModalDisplayData,
     onButtonClick,
     setDecisions,
-    setShowAttentionModal,
     showAttentionModal,
+    setShowAttentionModal,
     normalizeEvaluateRuleData,
     editDataOption,
   );
@@ -91,8 +65,7 @@ const DecisionsForm = (props: IDecisionsForm) => {
       attentionModal={attentionModal}
       decisions={decisions}
       decisionTemplate={
-        decisionTemplateConfig(ruleData, nameMoneyDestination) ??
-        ({} as IRuleDecision)
+        decisionTemplateConfig(ruleData, nameRule) ?? ({} as IRuleDecision)
       }
       deleteModal={deleteModal}
       isModalOpen={isModalOpen}
@@ -105,8 +78,7 @@ const DecisionsForm = (props: IDecisionsForm) => {
       onSubmitForm={(dataDecision: IRuleDecision) =>
         handleSubmitForm(
           dataDecision,
-          decisionTemplateConfig(ruleData, nameMoneyDestination) ??
-            ({} as IRuleDecision),
+          decisionTemplateConfig(ruleData, nameRule) ?? ({} as IRuleDecision),
         )
       }
       onToggleAttentionModal={handleToggleAttentionModal}
@@ -121,6 +93,7 @@ const DecisionsForm = (props: IDecisionsForm) => {
       hasChanges={hasChanges}
       titleContentAddCard={titleContentAddCard}
       messageEmptyDecisions={messageEmptyDecisions}
+      isMobile={isMobile}
     />
   );
 };

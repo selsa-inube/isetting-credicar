@@ -9,6 +9,10 @@ const AddGenCreditPolicies = () => {
     formReferences,
     isCurrentFormValid,
     smallScreen,
+    contributionsPortfolio,
+    incomePortfolio,
+    setIncomePortfolio,
+    setContributionsPortfolio,
     handleFormValidChange,
     handleNextStep,
     handlePreviousStep,
@@ -29,6 +33,10 @@ const AddGenCreditPolicies = () => {
       smallScreen={smallScreen}
       onToggleModal={handleToggleModal}
       handleFormValidChange={handleFormValidChange}
+      contributionsPortfolio={contributionsPortfolio}
+      setContributionsPortfolio={setContributionsPortfolio}
+      incomePortfolio={incomePortfolio}
+      setIncomePortfolio={setIncomePortfolio}
     />
   );
 };
