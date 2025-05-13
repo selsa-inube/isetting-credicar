@@ -4,35 +4,8 @@ import { IRuleDecision } from "@isettingkit/input";
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 import { useEnumRules } from "@hooks/moneyDestination/useEnumRules";
 import { useDecisionForm } from "@hooks/forms/useDecisionForm";
-import { IMessageModal } from "@ptypes/decisions/IMessageModal";
-import { IRulesFormTextValues } from "@ptypes/decisions/IRulesFormTextValues";
+import { IDecisionsForm } from "@ptypes/decisions/IDecisionsForm";
 import { DecisionsFormUI } from "./interface";
-
-interface IDecisionsForm {
-  attentionModal: IMessageModal;
-  deleteModal: IMessageModal;
-  initialValues: IRuleDecision[];
-  labelBusinessRules: string;
-  textValuesBusinessRules: IRulesFormTextValues;
-  showAttentionModal: boolean;
-  decisionTemplateConfig: (
-    enumeratorsRules: IRuleDecision,
-    nameMoneyDestination: string,
-  ) => IRuleDecision | undefined;
-  onButtonClick: () => void;
-  onPreviousStep: () => void;
-  setDecisions: (decisions: IRuleDecision[]) => void;
-  revertModalDisplayData: (
-    dataDecision: IRuleDecision,
-    originalDecision: IRuleDecision,
-  ) => void;
-  nameMoneyDestination: string;
-  setShowAttentionModal: React.Dispatch<React.SetStateAction<boolean>>;
-  editDataOption?: boolean;
-  normalizeEvaluateRuleData?: IRuleDecision[];
-  titleContentAddCard?: string;
-  messageEmptyDecisions?: string;
-}
 
 const DecisionsForm = (props: IDecisionsForm) => {
   const {
@@ -61,6 +34,8 @@ const DecisionsForm = (props: IDecisionsForm) => {
     decisions,
     showDeleteModal,
     hasChanges,
+    cancelButtonLabel,
+    saveButtonLabel,
     handleOpenModal,
     handleCloseModal,
     handleSubmitForm,
@@ -121,6 +96,8 @@ const DecisionsForm = (props: IDecisionsForm) => {
       hasChanges={hasChanges}
       titleContentAddCard={titleContentAddCard}
       messageEmptyDecisions={messageEmptyDecisions}
+      cancelButtonLabel={cancelButtonLabel}
+      saveButtonLabel={saveButtonLabel}
     />
   );
 };

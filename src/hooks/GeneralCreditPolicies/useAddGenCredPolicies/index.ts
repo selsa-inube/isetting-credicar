@@ -2,10 +2,10 @@ import { useRef, useState } from "react";
 import { useMediaQuery } from "@inubekit/inubekit";
 import { FormikProps } from "formik";
 
-import { addPayrollAgreementSteps } from "@config/payrollAgreement/payrollAgreementTab/assisted/steps";
 import { IAddGenCredPoliciesForms } from "@ptypes/generalCredPolicies/forms/IAddGenCredPoliciesForms";
 import { IAddGenCredPoliciesRef } from "@ptypes/generalCredPolicies/forms/IAddGenCredPoliciesRef";
 import { IDecisionsGeneralEntry } from "@ptypes/generalCredPolicies/forms/IDecisionsGeneralEntry";
+import { addGenCredPoliciesSteps } from "@config/generalCreditPolicies/assisted/steps";
 
 const useAddGenCredPolicies = () => {
   const initialValues = {
@@ -44,7 +44,7 @@ const useAddGenCredPolicies = () => {
   };
 
   const handleNextStep = () => {
-    if (currentStep < addPayrollAgreementSteps.length) {
+    if (currentStep < addGenCredPoliciesSteps.length) {
       if (decisionsGeneralRef.current) {
         setFormValues((prevValues) => ({
           ...prevValues,

@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from "axios";
 import { postWithRetries } from "@services/core/postWithRetries";
 
-import { axiosInstance } from "@api/isettingCredicar";
+import { credicarAxiosInstance } from "@api/isettingCredicar";
 import { IRequestMoneyDestination } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/IRequestMoneyDestination";
 import { mapAddMoneyDestinationEntityToApi } from "./mappers.ts";
 
@@ -20,7 +20,7 @@ const postAddMoneyDestination = async (
     `/money-destinations`,
     config,
     mapAddMoneyDestinationEntityToApi(data) as unknown as string[],
-    axiosInstance,
+    credicarAxiosInstance,
   );
 
   return newData;
