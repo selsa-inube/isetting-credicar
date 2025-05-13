@@ -3,13 +3,13 @@ import { useMediaQuery } from "@inubekit/inubekit";
 import { IRuleDecision } from "@isettingkit/input";
 import { FormikProps } from "formik";
 
+import { addPayrollAgreementSteps } from "@config/payrollAgreement/payrollAgreementTab/assisted/steps";
 import { IAddGenCredPoliciesForms } from "@ptypes/generalCredPolicies/forms/IAddGenCredPoliciesForms";
 import { IAddGenCredPoliciesRef } from "@ptypes/generalCredPolicies/forms/IAddGenCredPoliciesRef";
 import { IDecisionsGeneralEntry } from "@ptypes/generalCredPolicies/forms/IDecisionsGeneralEntry";
-import { addGenCredPoliciesSteps } from "@config/generalCreditPolicies/assisted/steps";
 
 const useAddGenCredPolicies = () => {
-  const initialValues = {
+  const initialValues: IAddGenCredPoliciesForms = {
     decisionsGeneral: {
       isValid: false,
       values: {
@@ -26,8 +26,7 @@ const useAddGenCredPolicies = () => {
   };
 
   const [currentStep, setCurrentStep] = useState(1);
-  const [formValues, setFormValues] =
-    useState<IAddGenCredPoliciesForms>(initialValues);
+  const [formValues, setFormValues] = useState(initialValues);
   const [isCurrentFormValid, setIsCurrentFormValid] = useState(false);
   const [contributionsPortfolio, setContributionsPortfolio] = useState<
     IRuleDecision[]
@@ -43,91 +42,62 @@ const useAddGenCredPolicies = () => {
     decisionsGeneral: decisionsGeneralRef,
   };
 
-  const handleFormValidChange = (isValid: boolean) => {
-    setIsCurrentFormValid(isValid);
+  const getValues = () =>
+    decisionsGeneralRef.current?.values || formValues.decisionsGeneral.values;
+
+  const updateFormValues = () => {
+    const values = decisionsGeneralRef.current?.values;
+    if (values) {
+      setFormValues((prev) => ({
+        ...prev,
+        decisionsGeneral: {
+          ...prev.decisionsGeneral,
+          values,
+        },
+      }));
+    }
+  };
+
+  const getNextStep = (step: number) => {
+    const { factor, reciprocity } = getValues();
+
+    if (step === 2) return factor ? 3 : 4;
+    if ([3, 4].includes(step)) return step + 1;
+    if ([1].includes(step)) {
+      if (reciprocity) return 2;
+      return factor ? 3 : 4;
+    }
+    return step + 1;
+  };
+
+  const getPreviousStep = (step: number) => {
+    const { factor, reciprocity } = formValues.decisionsGeneral.values;
+
+    const map: Record<number, number> = {
+      2: 1,
+      3: reciprocity ? 2 : 1,
+      4: factor ? 3 : reciprocity ? 2 : 1,
+      5: 4,
+    };
+
+    return map[step] || step - 1;
   };
 
   const handleNextStep = () => {
-    if (currentStep >= addGenCredPoliciesSteps.length) return;
-
-    const updateFormValues = () => {
-      if (decisionsGeneralRef.current) {
-        setFormValues((prevValues) => ({
-          ...prevValues,
-          decisionsGeneral: {
-            ...prevValues.decisionsGeneral,
-            values: decisionsGeneralRef.current
-              ? decisionsGeneralRef.current.values
-              : ({} as IDecisionsGeneralEntry),
-          },
-        }));
-      }
-    };
-
-    const calculateNextStep = () => {
-      const isFactor =
-        decisionsGeneralRef.current?.values.factor ??
-        formValues.decisionsGeneral.values.factor;
-      const isReciprocity =
-        decisionsGeneralRef.current?.values.reciprocity ??
-        formValues.decisionsGeneral.values.reciprocity;
-
-      if (currentStep === 2) {
-        return isFactor ? currentStep + 1 : 4;
-      }
-
-      if (currentStep === 3 || currentStep === 4) {
-        return currentStep + 1;
-      }
-
-      return isReciprocity ? currentStep + 1 : isFactor ? 3 : 4;
-    };
-
+    if (currentStep >= addPayrollAgreementSteps.length) return;
     updateFormValues();
-    setCurrentStep(calculateNextStep());
+    setCurrentStep(getNextStep(currentStep));
   };
 
   const handlePreviousStep = () => {
     if (currentStep <= 1) return;
-
-    const isReciprocity =
-      formValues.decisionsGeneral.values.reciprocity === true;
-    const isFactor = formValues.decisionsGeneral.values.factor === true;
-
-    const calculateStep = (
-      defaultStep: number,
-      condition: boolean,
-      stepIfTrue: number,
-    ) => (condition ? stepIfTrue : defaultStep);
-
-    switch (currentStep) {
-      case 4:
-        setCurrentStep(
-          calculateStep(
-            calculateStep(1, isReciprocity, 2),
-            isFactor,
-            currentStep - 1,
-          ),
-        );
-        break;
-
-      case 3:
-        setCurrentStep(calculateStep(1, isReciprocity, currentStep - 1));
-        break;
-
-      case 2:
-      case 5:
-        setCurrentStep(currentStep - 1);
-        break;
-
-      default:
-        break;
-    }
+    setCurrentStep(getPreviousStep(currentStep));
   };
 
-  const handleToggleModal = () => {
-    setShowModal(!showModal);
-  };
+  const handleToggleModal = () => setShowModal((prev) => !prev);
+
+  const handleFormValidChange = (isValid: boolean) =>
+    setIsCurrentFormValid(isValid);
 
   const formValid =
     (currentStep === 2 && contributionsPortfolio.length === 0) ||
