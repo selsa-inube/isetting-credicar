@@ -1,19 +1,20 @@
 import { useContext, useEffect, useState } from "react";
 import { moneyDestinationTabsConfig } from "@config/moneyDestination/tabs";
-import { ChangeToRequestTab } from "@context/changeToRequestTab";
+
 import { decrypt } from "@utils/crypto/decrypt";
 import { useOptionsByBusinessUnit } from "@hooks/staffPortal/useOptionsByBusinessUnit";
+import { ChangeToRequestTab } from "@context/changeToRequestTab/changeToRequest";
 
 const useMoneryDestinationPage = (businessUnitSigla: string) => {
   const portalId = localStorage.getItem("portalCode");
   const staffPortalId = portalId ? decrypt(portalId) : "";
   const [isSelected, setIsSelected] = useState<string>();
 
-  const { descriptionOptions } = useOptionsByBusinessUnit(
-    businessUnitSigla,
+  const { descriptionOptions } = useOptionsByBusinessUnit({
+    businessUnit: businessUnitSigla,
     staffPortalId,
-    "Destinos de dinero",
-  );
+    optionName: "Destinos de dinero",
+  });
 
   const handleTabChange = (tabId: string) => {
     setIsSelected(tabId);

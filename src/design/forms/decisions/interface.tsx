@@ -81,6 +81,7 @@ const DecisionsFormUI = (props: IDecisionsFormUI) => {
             disabled={disabledPrevius}
           >
             {cancelButtonLabel}
+            {cancelButtonLabel}
           </Button>
 
           <Button
@@ -89,6 +90,7 @@ const DecisionsFormUI = (props: IDecisionsFormUI) => {
             appearance={ComponentAppearance.PRIMARY}
             disabled={disabledNext}
           >
+            {saveButtonLabel}
             {saveButtonLabel}
           </Button>
         </Stack>

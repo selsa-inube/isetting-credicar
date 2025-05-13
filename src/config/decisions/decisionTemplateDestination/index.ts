@@ -25,23 +25,21 @@ const decisionTemplateConfig = (
       effectiveFrom: "",
       validUntil: "",
       listOfPossibleValues: listOfPossibleValues,
-    };
-
-    if (
-      conditionsThatEstablishesTheDecision &&
-      conditionsThatEstablishesTheDecision?.length > 0
-    ) {
-      decisionTemplate.conditionsThatEstablishesTheDecision =
-        conditionsThatEstablishesTheDecision.map((condition) => ({
+      conditionsThatEstablishesTheDecision:
+        conditionsThatEstablishesTheDecision?.map((condition) => ({
           conditionName: condition.conditionName,
-          labelName: dataTranslations[condition.labelName],
+          labelName:
+            dataTranslations[condition.labelName] ?? condition.labelName,
           conditionDataType: condition.conditionDataType,
-          value: nameMoneyDestination,
+          value:
+            condition.conditionName === "MoneyDestination"
+              ? nameMoneyDestination
+              : condition.value,
           listOfPossibleValues: condition.listOfPossibleValues,
           howToSetTheCondition: condition.howToSetTheCondition,
           hidden: condition.conditionName === "MoneyDestination",
-        }));
-    }
+        })),
+    };
 
     return decisionTemplate;
   }

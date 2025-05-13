@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { IFlagAppearance, useFlag } from "@inubekit/inubekit";
 
-import { postSaveRequest } from "@services/saveRequest/postSaveRequest";
 import { ISaveDataRequest } from "@ptypes/saveData/ISaveDataRequest";
 import { statusFlowAutomatic } from "@config/status/statusFlowAutomatic";
 import { IRequestSteps } from "@design/modals/requestProcessModal/types";
@@ -12,14 +11,16 @@ import { flowAutomaticMessages } from "@config/moneyDestination/moneyDestination
 import { interventionHumanMessage } from "@config/moneyDestination/moneyDestinationTab/generics/interventionHumanMessage";
 import { statusCloseModal } from "@config/status/statusCloseModal";
 import { statusRequestFinished } from "@config/status/statusRequestFinished";
-import { ChangeToRequestTab } from "@context/changeToRequestTab";
+
 import { postAddMoneyDestination } from "@services/moneyDestination/postAddMoneyDestination";
 import { IRequestMoneyDestination } from "@ptypes/moneyDestination/tabs/moneyDestinationTab/IRequestMoneyDestination";
 import { patchEditMoneyDestination } from "@services/moneyDestination/patchEditMoneyDestination";
 import { deleteMoneyDestination } from "@services/moneyDestination/deleteMoneyDestination";
 import { UseCase } from "@enum/useCase";
 import { operationTypes } from "@config/useCase";
-import { RequestStepsStatus } from "@src/enum/requestStepsStatus";
+import { RequestStepsStatus } from "@enum/requestStepsStatus";
+import { postSaveRequest } from "@services/requestInProgress/postSaveRequest";
+import { ChangeToRequestTab } from "@context/changeToRequestTab/changeToRequest";
 
 const useSaveMoneyDestination = (
   useCase: "add" | "edit" | "delete",
