@@ -18,7 +18,7 @@ const decisionScoreModelsConfig = (
 
     const decisionTemplate: IRuleDecision = {
       ruleName: ruleName,
-      labelName: dataTranslations[labelName] ?? labelName,
+      labelName: "Modelo de score",
       decisionDataType:
         ValueDataType[decisionData as keyof typeof ValueDataType],
       howToSetTheDecision: howToSetTheDecision,
