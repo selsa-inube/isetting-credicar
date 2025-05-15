@@ -1,4 +1,4 @@
-import { stepKeyByNamePolicies } from "@src/utils/stepKeyByNamePolicies";
+import { stepKeyByNamePolicies } from "@utils/stepKeyByNamePolicies";
 
 const stepKeysPolicies = {
   DECISIONS_GENERAL: stepKeyByNamePolicies["Decisiones generales"],
