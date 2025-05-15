@@ -14,7 +14,7 @@ const decisionIncomePortfolioConfig = ({
 
     const decisionTemplate: IRuleDecision = {
       ruleName: ruleName,
-      labelName: dataTranslations[labelName] ?? labelName,
+      labelName: "Número de veces los ingresos",
       decisionDataType:
         ValueDataType[decisionData as keyof typeof ValueDataType],
       howToSetTheDecision: howToSetTheDecision,

@@ -14,7 +14,7 @@ const decisionContributionsPortfConfig = ({
 
     const decisionTemplate: IRuleDecision = {
       ruleName: ruleName,
-      labelName: dataTranslations[labelName] ?? labelName,
+      labelName: "Número de veces los aportes",
       decisionDataType:
         ValueDataType[decisionData as keyof typeof ValueDataType],
       howToSetTheDecision: howToSetTheDecision,

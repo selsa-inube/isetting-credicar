@@ -4,7 +4,7 @@ import { tokens } from "@design/tokens";
 import { IAddGenCreditPoliciesUI } from "@ptypes/generalCredPolicies/IAddGenCreditPoliciesUI";
 import { addLabels } from "@config/generalCreditPolicies/assisted/addLabels";
 import { crumbsAddGenCredPolicies } from "@config/generalCreditPolicies/assisted/navigation";
-import { controlsAssisted } from "@config/generalCreditPolicies/assisted/controlsAssisted";
+import { controlsAssisted } from "@config/controlsAssisted";
 import { DecisionsForm } from "@design/forms/decisions";
 import { deleteModal } from "@config/decisions/messages";
 import { decisionContributionsPortfConfig } from "@config/decisions/decisionTempContributionsPortfolio";
@@ -14,7 +14,10 @@ import { textValuesBusinessRules } from "@config/generalCreditPolicies/assisted/
 import { contributionsPortfLabels } from "@config/generalCreditPolicies/assisted/contributionsPortfLabels";
 import { incomePortfLabels } from "@config/generalCreditPolicies/assisted/incomePortfLabels";
 import { nameRules } from "@config/generalCreditPolicies/assisted/nameRules";
+import { decisionScoreModelsConfig } from "@config/decisions/decisionTempScoreModels";
+import { scoreModelsLabels } from "@config/generalCreditPolicies/assisted/scoreModelsLabels";
 import { DecisionsGeneralForm } from "../forms/decisionsGeneral";
+import { VerificationForm } from "../forms/verification";
 
 const AddGenCreditPoliciesUI = (props: IAddGenCreditPoliciesUI) => {
   const {
@@ -26,8 +29,22 @@ const AddGenCreditPoliciesUI = (props: IAddGenCreditPoliciesUI) => {
     steps,
     contributionsPortfolio,
     incomePortfolio,
+    scoreModels,
+    showModal,
+    showRequestProcessModal,
+    requestSteps,
+    saveGeneralPolicies,
+    loading,
+    showPendingReqModal,
+    dateVerification,
+    setDateVerification,
+    onCloseRequestStatus,
+    onClosePendingReqModal,
+    onFinishForm,
+    setScoreModels,
     setIncomePortfolio,
     setContributionsPortfolio,
+    setCurrentStep,
     handleFormValidChange,
     onNextStep,
     onPreviousStep,
@@ -91,7 +108,7 @@ const AddGenCreditPoliciesUI = (props: IAddGenCreditPoliciesUI) => {
                   contributionsPortfLabels.titleContentAddCard
                 }
                 messageEmptyDecisions={
-                  contributionsPortfLabels.messageEmptyDecisions
+                  contributionsPortfLabels.messageEmptyDecisions as unknown as string
                 }
                 disabledButton={contributionsPortfolio.length === 0}
               />
@@ -109,8 +126,66 @@ const AddGenCreditPoliciesUI = (props: IAddGenCreditPoliciesUI) => {
                 labelBusinessRules={nameRules.incomePortfolio}
                 nameRule=""
                 titleContentAddCard={incomePortfLabels.titleContentAddCard}
-                messageEmptyDecisions={incomePortfLabels.messageEmptyDecisions}
+                messageEmptyDecisions={
+                  incomePortfLabels.messageEmptyDecisions as unknown as string
+                }
                 disabledButton={incomePortfolio.length === 0}
+              />
+            )}
+            {currentStep === 4 && (
+              <DecisionsForm
+                deleteModal={deleteModal}
+                textValuesBusinessRules={textValuesBusinessRules}
+                decisionTemplateConfig={decisionScoreModelsConfig}
+                onButtonClick={onNextStep}
+                onPreviousStep={onPreviousStep}
+                initialValues={scoreModels}
+                setDecisions={setScoreModels}
+                revertModalDisplayData={revertModalDisplayData}
+                labelBusinessRules={nameRules.scoreModels}
+                nameRule=""
+                titleContentAddCard={scoreModelsLabels.titleContentAddCard}
+                messageEmptyDecisions={
+                  scoreModelsLabels.messageEmptyDecisions as unknown as string
+                }
+                disabledButton={scoreModels.length === 0}
+              />
+            )}
+            {currentStep === 5 && (
+              <VerificationForm
+                updatedData={{
+                  decisionsGeneral: {
+                    isValid: formValid,
+                    values: initialValues.decisionsGeneral.values,
+                  },
+
+                  contributionsPortfolio: {
+                    isValid: formValid,
+                    values: contributionsPortfolio,
+                  },
+                  incomePortfolio: {
+                    isValid: formValid,
+                    values: incomePortfolio,
+                  },
+                  scoreModels: {
+                    isValid: formValid,
+                    values: scoreModels,
+                  },
+                }}
+                requestSteps={requestSteps}
+                onPreviousStep={onPreviousStep}
+                handleStepChange={(stepId) => setCurrentStep(stepId)}
+                showModal={showModal}
+                showRequestProcessModal={showRequestProcessModal}
+                onToggleModal={onToggleModal}
+                onFinishForm={onFinishForm}
+                saveGeneralPolicies={saveGeneralPolicies}
+                loading={loading}
+                onCloseRequestStatus={onCloseRequestStatus}
+                showPendingReqModal={showPendingReqModal}
+                onClosePendingReqModal={onClosePendingReqModal}
+                date={dateVerification}
+                setDateVerification={setDateVerification}
               />
             )}
           </Stack>

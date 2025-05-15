@@ -11,7 +11,7 @@ import { ChangeToRequestTab } from "@context/changeToRequestTab/changeToRequest"
 import { IUseSavePayrollAgreement } from "@ptypes/hooks/payrollAgreement/IUseSavePayrollAgreement";
 import { IRequestSteps } from "@ptypes/design/IRequestSteps";
 import { requestStatusMessage } from "@config/payrollAgreement/payrollAgreementTab/generic/requestStatusMessage";
-import { requestStepsInitial } from "@config/moneyDestination/addDestination/requestSteps";
+import { requestStepsInitial } from "@config/requestSteps";
 import { getRequestInProgressById } from "@services/requestInProgress/getRequestInProgressById";
 import { flowAutomaticMessages } from "@config/payrollAgreement/payrollAgreementTab/generic/flowAutomaticMessages";
 import { interventionHumanMessage } from "@config/payrollAgreement/payrollAgreementTab/generic/interventionHumanMessage";

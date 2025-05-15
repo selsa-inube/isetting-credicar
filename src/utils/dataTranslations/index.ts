@@ -20,6 +20,12 @@ const dataTranslations: Record<string, string> = {
   "Primary income type": "Tipo de ingreso primario",
   "Credit risk score": "Puntuación de riesgo crediticio",
   CreditRiskScore: "Puntuación de riesgo crediticio",
+  "Credit risk scoring model gp":
+    "Modelo de puntuación de riesgo crediticio gp",
+  "Credit risk profile": "Perfil de riesgo crediticio",
+  "Business unit": "Unidad de negocio",
+  amount: "Monto",
+  net: "Neto",
 };
 
 export { dataTranslations };
