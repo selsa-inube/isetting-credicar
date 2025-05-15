@@ -128,8 +128,6 @@ const useAddGenCredPolicies = (props: IUseAddGenCredPolicies) => {
 
   const rules = [...rulesContributions, ...rulesIncomes, ...ruleScoremodels];
 
-  console.log("rules", rules);
-
   const handleSubmitClick = () => {
     setSaveData({
       applicationName: "ifac",
