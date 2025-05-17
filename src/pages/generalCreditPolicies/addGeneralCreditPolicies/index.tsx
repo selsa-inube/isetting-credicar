@@ -11,6 +11,10 @@ const AddGenCreditPolicies = () => {
     contributionsPortfolio,
     incomePortfolio,
     formValid,
+    showGoBackModal,
+    handleCloseGoBackModal,
+    handleGoBack,
+    handleOpenModal,
     setIncomePortfolio,
     setContributionsPortfolio,
     handleFormValidChange,
@@ -37,6 +41,10 @@ const AddGenCreditPolicies = () => {
       setContributionsPortfolio={setContributionsPortfolio}
       incomePortfolio={incomePortfolio}
       setIncomePortfolio={setIncomePortfolio}
+      showGoBackModal={showGoBackModal}
+      onCloseGoBackModal={handleCloseGoBackModal}
+      onGoBack={handleGoBack}
+      onOpenModal={handleOpenModal}
     />
   );
 };

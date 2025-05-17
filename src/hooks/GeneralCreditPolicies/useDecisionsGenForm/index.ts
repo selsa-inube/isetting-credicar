@@ -17,6 +17,7 @@ const useDecisionsGenForm = (props: IUseDecisionsGenForm) => {
     onSubmit,
     onFormValid,
     handleFormValidChange,
+    initialValuesEdit,
   } = props;
 
   const createValidationSchema = () =>
@@ -63,12 +64,23 @@ const useDecisionsGenForm = (props: IUseDecisionsGenForm) => {
     });
   };
 
+  const valuesEmpty = Object.values(formik.values).every(
+    (value) => value === "" || value === null || value === undefined,
+  );
+
+  const valuesEqualBoton =
+    JSON.stringify(initialValuesEdit) === JSON.stringify(formik.values);
+
   useEffect(() => {
     const updateButton = () => {
-      setIsDisabledButton(!formik.isValid);
+      if (editDataOption) {
+        setIsDisabledButton(!formik.isValid || valuesEmpty || valuesEqualBoton);
+      } else {
+        setIsDisabledButton(!formik.isValid);
+      }
     };
     updateButton();
-  }, [formik.values, formik.isValid, initialValues]);
+  }, [formik.values, formik.isValid, initialValues, editDataOption]);
 
   useEffect(() => {
     if (onFormValid) {

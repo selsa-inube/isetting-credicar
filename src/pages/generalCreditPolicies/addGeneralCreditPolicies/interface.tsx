@@ -14,6 +14,8 @@ import { textValuesBusinessRules } from "@config/generalCreditPolicies/assisted/
 import { contributionsPortfLabels } from "@config/generalCreditPolicies/assisted/contributionsPortfLabels";
 import { incomePortfLabels } from "@config/generalCreditPolicies/assisted/incomePortfLabels";
 import { nameRules } from "@config/generalCreditPolicies/assisted/nameRules";
+import { DecisionModal } from "@design/modals/decisionModal";
+import { goBackModal } from "@config/goBackModal";
 import { DecisionsGeneralForm } from "../forms/decisionsGeneral";
 
 const AddGenCreditPoliciesUI = (props: IAddGenCreditPoliciesUI) => {
@@ -26,6 +28,10 @@ const AddGenCreditPoliciesUI = (props: IAddGenCreditPoliciesUI) => {
     steps,
     contributionsPortfolio,
     incomePortfolio,
+    showGoBackModal,
+    onCloseGoBackModal,
+    onGoBack,
+    onOpenModal,
     setIncomePortfolio,
     setContributionsPortfolio,
     handleFormValidChange,
@@ -52,6 +58,7 @@ const AddGenCreditPoliciesUI = (props: IAddGenCreditPoliciesUI) => {
             description={addLabels.description}
             sizeTitle="large"
             navigatePage="/"
+            onClick={onOpenModal}
           />
         </Stack>
         <Stack gap={tokens.spacing.s300} direction="column">
@@ -91,7 +98,7 @@ const AddGenCreditPoliciesUI = (props: IAddGenCreditPoliciesUI) => {
                   contributionsPortfLabels.titleContentAddCard
                 }
                 messageEmptyDecisions={
-                  contributionsPortfLabels.messageEmptyDecisions
+                  contributionsPortfLabels.messageEmptyDecisions as unknown as string
                 }
                 disabledButton={contributionsPortfolio.length === 0}
               />
@@ -109,13 +116,25 @@ const AddGenCreditPoliciesUI = (props: IAddGenCreditPoliciesUI) => {
                 labelBusinessRules={nameRules.incomePortfolio}
                 nameRule=""
                 titleContentAddCard={incomePortfLabels.titleContentAddCard}
-                messageEmptyDecisions={incomePortfLabels.messageEmptyDecisions}
+                messageEmptyDecisions={
+                  incomePortfLabels.messageEmptyDecisions as unknown as string
+                }
                 disabledButton={incomePortfolio.length === 0}
               />
             )}
           </Stack>
         </Stack>
       </Stack>
+      {showGoBackModal && (
+        <DecisionModal
+          portalId="portal"
+          title={goBackModal.title}
+          description={goBackModal.description}
+          actionText={goBackModal.actionText}
+          onCloseModal={onCloseGoBackModal}
+          onClick={onGoBack}
+        />
+      )}
     </Stack>
   );
 };

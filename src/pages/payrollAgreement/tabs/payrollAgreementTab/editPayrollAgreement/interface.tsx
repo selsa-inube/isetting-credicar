@@ -4,8 +4,7 @@ import { Breadcrumbs, Stack, Tabs } from "@inubekit/inubekit";
 import { requestStatusMessage } from "@config/payrollAgreement/payrollAgreementTab/generic/requestStatusMessage";
 import { requestProcessMessage } from "@config/payrollAgreement/payrollAgreementTab/generic/requestProcessMessage";
 import { crumbsEditPayrollAgreement } from "@config/payrollAgreement/payrollAgreementTab/edit/navigation";
-import { goBackModal } from "@config/payrollAgreement/payrollAgreementTab/forms/goBackModal";
-
+import { goBackModal } from "@config/goBackModal";
 import { RequestStatusModal } from "@design/modals/requestStatusModal";
 import { RequestProcess } from "@design/feedback/RequestProcess";
 import { DecisionModal } from "@design/modals/decisionModal";

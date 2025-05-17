@@ -1,4 +1,5 @@
-import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "@inubekit/inubekit";
 import { IRuleDecision } from "@isettingkit/input";
 import { FormikProps } from "formik";
@@ -7,6 +8,7 @@ import { addPayrollAgreementSteps } from "@config/payrollAgreement/payrollAgreem
 import { IAddGenCredPoliciesForms } from "@ptypes/generalCredPolicies/forms/IAddGenCredPoliciesForms";
 import { IAddGenCredPoliciesRef } from "@ptypes/generalCredPolicies/forms/IAddGenCredPoliciesRef";
 import { IDecisionsGeneralEntry } from "@ptypes/generalCredPolicies/forms/IDecisionsGeneralEntry";
+import { compareObjects } from "@utils/compareObjects";
 
 const useAddGenCredPolicies = () => {
   const initialValues: IAddGenCredPoliciesForms = {
@@ -33,6 +35,10 @@ const useAddGenCredPolicies = () => {
   >([]);
   const [incomePortfolio, setIncomePortfolio] = useState<IRuleDecision[]>([]);
   const [showModal, setShowModal] = useState(false);
+  const [showGoBackModal, setShowGoBackModal] = useState(false);
+  const [canRefresh, setCanRefresh] = useState(false);
+
+  const navigate = useNavigate();
 
   const smallScreen = useMediaQuery("(max-width: 990px)");
 
@@ -99,6 +105,52 @@ const useAddGenCredPolicies = () => {
   const handleFormValidChange = (isValid: boolean) =>
     setIsCurrentFormValid(isValid);
 
+  useEffect(() => {
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      const hasUnsavedChanges =
+        !compareObjects(initialValues, formValues) ||
+        (decisionsGeneralRef.current &&
+          !compareObjects(
+            decisionsGeneralRef.current.initialValues,
+            decisionsGeneralRef.current.values,
+          ));
+
+      if (hasUnsavedChanges) {
+        event.preventDefault();
+        setShowGoBackModal(!showGoBackModal);
+
+        event.returnValue = "";
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [formValues, initialValues, decisionsGeneralRef, canRefresh]);
+
+  const handleOpenModal = () => {
+    const compare = compareObjects(initialValues, formValues);
+    const compareCompany = compareObjects(
+      decisionsGeneralRef.current?.initialValues,
+      decisionsGeneralRef.current?.values,
+    );
+    if (!compare || !compareCompany) {
+      setShowGoBackModal(true);
+    } else {
+      navigate(-1);
+    }
+  };
+
+  const handleCloseGoBackModal = () => {
+    setShowGoBackModal(false);
+  };
+
+  const handleGoBack = () => {
+    setCanRefresh(true);
+    navigate("/");
+  };
+
   const formValid =
     (currentStep === 2 && contributionsPortfolio.length === 0) ||
     (currentStep === 3 && incomePortfolio.length === 0)
@@ -115,6 +167,10 @@ const useAddGenCredPolicies = () => {
     contributionsPortfolio,
     incomePortfolio,
     formValid,
+    showGoBackModal,
+    handleCloseGoBackModal,
+    handleGoBack,
+    handleOpenModal,
     setIncomePortfolio,
     setContributionsPortfolio,
     handleFormValidChange,

@@ -12,6 +12,10 @@ interface IAddGenCreditPoliciesUI {
   steps: IAssistedStep[];
   contributionsPortfolio: IRuleDecision[];
   incomePortfolio: IRuleDecision[];
+  showGoBackModal: boolean;
+  onCloseGoBackModal: () => void;
+  onGoBack: () => void;
+  onOpenModal: () => void;
   setIncomePortfolio: React.Dispatch<React.SetStateAction<IRuleDecision[]>>;
   setContributionsPortfolio: React.Dispatch<
     React.SetStateAction<IRuleDecision[]>
