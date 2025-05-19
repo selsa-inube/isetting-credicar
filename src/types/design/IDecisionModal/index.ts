@@ -16,7 +16,7 @@ interface IDecisionModal {
   isDisabledButton?: boolean;
   withDate?: boolean;
   statusDate?: "pending" | "invalid" | undefined;
-  isLoading?: boolean;
+  loading?: boolean;
   withIcon?: boolean;
   appearance?: IIconAppearance;
   valueDate?: string;

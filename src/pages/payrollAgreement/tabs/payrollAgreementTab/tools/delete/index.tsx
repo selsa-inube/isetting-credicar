@@ -76,7 +76,7 @@ const Delete = (props: IDelete) => {
           requestNumber={savePayrollAgreement?.requestNumber ?? ""}
           onClick={handleClosePendingReqModal}
           onCloseModal={handleClosePendingReqModal}
-          isLoading={false}
+          loading={false}
           actionText={
             requestStatusMessage(savePayrollAgreement?.staffName).actionText
           }

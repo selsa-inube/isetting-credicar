@@ -14,7 +14,7 @@ import { requestProcessMessage } from "@config/generalCreditPolicies/generic/req
 import { useVerificationForm } from "@hooks/GeneralCreditPolicies/useVerificationForm";
 import { IDateVerification } from "@ptypes/generalCredPolicies/forms/IDateVerification";
 import { VerificationBoxes } from "./verificationBoxes";
-import { DateGeneralPolicies } from "./dateGeneralPolicies";
+import { DateGeneralPolicies } from "../../dateGeneralPolicies";
 
 const VerificationForm = (props: IVerificationForm) => {
   const {
@@ -124,7 +124,7 @@ const VerificationForm = (props: IVerificationForm) => {
           requestNumber={saveGeneralPolicies.requestNumber}
           onClick={onClosePendingReqModal}
           onCloseModal={onClosePendingReqModal}
-          isLoading={false}
+          loading={false}
           actionText={
             requestStatusMessage(saveGeneralPolicies.staffName).actionText
           }

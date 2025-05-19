@@ -22,7 +22,7 @@ const Table = (props: ITable) => {
     actions,
     entries,
     filter = "",
-    isLoading,
+    loading,
     mobileTitle,
     pageLength = 10,
     breakpoints,
@@ -68,7 +68,7 @@ const Table = (props: ITable) => {
           actions={actions}
           entriesLength={entries.length}
           entries={getPageEntries(filteredEntries, firstEntry, lastEntry)}
-          isLoading={isLoading}
+          loading={loading}
           mediaActionOpen={mediaActionOpen}
           numberActions={numberActions}
           TitleColumns={titleColumns(

@@ -6,7 +6,7 @@ import { ITitle } from "../ITitle";
 interface ITable {
   entries: IEntry[];
   id: string;
-  isLoading: boolean;
+  loading: boolean;
   titles: ITitle[];
   actions: IAction[];
   breakpoints: IBreakpoint[];

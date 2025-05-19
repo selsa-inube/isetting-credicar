@@ -18,7 +18,7 @@ const DecisionModal = (props: IDecisionModal) => {
     icon = <></>,
     withIcon = false,
     description,
-    isLoading = false,
+    loading = false,
     sizeIcon = "60px",
     portalId = "portal",
     title,
@@ -50,7 +50,7 @@ const DecisionModal = (props: IDecisionModal) => {
       withCancelButton={withCancelButton}
       onCloseModal={onCloseModal}
       onClick={onClick}
-      isLoading={isLoading}
+      loading={loading}
       disabledActionButton={isDisabledButton}
     >
       {withIcon && (

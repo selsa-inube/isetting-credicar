@@ -6,6 +6,7 @@ import { IBoxAttribute } from "@ptypes/design/IBoxAttribute";
 import { BoxContainer } from "@design/layout/boxContainer";
 import { ButtonAttribute } from "./ButtonAttribute";
 import { useThemeData } from "@utils/theme";
+import { ContainerAttribute } from "./containerAttribute";
 
 const BoxAttribute = (props: IBoxAttribute) => {
   const {
@@ -67,19 +68,14 @@ const BoxAttribute = (props: IBoxAttribute) => {
             />
           ) : (
             <>
-              {withTag ? (
-                children
-              ) : (
-                <Text
-                  size={isMobile ? "small" : "medium"}
-                  appearance={ComponentAppearance.GRAY}
-                  textAlign={direction === "column" ? "start" : "end"}
-                >
-                  {typeof value === "object"
-                    ? JSON.stringify(value)
-                    : String(value)}
-                </Text>
-              )}
+              <ContainerAttribute
+                withTag={withTag ?? false}
+                isMobile={isMobile}
+                direction={direction}
+                value={value}
+              >
+                {children}
+              </ContainerAttribute>
             </>
           )}
         </Stack>

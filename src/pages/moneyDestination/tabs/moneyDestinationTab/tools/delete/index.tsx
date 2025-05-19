@@ -81,7 +81,7 @@ const Delete = (props: IDelete) => {
           requestNumber={saveMoneyDestination.requestNumber}
           onClick={handleClosePendingReqModal}
           onCloseModal={handleClosePendingReqModal}
-          isLoading={false}
+          loading={false}
           actionText={
             requestStatusMessage(saveMoneyDestination.staffName).actionText
           }

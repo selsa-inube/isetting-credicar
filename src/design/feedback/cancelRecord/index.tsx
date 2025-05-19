@@ -55,7 +55,7 @@ const CancelRecord = (props: ICancelRecord) => {
           onClick={onClick}
           onCloseModal={onToggleModal}
           appearance={ComponentAppearance.DANGER}
-          isLoading={loading}
+          loading={loading}
           appearanceButton={ComponentAppearance.DANGER}
         />
       )}

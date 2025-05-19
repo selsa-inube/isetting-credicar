@@ -125,7 +125,7 @@ const EditDestinationUI = (props: IEditDestinationUI) => {
           requestNumber={saveMoneyDestination.requestNumber}
           onClick={onClosePendingReqModal}
           onCloseModal={onClosePendingReqModal}
-          isLoading={false}
+          loading={false}
           actionText={
             requestStatusMessage(saveMoneyDestination.staffName).actionText
           }
