@@ -231,11 +231,15 @@ const useSaveGeneralPolicies = (props: IUseSaveGeneralPolicies) => {
     navigate(navigatePage);
   };
 
+  const isRequestStatusModal =
+    showPendingReqModal && saveGeneralPolicies?.requestNumber ? true : false;
+
   return {
     saveGeneralPolicies,
     requestSteps,
     showPendingReqModal,
     loadingSendData,
+    isRequestStatusModal,
     handleCloseRequestStatus,
     handleClosePendingReqModal,
   };

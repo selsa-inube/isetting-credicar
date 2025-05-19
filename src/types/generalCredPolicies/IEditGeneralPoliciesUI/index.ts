@@ -31,6 +31,7 @@ interface IEditGeneralPoliciesUI {
   showGoBackModal: boolean;
   showDateModal: boolean;
   date: IDateVerification;
+  isRequestStatusModal: boolean;
   setDateDecisions: React.Dispatch<
     React.SetStateAction<IDateVerification | undefined>
   >;

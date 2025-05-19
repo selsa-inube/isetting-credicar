@@ -32,7 +32,7 @@ const EditGeneralPoliciesUI = (props: IEditGeneralPoliciesUI) => {
     saveGeneralPolicies,
     requestSteps,
     loading,
-    showPendingReqModal,
+    isRequestStatusModal,
     showRequestProcessModal,
     smallScreen,
     tabletScreen,
@@ -200,7 +200,7 @@ const EditGeneralPoliciesUI = (props: IEditGeneralPoliciesUI) => {
           onCloseRequestStatus={onCloseRequestStatus}
         />
       )}
-      {showPendingReqModal && saveGeneralPolicies.requestNumber && (
+      {isRequestStatusModal && (
         <RequestStatusModal
           portalId="portal"
           title={requestStatusMessage(saveGeneralPolicies.staffName).title}

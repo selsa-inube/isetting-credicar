@@ -76,6 +76,7 @@ const EditGeneralPolicies = (props: IEditGeneralPolicies) => {
     requestSteps,
     loadingSendData,
     showPendingReqModal,
+    isRequestStatusModal,
     handleCloseRequestStatus,
     handleClosePendingReqModal,
   } = useSaveGeneralPolicies({
@@ -128,6 +129,7 @@ const EditGeneralPolicies = (props: IEditGeneralPolicies) => {
       normalizedContributions={normalizedContributions}
       normalizedIncome={normalizedIncome}
       normalizedScoreModels={normalizedScoreModels}
+      isRequestStatusModal={isRequestStatusModal}
     />
   );
 };
