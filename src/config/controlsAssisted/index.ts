@@ -1,7 +1,7 @@
 const controlsAssisted = {
   goBackText: "Anterior",
   goNextText: "Siguiente",
-  submitText: "Finalizar",
+  submitText: "Enviar",
 };
 
 export { controlsAssisted };

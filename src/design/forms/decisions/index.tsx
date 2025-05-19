@@ -73,7 +73,11 @@ const DecisionsForm = (props: IDecisionsForm) => {
       attentionModal={attentionModal}
       decisions={decisions}
       decisionTemplate={
-        decisionTemplateConfig(ruleData, nameRule) ?? ({} as IRuleDecision)
+        decisionTemplateConfig(
+          ruleData,
+          nameRule,
+          appData.businessUnit.publicCode,
+        ) ?? ({} as IRuleDecision)
       }
       deleteModal={deleteModal}
       isModalOpen={isModalOpen}
@@ -85,7 +89,11 @@ const DecisionsForm = (props: IDecisionsForm) => {
       onSubmitForm={(dataDecision: IRuleDecision) =>
         handleSubmitForm(
           dataDecision,
-          decisionTemplateConfig(ruleData, nameRule) ?? ({} as IRuleDecision),
+          decisionTemplateConfig(
+            ruleData,
+            nameRule,
+            appData.businessUnit.publicCode,
+          ) ?? ({} as IRuleDecision),
         )
       }
       onToggleAttentionModal={handleToggleAttentionModal}

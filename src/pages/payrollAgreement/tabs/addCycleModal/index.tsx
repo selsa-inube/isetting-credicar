@@ -24,7 +24,7 @@ const AddCycleModal = (props: IAddCycleModal) => {
     actionText,
     comparisonData,
     formik,
-    isLoading,
+    loading,
     portalId,
     title,
     isOrdinary,
@@ -54,7 +54,7 @@ const AddCycleModal = (props: IAddCycleModal) => {
       title={title}
       onClick={onClick}
       onCloseModal={onCloseModal}
-      isLoading={isLoading}
+      loading={loading}
       disabledActionButton={comparisonData || !formik.isValid}
     >
       <Stack gap={tokens.spacing.s200} direction="column" width="100%">

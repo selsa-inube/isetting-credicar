@@ -144,7 +144,7 @@ const EditPayrollAgreementUI = (props: IEditPayrollAgreementUI) => {
           actionText={sendEditedModal.actionText}
           onCloseModal={onToggleEditedModal}
           onClick={onEditedModal}
-          isLoading={loadingSendData}
+          loading={loadingSendData}
         />
       )}
 
@@ -192,7 +192,7 @@ const EditPayrollAgreementUI = (props: IEditPayrollAgreementUI) => {
           requestNumber={savePayrollAgreement.requestNumber}
           onClick={onClosePendingReqModal}
           onCloseModal={onClosePendingReqModal}
-          isLoading={false}
+          loading={false}
           actionText={actionTextRequest}
           appearance={ComponentAppearance.PRIMARY}
         />

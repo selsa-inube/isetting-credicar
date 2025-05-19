@@ -210,7 +210,7 @@ const EditGeneralPoliciesUI = (props: IEditGeneralPoliciesUI) => {
           requestNumber={saveGeneralPolicies.requestNumber}
           onClick={onClosePendingReqModal}
           onCloseModal={onClosePendingReqModal}
-          isLoading={false}
+          loading={false}
           actionText={
             requestStatusMessage(saveGeneralPolicies.staffName).actionText
           }

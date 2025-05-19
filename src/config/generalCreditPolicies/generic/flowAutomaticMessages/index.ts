@@ -22,8 +22,8 @@ const flowAutomaticMessages = (action?: string) => {
       duration: 5000,
     },
     SuccessfulCreateRequest: {
-      title: `Destino de dinero ${action} con éxito!`,
-      description: `Destino de dinero fue ${action} con éxito!`,
+      title: `Politicas generales ${action} con éxito!`,
+      description: `Politicas generales fue ${action} con éxito!`,
       appearance: ComponentAppearance.SUCCESS,
       duration: 5000,
     },

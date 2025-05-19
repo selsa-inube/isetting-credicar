@@ -12,6 +12,7 @@ import { ExtraordinaryPaymentCyclesForm } from "@pages/payrollAgreement/tabs/for
 import { VerificationForm } from "@pages/payrollAgreement/tabs/forms/verificationPayrollAgreement";
 import { GeneralInformationPayrollForm } from "@pages/payrollAgreement/tabs/forms/generalInfoPayrollAgreement";
 import { addPayrollLabels } from "@config/payrollAgreement/payrollAgreementTab/assisted/addPayrollLabels";
+import { controlsAssisted } from "@config/controlsAssisted";
 
 const AddPayrollAgreementUI = (props: IAddPayrollAgreementUI) => {
   const {
@@ -77,11 +78,7 @@ const AddPayrollAgreementUI = (props: IAddPayrollAgreementUI) => {
             onNextClick={onNextStep}
             onSubmitClick={onToggleModal}
             disableNext={formValid}
-            controls={{
-              goBackText: "Anterior",
-              goNextText: "Siguiente",
-              submitText: "Finalizar",
-            }}
+            controls={controlsAssisted}
             size={smallScreen ? "small" : "large"}
           />
           <Stack direction="column">

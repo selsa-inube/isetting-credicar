@@ -5,7 +5,7 @@ interface IAddCycleModal {
   actionText: string;
   comparisonData: boolean;
   formik: FormikValues;
-  isLoading: boolean;
+  loading: boolean;
   portalId: string;
   title: string;
   numberDaysUntilCutOptions: IServerDomain[];

@@ -8,9 +8,16 @@ import { addPayrollAgreementSteps } from "@config/payrollAgreement/payrollAgreem
 import { IAddGenCredPoliciesForms } from "@ptypes/generalCredPolicies/forms/IAddGenCredPoliciesForms";
 import { IAddGenCredPoliciesRef } from "@ptypes/generalCredPolicies/forms/IAddGenCredPoliciesRef";
 import { IDecisionsGeneralEntry } from "@ptypes/generalCredPolicies/forms/IDecisionsGeneralEntry";
+import { ISaveDataRequest } from "@ptypes/saveData/ISaveDataRequest";
+import { formatDate } from "@utils/date/formatDate";
+import { IUseAddGenCredPolicies } from "@ptypes/hooks/generalCreditPolicies/IUseAddGenCredPolicies";
+import { renderValue } from "@utils/renderValue";
+import { IDateVerification } from "@ptypes/generalCredPolicies/forms/IDateVerification";
+import { formatRuleDecisions } from "@utils/formatRuleDecisions";
 import { compareObjects } from "@utils/compareObjects";
 
-const useAddGenCredPolicies = () => {
+const useAddGenCredPolicies = (props: IUseAddGenCredPolicies) => {
+  const { appData } = props;
   const initialValues: IAddGenCredPoliciesForms = {
     decisionsGeneral: {
       isValid: false,
@@ -28,13 +35,17 @@ const useAddGenCredPolicies = () => {
   };
 
   const [currentStep, setCurrentStep] = useState(1);
+  const [showRequestProcessModal, setShowRequestProcessModal] = useState(false);
   const [formValues, setFormValues] = useState(initialValues);
+  const [saveData, setSaveData] = useState<ISaveDataRequest>();
   const [isCurrentFormValid, setIsCurrentFormValid] = useState(false);
   const [contributionsPortfolio, setContributionsPortfolio] = useState<
     IRuleDecision[]
   >([]);
+  const [scoreModels, setScoreModels] = useState<IRuleDecision[]>([]);
   const [incomePortfolio, setIncomePortfolio] = useState<IRuleDecision[]>([]);
   const [showModal, setShowModal] = useState(false);
+  const [dateVerification, setDateVerification] = useState<IDateVerification>();
   const [showGoBackModal, setShowGoBackModal] = useState(false);
   const [canRefresh, setCanRefresh] = useState(false);
 
@@ -100,10 +111,71 @@ const useAddGenCredPolicies = () => {
     setCurrentStep(getPreviousStep(currentStep));
   };
 
-  const handleToggleModal = () => setShowModal((prev) => !prev);
+  const handleToggleModal = () => {
+    setShowModal(!showModal);
+  };
 
   const handleFormValidChange = (isValid: boolean) =>
     setIsCurrentFormValid(isValid);
+
+  const rulesContributions = formatRuleDecisions(
+    contributionsPortfolio,
+    dateVerification?.date,
+  );
+  const rulesIncomes = formatRuleDecisions(
+    incomePortfolio,
+    dateVerification?.date,
+  );
+
+  const ruleScoremodels = formatRuleDecisions(
+    scoreModels,
+    dateVerification?.date,
+  );
+
+  const rules = [...rulesContributions, ...rulesIncomes, ...ruleScoremodels];
+
+  const handleSubmitClick = () => {
+    setSaveData({
+      applicationName: "ifac",
+      businessManagerCode: appData.businessManager.publicCode,
+      businessUnitCode: appData.businessUnit.publicCode,
+      description: "Solicitud de creación de politicas generales de credito",
+      entityName: "GeneralCreditPolicies",
+      requestDate: formatDate(new Date()),
+      useCaseName: "AddGeneralCreditPolicies",
+      configurationRequestData: {
+        reference: formValues.decisionsGeneral.values.reference,
+        additionalDebtors: renderValue(
+          formValues.decisionsGeneral.values.additionalDebtors,
+        ),
+        sourcesIncome: renderValue(
+          formValues.decisionsGeneral.values.sourcesIncome,
+        ),
+        financialObligations: renderValue(
+          formValues.decisionsGeneral.values.financialObligations,
+        ),
+        realGuarantees: renderValue(
+          formValues.decisionsGeneral.values.realGuarantees,
+        ),
+        calculation: renderValue(
+          formValues.decisionsGeneral.values.calculation,
+        ),
+        reciprocity: renderValue(
+          formValues.decisionsGeneral.values.reciprocity,
+        ),
+        factor: renderValue(formValues.decisionsGeneral.values.factor),
+        ruleName: rules,
+      },
+    });
+    setShowRequestProcessModal(!showRequestProcessModal);
+  };
+
+  const formValid =
+    (currentStep === 2 && contributionsPortfolio.length === 0) ||
+    (currentStep === 3 && incomePortfolio.length === 0) ||
+    (currentStep === 4 && scoreModels.length === 0)
+      ? true
+      : isCurrentFormValid;
 
   useEffect(() => {
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
@@ -151,12 +223,6 @@ const useAddGenCredPolicies = () => {
     navigate("/");
   };
 
-  const formValid =
-    (currentStep === 2 && contributionsPortfolio.length === 0) ||
-    (currentStep === 3 && incomePortfolio.length === 0)
-      ? true
-      : isCurrentFormValid;
-
   return {
     currentStep,
     formValues,
@@ -167,10 +233,17 @@ const useAddGenCredPolicies = () => {
     contributionsPortfolio,
     incomePortfolio,
     formValid,
+    scoreModels,
+    showRequestProcessModal,
+    saveData,
+    dateVerification,
     showGoBackModal,
+    handleOpenModal,
     handleCloseGoBackModal,
     handleGoBack,
-    handleOpenModal,
+    setDateVerification,
+    handleSubmitClick,
+    setScoreModels,
     setIncomePortfolio,
     setContributionsPortfolio,
     handleFormValidChange,
@@ -180,6 +253,7 @@ const useAddGenCredPolicies = () => {
     setCurrentStep,
     setIsCurrentFormValid,
     setShowModal,
+    setShowRequestProcessModal,
   };
 };
 

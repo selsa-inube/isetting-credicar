@@ -102,7 +102,7 @@ const VerificationForm = (props: IVerificationForm) => {
           actionText={finishModal.actionText}
           onCloseModal={onToggleModal}
           onClick={onFinishForm}
-          isLoading={loading}
+          loading={loading}
         />
       )}
       {canShowRequestProcess && (
@@ -126,7 +126,7 @@ const VerificationForm = (props: IVerificationForm) => {
           requestNumber={savePayrollAgreement.requestNumber}
           onClick={onClosePendingReqModal}
           onCloseModal={onClosePendingReqModal}
-          isLoading={false}
+          loading={false}
           actionText={
             requestStatusMessage(savePayrollAgreement.staffName).actionText
           }

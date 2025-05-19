@@ -15,7 +15,7 @@ const DateGeneralPoliciesUI = (props: IDateGeneralPolicies) => {
       actionText={finishModal.actionText}
       onCloseModal={onCloseModal}
       onClick={onFinishForm}
-      isLoading={loading}
+      loading={loading}
       withDate
       onDateChange={formik.handleChange}
       statusDate={getFieldState(formik, "date")}

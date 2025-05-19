@@ -32,7 +32,7 @@ const ModalWrapper = (props: IModalWrapper) => {
     title,
     width = "auto",
     withCancelButton,
-    isLoading = false,
+    loading = false,
     disabledActionButton = false,
     minHeight,
     maxHeight,
@@ -114,7 +114,7 @@ const ModalWrapper = (props: IModalWrapper) => {
             appearance={appearanceButton ?? ComponentAppearance.PRIMARY}
             variant="filled"
             onClick={onClick}
-            loading={isLoading}
+            loading={loading}
             iconBefore={iconBeforeButton ?? <></>}
             disabled={disabledActionButton}
           >

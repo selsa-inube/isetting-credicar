@@ -134,7 +134,7 @@ const HomeUI = (props: IHomeUI) => {
                   description={card.description}
                   icon={card.icon}
                   url={card.url}
-                  isLoading={loading}
+                  loading={loading}
                 />
               ))
             ) : (

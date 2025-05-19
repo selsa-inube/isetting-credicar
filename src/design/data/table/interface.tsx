@@ -25,7 +25,7 @@ const TableUI = (props: ITableUI) => {
     entriesLength,
     filteredEntries,
     firstEntryInPage,
-    isLoading,
+    loading,
     lastEntryInPage,
     pageLength,
     titles,
@@ -68,7 +68,7 @@ const TableUI = (props: ITableUI) => {
         </Tr>
       </Thead>
       <Tbody>
-        {isLoading ? (
+        {loading ? (
           DataLoading({ titleColumns: TitleColumns, numberActions })
         ) : (
           <>

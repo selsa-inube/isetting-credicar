@@ -86,7 +86,7 @@ function MoneyDestinationTabUI(props: IMoneyDestinationTabUI) {
             actions={actionsConfig(setEntryDeleted)}
             breakpoints={breakPoints}
             filter={searchMoneyDestination}
-            isLoading={loading}
+            loading={loading}
             columnWidths={columnWidths}
             pageLength={8}
           />

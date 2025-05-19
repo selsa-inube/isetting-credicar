@@ -98,7 +98,7 @@ const PayrollAgreementTabUI = (props: IpayrollAgreementTabUI) => {
             actions={actionsConfig(setEntryDeleted)}
             breakpoints={breakPoints}
             filter={searchPayrollAgreement}
-            isLoading={loading}
+            loading={loading}
             columnWidths={columnWidths}
             pageLength={pageLength}
             emptyDataMessage={payrollTabLabels.emptyDataMessage}
