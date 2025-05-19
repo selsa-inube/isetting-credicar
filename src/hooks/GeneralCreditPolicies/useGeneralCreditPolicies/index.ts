@@ -27,7 +27,8 @@ const useGeneralCreditPolicies = () => {
   const portalId = localStorage.getItem("portalCode");
   const staffPortalId = portalId ? decrypt(portalId) : "";
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [withoutPoliciesData, setWithoutPoliciesData] = useState<boolean>();
+  const [withoutPoliciesData, setWithoutPoliciesData] =
+    useState<boolean>(false);
 
   const [isSelected, setIsSelected] = useState<string>(
     generalPoliciesTabsConfig.generalPolicies.id,
@@ -75,7 +76,7 @@ const useGeneralCreditPolicies = () => {
 
   const policiesTabs = Object.values(generalPoliciesTabsConfig);
 
-  const showAddPolicies = withoutPoliciesData && showModal ? true : false;
+  const showAddPolicies = withoutPoliciesData && showModal;
 
   return {
     withoutPolicies,

@@ -50,7 +50,7 @@ const GeneralCreditPolicies = () => {
       realGuaranteesData={realGuaranteesData}
       withoutPolicies={withoutPolicies}
       loadingPolicies={loadingPolicies ?? true}
-      showAddPolicies={showAddPolicies}
+      showAddPolicies={showAddPolicies ?? false}
     />
   );
 };

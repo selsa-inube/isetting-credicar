@@ -1,7 +1,7 @@
 const nameRules = {
   reference: "RequestedAmountInterpretationInLoanGP",
   methods: "MaximumLimitCalculationMethodGP",
-  additionalDebtors: "LineOfCredit",
+  additionalDebtors: "AdditionalBorrowersAllowedGP",
   sourcesIncome: "IncomeSourceUpdateAllowedGP",
   financialObligations: "FinancialObligationsUpdateAllowedGP",
   realGuarantees: "SecureDebtsIncludedInOverdraftGP",
