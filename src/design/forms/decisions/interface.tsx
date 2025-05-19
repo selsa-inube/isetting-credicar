@@ -24,7 +24,7 @@ const DecisionsFormUI = (props: IDecisionsFormUI) => {
     isMobile,
     saveButtonLabel,
     cancelButtonLabel,
-    shouldShowAttentionModal,
+    showDecisionModal,
     disabledNext,
     disabledPrevius,
     cancelButton,
@@ -77,12 +77,12 @@ const DecisionsFormUI = (props: IDecisionsFormUI) => {
             {saveButtonLabel}
           </Button>
         </Stack>
-        {shouldShowAttentionModal && attentionModal && (
+        {showDecisionModal && (
           <DecisionModal
             portalId="portal"
-            title={attentionModal.title}
-            description={attentionModal.description}
-            actionText={attentionModal.actionText}
+            title={attentionModal!.title}
+            description={attentionModal!.description}
+            actionText={attentionModal!.actionText}
             withIcon
             icon={<MdOutlineWarningAmber />}
             appearance={ComponentAppearance.WARNING}

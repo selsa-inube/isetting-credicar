@@ -16,6 +16,7 @@ interface IDecisionsFormUI {
   cancelButtonLabel: string;
   disabledNext: boolean;
   disabledPrevius: boolean;
+  showDecisionModal: boolean;
   onButtonClick: () => void;
   onCloseModal: () => void;
   onDelete: () => void;

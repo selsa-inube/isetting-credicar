@@ -40,7 +40,7 @@ const DecisionsForm = (props: IDecisionsForm) => {
     shouldShowAttentionModal,
     disabledNext,
     disabledPrevius,
-    cancelButton,
+    showDecisionModal,
     handleOpenModal,
     handleCloseModal,
     handleSubmitForm,
@@ -110,7 +110,8 @@ const DecisionsForm = (props: IDecisionsForm) => {
       shouldShowAttentionModal={shouldShowAttentionModal}
       disabledNext={disabledNext ?? false}
       disabledPrevius={disabledPrevius}
-      cancelButton={cancelButton}
+      cancelButton={onPreviousStep}
+      showDecisionModal={showDecisionModal}
     />
   );
 };

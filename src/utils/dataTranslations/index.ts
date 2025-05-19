@@ -17,6 +17,8 @@ const dataTranslations: Record<string, string> = {
     "Factor de puntuación de riesgo para el límite de crédito g p",
   "Affiliate seniority": "Antigüedad del afiliado",
   AffiliateSeniority: "Antigüedad del afiliado",
+  Amount: "Monto",
+  Net: "Neto",
   "Primary income type": "Tipo de ingreso primario",
   "Credit risk score": "Puntuación de riesgo crediticio",
   CreditRiskScore: "Puntuación de riesgo crediticio",
