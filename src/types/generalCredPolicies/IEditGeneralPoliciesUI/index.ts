@@ -32,6 +32,8 @@ interface IEditGeneralPoliciesUI {
   showDateModal: boolean;
   date: IDateVerification;
   isRequestStatusModal: boolean;
+  setShowReciprocity: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowFactor: React.Dispatch<React.SetStateAction<boolean>>;
   setDateDecisions: React.Dispatch<
     React.SetStateAction<IDateVerification | undefined>
   >;

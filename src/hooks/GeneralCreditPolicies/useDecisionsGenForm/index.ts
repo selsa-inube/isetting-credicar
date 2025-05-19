@@ -18,6 +18,8 @@ const useDecisionsGenForm = (props: IUseDecisionsGenForm) => {
     onFormValid,
     handleFormValidChange,
     initialValuesEdit,
+    setShowReciprocity,
+    setShowFactor,
   } = props;
 
   const createValidationSchema = () =>
@@ -55,6 +57,18 @@ const useDecisionsGenForm = (props: IUseDecisionsGenForm) => {
     const { name, checked } = event.target;
     formik.setFieldValue(name, checked);
   };
+
+  useEffect(() => {
+    if (setShowReciprocity) {
+      setShowReciprocity(formik.values.reciprocity);
+    }
+  }, [formik.values.reciprocity, setShowReciprocity]);
+
+  useEffect(() => {
+    if (setShowFactor) {
+      setShowFactor(formik.values.factor);
+    }
+  }, [formik.values.factor, setShowFactor]);
 
   const handleChange = (name: string, value: string) => {
     formik.setFieldValue(name, value).then(() => {

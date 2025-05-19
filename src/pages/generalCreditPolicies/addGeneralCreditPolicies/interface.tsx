@@ -18,8 +18,8 @@ import { decisionScoreModelsConfig } from "@config/decisions/decisionTempScoreMo
 import { scoreModelsLabels } from "@config/generalCreditPolicies/assisted/scoreModelsLabels";
 import { DecisionsGeneralForm } from "../forms/decisionsGeneral";
 import { VerificationForm } from "../forms/verification";
-import { DecisionModal } from "@src/design/modals/decisionModal";
-import { goBackModal } from "@src/config/goBackModal";
+import { DecisionModal } from "@design/modals/decisionModal";
+import { goBackModal } from "@config/goBackModal";
 
 const AddGenCreditPoliciesUI = (props: IAddGenCreditPoliciesUI) => {
   const {

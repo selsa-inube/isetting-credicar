@@ -46,6 +46,8 @@ const EditGeneralPolicies = (props: IEditGeneralPolicies) => {
     normalizedContributions,
     normalizedIncome,
     normalizedScoreModels,
+    setShowReciprocity,
+    setShowFactor,
     setDateDecisions,
     handleFinishForm,
     handleToggleDateModal,
@@ -130,6 +132,8 @@ const EditGeneralPolicies = (props: IEditGeneralPolicies) => {
       normalizedIncome={normalizedIncome}
       normalizedScoreModels={normalizedScoreModels}
       isRequestStatusModal={isRequestStatusModal}
+      setShowReciprocity={setShowReciprocity}
+      setShowFactor={setShowFactor}
     />
   );
 };

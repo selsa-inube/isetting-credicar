@@ -52,6 +52,8 @@ const EditGeneralPoliciesUI = (props: IEditGeneralPoliciesUI) => {
     normalizedContributions,
     normalizedIncome,
     normalizedScoreModels,
+    setShowFactor,
+    setShowReciprocity,
     setDateDecisions,
     onFinishForm,
     onToggleDateModal,
@@ -101,6 +103,8 @@ const EditGeneralPoliciesUI = (props: IEditGeneralPoliciesUI) => {
               onFormValid={setIsCurrentFormValid}
               editDataOption
               initialValuesEdit={initialDecisionsData}
+              setShowReciprocity={setShowReciprocity}
+              setShowFactor={setShowFactor}
             />
           )}
           {showContributions && (

@@ -85,7 +85,11 @@ const useEditGenCredPolicies = (props: IUseEditGenCredPolicies) => {
   const [showGoBackModal, setShowGoBackModal] = useState(false);
   const [showDateModal, setShowDateModal] = useState(false);
   const [dateDecisions, setDateDecisions] = useState<IDateVerification>();
-
+  const [showReciprocity, setShowReciprocity] = useState(false);
+  const [showFactor, setShowFactor] = useState(false);
+  const [isSelected, setIsSelected] = useState<string>(
+    () => editGeneralPoliciesTabsConfig.decisionsGeneral.id,
+  );
   const decisionsGeneralRef = useRef<FormikProps<IDecisionsGeneralEntry>>(null);
 
   const navigate = useNavigate();
@@ -104,19 +108,16 @@ const useEditGenCredPolicies = (props: IUseEditGenCredPolicies) => {
           key as keyof typeof editGeneralPoliciesTabsConfig
         ];
 
-      const reprocity = formValues.reciprocity;
-      const factor = formValues.factor;
-
       if (
         key === editGeneralPoliciesTabsConfig.contributionsPortfolio.id &&
-        reprocity === false
+        !showReciprocity
       ) {
         return acc;
       }
 
       if (
         key === editGeneralPoliciesTabsConfig.incomePortfolio.id &&
-        factor === false
+        !showFactor
       ) {
         return acc;
       }
@@ -126,20 +127,7 @@ const useEditGenCredPolicies = (props: IUseEditGenCredPolicies) => {
       }
       return acc;
     }, {} as IEditPoliciesTabsConfig);
-  }, [formValues.reciprocity, formValues.factor]);
-
-  const getInitialTabId = (tabs: IEditPoliciesTabsConfig) =>
-    tabs.decisionsGeneral?.id || Object.values(tabs)[0]?.id || "";
-
-  const [isSelected, setIsSelected] = useState<string>(() =>
-    getInitialTabId(filteredTabs),
-  );
-
-  useEffect(() => {
-    if (!Object.values(filteredTabs).some((tab) => tab.id === isSelected)) {
-      setIsSelected(getInitialTabId(filteredTabs));
-    }
-  }, [filteredTabs, isSelected]);
+  }, [showReciprocity, showFactor]);
 
   const handleTabChange = (tabId: string) => {
     if (decisionsGeneralRef.current?.values) {
@@ -338,6 +326,8 @@ const useEditGenCredPolicies = (props: IUseEditGenCredPolicies) => {
     normalizedContributions,
     normalizedIncome,
     normalizedScoreModels,
+    setShowReciprocity,
+    setShowFactor,
     setDateDecisions,
     handleFinishForm,
     handleToggleDateModal,

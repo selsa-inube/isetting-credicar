@@ -21,6 +21,8 @@ const DecisionsGeneralForm = forwardRef<
       handleFormValidChange,
       onReset,
       initialValuesEdit,
+      setShowReciprocity,
+      setShowFactor,
     },
     ref,
   ) => {
@@ -41,6 +43,8 @@ const DecisionsGeneralForm = forwardRef<
       onFormValid,
       handleFormValidChange,
       initialValuesEdit,
+      setShowReciprocity,
+      setShowFactor,
     });
 
     return (
