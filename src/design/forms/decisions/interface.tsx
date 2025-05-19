@@ -1,4 +1,4 @@
-import { MdAddCircleOutline, MdOutlineWarningAmber } from "react-icons/md";
+import { MdOutlineWarningAmber } from "react-icons/md";
 import { BusinessRules } from "@isettingkit/business-rules";
 import { Stack, Button } from "@inubekit/inubekit";
 
@@ -6,7 +6,6 @@ import { tokens } from "@design/tokens";
 import { ComponentAppearance } from "@enum/appearances";
 import { DecisionModal } from "@design/modals/decisionModal";
 import { IDecisionsFormUI } from "@ptypes/design/IDecisionsFormUI";
-import { decisionsLabels } from "@config/decisions/decisionsLabels";
 import { StyledContainer } from "./styles";
 
 const DecisionsFormUI = (props: IDecisionsFormUI) => {
@@ -43,20 +42,6 @@ const DecisionsFormUI = (props: IDecisionsFormUI) => {
     <form>
       <Stack direction="column" gap={tokens.spacing.s300}>
         <StyledContainer $isMobile={isMobile}>
-          <Stack
-            justifyContent="flex-end"
-            alignItems="center"
-            gap={tokens.spacing.s250}
-          >
-            <Button
-              iconBefore={<MdAddCircleOutline />}
-              spacing="wide"
-              onClick={onOpenModal}
-              fullwidth={isMobile}
-            >
-              {decisionsLabels.labelAddButton}
-            </Button>
-          </Stack>
           <BusinessRules
             decisions={decisions}
             textValues={textValuesBusinessRules}

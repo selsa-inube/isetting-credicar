@@ -8,7 +8,7 @@ interface ITableUI {
   entries: IEntry[];
   filteredEntries: IEntry[];
   firstEntryInPage: number;
-  isLoading: boolean;
+  loading: boolean;
   lastEntryInPage: number;
   pageLength: number;
   titles: ITitle[];

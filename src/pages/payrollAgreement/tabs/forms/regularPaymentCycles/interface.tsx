@@ -93,7 +93,7 @@ const RegularPaymentCyclesFormUI = (props: IRegularPaymentCyclesFormUI) => {
                 entries={entries}
                 actions={actionsConfig(setEntryDeleted)}
                 breakpoints={breakPoints}
-                isLoading={loading}
+                loading={loading}
                 columnWidths={columnWidths}
                 withActionsTitles
                 emptyDataMessage={cyclespaymentLabels.emptyDataMessage}
@@ -127,7 +127,7 @@ const RegularPaymentCyclesFormUI = (props: IRegularPaymentCyclesFormUI) => {
           actionText={cyclespaymentLabels.actionText}
           comparisonData={valuesEqual}
           formik={formik}
-          isLoading={loading}
+          loading={loading}
           portalId="portal"
           title={cyclespaymentLabels.addPaymentCycle}
           isOrdinary={true}

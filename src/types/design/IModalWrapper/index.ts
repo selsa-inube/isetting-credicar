@@ -13,7 +13,7 @@ interface IModalWrapper {
   labelCloseButton?: string;
   height?: string;
   width?: string;
-  isLoading?: boolean;
+  loading?: boolean;
   withCancelButton?: boolean;
   minHeight?: string;
   maxHeight?: string;

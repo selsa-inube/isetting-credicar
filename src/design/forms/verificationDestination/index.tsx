@@ -108,7 +108,7 @@ function VerificationForm(props: IVerificationForm) {
           actionText={finishModal.actionText}
           onCloseModal={onToggleModal}
           onClick={onFinishForm}
-          isLoading={loading}
+          loading={loading}
         />
       )}
       {showRequestProcessModal && saveMoneyDestination && (
@@ -132,7 +132,7 @@ function VerificationForm(props: IVerificationForm) {
           requestNumber={saveMoneyDestination.requestNumber}
           onClick={onClosePendingReqModal}
           onCloseModal={onClosePendingReqModal}
-          isLoading={false}
+          loading={false}
           actionText={
             requestStatusMessage(saveMoneyDestination.staffName).actionText
           }

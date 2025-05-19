@@ -67,7 +67,7 @@ const RequestProcess = (props: IRequestProcess) => {
             requestNumber={saveData.requestNumber}
             onClick={onCloseRequestStatus}
             onCloseModal={onCloseRequestStatus}
-            isLoading={false}
+            loading={false}
             actionText={descriptionRequestStatus(staffDisplayName).actionText}
             appearance={ComponentAppearance.PRIMARY}
           />

@@ -83,7 +83,7 @@ const RequestsInProgressTabUI = (props: IRequestsInProgressTabUI) => {
             actions={actionsConfig(setEntryCanceled)}
             breakpoints={breakPoints}
             filter={searchrequestProgress}
-            isLoading={loading}
+            loading={loading}
             columnWidths={columnWidths}
             pageLength={pageLength}
           />

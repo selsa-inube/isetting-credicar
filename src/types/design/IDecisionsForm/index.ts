@@ -10,6 +10,7 @@ interface IDecisionsForm {
   decisionTemplateConfig: (
     enumeratorsRules: IRuleDecision,
     nameRule: string,
+    businessUnit?: string,
   ) => IRuleDecision | undefined;
   onButtonClick: () => void;
   onPreviousStep: () => void;
