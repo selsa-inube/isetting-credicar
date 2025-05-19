@@ -6,8 +6,8 @@ import { IConditionsEvaluateRule } from "@ptypes/decisions/IConditionsEvaluateRu
 
 const useValidateRules = () => {
   const { appData } = useContext(AuthAndPortalData);
-  const [withoutPolicies, setWithoutPolicies] = useState<boolean>();
-  const [loadingPolicies, setLoadingPolicies] = useState<boolean>();
+  const [withoutPolicies, setWithoutPolicies] = useState<boolean>(false);
+  const [loadingPolicies, setLoadingPolicies] = useState<boolean>(false);
 
   const getRule = (ruleName: string, conditions?: IConditionsEvaluateRule[]) =>
     useEvaluateRuleByBusinessUnit(appData.businessUnit.publicCode, {
@@ -75,7 +75,7 @@ const useValidateRules = () => {
 
   useEffect(() => {
     setWithoutPolicies(
-      referenceError &&
+      (referenceError &&
         methodsError &&
         additionalError &&
         sourcesIncomeError &&
@@ -83,7 +83,8 @@ const useValidateRules = () => {
         GuaranteesError &&
         contributionsError &&
         incomeError &&
-        scoreModelsError,
+        scoreModelsError) ??
+        false,
     );
   }, [
     referenceError,

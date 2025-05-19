@@ -3,7 +3,7 @@ import { IRuleDecision } from "@isettingkit/input";
 import { ICardData } from "@ptypes/home/ICardData";
 
 interface IGeneralCreditPoliciesUI {
-  withoutPolicies: boolean | undefined;
+  withoutPolicies: boolean;
   smallScreen: boolean;
   policiesTabs: ITab[];
   descriptionOptions: ICardData;

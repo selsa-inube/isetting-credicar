@@ -5,6 +5,7 @@ import { IRequestSteps } from "@design/modals/requestProcessModal/types";
 import { ISaveDataResponse } from "@ptypes/saveData/ISaveDataResponse";
 import { IDateVerification } from "../forms/IDateVerification";
 import { IDecisionsGeneralEntry } from "../forms/IDecisionsGeneralEntry";
+import { DefaultTheme } from "styled-components/dist/types";
 
 interface IEditGeneralPoliciesUI {
   filteredTabsConfig: ITab[];
@@ -28,6 +29,7 @@ interface IEditGeneralPoliciesUI {
   showIncomePort: boolean;
   showContributions: boolean;
   showScoreModels: boolean;
+  theme: DefaultTheme;
   showGoBackModal: boolean;
   showDateModal: boolean;
   date: IDateVerification;

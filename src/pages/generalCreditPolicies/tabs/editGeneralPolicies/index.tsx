@@ -8,6 +8,7 @@ import { IEditGeneralPolicies } from "@ptypes/generalCredPolicies/IEditGeneralPo
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 import { IDateVerification } from "@ptypes/generalCredPolicies/forms/IDateVerification";
 import { EditGeneralPoliciesUI } from "./interface";
+import { useThemeData } from "@src/utils/theme";
 
 const EditGeneralPolicies = (props: IEditGeneralPolicies) => {
   const {
@@ -91,6 +92,8 @@ const EditGeneralPolicies = (props: IEditGeneralPolicies) => {
     setShowModal: setShowModal,
   });
 
+  const theme = useThemeData();
+
   return (
     <EditGeneralPoliciesUI
       formValues={formValues}
@@ -134,6 +137,7 @@ const EditGeneralPolicies = (props: IEditGeneralPolicies) => {
       isRequestStatusModal={isRequestStatusModal}
       setShowReciprocity={setShowReciprocity}
       setShowFactor={setShowFactor}
+      theme={theme}
     />
   );
 };

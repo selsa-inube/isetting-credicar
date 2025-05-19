@@ -8,7 +8,6 @@ import { RequestProcess } from "@design/feedback/RequestProcess";
 import { ComponentAppearance } from "@enum/appearances";
 import { RequestStatusModal } from "@design/modals/requestStatusModal";
 import { BoxContainer } from "@design/layout/boxContainer";
-import { useThemeData } from "@utils/theme";
 import { nameRules } from "@config/generalCreditPolicies/assisted/nameRules";
 import { contributionsPortfLabels } from "@config/generalCreditPolicies/assisted/contributionsPortfLabels";
 import { decisionContributionsPortfConfig } from "@config/decisions/decisionTempContributionsPortfolio";
@@ -52,6 +51,7 @@ const EditGeneralPoliciesUI = (props: IEditGeneralPoliciesUI) => {
     normalizedContributions,
     normalizedIncome,
     normalizedScoreModels,
+    theme,
     setShowFactor,
     setShowReciprocity,
     setDateDecisions,
@@ -68,8 +68,6 @@ const EditGeneralPoliciesUI = (props: IEditGeneralPoliciesUI) => {
     onCloseRequestStatus,
     onClosePendingReqModal,
   } = props;
-
-  const theme = useThemeData();
 
   return (
     <BoxContainer
