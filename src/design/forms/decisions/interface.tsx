@@ -80,9 +80,9 @@ const DecisionsFormUI = (props: IDecisionsFormUI) => {
         {showDecisionModal && (
           <DecisionModal
             portalId="portal"
-            title={attentionModal?.title ?? ""}
-            description={attentionModal?.description ?? ""}
-            actionText={attentionModal?.actionText ?? ""}
+            title={attentionModal!.title}
+            description={attentionModal!.description}
+            actionText={attentionModal!.actionText}
             withIcon
             icon={<MdOutlineWarningAmber />}
             appearance={ComponentAppearance.WARNING}
