@@ -268,7 +268,7 @@ const useAddPayrollAgreement = (props: IUseAddPayrollAgreement) => {
     legalPersonId: formValues.company.values.companyNumberIdent,
     identificationDocumentNumber: formValues.company.values.companyNumberIdent,
     identificationTypeLegalPerson: formValues.company.values.companyTypeIdent,
-    legalPersonName: formValues.company.values.companyName,
+    payingEntityName: formValues.company.values.companyName,
     tradename: formValues.company.values.companyNameCommercial,
     countryTaxResidence: formValues.company.values.companyCountry,
     headquarterCity: formValues.company.values.companyCity,
@@ -307,7 +307,7 @@ const useAddPayrollAgreement = (props: IUseAddPayrollAgreement) => {
   const handleSubmitClick = () => {
     const legalPersonIdent = legalPersonData.find(
       (item) =>
-        item.legalPersonName === formValues.company.values.companySelected,
+        item.payingEntityName === formValues.company.values.companySelected,
     );
 
     const configurationRequestData: {

@@ -6,8 +6,8 @@ const mapPayrollAgreementToEntity = (
   const newData: IPayrollAgreementData = {
     id: String(data.payrollForDeductionAgreementId),
     abbreviatedName: String(data.abbreviatedName),
-    legalPersonIdentification: String(data.legalPersonIdentification),
-    legalPersonName: String(data.legalPersonName),
+    payingIdentification: String(data.payingIdentification),
+    payingEntityName: String(data.payingEntityName),
     numberOfDaysForReceivingTheDiscounts: Number(
       data.numberOfDaysForReceivingTheDiscounts,
     ),

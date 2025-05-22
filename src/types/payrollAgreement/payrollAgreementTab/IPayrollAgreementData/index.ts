@@ -5,8 +5,8 @@ import { IIncomeTypes } from "../../RequestPayrollAgre/IIncomeTypes";
 
 interface IPayrollAgreementData {
   abbreviatedName: string;
-  legalPersonIdentification: string;
-  legalPersonName: string;
+  payingIdentification: string;
+  payingEntityName: string;
   numberOfDaysForReceivingTheDiscounts: number;
   payrollForDeductionAgreementCode: string;
   payrollForDeductionAgreementId: string;

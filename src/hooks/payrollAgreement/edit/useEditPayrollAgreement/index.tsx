@@ -115,7 +115,7 @@ const useEditPayrollAgreement = (props: IUseEditPayrollAgreement) => {
     },
   };
 
-  const companyAgreement = data.legalPersonName ?? "";
+  const companyAgreement = data.payingEntityName ?? "";
   const { appData } = useContext(AuthAndPortalData);
   const [isSelected, setIsSelected] = useState<string>(
     editPayrollAgTabsConfig.generalInformation.id,

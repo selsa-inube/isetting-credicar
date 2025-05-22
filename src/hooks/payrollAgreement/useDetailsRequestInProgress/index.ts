@@ -29,7 +29,7 @@ const useDetailsRequestInProgress = (props: IUseDetailsRequestInProgress) => {
     numberOfDaysForReceivingTheDiscounts:
       data.configurationRequestData.numberOfDaysForReceivingTheDiscounts ??
       data.configurationRequestData.applicationDaysPayroll,
-    legalPersonName: data.configurationRequestData.legalPersonName,
+    payingEntityName: data.configurationRequestData.payingEntityName,
     status: data.requestStatus,
     traceability: data.configurationRequestsTraceability.map(
       (traceability: IEntry) => ({

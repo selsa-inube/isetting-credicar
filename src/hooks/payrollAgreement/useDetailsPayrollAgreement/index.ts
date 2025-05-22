@@ -24,7 +24,7 @@ const useDetailsPayrollAgreement = (props: IUseDetailsPayrollAgreement) => {
     TypePayroll: data.payrollForDeductionAgreementType,
     daysToDetermineDate:
       data.numberOfDaysForReceivingTheDiscounts ?? data.applicationDaysPayroll,
-    company: data.legalPersonName,
+    company: data.payingEntityName,
     paymentSources: data.sourcesOfIncome,
   };
 

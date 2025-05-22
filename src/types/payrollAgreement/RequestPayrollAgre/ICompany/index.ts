@@ -6,7 +6,7 @@ interface ICompany {
   identificationDocumentNumber: string;
   identificationTypeLegalPerson: string;
   legalPersonId: string;
-  legalPersonName: string;
+  payingEntityName: string;
   tradename: string;
 }
 
