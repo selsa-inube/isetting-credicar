@@ -23,8 +23,8 @@ const VerificationForm = (props: IVerificationForm) => {
     updatedData,
     savePayrollAgreement,
     loading,
-    showPendingReqModal,
     typeRegularPayroll,
+    showPendingReqModal,
     handleStepChange,
     onFinishForm,
     onPreviousStep,
@@ -40,7 +40,9 @@ const VerificationForm = (props: IVerificationForm) => {
   const canShowRequestProcess = showRequestProcessModal && savePayrollAgreement;
 
   const canShowPendingRequest =
-    showPendingReqModal && savePayrollAgreement.requestNumber;
+    showPendingReqModal &&
+    savePayrollAgreement &&
+    savePayrollAgreement.requestNumber.length > 0;
 
   const steps = addPayrollAgreementSteps.filter(
     (step) =>

@@ -24,9 +24,14 @@ import { IRegularPaymentCycles } from "@ptypes/payrollAgreement/payrollAgreement
 import { severancePay } from "@config/payrollAgreement/payrollAgreementTab/assisted/severancePaymentCycles";
 import { IUseEditPayrollAgreement } from "@ptypes/hooks/payrollAgreement/IUseEditPayrollAgreement";
 import { specialBenefitPayment } from "@config/payrollAgreement/payrollAgreementTab/assisted/specialBenefitPaymentCycles";
-
 import { AuthAndPortalData } from "@context/authAndPortalDataProvider";
 import { deletedAlertModal } from "@config/payrollAgreement/payrollAgreementTab/generic/deletedAlertModal";
+import { dataTranslations } from "@utils/dataTranslations";
+import { IIncomeTypes } from "@ptypes/payrollAgreement/RequestPayrollAgre/IIncomeTypes";
+import { getIncomeTypesData } from "@utils/IncomeTypesData";
+import { getSourcesIncome } from "@utils/getSourcesIncome";
+import { getDayPayment } from "@utils/getDayPayment";
+import { IEntry } from "@ptypes/design/table/IEntry";
 import { useManagePayrollCycles } from "../useManagePayrollCycles";
 
 const useEditPayrollAgreement = (props: IUseEditPayrollAgreement) => {
@@ -38,8 +43,8 @@ const useEditPayrollAgreement = (props: IUseEditPayrollAgreement) => {
         id: String(index + 1),
         cycleId: `cycle-${addLeadingZero(index + 1).toString()}`,
         nameCycle: entry.regularPaymentCycleName,
-        periodicity: entry.schedule,
-        payday: entry.paymentDay,
+        periodicity: dataTranslations[entry.schedule] ?? entry.schedule,
+        payday: getDayPayment(entry.paymentDay as unknown as IEntry),
         numberDaysUntilCut: Number(entry.numberOfDaysBeforePaymentToBill),
       }));
     } else {
@@ -57,7 +62,7 @@ const useEditPayrollAgreement = (props: IUseEditPayrollAgreement) => {
                 id: `cycle-special-benefit-${addLeadingZero(index + 1).toString()}`,
                 nameCycle: entry.abbreviatedName,
                 typePayment: specialBenefitPayment[0],
-                payday: entry.paymentDay,
+                payday: getDayPayment(entry.paymentDay as unknown as IEntry),
                 numberDaysUntilCut: String(
                   entry.numberOfDaysBeforePaymentToBill,
                 ),
@@ -74,7 +79,7 @@ const useEditPayrollAgreement = (props: IUseEditPayrollAgreement) => {
                 id: `cycle-severance-${addLeadingZero(index + 1).toString()}`,
                 nameCycle: entry.abbreviatedName,
                 typePayment: severancePay[0],
-                payday: entry.paymentDay,
+                payday: getDayPayment(entry.paymentDay as unknown as IEntry),
                 numberDaysUntilCut: String(
                   entry.numberOfDaysBeforePaymentToBill,
                 ),
@@ -91,8 +96,10 @@ const useEditPayrollAgreement = (props: IUseEditPayrollAgreement) => {
       isValid: false,
       values: {
         abbreviatedName: data.abbreviatedName ?? "",
-        typePayroll: data.payrollForDeductionAgreementType ?? "",
-        sourcesOfIncome: "Independiente",
+        typePayroll:
+          dataTranslations[data.payrollForDeductionAgreementType] ??
+          data.payrollForDeductionAgreementType,
+        sourcesOfIncome: getSourcesIncome(data.incomeTypes),
         applicationDaysPayroll: String(
           data.numberOfDaysForReceivingTheDiscounts ?? 0,
         ),
@@ -163,7 +170,7 @@ const useEditPayrollAgreement = (props: IUseEditPayrollAgreement) => {
         ? true
         : false,
     );
-  }, [formValues.generalInformation.values.typePayroll]);
+  }, []);
 
   const filteredTabsConfig = Object.keys(editPayrollAgTabsConfig).reduce(
     (acc, key) => {
@@ -312,10 +319,17 @@ const useEditPayrollAgreement = (props: IUseEditPayrollAgreement) => {
       abbreviatedName?: string;
       sourcesOfIncome?: string;
       applicationDaysPayroll?: string;
+      numberOfDaysForReceivingTheDiscounts?: number;
+      payrollForDeductionAgreementId?: string;
       regularPaymentCycles?: IRegularPaymentCycles[];
       payrollSpecialBenefitPaymentCycles?: IPayrollSpecialBenefit[];
       severancePaymentCycles?: ISeverancePaymentCycles[];
-    } = {};
+      modifyJustification?: string;
+      incomeTypes?: IIncomeTypes[];
+    } = {
+      payrollForDeductionAgreementId: data.payrollForDeductionAgreementId,
+      modifyJustification: `Solicitud de modificación de una nómina de convenio por ${appData.user.userAccount} `,
+    };
 
     const initialValues = initialData.generalInformation.values;
 
@@ -328,6 +342,18 @@ const useEditPayrollAgreement = (props: IUseEditPayrollAgreement) => {
     });
 
     const hasChanges = Object.keys(changedFields).length > 0;
+
+    if (formValues.generalInformation.values.applicationDaysPayroll) {
+      changedFields.numberOfDaysForReceivingTheDiscounts =
+        Number(formValues.generalInformation.values.applicationDaysPayroll) ||
+        0;
+    }
+
+    if (formValues.generalInformation.values.sourcesOfIncome) {
+      changedFields.incomeTypes = getIncomeTypesData(
+        formValues.generalInformation.values.sourcesOfIncome,
+      );
+    }
 
     const regularPayments = newRegularPayment();
     if (regularPayments.length > 0) {
@@ -365,7 +391,7 @@ const useEditPayrollAgreement = (props: IUseEditPayrollAgreement) => {
   };
 
   const typePayroll = typeRegularPayroll
-    ? "remuneración ordinaria"
+    ? "Remuneración ordinaria"
     : "Primas o cesantias";
 
   const showGeneralInfPayrollForm =

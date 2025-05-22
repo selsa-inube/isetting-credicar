@@ -23,6 +23,7 @@ const mapPayrollAgreementToEntity = (
     ),
     regularPaymentCycles: Object(data.regularPaymentCycles),
     severancePaymentCycles: Object(data.severancePaymentCycles),
+    incomeTypes: Object(data.incomeTypes),
   };
 
   return newData;

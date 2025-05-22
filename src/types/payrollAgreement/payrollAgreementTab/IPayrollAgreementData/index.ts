@@ -1,6 +1,7 @@
 import { ISeverancePaymentCycles } from "../ISeverancePaymentCycles";
 import { IPayrollSpecialBenefit } from "../IPayrollSpecialBenefit";
 import { IRegularPaymentCycles } from "../IRegularPaymentCycles";
+import { IIncomeTypes } from "../../RequestPayrollAgre/IIncomeTypes";
 
 interface IPayrollAgreementData {
   abbreviatedName: string;
@@ -14,6 +15,7 @@ interface IPayrollAgreementData {
   regularPaymentCycles: IRegularPaymentCycles[];
   severancePaymentCycles: ISeverancePaymentCycles[];
   id?: string;
+  incomeTypes?: IIncomeTypes[];
 }
 
 export type { IPayrollAgreementData };
