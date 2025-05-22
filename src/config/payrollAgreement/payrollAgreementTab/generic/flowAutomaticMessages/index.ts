@@ -4,7 +4,7 @@ const flowAutomaticMessages = (action?: string) => {
   const flowAutomatic = {
     errorSendingData: {
       title: "¡Ups! Algo salió mal",
-      description: "La solicitud de edición no se pudo radicar correctamente",
+      description: "La solicitud no se pudo radicar correctamente",
       appearance: ComponentAppearance.DANGER,
       duration: 5000,
     },
@@ -22,8 +22,8 @@ const flowAutomaticMessages = (action?: string) => {
       duration: 5000,
     },
     SuccessfulCreateRequest: {
-      title: `Nominas de convenio ${action} con éxito!`,
-      description: `Nominas de convenio fue ${action} con éxito!`,
+      title: `Nomina de convenio ${action} con éxito!`,
+      description: `Nomina de convenio fue ${action} con éxito!`,
       appearance: ComponentAppearance.SUCCESS,
       duration: 5000,
     },
