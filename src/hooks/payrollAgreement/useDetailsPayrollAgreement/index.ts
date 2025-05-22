@@ -40,7 +40,7 @@ const useDetailsPayrollAgreement = (props: IUseDetailsPayrollAgreement) => {
     name: item.regularPaymentCycleName ?? item.nameCycle,
     periodicity:
       normalizeEnumName(item.schedule) ?? normalizeEnumName(item.periodicity),
-    dayPayment: getDayPayment(item),
+    dayPayment: getDayPayment(item.paymentDay ?? item.payday),
     numberDays: item.numberOfDaysBeforePaymentToBill ?? item.numberDaysUntilCut,
   });
 

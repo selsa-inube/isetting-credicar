@@ -31,7 +31,6 @@ import { IIncomeTypes } from "@ptypes/payrollAgreement/RequestPayrollAgre/IIncom
 import { getIncomeTypesData } from "@utils/IncomeTypesData";
 import { getSourcesIncome } from "@utils/getSourcesIncome";
 import { getDayPayment } from "@utils/getDayPayment";
-import { IEntry } from "@ptypes/design/table/IEntry";
 import { useManagePayrollCycles } from "../useManagePayrollCycles";
 
 const useEditPayrollAgreement = (props: IUseEditPayrollAgreement) => {
@@ -44,7 +43,7 @@ const useEditPayrollAgreement = (props: IUseEditPayrollAgreement) => {
         cycleId: `cycle-${addLeadingZero(index + 1).toString()}`,
         nameCycle: entry.regularPaymentCycleName,
         periodicity: dataTranslations[entry.schedule] ?? entry.schedule,
-        payday: getDayPayment(entry.paymentDay as unknown as IEntry),
+        payday: getDayPayment(entry.paymentDay),
         numberDaysUntilCut: Number(entry.numberOfDaysBeforePaymentToBill),
       }));
     } else {
@@ -62,7 +61,7 @@ const useEditPayrollAgreement = (props: IUseEditPayrollAgreement) => {
                 id: `cycle-special-benefit-${addLeadingZero(index + 1).toString()}`,
                 nameCycle: entry.abbreviatedName,
                 typePayment: specialBenefitPayment[0],
-                payday: getDayPayment(entry.paymentDay as unknown as IEntry),
+                payday: getDayPayment(entry.paymentDay),
                 numberDaysUntilCut: String(
                   entry.numberOfDaysBeforePaymentToBill,
                 ),
@@ -79,7 +78,7 @@ const useEditPayrollAgreement = (props: IUseEditPayrollAgreement) => {
                 id: `cycle-severance-${addLeadingZero(index + 1).toString()}`,
                 nameCycle: entry.abbreviatedName,
                 typePayment: severancePay[0],
-                payday: getDayPayment(entry.paymentDay as unknown as IEntry),
+                payday: getDayPayment(entry.paymentDay),
                 numberDaysUntilCut: String(
                   entry.numberOfDaysBeforePaymentToBill,
                 ),
@@ -162,6 +161,7 @@ const useEditPayrollAgreement = (props: IUseEditPayrollAgreement) => {
     },
   );
 
+  console.log({ formValues });
   useEffect(() => {
     setTypeRegularPayroll(
       typePayrollForCyclesExtraord.includes(
