@@ -265,7 +265,6 @@ const useAddPayrollAgreement = (props: IUseAddPayrollAgreement) => {
       : !isCurrentFormValid;
 
   const company = {
-    legalPersonId: formValues.company.values.companyNumberIdent,
     identificationDocumentNumber: formValues.company.values.companyNumberIdent,
     identificationTypeLegalPerson: formValues.company.values.companyTypeIdent,
     payingEntityName: formValues.company.values.companyName,
@@ -344,7 +343,7 @@ const useAddPayrollAgreement = (props: IUseAddPayrollAgreement) => {
 
     if (
       formValues.company.values.companySelected === "addCompany" &&
-      company.legalPersonId
+      company.identificationDocumentNumber
     ) {
       configurationRequestData.company = company as ILegalPerson;
     }

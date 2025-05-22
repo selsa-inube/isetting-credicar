@@ -15,6 +15,7 @@ import { editPayrollAgTabsConfig } from "@config/payrollAgreement/payrollAgreeme
 import { getLastDayOfMonth } from "@utils/getLastDayOfMonth";
 import { IUseManagePayrollCycles } from "@ptypes/hooks/IUseManagePayrollCycles";
 import { checkDayWeek } from "@utils/checkDayWeek";
+import { formatPaymentDay } from "@utils/formatPaymentDay";
 
 const useManagePayrollCycles = (props: IUseManagePayrollCycles) => {
   const {
@@ -49,7 +50,7 @@ const useManagePayrollCycles = (props: IUseManagePayrollCycles) => {
     newValues.map((item) => ({
       abbreviatedName: item.nameCycle,
       numberOfDaysBeforePaymentToBill: Number(item.numberDaysUntilCut),
-      paymentDay: item.payday ?? "",
+      paymentDay: formatPaymentDay(item.payday ?? ""),
       payrollForDeductionAgreementId: item.id ?? "",
       transactionOperation: transactionOperation,
     }));

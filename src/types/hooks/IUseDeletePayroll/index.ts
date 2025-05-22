@@ -4,7 +4,6 @@ import { IEntry } from "@ptypes/design/table/IEntry";
 interface IUseDeletePayroll {
   data: IEntry;
   appData: IAppData;
-  setEntryDeleted: (id: string | number) => void;
 }
 
 export type { IUseDeletePayroll };

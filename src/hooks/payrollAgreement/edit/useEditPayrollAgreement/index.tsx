@@ -161,7 +161,6 @@ const useEditPayrollAgreement = (props: IUseEditPayrollAgreement) => {
     },
   );
 
-  console.log({ formValues });
   useEffect(() => {
     setTypeRegularPayroll(
       typePayrollForCyclesExtraord.includes(
@@ -343,13 +342,19 @@ const useEditPayrollAgreement = (props: IUseEditPayrollAgreement) => {
 
     const hasChanges = Object.keys(changedFields).length > 0;
 
-    if (formValues.generalInformation.values.applicationDaysPayroll) {
+    if (
+      formValues.generalInformation.values.applicationDaysPayroll !==
+      initialValues.applicationDaysPayroll
+    ) {
       changedFields.numberOfDaysForReceivingTheDiscounts =
         Number(formValues.generalInformation.values.applicationDaysPayroll) ||
         0;
     }
 
-    if (formValues.generalInformation.values.sourcesOfIncome) {
+    if (
+      formValues.generalInformation.values.sourcesOfIncome !==
+      initialValues.sourcesOfIncome
+    ) {
       changedFields.incomeTypes = getIncomeTypesData(
         formValues.generalInformation.values.sourcesOfIncome,
       );

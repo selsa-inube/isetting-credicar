@@ -5,7 +5,7 @@ import { eventBus } from "@events/eventBus";
 import { IUseDeletePayroll } from "@ptypes/hooks/IUseDeletePayroll";
 
 const useDeletePayroll = (props: IUseDeletePayroll) => {
-  const { data, appData, setEntryDeleted } = props;
+  const { data, appData } = props;
   const [showModal, setShowModal] = useState(false);
   const [showRequestProcessModal, setShowRequestProcessModal] = useState(false);
   const [showPendingReq, setShowPendingReq] = useState(false);
@@ -17,7 +17,6 @@ const useDeletePayroll = (props: IUseDeletePayroll) => {
   };
 
   const handleClick = () => {
-    setEntryDeleted(data.id);
     setSaveData({
       applicationName: "ifac",
       businessManagerCode: appData.businessManager.publicCode,

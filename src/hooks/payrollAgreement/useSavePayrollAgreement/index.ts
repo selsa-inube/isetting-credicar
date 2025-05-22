@@ -118,7 +118,8 @@ const useSavePayrollAgreement = (props: IUseSavePayrollAgreement) => {
             )
           ) {
             setEntryDeleted(
-              data.configurationRequestData.moneyDestinationId as string,
+              data.configurationRequestData
+                .payrollForDeductionAgreementId as string,
             );
           }
         }, 3000);

@@ -27,7 +27,7 @@ const Delete = (props: IDelete) => {
     setShowRequestProcessModal,
     setShowModal,
     setShowPendingReq,
-  } = useDeletePayroll({ data, appData, setEntryDeleted });
+  } = useDeletePayroll({ data, appData });
 
   const {
     savePayrollAgreement,
@@ -46,6 +46,7 @@ const Delete = (props: IDelete) => {
     setSendData: setShowRequestProcessModal,
     setShowModal,
     setShowPendingReq,
+    setEntryDeleted,
   });
 
   return (
