@@ -13,9 +13,9 @@ import { RequestStepsStatus } from "@enum/requestStepsStatus";
 import { postSaveRequest } from "@services/requestInProgress/postSaveRequest";
 import { ChangeToRequestTab } from "@context/changeToRequestTab/changeToRequest";
 import { IUseSaveGeneralPolicies } from "@ptypes/hooks/generalCreditPolicies/IUseSaveGeneralPolicies";
-import { requestStepsInitial } from "@config/requestSteps";
 import { flowAutomaticMessages } from "@config/generalCreditPolicies/generic/flowAutomaticMessages";
 import { interventionHumanMessage } from "@config/generalCreditPolicies/generic/interventionHumanMessage";
+import { requestStepsInitial } from "@config/requestSteps";
 
 const useSaveGeneralPolicies = (props: IUseSaveGeneralPolicies) => {
   const { userAccount, data, setSendData, sendData, setShowModal, useCase } =
@@ -231,11 +231,15 @@ const useSaveGeneralPolicies = (props: IUseSaveGeneralPolicies) => {
     navigate(navigatePage);
   };
 
+  const isRequestStatusModal =
+    showPendingReqModal && saveGeneralPolicies?.requestNumber ? true : false;
+
   return {
     saveGeneralPolicies,
     requestSteps,
     showPendingReqModal,
     loadingSendData,
+    isRequestStatusModal,
     handleCloseRequestStatus,
     handleClosePendingReqModal,
   };

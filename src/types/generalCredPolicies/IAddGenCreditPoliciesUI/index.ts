@@ -23,6 +23,10 @@ interface IAddGenCreditPoliciesUI {
   loading: boolean;
   showPendingReqModal: boolean;
   dateVerification: IDateVerification;
+  showGoBackModal: boolean;
+  onCloseGoBackModal: () => void;
+  onGoBack: () => void;
+  onOpenModal: () => void;
   setDateVerification: React.Dispatch<
     React.SetStateAction<IDateVerification | undefined>
   >;

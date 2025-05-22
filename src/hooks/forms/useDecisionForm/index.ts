@@ -29,7 +29,7 @@ const useDecisionForm = (
   const [hasChanges, setHasChanges] = useState(false);
   const [savedDecisions, setSavedDecisions] = useState<IRuleDecision[]>([]);
 
-  const initialDecisions = useState(initialValues)[0];
+  const [initialDecisions] = useState<IRuleDecision[]>(initialValues);
 
   const handleOpenModal = () => {
     setSelectedDecision(null);
@@ -135,7 +135,7 @@ const useDecisionForm = (
 
   useEffect(() => {
     if (
-      JSON.stringify(decisions) !== JSON.stringify(initialDecisions) ||
+      JSON.stringify(decisions) !== JSON.stringify(initialValues) ||
       JSON.stringify(normalizeEvaluateRuleData) !== JSON.stringify(decisions)
     ) {
       setHasChanges(true);
@@ -164,6 +164,9 @@ const useDecisionForm = (
 
   const cancelButton = editDataOption ? handleReset : onPreviousStep;
 
+  const showDecisionModal =
+    shouldShowAttentionModal && attentionModal ? true : false;
+
   return {
     isModalOpen,
     selectedDecision,
@@ -177,6 +180,7 @@ const useDecisionForm = (
     shouldShowAttentionModal,
     disabledNext,
     disabledPrevius,
+    showDecisionModal,
     cancelButton,
     handleOpenModal,
     handleCloseModal,

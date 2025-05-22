@@ -24,6 +24,10 @@ const AddGenCreditPolicies = () => {
     showModal,
     showRequestProcessModal,
     dateVerification,
+    showGoBackModal,
+    handleCloseGoBackModal,
+    handleGoBack,
+    handleOpenModal,
     setDateVerification,
     handleSubmitClick,
     setShowRequestProcessModal,
@@ -87,6 +91,10 @@ const AddGenCreditPolicies = () => {
       onFinishForm={handleSubmitClick}
       dateVerification={dateVerification as IDateVerification}
       setDateVerification={setDateVerification}
+      showGoBackModal={showGoBackModal}
+      onCloseGoBackModal={handleCloseGoBackModal}
+      onGoBack={handleGoBack}
+      onOpenModal={handleOpenModal}
     />
   );
 };

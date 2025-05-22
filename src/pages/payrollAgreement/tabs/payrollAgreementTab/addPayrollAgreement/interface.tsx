@@ -4,7 +4,7 @@ import { Title } from "@design/data/title";
 import { tokens } from "@design/tokens";
 import { crumbsAddPayrollAgreement } from "@config/payrollAgreement/payrollAgreementTab/navigation";
 import { DecisionModal } from "@design/modals/decisionModal";
-import { goBackModal } from "@config/payrollAgreement/payrollAgreementTab/forms/goBackModal";
+import { goBackModal } from "@config/goBackModal";
 import { IAddPayrollAgreementUI } from "@ptypes/payrollAgreement/payrollAgreementTab/IAddPayrollAgreementUI";
 import { CompanyForm } from "@pages/payrollAgreement/tabs/forms/companyPayrollAgreement";
 import { RegularPaymentCyclesForm } from "@pages/payrollAgreement/tabs/forms/regularPaymentCycles";

@@ -18,6 +18,8 @@ import { decisionScoreModelsConfig } from "@config/decisions/decisionTempScoreMo
 import { scoreModelsLabels } from "@config/generalCreditPolicies/assisted/scoreModelsLabels";
 import { DecisionsGeneralForm } from "../forms/decisionsGeneral";
 import { VerificationForm } from "../forms/verification";
+import { DecisionModal } from "@design/modals/decisionModal";
+import { goBackModal } from "@config/goBackModal";
 
 const AddGenCreditPoliciesUI = (props: IAddGenCreditPoliciesUI) => {
   const {
@@ -37,6 +39,10 @@ const AddGenCreditPoliciesUI = (props: IAddGenCreditPoliciesUI) => {
     loading,
     showPendingReqModal,
     dateVerification,
+    showGoBackModal,
+    onOpenModal,
+    onCloseGoBackModal,
+    onGoBack,
     setDateVerification,
     onCloseRequestStatus,
     onClosePendingReqModal,
@@ -69,6 +75,7 @@ const AddGenCreditPoliciesUI = (props: IAddGenCreditPoliciesUI) => {
             description={addLabels.description}
             sizeTitle="large"
             navigatePage="/"
+            onClick={onOpenModal}
           />
         </Stack>
         <Stack gap={tokens.spacing.s300} direction="column">
@@ -191,6 +198,16 @@ const AddGenCreditPoliciesUI = (props: IAddGenCreditPoliciesUI) => {
           </Stack>
         </Stack>
       </Stack>
+      {showGoBackModal && (
+        <DecisionModal
+          portalId="portal"
+          title={goBackModal.title}
+          description={goBackModal.description}
+          actionText={goBackModal.actionText}
+          onCloseModal={onCloseGoBackModal}
+          onClick={onGoBack}
+        />
+      )}
     </Stack>
   );
 };
