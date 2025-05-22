@@ -14,6 +14,8 @@ import { getDaysInNumber } from "@utils/getDaysInNumber";
 import { editPayrollAgTabsConfig } from "@config/payrollAgreement/payrollAgreementTab/edit/tab";
 import { getLastDayOfMonth } from "@utils/getLastDayOfMonth";
 import { IUseManagePayrollCycles } from "@ptypes/hooks/IUseManagePayrollCycles";
+import { checkDayWeek } from "@utils/checkDayWeek";
+import { formatPaymentDay } from "@utils/formatPaymentDay";
 
 const useManagePayrollCycles = (props: IUseManagePayrollCycles) => {
   const {
@@ -29,13 +31,14 @@ const useManagePayrollCycles = (props: IUseManagePayrollCycles) => {
     transactionOperation: string,
   ): IRegularPaymentCycles[] =>
     newValues.map((item) => ({
-      payrollForDeductionAgreementId: item.cycleId,
-      regularPaymentCycleNumber: item.cycleId,
-      regularPaymentCycleName: item.nameCycle,
+      payrollForDeductionAgreementId: item.cycleId ?? "",
+      regularPaymentCycleNumber: item.cycleId ?? "",
+      regularPaymentCycleName: item.nameCycle ?? "",
       schedule:
-        normalizeEnumTranslationCode(item.periodicity)?.code ??
-        item.periodicity,
-      paymentDay: item.payday,
+        normalizeEnumTranslationCode(item.periodicity ?? "")?.code ??
+        item.periodicity ??
+        "",
+      paymentDay: checkDayWeek(item.payday ?? ""),
       numberOfDaysBeforePaymentToBill: Number(item.numberDaysUntilCut),
       transactionOperation: transactionOperation,
     }));
@@ -47,7 +50,7 @@ const useManagePayrollCycles = (props: IUseManagePayrollCycles) => {
     newValues.map((item) => ({
       abbreviatedName: item.nameCycle,
       numberOfDaysBeforePaymentToBill: Number(item.numberDaysUntilCut),
-      paymentDay: item.payday ?? "",
+      paymentDay: formatPaymentDay(item.payday ?? ""),
       payrollForDeductionAgreementId: item.id ?? "",
       transactionOperation: transactionOperation,
     }));
@@ -85,7 +88,7 @@ const useManagePayrollCycles = (props: IUseManagePayrollCycles) => {
 
       const filteredRegularPaymentCycles = regularPaymentCycles.flatMap(
         (item) => {
-          const filteredPayday = item.payday
+          const filteredPayday = (item.payday ?? "")
             .split(",")
             .map((payday) => Number(payday.trim()));
           return filteredPayday.filter((payday) => verifyDays.includes(payday));

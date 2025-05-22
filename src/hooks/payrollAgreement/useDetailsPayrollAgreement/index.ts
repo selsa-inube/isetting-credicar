@@ -10,6 +10,7 @@ import { RequestType } from "@enum/requestType";
 import { IDetailsTabsConfig } from "@ptypes/payrollAgreement/requestInProgTab/IDetailsTabsConfig";
 import { IEntry } from "@ptypes/design/table/IEntry";
 import { eventBus } from "@events/eventBus";
+import { getDayPayment } from "@utils/getDayPayment";
 
 const useDetailsPayrollAgreement = (props: IUseDetailsPayrollAgreement) => {
   const { data, detailsTabsConfig, showModalReq } = props;
@@ -23,7 +24,7 @@ const useDetailsPayrollAgreement = (props: IUseDetailsPayrollAgreement) => {
     TypePayroll: data.payrollForDeductionAgreementType,
     daysToDetermineDate:
       data.numberOfDaysForReceivingTheDiscounts ?? data.applicationDaysPayroll,
-    company: data.legalPersonName,
+    company: data.payingEntityName,
     paymentSources: data.sourcesOfIncome,
   };
 
@@ -39,7 +40,7 @@ const useDetailsPayrollAgreement = (props: IUseDetailsPayrollAgreement) => {
     name: item.regularPaymentCycleName ?? item.nameCycle,
     periodicity:
       normalizeEnumName(item.schedule) ?? normalizeEnumName(item.periodicity),
-    dayPayment: item.paymentDay ?? item.payday,
+    dayPayment: getDayPayment(item.paymentDay ?? item.payday),
     numberDays: item.numberOfDaysBeforePaymentToBill ?? item.numberDaysUntilCut,
   });
 
@@ -78,7 +79,7 @@ const useDetailsPayrollAgreement = (props: IUseDetailsPayrollAgreement) => {
     id: index,
     name: item.abbreviatedName,
     typePayment,
-    cuttingDay: item.paymentDay,
+    paymentDay: item.paymentDay,
     numberDays: item.numberOfDaysBeforePaymentToBill,
   });
 

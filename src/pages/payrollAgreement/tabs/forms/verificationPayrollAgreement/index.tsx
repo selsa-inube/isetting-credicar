@@ -23,8 +23,8 @@ const VerificationForm = (props: IVerificationForm) => {
     updatedData,
     savePayrollAgreement,
     loading,
-    showPendingReqModal,
     typeRegularPayroll,
+    showPendingReqModal,
     handleStepChange,
     onFinishForm,
     onPreviousStep,
@@ -40,13 +40,22 @@ const VerificationForm = (props: IVerificationForm) => {
   const canShowRequestProcess = showRequestProcessModal && savePayrollAgreement;
 
   const canShowPendingRequest =
-    showPendingReqModal && savePayrollAgreement.requestNumber;
+    showPendingReqModal &&
+    savePayrollAgreement &&
+    savePayrollAgreement.requestNumber.length > 0;
 
-  const steps = addPayrollAgreementSteps.filter(
-    (step) =>
-      step.name.toLowerCase() !== "verificación" &&
-      (typeRegularPayroll || Number(step.id) !== 3),
-  );
+  const steps = addPayrollAgreementSteps.filter((step) => {
+    if (step.name.toLowerCase() === "verificación") return false;
+    if (
+      Number(step.id) === 4 &&
+      (!updatedData.extraordinaryCycles.values ||
+        updatedData.extraordinaryCycles.values.length === 0)
+    ) {
+      return false;
+    }
+    if (typeRegularPayroll) return true;
+    return Number(step.id) !== 3;
+  });
 
   return (
     <Stack direction="column" gap={tokens.spacing.s300}>
