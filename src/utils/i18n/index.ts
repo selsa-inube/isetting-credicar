@@ -1,5 +1,5 @@
-import { es } from "@locales/en/translation";
-import { en } from "@locales/es/translation";
+import { en } from "@locales/en/translation";
+import { es } from "@locales/es/translation";
 import i18next from "i18next";
 import { initReactI18next } from "react-i18next";
 

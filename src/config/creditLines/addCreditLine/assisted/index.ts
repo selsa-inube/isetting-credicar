@@ -1,7 +1,7 @@
 import { IAssistedStep } from "@inubekit/inubekit";
-import { useTranslation } from "react-i18next";
 
-const { t } = useTranslation();
+import { t } from "i18next";
+
 const addCreditLinesSteps: IAssistedStep[] = [
   {
     id: 1,

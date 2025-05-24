@@ -1,13 +1,15 @@
+import { t } from "i18next";
+
 const moneyDestinationTabsConfig = {
   moneyDestination: {
     id: "moneyDestination",
     isDisabled: false,
-    label: "Destinos de dinero",
+    label: t("moneyDestination.tabs.moneyDestination"),
   },
   requestsInProgress: {
     id: "requestsInProgress",
     isDisabled: false,
-    label: "Solicitudes en trámite",
+    label: t("moneyDestination.tabs.requestsInProgress"),
     notificationIndicators: 2,
   },
 };

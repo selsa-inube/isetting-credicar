@@ -1,18 +1,17 @@
-const es = {
+const en = {
   creditLines: {
     addCreditLine: {
       assisted: {
-        generalData: "Datos generales",
-        generalDataOfTheCreditLine: "Datos generales de la línea de crédito.",
-        creditProspectOptions: "Opciones para el prospecto de crédito",
+        generalData: "General data",
+        generalDataOfTheCreditLine: "General data of the credit line.",
+        creditProspectOptions: "Credit prospect options",
         optionsForCreatingTheCreditProspect:
-          "Opciones para la creación del prospecto de crédito.",
-        maximumAmount: "Monto máximo",
-        configureMaximumAmountDecisions:
-          "Configura las decisiones de monto máximo.",
-        verification: "Verificación",
+          "Options for creating the credit prospect.",
+        maximumAmount: "Maximum amount",
+        configureMaximumAmountDecisions: "Configure maximum amount decisions.",
+        verification: "Verification",
         confirmFilledInformation:
-          "Confirma la información diligenciada en pasos anteriores.",
+          "Confirm the information filled in previous steps.",
       },
       navigation: {
         home: "Home",
@@ -21,6 +20,32 @@ const es = {
       },
     },
   },
+  moneyDestination: {
+    addDestination: {
+      assisted: {
+        generalData: "General data",
+        generalDataDescription: "Select or add a new destination.",
+        generalDataOfTheCreditLine: "General data of the credit line.",
+        creditProspectOptions: "Credit prospect options",
+        optionsForCreatingTheCreditProspect:
+          "Options for creating the credit prospect.",
+        maximumAmount: "Maximum amount",
+        configureMaximumAmountDecisions: "Configure maximum amount decisions.",
+        verification: "Verification",
+        confirmFilledInformation:
+          "Confirm the information filled in previous steps.",
+      },
+      navigation: {
+        home: "Home",
+        moneyDestination: "Money destination",
+        addDestination: "Add destination",
+      },
+    },
+    tabs: {
+      moneyDestination: "Money destination",
+      requestsInProgress: "Requests in progress",
+    },
+  },
 };
 
-export { es };
+export { en };
